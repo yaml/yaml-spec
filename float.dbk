@@ -1,0 +1,185 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      Floating-Point Language-Independent Type for
+      <trademark>YAML</trademark>&nbsp;Version&nbsp;1.1
+    </title>
+
+    <subtitle>
+      Working Draft 2005-01-18-FIXED!!!
+    </subtitle>
+
+    <authorgroup>
+      <author>
+        <firstname>Oren</firstname>
+        <surname>Ben-Kiki</surname>
+        <email>oren@ben-kiki.org</email>
+      </author>
+
+      <author>
+        <firstname>Clark</firstname>
+        <surname>Evans</surname>
+        <email>cce+yaml@clarkevans.com</email>
+      </author>
+
+      <author>
+        <firstname>Brian</firstname>
+        <surname>Ingerson</surname>
+        <email>ingy@ttul.org</email>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+
+    <abstract>
+      <title>Status</title>
+
+      <para>
+       This specification is a draft reflecting consensus reached by members of
+       the <ulink
+       url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
+       mailing list</ulink>. Any questions regarding this draft should be
+       raised on this list.
+      </para>
+    </abstract>
+  </articleinfo>
+
+  <section>
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            URI:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>tag:yaml.org,2002:float</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Shorthand:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>!!float</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Kind:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Scalar.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Canonical:
+          </para>
+        </term>
+
+        <listitem>
+<screen>
+ 0
+|[-]?[1-9]\.([0-9]*[1-9])?e[-+](0|[1-9][0-9]+) <lineannotation>(scientific)</lineannotation>
+|-?\.inf <lineannotation>(infinity)</lineannotation>
+|\.nan <lineannotation>(not a number)</lineannotation>
+</screen>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Regexp:</term>
+        <listitem>
+<screen>
+ [-+]?([0-9][0-9_]*)?\.[0-9.]*([eE][-+][0-9]+)? <lineannotation>(base 10)</lineannotation>
+|[-+]?[0-9][0-9_]*(:[0-5]?[0-9])+\.[0-9_]* <lineannotation>(base 60)</lineannotation>
+|[-+]?\.(inf|Inf|INF) <lineannotation># (infinity)</lineannotation>
+|\.(nan|NaN|NAN) <lineannotation># (not a number)</lineannotation>
+</screen>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Definition:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Floating-point approximation to real numbers.
+          </para>
+
+          <para>
+            Floating-point numbers are approximations to real numbers,
+            including three special values (positive and negative infinity and
+            <quote>not a number</quote>). Using
+            <quote><userinput>:</userinput></quote> allows expressing the
+            integer part in base 60, which is convenient for time and angle
+            values (the fractional part is always in base 10). Any
+            <quote><userinput>_</userinput></quote> characters in the number
+            are ignored, allowing a readable representation of large values.
+          </para>
+
+          <para>
+            This should be loaded to some native float data type. The processor
+            may choose from a range of such native data types according to the
+            size and accuracy of the floating-point value. Note that not all
+            floating-point values can be represented exactly when stored in any
+            native float type, and hence a float value may change by <quote>a
+            small amount</quote> when round-tripped through a native type. The
+            valid range and accuracy depends on the implementation, though 32
+            bit IEEE floats should be safe. Since YAML does not specify a
+            particular accuracy, using floating-point mapping keys requires
+            great care and is not recommended.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <example>
+      <title><userinput>!!float</userinput> Examples</title>
+<programlisting>
+canonical: 6.8523015e+5
+exponentioal: 685.230_15e+03
+fixed: 685_230.15
+sexagesimal: 190:20:30.15
+negative infinity: -.inf
+not a number: .NaN
+</programlisting>
+    </example>
+  </section>
+</article>

@@ -1,0 +1,2052 @@
+<?xml version="1.0"?>
+<!DOCTYPE appendix
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<book>
+  <title>Change Log For The YAML 1.0 Specification</title>
+  <subtitle>Last Updated On 2005-01-18</subtitle>
+
+  <chapter>
+    <title>Changes From The 28 Dec 2004 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>
+          Break Syntax Chapter
+        </para></term>
+        <listitem><para>
+          As proposed by Rich Morin.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Nit Fixes
+        </para></term>
+        <listitem><para>
+          A lot of nits detected by Rich Morin, Tichy Braoo and Alexis Layton.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Broken Links
+        </para></term>
+        <listitem><para>
+          Several broken links detected by Tichy Braoo.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Break Syntax Chapter
+        </para></term>
+        <listitem><para>
+          To several smaller chapters.
+        </para></listitem>
+      </varlistentry>
+
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 15 Mar 2003 4th Last Call Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>
+          Boolean canonicals
+        </para></term>
+        <listitem><para>
+          Change to
+          <quote><userinput>y</userinput></quote>/<quote><userinput>n</userinput></quote>.
+          Remove
+          <quote><userinput>+</userinput></quote>/<quote><userinput>-</userinput></quote>
+          from examples and the bool type definition. This should have been
+          done a while back (when a plain value could no longer be
+          <quote><userinput>-</userinput></quote>).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Time-less dates
+        </para></term>
+        <listitem><para>
+          Changed to 00:00:00Z instead of 12:00:00Z.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Renamed <userinput>!special</userinput> to
+          <userinput>!yaml</userinput>
+        </para></term>
+        <listitem><para>
+          Better reflects the intent.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>DocBook format</para></term>
+        <listitem><para>
+          To allow for easier media retargeting. Support HTML and PDF (using
+          XEP).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Fix production bugs</para></term>
+        <listitem><para>
+          Prevent header/trailer from appearing as content - Thanks to Robin
+          Green for catching this one.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Change <quote>Serialization</quote> back to <quote>Document</quote>
+        </para></term>
+        <listitem><para>
+          By popular demand.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Implicit/explicit indentation</para></term>
+        <listitem><para>
+          Allow leading empty lines, and indented content lines to start with a
+          <quote><userinput>#</userinput></quote> character.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Changed <quote><userinput>taguri:</userinput></quote> to
+          <quote><userinput>tag:</userinput></quote>
+        </para></term>
+        <listitem><para>
+          As per the updated tag URI RFC.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAML Processor</para></term>
+        <listitem><para>
+          Used the term <quote>(YAML) processor</quote> instead of parser,
+          loader etc. This avoids forcing preconcieved notions on system
+          architecture to affect the semantics.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Rearranged and renamed node/value productions</para></term>
+        <listitem><para>
+          Hopefully this would increase production readability.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Hungarian explained</para></term>
+        <listitem><para>
+          Add a note explaining the production prefixes.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Status</para></term>
+        <listitem><para>
+          Changed to release candidate.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Allow inline collection form in complex keys</para></term>
+        <listitem><para>
+          Reusing the productions from the *-in-seq form.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Allow omitting complex and flow keys values</para></term>
+        <listitem><para>
+          Allows for a nicer set notation.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Allow implicit single pair maps in flow sequences
+        </para></term>
+        <listitem><para>
+          Allows for a nicer ordered map connection.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Major re-write of model and intro chapters</para></term>
+        <listitem><para>
+          Add figures, rephrase, make more readable.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>URI escaping</para></term>
+        <listitem><para>
+          Gone.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Empty plain scalars</para></term>
+        <listitem><para>
+          Are forbidden as keys and as flow sequence entries.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Trailing commas</para></term>
+        <listitem><para>
+          Are allowed in flow collections and following ... line. Empty lines
+          ending with a specific line break are now treated as comments even
+          if following a block scalar.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Folding and Chomping</para></term>
+        <listitem><para>
+         Rules have been massively simplified.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Examples</para></term>
+        <listitem><para>
+         Completely new examples set, with highlights associating parts of the
+         characters stream with specific productions.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Productions</para></term>
+        <listitem><para>
+         Re-work almost all productions in the syntax section, together with
+         examples.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Sam&#8217;s corrections</para></term>
+        <listitem><para>
+         Incorporated minor wording issues (thanks to Sam Vilain).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          YAML 1.1
+        </para></term>
+        <listitem><para>
+          New directive syntax, %TAG directives, patched indentation rules,
+          moved !!str, !!seq and !!map to the repository. Hopefully this is the
+          last "global" change.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Index
+        </para></term>
+        <listitem><para>
+          Replace all internal links with index entries. It is simply amazing
+          how much work is expressed in this short sentence.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 24 Jan 2003 3rd Last Call Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Implicit header</para></term>
+        <listitem><para>
+          Was changed to <quote>---</quote> instead of <quote>---
+          %YAML:1.0</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Implicit document</para></term>
+        <listitem><para>
+          Now allows all collection styles, not only block collections.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Block sequence indentation</para></term>
+        <listitem><para>
+          Wording, productions and examples fixed to allow for more
+          human-friendly interpretation of <quote>-</quote> as indentation.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 31 Oct 2002 2nd Last Call Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>BNF productions</para></term>
+        <listitem><para>
+          Were renamed with a hungarian-like prefix notation and reformatted so
+          that cut-and-paste from HTML would yield proper results.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Vocabulary instead of language</para></term>
+        <listitem><para>
+          The term <quote>vocabulary</quote> better describes the intent of
+          sub-domains of yaml.org (for type families).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Seq-in-seq</para></term>
+        <listitem><para>
+          Was added (similar to map-in-seq).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Throwaway indicator</para></term>
+        <listitem><para>
+          Changed from <quote><userinput> # </userinput></quote> to
+          <quote><userinput> #</userinput></quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Directive indicator</para></term>
+        <listitem><para>
+          Changed from <quote><userinput>#</userinput></quote> to
+          <quote><userinput>%</userinput></quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Anchors and directive names</para></term>
+        <listitem><para>
+          Can be any non-space flow char.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Flow values</para></term>
+        <listitem><para>
+          May start on a following line.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Special <quote><userinput>-</userinput></quote> plain value
+        </para></term>
+        <listitem><para>
+          Is canceled (ambiguous with next-line flow). Therefore the
+          <userinput>-/+</userinput> Boolean implicits are gone as well.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Language-independent types</para></term>
+        <listitem><para>
+          Corrected date indicators.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Integers and floats</para></term>
+        <listitem><para>
+          Added sexagesimal (base 60) format (using
+          <quote><userinput>:</userinput></quote>) for time (and degrees).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Nulls</para></term>
+        <listitem><para>
+          Removed the <quote><userinput>Undef</userinput></quote> possibility.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Merge</para></term>
+        <listitem><para>
+          Changed from <quote><userinput>&lt;=</userinput></quote> to
+          <quote><userinput>&lt;&lt;</userinput></quote>.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 01 sep 2002 1st Last Call Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Brian&#8217;s wording fixes</para></term>
+        <listitem><para>
+          Spelling and minor re-wording.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para><userinput>#TAB</userinput> was removed</para></term>
+        <listitem><para>
+          Tabs are now completely banned from indentation.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Escaping of type family name</para></term>
+        <listitem><para>
+          The interaction between <quote><userinput>\</userinput></quote> and
+          <quote><userinput>%</userinput></quote> escaping has been clarified
+          in a better way.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Zero explicit indentation</para></term>
+        <listitem><para>
+          Is now allowed for top level nodes.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Moved language-independent types out of the spec.</para></term>
+        <listitem><para>
+          Only !map, !seq and !str are in it now.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Changed implicit types</para></term>
+        <listitem><para>
+          No longer require (). Implicit empty string is !null. Changed nil to
+          undef. These changes depend on a resolution to the implicit typing
+          issues; hence all the separate type documents are not in <quote>last
+          call</quote> status. Yet.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Changed NULL escape</para></term>
+        <listitem><para>
+          From \z to \0.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Changed <quote><userinput>-</userinput> entry</quote> indentation
+        </para></term>
+        <listitem><para>
+          Consider the <quote><userinput>-</userinput></quote> to be
+          indentation, but not the following spaces.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Changed format separator to <quote><userinput>#</userinput></quote>
+        </para></term>
+        <listitem><para>
+          This makes transfer methods into URI-references (allow fragments).
+          Type families are URIs (without fragments).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Mutability == collection</para></term>
+        <listitem><para>
+          Make all collections mutable and all scalars immutable. This
+          simplifies generic tools and the native model.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Re-ordered sections</para></term>
+        <listitem><para>
+          Moved information models to the end.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Graph implicit types</para></term>
+        <listitem><para>
+          Allow types to remain unknown (implicit) all the way up to and
+          including the graph model; allow implicit collection types.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Graph implicit types</para></term>
+        <listitem><para>
+          Allow types to remain unknown (implicit) all the way up to and
+          including the graph model; allow implicit collection types.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 10 Jul 2002 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Status</para></term>
+        <listitem><para>
+          Was changed to <quote>Last Call</quote>. At long last.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Implicit strings</para></term>
+        <listitem><para>
+          May begin with a <quote><userinput>/</userinput></quote> to allow
+          paths to be unquoted.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Removed the <userinput>//</userinput> special keys.</para></term>
+        <listitem><para>
+          They conflict with the new implicit string format. What to replace
+          them with, if anything, is still TBD.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Example fixes</para></term>
+        <listitem><para>
+          Minor nits were wrong in some examples (4.3.1, 4.6.4, 4.6.5, 4.6.7).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Renamed <quote>public</quote> type families to <quote>global</quote>
+        </para></term>
+        <listitem><para>
+          This better conveys the intent.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Separated changes</para></term>
+        <listitem><para>
+          As of this draft, changes are in a separated document.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Repaginated draft</para></term>
+        <listitem><para>
+          The previous pagination was nice but it was very wasteful of pages.
+          In the spirit of keeping the spec small, page breaks were moved,
+          reducing the printed size by 10 pages or so.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 06 Jul 2002 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Table of content</para></term>
+        <listitem><para>
+          Was enhanced to specify page numbers as well as links. Also, entry
+          3.1.4 was missing.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Section 1.2, paragraph 7</para></term>
+        <listitem><para>
+          Remove the sentence about indentation being used for multiple
+          documents (it isn&#8217;t).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Syntactical problems</para></term>
+        <listitem><para>
+          Using <quote>an flow</quote> (leftover from the global substitute)
+          and various other minor fixes.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Renamed <quote>nested</quote> to <quote>block</quote></para></term>
+        <listitem><para>
+          In all the wording. This makes the wording match the productions.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Cleaned canonical formats</para></term>
+        <listitem><para>
+          In some cases, the canonical format was a subset of another format,
+          rather than being an implicit format on its own. This is allowed, and
+          is now explicit in the format definition. Also fixed the string
+          formats to satisfy the requirement that a value would only match one
+          implicit or explicit format.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 30 Jun 2002 Draft</title>
+    <variablelist>
+      <varlistentry>
+        <term><para>Printing</para></term>
+        <listitem><para>
+          Should be much improved. Explicit page breaks were added and some
+          reorganization was done so that breaks should reflect logical chunks.
+          At least in A4 and Letter pages size on IE6 :-)
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Productions 94 and 98</para></term>
+        <listitem><para>
+          Now reflect the correct indentation policy for map-in-seq.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Productions 129 and 130</para></term>
+        <listitem><para>
+          Were renamed to <quote>folded-paragraph</quote> and
+          <quote>folded-text-line</quote> to better reflect the intent.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          The <quote><userinput>...</userinput></quote> <quote>pause</quote>
+          marker
+        </para></term>
+        <listitem><para>
+          Was added as per the discussions in the mailing list. This added two
+          productions.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Examples</para></term>
+        <listitem><para>
+          Some examples were re-worked as part of the re-organization.
+          Hopefully for the better. The XML example was removed.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 25 Jun 2002 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Printing enhancements</para></term>
+        <listitem><para>
+          Add page-break in many locations for better printing, make table of
+          contents two columns.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Terminology</para></term>
+        <listitem><para>
+          <para>
+            Change <quote>block scalar</quote> to <quote>literal
+            scalar</quote>, change <quote>in-line</quote> to
+            <quote>flow</quote>. This allows for two sorts of mechanisms, the
+            <quote>block</quote> mechanism and the <quote>flow</quote>
+            mechanism. Within block are literal and folded scalars; within flow
+            are plain, single, and double. This involved a few global
+            substitutions which will probably introduce error, those are:
+          </para>
+
+          <itemizedlist>
+            <listitem><para>s/in-line/flow/</para></listitem>
+            <listitem><para>s/nest-/blk-/</para></listitem>
+            <listitem><para>s/line-/flow-/</para></listitem>
+            <listitem><para>s/flow-feed/line-feed</para></listitem>
+            <listitem><para>s/flow-separator/line-separator</para></listitem>
+            <listitem><para>s/flow-break-char/line-break-char</para></listitem>
+            <listitem><para>s/flow-break/break</para></listitem>
+          </itemizedlist>
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Preview Re-structuring</para></term>
+        <listitem><para>
+          Restructure the preview section for general readability.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Production Changes</para></term>
+        <listitem><para>
+          Minor change to the comment-break production
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 14 Jun 2002 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Use (word) instead of .word for <quote>enums</quote></para></term>
+        <listitem><para>
+          This is going to be our generic way to handle implicits that
+          otherwise would be taken to be strings.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Change <quote>word</quote> format names to <quote>english</quote>
+        </para></term>
+        <listitem><para>
+          More correctly reflects their semantics.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Canonical Booleans</para></term>
+        <listitem><para>
+          Change canonical Booleans to <userinput>+/-</userinput>. Had to
+          make a special case to allow <quote><userinput>-</userinput></quote>
+          in unquoted values to do it. This doesn&#8217;t apply to keys, but using
+          the English format there makes more sense anyway. This allows
+          canonical boolean to be implicit.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Add (null)/(nil)</para></term>
+        <listitem><para>
+          In addition to <userinput>~</userinput>, consistent with booleans.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Unify date/time</para></term>
+        <listitem><para>
+          Merge them into timestamp (and rename it to <quote>time</quote>).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Relax string regexp</para></term>
+        <listitem><para>
+          Anything starting with a <quote>text</quote> character
+          (<quote><userinput>-</userinput></quote>, letter or digit),
+          except for int/flt/time.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Change space escapes</para></term>
+        <listitem><para>
+          <quote><userinput>\ </userinput></quote> is now a space,
+          <quote><userinput>\-</userinput></quote> is now NBSP.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Allow repeated <userinput>#</userinput></para></term>
+        <listitem><para>
+          To begin throwaway comments.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Renamed the three chomping variants</para></term>
+        <listitem><para>
+          To <quote>strip</quote>, <quote>clip</quote> (default) and
+          <quote>keep</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Changed in-line folding</para></term>
+        <listitem><para>
+          To allow empty lines to represent line feeds and to preserve specific
+          line breaks. The WIKI feature isn&#8217;t included as it depends on
+          indentation.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Changed simple style</para></term>
+        <listitem><para>
+          To reflect the new restrictions (keys can&#8217;t span; in-lines can&#8217;t have
+          <quote><userinput>, </userinput></quote> and <quote><userinput>:
+          </userinput></quote>; for top-level values, anything goes except
+          comments. Comments can no longer be interleaved in such scalars.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>
+          Make <quote><userinput>?</userinput></quote> into a space separator
+        </para></term>
+        <listitem><para>
+          No reason not to. It was always followed by a space anyway.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Renamed scalar styles</para></term>
+        <listitem><para>
+          Rename <quote>plain</quote> to <quote>block</quote> and
+          <quote>simple</quote> to <quote>plain</quote>. As a result of the
+          above it isn&#8217;t that simple any more <userinput>:-)</userinput> and
+          having both <quote>plain</quote> and <quote>simple</quote> was
+          confusing. Reverting to <quote>block</quote> more accurately reflects
+          the semantics, freeing <quote>plain</quote> for the unquoted style.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Renamed productions</para></term>
+        <listitem><para>
+          To make the document more printer-friendly. The main change was to
+          rename <userinput>nested-</userinput> to
+          <userinput>nest-</userinput> and
+          <userinput>inline-</userinput> to
+          <userinput>line-</userinput>. The latter is particularly painful,
+          but there was no other good choice.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Float round-tripping</para></term>
+        <listitem><para>
+          Added a warning that float values may not round-trip exactly due to
+          the use of native float data types.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 27 May 2002 Draft</title>
+    <variablelist>
+      <varlistentry>
+        <term><para>Provide mailing list URL</para></term>
+        <listitem><para>
+          So that its address would be clear even from the printed version.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Line Processing section</para></term>
+        <listitem><para>
+          Was renamed <quote>Space processing</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Document productions</para></term>
+        <listitem><para>
+          Were cleaned up and now allow comments before the header line.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Printing</para></term>
+        <listitem><para>
+          Many tweaking to ensure printing doesn&#8217;t clip the comments of the
+          productions tables.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Float format</para></term>
+        <listitem><para>
+          Extended to allow for infinity and not a number.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Block indicators</para></term>
+        <listitem><para>
+          Changed to <userinput>|</userinput>, <userinput>&gt;</userinput> and
+          <userinput>\</userinput> (without the leading
+          <userinput>|</userinput>).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Information model</para></term>
+        <listitem><para>
+          Whole section was re-worked to accommodate the latest decisions in
+          the mailing list. Leaf and branch are now renamed to collection and
+          scalar; keyed and series are renamed to mapping and sequence.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Multi-line in-lines</para></term>
+        <listitem><para>
+          Are now allowed, including multi-line in-line scalars.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Limit implicit strings</para></term>
+        <listitem><para>
+          To word and space characters only.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Unreserve <userinput># % ^</userinput></para></term>
+        <listitem><para>
+          No need to reserve them - they can&#8217;t be used as first characters in a
+          simple value anyway because there&#8217;s no implicit type using them.
+          Unreserving them allows them to be used in implicit types in the
+          future.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Modify folding</para></term>
+        <listitem><para>
+          To preserve line breaks around more-indented and specific empty
+          lines.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Spell checking</para></term>
+        <listitem><para>
+          Run the whole document throught Word for spell checking.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Model chart</para></term>
+        <listitem><para>
+          Changed to use style sheet in a more dependable way, and now reflects
+          the fact the native and generic models <quote>are one</quote> in some
+          respects.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Wording for String</para></term>
+        <listitem><para>
+          Changed to reflect the fact
+          <quote><userinput>-</userinput></quote> isn&#8217;t a word character.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Chomp control</para></term>
+        <listitem><para>
+          Was added (<quote><userinput>-</userinput></quote> for chomp,
+          <quote><userinput>+</userinput></quote> for keep).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Escaped nested style</para></term>
+        <listitem><para>
+          Was removed. It is redundant due to <quote>..</quote> spanning lines.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 28 Apr 2002 Draft</title>
+    <variablelist>
+      <varlistentry>
+        <term><para>Explicit Syntax</para></term>
+        <listitem><para>
+          Explicit notation is now required for empty scalars. This reverts the
+          change in the previous draft.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>No alternate style for collections.</para></term>
+        <listitem><para>
+          Map and seq can now only be written in keyed and series style.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Comments</para></term>
+        <listitem><para>
+          Are now allowed to trail lines except for inside multi line text.
+          Comments (explicit and implicit) may trail multi-line text values as
+          long as they are less indented.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>URI Scheme</para></term>
+        <listitem><para>
+          Is now correctly limited to word characters.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Trailing comma</para></term>
+        <listitem><para>
+          Is no longer allowed in in-line collections.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Simple char</para></term>
+        <listitem><para>
+          Production 170 fixed to prohibit in-line indicators after a space
+          indicator, or two space indicators followed by a space.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Base64 Format</para></term>
+        <listitem><para>
+          Was listed as <quote>canonical</quote>. Fixed to
+          <quote>explicit</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Time intro examples</para></term>
+        <listitem><para>
+          Used the wrong format
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Production fixes</para></term>
+        <listitem><para>
+          Correct minor problems (missing <quote>(n)</quote>, improper handling
+          of spaces in in-line collections, missing
+          <quote><userinput>|</userinput></quote>, etc.)
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Integer and Float formats</para></term>
+        <listitem><para>
+          Now ignores any <quote><userinput>,</userinput></quote> inside the
+          value. This required making <quote><userinput>,</userinput></quote>
+          into a space separator.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Boolean</para></term>
+        <listitem><para>
+          Is now a type of its own.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Ptr</para></term>
+        <listitem><para>
+          Was removed. Will probably be a Perl-specific type.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Leaf styles</para></term>
+        <listitem><para>
+          Were simplified to only 6 (3 nested and 3 in-line).
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 07 Apr 2002 Draft</title>
+    <variablelist>
+      <varlistentry>
+        <term><para>Document Separator</para></term>
+        <listitem><para>
+          Is now restricted to <quote><userinput>---</userinput></quote>. BOM
+          is allowed if encoding does not change. Production 49 has been
+          corrected accordingly, and the reference to the obsolete
+          <userinput>non-alias_node</userinput> was corrected.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>In-series keyed</para></term>
+        <listitem><para>
+          This special case (production 93) has been restricted to in-line leaf
+          keys without any properties. This minimizes lookahead in parsers.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Inline leaf</para></term>
+        <listitem><para>
+          Now allows an empty unquoted value (production 163).
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 10 Mar 2002 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Anchors for aliases</para></term>
+        <listitem><para>
+          Are now forbidden.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Timestamp format</para></term>
+        <listitem><para>
+          Fixed a problem with the regexp. Allow both a valid ISO8601 format
+          (using <quote><userinput>T</userinput></quote>) and a space separated
+          format (for readability).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Productions</para></term>
+        <listitem><para>
+          Break node productions to smaller bits.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 20 Feb 2002 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>YAC 22</para></term>
+        <listitem><para>
+          The <userinput>#TAB</userinput> directive is now required to allow
+          tabs in indentation.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 16 Feb 2002 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Corrected examples</para></term>
+        <listitem><para>
+          Floating point numbers in all examples now start with
+          <quote><userinput>0</userinput></quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Wording improvements</para></term>
+        <listitem><para>
+          In various places.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Empty line indentation</para></term>
+        <listitem><para>
+          Is now be <userinput>indent(&lt;=n)</userinput> instead of the
+          previous <userinput>indent(n)?</userinput>
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 10 Feb 2002 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>YAC 20</para></term>
+        <listitem><para>
+          The yaml: scheme has been replaced by an http: one. Mapping of XML
+          namespaces is now done using <quote><userinput>$</userinput></quote>
+          instead of <quote><userinput>;</userinput></quote>. The prefix
+          indicator is now <quote><userinput>^</userinput></quote> and the
+          format indicator is now <quote><userinput>|</userinput></quote>.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 10 Dec 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Transfer Method</para></term>
+        <listitem><para>
+          Is now split to type family and format; type family is now a URI.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Date/Time Types</para></term>
+        <listitem><para>
+          Were added.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Tree Model</para></term>
+        <listitem><para>
+          Now includes the format.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Wording changes</para></term>
+        <listitem><para>
+          Throughout the whole spec.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Format in Transfer Method</para></term>
+        <listitem><para>
+          Is now separated by a <quote><userinput>`</userinput></quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC List</para></term>
+        <listitem><para>
+          Removed the Probable changes section; it is now replaced by the YAC
+          list.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 3, YAC 5</para></term>
+        <listitem><para>
+          Added a uniform URI based namespace scheme.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 6</para></term>
+        <listitem><para>
+          Unrecognized explicitly typed implicit (simple) leafs are allowed.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 7</para></term>
+        <listitem><para>
+          C1 Control codes are explicitly forbidden.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 10</para></term>
+        <listitem><para>
+          In-series in-line syntax was modified according to the flexible
+          indentation scheme (YAC needs to be updated).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 11</para></term>
+        <listitem><para>
+          Rename implicit leaves to simple leaves.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 12</para></term>
+        <listitem><para>
+          Throwaways are now allowed everywhere. Blank lines are comments.
+          <emphasis>There are ambiguity problems in chomped leaf
+          values.</emphasis>
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 13</para></term>
+        <listitem><para>
+          Indentation is now generic (flexible).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 14</para></term>
+        <listitem><para>
+          Nested leaf format is now built out of three orthogonal properties.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 15</para></term>
+        <listitem><para>
+          Top level nodes can be in-line.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 16</para></term>
+        <listitem><para>
+          A <quote><userinput>--- #YAML:1.0</userinput></quote> is assumed if
+          there&#8217;s no header.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>YAC 18</para></term>
+        <listitem><para>
+          YAML Ain&#8217;t Markup Language
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 11 Nov 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Quoted Strings</para></term>
+        <listitem><para>
+          Are now implemented as a text implicit transfer format. This changed
+          slightly the definition of an escaped leaf so that the two would be
+          equivalent.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Relative DNS type familys</para></term>
+        <listitem><para>
+          Are now supported using the simplest form only. the definition of an
+          escaped leaf so that the two would be equivalent.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Syntax/Grammar/Formatting</para></term>
+        <listitem><para>
+          Were fixed according to Brian&#8217;s inputs.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Block</para></term>
+        <listitem><para>
+          Is now chomped using <quote><userinput>||</userinput></quote> rather
+          than <quote><userinput>|-</userinput></quote> for consistency.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Document Header</para></term>
+        <listitem><para>
+          Can now be anything starting with
+          <quote><userinput>--</userinput></quote>; therefore is required
+          before the first document in a multi-document stream.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Transfer Methods</para></term>
+        <listitem><para>
+          Can now accept any printable characters, not just words.
+          <quote><userinput>!</userinput></quote> now means <quote>force
+          implicit typing</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>New Scalar Styles</para></term>
+        <listitem><para>
+          We now have the following: <userinput>| || \ \\ ' "</userinput>
+          implicit.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Treat sequence/map as Collection Styles</para></term>
+        <listitem><para>
+          In productions and in information model.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Add Structured Keys</para></term>
+        <listitem><para>
+          Using a key indicator (done - Oren).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Add Examples</para></term>
+        <listitem><para>
+          Added a detailed examples section to the introduction to better
+          acquaint the user so that the spec can proceed with some basic
+          knowledge.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>In-line maps/sequences</para></term>
+        <listitem><para>
+          Are now supported. Empty maps/sequences are a natural special case.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Minor Changes</para></term>
+        <listitem><para>
+          Moved list of changes down... it was cluttering the top of the spec.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Information model and Preview</para></term>
+        <listitem><para>
+          Completely new rewrite.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 04 Nov 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Polish</para></term>
+        <listitem><para>
+          Minor wording fixes, added internal links, etc.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>List</para></term>
+        <listitem><para>
+          Was renamed to <quote>sequence</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Separator</para></term>
+        <listitem><para>
+          Was changed to <quote>---</quote> instead of <quote>----</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Indentation</para></term>
+        <listitem><para>
+          Was changed to one space instead of one tab.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Base64</para></term>
+        <listitem><para>
+          Is no longer an implicit type. The surrounding
+          <quote><userinput>[=...=]</userinput></quote> are kept,
+          however, in case we change our mind later (e.g., if we introduce
+          pipelining). The type was renamed to <quote>binary</quote> to stress
+          its class rather than the encoding used.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Float</para></term>
+        <listitem><para>
+          Was renamed to <quote>real</quote> to decouple it from specific
+          in-memory representation. Mathematicians may object :-)
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Length</para></term>
+        <listitem><para>
+          Was removed from the sequence map.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Type vs. Class</para></term>
+        <listitem><para>
+          Added some wording to clarify the difference. Most likely this will
+          need to be changed once we settle the pipelining issue.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Productions</para></term>
+        <listitem><para>
+          Were completely overhauled, again, to accomodate the new semantics.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Next Line Scalars</para></term>
+        <listitem><para>
+          Now have two separate indicators, one for quoted and one for unquoted
+          values.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Duplicate keys</para></term>
+        <listitem><para>
+          Are now an error. The parser may ignore the second occurrence with a
+          warning.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 12 Aug 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Indentation</para></term>
+        <listitem><para>
+          Has been changed to use tabs instead of spaces.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Throwaway comments</para></term>
+        <listitem><para>
+          Were added. The persistent comment key was changed to
+          <quote><userinput>//</userinput></quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Indicators</para></term>
+        <listitem><para>
+          Were changed. <quote><userinput>-</userinput></quote> now signifies a
+          list entry and <quote><userinput>\</userinput></quote> signifies a
+          next-line leaf value. <quote><userinput>@</userinput></quote> and
+          <quote><userinput>%</userinput></quote> are no longer necessary (they
+          may be if we ever support map/list keys). As a result no lookahead is
+          ever required.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Multiple documents</para></term>
+        <listitem><para>
+          Are now possible in a single file (again), using
+          <quote><userinput>----</userinput></quote> as a separator.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Wording</para></term>
+        <listitem><para>
+          Has been changed in numerous locations, hopefully to make it clearer.
+          There was also some shuffling of the text sections to remove
+          redundancy.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Productions</para></term>
+        <listitem><para>
+          Were thoroughly overhauled and therefore undoubtedly contain new
+          bugs. Also, all the shorthand production names were replaced by long
+          ones to improve readability.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Indicator keys</para></term>
+        <listitem><para>
+          Are no longer allowed. Structure keys are used instead, where some
+          have only an in-memory representation.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Map/List keys</para></term>
+        <listitem><para>
+          Are no longer allowed. This may have to be revisited when Perl 6
+          comes out.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Deep References</para></term>
+        <listitem><para>
+          Are still supported but as an explicit type rather than as a hack.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Types List</para></term>
+        <listitem><para>
+          Has been shrunk to only the common types, with a reference to
+          yaml.org for a fuller list of types. The three core types were added
+          as required types.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Type vs. Kind</para></term>
+        <listitem><para>
+          This distinction was inserted explicitly into the text, with several
+          examples to drive the point home.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 01 Aug 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Character Set</para></term>
+        <listitem><para>
+          Is now defined as simply printable Unicode characters without
+          explicit ranges. This makes the spec resistant to the evolution of
+          the Unicode spec.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Reserved Indicators</para></term>
+        <listitem><para>
+          The set of such indicators has been minimized. There is now a
+          conflict between reserving them for future use and allowing people to
+          use them as markers for implicit leaf types.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Simple Scalar</para></term>
+        <listitem><para>
+          Has been renamed to unquoted leaf.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Generic Model</para></term>
+        <listitem><para>
+          Has been generalized to allow for types nodes.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Implicit Typing</para></term>
+        <listitem><para>
+          Has been added with an assortment of suggested types.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>General Keys</para></term>
+        <listitem><para>
+          Keys can now be any nodes to allow for Java serialization.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Multi-level references</para></term>
+        <listitem><para>
+          Are now supported for Perl serialization.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+  <chapter>
+    <title>Changes From The 31 Jul 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Simple Scalar and End Of Lines</para></term>
+        <listitem><para>
+          Moved eol productions to the end, rather than the start, of most
+          productions. The wording and productions for the simple leaf were
+          fixed to match each other and the intended semantics. The simple leaf
+          example set was enhanced to clarify the proper interpretation.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Empty Document</para></term>
+        <listitem><para>
+          Both empty top level maps and no top level maps are now allowed, and
+          hence so are empty documents.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 22 Jul 2001 Draft</title>
+
+    <para>
+      Thanks to Joe Lapp for reviewing the 22 Jul 2001 draft and recommending
+      these changes.
+    </para>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Phrasing fixes</para></term>
+        <listitem><para>
+          Fixed phrasing in the abstract, and sections 1.3, 2.1, 2.3.1, 2.4.3,
+          2.4.4, 2.4.5, 2.4.6 and 2.5.3.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Production fixes</para></term>
+        <listitem><para>
+          Fixed productions: added production 47, 59, fixed productions 57, 58,
+          60 and 64 (productions numbers in the 22 Jul 2001 draft are off by
+          one in some cases). Most are bug fixes. Actual changes include
+          allowing for empty lines surrounding a top level map, allowing an
+          optional trailing separator line, and forbidding annotations which
+          have no sensible semantics (anchor to null, anchor to a reference,
+          shorthand for a reference).
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 23 Jun 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Merge Spec</para></term>
+        <listitem><para>
+          Due to the decision to leave all API related issues outside the core
+          spec, the spec has been re-merged into a single file, covering just
+          what used to be the introduction and serialization sections of the
+          previous specs.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Character Encodings</para></term>
+        <listitem><para>
+          The spec now refers only to the Unicode standard. Due to the efforts
+          by the Unicode and ISO/IEC 10646 groups, both standards are in almost
+          complete agreement. The additional features provided by the ISO/IEC
+          standard are rarely used in practice, while Unicode is simpler and is
+          more widely supported by existing languages and systems.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Strict Indentation</para></term>
+        <listitem><para>
+          Indentation is now a strict 4 spaces per level. This allows for the
+          new white space policy and the new block notation.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Shorthand Notation</para></term>
+        <listitem><para>
+          The spec introduces a shorthand notation for attaching special keys
+          to any node kind (converting it to a map if necessary). This will
+          need more work.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Null Nodes</para></term>
+        <listitem><para>
+          Null nodes have finally been added, after somehow eluding all
+          previous versions.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Bullet Lists</para></term>
+        <listitem><para>
+          Change the <userinput>*</userinput> optional prefix for leaf list
+          entries to a mandatory : and therefore remove the special name
+          <quote>bulleted list entries</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Simplify Keys</para></term>
+        <listitem><para>
+          Multi-line simple keys are now out. The door is open for
+          re-introducing them, however.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Change Whitespace Policy</para></term>
+        <listitem><para>
+          White space folding has been replaced by line break folding. White
+          space is now always significant, except for indentation and for
+          separation of structure tokens.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Block Scalar Syntax</para></term>
+        <listitem><para>
+          The syntax for block leaves has been replaced by a more elegant one.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 16 Jun 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Split Spec</para></term>
+        <listitem><para>
+          The spec is now separated into several files. This allows different
+          versions of the spec to share the same version of unchanged section,
+          and make it easier to refer to a particular version of important
+          pieces of the spec such as serialization and interfaces. All the HTML
+          files use the same shared CSS file. Cross references between the
+          separate parts of the spec are now relative, though references to
+          older versions are absolute and refer to the main site.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Cyclical Graph</para></term>
+        <listitem><para>
+          Change the wording on the information model to allow for graphs with
+          cycles. The alternative is to define the anchor semantics in such a
+          way that would preclude cycles.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Null Character Escape</para></term>
+        <listitem><para>
+          The escape sequence \z was added to allow convenient escaping of the
+          ASCII zero (null) character.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Remove Binary Scalars</para></term>
+        <listitem><para>
+          The information model now contains just one type of leaf. The special
+          syntax for binary leaves has been removed. This functionality will be
+          re-added in the form of a color.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Remove Class Shorthand</para></term>
+        <listitem><para>
+          The syntax no longer supports the !class syntax. This functionality
+          will be re-added in the form of a color.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Bullet Lists</para></term>
+        <listitem><para>
+          Change the optional prefix for leaf list entries to
+          <userinput>*</userinput> and rename such entries to <quote>bulleted
+          list entries</quote>.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Make Keys More Scalars-Compatible</para></term>
+        <listitem><para>
+          Allow for multi-line simple keys and unify the description of leaf
+          keys and values where it makes sense.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>HTML Tidying</para></term>
+        <listitem><para>
+          All the HTML pages have gone through Tidy. Also, all the HTML files
+          have been run through an <ulink url="http://validator.w3.org/">HTML
+          validation service</ulink> and a <ulink
+          url="http://jigsaw.w3.org/css-validator/validator-uri.html">CSS
+          validation service</ulink>. Broken links and spelling were checked
+          using another <ulink
+          url="http://www.zdnet.com/devhead/static/toolbox/">online HTML
+          validator</ulink>. This needs to be repeated for all future drafts.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 09 Jun 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Relationship with MIME</para></term>
+        <listitem><para>
+          Beyond using base64 for binary leaves, no additional special
+          relationship with MIME is expected. Hence references to the MIME and
+          mail RFCs were moved from section 1.1 (<quote>required
+          reading</quote>) to section 1.2 (<quote>background material</quote>).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Strict Indentation</para></term>
+        <listitem><para>
+          Indentation is now completely strict for all leaf styles. Also, the
+          productions were changes to use a consistent semantics to the
+          indentation level parameter.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>List Scalar Prefixes</para></term>
+        <listitem><para>
+          A list leaf entry may be prefixed by an optional : indicator to
+          improve readability of multi-line simple leaf values.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Anchor Semantics</para></term>
+        <listitem><para>
+          Leading zeros are now ignored for comparing anchor strings.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>No Empty Line At Start</para></term>
+        <listitem><para>
+          The document production was fixed so as not to require an empty line
+          at the start of a document.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Character Escapes</para></term>
+        <listitem><para>
+          The set of character escapes is now maximal (including the rare \e
+          escape for the useful ASCII ESC character). Also, it is now possible
+          to <quote>escape</quote> a line break in a quoted string (the
+          previous drafts were inconsistent at this point).
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>32 Bit Characters</para></term>
+        <listitem><para>
+          The current draft allows such characters, and includes a specialized
+          escaping format (<quote><userinput>\Uxxxxxxxx</userinput></quote>) to
+          support them.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+
+  <chapter>
+    <title>Changes From The 26 May 2001 Draft</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><para>Changes Section</para></term>
+        <listitem><para>
+          The changes section was added for easier comparison of different
+          versions. The final draft will not contain this section.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Class Indicator</para></term>
+        <listitem><para>
+          The indicator was changed from <userinput>#</userinput> to
+          <userinput>!</userinput> to allow for <userinput>#</userinput> to be
+          used for comments.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>No Empty Line At End</para></term>
+        <listitem><para>
+          The document production was fixed so as not to require an empty line
+          at the end of a document.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Strict Indentation</para></term>
+        <listitem><para>
+          Indentation in quoted strings and binary blocks is now strict to
+          ensure readability.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Productions</para></term>
+        <listitem><para>
+          Problems in the productions were fixed, especially where related to
+          white space issues and formatting of the result.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>BOM Comment</para></term>
+        <listitem><para>
+          The link to the Unicode FAQ was moved to section 2.2.2.
+        </para></listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term><para>Binary Scalars</para></term>
+        <listitem><para>
+          The information model now distinguishes between text and binary
+          leaves.
+        </para></listitem>
+      </varlistentry>
+    </variablelist>
+  </chapter>
+</book>

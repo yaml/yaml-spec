@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      Null Language-Independent Type for
+      <trademark>YAML</trademark>&nbsp;Version&nbsp;1.1
+    </title>
+
+    <subtitle>
+      Working Draft 2005-01-18
+    </subtitle>
+
+    <authorgroup>
+      <author>
+        <firstname>Oren</firstname>
+        <surname>Ben-Kiki</surname>
+        <email>oren@ben-kiki.org</email>
+      </author>
+
+      <author>
+        <firstname>Clark</firstname>
+        <surname>Evans</surname>
+        <email>cce+yaml@clarkevans.com</email>
+      </author>
+
+      <author>
+        <firstname>Brian</firstname>
+        <surname>Ingerson</surname>
+        <email>ingy@ttul.org</email>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+
+    <abstract>
+      <title>Status</title>
+
+      <para>
+       This specification is a draft reflecting consensus reached by members of
+       the <ulink
+       url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
+       mailing list</ulink>. Any questions regarding this draft should be
+       raised on this list.
+      </para>
+    </abstract>
+  </articleinfo>
+
+  <section>
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            URI:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>tag:yaml.org,2002:null</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Shorthand:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>!!null</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Kind:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Scalar.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Canonical:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>~</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Regexp:</term>
+        <listitem>
+<screen>
+ ~ <lineannotation># (canonical)</lineannotation>
+|null|Null|NULL <lineannotation># (English)</lineannotation>
+| <lineannotation># (Empty)</lineannotation>
+</screen>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Definition:</term>
+        <listitem>
+          <para>
+            Devoid of value.
+          </para>
+
+          <para>
+            A null value is used to indicate the lack of a value. This is
+            typically converted into any native null-like value (e.g.,
+            <userinput>undef</userinput> in Perl, <userinput>None</userinput>
+            in Python). Note that a null is different from an empty string and
+            that a mapping entry with some key and a null value is valid and
+            different from not having that key in the mapping.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <example>
+      <title><userinput>!!null</userinput> Examples</title>
+<programlisting>
+# A document may be null.
+---
+---
+# This mapping has four keys,
+# one has a value.
+empty:
+canonical: ~
+english: null
+~: null key
+---
+# This sequence has five
+# entries, two have values.
+sparse:
+  - ~
+  - 2nd entry
+  -
+  - 4th entry
+  - Null
+</programlisting>
+    </example>
+  </section>
+</article>

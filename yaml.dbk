@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      YAML Encoding Keys Language-Independent Type for
+      <trademark>YAML</trademark>&nbsp;Version&nbsp;1.1
+    </title>
+
+    <subtitle>
+      Working Draft 2005-01-18
+    </subtitle>
+
+    <authorgroup>
+      <author>
+        <firstname>Oren</firstname>
+        <surname>Ben-Kiki</surname>
+        <email>oren@ben-kiki.org</email>
+      </author>
+
+      <author>
+        <firstname>Clark</firstname>
+        <surname>Evans</surname>
+        <email>cce+yaml@clarkevans.com</email>
+      </author>
+
+      <author>
+        <firstname>Brian</firstname>
+        <surname>Ingerson</surname>
+        <email>ingy@ttul.org</email>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+
+    <abstract>
+      <title>Status</title>
+
+      <para>
+       This specification is a draft reflecting consensus reached by members of
+       the <ulink
+       url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
+       mailing list</ulink>. Any questions regarding this draft should be
+       raised on this list.
+      </para>
+    </abstract>
+  </articleinfo>
+
+  <section>
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            URI:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>tag:yaml.org,2002:yaml</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Shorthand:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>!!yaml</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Kind:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Scalar.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Canonical:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            N/A (single format).
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Regexp:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>!|&amp;|\*</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Definition:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Keys for encoding YAML in YAML.
+          </para>
+
+          <para>
+            YAML encoding keys are used to denote YAML structure information.
+            The in-memory representation of these keys must be different from
+            any value in any other type family. Specifically, these in-memory
+            values must not be implemented as strings. Normally, the encoding
+            keys should not be used in serialized YAML documents; the encoded
+            YAML node is serialized instead.
+          </para>
+
+          <para>
+            Encoding is useful when a YAML processor encounters a valid
+            YAML value of an unknown tag. For a schema-specific application,
+            this is not different from encountering any other valid YAML
+            document that does not satisfy the schema. Such an application may
+            safely use a processor that rejects any value of any unknown tag,
+            or discards the tag property with an appropriate warning and parses
+            the value as if the property was not present.
+          </para>
+
+          <para>
+            For a schema-independent application (for example, a hypothetical
+            YAML pretty print application), this is not an option. Processors
+            used by such applications should encode the value instead. This may
+            be done by wrapping the value in a mapping containing encoding
+            keys. The <quote><userinput>!</userinput></quote> key denotes the
+            unsupported tag. In some cases it may be necessary to encode
+            anchors and alias nodes as well. The
+            <quote><userinput>&amp;</userinput></quote> and
+            <quote><userinput>*</userinput></quote> keys are used for this
+            purpose.
+          </para>
+
+          <para>
+            Encoding should be reversed on output, allowing the
+            schema-independent application to safely round-trip any valid YAML
+            document. In-memory, the encoded data may be accessed and
+            manipulated in a standard way using the three basic data types
+            (mapping, sequence and scalar), allowing limited processing to be
+            applied to arbitrary YAML data.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <example>
+      <title><userinput>!!yaml</userinput> Examples</title>
+<programlisting>
+# The following node should NOT be serialized this way.
+encoded YAML node :
+ !!yaml '!' : '!type'
+ !!yaml '&amp;' : 12
+ !!value = : value
+# The proper way to serialize the above node is as follows:
+node : !type &amp;12 value
+</programlisting>
+    </example>
+  </section>
+</article>

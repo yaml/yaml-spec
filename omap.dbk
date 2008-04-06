@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      Ordered Mapping Language-Independent Type for
+      <trademark>YAML</trademark>&nbsp;Version&nbsp;1.1
+    </title>
+
+    <subtitle>
+      Working Draft 2005-01-18
+    </subtitle>
+
+    <authorgroup>
+      <author>
+        <firstname>Oren</firstname>
+        <surname>Ben-Kiki</surname>
+        <email>oren@ben-kiki.org</email>
+      </author>
+
+      <author>
+        <firstname>Clark</firstname>
+        <surname>Evans</surname>
+        <email>cce+yaml@clarkevans.com</email>
+      </author>
+
+      <author>
+        <firstname>Brian</firstname>
+        <surname>Ingerson</surname>
+        <email>ingy@ttul.org</email>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+
+    <abstract>
+      <title>Status</title>
+
+      <para>
+       This specification is a draft reflecting consensus reached by members of
+       the <ulink
+       url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
+       mailing list</ulink>. Any questions regarding this draft should be
+       raised on this list.
+      </para>
+    </abstract>
+  </articleinfo>
+
+  <section>
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            URI:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>tag:yaml.org,2002:omap</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Shorthand:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>!!omap</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Kind:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Sequence.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Definition:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Ordered sequence of key:value pairs without duplicates.
+          </para>
+
+          <para>
+            A common type used for modeling is the ordered list of named
+            values, where duplicates are not allowed. For example, this is the
+            basic collection data type used by the PHP language.
+          </para>
+
+          <para>
+            Most programming languages do not have a built-in native data type
+            for supporting ordered maps. Such data types are usually provided
+            by libraries. If no such data type is available, an application may
+            resort to loading an <quote><userinput>!!omap</userinput></quote>
+            into a native array of hash tables containing one key each.
+          </para>
+
+          <para>
+            The <quote><userinput>!!omap</userinput></quote> tag may be given
+            explicitly. Alternatively, the application may choose to implicitly
+            type a sequence of single-key mappings to ordered maps. In this
+            case, an explicit <quote><userinput>!seq</userinput></quote>
+            transfer must be given to sequences of single-key mappings that do
+            not represent ordered maps.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <example>
+      <title><userinput>!!omap</userinput> Examples</title>
+<programlisting>
+# Explicitly typed ordered map (dictionary).
+Bestiary: !!omap
+  - aardvark: African pig-like ant eater. Ugly.
+  - anteater: South-American ant eater. Two species.
+  - anaconda: South-American constrictor snake. Scaly.
+  # Etc.
+# Flow style
+Numbers: !!omap [ one: 1, two: 2, three : 3 ]
+</programlisting>
+    </example>
+  </section>
+</article>

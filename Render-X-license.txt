@@ -1,0 +1,10 @@
+-----BEGIN PGP SIGNED MESSAGE-----
+
+1 license(s) for XEP v3 developer, stamped issued to Clark Evans, YAML Project. 
+-----BEGIN PGP SIGNATURE-----
+Version: Cryptix-Java 3.1.2
+
+iQBFAgUAQKp6HQ11/zXDgGN9AQF2VgF/WUUUjryPBTpHjBQWMbikapMYe/Ly624k
+DiAGaB6Edqo88xlQhxUbf9uGfH03jHri
+=+0Te
+-----END PGP SIGNATURE-----

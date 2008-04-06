@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      Binary Data Language-Independent Type for
+      <trademark>YAML</trademark>&nbsp;Version&nbsp;1.1
+    </title>
+
+    <subtitle>
+      Working Draft 2005-01-18
+    </subtitle>
+
+    <authorgroup>
+      <author>
+        <firstname>Oren</firstname>
+        <surname>Ben-Kiki</surname>
+        <email>oren@ben-kiki.org</email>
+      </author>
+
+      <author>
+        <firstname>Clark</firstname>
+        <surname>Evans</surname>
+        <email>cce+yaml@clarkevans.com</email>
+      </author>
+
+      <author>
+        <firstname>Brian</firstname>
+        <surname>Ingerson</surname>
+        <email>ingy@ttul.org</email>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+
+    <abstract>
+      <title>Status</title>
+
+      <para>
+       This specification is a draft reflecting consensus reached by members of
+       the <ulink
+       url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
+       mailing list</ulink>. Any questions regarding this draft should be
+       raised on this list.
+      </para>
+    </abstract>
+  </articleinfo>
+
+  <section>
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            URI:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>tag:yaml.org,2002:binary</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Shorthand:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>!!binary</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Kind:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Scalar.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Canonical:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Base64 without white space and line breaks.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Regexp:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Base64 including white space and line breaks.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Definition:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            A sequence of zero or more octets (8 bit values).
+          </para>
+
+          <para>
+            Binary data is serialized using the base64 format as defined by
+            <ulink url="http://www.ietf.org/rfc/rfc2045.txt">RFC2045</ulink>
+            (MIME), with the following notes:
+          </para>
+
+          <itemizedlist>
+            <listitem>
+              <para>
+                The content is not restricted to lines of 76 characters or
+                less.
+              </para>
+            </listitem>
+
+            <listitem>
+              <para>
+                Characters other than the base64 alphabet, line breaks and
+                white space are considered an error.
+              </para>
+            </listitem>
+          </itemizedlist>
+
+          <para>
+            Base64 is the recommended way to store opaque binary data in YAML
+            files. Note that many forms of binary data have internal structure
+            that may benefit from being represented as YAML nodes (e.g. the
+            Java serialization format).
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <example>
+      <title><userinput>!!binary</userinput> Examples</title>
+<programlisting>
+canonical: !!binary "\
+ R0lGODlhDAAMAIQAAP//9/X17unp5WZmZgAAAOfn515eXvPz7Y6OjuDg4J+fn5\
+ OTk6enp56enmlpaWNjY6Ojo4SEhP/++f/++f/++f/++f/++f/++f/++f/++f/+\
+ +f/++f/++f/++f/++f/++SH+Dk1hZGUgd2l0aCBHSU1QACwAAAAADAAMAAAFLC\
+ AgjoEwnuNAFOhpEMTRiggcz4BNJHrv/zCFcLiwMWYNG84BwwEeECcgggoBADs="
+generic: !binary |
+ R0lGODlhDAAMAIQAAP//9/X17unp5WZmZgAAAOfn515eXvPz7Y6OjuDg4J+fn5
+ OTk6enp56enmlpaWNjY6Ojo4SEhP/++f/++f/++f/++f/++f/++f/++f/++f/+
+ +f/++f/++f/++f/++f/++SH+Dk1hZGUgd2l0aCBHSU1QACwAAAAADAAMAAAFLC
+ AgjoEwnuNAFOhpEMTRiggcz4BNJHrv/zCFcLiwMWYNG84BwwEeECcgggoBADs=
+description:
+ The binary value above is a tiny arrow encoded as a gif image.
+</programlisting>
+    </example>
+  </section>
+</article>

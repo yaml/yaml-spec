@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      Timestamp Language-Independent Type for
+      <trademark>YAML</trademark>&nbsp;Version&nbsp;1.1
+    </title>
+
+    <subtitle>
+      Working Draft 2005-01-18 - FIXED!!!
+    </subtitle>
+
+    <authorgroup>
+      <author>
+        <firstname>Oren</firstname>
+        <surname>Ben-Kiki</surname>
+        <email>oren@ben-kiki.org</email>
+      </author>
+
+      <author>
+        <firstname>Clark</firstname>
+        <surname>Evans</surname>
+        <email>cce+yaml@clarkevans.com</email>
+      </author>
+
+      <author>
+        <firstname>Brian</firstname>
+        <surname>Ingerson</surname>
+        <email>ingy@ttul.org</email>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+
+    <abstract>
+      <title>Status</title>
+
+      <para>
+       This specification is a draft reflecting consensus reached by members of
+       the <ulink
+       url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
+       mailing list</ulink>. Any questions regarding this draft should be
+       raised on this list.
+      </para>
+    </abstract>
+  </articleinfo>
+
+  <section>
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            URI:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>tag:yaml.org,2002:timestamp</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Shorthand:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>!!timestamp</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Kind:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Scalar.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Canonical:
+          </para>
+        </term>
+
+        <listitem>
+<screen>
+[0-9][0-9][0-9][0-9] <lineannotation># (year)</lineannotation>
+-[0-9][0-9] <lineannotation># (month)</lineannotation>
+-[0-9][0-9] <lineannotation># (day)</lineannotation>
+T[0-9][0-9] <lineannotation># (hour)</lineannotation>
+:[0-9][0-9] <lineannotation># (minute)</lineannotation>
+:[0-9][0-9] <lineannotation># (second)</lineannotation>
+(\.[0-9]*[1-9])? <lineannotation># (fraction)</lineannotation>
+Z <lineannotation># (time zone)</lineannotation>
+</screen>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Regexp:
+          </para>
+        </term>
+
+        <listitem>
+<screen>
+ [0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] <lineannotation># (ymd)</lineannotation>
+|[0-9][0-9][0-9][0-9] <lineannotation># (year)</lineannotation>
+ -[0-9][0-9]? <lineannotation># (month)</lineannotation>
+ -[0-9][0-9]? <lineannotation># (day)</lineannotation>
+ ([Tt]|[ \t]+)[0-9][0-9]? <lineannotation># (hour)</lineannotation>
+ :[0-9][0-9] <lineannotation># (minute)</lineannotation>
+ :[0-9][0-9] <lineannotation># (second)</lineannotation>
+ (\.[0-9]*)? <lineannotation># (fraction)</lineannotation>
+ ([ \t]*(Z|[-+][0-9][0-9]?(:[0-9][0-9])?))? <lineannotation># (time zone)</lineannotation>
+</screen>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Definition:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            A point in time.
+          </para>
+
+          <para>
+            A timestamp value represents a single point in time. This can be
+            serialized using a subset of the ISO8601 format and the formats
+            proposed by the W3C note on <ulink
+            url="http://www.w3.org/TR/NOTE-datetime">datetime</ulink>. In
+            addition, a more relaxed format is also supported for enhanced
+            readability, using white space separation.
+          </para>
+
+          <para>
+            If the time zone is omitted, the timestamp is assumed to be
+            specified in UTC. The time part may be omitted altogether,
+            resulting in a date format. In such a case, the time part is
+            assumed to be <userinput>00:00:00Z</userinput> (start of day, UTC).
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <example>
+      <title><userinput>!!timestamp</userinput> Examples</title>
+<programlisting>
+canonical:        2001-12-15T02:59:43.1Z
+valid iso8601:    2001-12-14t21:59:43.10-05:00
+space separated:  2001-12-14 21:59:43.10 -5
+no time zone (Z): 2001-12-15 2:59:43.10
+date (00:00:00Z): 2002-12-14
+</programlisting>
+    </example>
+  </section>
+</article>

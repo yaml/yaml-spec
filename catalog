@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE catalog
+  PUBLIC "-//OASIS/DTD Entity Resolution XML Catalog V1.0//EN"
+         "http://www.oasis-open.org/committees/entity/release/1.0/catalog.dtd">
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+  <!--
+    Each system puts the DTD somewhere else:
+      Gentoo: /usr/local/share/xml/docbook/4.2/docbookx.dtd
+      MAC OS X: /sw/share/xml/dtd/docbookx/4.2.0/docbookx.dtd
+      Ubuntu: /usr/share/xml/docbook/schema/dtd/4.2/docbookx.dtd
+      BSD: /usr/local/share/xml/docbook/4.2/docbookx.dtd
+      Cygwin: /usr/share/xml/docbook/4.2/docbookx.dtd
+  -->
+  <group prefer="public"
+         xml:base="/usr/share/xml/docbook/schema/dtd/4.2/docbookx.dtd">
+    <public publicId="-//OASIS//DTD DocBook XML V4.2//EN"
+            uri="docbookx.dtd" />
+    <system systemId="http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd"
+            uri="docbookx.dtd" />
+  </group>
+</catalog>

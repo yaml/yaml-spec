@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      Language-Independent Types for
+      <trademark>YAML</trademark>&nbsp;Version&nbsp;1.1
+    </title>
+
+    <subtitle>Last Updated On 2005-01-18</subtitle>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+  </articleinfo>
+
+  <section>
+    <title>Introduction</title>
+
+    <para>
+      The following is the list of language-independent YAML tags defined under
+      the domain <userinput>yaml.org</userinput>. The use of these tags is not
+      mandatory. However these tags represent types that are useful across a
+      wide range of applications and it is strongly recommended they be used
+      whenever appropriate to promote interoperability.
+    </para>
+
+    <para>
+      New language-independent tags may be proposed on the <ulink
+      url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
+      mailing list</ulink>. This mailing list is also the forum for raising any
+      question regarding these types.
+    </para>
+  </section>
+
+  <section>
+    <title>Collection Types</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!map</userinput>
+            <ulink url="http://yaml.org/type/map.html">html</ulink>
+            <ulink url="http://yaml.org/type/map.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/map.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Unordered set of key:&nbsp;value pairs without duplicates.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!omap</userinput>
+            <ulink url="http://yaml.org/type/omap.html">html</ulink>
+            <ulink url="http://yaml.org/type/omap.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/omap.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Ordered sequence of key:&nbsp;value pairs without duplicates.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!pairs</userinput>
+            <ulink url="http://yaml.org/type/pairs.html">html</ulink>
+            <ulink url="http://yaml.org/type/pairs.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/pairs.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Ordered sequence of key:&nbsp;value pairs allowing duplicates.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!set</userinput>
+            <ulink url="http://yaml.org/type/set.html">html</ulink>
+            <ulink url="http://yaml.org/type/set.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/set.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Unordered set of non-equal values.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!seq</userinput>
+            <ulink url="http://yaml.org/type/seq.html">html</ulink>
+            <ulink url="http://yaml.org/type/seq.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/seq.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Sequence of arbitrary values.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section>
+    <title>Scalar Types</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!binary</userinput>
+            <ulink url="http://yaml.org/type/binary.html">html</ulink>
+            <ulink url="http://yaml.org/type/binary.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/binary.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            A sequence of zero or more octets (8 bit values).
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!bool</userinput>
+            <ulink url="http://yaml.org/type/bool.html">html</ulink>
+            <ulink url="http://yaml.org/type/bool.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/bool.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Mathematical Booleans.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!float</userinput>
+            <ulink url="http://yaml.org/type/float.html">html</ulink>
+            <ulink url="http://yaml.org/type/float.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/float.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Floating-point approximation to real numbers.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!int</userinput>
+            <ulink url="http://yaml.org/type/int.html">html</ulink>
+            <ulink url="http://yaml.org/type/int.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/int.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Mathematical integers.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!merge</userinput>
+            <ulink url="http://yaml.org/type/merge.html">html</ulink>
+            <ulink url="http://yaml.org/type/merge.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/merge.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Specify one or more mappings to be merged with the current one.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!null</userinput>
+            <ulink url="http://yaml.org/type/null.html">html</ulink>
+            <ulink url="http://yaml.org/type/null.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/null.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Devoid of value.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!str</userinput>
+            <ulink url="http://yaml.org/type/str.html">html</ulink>
+            <ulink url="http://yaml.org/type/str.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/str.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            A sequence of zero or more Unicode characters.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!timestamp</userinput>
+            <ulink url="http://yaml.org/type/timestamp.html">html</ulink>
+            <ulink url="http://yaml.org/type/timestamp.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/timestamp.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            A point in time.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!value</userinput>
+            <ulink url="http://yaml.org/type/value.html">html</ulink>
+            <ulink url="http://yaml.org/type/value.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/value.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Specify the default value of a mapping.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            <userinput>!!yaml</userinput>
+            <ulink url="http://yaml.org/type/yaml.html">html</ulink>
+            <ulink url="http://yaml.org/type/yaml.pdf">pdf</ulink>
+            <ulink url="http://yaml.org/type/yaml.ps">ps</ulink>
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Keys for encoding YAML in YAML.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+</article>

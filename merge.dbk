@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      Merge Key Language-Independent Type for
+      <trademark>YAML</trademark>&nbsp;Version&nbsp;1.1
+    </title>
+
+    <subtitle>
+      Working Draft 2005-01-18
+    </subtitle>
+
+    <authorgroup>
+      <author>
+        <firstname>Oren</firstname>
+        <surname>Ben-Kiki</surname>
+        <email>oren@ben-kiki.org</email>
+      </author>
+
+      <author>
+        <firstname>Clark</firstname>
+        <surname>Evans</surname>
+        <email>cce+yaml@clarkevans.com</email>
+      </author>
+
+      <author>
+        <firstname>Brian</firstname>
+        <surname>Ingerson</surname>
+        <email>ingy@ttul.org</email>
+      </author>
+    </authorgroup>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+
+    <abstract>
+      <title>Status</title>
+
+      <para>
+       This specification is a draft reflecting consensus reached by members of
+       the <ulink
+       url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
+       mailing list</ulink>. Any questions regarding this draft should be
+       raised on this list.
+      </para>
+    </abstract>
+  </articleinfo>
+
+  <section>
+    <variablelist>
+      <varlistentry>
+        <term>
+          <para>
+            URI:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>tag:yaml.org,2002:merge</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Shorthand:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>!!merge</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Kind:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Scalar.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Canonical:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            N/A (single format).
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Regexp:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            <userinput>&lt;&lt;</userinput>
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          <para>
+            Definition:
+          </para>
+        </term>
+
+        <listitem>
+          <para>
+            Specify one or more mappings to be merged with the current one.
+          </para>
+
+          <para>
+            The <quote><userinput>&lt;&lt;</userinput></quote> merge key is
+            used to indicate that all the keys of one or more specified maps
+            should be inserted into the current map. If the value associated
+            with the key is a single mapping node, each of its key/value pairs
+            is inserted into the current mapping, unless the key already exists
+            in it. If the value associated with the merge key is a sequence,
+            then this sequence is expected to contain mapping nodes and each
+            of these nodes is merged in turn according to its order in the
+            sequence. Keys in mapping nodes earlier in the sequence override
+            keys specified in later mapping nodes.
+          </para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <example>
+      <title><userinput>!!merge</userinput> Examples</title>
+<programlisting>
+---
+- &amp;CENTER { x: 1, y: 2 }
+- &amp;LEFT { x: 0, y: 2 }
+- &amp;BIG { r: 10 }
+- &amp;SMALL { r: 1 }
+
+# All the following maps are equal:
+
+- # Explicit keys
+  x: 1
+  y: 2
+  r: 10
+  label: center/big
+
+- # Merge one map
+  &lt;&lt; : *CENTER
+  r: 10
+  label: center/big
+
+- # Merge multiple maps
+  &lt;&lt; : [ *CENTER, *BIG ]
+  label: center/big
+
+- # Override
+  &lt;&lt; : [ *BIG, *LEFT, *SMALL ]
+  x: 1
+  label: center/big
+</programlisting>
+    </example>
+  </section>
+</article>

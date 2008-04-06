@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!DOCTYPE article
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<article>
+  <articleinfo>
+    <title>
+      <trademark>YAML</trademark>&nbsp;Specification&nbsp;Index
+    </title>
+
+    <subtitle>Last Updated On 2005-01-18</subtitle>
+
+    <copyright>
+      <year>2001-2005</year>
+      <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
+      <holder>Clark Evans<fo>,&nbsp;</fo></holder>
+      <holder>Brian Ingerson</holder>
+    </copyright>
+
+    <legalnotice>
+      This document may be freely copied provided it is not modified.
+    </legalnotice>
+  </articleinfo>
+
+  <section>
+    <title>Introduction</title>
+
+    <para>
+      <trademark>YAML</trademark> (rhymes with <quote>camel</quote>) is a
+      human-friendly, cross language, Unicode based data serialization language
+      designed around the common native data structures of agile programming
+      languages. It is broadly useful for programming needs ranging from
+      configuration files to Internet messaging to object persistence to data
+      auditing. Together with the <ulink url="http://www.unicode.org/">Unicode
+      standard for characters</ulink>, the YAML <ulink
+      url="http://yaml.org/spec/current.html">specification</ulink> provides
+      all the information necessary to understand YAML Version 1.1 and to
+      creating programs that process YAML information.
+    </para>
+  </section>
+
+  <section>
+    <title>Specification</title>
+
+    <para>
+      Current (drafts):
+    </para>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          YAML latest posted specification
+        </term>
+
+        <listitem>
+          <ulink url="http://yaml.org/spec/current.html">html</ulink>
+          <ulink url="http://yaml.org/spec/current.pdf">pdf</ulink>
+          <ulink url="http://yaml.org/spec/current.ps">ps</ulink>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          YAML latest CVS snapshot
+        </term>
+
+        <listitem>
+          <ulink url="http://yaml.org/spec/cvs/current.html">html</ulink>
+          <ulink url="http://yaml.org/spec/cvs/current.pdf">pdf</ulink>
+          <ulink url="http://yaml.org/spec/cvs/current.ps">ps</ulink>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          Changes List
+        </term>
+
+        <listitem>
+          <ulink url="http://yaml.org/spec/changes.html">html</ulink>
+          <ulink url="http://yaml.org/spec/changes.pdf">pdf</ulink>
+          <ulink url="http://yaml.org/spec/changes.ps">ps</ulink>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          Types Repository
+        </term>
+
+        <listitem>
+          <ulink url="http://yaml.org/type/index.html">html</ulink>
+          <ulink url="http://yaml.org/type/index.pdf">pdf</ulink>
+          <ulink url="http://yaml.org/type/index.ps">ps</ulink>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>
+      Dated revisions:
+    </para>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          2004-12-30 (draft YAML 1.1)
+        </term>
+
+        <listitem>
+          <ulink
+     url="http://yaml.org/spec/history/2004-12-30/2004-12-30.html">html</ulink>
+          <ulink
+     url="http://yaml.org/spec/history/2004-12-30/2004-12-30.pdf">pdf</ulink>
+          <ulink
+     url="http://yaml.org/spec/history/2004-12-30/2004-12-30.ps">ps</ulink>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          2004-01-29 (last call YAML 1.0)
+        </term>
+
+        <listitem>
+          <ulink
+     url="http://yaml.org/spec/history/2004-01-29/2004-01-29.html">html</ulink>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          Historical Versions
+        </term>
+
+        <listitem>
+          <ulink
+          url="http://yaml.org/spec/history/2001-03-30.html">2001-03-30</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2001-05-15.html">2001-05-15</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2001-05-26.html">2001-05-26</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2001-06-16.html">2001-06-16</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2001-08-01.html">2001-08-01</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2001-12-10.html">2001-12-10</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2002-04-07.html">2002-04-07</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2002-09-01.html">2002-09-01</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2002-10-31.html">2002-10-31</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2003-03-15.html">2003-03-15</ulink>
+          , <ulink
+          url="http://yaml.org/spec/history/2003-09-01.html">2003-09-01</ulink>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+</article>
