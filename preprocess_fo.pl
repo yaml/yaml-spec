@@ -4,6 +4,7 @@ use strict;
 use English;
 
 my $text = "";
+my $in_final_tables = 0;
 while (my $line = <>) {
     # Get rid of the URLs of external links
     $line =~ s/\s*\[<fo:basic-link external-destination="[^"]*">[^<]*<\/fo:basic-link>\]//g;
@@ -24,11 +25,9 @@ while (my $line = <>) {
     # enforce keep-together.
     $line =~ s/<fo:table-row/<fo:table-row keep-together="always"/g;
     # Add margin and p[adding to preview examples.
-    $line =~ s/border-style/margin="2pt" padding="2pt" border-style/
-                              if ($line =~ /fo:block><fo:block wrap-option/);
+    $line =~ s/border-style/margin="2pt" padding="2pt" border-style/ if ($line =~ /fo:block><fo:block wrap-option/);
     # Add margin and padding to syntax examples.
-    $line =~ s/border-style/margin="2pt" padding="2pt" border-style/
-                              if ($line =~ /^<fo:block wrap-option/);
+    $line =~ s/border-style/margin="2pt" padding="2pt" border-style/ if ($line =~ /^<fo:block wrap-option/);
     # Fix the disappearing trademark problem.
     $line =~ s/\(YAML\)/(YAML&#8482;)/g;
     # Break the attempt to one-line the title
@@ -39,6 +38,17 @@ while (my $line = <>) {
     for (my $i = 0; $i < 6; $i++) {
         $line =~ s/key="((?:[^" ]+ )+)[ ]+/key="$1/;
     }
+    # Get rid of the non-ASCII characters.
+    $line =~ s/\302?\240/&#160;/g; # nbsp
+    $line =~ s/\302?\251/&#169;/g; # copyright
+    $line =~ s/\302?\260/&#176;/g; # deg
+    $line =~ s/\302?\267/&#183;/g; # middot
+    $line =~ s/\303?\327/&#215;/g; # times
+    $line =~ s/d[^ ]*t Net/d&#246;t Net/g; # ouml
+
+    $in_final_tables++ if $line =~ /10.2.2.&#160;Resolution</;
+    $line =~ s/column-number="1"\//column-number="1" column-width="60%"\// if $in_final_tables > 1;
+    $line =~ s/column-number="2"\//column-number="2" column-width="40%"\// if $in_final_tables > 1;
 
     print $line;
 }

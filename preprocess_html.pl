@@ -15,6 +15,8 @@ while (my $line = <>) {
   $line =~ s/width="52%"/class="productionrhs"/g;
   $line =~ s/width="30%"/class="productioncomment"/g;
   $line =~ s/Symbols/Indicators/g;
+  $line =~ s/<table border="1">/<table border="0" style="width: 0%">/g;
+  $line =~ s/em>/b>/g if $line =~ /<em>(Byte|Encoding)/;
 
   $table_depth++ if $line =~ /<table/;
   $simple_table_depth = $table_depth if $line =~ /<table.*class="simplelist"/;
