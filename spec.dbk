@@ -9664,7 +9664,7 @@ keep: |+
               <rhs>
                 <nonterminal
                   def="#c-mapping-value"><quote>:</quote></nonterminal>
-                ( <nonterminal def="#s-l+block-indented(n,c)"
+                ( <nonterminal def="#s-l+block-node(n,c)"
                   >s-l+block-node(n,block-out)</nonterminal><sbr/>
                 &nbsp;&nbsp;&nbsp;&nbsp;| <nonterminal def="#e-node"/>
                   <nonterminal def="#s-l-comments"/> )
@@ -10185,7 +10185,7 @@ of line
             <lhs>l-implicit-document</lhs>
             <rhs>
               <nonterminal def="#s-l+block-node(n,c)"
-                >ns-l+block-node(-1,block-in)</nonterminal><sbr/>
+                >s-l+block-node(-1,block-in)</nonterminal><sbr/>
               /* Excluding <nonterminal def="#c-forbidden"/> content */
             </rhs>
           </production>

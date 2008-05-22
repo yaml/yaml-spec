@@ -20,9 +20,17 @@ my $keep_next_text = 0;
 sub PI {
 }
 
+my $in_non_term = 0;
+
 sub StartTag {
   my $tag = $_;
   my $attr = \%_;
+
+  if ($tag =~ /<nonterminal def="#(.[^("]*)/) {
+    $in_non_term = $1;
+    $in_non_term =~ s/\+/\\+/g;
+    $in_non_term = 0 if $in_non_term eq 'c-reserved';
+  }
 
   if ($tag =~ /^<sect|^<chapter|^<book>/) {
     die if ($keep_next_title++);
@@ -61,8 +69,9 @@ sub StartTag {
 }
 
 sub Text {
+  my $text = $_;
+  warn("PRD-REF $text => $in_non_term") if $in_non_term and $text !~ /^.$|^${in_non_term}/;
   if ($keep_next_text) {
-    my $text = $_;
     $text =~ s/(?:\s|\n)+/ /g;
     push(@parts_stack, $text);
     $keep_next_text--;
@@ -72,6 +81,8 @@ sub Text {
 sub EndTag {
   my $tag = $_;
   my $attr = \%_;
+  $in_non_term = 0 if ($tag =~ /nonterminal/);
+
   pop(@parts_stack) if ($tag =~ /sect|chapter|book/);
 }
 
