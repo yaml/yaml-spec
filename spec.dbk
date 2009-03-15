@@ -2277,7 +2277,7 @@ Stack:
 
     <para>
       The following chapters formally define the syntax of YAML character
-      <refterm primary="stream">streams</refterm>, using (parametrized) BNF
+      <refterm primary="stream">streams</refterm>, using (parameterized) BNF
       productions. Each BNF production is both named and numbered for easy
       reference. Whenever possible, basic structures are specified before the
       more complex structures using them in a <quote>bottom up</quote> fashion.
@@ -2420,7 +2420,7 @@ Stack:
           YAML<q/>s syntax is designed for maximal human readability. This
           requires <refterm primary="parse">parsing</refterm> to depend on the
           surrounding text. For notational compactness, this dependency is
-          expressed using parametrized BNF productions.
+          expressed using parameterized BNF productions.
         </para>
 
         <para>
@@ -3474,8 +3474,8 @@ grave-accent: <hl1>`</hl1>text
           end flow entry"><uquote>,</uquote></refterm> indicators denote
           structure in <refterm primary="style" secondary="flow"
           tertiary="collection">flow collections</refterm>. They are therefore
-          forbidden avoid ambiguity in several constructs. This is handled on a
-          case-by-case basis by the relevant productions.
+          forbidden to avoid ambiguity in several constructs. This is handled
+          on a case-by-case basis by the relevant productions.
         </para>
 
         <productionset>
@@ -3503,7 +3503,7 @@ grave-accent: <hl1>`</hl1>text
 
       <keep-together>
         <para>
-          YAML recongnizes the following ASCII <defterm primary="line
+          YAML recognizes the following ASCII <defterm primary="line
           break">line break</defterm> characters. Note that the form feed
           (<userinput>#x0C</userinput>) is not considered to be a line break
           character.
@@ -3551,7 +3551,7 @@ grave-accent: <hl1>`</hl1>text
           break characters; however, JSON does not. Hence, to ensure <refterm
           primary="JSON compatibility">JSON compatibility</refterm>, YAML
           treats them as non-break characters as of version 1.2. In theory this
-          would cause incomatibility with <refterm primary="YAML 1.1
+          would cause incompatibility with <refterm primary="YAML 1.1
           processing">version 1.1</refterm>; in practice these characters were
           rarely (if ever) used. YAML 1.2 <refterm
           primary="processor">processors</refterm> <refterm
@@ -3567,6 +3567,7 @@ grave-accent: <hl1>`</hl1>text
             <rhs>
               <nonterminal def="#c-printable"/>
               - <nonterminal def="#b-char"/>
+              - <nonterminal def="#c-byte-order-mark"/>
             </rhs>
           </production>
 
@@ -7178,16 +7179,17 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             pair">key:&nbsp;value pairs</refterm> and <refterm
             primary="comment">comments</refterm>. In addition, inside <refterm
             primary="style" secondary="flow" tertiary="collection">flow
-            collections</refterm>, plain scalars must not contain the <refterm
-            primary="[ start flow sequence"><uquote>[</uquote></refterm>,
-            <refterm primary="] end flow
-            sequence"><uquote>]</uquote></refterm>, <refterm primary="{ start
-            flow mapping"><uquote>{</uquote></refterm>, <refterm primary="} end
-            flow mapping"><uquote>}</uquote></refterm> and <refterm primary=",
-            end flow entry"><uquote>,</uquote></refterm> characters. These
-            characters would cause ambiguity with <refterm primary="style"
-            secondary="flow" tertiary="collection">flow collection</refterm>
-            structures.
+            collections</refterm>, or when used as <refterm primary="key"
+            secondary="implicit">implicit keys</refterm>, plain scalars must
+            not contain the <refterm primary="[ start flow
+            sequence"><uquote>[</uquote></refterm>, <refterm primary="] end
+            flow sequence"><uquote>]</uquote></refterm>, <refterm primary="{
+            start flow mapping"><uquote>{</uquote></refterm>, <refterm
+            primary="} end flow mapping"><uquote>}</uquote></refterm> and
+            <refterm primary=", end flow entry"><uquote>,</uquote></refterm>
+            characters. These characters would cause ambiguity with <refterm
+            primary="style" secondary="flow" tertiary="collection">flow
+            collection</refterm> structures.
           </para>
 
           <productionset>
@@ -7279,9 +7281,9 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 
         <keep-together>
           <para>
-            Plain scalars are restricted to a single line when contained inside
-            an <refterm primary="key" secondary="implicit">implicit
-            key</refterm>.
+            Plain scalars are further restricted to a single line when
+            contained inside an <refterm primary="key"
+            secondary="implicit">implicit key</refterm>.
           </para>
 
           <productionset>
@@ -10104,7 +10106,7 @@ Document
             empty) list of <refterm primary="directive">directives</refterm> is
             terminated by a <defterm primary="marker" secondary="directives
             end">directives end marker</defterm> line. Lines following this
-            marker can safey use <refterm primary="%
+            marker can safely use <refterm primary="%
             directive"><uquote>%</uquote></refterm> as the first character.
           </para>
 
@@ -10193,7 +10195,7 @@ Document
       </sect2>
 
       <sect2>
-        <title>Document Types</title>
+        <title>Bare Documents</title>
 
         <keep-together>
           <para>
@@ -10270,7 +10272,7 @@ document</hl1>
             document</defterm> begins with no <refterm
             primary="directive">directives</refterm> but with an explicit
             <refterm primary="marker" secondary="directives end">directives end
-            marker</refterm> line. Since the existance of the <refterm
+            marker</refterm> line. Since the existence of the <refterm
             primary="document">document</refterm> is indicated by this <refterm
             primary="marker">marker</refterm>, the <refterm
             primary="document">document</refterm> itself may be <refterm
@@ -10403,8 +10405,8 @@ document</hl1>
           <production id="l-any-document">
             <lhs>l-any-document</lhs>
             <rhs>
-              &nbsp;&nbsp;<nonterminal def="#l-explicit-document"/><sbr/>
-              | <nonterminal def="#l-directive-document"/><sbr/>
+              &nbsp;&nbsp;<nonterminal def="#l-directive-document"/><sbr/>
+              | <nonterminal def="#l-explicit-document"/><sbr/>
               | <nonterminal def="#l-bare-document"/>
             </rhs>
           </production>
@@ -11504,7 +11506,7 @@ Also floats: [ .inf, -.Inf, +.INF, .NAN ]
         <refterm primary="tag" secondary="resolution">tag resolution</refterm>
         rules. Such rules may provide additional regular expressions, as well
         as consider the path to the <refterm primary="node">node</refterm>.
-        This allows interoparable <refterm primary="schema">schemas</refterm>
+        This allows interoperable <refterm primary="schema">schemas</refterm>
         to use <refterm primary="tag"
         secondary="non-specific">untagged</refterm> <refterm
         primary="node">nodes</refterm>.
@@ -11528,7 +11530,7 @@ Also floats: [ .inf, -.Inf, +.INF, .NAN ]
         The tag repository is intentionally left out of the scope of this
         specification. This allows it to evolve to better support YAML <refterm
         primary="application">applications</refterm>. Hence, developers are
-        enocuraged to submit new <quote>universal</quote> types to the
+        encouraged to submit new <quote>universal</quote> types to the
         repository. The <ulink
         url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
         mailing list</ulink> is the preferred method for such submissions, as
