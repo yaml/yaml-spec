@@ -225,15 +225,14 @@ span.honorific > code.literal {
 a[href^="#"] {
   text-decoration: none;
   color: black;
-  background-color: green;
-  background: url(term.png) no-repeat bottom right;
+  border-bottom: 1px dotted gray;
 }
 
 a[href^="#"]:hover,
 div.indexdiv a,
 div.toc a {
   text-decoration: underline;
-  background: none;
+  border-bottom: none;
   color: blue;
 }
 
@@ -243,7 +242,7 @@ pre.synopsis a {
 
 table.productionset a {
   background-color: #E0F8F8;
-  background: none;
+  border-bottom: none;
 }
 
 a.preferred {

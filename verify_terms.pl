@@ -10,8 +10,8 @@ my %ref_terms = ();
 my %ref_def_terms = ();
 my %def_ref_terms = ();
 my %ok_def_ref_terms = (
-    '<term primary="\\ escaping in double-quoted style">'
-  . ' @ Characters / Escape Sequences' => 1
+    '<term primary="document" secondary="end marker">'
+  . ' @ YAML Character Stream / Streams' => 1
 );
 
 my $keep_next_title = 0;

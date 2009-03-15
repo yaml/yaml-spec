@@ -86,10 +86,10 @@ $(HTML): single_html.xsl preprocess_html.xsl
 	$(XSLTPROC) single_html.xsl $*.dbk > $*.html
 
 .dbk.pdf: single_fo.xsl Render-X-license.txt catalog docbook_xslt
-	$(XSLTPROC) --param generate.toc "''" single_fo.xsl $*.dbk > tmp.xml
+	$(XSLTPROC) --param generate.toc "''" single_fo.xsl $*.dbk | sed 's/\xa0/\&#160;/g;s/\xa9/\&#169;/' > tmp.xml
 	$(XEP) tmp.xml -ps $*.ps
 	ps2pdf $*.ps
-	rm tmp.xml
+	rm tmp*.xml
 
 .dia.eps:
 	@echo "Export $*.eps using Pango fonts"
@@ -104,29 +104,29 @@ $(HTML): single_html.xsl preprocess_html.xsl
 #	dia --export-to-format eps-pango $*.dia
 
 changes.pdf: changes.dbk Render-X-license.txt catalog docbook_xslt
-	$(XSLTPROC) single_fo.xsl changes.dbk > tmp1.xml
-	sed 's/Chapter.//g' < tmp1.xml > tmp2.xml
+	$(XSLTPROC) single_fo.xsl changes.dbk | sed 's/\xa0/\&#160;/g;s/\xa9/\&#169;/' > tmp1.xml
+	sed 's/Chapter\xa0//g;s/\xa0/\&#160;/g' < tmp1.xml > tmp2.xml
 	$(XEP) tmp2.xml -ps changes.ps
 	ps2pdf changes.ps
-	rm tmp1.xml tmp2.xml
+	rm tmp*.xml
 
 type.pdf: type.dbk Render-X-license.txt catalog docbook_xslt
-	$(XSLTPROC) single_fo.xsl type.dbk > tmp1.xml
+	$(XSLTPROC) single_fo.xsl type.dbk | sed 's/\xa0/\&#160;/g;s/\xa9/\&#169;/' > tmp1.xml
 	sed 's/11em/24em/g' < tmp1.xml > tmp2.xml
 	$(XEP) tmp2.xml -ps type.ps
 	ps2pdf type.ps
-	rm tmp1.xml tmp2.xml
+	rm tmp*.xml
 
 spec.pdf: spec.dbk \
           preprocess_fo.pl preprocess_ps.pl catalog docbook_xslt \
           $(EPS_IMAGES) Render-X-license.txt
 	$(XSLTPROC) preprocess_fo.xsl spec.dbk > tmp1.xml
-	$(XSLTPROC) single_fo.xsl tmp1.xml > tmp2.xml
+	$(XSLTPROC) single_fo.xsl tmp1.xml | sed 's/\xa0/\&#160;/g;s/\xa9/\&#169;/' > tmp2.xml
 	perl preprocess_fo.pl tmp2.xml > tmp3.xml
 	$(XEP) tmp3.xml -ps tmp3.ps
 	perl preprocess_ps.pl tmp3.ps > spec.ps
 	ps2pdf spec.ps
-	rm tmp1.xml tmp2.xml tmp3.xml tmp3.ps
+	rm tmp*.xml
 
 spec.html: spec.dbk \
            preprocess_png.sed preprocess_html.pl catalog docbook_xslt \
@@ -137,7 +137,7 @@ spec.html: spec.dbk \
 	$(XSLTPROC) preprocess_html.xsl tmp1.xml > tmp2.xml
 	$(XSLTPROC) single_html.xsl tmp2.xml > tmp3.xml
 	perl preprocess_html.pl tmp3.xml > spec.html
-	rm tmp1.xml tmp2.xml tmp3.xml
+	#rm tmp*.xml
 
 docbook_xslt:
 	ln -s $(DOCBOOK_XSLT) docbook_xslt
