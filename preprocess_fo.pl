@@ -46,7 +46,7 @@ while (my $line = <>) {
     $line =~ s/\303?\327/&#215;/g; # times
     $line =~ s/d[^ ]*t Net/d&#246;t Net/g; # ouml
 
-    $in_final_tables++ if $line =~ /10.2.2.&#160;Resolution</;
+    $in_final_tables++ if $line =~ />Tag Resolution</;
     $line =~ s/column-number="1"\//column-number="1" column-width="60%"\// if $in_final_tables > 1;
     $line =~ s/column-number="2"\//column-number="2" column-width="40%"\// if $in_final_tables > 1;
 

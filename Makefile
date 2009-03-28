@@ -41,11 +41,11 @@ PDF = \
   timestamp.pdf value.pdf yaml.pdf omap.pdf pairs.pdf set.pdf
 
 EPS_IMAGES = \
-  model2.eps overview2.eps \
+  logo.eps model2.eps overview2.eps \
   present2.eps represent2.eps serialize2.eps styles2.eps validity2.eps
 
 PNG_IMAGES = \
-  model2.png overview2.png \
+  logo.svg logo.png model2.png overview2.png \
   present2.png represent2.png serialize2.png styles2.png validity2.png
 
 all: html pdf
@@ -126,11 +126,10 @@ spec.pdf: spec.dbk \
 	$(XEP) tmp3.xml -ps tmp3.ps
 	perl preprocess_ps.pl tmp3.ps > spec.ps
 	ps2pdf spec.ps
-	rm tmp*.xml
+	#rm tmp*.xml
 
 spec.html: spec.dbk \
-           preprocess_png.sed preprocess_html.pl catalog docbook_xslt \
-           $(PNG_IMAGES)
+           preprocess_png.sed preprocess_html.pl catalog docbook_xslt
 	perl verify_lhs.pl < spec.dbk
 	perl verify_terms.pl
 	sed -f preprocess_png.sed spec.dbk > tmp1.xml

@@ -6,12 +6,12 @@
 <book>
   <bookinfo>
     <title>
-YAML&nbsp;Ain<q/>t&nbsp;Markup&nbsp;Language&nbsp;(<trademark>YAML</trademark>)
+      YAML&nbsp;Ain<q/>t&nbsp;Markup&nbsp;Language&nbsp;(<trademark>YAML</trademark>)
       Version&nbsp;1.2
     </title>
 
     <subtitle>
-      Working&nbsp;Draft&nbsp;2009-03-14
+      Working&nbsp;Draft&nbsp;2009-03-20
     </subtitle>
 
     <authorgroup>
@@ -47,10 +47,10 @@ YAML&nbsp;Ain<q/>t&nbsp;Markup&nbsp;Language&nbsp;(<trademark>YAML</trademark>)
     </legalnotice>
 
     <releaseinfo id="releaseinfo">
-      <emphasis>This version:</emphasis>
-      <ulink url="http://yaml.org/spec/cvs/current.html">html</ulink>,
-      <ulink url="http://yaml.org/spec/cvs/current.ps">ps</ulink>,
-      <ulink url="http://yaml.org/spec/cvs/current.pdf">pdf</ulink>.<sbr/>
+      <emphasis>This version:</emphasis><sbr/>
+      &nbsp;&nbsp;HTML: <ulink url="http://yaml.org/spec/cvs/current.html"/><sbr/>
+      &nbsp;&nbsp;PDF: <ulink url="http://yaml.org/spec/cvs/current.pdf"/><sbr/>
+      &nbsp;&nbsp;PS: <ulink url="http://yaml.org/spec/cvs/current.ps"/>
     </releaseinfo>
 
     <abstract>
@@ -59,10 +59,9 @@ YAML&nbsp;Ain<q/>t&nbsp;Markup&nbsp;Language&nbsp;(<trademark>YAML</trademark>)
       <para>
        This specification is a "last call for comments" prior to finalizing the
        YAML specification. It reflects the consensus reached by members of the
-       <ulink
-       url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
-       mailing list</ulink>. Any questions regarding this draft should be
-       raised on this list.
+       yaml-core mailing list at <ulink
+       url="http://lists.sourceforge.net/lists/listinfo/yaml-core"/>. Any
+       questions regarding this draft should be raised on this list.
       </para>
 
       <para>
@@ -913,27 +912,30 @@ quoted: "So does this
           In YAML, <refterm primary="tag" secondary="non-specific">untagged
           nodes</refterm> are given a type depending on the <refterm
           primary="application">application</refterm>. The examples in this
-          specification generally use the <ulink
-          url="http://yaml.org/type/seq.html"><uquote>seq</uquote></ulink>,
+          specification generally use the <refterm primary="tag"
+          secondary="repository" tertiary="seq">
+          <userinput>seq</userinput></refterm>, <refterm primary="tag"
+          secondary="repository" tertiary="map">
+          <userinput>map</userinput></refterm> and <refterm primary="tag"
+          secondary="repository" tertiary="str">
+          <userinput>str</userinput></refterm> types from the <refterm
+          primary="schema" secondary="failsafe">fail safe schema</refterm>. A
+          few examples also use the <refterm primary="tag"
+          secondary="repository"
+          tertiary="int"><userinput>int</userinput></refterm>, <refterm
+          primary="tag" secondary="repository"
+          tertiary="float"><userinput>float</userinput></refterm>, and <refterm
+          primary="tag" secondary="repository"
+          tertiary="null"><userinput>null</userinput></refterm> types from the
+          <refterm primary="schema" secondary="JSON">JSON schema</refterm>. The
+          <refterm primary="tag" secondary="repository">repository</refterm>
+          includes additional types such as <ulink
+          url="http://yaml.org/type/binary.html"
+          ><userinput>binary</userinput></ulink>, <ulink
+          url="http://yaml.org/type/omap.html"><userinput>omap</userinput></ulink>,
           <ulink
-          url="http://yaml.org/type/map.html"><uquote>map</uquote></ulink> and
-          <ulink
-          url="http://yaml.org/type/str.html"><uquote>str</uquote></ulink>
-          types from the <ulink url="http://yaml.org/type/index.html">YAML tag
-          repository</ulink>. A few examples also use the <ulink
-          url="http://yaml.org/type/int.html"><uquote>int</uquote></ulink>,
-          <ulink
-          url="http://yaml.org/type/float.html"><uquote>float</uquote></ulink>
-          and <ulink
-          url="http://yaml.org/type/null.html"><uquote>null</uquote></ulink>
-          types. The <refterm primary="tag"
-          secondary="repository">repository</refterm> includes additional types
-          such as <ulink url="http://yaml.org/type/binary.html"
-          ><uquote>binary</uquote></ulink>, <ulink
-          url="http://yaml.org/type/bool.html"><uquote>bool</uquote></ulink>,
-          <ulink
-          url="http://yaml.org/type/set.html"><uquote>set</uquote></ulink> and
-          others.
+          url="http://yaml.org/type/set.html"><userinput>set</userinput></ulink>
+          and others.
         </para>
 
         <simplelist type="horiz" columns="2">
@@ -964,7 +966,7 @@ not a number: .NaN
           <member>
             <example>
               <title>Miscellaneous</title>
-<programlisting>null: ~<sbr/>
+<programlisting>null:<sbr/>
 true: boolean
 false: boolean
 string: '12345'
@@ -1051,7 +1053,7 @@ application specific tag: !something |
               <title>Unordered Sets</title>
 <programlisting># Sets are represented as a<sbr/>
 # Mapping where each key is
-# associated with the empty string
+# associated with a null value
 --- !!set
 ? Mark McGwire
 ? Sammy Sosa
@@ -1476,7 +1478,7 @@ Stack:
           mean a set of <refterm primary="node">nodes</refterm> and directed
           edges (<quote>arrows</quote>), where each edge connects one <refterm
           primary="node">node</refterm> to another (see <ulink
-          url="http://www.nist.gov/dads/HTML/directedGraph.html"> a formal
+          url="http://www.nist.gov/dads/HTML/directedGraph.html">a formal
           definition</ulink>). All the <refterm primary="node">nodes</refterm>
           must be reachable from the <defterm primary="node"
           secondary="root">root node</defterm> via such edges. Note that the
@@ -1545,7 +1547,11 @@ Stack:
                 even contain itself (directly or indirectly).
               </listitem>
             </varlistentry>
+          </variablelist>
 
+          <pagebreak/>
+
+          <variablelist>
             <varlistentry>
               <term>Mapping</term>
 
@@ -1755,7 +1761,7 @@ Stack:
           of <refterm primary="native data structure">native data
           structures</refterm> from the serial interface should not use
           <refterm primary="key" secondary="order">key order</refterm> or
-          <refterm primary="anchor">anchors</refterm> for the preservation of
+          <refterm primary="anchor">anchor names</refterm> for the preservation of
           <refterm primary="application">application</refterm> data.
         </para>
 
@@ -1923,7 +1929,7 @@ Stack:
             tertiary="mapping">flow mappings</refterm> with a single <refterm
             primary="key: value pair">key:&nbsp;value pair</refterm>, nested
             inside a <refterm primary="style" secondary="flow"
-            tertiary="sequence">flow sequence</refterm>. This allows for a
+            tertiary="sequence">flow sequence</refterm>. These allow for a
             natural <quote>ordered mapping</quote> notation.
           </para>
 
@@ -1977,6 +1983,8 @@ Stack:
             primary="collection">collections</refterm>.
           </para>
         </sect3>
+
+        <pagebreak/>
 
         <sect3>
           <title>Directives</title>
@@ -2063,7 +2071,7 @@ Stack:
         <para>
           A <refterm primary="stream"
           secondary="well-formed">well-formed</refterm> character <refterm
-          primary="stream">stream</refterm> must match the productions
+          primary="stream">stream</refterm> must match the BNF productions
           specified in the following chapters. Successful loading also requires
           that each <refterm primary="alias">alias</refterm> shall refer to a
           previous <refterm primary="node">node</refterm> <refterm
@@ -2137,7 +2145,7 @@ Stack:
           <refterm primary="node" >node</refterm>. Finally, resolution must not
           consider the <refterm primary="content">content</refterm> of a
           sibling <refterm primary="node">node</refterm> in a <refterm
-          primary="collection">collection</refterm> or the <refterm
+          primary="collection">collection</refterm>, or the <refterm
           primary="content">content</refterm> of the <refterm
           primary="value">value node</refterm> associated with a <refterm
           primary="key">key node</refterm> being resolved.
@@ -2168,7 +2176,7 @@ Stack:
           <quote>disable</quote> the tag resolution process. By explicitly
           specifying a <uquote>!</uquote> non-specific <refterm primary="tag"
           secondary="property">tag property</refterm>, the <refterm
-          primary="node">node</refterm> would be resolved to a
+          primary="node">node</refterm> would then be resolved to a
           <quote>vanilla</quote> <refterm
           primary="sequence">sequence</refterm>, <refterm
           primary="mapping">mapping</refterm>, or string, according to its
@@ -2176,17 +2184,8 @@ Stack:
         </para>
 
         <para>
-          That said, tag resolution is specific to the <refterm
-          primary="application">application</refterm>. YAML <refterm
-          primary="processor">processors</refterm> should therefore provide a
-          mechanism allowing the <refterm
-          primary="application">application</refterm> to override and expand
-          these default tag resolution rules.
-        </para>
-
-        <para>
-          Typically, <refterm primary="application">application</refterm>
-          specific tag resolution rules are restricted to resolving the
+          <refterm primary="application">Application</refterm> specific tag
+          resolution rules should be restricted to resolving the
           <uquote>?</uquote> non-specific tag, most commonly to resolving
           <refterm primary="style" secondary="flow" tertiary="plain">plain
           scalars</refterm>. These may be matched against a set of regular
@@ -2199,6 +2198,15 @@ Stack:
           points, complex numbers, and similar types. Resolved <refterm
           primary="sequence">sequence node</refterm> types such as the
           <quote>ordered mapping</quote> are also possible.
+        </para>
+
+        <para>
+          That said, tag resolution is specific to the <refterm
+          primary="application">application</refterm>. YAML <refterm
+          primary="processor">processors</refterm> should therefore provide a
+          mechanism allowing the <refterm
+          primary="application">application</refterm> to override and expand
+          these default tag resolution rules.
         </para>
 
         <para>
@@ -2277,7 +2285,7 @@ Stack:
 
     <para>
       The following chapters formally define the syntax of YAML character
-      <refterm primary="stream">streams</refterm>, using (parameterized) BNF
+      <refterm primary="stream">streams</refterm>, using parameterized BNF
       productions. Each BNF production is both named and numbered for easy
       reference. Whenever possible, basic structures are specified before the
       more complex structures using them in a <quote>bottom up</quote> fashion.
@@ -2286,8 +2294,9 @@ Stack:
     <para>
       The order of alternatives inside a production is significant. Subsequent
       alternatives are only considered when previous ones fails. See for
-      example the <nonterminal def="#b-break"/> production. In addition,
-      production matching is expected to be greedy. Optional
+      example the <nonterminal
+      def="#b-break"><userinput>b-break</userinput></nonterminal> production.
+      In addition, production matching is expected to be greedy. Optional
       (<userinput>?</userinput>), zero-or-more (<userinput>*</userinput>) and
       one-or-more (<userinput>+</userinput>) patterns are always expected to
       match as much of the input as possible.
@@ -2309,7 +2318,7 @@ Stack:
       url="http://hackage.haskell.org/cgi-bin/hackage-scripts/package/YamlReference"
       >YamlReference</ulink> Haskell package. This reference implementation is
       also available as an interactive web application at <ulink
-      url="http://dev.yaml.org/ypaste">http://dev.yaml.org/ypaste</ulink>.
+      url="http://dev.yaml.org/ypaste"/>.
     </para>
 
     <sect1>
@@ -2468,32 +2477,6 @@ Stack:
                 </para>
 
                 <para>
-                  In <refterm primary="style" secondary="flow">flow
-                  styles</refterm>, explicit <refterm
-                  primary="indicator">indicators</refterm> are used to
-                  delineate structure. These styles can be viewed as the
-                  natural extension of JSON to cover <refterm
-                  primary="tag">tagged</refterm>, <refterm primary="style"
-                  secondary="flow"
-                  tertiary="single-quoted">single-quoted</refterm> and <refterm
-                  primary="style" secondary="flow" tertiary="plain">plain
-                  scalars</refterm>. Since the latter have no delineating
-                  <refterm primary="indicator">indicators</refterm>, they are
-                  subject to some restrictions to avoid ambiguities. These
-                  restrictions depend on whether they are used as keys
-                  (<defterm primary="context"
-                  secondary="flow-key"><userinput>flow-key</userinput></defterm>
-                  context), are nested inside a <refterm primary="style"
-                  secondary="flow" tertiary="collection">flow
-                  collection</refterm> (<defterm primary="context"
-                  secondary="flow-in"><userinput>flow-in</userinput>
-                  context</defterm>), or appear outside one (<defterm
-                  primary="context"
-                  secondary="flow-out"><userinput>flow-out</userinput>
-                  context</defterm>).
-                </para>
-
-                <para>
                   In <refterm primary="style" secondary="block">block
                   styles</refterm>, <refterm primary="space"
                   secondary="indentation">indentation</refterm> is used to
@@ -2506,11 +2489,37 @@ Stack:
                   cases productions need to behave differently inside <refterm
                   primary="style" secondary="block" tertiary="sequence">block
                   sequences</refterm> (<defterm primary="context"
-                  secondary="block-in"><userinput>block-in</userinput>
-                  context</defterm>) and outside them (<defterm
-                  primary="context"
-                  secondary="block-out"><userinput>block-out</userinput>
-                  context</defterm>).
+                  secondary="block-in">block-in context</defterm>) and outside
+                  them (<defterm primary="context"
+                  secondary="block-out">block-out context</defterm>).
+                </para>
+
+                <para>
+                  In <refterm primary="style" secondary="flow">flow
+                  styles</refterm>, explicit <refterm
+                  primary="indicator">indicators</refterm> are used to
+                  delineate structure. These styles can be viewed as the
+                  natural extension of JSON to cover <refterm
+                  primary="tag">tagged</refterm>, <refterm primary="style"
+                  secondary="flow"
+                  tertiary="single-quoted">single-quoted</refterm> and <refterm
+                  primary="style" secondary="flow" tertiary="plain">plain
+                  scalars</refterm>. Since the latter have no delineating
+                  <refterm primary="indicator">indicators</refterm>, they are
+                  subject to some restrictions to avoid ambiguities. These
+                  restrictions depend on where they appear: as implicit keys
+                  directly inside a <refterm primary="style" secondary="block"
+                  tertiary="mapping">block mapping</refterm> (<defterm
+                  primary="context" secondary="block-key">block-key</defterm>);
+                  as implicit keys inside a <refterm primary="style"
+                  secondary="flow" tertiary="mapping">flow mapping</refterm>
+                  (<defterm primary="context"
+                  secondary="flow-key">flow-key</defterm>); as values inside a
+                  <refterm primary="style" secondary="flow"
+                  tertiary="collection">flow collection</refterm> (<defterm
+                  primary="context" secondary="flow-in">flow-in</defterm>); or
+                  as values inside one (<defterm primary="context"
+                  secondary="flow-out">flow-out</defterm>).
                 </para>
               </keep-together>
             </listitem>
@@ -2598,10 +2607,12 @@ Stack:
           primary="processor">processors</refterm> must allow all non-control
           characters inside <refterm primary="style" secondary="flow"
           tertiary="double-quoted">quoted</refterm> <refterm primary="style"
-          secondary="flow" tertiary="single-quoted">scalars</refterm>. On
-          output, such characters should be <refterm primary="escaping"
-          secondary="in double-quoted scalars">escaped</refterm> to ensure
-          readability.
+          secondary="flow" tertiary="single-quoted">scalars</refterm>. To
+          ensure readability, non-printable characters should be <refterm
+          primary="escaping" secondary="in double-quoted
+          scalars">escaped</refterm> on output, even inside such <refterm
+          primary="style" secondary="flow" tertiary="double-quoted">quoted
+          scalars</refterm>.
         </para>
 
         <productionset>
@@ -2661,102 +2672,102 @@ Stack:
           <tgroup cols="6">
             <tbody>
               <row>
+                <entry></entry>
                 <entry>&nbsp;<emphasis>Byte0&nbsp;</emphasis></entry>
                 <entry>&nbsp;<emphasis>Byte1&nbsp;</emphasis></entry>
                 <entry>&nbsp;<emphasis>Byte2&nbsp;</emphasis></entry>
                 <entry>&nbsp;<emphasis>Byte3&nbsp;</emphasis></entry>
                 <entry>&nbsp;<emphasis>Encoding</emphasis></entry>
-                <entry></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<userinput>#xFE</userinput></entry>
                 <entry>&nbsp;<userinput>#xFF</userinput></entry>
                 <entry>&nbsp;UTF-32BE</entry>
-                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<emphasis>any</emphasis></entry>
                 <entry>&nbsp;UTF-32BE</entry>
-                <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
                 <entry>&nbsp;<userinput>#xFF</userinput></entry>
                 <entry>&nbsp;<userinput>#xFE</userinput></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;UTF-32LE</entry>
-                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
                 <entry>&nbsp;<emphasis>any</emphasis></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;UTF-32LE</entry>
-                <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
                 <entry>&nbsp;<userinput>#xFE</userinput></entry>
                 <entry>&nbsp;<userinput>#xFF</userinput></entry>
                 <entry></entry>
                 <entry></entry>
                 <entry>&nbsp;UTF-16BE</entry>
-                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry>&nbsp;<emphasis>any</emphasis></entry>
                 <entry></entry>
                 <entry></entry>
                 <entry>&nbsp;UTF-16BE</entry>
-                <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
                 <entry>&nbsp;<userinput>#xFF</userinput></entry>
                 <entry>&nbsp;<userinput>#xFE</userinput></entry>
                 <entry></entry>
                 <entry></entry>
                 <entry>&nbsp;UTF-16LE</entry>
-                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
                 <entry>&nbsp;<emphasis>any</emphasis></entry>
                 <entry>&nbsp;<userinput>#x00</userinput></entry>
                 <entry></entry>
                 <entry></entry>
                 <entry>&nbsp;UTF-16LE</entry>
-                <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
                 <entry>&nbsp;<userinput>#xEF</userinput></entry>
                 <entry>&nbsp;<userinput>#xBB</userinput></entry>
                 <entry>&nbsp;<userinput>#xBF</userinput></entry>
                 <entry></entry>
                 <entry>&nbsp;UTF-8</entry>
-                <entry>&nbsp;<emphasis>&nbsp;Explicit&nbsp;BOM</emphasis></entry>
               </row>
 
               <row>
+                <entry>&nbsp;<emphasis>&nbsp;Default</emphasis></entry>
                 <entry></entry>
                 <entry></entry>
                 <entry></entry>
                 <entry></entry>
                 <entry>&nbsp;UTF-8</entry>
-                <entry>&nbsp;<emphasis>&nbsp;Default</emphasis></entry>
               </row>
             </tbody>
           </tgroup>
@@ -3175,11 +3186,11 @@ mapping: <hl2>{</hl2> sky: blue<hl3>,</hl3> sea: green <hl2>}</hl2>
 
         <simplelist type="horiz" columns="2">
           <member>
-<programlisting>anchored: <hl3>!</hl3>local <hl1>&amp;</hl1>anchor value<sbr/>
-alias: <hl2>*</hl2>anchor
+<programlisting>anchored: <hl1>!</hl1>local <hl2>&amp;</hl2>anchor value<sbr/>
+alias: <hl3>*</hl3>anchor
 </programlisting>
 <synopsis>Legend:
-  <hl1><link linkend="c-anchor">c-anchor</link></hl1> <hl2><link linkend="c-alias">c-alias</link></hl2> <hl3><link linkend="c-tag">c-tag</link></hl3>
+  <hl1><link linkend="c-tag">c-tag</link></hl1> <hl2><link linkend="c-anchor">c-anchor</link></hl2> <hl3><link linkend="c-alias">c-alias</link></hl3>
 </synopsis>
             </member>
             <member>
@@ -3474,8 +3485,8 @@ grave-accent: <hl1>`</hl1>text
           end flow entry"><uquote>,</uquote></refterm> indicators denote
           structure in <refterm primary="style" secondary="flow"
           tertiary="collection">flow collections</refterm>. They are therefore
-          forbidden to avoid ambiguity in several constructs. This is handled
-          on a case-by-case basis by the relevant productions.
+          forbidden in some cases, to avoid ambiguity in several constructs.
+          This is handled on a case-by-case basis by the relevant productions.
         </para>
 
         <productionset>
@@ -3536,8 +3547,7 @@ grave-accent: <hl1>`</hl1>text
 
       <keep-together>
         <para>
-          All other <refterm primary="printable character">printable</refterm>
-          or JSON characters are considered to be non-break characters. Note
+          All other characters are considered to be non-break characters. Note
           these include the <defterm primary="line break"
           secondary="non-ASCII">non-ASCII line breaks</defterm>: next line
           (<userinput>#x85</userinput>), line separator
@@ -4280,6 +4290,8 @@ block:<hl2>&rarr;</hl2>|
         </member>
       </simplelist>
 
+      <pagebreak/>
+
       <simplelist type="horiz" columns="2">
         <member>
           <productionset>
@@ -4348,8 +4360,8 @@ block:<hl2>&rarr;</hl2>|
               | <nonterminal def="#ns-esc-bell"/>
               | <nonterminal def="#ns-esc-backspace"/><sbr/>
               | <nonterminal def="#ns-esc-horizontal-tab"/>
-              | <nonterminal def="#ns-esc-vertical-tab"/><sbr/>
-              | <nonterminal def="#ns-esc-line-feed"/>
+              | <nonterminal def="#ns-esc-line-feed"/><sbr/>
+              | <nonterminal def="#ns-esc-vertical-tab"/>
               | <nonterminal def="#ns-esc-form-feed"/><sbr/>
               | <nonterminal def="#ns-esc-carriage-return"/>
               | <nonterminal def="#ns-esc-escape"/>
@@ -4557,14 +4569,14 @@ Not indented:
 
           <simplelist type="horiz" columns="2">
             <member>
-<programlisting><HL><hl3><hl2>?</hl2></hl3></HL>&middot;a<sbr/>
-<HL><hl3><hl2>:</hl2><hl1>&middot;</hl1><hl2>-</hl2></hl3></HL>&rarr;b
-<HL><hl3><hl1>&middot;&middot;</hl1><hl2>-</hl2><hl1>&middot;&middot;</hl1><hl2>-</hl2></hl3></HL>&rarr;c
-<HL><hl3><hl1>&middot;&middot;&middot;&middot;&middot;</hl1><hl2>-</hl2></hl3></HL>&middot;d
+<programlisting><HL><hl1><hl3>?</hl3></hl1></HL>&middot;a<sbr/>
+<HL><hl1><hl3>:</hl3><hl2>&middot;</hl2><hl3>-</hl3></hl1></HL>&rarr;b
+<HL><hl1><hl2>&middot;&middot;</hl2><hl3>-</hl3><hl2>&middot;&middot;</hl2><hl3>-</hl3></hl1></HL>&rarr;c
+<HL><hl1><hl2>&middot;&middot;&middot;&middot;&middot;</hl2><hl3>-</hl3></hl1></HL>&middot;d
 </programlisting>
 <synopsis>Legend:
-  <hl1><link linkend="s-indent(n)">s-indent(n)</link></hl1> <hl2>Indentation indicator</hl2>
-  <hl3>Total Indentation</hl3>
+  <hl1>Total Indentation</hl1>
+  <hl2><link linkend="s-indent(n)">s-indent(n)</link></hl2> <hl3>Indicator as indentation</hl3>
 </synopsis>
             </member>
             <member>
@@ -4771,7 +4783,7 @@ Legend:
 <hl1>&middot;&middot;&middot;&rarr;</hl1>
   as a line feed"
 Chomping: |
-  Trimmed empty lines
+  Clipped empty lines
 <hl1>&middot;</hl1>
 </programlisting>
 <synopsis>Legend:
@@ -4785,7 +4797,7 @@ Chomping: |
   ? !!str "Folding"
   : !!str "Empty line\nas a line feed",
   ? !!str "Chomping"
-  : !!str "Trimmed empty lines\n",
+  : !!str "Clipped empty lines\n",
 }
 </programlisting>
           </member>
@@ -4907,7 +4919,7 @@ Chomping: |
               to <refterm primary="chomping">chomping</refterm>, and are never
               folded. In addition, folding does not apply to <refterm
               primary="line break">line breaks</refterm> surrounding text lines
-              containing leading <refterm primary="space"
+              that contain leading <refterm primary="space"
               secondary="white">white space</refterm>. Note that such a
               <refterm primary="more-indented">more-indented</refterm> line may
               consist only of such leading <refterm primary="space"
@@ -5222,6 +5234,8 @@ Chomping: |
               <nonterminal def="#s-separate-lines(n)"/><sbr/>
               <varname>c</varname> = flow-in&nbsp;&nbsp; &rArr;
               <nonterminal def="#s-separate-lines(n)"/><sbr/>
+              <varname>c</varname> = block-key &rArr;
+              <nonterminal def="#s-separate-in-line"/><sbr/>
               <varname>c</varname> = flow-key&nbsp; &rArr;
               <nonterminal def="#s-separate-in-line"/>
             </rhs>
@@ -5386,7 +5400,7 @@ Chomping: |
             primary="document">document</refterm> conforms to. This
             specification defines version <uquote>1.2</uquote>, including
             recommendations for <defterm primary="YAML 1.1
-            processing">processing</defterm> of version <uquote>1.1</uquote>.
+            processing">YAML 1.1 processing</defterm>.
           </para>
 
           <para>
@@ -5409,16 +5423,17 @@ Chomping: |
 
           <para>
             A version 1.2 YAML <refterm primary="processor">processor</refterm>
-            must accept <refterm primary="document">documents</refterm> with an
-            explicit <uquote>%YAML 1.1</uquote> directive. Note version 1.2 is
-            mostly a superset of version 1.1, defined for the purpose of
+            must also accept <refterm primary="document">documents</refterm>
+            with an explicit <uquote>%YAML 1.1</uquote> directive. Note version
+            1.2 is mostly a superset of version 1.1, defined for the purpose of
             ensuring <defterm primary="JSON compatibility">JSON
             compatibility</defterm>. Hence a version 1.2 <refterm
             primary="processor">processor</refterm> should process version 1.1
             <refterm primary="document">documents</refterm> as if they were
             version 1.2. The only exception is the handling of <refterm
             primary="line break" secondary="non-ASCII">non-ASCII line
-            breaks</refterm>, as described above.
+            breaks</refterm>, as described <link linkend="non-ASCII line
+            breaks">above</link>.
           </para>
 
           <productionset>
@@ -5652,14 +5667,12 @@ be given at most once per
               <member>
 <programlisting># Private<sbr/>
 <hl1>!</hl1>foo "bar"
+...
 # Global
 %TAG <hl1>!</hl1> tag:example.com,2000:app/
 ---
 <hl1>!</hl1>foo "bar"
 </programlisting>
-<synopsis>Legend:
-  <hl1><link linkend="c-primary-tag-handle">c-primary-tag-handle</link></hl1>
-</synopsis>
               </member>
               <member>
 <programlisting>%YAML 1.2<sbr/>
@@ -5669,6 +5682,9 @@ be given at most once per
 ---
 !&lt;tag:example.com,2000:app/foo&gt; "bar"
 </programlisting>
+<synopsis>Legend:
+  <hl1><link linkend="c-primary-tag-handle">c-primary-tag-handle</link></hl1>
+</synopsis>
               </member>
             </simplelist>
           </example>
@@ -5863,8 +5879,9 @@ be given at most once per
             <simplelist type="horiz" columns="2">
               <member>
 <programlisting>%TAG !m! <hl1>!my-</hl1><sbr/>
---- # Type here
+--- # Bulb here
 !m!light fluorescent
+...
 %TAG !m! <hl1>!my-</hl1>
 --- # Color here
 !m!light green
@@ -5983,14 +6000,14 @@ be given at most once per
 
         <simplelist type="horiz" columns="2">
           <member>
-<programlisting><HL><hl3><hl2>!!str</hl2> <hl1>&amp;a1</hl1></hl3></HL> "foo":<sbr/>
-  <HL><hl3><hl2>!!str</hl2></hl3></HL> bar
-<HL><hl3><hl1>&amp;a2</hl1></hl3></HL> baz : *a1
+<programlisting><HL><hl1><hl3>!!str</hl3> <hl2>&amp;a1</hl2></hl1></HL> "foo":<sbr/>
+  <HL><hl1><hl3>!!str</hl3></hl1></HL> bar
+<HL><hl1><hl2>&amp;a2</hl2></hl1></HL> baz : *a1
 </programlisting>
 <synopsis>Legend:
-  <hl1><link linkend="c-ns-anchor-property">c-ns-anchor-property</link></hl1>
-  <hl2><link linkend="c-ns-tag-property">c-ns-tag-property</link></hl2>
-  <hl3><link linkend="c-ns-properties(n,c)">c-ns-properties(n,c)</link></hl3>
+  <hl1><link linkend="c-ns-properties(n,c)">c-ns-properties(n,c)</link></hl1>
+  <hl2><link linkend="c-ns-anchor-property">c-ns-anchor-property</link></hl2>
+  <hl3><link linkend="c-ns-tag-property">c-ns-tag-property</link></hl3>
 </synopsis>
         </member>
         <member>
@@ -6275,10 +6292,11 @@ be given at most once per
                 </para>
 
                 <para>
-                  It is possible for the tag property to be set to the <refterm
-                  primary="! tag indicator" secondary="! non-specific
-                  tag"><uquote>!</uquote> non-specific tag</refterm>. By
-                  <refterm primary="tag" secondary="resolution"
+                  It is possible for the tag property to be explicitly set to
+                  the <refterm primary="! tag indicator" secondary="!
+                  non-specific tag"><uquote>!</uquote> non-specific
+                  tag</refterm>. By <refterm primary="tag"
+                  secondary="resolution"
                   tertiary="convention">convention</refterm>, this
                   <quote>disables</quote> <refterm primary="tag"
                   secondary="resolution">tag resolution</refterm>, forcing the
@@ -6443,14 +6461,12 @@ Second occurrence: *<hl2>anchor</hl2>
 
     <para>
       YAML<q/>s <defterm primary="style" secondary="flow">flow styles</defterm>
-      can be thought of as the natural extension of JSON to cover additional
-      <refterm primary="style" secondary="scalar">scalar styles</refterm>.
-      These allow <refterm primary="line folding">folding</refterm> long
-      content lines for readability, <refterm primary="tag">tagging</refterm>
-      nodes to control <refterm primary="construct">construction</refterm> of
-      <refterm primary="native data structure">native data
-      structures</refterm>, and using <refterm
-      primary="anchor">anchors</refterm> and <refterm
+      can be thought of as the natural extension of JSON to cover <refterm
+      primary="line folding">folding</refterm> long content lines for
+      readability, <refterm primary="tag">tagging</refterm> nodes to control
+      <refterm primary="construct">construction</refterm> of <refterm
+      primary="native data structure">native data structures</refterm>, and
+      using <refterm primary="anchor">anchors</refterm> and <refterm
       primary="alias">aliases</refterm> to reuse <refterm
       primary="construct">constructed</refterm> object instances.
     </para>
@@ -6544,9 +6560,8 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
           interpreted as if they were <refterm primary="style" secondary="flow"
           tertiary="plain">plain scalars</refterm> with an empty value. Such
           <refterm primary="node">nodes</refterm> are commonly resolved to a
-          <ulink
-          url="http://yaml.org/type/null.html"><uquote>null</uquote></ulink>
-          value.
+          <refterm primary="tag" secondary="repository"
+          tertiary="null"><uquote>null</uquote></refterm> value.
         </para>
 
         <productionset>
@@ -6728,11 +6743,13 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
             <production id="nb-double-text(n,c)">
               <lhs>nb-double-text(n,c)</lhs>
               <rhs>
-                <varname>c</varname> = flow-out &rArr;
+                <varname>c</varname> = flow-out&nbsp; &rArr;
                 <nonterminal def="#nb-double-multi-line(n)"/><sbr/>
-                <varname>c</varname> = flow-in&nbsp; &rArr;
+                <varname>c</varname> = flow-in&nbsp;&nbsp; &rArr;
                 <nonterminal def="#nb-double-multi-line(n)"/><sbr/>
-                <varname>c</varname> = flow-key &rArr;
+                <varname>c</varname> = block-key &rArr;
+                <nonterminal def="#nb-double-one-line"/><sbr/>
+                <varname>c</varname> = flow-key&nbsp; &rArr;
                 <nonterminal def="#nb-double-one-line"/>
               </rhs>
             </production>
@@ -6751,9 +6768,9 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
 
           <simplelist type="horiz" columns="2">
             <member>
-<programlisting><HL><hl2>"<hl1>implicit key</hl1>"</hl2></HL> : {<sbr/>
-  <HL><hl2>"<hl1>also implicit</hl1>"</hl2></HL> : value,
- }
+<programlisting><HL><hl2>"<hl1>implicit block key</hl1>"</hl2></HL> : [<sbr/>
+  <HL><hl2>"<hl1>implicit flow key</hl1>"</hl2></HL> : value,
+ ]
 </programlisting>
 <synopsis>Legend:
   <hl1><link linkend="nb-double-one-line">nb-double-one-line</link></hl1>
@@ -6764,11 +6781,13 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
 <programlisting>%YAML 1.2<sbr/>
 ---
 !!map {
-  ? !!str "implicit key"
-  : !!map {
-    ? !!str "also implicit"
-    : !!str "value",
-  }
+  ? !!str "implicit block key"
+  : !!seq [
+    !!map {
+      ? !!str "implicit flow key"
+      : !!str "value",
+    }
+  ]
 }
 </programlisting>
             </member>
@@ -7005,11 +7024,13 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <production id="nb-single-text(n,c)">
               <lhs>nb-single-text(n,c)</lhs>
               <rhs>
-                <varname>c</varname> = flow-out &rArr;
+                <varname>c</varname> = flow-out&nbsp; &rArr;
                 <nonterminal def="#nb-single-multi-line(n)"/><sbr/>
-                <varname>c</varname> = flow-in&nbsp; &rArr;
+                <varname>c</varname> = flow-in&nbsp;&nbsp; &rArr;
                 <nonterminal def="#nb-single-multi-line(n)"/><sbr/>
-                <varname>c</varname> = flow-key &rArr;
+                <varname>c</varname> = block-key &rArr;
+                <nonterminal def="#nb-single-one-line"/><sbr/>
+                <varname>c</varname> = flow-key&nbsp; &rArr;
                 <nonterminal def="#nb-single-one-line"/>
               </rhs>
             </production>
@@ -7028,9 +7049,9 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 
           <simplelist type="horiz" columns="2">
             <member>
-<programlisting><HL><hl2>'<hl1>implicit key</hl1>'</hl2></HL> : {<sbr/>
-  <HL><hl2>'<hl1>also implicit</hl1>'</hl2></HL> : value,
- }
+<programlisting><HL><hl2>'<hl1>implicit block key</hl1>'</hl2></HL> : [<sbr/>
+  <HL><hl2>'<hl1>implicit flow key</hl1>'</hl2></HL> : value,
+ ]
 </programlisting>
 <synopsis>Legend:
   <hl1><link linkend="nb-single-one-line">nb-single-one-line</link></hl1>
@@ -7041,11 +7062,13 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 <programlisting>%YAML 1.2<sbr/>
 ---
 !!map {
-  ? !!str "implicit key"
-  : !!map {
-    ? !!str "also implicit"
-    : !!str "value",
-  },
+  ? !!str "implicit block key"
+  : !!seq [
+    !!map {
+      ? !!str "implicit flow key"
+      : !!str "value",
+    }
+  ]
 }
 </programlisting>
             </member>
@@ -7196,11 +7219,13 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <production id="ns-plain-safe(c)">
               <lhs>ns-plain-safe(c)</lhs>
               <rhs>
-                <varname>c</varname> = flow-out &rArr; <nonterminal
+                <varname>c</varname> = flow-out&nbsp; &rArr; <nonterminal
                 def="#ns-plain-safe-out"/><sbr/>
-                <varname>c</varname> = flow-in&nbsp; &rArr; <nonterminal
+                <varname>c</varname> = flow-in&nbsp;&nbsp; &rArr; <nonterminal
                 def="#ns-plain-safe-in"/><sbr/>
-                <varname>c</varname> = flow-key &rArr; <nonterminal
+                <varname>c</varname> = block-key &rArr; <nonterminal
+                def="#ns-plain-safe-out"/><sbr/>
+                <varname>c</varname> = flow-key&nbsp; &rArr; <nonterminal
                 def="#ns-plain-safe-in"/>
               </rhs>
             </production>
@@ -7291,11 +7316,13 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <production id="ns-plain(n,c)">
               <lhs>ns-plain(n,c)</lhs>
               <rhs>
-                <varname>c</varname> = flow-out &rArr;
+                <varname>c</varname> = flow-out&nbsp; &rArr;
                   <nonterminal def="#ns-plain-multi-line(n,c)"/><sbr/>
-                <varname>c</varname> = flow-in&nbsp; &rArr;
+                <varname>c</varname> = flow-in&nbsp;&nbsp; &rArr;
                   <nonterminal def="#ns-plain-multi-line(n,c)"/><sbr/>
-                <varname>c</varname> = flow-key &rArr;
+                <varname>c</varname> = block-key &rArr;
+                  <nonterminal def="#ns-plain-one-line(c)"/><sbr/>
+                <varname>c</varname> = flow-key&nbsp; &rArr;
                   <nonterminal def="#ns-plain-one-line(c)"/>
               </rhs>
             </production>
@@ -7323,9 +7350,9 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 
           <simplelist type="horiz" columns="2">
             <member>
-<programlisting><hl1>implicit key</hl1> : {<sbr/>
-  <hl1>also implicit</hl1> : value,
- }
+<programlisting><hl1>implicit block key</hl1> : [<sbr/>
+  <hl1>implicit flow key</hl1> : value,
+ ]
 </programlisting>
 <synopsis>Legend:
   <hl1><link linkend="ns-plain-one-line(c)">ns-plain-one-line(c)</link></hl1>
@@ -7335,11 +7362,13 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 <programlisting>%YAML 1.2<sbr/>
 ---
 !!map {
-  ? !!str "implicit key"
-  : !!map {
-    ? !!str "also implicit"
-    : !!str "value",
-  },
+  ? !!str "implicit block key"
+  : !!seq [
+    !!map {
+      ? !!str "implicit flow key"
+      : !!str "value",
+    }
+  ]
 }
 </programlisting>
             </member>
@@ -7421,6 +7450,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
           secondary="implicit">implicit key</refterm> (<refterm
           primary="context"
           secondary="flow-key"><userinput>flow-key</userinput>
+          context</refterm> or <refterm primary="context"
+          secondary="block-key"><userinput>block-key</userinput>
           context</refterm>). Flow collection entries are terminated by the
           <defterm primary=", end flow entry"><uquote>,</uquote>
           indicator</defterm>. The final <uquote>,</uquote> may be omitted.
@@ -7433,9 +7464,10 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
           <production id="in-flow(c)">
             <lhs>in-flow(c)</lhs>
             <rhs>
-              <varname>c</varname> = flow-out &rArr; flow-in<sbr/>
-              <varname>c</varname> = flow-in&nbsp; &rArr; flow-in<sbr/>
-              <varname>c</varname> = flow-key &rArr; flow-key
+              <varname>c</varname> = flow-out&nbsp; &rArr; flow-in<sbr/>
+              <varname>c</varname> = flow-in&nbsp;&nbsp; &rArr; flow-in<sbr/>
+              <varname>c</varname> = block-key &rArr; flow-key<sbr/>
+              <varname>c</varname> = flow-key&nbsp; &rArr; flow-key
             </rhs>
           </production>
         </productionset>
@@ -7591,8 +7623,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             mappings</defterm> are denoted by surrounding <defterm primary="{
             start flow mapping"><uquote>{</uquote></defterm> and <defterm
             primary="} end flow mapping"><uquote>}</uquote></defterm>
-            characters. Mapping entries are separated by a <refterm primary=",
-            end flow entry"><uquote>,</uquote></refterm> character.
+            characters.
           </para>
 
           <productionset>
@@ -7606,18 +7637,27 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
                 <nonterminal
                   def="#c-mapping-end"><quote>}</quote></nonterminal>
               </rhs>
-          </production>
+            </production>
+          </productionset>
+        </keep-together>
 
-          <production id="ns-s-flow-map-entries(n,c)">
-            <lhs>ns-s-flow-map-entries(n,c)</lhs>
-            <rhs>
-              <nonterminal def="#ns-flow-map-entry(n,c)"/>
-              <nonterminal def="#s-separate(n,c)"/>?<sbr/>
-                ( <nonterminal
-                  def="#c-collect-entry"><quote>,</quote></nonterminal>
-                  <nonterminal def="#s-separate(n,c)"/>?<sbr/>
-                &nbsp;&nbsp;<nonterminal
-                  def="#ns-s-flow-map-entries(n,c)"/>? )?
+        <keep-together>
+          <para>
+            Mapping entries are separated by a <refterm primary=", end flow
+            entry"><uquote>,</uquote></refterm> character.
+          </para>
+
+          <productionset>
+            <production id="ns-s-flow-map-entries(n,c)">
+              <lhs>ns-s-flow-map-entries(n,c)</lhs>
+              <rhs>
+                <nonterminal def="#ns-flow-map-entry(n,c)"/>
+                <nonterminal def="#s-separate(n,c)"/>?<sbr/>
+                  ( <nonterminal
+                    def="#c-collect-entry"><quote>,</quote></nonterminal>
+                    <nonterminal def="#s-separate(n,c)"/>?<sbr/>
+                  &nbsp;&nbsp;<nonterminal
+                    def="#ns-s-flow-map-entries(n,c)"/>? )?
               </rhs>
             </production>
           </productionset>
@@ -7798,8 +7838,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 <programlisting>{<sbr/>
 <hl1>unquoted</hl1>&middot;<hl2>:&middot;"separate"</hl2>,
 <hl1>http://foo.com</hl1>,
-<hl1>omitted</hl1><HL><hl2>:<hl3>&deg;</hl3></hl2></HL>,
-<hl3>&deg;</hl3><hl2>:&middot;omitted</hl2>,
+<hl1>omitted value</hl1><HL><hl2>:<hl3>&deg;</hl3></hl2></HL>,
+<hl3>&deg;</hl3><hl2>:&middot;omitted key</hl2>,
 }
 </programlisting>
 <synopsis>Legend:
@@ -7813,8 +7853,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 !!map {
   ? !!str "unquoted" : !!str "separate",
   ? !!str "http://foo.com" : !!null "",
-  ? !!str "omitted"  : !!null "",
-  ? !!null ""        : !!str "omitted",
+  ? !!str "omitted value" : !!null "",
+  ? !!null "" : !!str "omitted key",
 }
 </programlisting>
             </member>
@@ -8015,7 +8055,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <production id="ns-flow-pair-yaml-key-entry(n,c)">
               <lhs>ns-flow-pair-yaml-key-entry(n,c)</lhs>
               <rhs>
-                <nonterminal def="#ns-s-implicit-yaml-key"/><sbr/>
+                <nonterminal def="#ns-s-implicit-yaml-key(c)"
+                  >ns-s-implicit-yaml-key(flow-key)</nonterminal><sbr/>
                 <nonterminal def="#c-ns-flow-map-separate-value(n,c)"/>
               </rhs>
             </production>
@@ -8023,26 +8064,27 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <production id="c-ns-flow-pair-json-key-entry(n,c)">
               <lhs>c-ns-flow-pair-json-key-entry(n,c)</lhs>
               <rhs>
-                <nonterminal def="#c-s-implicit-json-key"/><sbr/>
+                <nonterminal def="#c-s-implicit-json-key(c)"
+                  >c-s-implicit-json-key(flow-key)</nonterminal><sbr/>
                 <nonterminal def="#c-ns-flow-map-adjacent-value(n,c)"/>
               </rhs>
             </production>
 
-            <production id="ns-s-implicit-yaml-key">
-              <lhs>ns-s-implicit-yaml-key</lhs>
+            <production id="ns-s-implicit-yaml-key(c)">
+              <lhs>ns-s-implicit-yaml-key(c)</lhs>
               <rhs>
                 <nonterminal def="#ns-flow-yaml-node(n,c)"
-                  >ns-flow-yaml-node(n/a,flow-key)</nonterminal>
+                  >ns-flow-yaml-node(n/a,c)</nonterminal>
                 <nonterminal def="#s-separate-in-line"/><sbr/>
                 /* At most 1024 characters altogether */
               </rhs>
             </production>
 
-            <production id="c-s-implicit-json-key">
-              <lhs>c-s-implicit-json-key</lhs>
+            <production id="c-s-implicit-json-key(c)">
+              <lhs>c-s-implicit-json-key(c)</lhs>
               <rhs>
                 <nonterminal def="#c-flow-json-node(n,c)"
-                  >c-flow-json-node(n/a,flow-key)</nonterminal>
+                  >c-flow-json-node(n/a,c)</nonterminal>
                 <nonterminal def="#s-separate-in-line"/><sbr/>
                 /* At most 1024 characters altogether */
               </rhs>
@@ -8060,8 +8102,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 - [ <hl3>{JSON: like}</hl3><hl4>:adjacent</hl4> ]
 </programlisting>
 <synopsis>Legend:
-  <hl1><link linkend="ns-s-implicit-yaml-key">ns-s-implicit-yaml-key</link></hl1>
-  <hl3><link linkend="c-s-implicit-json-key">c-s-implicit-json-key</link></hl3>
+  <hl1><link linkend="ns-s-implicit-yaml-key(c)">ns-s-implicit-yaml-key</link></hl1>
+  <hl3><link linkend="c-s-implicit-json-key(c)">c-s-implicit-json-key</link></hl3>
   <hl2><link linkend="e-node">e-node</link></hl2> <hl4>Value</hl4>
 </synopsis>
             </member>
@@ -9336,7 +9378,7 @@ keep: |+
                     >s-indent(n+m)</nonterminal>
                   <nonterminal def="#c-l-block-seq-entry(n)"
                     >c-l-block-seq-entry(n+m)</nonterminal> )+<sbr/>
-                /* For some fixed <varname>m</varname> &gt; 0 */
+                /* For some fixed auto-detected <varname>m</varname> &gt; 0 */
               </rhs>
             </production>
 
@@ -9359,11 +9401,12 @@ keep: |+
           <simplelist type="horiz" columns="2">
             <member>
 <programlisting>block sequence:<sbr/>
-  <hl2>- one&darr;</hl2>
-  <hl2>- two : three&darr;</hl2>
+&middot;&middot;<hl1>- one&darr;</hl1>
+  <hl1>- two : three&darr;</hl1>
 </programlisting>
 <synopsis>Legend:
   <hl1><link linkend="c-l-block-seq-entry(n)">c-l-block-seq-entry(n)</link></hl1>
+  <hl2>auto-detected <link linkend="s-indent(n)">s-indent(n)</link></hl2>
 </synopsis>
             </member>
             <member>
@@ -9444,8 +9487,7 @@ keep: |+
  block node</hl2>
 -<hl3>&middot;- one # In-line
 &middot;&middot;- two # sequence</hl3>
--<hl4> one: two # In-line
-           # mapping</hl4>
+-<hl4> one: two # In-line mapping</hl4>
 </programlisting>
 <synopsis>Legend:
   <hl1>Empty</hl1>
@@ -9494,7 +9536,7 @@ keep: |+
                     >s-indent(n+m)</nonterminal>
                   <nonterminal def="#ns-l-block-map-entry(n)"
                     >ns-l-block-map-entry(n+m)</nonterminal> )+<sbr/>
-                /* For some fixed <varname>m</varname> &gt; 0 */
+                /* For some fixed auto-detected <varname>m</varname> &gt; 0 */
               </rhs>
             </production>
           </productionset>
@@ -9506,11 +9548,11 @@ keep: |+
           <simplelist type="horiz" columns="2">
             <member>
 <programlisting>block mapping:<sbr/>
-<hl2>&middot;</hl2><hl3>key: value&darr;</hl3>
+<hl2>&middot;</hl2><hl1>key: value&darr;</hl1>
 </programlisting>
 <synopsis>Legend:
-  <hl2><link linkend="s-indent(n)">s-indent(n)</link></hl2>
-  <hl3><link linkend="ns-l-block-map-entry(n)">ns-l-block-map-entry(n)</link></hl3>
+  <hl1><link linkend="ns-l-block-map-entry(n)">ns-l-block-map-entry(n)</link></hl1>
+  <hl2>auto-detected <link linkend="s-indent(n)">s-indent(n)</link></hl2>
 </synopsis>
             </member>
             <member>
@@ -9658,8 +9700,10 @@ keep: |+
             <production id="ns-s-block-map-implicit-key">
               <lhs>ns-s-block-map-implicit-key</lhs>
               <rhs>
-                <nonterminal def="#c-s-implicit-json-key"/>
-                | <nonterminal def="#ns-s-implicit-yaml-key"/>
+                <nonterminal def="#c-s-implicit-json-key(c)"
+                  >c-s-implicit-json-key(block-key)</nonterminal>
+                | <nonterminal def="#ns-s-implicit-yaml-key(c)"
+                  >ns-s-implicit-yaml-key(block-key)</nonterminal>
               </rhs>
             </production>
 
@@ -9852,16 +9896,16 @@ keep: |+
 
         <keep-together>
           <para>
-            The block node<q/>s <refterm primary="node"
-            secondary="property">node properties</refterm> may span across
-            several lines. In this case, YAML insists that they be <refterm
-            primary="space" secondary="indentation">indented</refterm> by at
-            least one more <refterm primary="space">space</refterm> than the
-            <refterm primary="style" secondary="block"
-            tertiary="collection">block collection</refterm>, regardless of the
-            <refterm primary="space"
-            secondary="indentation">indentation</refterm> of the block node
-            itself.
+            The block <refterm primary="node" secondary="property">node<q/>s
+            properties</refterm> may span across several lines. In this case,
+            YAML insists that they be <refterm primary="space"
+            secondary="indentation">indented</refterm> by at least one more
+            <refterm primary="space">space</refterm> than the <refterm
+            primary="style" secondary="block" tertiary="collection">block
+            collection</refterm>, regardless of the <refterm primary="space"
+            secondary="indentation">indentation</refterm> of the <refterm
+            primary="style" secondary="block" tertiary="collection">block
+            collection</refterm> entries.
           </para>
 
           <productionset>
@@ -10204,7 +10248,9 @@ Document
             primary="directive">directives</refterm> or <refterm
             primary="marker">marker</refterm> lines. Such documents are very
             <quote>clean</quote> as they contain nothing other than the
-            <refterm primary="content">content</refterm>.
+            <refterm primary="content">content</refterm>. In this case, the
+            first non-comment line may not start with a <refterm primary="%
+            directive"><uquote>%</uquote></refterm> first character.
           </para>
 
           <para>
@@ -10244,8 +10290,11 @@ document</hl1>
 # No document
 ...
 <hl1>|
-%!PS-Adobe-2.0</hl1>
+%!PS-Adobe-2.0 # Not the first line</hl1>
 </programlisting>
+<screen># Invalid first line<sbr/>
+<hl1>%!PS-Adobe-2.0</hl1>
+</screen>
             </member>
             <member>
 <programlisting>%YAML 1.2<sbr/>
@@ -10255,6 +10304,10 @@ document</hl1>
 ---
 !!str "%PS-Adobe-2.0\n"
 </programlisting>
+<screen>ERROR:<sbr/>
+Bare document start
+with <hl1>%</hl1> first line
+</screen>
 <synopsis>&nbsp;Legend:
    <hl1><link linkend="l-bare-document">l-bare-document</link></hl1>
 </synopsis>
@@ -10269,12 +10322,12 @@ document</hl1>
         <keep-together>
           <para>
             An <defterm primary="document" secondary="explicit">explicit
-            document</defterm> begins with no <refterm
-            primary="directive">directives</refterm> but with an explicit
-            <refterm primary="marker" secondary="directives end">directives end
-            marker</refterm> line. Since the existence of the <refterm
-            primary="document">document</refterm> is indicated by this <refterm
-            primary="marker">marker</refterm>, the <refterm
+            document</defterm> begins with an explicit <refterm
+            primary="marker" secondary="directives end">directives end
+            marker</refterm> line but no <refterm
+            primary="directive">directives</refterm>. Since the existence of
+            the <refterm primary="document">document</refterm> is indicated by
+            this <refterm primary="marker">marker</refterm>, the <refterm
             primary="document">document</refterm> itself may be <refterm
             primary="node" secondary="completely empty">completely
             empty</refterm>.
@@ -10390,15 +10443,19 @@ document</hl1>
         <para>
           A YAML <defterm primary="stream">stream</defterm> consists of zero or
           more <refterm primary="document">documents</refterm>. Subsequent
-          <refterm primary="document">documents</refterm> may only specify
-          <refterm primary="directive">directives</refterm> if the previous
-          <refterm primary="document">document</refterm> was followed by an
-          explicit <refterm primary="document"
-          secondary="suffix">suffix</refterm>; otherwise, the following
-          <refterm primary="document">document</refterm> must be <refterm
-          primary="document" secondary="explicit">explicit</refterm>. The
-          format is intentionally <quote>sloppy</quote> to better support
-          common use cases, such as stream concatenation.
+          <refterm primary="document">documents</refterm> require some sort of
+          separation <refterm primary="marker">marker</refterm> line. If a
+          <refterm primary="document">document</refterm> is not terminated by a
+          <refterm primary="marker" secondary="document end">document end
+          marker</refterm> line, then the following <refterm
+          primary="document">document</refterm> must begin with a <refterm
+          primary="marker" secondary="directives end">directives end
+          marker</refterm> line.
+        </para>
+
+        <para>
+          The stream format is intentionally <quote>sloppy</quote> to better
+          support common use cases, such as stream concatenation.
         </para>
 
         <productionset>
@@ -10551,8 +10608,8 @@ document</hl1>
       <title>Failsafe Schema</title>
 
       <para>
-        The <defterm primary="schema" secondary="failsafe">schema</defterm> is
-        guaranteed to work with any YAML <refterm
+        The <defterm primary="schema" secondary="failsafe">failsafe
+        schema</defterm> is guaranteed to work with any YAML <refterm
         primary="document">document</refterm>. It is therefore the recommended
         <refterm primary="schema">schema</refterm> for generic YAML tools. A
         YAML <refterm primary="processor">processor</refterm> should therefore
@@ -10564,7 +10621,7 @@ document</hl1>
         <title>Tags</title>
 
         <sect3>
-          <title>Generic mapping</title>
+          <title><defterm primary="tag" secondary="repository" tertiary="map"/>Generic mapping</title>
 
           <keep-together>
             <variablelist>
@@ -10640,7 +10697,7 @@ Flow style: !!map { Clark: Evans, Ingy: d&ouml;t Net, Oren: Ben-Kiki }
         </sect3>
 
         <sect3>
-          <title>Generic sequence</title>
+          <title><defterm primary="tag" secondary="repository" tertiary="seq"/>Generic sequence</title>
 
           <keep-together>
             <variablelist>
@@ -10710,7 +10767,7 @@ Flow style: !!seq [ Clark Evans, Ingy d&ouml;t Net, Oren Ben-Kiki ]
         </sect3>
 
         <sect3>
-          <title>Generic string</title>
+          <title><defterm primary="tag" secondary="repository" tertiary="str"/>Generic string</title>
 
           <keep-together>
             <variablelist>
@@ -10845,7 +10902,7 @@ Flow style: !!str "String: just a theory."
         </para>
 
         <sect3>
-          <title>Null</title>
+          <title><defterm primary="tag" secondary="repository" tertiary="null"/>Null</title>
 
           <variablelist>
             <varlistentry>
@@ -10926,7 +10983,7 @@ key with null value: !!null null
         </sect3>
 
         <sect3>
-          <title>Boolean</title>
+          <title><defterm primary="tag" secondary="repository" tertiary="bool"/>Boolean</title>
 
           <keep-together>
             <variablelist>
@@ -11005,7 +11062,7 @@ Pluto is a planet: !!bool false
         </sect3>
 
         <sect3>
-          <title>Integer</title>
+          <title><defterm primary="tag" secondary="repository" tertiary="int"/>Integer</title>
 
           <keep-together>
             <variablelist>
@@ -11104,7 +11161,7 @@ positive: !!int 34
         </sect3>
 
         <sect3>
-          <title>Floating Point</title>
+          <title><defterm primary="tag" secondary="repository" tertiary="float"/>Floating Point</title>
 
           <keep-together>
             <variablelist>
@@ -11219,6 +11276,19 @@ not a number: !!float .nan
         </para>
 
         <para>
+          All <refterm primary="node">nodes</refterm> with the <refterm
+          primary="! tag indicator" secondary="! non-specific
+          tag"><uquote>!</uquote> non-specific tag</refterm> are <refterm
+          primary="tag" secondary="resolution">resolved</refterm>, by the
+          standard <refterm primary="tag" secondary="resolution"
+          tertiary="convention">convention</refterm>, to
+          <uquote>tag:yaml.org,2002:seq</uquote>,
+          <uquote>tag:yaml.org,2002:map</uquote>, or
+          <uquote>tag:yaml.org,2002:str</uquote>, according to their <refterm
+          primary="kind">kind</refterm>.
+        </para>
+
+        <para>
           <refterm primary="collection">Collections</refterm> with the <refterm
           primary="? non-specific tag"><uquote>?</uquote> non-specific
           tag</refterm> (that is, <refterm primary="tag"
@@ -11271,6 +11341,11 @@ not a number: !!float .nan
               <row>
                 <entry>&nbsp;<userinput>-?&nbsp;(&nbsp;0&nbsp;|&nbsp;[1-9]&nbsp;[0-9]*&nbsp;)&nbsp;(&nbsp;\.&nbsp;[0-9]*&nbsp;)?&nbsp;(&nbsp;[eE]&nbsp;[-+]?&nbsp;[0-9]+&nbsp;)?</userinput></entry>
                 <entry>&nbsp;<userinput>tag:yaml.org,2002:float</userinput></entry>
+              </row>
+
+              <row>
+                <entry>&nbsp;<userinput>*</userinput></entry>
+                <entry>&nbsp;Error</entry>
               </row>
             </tbody>
           </tgroup>
@@ -11355,19 +11430,41 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
         </para>
 
         <para>
-          <refterm primary="collection">Collections</refterm> are <refterm
-          primary="tag" secondary="resolution">resolved</refterm> in exactly
-          the same way as in the <refterm primary="schema"
-          secondary="JSON">JSON schema</refterm>. <refterm
-          primary="scalar">Scalars</refterm> with the <refterm primary="?
-          non-specific tag"><uquote>?</uquote> non-specific tag</refterm> (that
-          is, <refterm primary="style" secondary="flow" tertiary="plain">plain
-          scalars</refterm>) are matched with an extended list of regular
-          expressions. However, in this case, if none of the regular
-          expressions matches, the <refterm primary="scalar">scalar</refterm>
-          is <refterm primary="tag" secondary="resolution">resolved</refterm>
-          to <userinput>tag:yaml.org,2002:str</userinput> (that is, considered
-          to be a string).
+          All <refterm primary="node">nodes</refterm> with the <refterm
+          primary="! tag indicator" secondary="! non-specific
+          tag"><uquote>!</uquote> non-specific tag</refterm> are <refterm
+          primary="tag" secondary="resolution">resolved</refterm>, by the
+          standard <refterm primary="tag" secondary="resolution"
+          tertiary="convention">convention</refterm>, to
+          <uquote>tag:yaml.org,2002:seq</uquote>,
+          <uquote>tag:yaml.org,2002:map</uquote>, or
+          <uquote>tag:yaml.org,2002:str</uquote>, according to their <refterm
+          primary="kind">kind</refterm>.
+        </para>
+
+        <para>
+          <refterm primary="collection">Collections</refterm> with the <refterm
+          primary="? non-specific tag"><uquote>?</uquote> non-specific
+          tag</refterm> (that is, <refterm primary="tag"
+          secondary="non-specific">untagged</refterm> <refterm
+          primary="collection">collections</refterm>) are <refterm
+          primary="tag" secondary="resolution">resolved</refterm> to
+          <uquote>tag:yaml.org,2002:seq</uquote> or
+          <uquote>tag:yaml.org,2002:map</uquote> according to their <refterm
+          primary="kind">kind</refterm>.
+        </para>
+
+        <para>
+          <refterm primary="scalar">Scalars</refterm> with the <refterm
+          primary="? non-specific tag"><uquote>?</uquote> non-specific
+          tag</refterm> (that is, <refterm primary="style" secondary="flow"
+          tertiary="plain">plain scalars</refterm>) are matched with an
+          extended list of regular expressions. However, in this case, if none
+          of the regular expressions matches, the <refterm
+          primary="scalar">scalar</refterm> is <refterm primary="tag"
+          secondary="resolution">resolved</refterm> to
+          <userinput>tag:yaml.org,2002:str</userinput> (that is, considered to
+          be a string).
         </para>
 
         <informaltable>
@@ -11423,6 +11520,11 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
               <row>
                 <entry>&nbsp;<userinput>\.nan&nbsp;|&nbsp;\.NaN&nbsp;|&nbsp;\.NAN</userinput></entry>
                 <entry>&nbsp;<userinput>tag:yaml.org,2002:float</userinput>&nbsp;<emphasis>(Not&nbsp;a&nbsp;number)</emphasis></entry>
+              </row>
+
+              <row>
+                <entry>&nbsp;<userinput>*</userinput></entry>
+                <entry>&nbsp;<userinput>tag:yaml.org,2002:str</userinput>&nbsp;<emphasis>(Default)</emphasis></entry>
               </row>
             </tbody>
           </tgroup>
@@ -11518,8 +11620,8 @@ Also floats: [ .inf, -.Inf, +.INF, .NAN ]
         primary="schema" secondary="core">core schema</refterm> defined above.
         In addition, it is strongly recommended that such <refterm
         primary="schema">schemas</refterm> make as much use as possible of the
-        the <defterm primary="tag" secondary="repository"><ulink
-        url="http://yaml.org/type/">YAML tag repository</ulink></defterm>. This
+        the <defterm primary="tag" secondary="repository">YAML tag
+        repository</defterm> at <ulink url="http://yaml.org/type/"/>. This
         repository provides recommended <refterm primary="tag"
         secondary="global">global tags</refterm> for increasing the portability
         of YAML <refterm primary="document">documents</refterm> between
@@ -11531,10 +11633,10 @@ Also floats: [ .inf, -.Inf, +.INF, .NAN ]
         specification. This allows it to evolve to better support YAML <refterm
         primary="application">applications</refterm>. Hence, developers are
         encouraged to submit new <quote>universal</quote> types to the
-        repository. The <ulink
-        url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core
-        mailing list</ulink> is the preferred method for such submissions, as
-        well as raising any questions regarding this draft.
+        repository. The yaml-core mailing list at <ulink
+        url="http://lists.sourceforge.net/lists/listinfo/yaml-core"/> is the
+        preferred method for such submissions, as well as raising any questions
+        regarding this draft.
       </para>
     </sect1>
   </chapter>

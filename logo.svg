@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="320pt" height="110pt" viewBox="0 0 320 110">
+  <polygon points="73,1 258,1 258,19 318,109 1,109"
+           style="fill: #FFFFFF; stroke-width: 1; stroke: #000000"/>
+  <polygon points="73,1 97,1 25,109 1,109 37,55 1,1 25,1 49,37"
+           style="fill: #000000; stroke-width: 1; stroke: #000000"/>
+  <polygon points="31,109 55,109 103,37 103,109 127,109 127,1 103,1"
+           style="fill: #000000; stroke-width: 1; stroke: #000000"/>
+  <polygon points="132,109 156,109 156,37 180,73 204,37 204,109 228,109 228,1 198,1 180,37 156,1 132,1"
+           style="fill: #000000; stroke-width: 1; stroke: #000000"/>
+  <polygon points="234,109 318,109 302,85 258,85 258,1 234,1"
+           style="fill: #000000; stroke-width: 1; stroke: #000000"/>
+</svg>
