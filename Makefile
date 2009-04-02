@@ -76,7 +76,7 @@ html: $(HTML)
 pdf: $(PDF)
 
 clean:
-	rm -f $(HTML) $(PDF) $(PS)
+	rm -f $(HTML) $(PDF) $(PS) tmp* docbook_xslt
 
 $(PDF): single_fo.xsl ebnf_fo.xsl preprocess_fo.xsl
 
