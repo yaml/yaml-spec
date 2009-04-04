@@ -386,9 +386,6 @@
         primary="serialize">serializing</refterm> arbitrary <refterm
         primary="native data structure">native data structures</refterm>, like
         YAML. Such a format might also serve as YAML<q/>s "canonical format".
-      </para>
-
-      <para>
         Defining such a <quote>YSON</quote> format (YSON is a Serialized Object
         Notation) can be done either by enhancing the JSON specification or by
         restricting the YAML specification. Such a definition is beyond the
@@ -486,7 +483,11 @@
           primary="mapping">Mappings</refterm> use a colon and
           space&nbsp;(<refterm primary=": mapping
           value"><uquote>:&nbsp;</uquote></refterm>) to mark each <refterm
-          primary="key: value pair">key:&nbsp;value pair</refterm>.
+          primary="key: value pair">key:&nbsp;value pair</refterm>. <refterm
+          primary="comment">Comments</refterm> begin with an octothorpe (also
+          called a <quote>hash</quote>, <quote>sharp</quote>,
+          <quote>pound</quote>, or <quote>number sign</quote> - <refterm
+          primary="# comment"> <uquote>#</uquote></refterm>).
         </para>
 
         <simplelist type="horiz" columns="2">
@@ -614,10 +615,6 @@ Sammy Sosa: {
           dots&nbsp;( <refterm primary="marker" secondary="document
           end"><uquote>...</uquote></refterm>) indicate the end of a document
           without starting a new one, for use in communication channels.
-          <refterm primary="comment">Comments</refterm> begin with an
-          octothorpe (also called a <quote>hash</quote>, <quote>sharp</quote>,
-          <quote>pound</quote>, or <quote>number sign</quote> - <refterm
-          primary="# comment"> <uquote>#</uquote></refterm>).
         </para>
 
         <simplelist type="horiz" columns="2">
@@ -944,7 +941,7 @@ quoted: "So does this
               <title>Integers</title>
 <programlisting>canonical: 12345<sbr/>
 decimal: +12345
-octal: 014
+octal: 0o14
 hexadecimal: 0xC
 
 </programlisting>
@@ -967,9 +964,8 @@ not a number: .NaN
             <example>
               <title>Miscellaneous</title>
 <programlisting>null:<sbr/>
-true: boolean
-false: boolean
-string: '12345'
+booleans: [ true, false ]
+string: '012345'
 </programlisting>
             </example>
           </member>
@@ -1219,13 +1215,17 @@ Stack:
       primary="representation">representation</refterm> stages. It may
       translate directly between <refterm primary="native data
       structure">native data structures</refterm> and a character <refterm
-      primary="stream">stream</refterm> (<defterm primary="dump">dump</defterm>
-      and <defterm primary="load">load</defterm> in the diagram above).
+      primary="stream">stream</refterm> (<refterm primary="dump">dump</refterm>
+      and <refterm primary="load">load</refterm> in the diagram above).
       However, such a direct translation should take place so that the <refterm
       primary="native data structure">native data structures</refterm> are
       <refterm primary="construct">constructed</refterm> only from information
       available in the <refterm
-      primary="representation">representation</refterm>.
+      primary="representation">representation</refterm>. In particular,
+      <refterm primary="key" secondary="order">mapping key order</refterm>,
+      <refterm primary="comment">comments</refterm>, and <refterm primary="tag"
+      secondary="handle">tag handles</refterm> should not be refernced during
+      <refterm primary="compose">composition</refterm>.
     </para>
 
     <sect1>
@@ -1235,178 +1235,212 @@ Stack:
         This section details the processes shown in the diagram above. Note
         that a YAML <refterm primary="processor">processor</refterm> need not
         provide all these processes. For example, a YAML library may provide
-        only YAML input ability, for loading configuration files, or only
-        output ability, for sending data to other <refterm
+        only YAML input ability, for <refterm primary="load">loading</refterm>
+        configuration files, or only output ability, for <refterm
+        primary="dump">dumping</refterm> data to other <refterm
         primary="application">applications</refterm>.
       </para>
 
       <sect2>
-        <title>Representing Native Data Structures</title>
+        <title>Dump</title>
 
-        <keep-together>
-          <para>
-            YAML <defterm primary="represent">represents</defterm> any <defterm
-            primary="native data structure">native data structure</defterm> using
-            three <refterm primary="kind">node kinds</refterm>: <refterm
-            primary="sequence">sequence</refterm> - an ordered series of entries;
-            <refterm primary="mapping">mapping</refterm> - an unordered
-            association of <refterm primary="equality">unique</refterm> <refterm
-            primary="key">keys</refterm> to <refterm
-            primary="value">values</refterm>; and <refterm
-            primary="scalar">scalar</refterm> - any datum with opaque structure
-            <refterm primary="present">presentable</refterm> as a series of
-            Unicode characters. Combined, these primitives generate directed
-            graph structures. These primitives were chosen because they are both
-            powerful and familiar: the <refterm
-            primary="sequence">sequence</refterm> corresponds to a Perl array and
-            a Python list, the <refterm primary="mapping">mapping</refterm>
-            corresponds to a Perl hash table and a Python dictionary. The
-            <refterm primary="scalar">scalar</refterm> represents strings,
-            integers, dates, and other atomic data types.
-          </para>
+        <para>
+          <defterm primary="dump">Dumping</defterm> native data structures to a
+          character <refterm primary="stream">stream</refterm> is done in three
+          logically separate stages.
+        </para>
 
-          <para>
-            Each YAML <refterm primary="node">node</refterm> requires, in
-            addition to its <refterm primary="kind">kind</refterm> and <refterm
-            primary="content">content</refterm>, a <refterm
-            primary="tag">tag</refterm> specifying its data type. Type specifiers
-            are either <refterm primary="tag" secondary="global">global</refterm>
-            URIs, or are <refterm primary="tag" secondary="local">local</refterm>
-            in scope to a single <refterm
-            primary="application">application</refterm>. For example, an integer
-            is represented in YAML with a <refterm
-            primary="scalar">scalar</refterm> plus the <refterm primary="tag"
-            secondary="global">global tag</refterm>
-            <uquote>tag:yaml.org,2002:int</uquote>. Similarly, an invoice object,
-            particular to a given organization, could be represented as a
-            <refterm primary="mapping">mapping</refterm> together with the
-            <refterm primary="tag" secondary="local">local tag</refterm>
-            <uquote>!invoice</uquote>. This simple model can represent any data
-            structure independent of programming language.
-          </para>
-        </keep-together>
+        <variablelist>
+          <varlistentry>
+            <term>Representing Native Data Structures</term>
+
+            <listitem>
+              <para>
+                YAML <defterm primary="represent">represents</defterm> any
+                <defterm primary="native data structure">native data
+                structure</defterm> using three <refterm primary="kind">node
+                kinds</refterm>: <refterm primary="sequence">sequence</refterm>
+                - an ordered series of entries; <refterm
+                primary="mapping">mapping</refterm> - an unordered association
+                of <refterm primary="equality">unique</refterm> <refterm
+                primary="key">keys</refterm> to <refterm
+                primary="value">values</refterm>; and <refterm
+                primary="scalar">scalar</refterm> - any datum with opaque
+                structure presentable as a series of Unicode characters.
+                Combined, these primitives generate directed graph structures.
+                These primitives were chosen because they are both powerful and
+                familiar: the <refterm primary="sequence">sequence</refterm>
+                corresponds to a Perl array and a Python list, the <refterm
+                primary="mapping">mapping</refterm> corresponds to a Perl hash
+                table and a Python dictionary. The <refterm
+                primary="scalar">scalar</refterm> represents strings, integers,
+                dates, and other atomic data types.
+              </para>
+
+              <para>
+                Each YAML <refterm primary="node">node</refterm> requires, in
+                addition to its <refterm primary="kind">kind</refterm> and
+                <refterm primary="content">content</refterm>, a <refterm
+                primary="tag">tag</refterm> specifying its data type. Type
+                specifiers are either <refterm primary="tag"
+                secondary="global">global</refterm> URIs, or are <refterm
+                primary="tag" secondary="local">local</refterm> in scope to a
+                single <refterm primary="application">application</refterm>.
+                For example, an integer is represented in YAML with a <refterm
+                primary="scalar">scalar</refterm> plus the <refterm
+                primary="tag" secondary="global">global tag</refterm>
+                <uquote>tag:yaml.org,2002:int</uquote>. Similarly, an invoice
+                object, particular to a given organization, could be
+                represented as a <refterm primary="mapping">mapping</refterm>
+                together with the <refterm primary="tag"
+                secondary="local">local tag</refterm>
+                <uquote>!invoice</uquote>. This simple model can represent any
+                data structure independent of programming language.
+              </para>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>Serializing the Representation Graph</term>
+
+            <listitem>
+              For sequential access mediums, such as an event callback API, a
+              YAML <refterm primary="representation">representation</refterm>
+              must be <defterm primary="serialize">serialized</defterm> to an
+              ordered tree. Since in a YAML <refterm
+              primary="representation">representation</refterm>, <refterm
+              primary="key">mapping keys</refterm> are unordered and <refterm
+              primary="node">nodes</refterm> may be referenced more than once
+              (have more than one incoming <quote>arrow</quote>), the
+              serialization process is required to impose an <refterm
+              primary="key" secondary="order">ordering</refterm> on the
+              <refterm primary="key">mapping keys</refterm> and to replace the
+              second and subsequent references to a given <refterm
+              primary="node">node</refterm> with place holders called <refterm
+              primary="alias">aliases</refterm>. YAML does not specify how
+              these <defterm primary="serialization"
+              secondary="detail">serialization details</defterm> are chosen. It
+              is up to the YAML <refterm
+              primary="processor">processor</refterm> to come up with
+              human-friendly <refterm primary="key" secondary="order">key
+              order</refterm> and <refterm primary="anchor">anchor</refterm>
+              names, possibly with the help of the <refterm
+              primary="application">application</refterm>. The result of this
+              process, a YAML <refterm primary="serialization">serialization
+              tree</refterm>, can then be traversed to produce a series of
+              event calls for one-pass processing of YAML data.
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term>Presenting the Serialization Tree</term>
+
+            <listitem>
+              The final output process is <defterm
+              primary="present">presenting</defterm> the YAML <refterm
+              primary="serialization">serializations</refterm> as a character
+              <refterm primary="stream">stream</refterm> in a human-friendly
+              manner. To maximize human readability, YAML offers a rich set of
+              stylistic options which go far beyond the minimal functional
+              needs of simple data storage. Therefore the YAML <refterm
+              primary="processor">processor</refterm> is required to introduce
+              various <defterm primary="presentation"
+              secondary="detail">presentation details</defterm> when creating
+              the <refterm primary="stream">stream</refterm>, such as the
+              choice of <refterm primary="style">node styles</refterm>, how to
+              <refterm primary="scalar" secondary="content format">format
+              scalar content</refterm>, the amount of <refterm primary="space"
+              secondary="indentation">indentation</refterm>, which <refterm
+              primary="tag" secondary="handle">tag handles</refterm> to use,
+              the <refterm primary="tag">node tags</refterm> to leave <refterm
+              primary="tag" secondary="non-specific">unspecified</refterm>, the
+              set of <refterm primary="directive" >directives</refterm> to
+              provide and possibly even what <refterm
+              primary="comment">comments</refterm> to add. While some of this
+              can be done with the help of the <refterm
+              primary="application">application</refterm>, in general this
+              process should be guided by the preferences of the user.
+            </listitem>
+          </varlistentry>
+        </variablelist>
       </sect2>
 
       <sect2>
-        <title>Serializing the Representation Graph</title>
+        <title>Load</title>
 
         <para>
-          For sequential access mediums, such as an event callback API, a YAML
-          <refterm primary="representation">representation</refterm> must be
-          <defterm primary="serialize">serialized</defterm> to an ordered tree.
-          Since in a YAML <refterm
-          primary="representation">representation</refterm>, <refterm
-          primary="key">mapping keys</refterm> are unordered and <refterm
-          primary="node">nodes</refterm> may be referenced more than once (have
-          more than one incoming <quote>arrow</quote>), the serialization
-          process is required to impose an <refterm primary="key"
-          secondary="order">ordering</refterm> on the <refterm
-          primary="key">mapping keys</refterm> and to replace the second and
-          subsequent references to a given <refterm
-          primary="node">node</refterm> with place holders called <refterm
-          primary="alias">aliases</refterm>. YAML does not specify how these
-          <defterm primary="serialization" secondary="detail">serialization
-          details</defterm> are chosen. It is up to the YAML <refterm
-          primary="processor">processor</refterm> to come up with
-          human-friendly <refterm primary="key" secondary="order">key
-          order</refterm> and <refterm primary="anchor">anchor</refterm> names,
-          possibly with the help of the <refterm
-          primary="application">application</refterm>. The result of this
-          process, a YAML <refterm primary="serialization">serialization
-          tree</refterm>, can then be traversed to produce a series of event
-          calls for one-pass processing of YAML data.
-        </para>
-      </sect2>
-
-      <sect2>
-        <title>Presenting the Serialization Tree</title>
-
-        <para>
-          The final output process is <defterm
-          primary="present">presenting</defterm> the YAML <refterm
-          primary="serialization">serializations</refterm> as a character
-          <refterm primary="stream">stream</refterm> in a human-friendly
-          manner. To maximize human readability, YAML offers a rich set of
-          stylistic options which go far beyond the minimal functional needs of
-          simple data storage. Therefore the YAML <refterm
-          primary="processor">processor</refterm> is required to introduce
-          various <defterm primary="presentation"
-          secondary="detail">presentation details</defterm> when creating the
-          <refterm primary="stream">stream</refterm>, such as the choice of
-          <refterm primary="style">node styles</refterm>, how to <refterm
-          primary="scalar" secondary="content format">format scalar
-          content</refterm>, the amount of <refterm primary="space"
-          secondary="indentation">indentation</refterm>, which <refterm
-          primary="tag" secondary="handle">tag handles</refterm> to use, the
-          <refterm primary="tag">node tags</refterm> to leave <refterm
-          primary="tag" secondary="non-specific">unspecified</refterm>, the set
-          of <refterm primary="directive" >directives</refterm> to provide and
-          possibly even what <refterm primary="comment">comments</refterm> to
-          add. While some of this can be done with the help of the <refterm
-          primary="application">application</refterm>, in general this process
-          should be guided by the preferences of the user.
+          <defterm primary="load">Loading</defterm> native data structures from
+          a character <refterm primary="stream">stream</refterm> is similarly
+          done in three logically inverse stages.
         </para>
 
-      </sect2>
+        <variablelist>
+          <varlistentry>
+            <term>Parsing the Presentation Stream</term>
 
-      <sect2>
-        <title>Parsing the Presentation Stream</title>
+            <listitem>
+              <defterm primary="parse">Parsing</defterm> is the inverse process
+              of <refterm primary="present">presentation</refterm>, it takes a
+              <refterm primary="stream">stream</refterm> of characters and
+              produces a series of events. Parsing discards all the <refterm
+              primary="presentation" secondary="detail">details</refterm>
+              introduced in the <refterm
+              primary="present">presentation</refterm> process, reporting only
+              the <refterm primary="serialization">serialization</refterm>
+              events. Parsing can fail due to <refterm primary="stream"
+              secondary="ill-formed">ill-formed</refterm> input.
+            </listitem>
+          </varlistentry>
 
-        <para>
-          <defterm primary="parse">Parsing</defterm> is the inverse process of
-          <refterm primary="present">presentation</refterm>, it takes a
-          <refterm primary="stream">stream</refterm> of characters and produces
-          a series of events. Parsing discards all the <refterm
-          primary="presentation" secondary="detail">details</refterm>
-          introduced in the <refterm primary="present">presentation</refterm>
-          process, reporting only the <refterm
-          primary="serialization">serialization</refterm> events. Parsing can
-          fail due to <refterm primary="stream"
-          secondary="ill-formed">ill-formed</refterm> input.
-        </para>
-      </sect2>
+          <varlistentry>
+            <term>Composing the Representation Graph</term>
 
-      <sect2>
-        <title>Composing the Representation Graph</title>
+            <listitem>
+              <defterm primary="compose">Composing</defterm> takes a series of
+              <refterm primary="serialization">serialization</refterm> events
+              and produces a <refterm primary="representation">representation
+              graph</refterm>. Composing discards all the <refterm
+              primary="serialization" secondary="detail">details</refterm>
+              introduced in the <refterm
+              primary="serialize">serialization</refterm> process, producing
+              only the <refterm primary="representation">representation
+              graph</refterm>. Composing can fail due to any of several
+              reasons, detailed <refterm primary="load" secondary="failure
+              point">below</refterm>.
+            </listitem>
+          </varlistentry>
+        </variablelist>
 
-        <para>
-          <defterm primary="compose">Composing</defterm> takes a series of
-          <refterm primary="serialization">serialization</refterm> events and
-          produces a <refterm primary="representation">representation
-          graph</refterm>. Composing discards all the <refterm
-          primary="serialization" secondary="detail">details</refterm>
-          introduced in the <refterm
-          primary="serialize">serialization</refterm> process, producing only
-          the <refterm primary="representation">representation graph</refterm>.
-          Composing can fail due to any of several reasons, detailed <refterm
-          primary="load" secondary="failure point">below</refterm>.
-        </para>
-      </sect2>
+        <variablelist>
+          <varlistentry>
+            <term>Constructing Native Data Structures</term>
 
-      <sect2>
-        <title>Constructing Native Data Structures</title>
-
-        <para>
-          The final input process is <defterm
-          primary="construct">constructing</defterm> <refterm primary="native
-          data structure">native data structures</refterm> from the YAML
-          <refterm primary="representation">representation</refterm>.
-          Construction must be based only on the information available in the
-          <refterm primary="representation">representation</refterm>, and not
-          on additional <refterm
-          primary="serialization">serialization</refterm> or <refterm
-          primary="presentation" secondary="detail">presentation
-          details</refterm> such as <refterm
-          primary="comment">comments</refterm>, <refterm
-          primary="directive">directives</refterm>, <refterm primary="key"
-          secondary="order">mapping key order</refterm>, <refterm
-          primary="style">node styles</refterm>, <refterm primary="scalar"
-          secondary="content format">scalar content format</refterm>, <refterm
-          primary="space" secondary="indentation">indentation</refterm> levels
-          etc. Construction can fail due to the <refterm primary="tag"
-          secondary="unavailable">unavailability</refterm> of the required
-          <refterm primary="native data structure">native data types</refterm>.
-        </para>
+            <listitem>
+              The final input process is <defterm
+              primary="construct">constructing</defterm>&nbsp;<refterm
+              primary="native data structure">native data structures</refterm>
+              from the YAML <refterm
+              primary="representation">representation</refterm>. Construction
+              must be based only on the information available in the <refterm
+              primary="representation">representation</refterm>, and not on
+              additional <refterm
+              primary="serialization">serialization</refterm> or <refterm
+              primary="presentation" secondary="detail">presentation
+              details</refterm> such as <refterm
+              primary="comment">comments</refterm>, <refterm
+              primary="directive">directives</refterm>, <refterm primary="key"
+              secondary="order">mapping key order</refterm>, <refterm
+              primary="style">node styles</refterm>, <refterm primary="scalar"
+              secondary="content format">scalar content format</refterm>,
+              <refterm primary="space"
+              secondary="indentation">indentation</refterm> levels etc.
+              Construction can fail due to the <refterm primary="tag"
+              secondary="unavailable">unavailability</refterm> of the required
+              <refterm primary="native data structure">native data
+              types</refterm>.
+            </listitem>
+          </varlistentry>
+        </variablelist>
       </sect2>
     </sect1>
 
@@ -1656,7 +1690,7 @@ Stack:
             primary="node">nodes</refterm>. This is non-trivial since YAML
             allows various ways to <refterm primary="scalar" secondary="content
             format">format scalar content</refterm>. For example, the integer
-            eleven can be written as <uquote>013</uquote> (octal) or
+            eleven can be written as <uquote>0o13</uquote> (octal) or
             <uquote>0xB</uquote> (hexadecimal). If both forms are used as
             <refterm primary="key">keys</refterm> in the same <refterm
             primary="mapping">mapping</refterm>, only a YAML <refterm
@@ -2384,6 +2418,14 @@ Stack:
         </varlistentry>
 
         <varlistentry>
+          <term><userinput>l-</userinput></term>
+
+          <listitem>
+            A production matching complete line(s).
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
           <term>
             <varname>X</varname><userinput>-</userinput
             ><varname>Y</varname><userinput>-</userinput>
@@ -2392,15 +2434,10 @@ Stack:
           <listitem>
             A production starting with an
             <varname>X</varname><userinput>-</userinput> character and ending
-            with a <varname>Y</varname><userinput>-</userinput> character.
-          </listitem>
-        </varlistentry>
-
-        <varlistentry>
-          <term><userinput>l-</userinput></term>
-
-          <listitem>
-            A production matching complete line(s).
+            with a <varname>Y</varname><userinput>-</userinput> character,
+            where <varname>X</varname><userinput>-</userinput> and
+            <varname>Y</varname><userinput>-</userinput> are any of the above
+            prefixes.
           </listitem>
         </varlistentry>
 
@@ -2606,20 +2643,24 @@ Stack:
           compatibility</refterm>, YAML <refterm
           primary="processor">processors</refterm> must allow all non-control
           characters inside <refterm primary="style" secondary="flow"
-          tertiary="double-quoted">quoted</refterm> <refterm primary="style"
-          secondary="flow" tertiary="single-quoted">scalars</refterm>. To
-          ensure readability, non-printable characters should be <refterm
+          tertiary="double-quoted">quoted scalars</refterm>. To ensure
+          readability, non-printable characters should be <refterm
           primary="escaping" secondary="in double-quoted
           scalars">escaped</refterm> on output, even inside such <refterm
+          primary="style" secondary="flow"
+          tertiary="double-quoted">scalars</refterm>. Note that JSON <refterm
           primary="style" secondary="flow" tertiary="double-quoted">quoted
-          scalars</refterm>.
+          scalars</refterm> cannot span multiple lines or contain <refterm
+          primary="tab">tabs</refterm>, but YAML <refterm primary="style"
+          secondary="flow" tertiary="double-quoted">quoted scalars</refterm>
+          can.
         </para>
 
         <productionset>
-          <production id="c-json">
-            <lhs>c-json</lhs>
+          <production id="nb-json">
+            <lhs>nb-json</lhs>
             <rhs>
-              #x9 | #xA | #xD | [#x20-#x10FFFF]
+              #x9 | [#x20-#x10FFFF]
             </rhs>
           </production>
         </productionset>
@@ -2800,6 +2841,18 @@ Stack:
       </keep-together>
 
       <keep-together>
+        <para>
+          A byte order mark may only appear at the start of a <refterm
+          primary="document">document</refterm>, or inside <refterm
+          primary="style" secondary="flow" tertiary="double-quoted">quoted
+          scalars</refterm> (for <refterm primary="JSON compatibility">JSON
+          compatibility</refterm>). On output, <refterm
+          primary="content">content</refterm> byte order marks should be
+          <refterm primary="escaping" secondary="in double-quoted
+          scalars">escaped</refterm>, even inside such <refterm primary="style"
+          secondary="flow" tertiary="double-quoted">scalars</refterm>.
+        </para>
+
         <para>
           In the examples, byte order mark characters are displayed as
           <uquote>&hArr;</uquote>.
@@ -3515,9 +3568,7 @@ grave-accent: <hl1>`</hl1>text
       <keep-together>
         <para>
           YAML recognizes the following ASCII <defterm primary="line
-          break">line break</defterm> characters. Note that the form feed
-          (<userinput>#x0C</userinput>) is not considered to be a line break
-          character.
+          break">line break</defterm> characters.
         </para>
 
         <productionset>
@@ -3547,8 +3598,9 @@ grave-accent: <hl1>`</hl1>text
 
       <keep-together>
         <para>
-          All other characters are considered to be non-break characters. Note
-          these include the <defterm primary="line break"
+          All other characters, including the form feed
+          (<userinput>#x0C</userinput>), are considered to be non-break
+          characters. Note these include the <defterm primary="line break"
           secondary="non-ASCII">non-ASCII line breaks</defterm>: next line
           (<userinput>#x85</userinput>), line separator
           (<userinput>#x2028</userinput>) and paragraph separator
@@ -3580,14 +3632,6 @@ grave-accent: <hl1>`</hl1>text
               - <nonterminal def="#c-byte-order-mark"/>
             </rhs>
           </production>
-
-          <production id="nb-json">
-            <lhs>nb-json</lhs>
-            <rhs>
-              <nonterminal def="#c-json"/>
-              - <nonterminal def="#b-char"/>
-            </rhs>
-          </production>
         </productionset>
       </keep-together>
 
@@ -3617,18 +3661,15 @@ grave-accent: <hl1>`</hl1>text
 
       <keep-together>
         <para>
-          Line breaks inside <refterm primary="scalar">scalar
-          content</refterm> must be <defterm primary="line break"
+          Line breaks inside <refterm primary="scalar">scalar content</refterm>
+          must be <defterm primary="line break"
           secondary="normalization">normalized</defterm> by the YAML <refterm
           primary="processor">processor</refterm>. Each such line break must be
           <refterm primary="parse">parsed</refterm> into a single line feed
-          character.
-        </para>
-
-        <para>
-          The original line break form is a <refterm primary="presentation"
-          secondary="detail">presentation detail</refterm> and must not be used
-          to convey <refterm primary="content">content</refterm> information.
+          character. The original line break form is a <refterm
+          primary="presentation" secondary="detail">presentation
+          detail</refterm> and must not be used to convey <refterm
+          primary="content">content</refterm> information.
         </para>
 
         <productionset>
@@ -4541,8 +4582,8 @@ Not indented:
       ? !!str "Flow style"
       : !!seq [
           !!str "By two",
+          !!str "Also by two",
           !!str "Still by two",
-          !!str "Again by two",
         ]
     }
 }
@@ -4666,13 +4707,13 @@ Not indented:
           always includes the <refterm primary="space"
           secondary="indentation">indentation</refterm>. For <refterm
           primary="style" secondary="flow" tertiary="scalar">flow scalar
-          styles</refterm> it also includes all leading <refterm
+          styles</refterm> it additionally includes all leading <refterm
           primary="space" secondary="white">white space</refterm>, which may
           contain <refterm primary="tab">tab</refterm> characters.
         </para>
 
         <para>
-          The prefix is a <refterm primary="presentation"
+          Line prefixes are a <refterm primary="presentation"
           secondary="detail">presentation detail</refterm> and must not be used
           to convey <refterm primary="content">content</refterm> information.
         </para>
@@ -4812,13 +4853,12 @@ Chomping: |
         <para>
           <defterm primary="line folding">Line folding</defterm> allows long
           lines to be broken for readability, while retaining the semantics of
-          the original long line.
-        </para>
-
-        <para>
-          If a <refterm primary="line break">line break</refterm> is followed
-          by an <refterm primary="empty line">empty line</refterm>, it is
-          <defterm primary="trimming">trimmed</defterm>.
+          the original long line. If a <refterm primary="line break">line
+          break</refterm> is followed by an <refterm primary="empty line">empty
+          line</refterm>, it is <defterm primary="trimming">trimmed</defterm>;
+          the first <refterm primary="line break">line break</refterm> is
+          discarded and the rest are retained as <refterm
+          primary="content">content</refterm>.
         </para>
 
         <productionset>
@@ -4887,8 +4927,7 @@ Chomping: |
           <member>
 <programlisting>%YAML 1.2<sbr/>
 ---
-!!str "trimmed\n\n\n\
-      as space"
+!!str "trimmed\n\n\nas space"
 </programlisting>
 <synopsis>&nbsp;Legend:
    <hl1><link linkend="b-l-trimmed(n,c)">b-l-trimmed(n,c)</link></hl1>
@@ -4973,9 +5012,9 @@ Chomping: |
             <listitem>
               <para>
                 Folding in <refterm primary="style" secondary="flow">flow
-                styles</refterm> provides more relaxed, less powerful
-                semantics. <refterm primary="style" secondary="flow">Flow
-                styles</refterm> typically depend on explicit <refterm
+                styles</refterm> provides more relaxed semantics. <refterm
+                primary="style" secondary="flow">Flow styles</refterm>
+                typically depend on explicit <refterm
                 primary="indicator">indicators</refterm> rather than <refterm
                 primary="space" secondary="indentation">indentation</refterm>
                 to convey structure. Hence spaces preceding or following the
@@ -5430,10 +5469,10 @@ Chomping: |
             compatibility</defterm>. Hence a version 1.2 <refterm
             primary="processor">processor</refterm> should process version 1.1
             <refterm primary="document">documents</refterm> as if they were
-            version 1.2. The only exception is the handling of <refterm
-            primary="line break" secondary="non-ASCII">non-ASCII line
-            breaks</refterm>, as described <link linkend="non-ASCII line
-            breaks">above</link>.
+            version 1.2, giving a warning on points of incompatibility
+            (handling of <refterm primary="line break"
+            secondary="non-ASCII">non-ASCII line breaks</refterm>, as described
+            <link linkend="non-ASCII line breaks">above</link>).
           </para>
 
           <productionset>
@@ -6703,7 +6742,7 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
             <production id="nb-double-char">
               <lhs>nb-double-char</lhs>
               <rhs>
-                ( <nonterminal def="#nb-char"/>
+                ( <nonterminal def="#nb-json"/>
                 - <nonterminal def="#c-escape"><quote>\</quote></nonterminal>
                 - <nonterminal
                     def="#c-double-quote"><quote>"</quote></nonterminal> )
@@ -6965,7 +7004,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <production id="nb-single-char">
               <lhs>nb-single-char</lhs>
               <rhs>
-                ( <nonterminal def="#nb-char"/>
+                ( <nonterminal def="#nb-json"/>
                 - <nonterminal
                     def="#c-single-quote"><quote>'</quote></nonterminal> )
                 | <nonterminal def="#c-quoted-quote"/>
@@ -11493,7 +11532,7 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
               </row>
 
               <row>
-                <entry>&nbsp;<userinput>[-+]?&nbsp;(&nbsp;0&nbsp;|&nbsp;[1-9]&nbsp;[0-9]*&nbsp;)</userinput></entry>
+                <entry>&nbsp;<userinput>[-+]?&nbsp;[0-9]+</userinput></entry>
                 <entry>&nbsp;<userinput>tag:yaml.org,2002:int</userinput>&nbsp;<emphasis>(Base&nbsp;10)</emphasis></entry>
               </row>
 
@@ -11508,7 +11547,7 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
               </row>
 
               <row>
-                <entry>&nbsp;<userinput>[-+]?&nbsp;(&nbsp;0&nbsp;|&nbsp;[1-9]&nbsp;[0-9]*&nbsp;)&nbsp;(&nbsp;\.&nbsp;[0-9]*&nbsp;)?&nbsp;(&nbsp;[eE]&nbsp;[-+]?&nbsp;[0-9]+&nbsp;)?</userinput></entry>
+                <entry>&nbsp;<userinput>[-+]?&nbsp;(&nbsp;\.&nbsp;[0-9]+&nbsp;|&nbsp;[0-9]+&nbsp;(&nbsp;\.&nbsp;[0-9]*&nbsp;)?&nbsp;)&nbsp;(&nbsp;[eE]&nbsp;[-+]?&nbsp;[0-9]+&nbsp;)?</userinput></entry>
                 <entry>&nbsp;<userinput>tag:yaml.org,2002:float</userinput>&nbsp;<emphasis>(Number)</emphasis></entry>
               </row>
 
