@@ -116,10 +116,10 @@
   /></xsl:template>
 
   <!-- Steal the margins for some pesky productions -->
-  <xsl:param name="page.margin.inner">0.4in</xsl:param>
-  <xsl:param name="page.margin.outer">0.4in</xsl:param>
-  <xsl:param name="page.margin.top">0.4in</xsl:param>
-  <xsl:param name="page.margin.bottom">0.4in</xsl:param>
+  <xsl:param name="page.margin.inner">0.25in</xsl:param>
+  <xsl:param name="page.margin.outer">0.25in</xsl:param>
+  <xsl:param name="page.margin.top">0.25in</xsl:param>
+  <xsl:param name="page.margin.bottom">0.25in</xsl:param>
 
   <!-- The common page area for US Letter and A4 -->
   <xsl:param name="page.width">8.3in</xsl:param>

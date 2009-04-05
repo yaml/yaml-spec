@@ -10,12 +10,23 @@ while (my $line = <>) {
     $line =~ s/\s*\[<fo:basic-link external-destination="[^"]*">[^<]*<\/fo:basic-link>\]//g;
     # Align two-column examples.
     $line =~ s/-4pc/-1pc/g;
-    # Ensure productions have some leading space.
-    $line =~ s/fo:table id/fo:table space-before.minimum="0.8em" space-before.optimum="1em" space-before.maximum="2em" id/;
     # Ensure Escaped characters are separated from productions.
     $line =~ s/^ [ ]+Escaped/&#160;Escaped/;
-    # Ensure the production counter has enough space.
-    $line =~ s/"5%"/"10mm"/g;
+    # Ensure productions have some leading space, and no inherited indentation.
+    if ($line =~ /></) {
+        # Inside a list.
+        $line =~ s/fo:table id/fo:table space-before.minimum="0.8em" space-before.optimum="1em" space-before.maximum="2em" id/g;
+        $line =~ s/"5%"/"0.5in"/g;
+    } else {
+        # Outside lists.
+        $line =~ s/fo:table id/fo:table start-indent="0" space-before.minimum="0.8em" space-before.optimum="1em" space-before.maximum="2em" id/g;
+        # Ensure the production counter has enough space.
+        $line =~ s/"100%">/"11in">/g;
+        $line =~ s/"5%"/"1.5in"/g;
+        $line =~ s/"95%"/"9.5in"/g;
+        # Re-introduce the indentation for the production counter.
+        $line =~ s/<fo:block text-align="start">\[([0-9]+)\]<\/fo:block>/<fo:block text-align="start" start-indent="1in">\[$1\]<\/fo:block>/g;
+    }
     # Expand the monospace family
     $line =~ s/{\$monospace\.font\.family}/monospace/g;
     # Add the special symbols to monospace.
@@ -49,6 +60,11 @@ while (my $line = <>) {
     $in_final_tables++ if $line =~ />Tag Resolution</;
     $line =~ s/column-number="1"\//column-number="1" column-width="60%"\// if $in_final_tables > 1;
     $line =~ s/column-number="2"\//column-number="2" column-width="40%"\// if $in_final_tables > 1;
+
+    # Ensure all of C and S is moved to the next index column.
+    print "<fo:block break-after=\"column\"/>\n" if ($line =~ />[CS]</);
+    # Ensure all of T is moved to the next index page.
+    print "<fo:block break-after=\"page\"/>\n" if ($line =~ />T</);
 
     print $line;
 }

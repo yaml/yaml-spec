@@ -152,6 +152,11 @@
   <!-- Slanted single quotes -->
   <xsl:template match="q">&#8217;</xsl:template>
 
+  <!-- Convert pbr -->
+  <xsl:template match="pbr">
+    <xsl:text> </xsl:text>
+  </xsl:template>
+
   <!-- Copy everything else unchanged. -->
   <xsl:template match='*|@*'>
     <xsl:copy>
