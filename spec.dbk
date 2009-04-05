@@ -32,6 +32,12 @@
         <surname>d&ouml;t Net</surname>
         <email>ingy@ingy.net</email>
       </author>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="logo.eps" format="eps"/>
+        </imageobject>
+      </mediaobject>
     </authorgroup>
 
     <copyright>

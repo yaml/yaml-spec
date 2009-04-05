@@ -126,7 +126,7 @@ spec.pdf: spec.dbk \
 	$(XEP) tmp3.xml -ps tmp3.ps
 	perl preprocess_ps.pl tmp3.ps > spec.ps
 	ps2pdf spec.ps
-	#rm tmp*.xml
+	rm tmp*.xml
 
 spec.html: spec.dbk \
            preprocess_png.sed preprocess_html.pl catalog docbook_xslt
@@ -136,7 +136,7 @@ spec.html: spec.dbk \
 	$(XSLTPROC) preprocess_html.xsl tmp1.xml > tmp2.xml
 	$(XSLTPROC) single_html.xsl tmp2.xml > tmp3.xml
 	perl preprocess_html.pl tmp3.xml > spec.html
-	#rm tmp*.xml
+	rm tmp*.xml
 
 docbook_xslt:
 	ln -s $(DOCBOOK_XSLT) docbook_xslt

@@ -7,6 +7,7 @@ my $table_depth = 0;
 my $simple_table_depth = -1;
 my $text = "";
 while (my $line = <>) {
+  next if $line =~ /logo.png/;
   $line =~ s/\n// if ($line =~ /class="database"/);
   $line =~ s/span class="index"/span class="appendix"/g;
   $line =~ s/width="3%"/class="productioncounter"/g;
