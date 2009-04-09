@@ -83,7 +83,10 @@ html: $(HTML)
 pdf: $(PDF)
 
 clean:
-	rm -fr $(HTML) $(PDF) $(PS) tmp* docbook_xslt $(PAGES_DIR)
+	rm -f $(HTML) $(PDF) $(PS) tmp* docbook_xslt
+
+purge: clean
+	rm -fr $(PAGES_DIR)	
 
 $(PDF): single_fo.xsl ebnf_fo.xsl preprocess_fo.xsl
 
