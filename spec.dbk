@@ -54,9 +54,9 @@
 
     <releaseinfo id="releaseinfo">
       <emphasis>This version:</emphasis><sbr/>
-      &nbsp;&nbsp;HTML: <ulink url="http://yaml.org/spec/cvs/current.html"/><sbr/>
-      &nbsp;&nbsp;PDF: <ulink url="http://yaml.org/spec/cvs/current.pdf"/><sbr/>
-      &nbsp;&nbsp;PS: <ulink url="http://yaml.org/spec/cvs/current.ps"/>
+      &nbsp;&nbsp;HTML: <ulink url="http://yaml.org/spec/current/spec.html"/><sbr/>
+      &nbsp;&nbsp;PDF: <ulink url="http://yaml.org/spec/current/spec.pdf"/><sbr/>
+      &nbsp;&nbsp;PS: <ulink url="http://yaml.org/spec/current/spec.ps"/>
     </releaseinfo>
 
     <abstract>
