@@ -201,7 +201,7 @@
         url="http://www.docuverse.com/smldev/">SML-DEV members</ulink>. Later
         on, it directly incorporated experience from Ingy d&ouml;t Net<q/>s
         Perl module <ulink
-        url="http://search.cpan.org/doc/INGY/Data-Denter-0.13/Denter.pod"
+        url="http://search.cpan.org/dist/Data-Denter/"
         >Data::Denter</ulink>. Since then, YAML has matured through ideas and
         support from its user community.
       </para>
