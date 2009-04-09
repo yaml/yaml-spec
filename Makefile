@@ -48,6 +48,13 @@ PNG_IMAGES = \
   logo.svg logo.png model2.png overview2.png \
   present2.png represent2.png serialize2.png styles2.png validity2.png
 
+PAGES_FILES = \
+index.html logo.png model2.png overview2.png \
+present2.png represent2.png serialize2.png single_html.css spec.html \
+styles2.png term.png validity2.png
+
+PAGES_DIR = ../.yaml-spec-gh-pages
+
 all: html pdf
 
 site: all
@@ -76,7 +83,7 @@ html: $(HTML)
 pdf: $(PDF)
 
 clean:
-	rm -f $(HTML) $(PDF) $(PS) tmp* docbook_xslt
+	rm -fr $(HTML) $(PDF) $(PS) tmp* docbook_xslt $(PAGES_DIR)
 
 $(PDF): single_fo.xsl ebnf_fo.xsl preprocess_fo.xsl
 
@@ -140,3 +147,9 @@ spec.html: spec.dbk \
 
 docbook_xslt:
 	ln -s $(DOCBOOK_XSLT) docbook_xslt
+
+gh-pages: html $(PAGES_DIR)
+	cp $(PAGES_FILES) $(PAGES_DIR)/
+
+$(PAGES_DIR):
+	mkdir $@
