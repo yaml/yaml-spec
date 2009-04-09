@@ -49,9 +49,9 @@ PNG_IMAGES = \
   present2.png represent2.png serialize2.png styles2.png validity2.png
 
 PAGES_FILES = \
-index.html logo.png model2.png overview2.png \
-present2.png represent2.png serialize2.png single_html.css spec.html \
-styles2.png term.png validity2.png
+  logo.png model2.png overview2.png present2.png represent2.png \
+  serialize2.png single_html.css spec.html styles2.png term.png \
+  validity2.png
 
 PAGES_DIR = ../.yaml-spec-gh-pages
 
