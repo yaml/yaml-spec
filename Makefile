@@ -156,3 +156,12 @@ gh-pages: html $(PAGES_DIR)
 
 $(PAGES_DIR):
 	mkdir $@
+
+publish: gh-pages clean
+	git stash
+	git checkout gh-pages
+	make
+	git commit -a -m 'Publishing latest spec changes'
+	git push
+	git checkout master
+	git stash apply
