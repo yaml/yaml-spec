@@ -1,5 +1,5 @@
-PAGES=../.yaml-spec-gh-pages
+PAGES_DIR=../.yaml-spec-gh-pages
 
 all:
-	mv $(PAGES)/* ./
-	rm -fr $(PAGES)
+	mv $(PAGES_DIR)/* ./
+	rm -fr $(PAGES_DIR)
