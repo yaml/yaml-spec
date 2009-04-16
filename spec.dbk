@@ -10225,12 +10225,13 @@ with <hl1>%</hl1> first line
         <production id="l-yaml-stream">
           <lhs>l-yaml-stream</lhs>
           <rhs>
-            <nonterminal def="#l-document-prefix"/>
+            <nonterminal def="#l-document-prefix"/>*
             <nonterminal def="#l-any-document"/>?<sbr/>
-            ( <nonterminal def="#l-document-prefix"/><sbr/>
-            &nbsp;&nbsp;( <nonterminal def="#l-explicit-document"/><sbr/>
-            &nbsp;&nbsp;| <nonterminal def="#l-document-suffix"/>
-            <nonterminal def="#l-any-document"/>? ) )*
+            ( <nonterminal def="#l-document-suffix"/>+
+            <nonterminal def="#l-document-prefix"/>*
+            <nonterminal def="#l-any-document"/>?<sbr/>
+            | <nonterminal def="#l-document-prefix"/>*
+            <nonterminal def="#l-explicit-document"/> )*
           </rhs>
         </production>
       </productionset>
