@@ -1703,32 +1703,48 @@ Stack:
               <term>Equality</term>
 
               <listitem>
-                 Two <refterm primary="node">nodes</refterm> must have the same
-                 <refterm primary="tag">tag</refterm> and <refterm
-                 primary="content">content</refterm> to be <defterm
-                 primary="equality">equal</defterm>. Since each <refterm
-                 primary="tag">tag</refterm> applies to exactly one <refterm
-                 primary="kind">kind</refterm>, this implies that the two
-                 <refterm primary="node">nodes</refterm> must have the same
-                 <refterm primary="kind">kind</refterm> to be equal. Two
-                 <refterm primary="scalar">scalars</refterm> are equal only
-                 when their <refterm primary="tag">tags</refterm> and canonical
-                 forms are equal character-by-character. Equality of <refterm
-                 primary="collection">collections</refterm> is defined
-                 recursively. Two <refterm
-                 primary="sequence">sequences</refterm> are equal only when
-                 they have the same <refterm primary="tag">tag</refterm> and
-                 length, and each <refterm primary="node">node</refterm> in one
-                 <refterm primary="sequence">sequence</refterm> is equal to the
-                 corresponding <refterm primary="node">node</refterm> in the
-                 other <refterm primary="sequence">sequence</refterm>. Two
-                 <refterm primary="mapping">mappings</refterm> are equal only
-                 when they have the same <refterm primary="tag">tag</refterm>
-                 and an equal set of <refterm primary="key">keys</refterm>, and
-                 each <refterm primary="key">key</refterm> in this set is
-                 associated with equal <refterm
-                 primary="value">values</refterm> in both <refterm
-                 primary="mapping">mappings</refterm>.
+                <para>
+                  Two <refterm primary="node">nodes</refterm> must have the
+                  same <refterm primary="tag">tag</refterm> and <refterm
+                  primary="content">content</refterm> to be <defterm
+                  primary="equality">equal</defterm>. Since each <refterm
+                  primary="tag">tag</refterm> applies to exactly one <refterm
+                  primary="kind">kind</refterm>, this implies that the two
+                  <refterm primary="node">nodes</refterm> must have the same
+                  <refterm primary="kind">kind</refterm> to be equal. Two
+                  <refterm primary="scalar">scalars</refterm> are equal only
+                  when their <refterm primary="tag">tags</refterm> and
+                  canonical forms are equal character-by-character. Equality
+                  of <refterm primary="collection">collections</refterm> is
+                  defined recursively. Two <refterm
+                  primary="sequence">sequences</refterm> are equal only when
+                  they have the same <refterm primary="tag">tag</refterm> and
+                  length, and each <refterm primary="node">node</refterm> in
+                  one <refterm primary="sequence">sequence</refterm> is equal
+                  to the corresponding <refterm primary="node">node</refterm>
+                  in the other <refterm primary="sequence">sequence</refterm>.
+                  Two <refterm primary="mapping">mappings</refterm> are equal
+                  only when they have the same <refterm
+                  primary="tag">tag</refterm> and an equal set of <refterm
+                  primary="key">keys</refterm>, and each <refterm
+                  primary="key">key</refterm> in this set is associated with
+                  equal <refterm primary="value">values</refterm> in both
+                  <refterm primary="mapping">mappings</refterm>.
+                </para>
+                <para>
+                  Different URI schemes may define different rules for testing
+                  the equality of URIs. Since a YAML <refterm
+                  primary="processor">processor</refterm> cannot be reasonably
+                  expected to be aware of them all, it must resort to a simple
+                  character-by-character comparison of <refterm
+                  primary="tag">tags</refterm> to ensure consistency. This also
+                  happens to be the comparison method defined by the
+                  <uquote>tag:</uquote> URI scheme. <refterm
+                  primary="tag">Tags</refterm> in a YAML stream must therefore
+                  be <refterm primary="present">presented</refterm> in a
+                  canonical way so that such comparison would yield the correct
+                  results.
+                </para>
               </listitem>
             </varlistentry>
 
@@ -3872,7 +3888,12 @@ block:<hl2>&rarr;</hl2>|
             secondary="in URI">encoded</defterm> in UTF-8, and then each byte
             is <defterm primary="escaping" secondary="in
             URIs">escaped</defterm> using the <defterm primary="% escaping in
-            URI"><uquote>%</uquote></defterm> character.
+            URI"><uquote>%</uquote></defterm> character. The YAML <refterm
+            primary="processor">processor</refterm> must not expand such
+            escaped characters. <refterm primary="tag">Tag</refterm> characters
+            must be preserved and compared exactly as <refterm
+            primary="present">presented</refterm> in the YAML <refterm
+            primary="stream">stream</refterm>, without any processing.
           </para>
         </listitem>
       </itemizedlist>
