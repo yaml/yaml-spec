@@ -7744,12 +7744,19 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 
         <para>
           To ensure <refterm primary="JSON compatibility">JSON
-          compatibility</refterm>, if the key is <refterm
+          compatibility</refterm>, if a <refterm primary="key">key</refterm>
+          inside a flow mapping is <refterm
           primary="JSON-like">JSON-like</refterm>, YAML allows the following
           <refterm primary="value">value</refterm> to be specified adjacent to
-          the <uquote>:</uquote>. Note this causes no ambiguity, as all
-          <refterm primary="JSON-like">JSON-like</refterm> keys are surrounded
-          by <refterm primary="indicator">indicators</refterm>.
+          the <uquote>:</uquote>. This causes no ambiguity, as all <refterm
+          primary="JSON-like">JSON-like</refterm> <refterm
+          primary="key">keys</refterm> are surrounded by <refterm
+          primary="indicator">indicators</refterm>. However, as this greatly
+          reduces readability, YAML <refterm
+          primary="processor">processor</refterm> should <refterm
+          primary="space" secondary="separation">separate</refterm> the
+          <refterm primary="value">value</refterm> from the <uquote>:</uquote>
+          on output even in this case.
         </para>
 
         <productionset>
@@ -9506,9 +9513,18 @@ keep: |+
         <para>
           In this case, the <refterm primary="value">value</refterm> may be
           specified on the same line as the <refterm primary="key"
-          secondary="implicit">implicit key</refterm>. Note there is no compact
-          <refterm primary="style" secondary="in-line
-          collection">in-line</refterm> form for such <refterm
+          secondary="implicit">implicit key</refterm>. Note however that in
+          block mappings the <refterm primary="value">value</refterm> must
+          never be adjacent to the <uquote>:</uquote>, as this greatly reduces
+          readability and is not required for <refterm primary="JSON
+          compatibility">JSON compatibility</refterm> (unlike the case in
+          <refterm primary="style" secondary="flow" tertiary="mapping">flow
+          mappings</refterm>).
+        </para>
+          
+        <para>
+          There is no compact <refterm primary="style" secondary="in-line
+          collection">in-line</refterm> form for in-line <refterm
           primary="value">values</refterm>. Also, while both the <refterm
           primary="key" secondary="implicit">implicit key</refterm> and the
           <refterm primary="value">value</refterm> following it may be empty,
