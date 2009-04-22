@@ -6,7 +6,8 @@
 <book>
   <bookinfo>
     <title>
-      YAML&nbsp;Ain<q/>t&nbsp;Markup&nbsp;Language&nbsp;(<trademark>YAML</trademark>)
+      YAML&nbsp;Ain<q/>t&nbsp;Markup&nbsp;Language&nbsp;(<trademark
+      >YAML</trademark>)
       Version&nbsp;1.2
     </title>
 
@@ -54,9 +55,12 @@
 
     <releaseinfo id="releaseinfo">
       <emphasis>This version:</emphasis><sbr/>
-      &nbsp;&nbsp;HTML: <ulink url="http://yaml.org/spec/current/spec.html"/><sbr/>
-      &nbsp;&nbsp;PDF: <ulink url="http://yaml.org/spec/current/spec.pdf"/><sbr/>
-      &nbsp;&nbsp;PS: <ulink url="http://yaml.org/spec/current/spec.ps"/>
+      &nbsp;&nbsp;HTML:
+      <ulink url="http://yaml.org/spec/current/spec.html"/><sbr/>
+      &nbsp;&nbsp;PDF:
+      <ulink url="http://yaml.org/spec/current/spec.pdf"/><sbr/>
+      &nbsp;&nbsp;PS:
+      <ulink url="http://yaml.org/spec/current/spec.ps"/>
     </releaseinfo>
 
     <abstract>
@@ -1791,8 +1795,8 @@ Stack:
           of <refterm primary="native data structure">native data
           structures</refterm> from the serial interface should not use
           <refterm primary="key" secondary="order">key order</refterm> or
-          <refterm primary="anchor">anchor names</refterm> for the preservation of
-          <refterm primary="application">application</refterm> data.
+          <refterm primary="anchor">anchor names</refterm> for the preservation
+          of <refterm primary="application">application</refterm> data.
         </para>
 
         <figure>
@@ -2739,7 +2743,8 @@ Stack:
             </row>
 
             <row>
-              <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
+              <entry>&nbsp;<emphasis
+                >&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
               <entry>&nbsp;<userinput>#x00</userinput></entry>
               <entry>&nbsp;<userinput>#x00</userinput></entry>
               <entry>&nbsp;<userinput>#x00</userinput></entry>
@@ -2757,7 +2762,8 @@ Stack:
             </row>
 
             <row>
-              <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
+              <entry>&nbsp;<emphasis
+                >&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
               <entry>&nbsp;<emphasis>any</emphasis></entry>
               <entry>&nbsp;<userinput>#x00</userinput></entry>
               <entry>&nbsp;<userinput>#x00</userinput></entry>
@@ -2775,7 +2781,8 @@ Stack:
             </row>
 
             <row>
-              <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
+              <entry>&nbsp;<emphasis
+                >&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
               <entry>&nbsp;<userinput>#x00</userinput></entry>
               <entry>&nbsp;<emphasis>any</emphasis></entry>
               <entry></entry>
@@ -2793,7 +2800,8 @@ Stack:
             </row>
 
             <row>
-              <entry>&nbsp;<emphasis>&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
+              <entry>&nbsp;<emphasis
+                >&nbsp;ASCII&nbsp;first&nbsp;character</emphasis></entry>
               <entry>&nbsp;<emphasis>any</emphasis></entry>
               <entry>&nbsp;<userinput>#x00</userinput></entry>
               <entry></entry>
@@ -4173,7 +4181,8 @@ block:<hl2>&rarr;</hl2>|
             <production id="ns-esc-double-quote">
               <lhs>ns-esc-double-quote</lhs>
               <rhs>
-                <nonterminal def="#c-double-quote"><quote>"</quote></nonterminal>
+                <nonterminal def="#c-double-quote"><quote
+                  >"</quote></nonterminal>
               </rhs>
             </production>
           </productionset>
@@ -4747,7 +4756,8 @@ Legend:
           <lhs>l-empty(n,c)</lhs>
           <rhs>
             ( <nonterminal def="#s-line-prefix(n,c)"/>
-            | <nonterminal def="#s-indent(n)">s-indent(&lt;n)</nonterminal> )<sbr/>
+            | <nonterminal def="#s-indent(n)"
+                >s-indent(&lt;n)</nonterminal> )<sbr/>
             <nonterminal def="#b-as-line-feed"/>
           </rhs>
         </production>
@@ -4982,8 +4992,10 @@ Chomping: |
           <lhs>s-s-flow-folded(n)</lhs>
           <rhs>
             <nonterminal def="#s-separate-in-line"/>?
-            <nonterminal def="#b-l-folded(n,c)">b-l-folded(n,flow-in)</nonterminal><sbr/>
-            <nonterminal def="#s-flow-line-prefix(n)">s-flow-line-prefix(n)</nonterminal>
+            <nonterminal def="#b-l-folded(n,c)"
+              >b-l-folded(n,flow-in)</nonterminal><sbr/>
+            <nonterminal def="#s-flow-line-prefix(n)"
+              >s-flow-line-prefix(n)</nonterminal>
           </rhs>
         </production>
       </productionset>
@@ -5973,7 +5985,7 @@ be given at most once per
             <rhs>
               &nbsp;&nbsp;<nonterminal def="#c-verbatim-tag"/><sbr/>
               | <nonterminal def="#c-ns-shorthand-tag"/><sbr/>
-              | <nonterminal def="#c-ns-non-specific-tag"/>
+              | <nonterminal def="#c-non-specific-tag"/>
             </rhs>
           </production>
         </productionset>
@@ -6231,8 +6243,8 @@ be given at most once per
         </variablelist>
 
         <productionset>
-          <production id="c-ns-non-specific-tag">
-            <lhs>c-ns-non-specific-tag</lhs>
+          <production id="c-non-specific-tag">
+            <lhs>c-non-specific-tag</lhs>
             <rhs>
               <nonterminal def="#c-tag"><quote>!</quote></nonterminal>
             </rhs>
@@ -6250,7 +6262,7 @@ be given at most once per
 - <hl1>!</hl1> 12
 </programlisting>
 <synopsis>Legend:
-  <hl1><link linkend="c-ns-non-specific-tag">c-ns-non-specific-tag</link></hl1>
+  <hl1><link linkend="c-non-specific-tag">c-non-specific-tag</link></hl1>
 </synopsis>
             </member>
             <member>
@@ -6605,11 +6617,11 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
           <production id="nb-double-char">
             <lhs>nb-double-char</lhs>
             <rhs>
-              ( <nonterminal def="#nb-json"/>
+              <nonterminal def="#c-ns-esc-char"/>
+              | ( <nonterminal def="#nb-json"/>
               - <nonterminal def="#c-escape"><quote>\</quote></nonterminal>
               - <nonterminal
                   def="#c-double-quote"><quote>"</quote></nonterminal> )
-              | <nonterminal def="#c-ns-esc-char"/>
             </rhs>
           </production>
 
@@ -6721,8 +6733,8 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
               <nonterminal def="#b-non-content"/><sbr/>
               <nonterminal def="#l-empty(n,c)"
                 >l-empty(n,flow-in)</nonterminal>*
-              <nonterminal def="#s-line-prefix(n,c)"
-                >s-line-prefix(n,flow-in)</nonterminal>
+              <nonterminal def="#s-flow-line-prefix(n)"
+                >s-flow-line-prefix(n)</nonterminal>
             </rhs>
           </production>
 
@@ -6859,10 +6871,10 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
           <production id="nb-single-char">
             <lhs>nb-single-char</lhs>
             <rhs>
-              ( <nonterminal def="#nb-json"/>
+              <nonterminal def="#c-quoted-quote"/>
+              | ( <nonterminal def="#nb-json"/>
               - <nonterminal
                   def="#c-single-quote"><quote>'</quote></nonterminal> )
-              | <nonterminal def="#c-quoted-quote"/>
             </rhs>
           </production>
 
@@ -7370,7 +7382,10 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
                 def="#c-sequence-start"><quote>[</quote></nonterminal>
               <nonterminal def="#s-separate(n,c)"/>?<sbr/>
               <nonterminal def="#ns-s-flow-seq-entries(n,c)"
-                >ns-s-flow-seq-entries(n,in-flow(c))</nonterminal>?
+                >ns-s-flow-seq-entries(n,</nonterminal
+                  ><nonterminal def="#in-flow(c)"
+                  >in-flow(c)</nonterminal><nonterminal
+                    def="#ns-s-flow-seq-entries(n,c)">)</nonterminal>?
               <nonterminal
                 def="#c-sequence-end"><quote>]</quote></nonterminal>
             </rhs>
@@ -7576,7 +7591,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
               <nonterminal
                 def="#c-mapping-key"><quote>?</quote></nonterminal>
               <nonterminal def="#s-separate(n,c)"/><sbr/>
-              &nbsp;&nbsp;&nbsp;&nbsp;<nonterminal def="#ns-flow-map-explicit-entry(n,c)"/> )<sbr/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<nonterminal
+                def="#ns-flow-map-explicit-entry(n,c)"/> )<sbr/>
               | <nonterminal def="#ns-flow-map-implicit-entry(n,c)"/>
             </rhs>
           </production>
@@ -7841,7 +7857,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
               <nonterminal
                 def="#c-mapping-key"><quote>?</quote></nonterminal>
               <nonterminal def="#s-separate(n,c)"/><sbr/>
-              &nbsp;&nbsp;&nbsp;&nbsp;<nonterminal def="#ns-flow-map-explicit-entry(n,c)"/> )<sbr/>
+              &nbsp;&nbsp;&nbsp;&nbsp;<nonterminal
+                def="#ns-flow-map-explicit-entry(n,c)"/> )<sbr/>
               | <nonterminal def="#ns-flow-pair-entry(n,c)"/>
             </rhs>
           </production>
@@ -7934,7 +7951,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <rhs>
               <nonterminal def="#ns-flow-yaml-node(n,c)"
                 >ns-flow-yaml-node(n/a,c)</nonterminal>
-              <nonterminal def="#s-separate-in-line"/><sbr/>
+              <nonterminal def="#s-separate-in-line"/>?<sbr/>
               /* At most 1024 characters altogether */
             </rhs>
           </production>
@@ -7944,7 +7961,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <rhs>
               <nonterminal def="#c-flow-json-node(n,c)"
                 >c-flow-json-node(n/a,c)</nonterminal>
-              <nonterminal def="#s-separate-in-line"/><sbr/>
+              <nonterminal def="#s-separate-in-line"/>?<sbr/>
               /* At most 1024 characters altogether */
             </rhs>
           </production>
@@ -8876,7 +8893,7 @@ keep: |+
             <rhs>
               <nonterminal def="#s-nb-folded-text(n)"/><sbr/>
               ( <nonterminal def="#b-l-folded(n,c)"
-                  >b-l-folded(n,folded)</nonterminal>
+                  >b-l-folded(n,block-in)</nonterminal>
               <nonterminal def="#s-nb-folded-text(n)"/> )*
             </rhs>
           </production>
@@ -9781,7 +9798,10 @@ folded:<hl2>&darr;
                   >c-ns-properties(n+1,c)</nonterminal> )?<sbr/>
               <nonterminal def="#s-l-comments"/><sbr/>
               ( <nonterminal def="#l+block-sequence(n)"
-                  >l+block-sequence(seq-spaces(n,c))</nonterminal><sbr/>
+                  >l+block-sequence(</nonterminal><nonterminal
+                    def="#seq-spaces(n,c)"
+                    >seq-spaces(n,c)</nonterminal><nonterminal
+                    def="#l+block-sequence(n)">)</nonterminal><sbr/>
               | <nonterminal def="#l+block-mapping(n)"/> )
             </rhs>
           </production>
@@ -10252,7 +10272,7 @@ with <hl1>%</hl1> first line
             <nonterminal def="#l-document-prefix"/>*
             <nonterminal def="#l-any-document"/>?<sbr/>
             | <nonterminal def="#l-document-prefix"/>*
-            <nonterminal def="#l-explicit-document"/> )*
+            <nonterminal def="#l-explicit-document"/>? )*
           </rhs>
         </production>
       </productionset>
@@ -10394,7 +10414,8 @@ with <hl1>%</hl1> first line
         <title>Tags</title>
 
         <sect3>
-          <title><defterm primary="tag" secondary="repository" tertiary="map"/>Generic Mapping</title>
+          <title><defterm primary="tag" secondary="repository"
+          tertiary="map"/>Generic Mapping</title>
 
           <variablelist>
             <varlistentry>
@@ -10469,7 +10490,8 @@ Flow style: !!map { Clark: Evans, Ingy: d&ouml;t Net, Oren: Ben-Kiki }
         </sect3>
 
         <sect3>
-          <title><defterm primary="tag" secondary="repository" tertiary="seq"/>Generic Sequence</title>
+          <title><defterm primary="tag" secondary="repository"
+          tertiary="seq"/>Generic Sequence</title>
 
           <variablelist>
             <varlistentry>
@@ -10540,7 +10562,8 @@ Flow style: !!seq [ Clark Evans, Ingy d&ouml;t Net, Oren Ben-Kiki ]
         <pagebreak/>
 
         <sect3>
-          <title><defterm primary="tag" secondary="repository" tertiary="str"/>Generic String</title>
+          <title><defterm primary="tag" secondary="repository"
+          tertiary="str"/>Generic String</title>
 
           <variablelist>
             <varlistentry>
@@ -10673,7 +10696,8 @@ Flow style: !!str "String: just a theory."
         </para>
 
         <sect3>
-          <title><defterm primary="tag" secondary="repository" tertiary="null"/>Null</title>
+          <title><defterm primary="tag" secondary="repository"
+          tertiary="null"/>Null</title>
 
           <variablelist>
             <varlistentry>
@@ -10754,7 +10778,8 @@ key with null value: !!null null
         </sect3>
 
         <sect3>
-          <title><defterm primary="tag" secondary="repository" tertiary="bool"/>Boolean</title>
+          <title><defterm primary="tag" secondary="repository"
+          tertiary="bool"/>Boolean</title>
 
           <variablelist>
             <varlistentry>
@@ -10832,7 +10857,8 @@ Pluto is a planet: !!bool false
         </sect3>
 
         <sect3>
-          <title><defterm primary="tag" secondary="repository" tertiary="int"/>Integer</title>
+          <title><defterm primary="tag" secondary="repository"
+          tertiary="int"/>Integer</title>
 
           <variablelist>
             <varlistentry>
@@ -10932,7 +10958,8 @@ positive: !!int 34
         <pagebreak/>
 
         <sect3>
-          <title><defterm primary="tag" secondary="repository" tertiary="float"/>Floating Point</title>
+          <title><defterm primary="tag" secondary="repository"
+          tertiary="float"/>Floating Point</title>
 
           <variablelist>
             <varlistentry>
@@ -11089,28 +11116,35 @@ not a number: !!float .nan
             <colspec width="30%"/>
             <tbody>
               <row>
-                <entry>&nbsp;<emphasis>Regular&nbsp;expression&nbsp;</emphasis></entry>
-                <entry>&nbsp;<emphasis>&nbsp;Resolved&nbsp;to&nbsp;tag</emphasis></entry>
+                <entry>&nbsp;<emphasis
+                  >Regular&nbsp;expression&nbsp;</emphasis></entry>
+                <entry>&nbsp;<emphasis
+                  >&nbsp;Resolved&nbsp;to&nbsp;tag</emphasis></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>null</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:null</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:null</userinput></entry>
               </row>
 
               <row>
-                <entry>&nbsp;<userinput>true&nbsp;|&nbsp;false</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:bool</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >true&nbsp;|&nbsp;false</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:bool</userinput></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>-?&nbsp;(&nbsp;0&nbsp;|&nbsp;[1-9]&nbsp;[0-9]*&nbsp;)</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:int</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:int</userinput></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>-?&nbsp;(&nbsp;0&nbsp;|&nbsp;[1-9]&nbsp;[0-9]*&nbsp;)&nbsp;(&nbsp;\.&nbsp;[0-9]*&nbsp;)?&nbsp;(&nbsp;[eE]&nbsp;[-+]?&nbsp;[0-9]+&nbsp;)?</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:float</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:float</userinput></entry>
               </row>
 
               <row>
@@ -11243,58 +11277,78 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
             <colspec width="30%"/>
             <tbody>
               <row>
-                <entry>&nbsp;<emphasis>Regular&nbsp;expression&nbsp;</emphasis></entry>
-                <entry>&nbsp;<emphasis>&nbsp;Resolved&nbsp;to&nbsp;tag</emphasis></entry>
+                <entry>&nbsp;<emphasis
+                  >Regular&nbsp;expression&nbsp;</emphasis></entry>
+                <entry>&nbsp;<emphasis
+                  >&nbsp;Resolved&nbsp;to&nbsp;tag</emphasis></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>null&nbsp;|&nbsp;Null&nbsp;|&nbsp;&nbsp;NULL</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:null</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:null</userinput></entry>
               </row>
 
               <row>
-                <entry>&nbsp;<userinput>/*&nbsp;Empty&nbsp;*/</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:null</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >/*&nbsp;Empty&nbsp;*/</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:null</userinput></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>true&nbsp;|&nbsp;True&nbsp;|&nbsp;TRUE&nbsp;|&nbsp;false&nbsp;|&nbsp;False&nbsp;|&nbsp;FALSE</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:bool</userinput></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:bool</userinput></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>[-+]?&nbsp;[0-9]+</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:int</userinput>&nbsp;<emphasis>(Base&nbsp;10)</emphasis></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:int</userinput>&nbsp;<emphasis
+                  >(Base&nbsp;10)</emphasis></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>0o&nbsp;[0-7]+</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:int</userinput>&nbsp;<emphasis>(Base&nbsp;8)</emphasis></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:int</userinput>&nbsp;<emphasis
+                  >(Base&nbsp;8)</emphasis></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>0x&nbsp;[0-9a-fA-F]+</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:int</userinput>&nbsp;<emphasis>(Base&nbsp;16)</emphasis></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:int</userinput>&nbsp;<emphasis
+                  >(Base&nbsp;16)</emphasis></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>[-+]?&nbsp;(&nbsp;\.&nbsp;[0-9]+&nbsp;|&nbsp;[0-9]+&nbsp;(&nbsp;\.&nbsp;[0-9]*&nbsp;)?&nbsp;)&nbsp;(&nbsp;[eE]&nbsp;[-+]?&nbsp;[0-9]+&nbsp;)?</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:float</userinput>&nbsp;<emphasis>(Number)</emphasis></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:float</userinput>&nbsp;<emphasis
+                  >(Number)</emphasis></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>[-+]?&nbsp;(&nbsp;\.inf&nbsp;|&nbsp;\.Inf&nbsp;|&nbsp;\.INF&nbsp;)</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:float</userinput>&nbsp;<emphasis>(Infinity)</emphasis></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:float</userinput
+                  >&nbsp;<emphasis>(Infinity)</emphasis></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>\.nan&nbsp;|&nbsp;\.NaN&nbsp;|&nbsp;\.NAN</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:float</userinput>&nbsp;<emphasis>(Not&nbsp;a&nbsp;number)</emphasis></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:float</userinput
+                  >&nbsp;<emphasis>(Not&nbsp;a&nbsp;number)</emphasis></entry>
               </row>
 
               <row>
                 <entry>&nbsp;<userinput>*</userinput></entry>
-                <entry>&nbsp;<userinput>tag:yaml.org,2002:str</userinput>&nbsp;<emphasis>(Default)</emphasis></entry>
+                <entry>&nbsp;<userinput
+                  >tag:yaml.org,2002:str</userinput
+                  >&nbsp;<emphasis>(Default)</emphasis></entry>
               </row>
             </tbody>
           </tgroup>
