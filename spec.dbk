@@ -12,7 +12,7 @@
     </title>
 
     <subtitle>
-      Working&nbsp;Draft&nbsp;2009-03-20
+      Working&nbsp;Draft&nbsp;2009-04-21
     </subtitle>
 
     <authorgroup>
@@ -7756,7 +7756,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
           primary="processor">processor</refterm> should <refterm
           primary="space" secondary="separation">separate</refterm> the
           <refterm primary="value">value</refterm> from the <uquote>:</uquote>
-          on output even in this case.
+          on output, even in this case.
         </para>
 
         <productionset>
