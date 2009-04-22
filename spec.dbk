@@ -4988,8 +4988,8 @@ Chomping: |
       </variablelist>
 
       <productionset>
-        <production id="s-s-flow-folded(n)">
-          <lhs>s-s-flow-folded(n)</lhs>
+        <production id="s-flow-folded(n)">
+          <lhs>s-flow-folded(n)</lhs>
           <rhs>
             <nonterminal def="#s-separate-in-line"/>?
             <nonterminal def="#b-l-folded(n,c)"
@@ -5020,7 +5020,7 @@ Chomping: |
 " foo\nbar\nbaz "
 </programlisting>
 <synopsis>&nbsp;Legend:
-   <hl1><link linkend="s-s-flow-folded(n)">s-s-flow-folded(n)</link></hl1>
+   <hl1><link linkend="s-flow-folded(n)">s-flow-folded(n)</link></hl1>
    <hl2>Non-content spaces</hl2>
 </synopsis>
           </member>
@@ -6725,8 +6725,8 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
         </para>
 
         <productionset>
-          <production id="s-s-double-escaped(n)">
-            <lhs>s-s-double-escaped(n)</lhs>
+          <production id="s-double-escaped(n)">
+            <lhs>s-double-escaped(n)</lhs>
             <rhs>
               <nonterminal def="#s-white"/>*
               <nonterminal def="#c-escape"><quote>\</quote></nonterminal>
@@ -6738,11 +6738,11 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
             </rhs>
           </production>
 
-          <production id="s-s-double-break(n)">
-            <lhs>s-s-double-break(n)</lhs>
+          <production id="s-double-break(n)">
+            <lhs>s-double-break(n)</lhs>
             <rhs>
-              <nonterminal def="#s-s-double-escaped(n)"/>
-              | <nonterminal def="#s-s-flow-folded(n)"/>
+              <nonterminal def="#s-double-escaped(n)"/>
+              | <nonterminal def="#s-flow-folded(n)"/>
             </rhs>
           </production>
         </productionset>
@@ -6769,7 +6769,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             </member>
           </simplelist>
 <synopsis>Legend:
-  <hl1><link linkend="s-s-flow-folded(n)">s-s-flow-folded(n)</link></hl1> <hl2><link linkend="s-s-double-escaped(n)">s-s-double-escaped(n)</link></hl2>
+  <hl1><link linkend="s-flow-folded(n)">s-flow-folded(n)</link></hl1> <hl2><link linkend="s-double-escaped(n)">s-double-escaped(n)</link></hl2>
 </synopsis>
         </example>
 
@@ -6792,12 +6792,14 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             </rhs>
           </production>
 
-          <production id="s-ns-double-next-line(n)">
-            <lhs>s-ns-double-next-line(n)</lhs>
+          <production id="s-double-next-line(n)">
+            <lhs>s-double-next-line(n)</lhs>
             <rhs>
-              <nonterminal def="#s-s-double-break(n)"/><sbr/>
-              <nonterminal def="#ns-double-char"/>
-              <nonterminal def="#nb-ns-double-in-line"/>
+              <nonterminal def="#s-double-break(n)"/><sbr/>
+              ( <nonterminal def="#ns-double-char"/>
+              <nonterminal def="#nb-ns-double-in-line"/><sbr/>
+              &nbsp;&nbsp;( <nonterminal def="#s-double-next-line(n)"/>
+              | <nonterminal def="#s-white"/>* ) )?
             </rhs>
           </production>
 
@@ -6805,8 +6807,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <lhs>nb-double-multi-line(n)</lhs>
             <rhs>
               <nonterminal def="#nb-ns-double-in-line"/><sbr/>
-              <nonterminal def="#s-ns-double-next-line(n)"/>*<sbr/>
-              <nonterminal def="#s-white"/>*
+              ( <nonterminal def="#s-double-next-line(n)"/>
+              | <nonterminal def="#s-white"/>* )
             </rhs>
           </production>
         </productionset>
@@ -6832,7 +6834,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             </member>
           </simplelist>
 <synopsis>Legend:
-  <hl1><link linkend="nb-ns-double-in-line">nb-ns-double-in-line</link></hl1> <hl2><link linkend="s-ns-double-next-line(n)">s-ns-double-next-line(n)</link></hl2>
+  <hl1><link linkend="nb-ns-double-in-line">nb-ns-double-in-line</link></hl1> <hl2><link linkend="s-double-next-line(n)">s-double-next-line(n)</link></hl2>
 </synopsis>
         </example>
       </sect2>
@@ -6999,12 +7001,14 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             </rhs>
           </production>
 
-          <production id="s-ns-single-next-line(n)">
-            <lhs>s-ns-single-next-line(n)</lhs>
+          <production id="s-single-next-line(n)">
+            <lhs>s-single-next-line(n)</lhs>
             <rhs>
-              <nonterminal def="#s-s-flow-folded(n)"/><sbr/>
-              <nonterminal def="#ns-single-char"/>
-              <nonterminal def="#nb-ns-single-in-line"/>
+              <nonterminal def="#s-flow-folded(n)"/><sbr/>
+              ( <nonterminal def="#ns-single-char"/>
+              <nonterminal def="#nb-ns-single-in-line"/><sbr/>
+              &nbsp;&nbsp;( <nonterminal def="#s-single-next-line(n)"/> |
+              <nonterminal def="#s-white"/>* ) )?
             </rhs>
           </production>
 
@@ -7012,8 +7016,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <lhs>nb-single-multi-line(n)</lhs>
             <rhs>
               <nonterminal def="#nb-ns-single-in-line"/><sbr/>
-              <nonterminal def="#s-ns-single-next-line(n)"/>*<sbr/>
-              <nonterminal def="#s-white"/>*
+              ( <nonterminal def="#s-single-next-line(n)"/>
+              | <nonterminal def="#s-white"/>* )
             </rhs>
           </production>
         </productionset>
@@ -7039,7 +7043,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             </member>
           </simplelist>
 <synopsis>Legend:
-  <hl1><link linkend="nb-ns-single-in-line">nb-ns-single-in-line(n)</link></hl1> <hl2><link linkend="s-ns-single-next-line(n)">s-ns-single-next-line(n)</link></hl2>
+  <hl1><link linkend="nb-ns-single-in-line">nb-ns-single-in-line(n)</link></hl1> <hl2><link linkend="s-single-next-line(n)">s-single-next-line(n)</link></hl2>
 </synopsis>
         </example>
 
@@ -7285,7 +7289,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
           <production id="s-ns-plain-next-line(n,c)">
             <lhs>s-ns-plain-next-line(n,c)</lhs>
             <rhs>
-              <nonterminal def="#s-s-flow-folded(n)"/><sbr/>
+              <nonterminal def="#s-flow-folded(n)"/><sbr/>
               <nonterminal def="#ns-plain-char(c)"/>
               <nonterminal def="#nb-ns-plain-in-line(c)"/>
             </rhs>
