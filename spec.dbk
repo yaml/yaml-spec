@@ -10223,8 +10223,8 @@ with <hl1>%</hl1> first line
           <simplelist type="horiz" columns="2">
             <member>
 <programlisting><hl1>%YAML 1.2<sbr/>
----
-% of matches: 20</hl1>
+--- |
+%PS-Adobe-2.0</hl1>
 ...
 <hl1>%YAML1.2
 ---
@@ -10239,7 +10239,7 @@ with <hl1>%</hl1> first line
 <programlisting>%YAML 1.2<sbr/>
 ---
 !!map {
-  !!str "% of matches": !!int "20"
+  !!str "%PS-Adobe-2.0\n"
 }
 ...
 %YAML 1.2
