@@ -10113,9 +10113,6 @@ document</hl1>
 <hl1>|
 %!PS-Adobe-2.0 # Not the first line</hl1>
 </programlisting>
-<screen># Invalid first line<sbr/>
-<hl1>%!PS-Adobe-2.0</hl1>
-</screen>
             </member>
             <member>
 <programlisting>%YAML 1.2<sbr/>
@@ -10125,10 +10122,6 @@ document</hl1>
 ---
 !!str "%PS-Adobe-2.0\n"
 </programlisting>
-<screen>ERROR:<sbr/>
-Bare document start
-with <hl1>%</hl1> first line
-</screen>
 <synopsis>&nbsp;Legend:
    <hl1><link linkend="l-bare-document">l-bare-document</link></hl1>
 </synopsis>
