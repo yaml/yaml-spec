@@ -5034,12 +5034,24 @@ Chomping: |
       <para>
         An explicit <defterm primary="comment">comment</defterm> is marked by a
         <defterm primary="# comment"><uquote>#</uquote> indicator</defterm>.
-      </para>
-
-      <para>
         Comments are a <refterm primary="presentation"
         secondary="detail">presentation detail</refterm> and must not be used
         to convey <refterm primary="content">content</refterm> information.
+      </para>
+
+      <para>
+        Comments must be <refterm primary="space"
+        secondary="separation">separated</refterm> from other tokens by
+        <refterm primary="space" secondary="white">white space</refterm>
+        characters. To ensure <refterm primary="JSON compatibility">JSON
+        compatibility</refterm>, YAML <refterm
+        primary="processor">processors</refterm> must allow for the omission of
+        the final comment <refterm primary="line break">line break</refterm> of
+        the input <refterm primary="stream">stream</refterm>. However, as this
+        confuses many tools, YAML <refterm
+        primary="processor">processors</refterm> should terminate the <refterm
+        primary="stream">stream</refterm> with an explicit <refterm
+        primary="line break">line break</refterm> on output.
       </para>
 
       <productionset>
@@ -5050,22 +5062,20 @@ Chomping: |
             <nonterminal def="#nb-char"/>*
           </rhs>
         </production>
-      </productionset>
 
-      <para>
-        Comments must be <refterm primary="space"
-        secondary="separation">separated</refterm> from other tokens by
-        <refterm primary="space" secondary="white">white space</refterm>
-        characters.
-      </para>
+        <production id="b-comment">
+          <lhs>b-comment</lhs>
+          <rhs>
+            <nonterminal def="#b-non-content"/> | /* End of file */
+          </rhs>
+        </production>
 
-      <productionset>
         <production id="s-b-comment">
           <lhs>s-b-comment</lhs>
           <rhs>
             ( <nonterminal def="#s-separate-in-line"/>
             <nonterminal def="#c-nb-comment-text"/>? )?<sbr/>
-            <nonterminal def="#b-non-content"/>
+            <nonterminal def="#b-comment"/>
           </rhs>
         </production>
       </productionset>
@@ -5075,11 +5085,12 @@ Chomping: |
 
         <simplelist type="horiz" columns="2">
           <member>
-<programlisting>key:<HL><hl2>&middot;&middot;&middot;&middot;<hl1># Comment</hl1>&darr;</hl2></HL><sbr/>
-  value<hl2>&darr;</hl2>
+<programlisting>key:<HL><hl3>&middot;&middot;&middot;&middot;<hl1># Comment</hl1><hl2>&darr;</hl2></hl3></HL><sbr/>
+  value<HL><hl3><hl2><emphasis>eof</emphasis></hl2></hl3></HL>
 </programlisting>
 <synopsis>Legend:
-  <hl1><link linkend="c-nb-comment-text">c-nb-comment-text</link></hl1> <hl2><link linkend="s-b-comment">s-b-comment</link></hl2>
+  <hl1><link linkend="c-nb-comment-text">c-nb-comment-text</link></hl1> <hl2><link linkend="b-comment">b-comment</link></hl2>
+  <hl3><link linkend="s-b-comment">s-b-comment</link></hl3>
 </synopsis>
             </member>
             <member>
@@ -5109,7 +5120,7 @@ Chomping: |
           <rhs>
             <nonterminal def="#s-separate-in-line"/>
             <nonterminal def="#c-nb-comment-text"/>?
-            <nonterminal def="#b-non-content"/>
+            <nonterminal def="#b-comment"/>
           </rhs>
         </production>
       </productionset>
@@ -7522,7 +7533,11 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
               <nonterminal
                 def="#c-mapping-start"><quote>{</quote></nonterminal>
               <nonterminal def="#s-separate(n,c)"/>?<sbr/>
-              <nonterminal def="#ns-s-flow-map-entries(n,c)"/>?
+              <nonterminal def="#ns-s-flow-map-entries(n,c)"
+                >ns-s-flow-map-entries(n,</nonterminal
+                  ><nonterminal def="#in-flow(c)"
+                  >in-flow(c)</nonterminal><nonterminal
+                    def="#ns-s-flow-map-entries(n,c)">)</nonterminal>?
               <nonterminal
                 def="#c-mapping-end"><quote>}</quote></nonterminal>
             </rhs>
@@ -7757,7 +7772,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
           primary="key">keys</refterm> are surrounded by <refterm
           primary="indicator">indicators</refterm>. However, as this greatly
           reduces readability, YAML <refterm
-          primary="processor">processor</refterm> should <refterm
+          primary="processor">processors</refterm> should <refterm
           primary="space" secondary="separation">separate</refterm> the
           <refterm primary="value">value</refterm> from the <uquote>:</uquote>
           on output, even in this case.
@@ -8608,7 +8623,7 @@ keep: |+
                 <nonterminal
                   def="#s-indent(n)">s-indent(&lt;n)</nonterminal>
                 <nonterminal def="#c-nb-comment-text"/>
-                <nonterminal def="#b-non-content"/><sbr/>
+                <nonterminal def="#b-comment"/><sbr/>
                 <nonterminal def="#l-comment"/>*
               </rhs>
             </production>
