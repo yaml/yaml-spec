@@ -11312,7 +11312,7 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
               </row>
 
               <row>
-                <entry>&nbsp;<userinput>null&nbsp;|&nbsp;Null&nbsp;|&nbsp;;NULL&nbsp;|&nbsp;~</userinput></entry>
+                <entry>&nbsp;<userinput>null&nbsp;|&nbsp;Null&nbsp;|&nbsp;NULL&nbsp;|&nbsp;~</userinput></entry>
                 <entry>&nbsp;<userinput
                   >tag:yaml.org,2002:null</userinput></entry>
               </row>
