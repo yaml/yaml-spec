@@ -12,7 +12,7 @@
     </title>
 
     <subtitle>
-      Working&nbsp;Draft&nbsp;2009-04-27
+      Working&nbsp;Draft&nbsp;2009-04-26
     </subtitle>
 
     <authorgroup>
@@ -7200,11 +7200,11 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 <programlisting>%YAML 1.2<sbr/>
 ---
 !!seq [
-  !!str "::std::vector",
+  !!str "::vector",
   !!str "Up, up, and away!",
   !!int "-123",
   !!seq [
-    !!str "::std::vector",
+    !!str "::vector",
     !!str "Up, up, and away!",
     !!int "-123",
     !!str "http://example.com/foo#bar",
@@ -11312,7 +11312,7 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
               </row>
 
               <row>
-                <entry>&nbsp;<userinput>null&nbsp;|&nbsp;Null&nbsp;|&nbsp;&nbsp;NULL</userinput></entry>
+                <entry>&nbsp;<userinput>null&nbsp;|&nbsp;Null&nbsp;|&nbsp;;NULL&nbsp;|&nbsp;~</userinput></entry>
                 <entry>&nbsp;<userinput
                   >tag:yaml.org,2002:null</userinput></entry>
               </row>
