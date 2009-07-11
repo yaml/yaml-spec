@@ -12,7 +12,7 @@
     </title>
 
     <subtitle>
-      Working&nbsp;Draft&nbsp;2009-04-26
+      Working&nbsp;Draft&nbsp;2009-07-11
     </subtitle>
 
     <authorgroup>
@@ -55,11 +55,11 @@
 
     <releaseinfo id="releaseinfo">
       <emphasis>This version:</emphasis><sbr/>
-      &nbsp;&nbsp;HTML:
+      &nbsp;&nbsp;HTML: TODO
       <ulink url="http://yaml.org/spec/current/spec.html"/><sbr/>
-      &nbsp;&nbsp;PDF:
+      &nbsp;&nbsp;PDF: TODO
       <ulink url="http://yaml.org/spec/current/spec.pdf"/><sbr/>
-      &nbsp;&nbsp;PS:
+      &nbsp;&nbsp;PS: TODO
       <ulink url="http://yaml.org/spec/current/spec.ps"/>
     </releaseinfo>
 
@@ -9965,13 +9965,13 @@ Document
           Using <refterm primary="directive">directives</refterm> raises a
           potential ambiguity. It is valid to have a <refterm primary="%
           directive"><uquote>%</uquote></refterm> character at the start of a
-          line (e.g. as the first character of a top-level <refterm
-          primary="mapping">mapping</refterm> <refterm
-          primary="key">key</refterm>). How, then, to distinguish between an
-          actual <refterm primary="directive">directive</refterm> and a
-          <refterm primary="content">content</refterm> line that happens to
-          start with a <refterm primary="%
-          directive"><uquote>%</uquote></refterm> character?
+          line (e.g. as the first character of the second line of a <refterm
+          primary="scalar" secondary="plain">plain scalar</refterm>). How,
+          then, to distinguish between an actual <refterm
+          primary="directive">directive</refterm> and a <refterm
+          primary="content">content</refterm> line that happens to start with a
+          <refterm primary="% directive"><uquote>%</uquote></refterm>
+          character?
         </para>
 
         <para>
@@ -10178,7 +10178,8 @@ document</hl1>
           <simplelist type="horiz" columns="2">
             <member>
 <programlisting><hl1>---<sbr/>
-% of matches: 20</hl1>
+{ matches
+% : 20 }</hl1>
 ...
 <hl1>---
 # Empty</hl1>
@@ -10192,7 +10193,7 @@ document</hl1>
 <programlisting>%YAML 1.2<sbr/>
 ---
 !!map {
-  !!str "% of matches": !!int "20"
+  !!str "matches %": !!int "20"
 }
 ...
 %YAML 1.2
@@ -10232,7 +10233,7 @@ document</hl1>
             <member>
 <programlisting><hl1>%YAML 1.2<sbr/>
 --- |
-%PS-Adobe-2.0</hl1>
+%!PS-Adobe-2.0</hl1>
 ...
 <hl1>%YAML1.2
 ---
@@ -10247,7 +10248,7 @@ document</hl1>
 <programlisting>%YAML 1.2<sbr/>
 ---
 !!map {
-  !!str "%PS-Adobe-2.0\n"
+  !!str "%!PS-Adobe-2.0\n"
 }
 ...
 %YAML 1.2
@@ -10316,7 +10317,7 @@ document</hl1>
 ...
 <hl3>%YAML 1.2
 ---
-% of matches: 20</hl3>
+matches %: 20</hl3>
 </programlisting>
 <synopsis>&nbsp;Legend:
    <hl1><link linkend="l-any-document">l-any-document</link></hl1>
@@ -10336,7 +10337,7 @@ document</hl1>
 %YAML 1.2
 ---
 !!map {
-  !!str "% of matches": !!int "20"
+  !!str "matches %": !!int "20"
 }
 </programlisting>
             </member>
