@@ -9966,9 +9966,9 @@ Document
           potential ambiguity. It is valid to have a <refterm primary="%
           directive"><uquote>%</uquote></refterm> character at the start of a
           line (e.g. as the first character of the second line of a <refterm
-          primary="scalar" secondary="plain">plain scalar</refterm>). How,
-          then, to distinguish between an actual <refterm
-          primary="directive">directive</refterm> and a <refterm
+          primary="style" secondary="flow" tertiary="plain">plain
+          scalar</refterm>). How, then, to distinguish between an actual
+          <refterm primary="directive">directive</refterm> and a <refterm
           primary="content">content</refterm> line that happens to start with a
           <refterm primary="% directive"><uquote>%</uquote></refterm>
           character?
