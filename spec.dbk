@@ -12,7 +12,7 @@
     </title>
 
     <subtitle>
-      Working&nbsp;Draft&nbsp;2009-07-11
+      Working&nbsp;Draft&nbsp;2009-07-17
     </subtitle>
 
     <authorgroup>
@@ -67,6 +67,7 @@
       <title>Status of this Document</title>
 
       <para>
+       TODO: Change this to finalized.
        This specification is a "last call for comments" prior to finalizing the
        YAML specification. It reflects the consensus reached by members of the
        yaml-core mailing list at <ulink
@@ -741,7 +742,7 @@ rbi:
 
         <member>
           <example>
-            <title>In-Line Nested Mapping</title>
+            <title>Compact Nested Mapping</title>
 <programlisting>---<sbr/>
 # Products purchased
 - item    : Super Hoop
@@ -762,19 +763,19 @@ rbi:
 
       <para>
         <refterm primary="scalar">Scalar content</refterm> can be written in
-        <refterm primary="style" secondary="block">block</refterm> form, using
-        a <refterm primary="style" secondary="block" tertiary="literal">literal
-        style</refterm>&nbsp;(indicated by <refterm primary="| literal
-        style"><uquote>|</uquote></refterm>) where all <refterm primary="line
-        break">line breaks</refterm> are significant. Alternatively, they can
-        be written with the <refterm primary="style" secondary="block"
-        tertiary="folded">folded style</refterm>&nbsp;<refterm primary="&gt;
-        folded style">(denoted by <uquote>&gt;</uquote></refterm>) where each
-        <refterm primary="line break">line break</refterm> is <refterm
-        primary="line folding">folded</refterm> to a <refterm
-        primary="space">space</refterm> unless it ends an <refterm
-        primary="empty line">empty</refterm> or a <refterm
-        primary="more-indented">more-indented</refterm> line.
+        <refterm primary="style" secondary="block">block</refterm> notation,
+        using a <refterm primary="style" secondary="block"
+        tertiary="literal">literal style</refterm>&nbsp;(indicated by <refterm
+        primary="| literal style"><uquote>|</uquote></refterm>) where all
+        <refterm primary="line break">line breaks</refterm> are significant.
+        Alternatively, they can be written with the <refterm primary="style"
+        secondary="block" tertiary="folded">folded
+        style</refterm>&nbsp;<refterm primary="&gt; folded style">(denoted by
+        <uquote>&gt;</uquote></refterm>) where each <refterm primary="line
+        break">line break</refterm> is <refterm primary="line
+        folding">folded</refterm> to a <refterm primary="space">space</refterm>
+        unless it ends an <refterm primary="empty line">empty</refterm> or a
+        <refterm primary="more-indented">more-indented</refterm> line.
       </para>
 
       <simplelist type="horiz" columns="2">
@@ -978,7 +979,7 @@ date: 2002-12-14
         indicator"><uquote>!</uquote></refterm>) symbol. <refterm primary="tag"
         secondary="global">Global tags</refterm> are URIs and may be specified
         in a <refterm primary="tag" secondary="shorthand">tag
-        shorthand</refterm> form using a <refterm primary="tag"
+        shorthand</refterm> notation using a <refterm primary="tag"
         secondary="handle">handle</refterm>. <refterm
         primary="application">Application</refterm>-specific <refterm
         primary="tag" secondary="local">local tags</refterm> may also be used.
@@ -1673,7 +1674,7 @@ Stack:
             allows various ways to <refterm primary="scalar" secondary="content
             format">format scalar content</refterm>. For example, the integer
             eleven can be written as <uquote>0o13</uquote> (octal) or
-            <uquote>0xB</uquote> (hexadecimal). If both forms are used as
+            <uquote>0xB</uquote> (hexadecimal). If both notations are used as
             <refterm primary="key">keys</refterm> in the same <refterm
             primary="mapping">mapping</refterm>, only a YAML <refterm
             primary="processor">processor</refterm> which recognizes integer
@@ -1832,7 +1833,9 @@ Stack:
             primary="mapping">mappings</refterm>, where each <refterm
             primary="mapping">mapping</refterm> is a single <refterm
             primary="key: value pair">key:&nbsp;value pair</refterm>. YAML
-            provides convenient compact notation for this case.
+            provides convenient <refterm primary="style"
+            secondary="single key:value pair mapping">compact notation</refterm> for
+            this case.
           </para>
         </sect3>
 
@@ -1956,10 +1959,11 @@ Stack:
             tertiary="mapping">mappings</refterm> begin on the next line. In
             some cases, YAML also allows nested <refterm primary="style"
             secondary="block">block</refterm> <refterm
-            primary="collection">collections</refterm> to start <refterm
-            primary="style" secondary="in-line collection">in-line</refterm>
-            for a more compact notation. In addition, YAML provides a compact
-            notation for <refterm primary="style" secondary="flow"
+            primary="collection">collections</refterm> to start in-line for a
+            more <refterm primary="style" secondary="compact block collection">compact
+            notation</refterm>. In addition, YAML provides a <refterm
+            primary="style" secondary="single key:value pair mapping">compact
+            notation</refterm> for <refterm primary="style" secondary="flow"
             tertiary="mapping">flow mappings</refterm> with a single <refterm
             primary="key: value pair">key:&nbsp;value pair</refterm>, nested
             inside a <refterm primary="style" secondary="flow"
@@ -3628,7 +3632,7 @@ grave-accent: <hl1>`</hl1>text
 
       <para>
         Line breaks are interpreted differently by different systems, and have
-        several widely used forms.
+        several widely used formats.
       </para>
 
       <productionset>
@@ -3654,7 +3658,7 @@ grave-accent: <hl1>`</hl1>text
         secondary="normalization">normalized</defterm> by the YAML <refterm
         primary="processor">processor</refterm>. Each such line break must be
         <refterm primary="parse">parsed</refterm> into a single line feed
-        character. The original line break form is a <refterm
+        character. The original line break format is a <refterm
         primary="presentation" secondary="detail">presentation detail</refterm>
         and must not be used to convey <refterm
         primary="content">content</refterm> information.
@@ -3970,7 +3974,7 @@ block:<hl2>&rarr;</hl2>|
         scalars"><uquote>\</uquote></defterm> notation common to most modern
         computer languages. Each escape sequence must be <refterm
         primary="parse">parsed</refterm> into the appropriate Unicode
-        character. The original escape sequence form is a <refterm
+        character. The original escape sequence is a <refterm
         primary="presentation" secondary="detail">presentation detail</refterm>
         and must not be used to convey <refterm
         primary="content">content</refterm> information.
@@ -4843,10 +4847,8 @@ Chomping: |
 
       <para>
         A folded non-<refterm primary="empty line">empty line</refterm> may end
-        with either of these forms. The form used is a <refterm
-        primary="presentation" secondary="detail">presentation detail</refterm>
-        and must not be used to convey <refterm
-        primary="content">content</refterm> information.
+        with either of the above <refterm primary="line break">line
+        breaks</refterm>.
       </para>
 
       <productionset>
@@ -7461,10 +7463,11 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
         <para>
           Any <refterm primary="style" secondary="flow">flow node</refterm> may
           be used as a flow sequence entry. In addition, YAML provides a
-          compact form for the case where a flow sequence entry is a <refterm
-          primary="mapping">mapping</refterm> with a <refterm primary="style"
-          secondary="single key:value pair mapping">single key:&nbsp;value
-          pair</refterm>.
+          <refterm primary="style" secondary="single key:value pair
+          mapping">compact notation</refterm> for the case where a flow
+          sequence entry is a <refterm primary="mapping">mapping</refterm> with
+          a <refterm primary="style" secondary="single key:value pair
+          mapping">single key:&nbsp;value pair</refterm>.
         </para>
 
         <productionset>
@@ -7834,11 +7837,11 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
         </example>
 
         <para>
-          A more compact form is usable inside <refterm primary="style"
+          A more compact notation is usable inside <refterm primary="style"
           secondary="flow" tertiary="sequence">flow sequences</refterm>, if the
           <refterm primary="mapping">mapping</refterm> contains a <defterm
           primary="style" secondary="single key:value pair mapping">single
-          key:&nbsp;value pair</defterm>. This form does not require the
+          key:&nbsp;value pair</defterm>. This notation does not require the
           surrounding <uquote>{</uquote> and <uquote>}</uquote> characters.
           Note that it is not possible to specify any <refterm primary="node"
           secondary="property">node properties</refterm> for the <refterm
@@ -8225,7 +8228,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
       styles</defterm> employ <refterm primary="space"
       secondary="indentation">indentation</refterm> rather than <refterm
       primary="indicator">indicators</refterm> to denote structure. This
-      results in a more human readable (though less compact) form.
+      results in a more human readable (though less compact) notation.
     </para>
 
     <sect1>
@@ -8323,13 +8326,14 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
           <para>
             Detection fails when the first non-<refterm primary="empty
             line">empty line</refterm> contains leading content <refterm
-            primary="space">space</refterm> characters. Note it may safely
-            start with a <refterm primary="tab">tab</refterm> or a <refterm
-            primary="# comment"><uquote>#</uquote></refterm> character.
+            primary="space">space</refterm> characters. Content <refterm
+            primary="content">Content</refterm> may safely start with a
+            <refterm primary="tab">tab</refterm> or a <refterm primary="#
+            comment"><uquote>#</uquote></refterm> character.
           </para>
 
           <para>
-            When detection fails, YAML requires that the <refterm
+            When detection would fail, YAML requires that the <refterm
             primary="space" secondary="indentation">indentation</refterm> level
             for the <refterm primary="content">content</refterm> be given using
             an explicit <defterm primary="indicator"
@@ -8344,8 +8348,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             It is always valid to specify an indentation indicator for a
             <refterm primary="style" secondary="block" tertiary="scalar">block
             scalar</refterm> node, though a YAML <refterm
-            primary="processor">processor</refterm> should only do so in cases
-            where detection will fail.
+            primary="processor">processor</refterm> should only emit an
+            explicit indentation indicator for cases where detection will fail.
           </para>
 
           <productionset>
@@ -8470,15 +8474,14 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
               <term>Keep</term>
 
               <listitem>
-                <defterm primary="chomping"
-                secondary="keep">Keeping</defterm> is specified by the
-                <defterm primary="+ keep chomping"><uquote>+</uquote>
-                chomping indicator</defterm>. In this case, the final
-                <refterm primary="line break">line break</refterm> and any
-                trailing <refterm primary="empty line">empty lines</refterm>
-                are considered to be part of the <refterm
-                primary="scalar">scalar<q/>s content</refterm>. Note that
-                they are not subject to <refterm primary="line
+                <defterm primary="chomping" secondary="keep">Keeping</defterm>
+                is specified by the <defterm primary="+ keep
+                chomping"><uquote>+</uquote> chomping indicator</defterm>. In
+                this case, the final <refterm primary="line break">line
+                break</refterm> and any trailing <refterm primary="empty
+                line">empty lines</refterm> are considered to be part of the
+                <refterm primary="scalar">scalar<q/>s content</refterm>. These
+                additional lines are not subject to <refterm primary="line
                 folding">folding</refterm>.
               </listitem>
             </varlistentry>
@@ -8554,7 +8557,7 @@ keep: |+
   ? !!str "clip"
   : !!str "text\n",
   ? !!str "keep"
-  : !!str "text\L",
+  : !!str "text\n",
 }
 </programlisting>
               </member>
@@ -8664,7 +8667,7 @@ keep: |+
   ? !!str "clip"
   : !!str "# text\n",
   ? !!str "keep"
-  : !!str "# text\L\n",
+  : !!str "# text\n",
 }
 </programlisting>
 <synopsis>&nbsp;Legend:
@@ -8677,7 +8680,7 @@ keep: |+
           </example>
 
           <para>
-            Note that if a <refterm primary="style" secondary="block"
+            If a <refterm primary="style" secondary="block"
             tertiary="scalar">block scalar</refterm> consists only of <refterm
             primary="empty line">empty lines</refterm>, then these lines are
             considered as trailing lines and hence are affected by chomping.
@@ -8970,6 +8973,11 @@ keep: |+
         </example>
 
         <para>
+          (The following three examples duplicate this example, each
+          highlighting different productions.)
+        </para>
+
+        <para>
           Lines starting with <refterm primary="space" secondary="white">white
           space</refterm> characters (<defterm
           primary="more-indented">more-indented</defterm> lines) are not
@@ -9187,14 +9195,14 @@ keep: |+
       <title>Block Collection Styles</title>
 
       <para>
-        <defterm primary="style" secondary="block" tertiary="collection">Block
-        collections styles</defterm> are not denoted by any <refterm
-        primary="indicator">indicator</refterm>. This causes a potential
-        ambiguity between them and <refterm primary="style" secondary="flow"
-        tertiary="plain">plain scalars</refterm>. However, entries in the block
-        collections do use <refterm primary="indicator">indicators</refterm>.
-        Combined with some additional restrictions, this allows the YAML
-        <refterm primary="parse">parser</refterm> to avoid the ambiguity.
+        For readability, <defterm primary="style" secondary="block"
+        tertiary="collection">block collections styles</defterm> are not
+        denoted by any <refterm primary="indicator">indicator</refterm>.
+        Instead, YAML uses a lookahead method, where a block collection is
+        distinguished from a <refterm primary="style" secondary="flow"
+        tertiary="plain">plain scalar</refterm> only when a <refterm
+        primary="key: value pair">key:&nbsp;value pair</refterm> or a <refterm
+        primary="- block sequence entry">sequence entry</refterm> is seen.
       </para>
 
       <sect2>
@@ -9274,11 +9282,11 @@ keep: |+
         <para>
           The entry <refterm primary="node">node</refterm> may be either
           <refterm primary="node" secondary="completely empty">completely
-          empty</refterm>, a normal <refterm primary="style"
-          secondary="block">block node</refterm>, or use one of the compact
-          <defterm primary="style" secondary="in-line
-          collection">in-line</defterm> forms. These forms may be used when the
-          entry is itself a nested <refterm primary="style" secondary="block"
+          empty</refterm>, be a nested <refterm primary="style"
+          secondary="block">block node</refterm>, or use a <defterm
+          primary="style" secondary="compact block collection">compact in-line
+          notation</defterm>. The compact notation may be used when the entry
+          is itself a nested <refterm primary="style" secondary="block"
           tertiary="collection">block collection</refterm>. In this case, both
           the <uquote>-</uquote> indicator and the following <refterm
           primary="space">spaces</refterm> are considered to be part of the
@@ -9298,19 +9306,19 @@ keep: |+
               &nbsp;&nbsp;( <nonterminal
                 def="#s-indent(n)">s-indent(m)</nonterminal><sbr/>
               &nbsp;&nbsp;&nbsp;&nbsp;(
-                <nonterminal def="#ns-l-in-line-sequence(n)"
-                  >ns-l-in-line-sequence(n+1+m)</nonterminal><sbr/>
+                <nonterminal def="#ns-l-compact-sequence(n)"
+                  >ns-l-compact-sequence(n+1+m)</nonterminal><sbr/>
               &nbsp;&nbsp;&nbsp;&nbsp;|
-                <nonterminal def="#ns-l-in-line-mapping(n)"
-                  >ns-l-in-line-mapping(n+1+m)</nonterminal> ) )<sbr/>
+                <nonterminal def="#ns-l-compact-mapping(n)"
+                  >ns-l-compact-mapping(n+1+m)</nonterminal> ) )<sbr/>
               | <nonterminal def="#s-l+block-node(n,c)"/><sbr/>
               | ( <nonterminal def="#e-node"/>
                   <nonterminal def="#s-l-comments"/> )
             </rhs>
           </production>
 
-          <production id="ns-l-in-line-sequence(n)">
-            <lhs>ns-l-in-line-sequence(n)</lhs>
+          <production id="ns-l-compact-sequence(n)">
+            <lhs>ns-l-compact-sequence(n)</lhs>
             <rhs>
               <nonterminal def="#c-l-block-seq-entry(n)"/><sbr/>
               ( <nonterminal def="#s-indent(n)"/>
@@ -9327,15 +9335,15 @@ keep: |+
 <programlisting>-<hl1>&deg; # Empty</hl1><sbr/>
 -<hl2> |
  block node</hl2>
--<hl3>&middot;- one # In-line
+-<hl3>&middot;- one # Compact
 &middot;&middot;- two # sequence</hl3>
--<hl4> one: two # In-line mapping</hl4>
+-<hl4> one: two # Compact mapping</hl4>
 </programlisting>
 <synopsis>Legend:
   <hl1>Empty</hl1>
   <hl2><link linkend="s-l+block-node(n,c)">s-l+block-node(n,c)</link></hl2>
-  <hl3><link linkend="ns-l-in-line-sequence(n)">ns-l-in-line-sequence(n)</link></hl3>
-  <hl4><link linkend="ns-l-in-line-mapping(n)">ns-l-in-line-mapping(n)</link></hl4>
+  <hl3><link linkend="ns-l-compact-sequence(n)">ns-l-compact-sequence(n)</link></hl3>
+  <hl4><link linkend="ns-l-compact-mapping(n)">ns-l-compact-mapping(n)</link></hl4>
 </synopsis>
             </member>
             <member>
@@ -9415,8 +9423,8 @@ keep: |+
           indicator is specified, the optional value node must be specified on
           a separate line, denoted by the <refterm primary=": mapping
           value"><uquote>:</uquote></refterm> indicator. Note YAML allows here
-          the same <refterm primary="style" secondary="in-line
-          collection">inline</refterm> compact notation described above for
+          the same <refterm primary="style" secondary="compact block
+          collection">compact in-line notation</refterm> described above for
           <refterm primary="style" secondary="block" tertiary="sequence">block
           sequence</refterm> entries.
         </para>
@@ -9470,7 +9478,7 @@ keep: |+
 <programlisting><hl1>? explicit key # Empty value&darr;</hl1><hl3>&deg;</hl3><sbr/>
 <hl1>? |
   block key&darr;</hl1>
-<hl2>:&middot;- one # Explicit in-line
+<hl2>:&middot;- one # Explicit compact
 &middot;&middot;- two # block value&darr;</hl2>
 </programlisting>
 <synopsis>Legend:
@@ -9505,7 +9513,7 @@ keep: |+
           <refterm primary="style" secondary="flow" tertiary="mapping">flow
           mapping</refterm>. Hence, such <refterm primary="key">keys</refterm>
           are subject to the same restrictions; they are limited to a single
-          line and must not span more than 1024 characters.
+          line and must not span more than 1024 Unicode characters.
         </para>
 
         <productionset>
@@ -9542,8 +9550,7 @@ keep: |+
         </para>
           
         <para>
-          There is no compact <refterm primary="style" secondary="in-line
-          collection">in-line</refterm> form for in-line <refterm
+          There is no compact notation for in-line <refterm
           primary="value">values</refterm>. Also, while both the <refterm
           primary="key" secondary="implicit">implicit key</refterm> and the
           <refterm primary="value">value</refterm> following it may be empty,
@@ -9572,7 +9579,7 @@ keep: |+
 
           <simplelist type="horiz" columns="2">
             <member>
-<programlisting><hl1>plain key</hl1><hl2>: inline value</hl2><sbr/>
+<programlisting><hl1>plain key</hl1><hl2>: in-line value</hl2><sbr/>
 <hl1>&deg;</hl1><hl2>:&deg; # Both empty</hl2>
 <hl1>"quoted key"</hl1><hl2>:
 - entry</hl2>
@@ -9587,7 +9594,7 @@ keep: |+
 ---
 !!map {
   ? !!str "plain key"
-  : !!str "inline value",
+  : !!str "in-line value",
   ? !!null ""
   : !!null "",
   ? !!str "quoted key"
@@ -9599,18 +9606,18 @@ keep: |+
         </example>
 
         <para>
-          A compact <refterm primary="style" secondary="in-line
-          collection">in-line</refterm> form is also available. This form may
-          be nested inside <refterm primary="style" secondary="block"
-          tertiary="sequence">block sequences</refterm> and explicit block
-          mapping entries. Note it is not possible to specify <refterm
-          primary="node" secondary="property">node properties</refterm> for
-          such a nested mapping.
+          A <refterm primary="style" secondary="compact block
+          collection">compact in-line notation</refterm> is also available.
+          This compact notation may be nested inside <refterm primary="style"
+          secondary="block" tertiary="sequence">block sequences</refterm> and
+          explicit block mapping entries. Note it is not possible to specify
+          <refterm primary="node" secondary="property">node
+          properties</refterm> for such a nested mapping.
         </para>
 
         <productionset>
-          <production id="ns-l-in-line-mapping(n)">
-            <lhs>ns-l-in-line-mapping(n)</lhs>
+          <production id="ns-l-compact-mapping(n)">
+            <lhs>ns-l-compact-mapping(n)</lhs>
             <rhs>
               <nonterminal def="#ns-l-block-map-entry(n)"/><sbr/>
               ( <nonterminal def="#s-indent(n)"/>
@@ -9620,7 +9627,7 @@ keep: |+
         </productionset>
 
         <example>
-          <title>In-Line Block Mappings</title>
+          <title>Compact Block Mappings</title>
 
           <simplelist type="horiz" columns="2">
             <member>
@@ -9629,7 +9636,7 @@ keep: |+
   : <hl1>moon: white&darr;</hl1></hl1></HL>
 </programlisting>
 <synopsis>Legend:
-  <hl1><link linkend="ns-l-in-line-mapping(n)">ns-l-in-line-mapping(n)</link></hl1>
+  <hl1><link linkend="ns-l-compact-mapping(n)">ns-l-compact-mapping(n)</link></hl1>
 </synopsis>
             </member>
             <member>
@@ -9740,7 +9747,7 @@ keep: |+
         <para>
           The block <refterm primary="node" secondary="property">node<q/>s
           properties</refterm> may span across several lines. In this case,
-          YAML insists that they be <refterm primary="space"
+          they must be <refterm primary="space"
           secondary="indentation">indented</refterm> by at least one more
           <refterm primary="space">space</refterm> than the <refterm
           primary="style" secondary="block" tertiary="collection">block
@@ -9962,7 +9969,7 @@ Document
         <title>Document Markers</title>
 
         <para>
-          Using <refterm primary="directive">directives</refterm> raises a
+          Using <refterm primary="directive">directives</refterm> creates a
           potential ambiguity. It is valid to have a <refterm primary="%
           directive"><uquote>%</uquote></refterm> character at the start of a
           line (e.g. as the first character of the second line of a <refterm
@@ -11233,12 +11240,12 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
       <para>
         The <defterm primary="schema" secondary="core">Core schema</defterm> is
         an extension of the <refterm primary="schema" secondary="JSON">JSON
-        schema</refterm>, allowing for more human-readable forms of the same
-        types. This is the recommended default <refterm
-        primary="schema">schema</refterm> that YAML <refterm
-        primary="processor">processor</refterm> should use unless instructed
-        otherwise. It is also strongly recommended that other <refterm
-        primary="schema">schemas</refterm> should be based on it.
+        schema</refterm>, allowing for more human-readable <refterm
+        primary="present">presentation</refterm> of the same types. This is the
+        recommended default <refterm primary="schema">schema</refterm> that
+        YAML <refterm primary="processor">processor</refterm> should use unless
+        instructed otherwise. It is also strongly recommended that other
+        <refterm primary="schema">schemas</refterm> should be based on it.
       </para>
 
       <sect2>
