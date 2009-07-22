@@ -56,30 +56,66 @@
     <releaseinfo id="releaseinfo">
       <emphasis>This version:</emphasis><sbr/>
       &nbsp;&nbsp;HTML: TODO
-      <ulink url="http://yaml.org/spec/current/spec.html"/><sbr/>
+      <ulink url="http://yaml.org/spec/1.2/spec.html"/><sbr/>
       &nbsp;&nbsp;PDF: TODO
-      <ulink url="http://yaml.org/spec/current/spec.pdf"/><sbr/>
+      <ulink url="http://yaml.org/spec/1.2/spec.pdf"/><sbr/>
       &nbsp;&nbsp;PS: TODO
-      <ulink url="http://yaml.org/spec/current/spec.ps"/>
+      &nbsp;&nbsp;Errata: TODO
+      <ulink url="http://yaml.org/spec/1.2/errata.html"/><sbr/>
     </releaseinfo>
 
     <abstract>
       <title>Status of this Document</title>
 
       <para>
-       TODO: Change this to finalized.
-       This specification is a "last call for comments" prior to finalizing the
-       YAML specification. It reflects the consensus reached by members of the
-       yaml-core mailing list at <ulink
-       url="http://lists.sourceforge.net/lists/listinfo/yaml-core"/>. Any
-       questions regarding this draft should be raised on this list.
+        This document reflects the third version of YAML data serialization
+        language.  The content of the specification was arrived at by consensus
+        of its authors and through user feedback on the <ulink
+        url="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core</ulink>
+        mailing list. We encourage implementers to please update their software
+        with support for this version.  
       </para>
 
       <para>
-        We wish to thank implementers, who have tirelessly tracked earlier
-        versions of this specification, as well as our fabulous user community
-        whose feedback has both validated and clarified our direction. We ask
-        them to review this document for any last minute corrections.
+        The primary objective of this revision is to bring YAML into compliance
+        with JSON as an official subset.  YAML 1.2 is compatible with 1.1 for
+        most practical applications - this is a minor revision.  An expected
+        source of incompatibility with prior versions of YAML, especially the
+        syck implementation, is the change in implicit typing rules.  We have
+        removed unique implicit typing rules and have updated these rules to
+        align them with JSON's productions.   In this version of YAML, boolean
+        values may be serialized as <uquote>true</uquote> or
+        <uquote>false</uquote>; the empty scalar as <uquote>null</uquote>.
+        Unquoted numeric values are a superset of JSON's numeric production.
+        Other changes in the specification were the removal of the unicode line
+        breaks and production bug fixes.   We also define 3 built-in implicit
+        typing rule sets: untyped, strict JSON, and a more flexible YAML rule
+        set that extends JSON typing.
+      </para>
+
+      <para>
+        The difference between late 1.0 drafts upon which syck 0.55 implements
+        and the 1.1 revision of this specification is much more extensive.  We
+        fixed usability issues with the tagging syntax.  In particular, the
+        single exclamation was re-defined for private types and a simple
+        prefixing mechanism was introduced. This revision also fixed many
+        production edge cases and introduced a type repository.  Therefore,
+        there are several incompatibilities between syck and this revision as
+        well.
+      </para>
+
+      <para>
+        The list of known errors in this specification is available at <ulink
+        url="http://yaml.org/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</ulink>.
+        Please report errors in this document to the <ulink
+        href="http://lists.sourceforge.net/lists/listinfo/yaml-core">
+        yaml-core</ulink> mailing list.
+      </para>
+
+      <para>
+        We wish to thank implementers who have tirelessly tracked earlier
+        versions of this specification, and our fabulous user community whose
+        feedback has both validated and clarified our direction. 
       </para>
     </abstract>
 
