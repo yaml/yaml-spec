@@ -158,6 +158,26 @@
 
       <varlistentry>
         <term>
+          7.3.3. Plain Style / [126] ns-plain-first(c)
+        </term>
+        <listitem>
+          Changed lookahead from <quote>ns-char</quote> to
+          <quote>ns-plain-char(c)</quote> (pointed out by Osamu Takeuchi).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          7.3.3. Plain Style / [130] ns-plain-char(c)
+        </term>
+        <listitem>
+          Changed lookahead from <quote>ns-char</quote> to
+          <quote>ns-plain-char(c)</quote> (pointed out by Osamu Takeuchi).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
           7.3.3. Plain Style / Example 7.10. Plain Characters
         </term>
         <listitem>
@@ -181,6 +201,19 @@
         <listitem>
           Changed <quote>Note the</quote> to <quote>Note that the</quote>
           (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          7.4.2. Flow mappings / [147] c-ns-flow-map-separate-value(n,c)
+        </term>
+        <listitem>
+          Added negative lookahead for <quote>ns-plain-char(c)</quote> after
+          the <quote>c-mapping-value</quote> (pointed out by Oren Ben-Kiki).
+          This actually existed in the YamlReference implementation (as a
+          negative lookahead for <quote>ns-char</quote>, which also needs to be
+          fixed).
         </listitem>
       </varlistentry>
 
