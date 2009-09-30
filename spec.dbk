@@ -12,7 +12,7 @@
     </title>
 
     <subtitle>
-      3<superscript>rd</superscript>&nbsp;Edition&nbsp;(2009-07-21)
+      3<superscript>rd</superscript>&nbsp;Edition,&nbsp;Patched&nbsp;at&nbsp;2009-09-29
     </subtitle>
 
     <authorgroup>
@@ -54,7 +54,7 @@
     </legalnotice>
 
     <releaseinfo id="releaseinfo">
-      <emphasis>This version:</emphasis><sbr/>
+      <emphasis>Latest (patched) version:</emphasis><sbr/>
       &nbsp;&nbsp;HTML:
       <ulink url="http://yaml.org/spec/1.2/spec.html"/><sbr/>
       &nbsp;&nbsp;PDF:
@@ -63,6 +63,8 @@
       <ulink url="http://yaml.org/spec/1.2/spec.ps"/><sbr/>
       &nbsp;&nbsp;Errata:
       <ulink url="http://yaml.org/spec/1.2/errata.html"/><sbr/>
+      <emphasis>Previous (original) version:</emphasis>
+      <ulink url="http://yaml.org/spec/1.2/2009-07-21/spec.html"/><sbr/>
     </releaseinfo>
 
     <abstract>
@@ -109,7 +111,8 @@
         url="http://yaml.org/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</ulink>.
         Please report errors in this document to the <ulink
         href="http://lists.sourceforge.net/lists/listinfo/yaml-core">
-        yaml-core</ulink> mailing list.
+        yaml-core</ulink> mailing list. This revision contains fixes for all
+        errors known as of 2009-09-29.
       </para>
 
       <para>
@@ -393,6 +396,18 @@
         is also the case in practice; every JSON file is also a valid YAML
         file. This makes it easy to migrate from JSON to YAML if/when the
         additional features are required.
+      </para>
+
+      <para>
+        JSON's <ulink url="http://www.ietf.org/rfc/rfc4627.txt">RFC4627</ulink>
+        requires that <refterm primary="mapping">mappings</refterm> <refterm
+        primary="key">keys</refterm> merely <quote>SHOULD</quote> be <refterm
+        primary="equality">unique</refterm>, while YAML insists they
+        <quote>MUST</quote> be. Technically, YAML therefore complies with the
+        JSON spec, choosing to treat duplicates as an error. In practice, since
+        JSON is silent on the semantics of such duplicates, the only portable
+        JSON files are those with unique keys, which are therefore valid YAML
+        files.
       </para>
 
       <para>
@@ -1256,7 +1271,7 @@ Stack:
         <refterm primary="key" secondary="order">mapping key order</refterm>,
         <refterm primary="comment">comments</refterm>, and <refterm
         primary="tag" secondary="handle">tag handles</refterm> should not be
-        refernced during <refterm primary="compose">composition</refterm>.
+        referenced during <refterm primary="compose">composition</refterm>.
       </para>
 
       <pagebreak/>
@@ -2408,9 +2423,9 @@ Stack:
       </para>
 
       <para>
-        This sensitivity is the cause of most of the complexity of the YAML
-        syntax definition. It is further complicated by struggling with the
-        human tendency to look ahead when interpreting text. These
+        This context sensitivity is the cause of most of the complexity of the
+        YAML syntax definition. It is further complicated by struggling with
+        the human tendency to look ahead when interpreting text. These
         complications are of course the source of most of YAML<q/>s power to
         <refterm primary="presentation">present</refterm> data in a very human
         readable way.
@@ -2490,7 +2505,7 @@ Stack:
               values inside a <refterm primary="style" secondary="flow"
               tertiary="collection">flow collection</refterm> (<defterm
               primary="context" secondary="flow-in">flow-in</defterm>); or as
-              values inside one (<defterm primary="context"
+              values outside one (<defterm primary="context"
               secondary="flow-out">flow-out</defterm>).
             </para>
           </listitem>
@@ -2508,7 +2523,7 @@ Stack:
             primary="chomping" secondary="keep">keep</refterm>. Unlike the
             previous parameters, this only controls interpretation; the
             <refterm primary="line break">line breaks</refterm> are valid in
-            either case.
+            all cases.
           </listitem>
         </varlistentry>
       </variablelist>
@@ -2958,7 +2973,7 @@ Stack:
 
         <member>
           A <refterm primary="- block sequence
-          entry"><uquote>-</uquote></refterm> (<userinput>#2D</userinput>,
+          entry"><uquote>-</uquote></refterm> (<userinput>#x2D</userinput>,
           hyphen) denotes a <refterm primary="style" secondary="block"
           tertiary="sequence">block sequence</refterm> entry.
         </member>
@@ -2978,7 +2993,7 @@ Stack:
 
         <member>
           A <refterm primary="? mapping key"><uquote>?</uquote></refterm>
-          (<userinput>#3F</userinput>, question mark) denotes a <refterm
+          (<userinput>#x3F</userinput>, question mark) denotes a <refterm
           primary="key">mapping key</refterm>.
         </member>
       </simplelist>
@@ -2997,7 +3012,7 @@ Stack:
 
         <member>
           A <refterm primary=": mapping value"><uquote>:</uquote></refterm>
-          (<userinput>#3A</userinput>, colon) denotes a <refterm
+          (<userinput>#x3A</userinput>, colon) denotes a <refterm
           primary="value">mapping value</refterm>.
         </member>
       </simplelist>
@@ -3051,7 +3066,7 @@ mapping<hl3>:</hl3>
 
         <member>
           A <refterm primary=", end flow entry"><uquote>,</uquote></refterm>
-          (<userinput>#2C</userinput>, comma) ends a <refterm primary="style"
+          (<userinput>#x2C</userinput>, comma) ends a <refterm primary="style"
           secondary="flow" tertiary="collection">flow collection</refterm>
           entry.
         </member>
@@ -3071,7 +3086,7 @@ mapping<hl3>:</hl3>
 
         <member>
           A <refterm primary="[ start flow
-          sequence"><uquote>[</uquote></refterm> (<userinput>#5B</userinput>,
+          sequence"><uquote>[</uquote></refterm> (<userinput>#x5B</userinput>,
           left bracket) starts a <refterm primary="style" secondary="flow"
           tertiary="sequence">flow sequence</refterm>.
         </member>
@@ -3091,7 +3106,7 @@ mapping<hl3>:</hl3>
 
         <member>
           A <refterm primary="] end flow sequence"><uquote>]</uquote></refterm>
-          (<userinput>#5D</userinput>, right bracket) ends a <refterm
+          (<userinput>#x5D</userinput>, right bracket) ends a <refterm
           primary="style" secondary="flow" tertiary="sequence">flow
           sequence</refterm>.
         </member>
@@ -3111,7 +3126,7 @@ mapping<hl3>:</hl3>
 
         <member>
           A <refterm primary="{ start flow
-          mapping"><uquote>{</uquote></refterm> (<userinput>#7B</userinput>,
+          mapping"><uquote>{</uquote></refterm> (<userinput>#x7B</userinput>,
           left brace) starts a <refterm primary="style" secondary="flow"
           tertiary="mapping">flow mapping</refterm>.
         </member>
@@ -3131,7 +3146,7 @@ mapping<hl3>:</hl3>
 
         <member>
           A <refterm primary="} end flow mapping"><uquote>}</uquote></refterm>
-          (<userinput>#7D</userinput>, right brace) ends a <refterm
+          (<userinput>#x7D</userinput>, right brace) ends a <refterm
           primary="style" secondary="flow" tertiary="mapping">flow
           mapping</refterm>.
         </member>
@@ -3182,7 +3197,7 @@ mapping: <hl2>{</hl2> sky: blue<hl3>,</hl3> sea: green <hl2>}</hl2>
 
         <member>
           An <refterm primary="# comment"><uquote>#</uquote></refterm>
-          (<userinput>#23</userinput>, octothorpe, hash, sharp, pound, number
+          (<userinput>#x23</userinput>, octothorpe, hash, sharp, pound, number
           sign) denotes a <refterm primary="comment">comment</refterm>.
         </member>
       </simplelist>
@@ -3222,7 +3237,7 @@ mapping: <hl2>{</hl2> sky: blue<hl3>,</hl3> sea: green <hl2>}</hl2>
 
         <member>
           An <refterm primary="&amp; anchor"><uquote>&amp;</uquote></refterm>
-          (<userinput>#26</userinput>, ampersand) denotes a <refterm
+          (<userinput>#x26</userinput>, ampersand) denotes a <refterm
           primary="anchor">node<q/>s anchor property</refterm>.
         </member>
       </simplelist>
@@ -3241,7 +3256,7 @@ mapping: <hl2>{</hl2> sky: blue<hl3>,</hl3> sea: green <hl2>}</hl2>
 
         <member>
           An <refterm primary="* alias"><uquote>*</uquote></refterm>
-          (<userinput>#2A</userinput>, asterisk) denotes an <refterm
+          (<userinput>#x2A</userinput>, asterisk) denotes an <refterm
           primary="alias">alias node</refterm>.
         </member>
       </simplelist>
@@ -3260,7 +3275,7 @@ mapping: <hl2>{</hl2> sky: blue<hl3>,</hl3> sea: green <hl2>}</hl2>
 
         <member>
           The <refterm primary="! tag indicator"><uquote>!</uquote></refterm>
-          (<userinput>#21</userinput>, exclamation) is heavily overloaded for
+          (<userinput>#x21</userinput>, exclamation) is heavily overloaded for
           specifying <refterm primary="tag">node tags</refterm>. It is used to
           denote <refterm primary="tag" secondary="handle">tag
           handles</refterm> used in <refterm primary="directive"
@@ -3333,7 +3348,7 @@ alias: <hl3>*</hl3>anchor
 
         <member>
           A <refterm primary="&gt; folded
-          style"><uquote>&gt;</uquote></refterm> (<userinput>#3E</userinput>,
+          style"><uquote>&gt;</uquote></refterm> (<userinput>#x3E</userinput>,
           greater than) denotes a <refterm primary="style" secondary="block"
           tertiary="folded">folded block scalar</refterm>.
         </member>
@@ -3383,7 +3398,7 @@ folded: <hl2>&gt;</hl2>
 
         <member>
           An <refterm primary="' single-quoted
-          style"><uquote>'</uquote></refterm> (<userinput>#27</userinput>,
+          style"><uquote>'</uquote></refterm> (<userinput>#x27</userinput>,
           apostrophe, single quote) surrounds a <refterm primary="style"
           secondary="flow" tertiary="single-quoted">single-quoted flow
           scalar</refterm>.
@@ -3404,7 +3419,7 @@ folded: <hl2>&gt;</hl2>
 
         <member>
           A <refterm primary='" double-quoted
-          style'><uquote>"</uquote></refterm> (<userinput>#22</userinput>,
+          style'><uquote>"</uquote></refterm> (<userinput>#x22</userinput>,
           double quote) surrounds a <refterm primary="style" secondary="flow"
           tertiary="double-quoted">double-quoted flow scalar</refterm>.
         </member>
@@ -3452,7 +3467,7 @@ double: <hl2>"</hl2>text<hl2>"</hl2>
 
         <member>
           A <refterm primary="% directive"><uquote>%</uquote></refterm>
-          (<userinput>#25</userinput>, percent) denotes a <refterm
+          (<userinput>#x25</userinput>, percent) denotes a <refterm
           primary="directive">directive</refterm> line.
         </member>
       </simplelist>
@@ -3492,9 +3507,9 @@ double: <hl2>"</hl2>text<hl2>"</hl2>
 
         <member>
           The <defterm primary="@ reserved
-          indicator"><uquote>@</uquote></defterm> (<userinput>#40</userinput>,
+          indicator"><uquote>@</uquote></defterm> (<userinput>#x40</userinput>,
           at) and <defterm primary="' reserved
-          indicator"><uquote>`</uquote></defterm> (<userinput>#60</userinput>,
+          indicator"><uquote>`</uquote></defterm> (<userinput>#x60</userinput>,
           grave accent) are <defterm primary="indicator"
           secondary="reserved">reserved</defterm> for future use.
         </member>
@@ -3632,7 +3647,7 @@ grave-accent: <hl1>`</hl1>text
       <para>
         All other characters, including the form feed
         (<userinput>#x0C</userinput>), are considered to be non-break
-        characters. Note these include the <defterm primary="line break"
+        characters. Note that these include the <defterm primary="line break"
         secondary="non-ASCII">non-ASCII line breaks</defterm>: next line
         (<userinput>#x85</userinput>), line separator
         (<userinput>#x2028</userinput>) and paragraph separator
@@ -3931,7 +3946,7 @@ block:<hl2>&rarr;</hl2>|
           </para>
 
           <para>
-            By convention, any URIs characters other than the allowed printable
+            By convention, any URI characters other than the allowed printable
             ASCII characters are first <defterm primary="character encoding"
             secondary="in URI">encoded</defterm> in UTF-8, and then each byte
             is <defterm primary="escaping" secondary="in
@@ -4157,7 +4172,7 @@ block:<hl2>&rarr;</hl2>|
         </member>
 
         <member>
-          Escaped ASCII form feed (<userinput>#xA</userinput>) character.
+          Escaped ASCII form feed (<userinput>#xC</userinput>) character.
         </member>
       </simplelist>
 
@@ -4773,7 +4788,7 @@ Legend:
   ? !!str "quoted"
   : !!str "text lines",
   ? !!str "block"
-  : !!str "text&middot;&rarr;lines\n",
+  : !!str "text\n&middot;&rarr;lines\n",
 }
 </programlisting>
           </member>
@@ -5441,14 +5456,14 @@ Chomping: |
         <para>
           A version 1.2 YAML <refterm primary="processor">processor</refterm>
           must also accept <refterm primary="document">documents</refterm> with
-          an explicit <uquote>%YAML 1.1</uquote> directive. Note version 1.2 is
-          mostly a superset of version 1.1, defined for the purpose of ensuring
-          <defterm primary="JSON compatibility">JSON compatibility</defterm>.
-          Hence a version 1.2 <refterm primary="processor">processor</refterm>
-          should process version 1.1 <refterm
-          primary="document">documents</refterm> as if they were version 1.2,
-          giving a warning on points of incompatibility (handling of <refterm
-          primary="line break" secondary="non-ASCII">non-ASCII line
+          an explicit <uquote>%YAML 1.1</uquote> directive. Note that version
+          1.2 is mostly a superset of version 1.1, defined for the purpose of
+          ensuring <defterm primary="JSON compatibility">JSON
+          compatibility</defterm>. Hence a version 1.2 <refterm
+          primary="processor">processor</refterm> should process version 1.1
+          <refterm primary="document">documents</refterm> as if they were
+          version 1.2, giving a warning on points of incompatibility (handling
+          of <refterm primary="line break" secondary="non-ASCII">non-ASCII line
           breaks</refterm>, as described <link linkend="non-ASCII line
           breaks">above</link>).
         </para>
@@ -6867,7 +6882,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 
           <simplelist type="horiz" columns="2">
             <member>
-<programlisting>"<hl1>&middot;1st non-empty,</hl1><HL><hl2>&darr;<sbr/>
+<programlisting>"<hl1>&middot;1st non-empty</hl1><HL><hl2>&darr;<sbr/>
 &darr;
 &middot;<hl1>2nd non-empty</hl1></hl2></HL><HL><hl2>&middot;
 &rarr;<hl1>3rd non-empty</hl1></hl2></HL>&middot;"
@@ -6876,8 +6891,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <member>
 <programlisting>%YAML 1.2<sbr/>
 ---
-!!str " 1st non-empty,\n\
-      2nd non-empty, \
+!!str " 1st non-empty\n\
+      2nd non-empty \
       3rd non-empty "
 </programlisting>
             </member>
@@ -7076,7 +7091,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 
           <simplelist type="horiz" columns="2">
             <member>
-<programlisting>'<hl1>&middot;1st non-empty,</hl1><HL><hl2>&darr;<sbr/>
+<programlisting>'<hl1>&middot;1st non-empty</hl1><HL><hl2>&darr;<sbr/>
 &darr;
 &middot;<hl1>2nd non-empty</hl1></hl2></HL><HL><hl2>&middot;
 &rarr;<hl1>3rd non-empty</hl1></hl2></HL>&middot;'
@@ -7085,8 +7100,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <member>
 <programlisting>%YAML 1.2<sbr/>
 ---
-!!str " 1st non-empty,\n\
-      2nd non-empty, \
+!!str " 1st non-empty\n\
+      2nd non-empty \
       3rd non-empty "
 </programlisting>
             </member>
@@ -7239,10 +7254,13 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 ---
 !!seq [
   !!str "::vector",
+  !!str ": - ()",
   !!str "Up, up, and away!",
   !!int "-123",
+  !!str "http://example.com/foo#bar",
   !!seq [
     !!str "::vector",
+    !!str ": - ()",
     !!str "Up, up, and away!",
     !!int "-123",
     !!str "http://example.com/foo#bar",
@@ -7358,7 +7376,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 
           <simplelist type="horiz" columns="2">
             <member>
-<programlisting><hl1>1st non-empty,</hl1><HL><hl2>&darr;<sbr/>
+<programlisting><hl1>1st non-empty</hl1><HL><hl2>&darr;<sbr/>
 &darr;
 &middot;<hl1>2nd non-empty</hl1></hl2></HL><HL><hl2>&middot;
 &rarr;<hl1>3rd non-empty</hl1></hl2></HL>
@@ -7367,8 +7385,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <member>
 <programlisting>%YAML 1.2<sbr/>
 ---
-!!str "1st non-empty,\n\
-      2nd non-empty, \
+!!str "1st non-empty\n\
+      2nd non-empty \
       3rd non-empty"
 </programlisting>
             </member>
@@ -7715,8 +7733,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
         </para>
 
         <para>
-          Note the <refterm primary="value">value</refterm> may be <refterm
-          primary="node" secondary="completely empty">completely
+          Note that the <refterm primary="value">value</refterm> may be
+          <refterm primary="node" secondary="completely empty">completely
           empty</refterm> since its existence is indicated by the
           <uquote>:</uquote>.
         </para>
@@ -8362,7 +8380,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
           <para>
             Detection fails when the first non-<refterm primary="empty
             line">empty line</refterm> contains leading content <refterm
-            primary="space">space</refterm> characters. Content <refterm
+            primary="space">space</refterm> characters. <refterm
             primary="content">Content</refterm> may safely start with a
             <refterm primary="tab">tab</refterm> or a <refterm primary="#
             comment"><uquote>#</uquote></refterm> character.
@@ -8409,7 +8427,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
 - &gt;<hl1>&deg;</hl1>
 <hl2>&middot;</hl2>
 <hl2>&middot;&middot;</hl2>
-<hl2>&middot;&middot;</hl2># Detected
+<hl2>&middot;&middot;</hl2># detected
 - |<hl1>1</hl1>
 <hl2>&middot;</hl2>&middot;explicit
 - &gt;<hl1>&deg;</hl1>
@@ -8559,11 +8577,11 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
               <lhs>b-chomped-last(t)</lhs>
               <rhs>
                 <varname>t</varname> = strip &rArr;
-                <nonterminal def="#b-non-content"/><sbr/>
+                <nonterminal def="#b-non-content"/> | /* End of file */<sbr/>
                 <varname>t</varname> = clip&nbsp; &rArr;
-                <nonterminal def="#b-as-line-feed"/><sbr/>
+                <nonterminal def="#b-as-line-feed"/> | /* End of file */<sbr/>
                 <varname>t</varname> = keep&nbsp; &rArr;
-                <nonterminal def="#b-as-line-feed"/>
+                <nonterminal def="#b-as-line-feed"/> | /* End of file */
               </rhs>
             </production>
           </productionset>
@@ -8808,7 +8826,7 @@ keep: |+
           secondary="indentation">indented</refterm>) characters are considered
           to be <refterm primary="content">content</refterm>, including
           <refterm primary="space" secondary="white">white space</refterm>
-          characters. Note all <refterm primary="line break">line
+          characters. Note that all <refterm primary="line break">line
           break</refterm> characters are <refterm primary="line break"
           secondary="normalization">normalized</refterm>. In addition, <refterm
           primary="empty line">empty lines</refterm> are not <refterm
@@ -9035,7 +9053,7 @@ keep: |+
             <rhs>
               <nonterminal def="#b-as-line-feed"/><sbr/>
               <nonterminal def="#l-empty(n,c)"
-                >l-empty(n,folded)</nonterminal>*
+                >l-empty(n,block-in)</nonterminal>*
             </rhs>
           </production>
 
@@ -9095,8 +9113,8 @@ keep: |+
 
         <para>
           <refterm primary="line break">Line breaks</refterm> and <refterm
-          primary="empty line">empty lines</refterm> separating between folded
-          and more-indented lines are also not <refterm primary="line
+          primary="empty line">empty lines</refterm> separating folded and
+          more-indented lines are also not <refterm primary="line
           folding">folded</refterm>.
         </para>
 
@@ -9329,8 +9347,8 @@ keep: |+
           <refterm primary="space"
           secondary="indentation">indentation</refterm> of the nested <refterm
           primary="style" secondary="block"
-          tertiary="collection">collection</refterm>. Note it is not possible
-          to specify <refterm primary="node" secondary="property">node
+          tertiary="collection">collection</refterm>. Note that it is not
+          possible to specify <refterm primary="node" secondary="property">node
           properties</refterm> for such a <refterm primary="style"
           secondary="block" tertiary="collection">collection</refterm>.
         </para>
@@ -9458,8 +9476,8 @@ keep: |+
           If the <refterm primary="? mapping key"><uquote>?</uquote></refterm>
           indicator is specified, the optional value node must be specified on
           a separate line, denoted by the <refterm primary=": mapping
-          value"><uquote>:</uquote></refterm> indicator. Note YAML allows here
-          the same <refterm primary="style" secondary="compact block
+          value"><uquote>:</uquote></refterm> indicator. Note that YAML allows
+          here the same <refterm primary="style" secondary="compact block
           collection">compact in-line notation</refterm> described above for
           <refterm primary="style" secondary="block" tertiary="sequence">block
           sequence</refterm> entries.
@@ -9646,8 +9664,8 @@ keep: |+
           collection">compact in-line notation</refterm> is also available.
           This compact notation may be nested inside <refterm primary="style"
           secondary="block" tertiary="sequence">block sequences</refterm> and
-          explicit block mapping entries. Note it is not possible to specify
-          <refterm primary="node" secondary="property">node
+          explicit block mapping entries. Note that it is not possible to
+          specify <refterm primary="node" secondary="property">node
           properties</refterm> for such a nested mapping.
         </para>
 
@@ -10178,7 +10196,7 @@ document</hl1>
 !!str "Bare document"
 %YAML 1.2
 ---
-!!str "%PS-Adobe-2.0\n"
+!!str "%!PS-Adobe-2.0\n"
 </programlisting>
 <synopsis>&nbsp;Legend:
    <hl1><link linkend="l-bare-document">l-bare-document</link></hl1>
@@ -10290,9 +10308,7 @@ document</hl1>
             <member>
 <programlisting>%YAML 1.2<sbr/>
 ---
-!!map {
-  !!str "%!PS-Adobe-2.0\n"
-}
+!!str "%!PS-Adobe-2.0\n"
 ...
 %YAML 1.2
 ---
@@ -10419,16 +10435,15 @@ matches %: 20</hl3>
             <para>
               Concatenating two YAML streams requires both to use the same
               <refterm primary="character encoding">character
-              encoding</refterm>. In addition, it is necessary to separate
-              between the last <refterm primary="document">document</refterm>
-              of the first stream and the first <refterm
-              primary="document">document</refterm> of the second stream.
-              This is easily ensured by inserting an <refterm
-              primary="marker" secondary="document end">document end
-              marker</refterm> between the two streams. Note this is safe
-              regardless of the content of either stream. In particular,
-              either or both may be empty, and the first stream may or may not
-              already contain such a marker.
+              encoding</refterm>. In addition, it is necessary to separate the
+              last <refterm primary="document">document</refterm> of the first
+              stream and the first <refterm
+              primary="document">document</refterm> of the second stream. This
+              is easily ensured by inserting a <refterm primary="marker"
+              secondary="document end">document end marker</refterm> between
+              the two streams. Note that this is safe regardless of the content
+              of either stream. In particular, either or both may be empty, and
+              the first stream may or may not already contain such a marker.
             </para>
           </listitem>
         </varlistentry>
@@ -10463,10 +10478,9 @@ matches %: 20</hl3>
 
     <para>
       A YAML <defterm primary="schema">schema</defterm> is a combination of a
-      set of <refterm primary="tag">tags</refterm> and a a mechanism for
-      <refterm primary="tag" secondary="resolution">resolving</refterm>
-      <refterm primary="tag" secondary="non-specific">non-specific
-      tags</refterm>.
+      set of <refterm primary="tag">tags</refterm> and a mechanism for <refterm
+      primary="tag" secondary="resolution">resolving</refterm> <refterm
+      primary="tag" secondary="non-specific">non-specific tags</refterm>.
     </para>
 
     <sect1>
@@ -10895,7 +10909,7 @@ key with null value: !!null null
                   true/false value. In languages without a <refterm
                   primary="native data structure">native</refterm> Boolean type
                   (such as C), is usually <refterm
-                  primary="construct">bound</refterm> to an native integer
+                  primary="construct">bound</refterm> to a native integer
                   type, using one for true and zero for false.
                 </para>
               </listitem>

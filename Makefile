@@ -26,17 +26,17 @@ XSLTPROC = SGML_CATALOG_FILES=catalog xsltproc --catalogs
 DOCBOOK_XSLT = /usr/share/xml/docbook/stylesheet/nwalsh
 
 HTML = \
-  spec.html changes.html index.html type.html map.html seq.html str.html \
+  spec.html errata.html changes.html index.html type.html map.html seq.html str.html \
   bool.html binary.html float.html int.html merge.html null.html \
   timestamp.html value.html yaml.html omap.html pairs.html set.html
 
 PS = \
-  spec.ps changes.ps index.ps type.ps map.ps seq.ps str.ps \
+  spec.ps errata.ps changes.ps index.ps type.ps map.ps seq.ps str.ps \
   bool.ps binary.ps float.ps int.ps merge.ps null.ps \
   timestamp.ps value.ps yaml.ps omap.ps pairs.ps set.ps
 
 PDF = \
-  spec.pdf changes.pdf index.pdf type.pdf map.pdf seq.pdf str.pdf \
+  spec.pdf errata.pdf changes.pdf index.pdf type.pdf map.pdf seq.pdf str.pdf \
   bool.pdf binary.pdf float.pdf int.pdf merge.pdf null.pdf \
   timestamp.pdf value.pdf yaml.pdf omap.pdf pairs.pdf set.pdf
 
@@ -73,7 +73,7 @@ site: all
 	cp $(PNG_IMAGES) site/spec/cvs
 	cp single_html.css site/spec/cvs
 	cp single_html.css site/type
-	for F in changes index; do cp $$F.html $$F.pdf $$F.ps site/spec; done
+	for F in errata changes index; do cp $$F.html $$F.pdf $$F.ps site/spec; done
 
 site.tgz: site
 	cd site && tar cvzf ../site.tgz *
@@ -112,6 +112,13 @@ $(HTML): single_html.xsl preprocess_html.xsl
 	dia $*.dia
 # Dia 0.93 offers no control over resolution:
 #	dia --export-to-format eps-pango $*.dia
+
+errata.pdf: errata.dbk Render-X-license.txt catalog docbook_xslt
+	$(XSLTPROC) single_fo.xsl errata.dbk | sed 's/\xa0/\&#160;/g;s/\xa9/\&#169;/' > tmp1.xml
+	sed 's/Chapter\xa0//g;s/\xa0/\&#160;/g' < tmp1.xml > tmp2.xml
+	$(XEP) tmp2.xml -ps errata.ps
+	ps2pdf errata.ps
+	rm tmp*.xml
 
 changes.pdf: changes.dbk Render-X-license.txt catalog docbook_xslt
 	$(XSLTPROC) single_fo.xsl changes.dbk | sed 's/\xa0/\&#160;/g;s/\xa9/\&#169;/' > tmp1.xml

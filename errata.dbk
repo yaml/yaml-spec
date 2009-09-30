@@ -1,0 +1,322 @@
+<?xml version="1.0"?>
+<!DOCTYPE appendix
+  PUBLIC "-//OASIS//DTD DocBook V4.2//EN"
+         "http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd">
+
+<book>
+  <title>Errata For The YAML 1.2 Specification</title>
+  <subtitle>Last Updated On 2009-09-29</subtitle>
+
+  <chapter>
+    <title>
+      Errata For the latest patched <ulink
+      url="http://yaml.org/spec/1.2/spec.html">2009-09-29</ulink>
+      revision
+    </title>
+
+    <para>
+      None known.
+    </para>
+  </chapter>
+
+  <chapter>
+    <title>
+      Errata For the original <ulink
+      url="http://yaml.org/spec/1.2/2009-07-21/spec.html">2009-07-21</ulink>
+      revision
+    </title>
+
+    <variablelist>
+      <varlistentry>
+        <term>
+          1.3. Relation to JSON
+        </term>
+        <listitem>
+          Added paragraph 4 to section 1.3 to clarify JSON compatibility in the
+          presence of duplicate mapping keys (pointed out by Osamu Takeuchi).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          3.1. Processes
+        </term>
+        <listitem>
+          Changed <quote>refernced</quote> to <quote>referenced</quote>
+          (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          4.1. Production Parameters
+        </term>
+        <listitem>
+          Changed <quote>sensitivity</quote> to <quote>context
+          sensitivity</quote> (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          4.1. Production Parameters / Context c
+        </term>
+        <listitem>
+          Changed <quote>as values inside one (flow-out)</quote> to <quote>as
+          values outside one (flow-out)</quote> (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          4.1. Production Parameters / (Block) Chomping t
+        </term>
+        <listitem>
+          Changed <quote>either case</quote> to <quote>all cases</quote>
+          (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          5.3. Indicator Characters
+        </term>
+        <listitem>
+          Changed all cases of <quote>#<varname>XX</varname></quote> to
+          <quote>#x<varname>XX</varname></quote> (pointed out by Brad
+          Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          5.4. Line Break Characters
+        </term>
+        <listitem>
+          Changed <quote>Note these</quote> to <quote>Note that these</quote>
+          (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          5.6. Miscellaneous Characters
+        </term>
+        <listitem>
+          Changed <quote>URIs</quote> to <quote>URI</quote> (pointed out by
+          Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          5.7. Escaped Characters
+        </term>
+        <listitem>
+          Changed <quote>#xA</quote> to <quote>#xC</quote> (pointed out by
+          Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          6.3. Line Prefixes / Example 6.4. Line Prefixes
+        </term>
+        <listitem>
+          Added a missing line break on the right hand side (pointed out by
+          Osamu Takeuchi and Jesse Beder).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          6.8.1. YAML Directive
+        </term>
+        <listitem>
+          Changed <quote>Note version</quote> to <quote>Note that
+          version</quote> (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          7.3.1. Double-Quoted Style / Example 7.6. Double Quoted Lines
+        </term>
+        <listitem>
+          Removed all <quote>,</quote> characters (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          7.3.2. Single-Quoted Style / Example 7.9. Single Quoted Lines
+        </term>
+        <listitem>
+          Removed all <quote>,</quote> characters (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          7.3.3. Plain Style / Example 7.10. Plain Characters
+        </term>
+        <listitem>
+          Added missing right hand side entries (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          7.3.3. Plain Style / Example 7.12. Plain Lines
+        </term>
+        <listitem>
+          Removed all <quote>,</quote> characters (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          7.4.2. Flow mappings
+        </term>
+        <listitem>
+          Changed <quote>Note the</quote> to <quote>Note that the</quote>
+          (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          8.1.1.1. Block Indentation Indicator
+        </term>
+        <listitem>
+          Changed <quote>Content Content</quote> to <quote>Content</quote>
+          (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          8.1.1.1. Block Indentation Indicator / Example 8.2. Block Indentation
+          Indicator
+        </term>
+        <listitem>
+          Changed <quote>Detected</quote> to <quote>detected</quote> on the
+          left hand side (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          8.1.1.2. Block Chomping Indicator / [165] b-chomped-last
+        </term>
+        <listitem>
+          Added EOF as a valid option (pointed out by Osamu Takeuchi).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          8.1.2. Literal Style
+        </term>
+        <listitem>
+          Changed <quote>Note all</quote> to <quote>Note that all</quote>
+          (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          8.1.3. Folded Style
+        </term>
+        <listitem>
+          Changed <quote>separating between</quote> to <quote>separating</quote>
+          (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          8.1.3. Folded Style / [178] - b-chomped-last
+        </term>
+        <listitem>
+          Changed <quote>folded</quote> to the correct
+          <quote>block-in</quote> (Pointed out by Osamu Takeuchi).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          8.2.1. Block Sequences
+        </term>
+        <listitem>
+          Changed <quote>Note it</quote> to <quote>Note that it</quote>
+          (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          8.2.2. Block Mappings
+        </term>
+        <listitem>
+          Changed <quote>Note YAML</quote> to <quote>Note that YAML</quote>
+          and <quote>Note it</quote> to <quote>Note that it</quote> (pointed
+          out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          9.1.3. Bare Documents / Example 9.3. Bare Documents
+        </term>
+        <listitem>
+          Changed <quote>%PS</quote> to <quote>%!PS</quote> on the right hand
+          side (pointed out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          9.1.5. Directives Documents / Example 9.5. Directives Documents
+        </term>
+        <listitem>
+          Removes the <quote>!!map</quote> on the right hand side (pointed
+          out by Osamu Takeuchi).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          9.2. Streams / Concatenating Streams
+        </term>
+        <listitem>
+          Changed <quote>separate between</quote> to <quote>separate</quote>
+          <quote>an document</quote> to <quote>a document</quote>, and
+          <quote>Note this</quote> to <quote>Note that this</quote>, (pointed
+          out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          10. Recommended Schemas
+        </term>
+        <listitem>
+          Changed <quote>a a</quote> to <quote>a</quote> (pointed out by Brad
+          Baxter).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          10.2.1.2. Boolean
+        </term>
+        <listitem>
+          Changed <quote>an native</quote> to <quote>a native</quote> (pointed
+          out by Brad Baxter).
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+  </chapter>
+</book>
