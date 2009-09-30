@@ -29,6 +29,16 @@
     <variablelist>
       <varlistentry>
         <term>
+          1.1. Goals
+        </term>
+        <listitem>
+          Switched the order between goals 2 and 3 (pointed out by Osamu
+          Takeuchi).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
           1.3. Relation to JSON
         </term>
         <listitem>
@@ -93,6 +103,8 @@
           5.4. Line Break Characters
         </term>
         <listitem>
+          Changed <quote>the above line breaks</quote> to <quote>the above
+          ASCII line breaks</quote> (pointed out by Osamu Takeuchi). Also,
           Changed <quote>Note these</quote> to <quote>Note that these</quote>
           (pointed out by Brad Baxter).
         </listitem>

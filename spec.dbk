@@ -210,12 +210,12 @@
         </listitem>
 
         <listitem>
-          YAML matches the <refterm primary="native data structure">native data
-          structures</refterm> of agile languages.
+          YAML data is portable between programming languages.
         </listitem>
 
         <listitem>
-          YAML data is portable between programming languages.
+          YAML matches the <refterm primary="native data structure">native data
+          structures</refterm> of agile languages.
         </listitem>
 
         <listitem>
@@ -3656,8 +3656,8 @@ grave-accent: <hl1>`</hl1>text
 
       <para>
         <anchor id="non-ASCII line breaks"/> <refterm primary="YAML 1.1
-        processing">YAML version 1.1</refterm> did support the above line break
-        characters; however, JSON does not. Hence, to ensure <refterm
+        processing">YAML version 1.1</refterm> did support the above ASCII line
+        break characters; however, JSON does not. Hence, to ensure <refterm
         primary="JSON compatibility">JSON compatibility</refterm>, YAML treats
         them as non-break characters as of version 1.2. In theory this would
         cause incompatibility with <refterm primary="YAML 1.1
