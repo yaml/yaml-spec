@@ -3656,11 +3656,11 @@ grave-accent: <hl1>`</hl1>text
 
       <para>
         <anchor id="non-ASCII line breaks"/> <refterm primary="YAML 1.1
-        processing">YAML version 1.1</refterm> did support the above ASCII line
-        break characters; however, JSON does not. Hence, to ensure <refterm
-        primary="JSON compatibility">JSON compatibility</refterm>, YAML treats
-        them as non-break characters as of version 1.2. In theory this would
-        cause incompatibility with <refterm primary="YAML 1.1
+        processing">YAML version 1.1</refterm> did support the above non-ASCII
+        line break characters; however, JSON does not. Hence, to ensure
+        <refterm primary="JSON compatibility">JSON compatibility</refterm>,
+        YAML treats them as non-break characters as of version 1.2. In theory
+        this would cause incompatibility with <refterm primary="YAML 1.1
         processing">version 1.1</refterm>; in practice these characters were
         rarely (if ever) used. YAML 1.2 <refterm
         primary="processor">processors</refterm> <refterm

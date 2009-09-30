@@ -104,7 +104,7 @@
         </term>
         <listitem>
           Changed <quote>the above line breaks</quote> to <quote>the above
-          ASCII line breaks</quote> (pointed out by Osamu Takeuchi). Also,
+          non-ASCII line breaks</quote> (pointed out by Osamu Takeuchi). Also,
           Changed <quote>Note these</quote> to <quote>Note that these</quote>
           (pointed out by Brad Baxter).
         </listitem>
