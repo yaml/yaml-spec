@@ -5,12 +5,12 @@
 
 <book>
   <title>Errata For The YAML 1.2 Specification</title>
-  <subtitle>Last Updated On 2009-09-29</subtitle>
+  <subtitle>Last Updated On 2009-10-01</subtitle>
 
   <chapter>
     <title>
       Errata For the latest patched <ulink
-      url="http://yaml.org/spec/1.2/spec.html">2009-09-29</ulink>
+      url="http://yaml.org/spec/1.2/spec.html">2009-10-01</ulink>
       revision
     </title>
 
@@ -173,8 +173,8 @@
           7.3.3. Plain Style / [126] ns-plain-first(c)
         </term>
         <listitem>
-          Changed lookahead from <quote>ns-char</quote> to
-          <quote>ns-plain-char(c)</quote> (pointed out by Osamu Takeuchi).
+          Changed lookahead from <quote>ns-char</quote> to <quote>ns-char -
+          c-flow-indicator</quote> (pointed out by Osamu Takeuchi).
         </listitem>
       </varlistentry>
 
@@ -183,8 +183,8 @@
           7.3.3. Plain Style / [130] ns-plain-char(c)
         </term>
         <listitem>
-          Changed lookahead from <quote>ns-char</quote> to
-          <quote>ns-plain-char(c)</quote> (pointed out by Osamu Takeuchi).
+          Changed lookahead from <quote>ns-char</quote> to <quote>ns-char -
+          c-flow-indicator</quote> (pointed out by Osamu Takeuchi).
         </listitem>
       </varlistentry>
 
@@ -221,11 +221,11 @@
           7.4.2. Flow mappings / [147] c-ns-flow-map-separate-value(n,c)
         </term>
         <listitem>
-          Added negative lookahead for <quote>ns-plain-char(c)</quote> after
-          the <quote>c-mapping-value</quote> (pointed out by Oren Ben-Kiki).
-          This actually existed in the YamlReference implementation (as a
-          negative lookahead for <quote>ns-char</quote>, which also needs to be
-          fixed).
+          Added negative lookahead for <quote>ns-char -
+          c-flow-indicator</quote> after the <quote>c-mapping-value</quote>
+          (pointed out by Oren Ben-Kiki). This actually existed in the
+          YamlReference implementation (as a negative lookahead for
+          <quote>ns-char</quote>, which also needs to be fixed).
         </listitem>
       </varlistentry>
 

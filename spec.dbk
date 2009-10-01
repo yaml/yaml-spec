@@ -12,7 +12,7 @@
     </title>
 
     <subtitle>
-      3<superscript>rd</superscript>&nbsp;Edition,&nbsp;Patched&nbsp;at&nbsp;2009-09-29
+      3<superscript>rd</superscript>&nbsp;Edition,&nbsp;Patched&nbsp;at&nbsp;2009-10-01
     </subtitle>
 
     <authorgroup>
@@ -112,7 +112,7 @@
         Please report errors in this document to the <ulink
         href="http://lists.sourceforge.net/lists/listinfo/yaml-core">
         yaml-core</ulink> mailing list. This revision contains fixes for all
-        errors known as of 2009-09-29.
+        errors known as of 2009-10-01.
       </para>
 
       <para>
@@ -7156,8 +7156,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
                   def="#c-mapping-value"><quote>:</quote></nonterminal>
               | <nonterminal
                   def="#c-sequence-entry"><quote>-</quote></nonterminal> )<sbr/>
-              &nbsp;&nbsp;&nbsp;&nbsp;/* Followed by an <nonterminal
-                  def="#ns-plain-char(c)"/> */ )
+              &nbsp;&nbsp;&nbsp;&nbsp;/* Followed by an (<nonterminal
+                  def="#ns-char"/> - <nonterminal def="#c-flow-indicator"/>) */ )
             </rhs>
           </production>
         </productionset>
@@ -7226,7 +7226,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
                   def="#c-comment"><quote>#</quote></nonterminal> )<sbr/>
               | ( <nonterminal
                   def="#c-mapping-value"><quote>:</quote></nonterminal>
-                  /* Followed by an <nonterminal def="#ns-plain-char(c)"/> */ )
+                  /* Followed by an (<nonterminal def="#ns-char"/> -
+                     <nonterminal def="#c-flow-indicator"/>) */ )
             </rhs>
           </production>
         </productionset>
@@ -7777,8 +7778,8 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
             <rhs>
               <nonterminal
                 def="#c-mapping-value"><quote>:</quote></nonterminal>
-                /* Not followed by
-                  <nonterminal def="#ns-plain-char(c)"/> */<sbr/>
+                /* Not followed by<sbr/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(<nonterminal def="#ns-char"/> - <nonterminal def="#c-flow-indicator"/>) */<sbr/>
               ( ( <nonterminal def="#s-separate(n,c)"/>
               <nonterminal def="#ns-flow-node(n,c)"/> )<sbr/>
               | <nonterminal def="#e-node"/> /* Value */ )
