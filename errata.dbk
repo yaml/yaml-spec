@@ -32,8 +32,7 @@
           1.1. Goals
         </term>
         <listitem>
-          Switched the order between goals 2 and 3 (pointed out by Osamu
-          Takeuchi).
+          Switched the order between goals 2 and 3 (pointed out by BlueGM).
         </listitem>
       </varlistentry>
 
@@ -173,8 +172,19 @@
           7.3.3. Plain Style / [126] ns-plain-first(c)
         </term>
         <listitem>
-          Changed lookahead from <quote>ns-char</quote> to <quote>ns-char -
-          c-flow-indicator</quote> (pointed out by Osamu Takeuchi).
+          Changed lookahead from <quote>ns-char</quote> to
+          <quote>ns-plain-safe(c)</quote> (pointed out by Osamu Takeuchi).
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>
+          7.3.3. Plain Style / [127-129] ns-plain-safe(c)
+        </term>
+        <listitem>
+          Changed to be "safe for use in lookahead" instead of "safe for use in
+          content", to support the lookahead fixes pointed out by Osamu
+          Takeuchi.
         </listitem>
       </varlistentry>
 
@@ -183,8 +193,8 @@
           7.3.3. Plain Style / [130] ns-plain-char(c)
         </term>
         <listitem>
-          Changed lookahead from <quote>ns-char</quote> to <quote>ns-char -
-          c-flow-indicator</quote> (pointed out by Osamu Takeuchi).
+          Changed lookahead from <quote>ns-char</quote> to
+          <quote>ns-plain-safe(c)</quote> (pointed out by Osamu Takeuchi).
         </listitem>
       </varlistentry>
 
@@ -221,11 +231,11 @@
           7.4.2. Flow mappings / [147] c-ns-flow-map-separate-value(n,c)
         </term>
         <listitem>
-          Added negative lookahead for <quote>ns-char -
-          c-flow-indicator</quote> after the <quote>c-mapping-value</quote>
-          (pointed out by Oren Ben-Kiki). This actually existed in the
-          YamlReference implementation (as a negative lookahead for
-          <quote>ns-char</quote>, which also needs to be fixed).
+          Added negative lookahead for <quote>ns-plain-safe(c)</quote> after
+          the <quote>c-mapping-value</quote> (pointed out by Oren Ben-Kiki).
+          This actually existed in the YamlReference implementation (as a
+          negative lookahead for <quote>ns-char</quote>, which also needs to be
+          fixed).
         </listitem>
       </varlistentry>
 
