@@ -12,7 +12,7 @@
     </title>
 
     <subtitle>
-      3<superscript>rd</superscript>&nbsp;Edition,&nbsp;Patched&nbsp;at&nbsp;2009-10-01
+      3<superscript>rd</superscript>&nbsp;Edition,&nbsp;Patched&nbsp;at&nbsp;2010-xx-xx
     </subtitle>
 
     <authorgroup>
@@ -42,7 +42,7 @@
     </authorgroup>
 
     <copyright>
-      <year>2001-2009</year>
+      <year>2001-2010</year>
       <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
       <holder>Clark Evans<fo>,&nbsp;</fo></holder>
       <holder>Ingy d&ouml;t Net</holder>
@@ -112,7 +112,7 @@
         Please report errors in this document to the <ulink
         href="http://lists.sourceforge.net/lists/listinfo/yaml-core">
         yaml-core</ulink> mailing list. This revision contains fixes for all
-        errors known as of 2009-10-01.
+        errors known as of 2010-xx-xx.
       </para>
 
       <para>
@@ -1716,91 +1716,107 @@ Stack:
         <sect3>
           <title>Node Comparison</title>
 
-          <para>
-            Since YAML <refterm primary="mapping">mappings</refterm> require
-            <refterm primary="key">key</refterm> uniqueness, <refterm
-            primary="representation">representations</refterm> must include a
-            mechanism for testing the equality of <refterm
-            primary="node">nodes</refterm>. This is non-trivial since YAML
-            allows various ways to <refterm primary="scalar" secondary="content
-            format">format scalar content</refterm>. For example, the integer
-            eleven can be written as <uquote>0o13</uquote> (octal) or
-            <uquote>0xB</uquote> (hexadecimal). If both notations are used as
-            <refterm primary="key">keys</refterm> in the same <refterm
-            primary="mapping">mapping</refterm>, only a YAML <refterm
-            primary="processor">processor</refterm> which recognizes integer
-            <refterm primary="scalar" secondary="content
-            format">formats</refterm> would correctly flag the duplicate
-            <refterm primary="key">key</refterm> as an error.
-          </para>
-
           <variablelist>
+            <varlistentry>
+              <term>Equality</term>
+
+              <listitem>
+                <para>
+                  Since YAML <refterm primary="mapping">mappings</refterm>
+                  require <refterm primary="key">key</refterm> uniqueness,
+                  <refterm primary="representation">representations</refterm>
+                  must include a mechanism for testing the equality of <refterm
+                  primary="node">nodes</refterm>. In general, it is impossible
+                  to ensure uniqueness for <refterm
+                  primary="presentation">presentations</refterm>, for the
+                  following reasons:
+                </para>
+
+                <itemizedlist>
+                  <listitem>
+                    <para>
+                      YAML allows various ways to <refterm primary="scalar"
+                      secondary="content format">format scalar
+                      content</refterm>. For example, the integer eleven can be
+                      written as <uquote>0o13</uquote> (octal) or
+                      <uquote>0xB</uquote> (hexadecimal). If both notations are
+                      used as <refterm primary="key">keys</refterm> in the same
+                      <refterm primary="mapping">mapping</refterm>, only a YAML
+                      <refterm primary="processor">processor</refterm> which
+                      recognizes integer <refterm primary="scalar"
+                      secondary="content format">formats</refterm> would
+                      correctly flag the duplicate <refterm
+                      primary="key">key</refterm> as an error.
+                    </para>
+                  </listitem>
+
+                  <listitem>
+                    <para>
+                      The semantics of the <refterm
+                      primary="representation">representation</refterm> may
+                      require that values with different <refterm
+                      primary="tag">tags</refterm> be considered equal. For
+                      example, the integer one and the float one are considered
+                      equal. If both are used as <refterm
+                      primary="key">keys</refterm> in the same <refterm
+                      primary="mapping">mapping</refterm>, only a YAML <refterm
+                      primary="processor">processor</refterm> which recognizes
+                      integer and float <refterm
+                      primary="representation">representations</refterm> would
+                      correctly flag the duplicate <refterm
+                      primary="key">key</refterm> as an error.
+                    </para>
+                  </listitem>
+                </itemizedlist>
+
+                <para>
+                  YAML therefore requires that each <refterm
+                  primary="tag">tag</refterm> must specify a mechanism for testing
+                  any of its values for <defterm
+                  primary="equality">equality</defterm> with any other value
+                  (including values of any different <refterm
+                  primary="tag">tag</refterm>). This is often implemented
+                  directly by the <refterm
+                  primary="representation">representation</refterm>. That is,
+                  duplicate <refterm primary="key">keys</refterm> are often
+                  flagged as an error by the <refterm primary="native data
+                  structure">native data structure</refterm> used to hold the
+                  <refterm primary="mapping">mapping</refterm>.
+                </para>
+
+                <para>
+                  The above does not preclude a YAML processor from flagging (some)
+                  duplicate <refterm primary="key">keys</refterm> as an error at an
+                  earlier processing stage. Specifically, two <refterm
+                  primary="key">keys</refterm> with the same <refterm
+                  primary="tag">tag</refterm> and the same <refterm
+                  primary="content">content</refterm> can be flagged as an error as
+                  soon as the <refterm primary="parse">parsing</refterm> stage. Note
+                  that this tests also works for <refterm primary="tag"
+                  secondary="non-specific">non-specific tags</refterm> due to the way
+                  that <refterm primary="tag" secondary="resolution">tag
+                  resolution</refterm> is defined.
+                </para>
+              </listitem>
+            </varlistentry>
+
             <varlistentry>
               <term>Canonical Form</term>
 
               <listitem>
-                YAML supports the need for <refterm
-                primary="scalar">scalar</refterm> equality by requiring that
-                every <refterm primary="scalar">scalar</refterm>&nbsp;<refterm
+                YAML also requires that every <refterm
+                primary="scalar">scalar</refterm>&nbsp;<refterm
                 primary="tag">tag</refterm> must specify a mechanism for
                 producing the <defterm primary="scalar" secondary="canonical
                 form">canonical form</defterm> of any <refterm primary="scalar"
                 secondary="content format">formatted content</refterm>. This
                 form is a Unicode character string which also <refterm
                 primary="present">presents</refterm> the same <refterm
-                primary="scalar" secondary="content format">content</refterm>,
-                and can be used for equality testing. While this requirement is
-                stronger than a well defined equality operator, it has other
-                uses, such as the production of digital signatures.
-              </listitem>
-            </varlistentry>
-
-            <varlistentry>
-              <term>Equality</term>
-
-              <listitem>
-                <para>
-                  Two <refterm primary="node">nodes</refterm> must have the
-                  same <refterm primary="tag">tag</refterm> and <refterm
-                  primary="content">content</refterm> to be <defterm
-                  primary="equality">equal</defterm>. Since each <refterm
-                  primary="tag">tag</refterm> applies to exactly one <refterm
-                  primary="kind">kind</refterm>, this implies that the two
-                  <refterm primary="node">nodes</refterm> must have the same
-                  <refterm primary="kind">kind</refterm> to be equal. Two
-                  <refterm primary="scalar">scalars</refterm> are equal only
-                  when their <refterm primary="tag">tags</refterm> and
-                  canonical forms are equal character-by-character. Equality
-                  of <refterm primary="collection">collections</refterm> is
-                  defined recursively. Two <refterm
-                  primary="sequence">sequences</refterm> are equal only when
-                  they have the same <refterm primary="tag">tag</refterm> and
-                  length, and each <refterm primary="node">node</refterm> in
-                  one <refterm primary="sequence">sequence</refterm> is equal
-                  to the corresponding <refterm primary="node">node</refterm>
-                  in the other <refterm primary="sequence">sequence</refterm>.
-                  Two <refterm primary="mapping">mappings</refterm> are equal
-                  only when they have the same <refterm
-                  primary="tag">tag</refterm> and an equal set of <refterm
-                  primary="key">keys</refterm>, and each <refterm
-                  primary="key">key</refterm> in this set is associated with
-                  equal <refterm primary="value">values</refterm> in both
-                  <refterm primary="mapping">mappings</refterm>.
-                </para>
-                <para>
-                  Different URI schemes may define different rules for testing
-                  the equality of URIs. Since a YAML <refterm
-                  primary="processor">processor</refterm> cannot be reasonably
-                  expected to be aware of them all, it must resort to a simple
-                  character-by-character comparison of <refterm
-                  primary="tag">tags</refterm> to ensure consistency. This also
-                  happens to be the comparison method defined by the
-                  <uquote>tag:</uquote> URI scheme. <refterm
-                  primary="tag">Tags</refterm> in a YAML stream must therefore
-                  be <refterm primary="present">presented</refterm> in a
-                  canonical way so that such comparison would yield the correct
-                  results.
-                </para>
+                primary="scalar" secondary="content format">content</refterm>.
+                While this can be used for equality testing (as long as the
+                compared values have the same <refterm
+                primary="tag">tag</refterm>), it has other uses, such as the
+                production of digital signatures.
               </listitem>
             </varlistentry>
 
@@ -9970,7 +9986,7 @@ mapping:<HL><hl3> !!map
         <title>Document Prefix</title>
 
         <para>
-          A document may be preceded by a <defterm primpary="document"
+          A document may be preceded by a <defterm primary="document"
           secondary="prefix">prefix</defterm> specifying the <refterm
           primary="character encoding">character encoding</refterm>, and
           optional <refterm primary="comment">comment</refterm> lines. Note
@@ -10546,7 +10562,8 @@ matches %: 20</hl3>
                 <para>
                   <refterm primary="represent">Represents</refterm> an
                   associative container, where each <refterm
-                  primary="key">key</refterm> is unique in the association and
+                  primary="key">key</refterm> is <refterm
+                  primary="equality">unique</refterm> in the association and
                   mapped to exactly one <refterm
                   primary="value">value</refterm>.  YAML places no restrictions
                   on the type of <refterm primary="key">keys</refterm>; in
@@ -10556,6 +10573,25 @@ matches %: 20</hl3>
                   primary="native data structure">native</refterm> types
                   include Perl<q/>s hash, Python<q/>s dictionary, and Java<q/>s
                   Hashtable.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <para>
+                  Equality:
+                </para>
+              </term>
+
+              <listitem>
+                <para>
+                  Two mappings are <refterm primary="equality">equal</refterm>
+                  if and only if they have an equal set of <refterm
+                  primary="key">keys</refterm>, and each <refterm
+                  primary="key">key</refterm> in this set is associated with
+                  <refterm primary="equality">equal</refterm> <refterm
+                  primary="value">values</refterm> in both mappings.
                 </para>
               </listitem>
             </varlistentry>
@@ -10626,6 +10662,24 @@ Flow style: !!map { Clark: Evans, Ingy: d&ouml;t Net, Oren: Ben-Kiki }
                   <refterm primary="native data structure">native</refterm>
                   types include Perl<q/>s array, Python<q/>s list or tuple, and
                   Java<q/>s array or Vector.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <para>
+                  Equality:
+                </para>
+              </term>
+
+              <listitem>
+                <para>
+                  Two sequences are <refterm
+                  primary="equality">equal</refterm> if and only if they have
+                  the same length, and each entry in one sequence is <refterm
+                  primary="equality">equal</refterm> to the corresponding
+                  entry in the other sequence.
                 </para>
               </listitem>
             </varlistentry>
@@ -10705,6 +10759,22 @@ Flow style: !!seq [ Clark Evans, Ingy d&ouml;t Net, Oren Ben-Kiki ]
             <varlistentry>
               <term>
                 <para>
+                  Equality:
+                </para>
+              </term>
+
+              <listitem>
+                <para>
+                  Two strings are <refterm primary="equality">equal</refterm>
+                  if and only if they have the same length and contain the same
+                  characters in the same order.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <para>
                   Canonical Form:
                 </para>
               </term>
@@ -10722,10 +10792,7 @@ Flow style: !!seq [ Clark Evans, Ingy d&ouml;t Net, Oren Ben-Kiki ]
 
             <simplelist type="horiz" columns="1">
               <member>
-<programlisting>Block style: !!str |-<sbr/>
-  String: just a theory.
-
-Flow style: !!str "String: just a theory."
+<programlisting>String: !!str "Just a theory."
 </programlisting>
               </member>
             </simplelist>
@@ -10844,6 +10911,21 @@ Flow style: !!str "String: just a theory."
             <varlistentry>
               <term>
                 <para>
+                  Equality:
+                </para>
+              </term>
+
+              <listitem>
+                <para>
+                  All <userinput>null</userinput> values are <refterm
+                  primary="equality">equal</refterm>.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <para>
                   Canonical Form:
                 </para>
               </term>
@@ -10914,6 +10996,23 @@ key with null value: !!null null
                   (such as C), is usually <refterm
                   primary="construct">bound</refterm> to a native integer
                   type, using one for true and zero for false.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <para>
+                  Equality:
+                </para>
+              </term>
+
+              <listitem>
+                <para>
+                  All <userinput>true</userinput> values are <refterm
+                  primary="equality">equal</refterm>. Similarly, all
+                  <userinput>false</userinput> values are <refterm
+                  primary="equality">equal</refterm>.
                 </para>
               </listitem>
             </varlistentry>
@@ -11018,6 +11117,24 @@ Pluto is a planet: !!bool false
             <varlistentry>
               <term>
                 <para>
+                  Equality:
+                </para>
+              </term>
+
+              <listitem>
+                <para>
+                  An integer value is <refterm
+                  primary="equality">equal</refterm> to any other numeric
+                  value that evaluates to the integer value. For example, the
+                  integer <userinput>1</userinput> is equal to the
+                  floating-point <userinput>1.0</userinput>.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <para>
                   Canonical Form:
                 </para>
               </term>
@@ -11113,6 +11230,29 @@ positive: !!int 34
                   Since YAML does not specify a particular accuracy, using
                   floating-point <refterm primary="key">mapping keys</refterm>
                   requires great care and is not recommended.
+                </para>
+              </listitem>
+            </varlistentry>
+
+            <varlistentry>
+              <term>
+                <para>
+                  Equality:
+                </para>
+              </term>
+
+              <listitem>
+                <para>
+                  A floating-point value is <refterm
+                  primary="equality">equal</refterm> to any other numeric value
+                  that evaluates to the floating-point value. For example,
+                  floating-point <userinput>1.0</userinput> is <refterm
+                  primary="equality">equal</refterm> to the the integer
+                  <userinput>1</userinput>. Note that for the purpose of
+                  <refterm primary="key">key</refterm> <refterm
+                  primary="equality">uniqueness</refterm>, all
+                  <userinput>.nan</userinput> values are considered to be
+                  <refterm primary="equality">equal</refterm>.
                 </para>
               </listitem>
             </varlistentry>

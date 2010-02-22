@@ -19,7 +19,11 @@ while (my $line = <>) {
         $line =~ s/"5%"/"0.5in"/g;
     } else {
         # Outside lists.
-        $line =~ s/fo:table id/fo:table start-indent="0" space-before.minimum="0.8em" space-before.optimum="1em" space-before.maximum="2em" id/g;
+        if ($line =~ /space-before.minimum/) {
+          $line =~ s/fo:table id/fo:table start-indent="0" id/g;
+        } else {
+          $line =~ s/fo:table id/fo:table start-indent="0" space-before.minimum="0.8em" space-before.optimum="1em" space-before.maximum="2em" id/g;
+        }
         # Ensure the production counter has enough space.
         $line =~ s/"100%">/"11in">/g;
         $line =~ s/"5%"/"1.5in"/g;

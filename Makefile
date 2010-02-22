@@ -139,7 +139,7 @@ spec.pdf: spec.dbk \
           $(EPS_IMAGES) Render-X-license.txt
 	$(XSLTPROC) preprocess_fo.xsl spec.dbk > tmp1.xml
 	$(XSLTPROC) single_fo.xsl tmp1.xml | sed 's/\xa0/\&#160;/g;s/\xa9/\&#169;/' > tmp2.xml
-	perl preprocess_fo.pl tmp2.xml > tmp3.xml
+	perl preprocess_fo.pl tmp2.xml | sed 's/space-before.optimum="[^"]*"\([^<>]*\)space-before.optimum/\1space-before.optimum/' > tmp3.xml
 	$(XEP) tmp3.xml -ps tmp3.ps
 	perl preprocess_ps.pl tmp3.ps > spec.ps
 	ps2pdf spec.ps
