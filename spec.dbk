@@ -1771,31 +1771,41 @@ Stack:
 
                 <para>
                   YAML therefore requires that each <refterm
-                  primary="tag">tag</refterm> must specify a mechanism for testing
-                  any of its values for <defterm
+                  primary="tag">tag</refterm> must specify a mechanism for
+                  testing any of its values for <defterm
                   primary="equality">equality</defterm> with any other value
                   (including values of any different <refterm
                   primary="tag">tag</refterm>). This is often implemented
-                  directly by the <refterm
-                  primary="representation">representation</refterm>. That is,
-                  duplicate <refterm primary="key">keys</refterm> are often
-                  flagged as an error by the <refterm primary="native data
-                  structure">native data structure</refterm> used to hold the
-                  <refterm primary="mapping">mapping</refterm>.
+                  directly by the <refterm primary="native data
+                  structure">native data structure</refterm> instead of the
+                  YAML <refterm primary="processor">processor</refterm>. That
+                  is, duplicate <refterm primary="key">keys</refterm> are often
+                  flagged as an error during the <refterm
+                  primary="construct">construction</refterm> processing stage.
                 </para>
 
                 <para>
-                  The above does not preclude a YAML processor from flagging (some)
-                  duplicate <refterm primary="key">keys</refterm> as an error at an
-                  earlier processing stage. Specifically, two <refterm
-                  primary="key">keys</refterm> with the same <refterm
+                  In order to ensure greater compatibility and clarity, YAML
+                  allows the <refterm primary="processor">processor</refterm>
+                  to flag obvious duplicate <refterm
+                  primary="key">keys</refterm> based on the <refterm
+                  primary="presentation">presentation</refterm>. Specifically,
+                  two <refterm primary="scalar">scalar</refterm> <refterm
+                  primary="key">keys</refterm> in the same <refterm
+                  primary="mapping">mapping</refterm>, with the same <refterm
                   primary="tag">tag</refterm> and the same <refterm
-                  primary="content">content</refterm> can be flagged as an error as
-                  soon as the <refterm primary="parse">parsing</refterm> stage. Note
-                  that this tests also works for <refterm primary="tag"
-                  secondary="non-specific">non-specific tags</refterm> due to the way
-                  that <refterm primary="tag" secondary="resolution">tag
-                  resolution</refterm> is defined.
+                  primary="content">content</refterm>, may be flagged as an
+                  error as soon as the <refterm
+                  primary="parse">parsing</refterm> stage. Note that this tests
+                  also works for <refterm primary="tag"
+                  secondary="non-specific">non-specific tags</refterm> due to
+                  the way that <refterm primary="tag"
+                  secondary="resolution">tag resolution</refterm> is defined.
+                  This allows a human reader to reasonably identify
+                  <userinput>{ a: 1, a: 2 }</userinput> as an error. Such
+                  constructs are silently accepted by many languages, but have
+                  no well defined meaning, and are therefore disallowed in YAML
+                  to avoid surprising behavior.
                 </para>
               </listitem>
             </varlistentry>
@@ -1819,31 +1829,52 @@ Stack:
                 production of digital signatures.
               </listitem>
             </varlistentry>
+          </variablelist>
 
+          <pagebreak/>
+
+          <variablelist>
             <varlistentry>
               <term>Identity</term>
 
               <listitem>
-                Two <refterm primary="node">nodes</refterm> are <defterm
-                primary="identity">identical</defterm> only when they <refterm
-                primary="represent">represent</refterm> the same <refterm
-                primary="native data structure">native data
-                structure</refterm>. Typically, this corresponds to a single
-                memory address. Identity should not be confused with equality;
-                two equal <refterm primary="node">nodes</refterm> need not have
-                the same identity. A YAML <refterm
-                primary="processor">processor</refterm> may treat equal
-                <refterm primary="scalar">scalars</refterm> as if they were
-                identical. In contrast, the separate identity of two distinct
-                but equal <refterm primary="collection">collections</refterm>
-                must be preserved.
+                <para>
+                  Two <refterm primary="node">nodes</refterm> are <defterm
+                  primary="identity">identical</defterm> only when they
+                  <refterm primary="represent">represent</refterm> the same
+                  <refterm primary="native data structure">native data
+                  structure</refterm>. Typically, this corresponds to a single
+                  memory address. Identity should not be confused with
+                  equality; two equal <refterm primary="node">nodes</refterm>
+                  need not have the same identity. A YAML <refterm
+                  primary="processor">processor</refterm> may treat equal
+                  <refterm primary="scalar">scalars</refterm> as if they were
+                  identical. In contrast, the separate identity of two distinct
+                  but equal <refterm primary="collection">collections</refterm>
+                  must be preserved.
+                </para>
+
+                <para>
+                  A common programming idiom is creating an empty object to
+                  obtain a value that is only equal to itself (for example, in
+                  order to generate a dynamic <quote>enumerated type</quote>).
+                  The proper way to <refterm
+                  primary="representation">represent</refterm> this in YAML
+                  would be <userinput>!object {}</userinput>, where the
+                  <userinput>!object</userinput> <refterm
+                  primary="tag">tag</refterm> defines two objects to be equal
+                  only if they are identical. The alternative <refterm
+                  primary="scalar">scalar</refterm> <refterm
+                  primary="representation">representation</refterm>
+                  <userinput>!object ''</userinput> will not work as expected,
+                  as the YAML <refterm primary="processor">processor</refterm>
+                  is not required to preserve the identity of such objects.
+                </para>
               </listitem>
             </varlistentry>
           </variablelist>
         </sect3>
       </sect2>
-
-      <pagebreak/>
 
       <sect2>
         <title>Serialization Tree</title>
@@ -10587,11 +10618,8 @@ matches %: 20</hl3>
               <listitem>
                 <para>
                   Two mappings are <refterm primary="equality">equal</refterm>
-                  if and only if they have an equal set of <refterm
-                  primary="key">keys</refterm>, and each <refterm
-                  primary="key">key</refterm> in this set is associated with
-                  <refterm primary="equality">equal</refterm> <refterm
-                  primary="value">values</refterm> in both mappings.
+                  if and only if they are <refterm
+                  primary="identity">identical</refterm>.
                 </para>
               </listitem>
             </varlistentry>
@@ -10675,11 +10703,9 @@ Flow style: !!map { Clark: Evans, Ingy: d&ouml;t Net, Oren: Ben-Kiki }
 
               <listitem>
                 <para>
-                  Two sequences are <refterm
-                  primary="equality">equal</refterm> if and only if they have
-                  the same length, and each entry in one sequence is <refterm
-                  primary="equality">equal</refterm> to the corresponding
-                  entry in the other sequence.
+                  Two sequences are <refterm primary="equality">equal</refterm>
+                  if and only if they are <refterm
+                  primary="identity">identical</refterm>.
                 </para>
               </listitem>
             </varlistentry>
@@ -11252,7 +11278,13 @@ positive: !!int 34
                   <refterm primary="key">key</refterm> <refterm
                   primary="equality">uniqueness</refterm>, all
                   <userinput>.nan</userinput> values are considered to be
-                  <refterm primary="equality">equal</refterm>.
+                  <refterm primary="equality">equal</refterm>. Note that in
+                  some languages (such as Ruby and Python) <quote>not a
+                  number</quote> has <refterm
+                  primary="identity">identity</refterm> semantics and therefore
+                  is not properly <refterm
+                  primary="representation">represented</refterm> in YAML as
+                  <userinput>!!float .nan</userinput>.
                 </para>
               </listitem>
             </varlistentry>
