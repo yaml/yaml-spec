@@ -5,3 +5,8 @@
 ## Directory-based project format:
 .idea/
 
+# generated HTML
+*.html
+
+docbook_xslt
+
