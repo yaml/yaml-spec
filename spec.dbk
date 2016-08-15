@@ -1978,7 +1978,7 @@ Stack:
         <para>
           A YAML <defterm primary="presentation">presentation</defterm> is a
           <refterm primary="stream">stream</refterm> of Unicode characters
-          making use of of <refterm primary="style">styles</refterm>, <refterm
+          making use of <refterm primary="style">styles</refterm>, <refterm
           primary="scalar" secondary="content format">scalar content
           formats</refterm>, <refterm primary="comment" >comments</refterm>,
           <refterm primary="directive">directives</refterm> and other <refterm
