@@ -6818,7 +6818,7 @@ Reuse anchor: <HL><hl1>*<hl2>anchor</hl2></hl1></HL>
 
         <para>
           In a multi-line double-quoted scalar, <refterm primary="line
-          break">line breaks</refterm> are are subject to <refterm
+          break">line breaks</refterm> are subject to <refterm
           primary="line folding" secondary="flow">flow line folding</refterm>,
           which discards any trailing <refterm primary="space"
           secondary="white">white space</refterm> characters. It is also
