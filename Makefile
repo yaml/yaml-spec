@@ -87,8 +87,8 @@ pdf: $(PDF)
 
 spec: html
 	mkdir $@
-	perl -pi -e 's/2010-xx-xx/$(DATE)/g' spec.html
-	perl -pi -e 's/2001-2010/2001-$(YEAR)/g' spec.html
+	perl -pi -e 's/YYYY-MM-DD/$(DATE)/g' spec.html
+	perl -pi -e 's/2001-YYYY/2001-$(YEAR)/g' spec.html
 	mv *.html $@/
 	cp *.png *.svg *.css $@/
 	rm docbook_xslt
@@ -97,7 +97,7 @@ clean:
 	rm -fr spec $(HTML) $(PDF) $(PS) tmp* docbook_xslt
 
 purge: clean
-	rm -fr $(PAGES_DIR)	
+	rm -fr $(PAGES_DIR)
 
 $(PDF): single_fo.xsl ebnf_fo.xsl preprocess_fo.xsl
 

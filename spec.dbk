@@ -12,7 +12,7 @@
     </title>
 
     <subtitle>
-      3<superscript>rd</superscript>&nbsp;Edition,&nbsp;Patched&nbsp;at&nbsp;2010-xx-xx
+      3<superscript>rd</superscript>&nbsp;Edition,&nbsp;Patched&nbsp;at&nbsp;YYYY-MM-DD
     </subtitle>
 
     <authorgroup>
@@ -42,7 +42,7 @@
     </authorgroup>
 
     <copyright>
-      <year>2001-2010</year>
+      <year>2001-YYYY</year>
       <holder>Oren Ben-Kiki<fo>,&nbsp;</fo></holder>
       <holder>Clark Evans<fo>,&nbsp;</fo></holder>
       <holder>Ingy d&ouml;t Net</holder>
@@ -112,7 +112,7 @@
         Please report errors in this document to the <ulink
         href="http://lists.sourceforge.net/lists/listinfo/yaml-core">
         yaml-core</ulink> mailing list. This revision contains fixes for all
-        errors known as of 2010-xx-xx.
+        errors known as of YYYY-xx-xx.
       </para>
 
       <para>
