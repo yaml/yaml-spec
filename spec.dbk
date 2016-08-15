@@ -5969,7 +5969,7 @@ be given at most once per
               <listitem>
                 If the prefix begins with a character other than <refterm
                 primary="! tag indicator" secondary="! local
-                tag"><uquote>!</uquote></refterm>, it must to be a valid URI
+                tag"><uquote>!</uquote></refterm>, it must be a valid URI
                 prefix, and should contain at least the scheme and the
                 authority. <refterm primary="tag"
                 secondary="shorthand">Shorthands</refterm> using the associated
