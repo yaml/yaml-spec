@@ -9906,9 +9906,9 @@ folded:<hl2>&darr;
 ---
 !!map {
   ? !!str "literal"
-  : !!str "value",
+  : !!str "value\n",
   ? !!str "folded"
-  : !&lt;!foo&gt; "value",
+  : !&lt;!foo&gt; "value\n",
 }
 </programlisting>
             </member>
