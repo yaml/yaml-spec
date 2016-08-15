@@ -2026,7 +2026,7 @@ Stack:
             two groups of styles. <refterm primary="style"
             secondary="block">Block styles</refterm> use <refterm
             primary="space" secondary="indentation">indentation</refterm> to
-            denote structure; In contrast, <refterm primary="style"
+            denote structure; in contrast, <refterm primary="style"
             secondary="flow">flow styles</refterm> styles rely on explicit
             <refterm primary="indicator">indicators</refterm>.
           </para>
