@@ -8771,7 +8771,7 @@ keep: |+
   ? !!str "clip"
   : !!str "# text\n",
   ? !!str "keep"
-  : !!str "# text\n",
+  : !!str "# text\n\n",
 }
 </programlisting>
 <synopsis>&nbsp;Legend:
