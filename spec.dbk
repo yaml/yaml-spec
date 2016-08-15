@@ -2789,7 +2789,7 @@ Stack:
       <para>
         If a character <refterm primary="stream">stream</refterm> begins with a
         <defterm primary="byte order mark">byte order mark</defterm>, the
-        character encoding will be taken to be as as indicated by the byte
+        character encoding will be taken to be as indicated by the byte
         order mark. Otherwise, the <refterm primary="stream">stream</refterm>
         must begin with an ASCII character. This allows the encoding to be
         deduced by the pattern of null (<userinput>#x00</userinput>)
