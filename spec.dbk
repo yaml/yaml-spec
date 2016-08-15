@@ -10244,9 +10244,10 @@ document</hl1>
 <programlisting>%YAML 1.2<sbr/>
 ---
 !!str "Bare document"
+...
 %YAML 1.2
 ---
-!!str "%!PS-Adobe-2.0\n"
+!!str "%!PS-Adobe-2.0 # Not the first line\n"
 </programlisting>
 <synopsis>&nbsp;Legend:
    <hl1><link linkend="l-bare-document">l-bare-document</link></hl1>
