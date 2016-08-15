@@ -2133,7 +2133,7 @@ Stack:
             secondary="detail">presentation details</refterm> are not reflected
             in the YAML <refterm primary="serialization">serialization
             tree</refterm> or <refterm primary="representation">representation
-            graph</refterm>. This version of YAML defines a two directives,
+            graph</refterm>. This version of YAML defines two directives,
             <refterm primary="directive"
             secondary="YAML"><uquote>YAML</uquote></refterm> and <refterm
             primary="directive" secondary="TAG"><uquote>TAG</uquote></refterm>.
