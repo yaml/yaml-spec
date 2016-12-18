@@ -92,6 +92,7 @@ spec: html
 	mv *.html $@/
 	cp *.png *.svg *.css $@/
 	rm docbook_xslt
+	chown -R --reference=Makefile $@
 
 clean:
 	rm -fr spec $(HTML) $(PDF) $(PS) tmp* docbook_xslt
