@@ -11,7 +11,7 @@
   <!-- Invoke the DocBook -> HTML conversion stylesheet -->
   <xsl:import href="docbook_xslt/xhtml/docbook.xsl" /> 
 
-  <xsl:output method="xml" encoding="ISO-8859-1" indent="yes"
+  <xsl:output method="xml" encoding="UTF-8" indent="yes"
     doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
     doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd" />
 

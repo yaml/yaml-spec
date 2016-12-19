@@ -22,7 +22,7 @@
   <xsl:param name="column.count.index" select="2" />
 
   <!-- Output control. No need to worry about document type. -->
-  <xsl:output method="xml" encoding="ISO-8859-1" indent="yes" />
+  <xsl:output method="xml" encoding="UTF-8" indent="yes" />
 
   <!-- Pass fo only -->
   <xsl:template match="fo"
