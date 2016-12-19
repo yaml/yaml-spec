@@ -89,7 +89,6 @@ spec: html
 	mkdir $@
 	perl -pi -e 's/YYYY-MM-DD/$(DATE)/g' spec.html
 	perl -pi -e 's/2001-YYYY/2001-$(YEAR)/g' spec.html
-	recode ISO-8859-1..UTF-8 *.html
 	mv *.html $@/
 	cp *.png *.svg *.css $@/
 	rm docbook_xslt
