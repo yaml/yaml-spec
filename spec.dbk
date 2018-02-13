@@ -8492,7 +8492,7 @@ to a line feed, or<hl2>&middot;&rarr;\&darr;
   !!str "detected\n",
   !!str "\n\n# detected\n",
   !!str "&middot;explicit\n",
-  !!str "\t&middot;detected\n",
+  !!str "\t\ndetected\n",
 ]
 </programlisting>
 <synopsis>&nbsp;Legend:
