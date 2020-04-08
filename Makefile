@@ -1,9 +1,8 @@
 SHELL := bash
 
 BRANCHES := \
+    gh-pages \
     spec-1.2 \
-    spec-1.3 \
-    rfc \
 
 REPOS:= \
     grammar \
