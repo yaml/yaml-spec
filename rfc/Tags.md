@@ -84,6 +84,10 @@ This is a list of tags and their meanings:
 
   A new language feature
 
+* property
+
+  Involves anchor or tag or other things preceding node content
+
 * scalar
 
   Involving scalar nodes
