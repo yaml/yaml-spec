@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+rm -f RFC-0*-*
+
+for rfc in RFC-*.md; do
+  title=$(grep -A2 '^======' "$rfc" | tail -n1)
+  title=${title//\ /-}
+  link=${rfc%.md}-$title
+  echo "$link"
+done
