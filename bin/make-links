@@ -3,8 +3,11 @@
 rm -f RFC-0*-*
 
 for rfc in RFC-*.md; do
+  [[ $rfc == *000* ]] && continue
+
   title=$(grep -A2 '^======' "$rfc" | tail -n1)
   title=${title//\ /-}
   link=${rfc%.md}-$title
-  echo "$link"
+
+  ln -fs "$rfc" "$link"
 done
