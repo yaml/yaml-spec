@@ -1,13 +1,17 @@
 #!/usr/bin/env bash
 
+base=${1:-.}
+
 rm -f RFC-0*-*
 
-for rfc in RFC-*.md; do
+for rfc in "$base"/RFC-*.md; do
+  rfc=${rfc#./}
+
   [[ $rfc == *000* ]] && continue
 
   title=$(grep -A2 '^======' "$rfc" | tail -n1)
   title=${title//\ /-}
-  link=${rfc%.md}-$title
+  link=${rfc%.md}-$title.md
 
   ln -fs "$rfc" "$link"
 done
