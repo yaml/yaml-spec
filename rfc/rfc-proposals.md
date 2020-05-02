@@ -1,13 +1,27 @@
-## Disallow explicit key indicator in flow collections
+## Every document after the first requires a document start indicator
 ```
 # NO
-[ ? [4, 2]: 42 ]
+foo: bar
+...
+bar: baz
+
 # OK
-[ { [4, 2]: 42 } ]
+foo: bar
+---
+bar: baz
 ```
 
+## A bare flow document can follow a bare flow document if they are separated by a newline
+```
+# OK
+{ foo: bar }
+[ 1, 2, 3 ]
+"yes"
+true
+42
+```
 
-## Top level scalars require a start indicator
+## Top level scalars require a document start indicator
 ```
 # NO
 foo
@@ -27,7 +41,7 @@ foo
 ```
 
 
-## Top level properties require a start indicator
+## Top level properties require a document start indicator
 ```
 # NO
 &a1 [4, 2]
