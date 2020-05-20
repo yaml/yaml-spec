@@ -7,8 +7,16 @@ rm -f RFC-0*-*
 for rfc in "$base"/RFC-???.md; do
   rfc=${rfc#./}
 
-  title=$(grep -A2 '^======' "$rfc" | tail -n1)
+  title=$(head -n1 "$rfc")
+  if [[ $title == *--* ]]; then
+    [[ $rfc == *000* ]] && continue
+    title=${title#*--\ }
+  else
+    title=$(grep -A2 '^======' "$rfc" | tail -n1)
+  fi
   title=${title//\ /-}
+  [[ $title == *[a-z]* ]] || continue
+
   link=${rfc##*/}
   link=${link%.md}-$title.md
 
