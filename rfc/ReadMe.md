@@ -20,3 +20,23 @@ In other words, it is best to hold off commenting while the RFC is still a PR.
 Please keep comments brief and to the point.
 Thumbs up and down won't have an effect on the outcome of the RFC or its comments.
 
+## YAML Specification Process
+
+YAML 1.0, 1.1 and 1.2 were specified in one large document.
+YAML 1.5 and onwards will be specified as multiple parts including:
+
+* [YAML Syntax EBNF Grammar]()
+* [YAML Test Suite]()
+* [YAML Language Guide]()
+* [YAML Implementers Guide]()
+
+## YAML Core Group
+
+The core group driving the new specification process currently consists of:
+
+* [Ingy dÖt Net](https://github.com/ingydotnet)
+* [Tina Mueller](https://github.com/perlpunk)
+* [Eemeli Aro](https://github.com/eemeli)
+* [Pantelis Antoniou](https://github.com/pantoniou)
+
+They can often be found on IRC at irc.freenode.net#yaml-dev.
