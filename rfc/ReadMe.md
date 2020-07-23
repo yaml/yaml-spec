@@ -20,7 +20,7 @@ When an RFC becomes permanent, it also will be assigned a discussion link.
 We'll be using GitHub Issues initially.
 
 Please keep comments brief and to the point.
-Thumbs up and down won't have an effect on the outcome of the RFC or its comments.
+Contentless opinions such as thumbs up and down or "+1" comments will not have an effect on the outcome of an RFC.
 
 ## YAML Specification Process
 
