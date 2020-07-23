@@ -49,10 +49,10 @@ While a neat trick mathmatically it has its downfalls:
   42
 ```
 is hard to reason about.
-It seems to mean `"  foo\n42\n" but technically means `"   foo\n 42\n"` because counting starts at -1.
+It seems to mean `"  foo\n42\n"` but technically means `"   foo\n 42\n"` because counting starts at -1.
 
 A better idea is to just make top level stuff "unindented".
-ie There's no concept of indentation at all, and everything starts in column 1, which is normal and expected.
+I.e. there's no concept of indentation at all, and everything starts in column 1, which is normal and expected.
 Indented sub-scopes are always visually indented a certain number of spaces.
 
 This makes the visual and technical levels of indentation the same, and reduces the ambiguity of discourse about a YAML node.
