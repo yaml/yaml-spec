@@ -13,14 +13,11 @@ Each PR is reviewed by the core team to make sure it is something that should be
 When an RFC is approved by the core team it is merged to the yaml-spec master branch.
 At that point it is assigned a permanent RFC # and has a document that lives in the RFC directory.
 
-The core group has about 50 ideas that are being worked into RFCs.
-Anybody can submit an RFC PR, but it might be wise to wait until the initial entries are submitted.
+Anyone is welcome to submit an RFC as a PR, but it might make sense to file an issue to discuss it first.
+The core group has about 50 ideas that are being worked into RFCs; these are being submitted as proposals, which may get initially merged with little public discussion.
 
 When an RFC becomes permanent, it also will be assigned a discussion link.
 We'll be using GitHub Issues initially.
-
-Discussion of an RFC should wait until the RFC becomes permanent.
-In other words, it is best to hold off commenting while the RFC is still a PR.
 
 Please keep comments brief and to the point.
 Thumbs up and down won't have an effect on the outcome of the RFC or its comments.
