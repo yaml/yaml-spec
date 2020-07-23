@@ -2,7 +2,7 @@ YAML Spec RFCs
 ==============
 
 The planning for the upcoming versions of the YAML Specification is being facilitated by public Request For Comment (RFC) documents.
-Currently the YAML core group is working on YAML versions 1.5 and 2.0.
+Currently the [YAML core group](#yaml-core-group) is working on YAML versions 1.5 and 2.0.
 All RFC documents, regardless of their intended target version, will reside in this directory.
 
 ## RFC Process
@@ -39,7 +39,7 @@ YAML 1.5 and onwards will be specified as multiple parts including:
 
 The core group driving the new specification process currently consists of:
 
-* [Ingy dÖt Net](https://github.com/ingydotnet)
+* [Ingy döt Net](https://github.com/ingydotnet)
 * [Tina Mueller](https://github.com/perlpunk)
 * [Eemeli Aro](https://github.com/eemeli)
 * [Pantelis Antoniou](https://github.com/pantoniou)
