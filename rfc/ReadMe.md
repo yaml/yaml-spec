@@ -2,7 +2,7 @@ YAML Spec RFCs
 ==============
 
 The planning for the upcoming versions of the YAML Specification is being facilitated by public Request For Comment (RFC) documents.
-Currently the [YAML core team](https://github.com/orgs/yaml/teams/core/members) is working on YAML versions 1.5 and 2.0.
+Currently the YAML core group is working on YAML versions 1.5 and 2.0.
 All RFC documents, regardless of their intended target version, will reside in this directory.
 
 ## RFC Process
