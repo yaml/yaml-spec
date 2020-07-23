@@ -44,4 +44,4 @@ The core group driving the new specification process currently consists of:
 * [Eemeli Aro](https://github.com/eemeli)
 * [Pantelis Antoniou](https://github.com/pantoniou)
 
-They can often be found on IRC at irc.freenode.net#yaml-dev.
+They can often be found on IRC at irc.freenode.net in `#yaml-dev`.
