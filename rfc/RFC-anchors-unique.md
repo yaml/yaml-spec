@@ -30,7 +30,7 @@ It is not an error for an alias to use an anchor name defined later in the same 
 ## Explanation
 
 Effectively, this RFC makes a document have a single namespace for anchor names, and forbids the same anchor name from being reused.
-On input, the will require that alias values are resolved after the whole document has been processed, but this is already effectively required by circular references:
+On input, this will require that alias values are resolved after the whole document has been processed, but this may already be effectively required by circular references to a root node:
 
 ```
 &anchor
