@@ -46,7 +46,7 @@ Using a null value as a mapping key is a rare thing for a program to do (if it i
 Under this RFC you can still have a null key, but it needs to happen explicitly like in these examples:
 ```
 - null: foo
-- !!null: foo
+- !!null : foo
 - !null "": foo
 - key: &null !null
   *null: foo
