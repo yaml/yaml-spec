@@ -49,7 +49,7 @@ Under this RFC you can still have a null key, but it needs to happen explicitly 
 - !!null : foo
 - !null "": foo
 - key: &null !null
-  *null: foo
+  *null : foo
 ```
 
 The following will be parse errors:
