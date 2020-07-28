@@ -12,7 +12,7 @@ Requires
 Related
 Discuss | [Issue 0](../../issues/0)
 Tags | empty key scalar
-Tests | 4ABK 2JQS FRK4 NHX8 S3PD 6M2F KZN9 9MMW
+Tests | 2JQS 4ABK 6M2F 9MMW FRK4 KZN9 NHX8 S3PD
 
 
 ## Problem
