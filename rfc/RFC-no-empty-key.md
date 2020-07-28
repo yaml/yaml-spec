@@ -6,8 +6,8 @@ Empty-scalars not allowed as keys
 
 Key | Value
 -|-
-Target | 1.5
-Status | 0
+Target
+Status
 Requires
 Related
 Discuss | [Issue 0](../../issues/0)
