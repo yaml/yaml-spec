@@ -1,0 +1,7 @@
+sidebar:
+- title: Documentation
+  pages:
+  - title: Installation
+  - title: Templating
+- title: User Manual
+- title: Cheat Sheet

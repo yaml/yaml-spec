@@ -1,0 +1,43 @@
+project-site:
+  version: 0.0.2
+  builder: bootstrap45
+  publish: gh-pages
+
+title: My Project Site
+description: The web site builder for your projects
+url: ''
+
+page:
+  layout: default
+  toc: false
+
+theme:
+  color: green
+  logo:
+    type: template
+    letters: Ps
+
+social:
+  github: https://github.com/ingydotnet/project-site
+  twitter: project-site
+  slack: project-site
+
+navbar:
+  left:
+  - type: logo
+  - name: Home
+    link: /main
+  - name: Documentation
+    link: /doc
+  - name: Examples
+    link: /eg
+
+  right:
+  - type: github
+  - type: twitter
+  - type: slack
+
+copyright:
+  who: Ingy döt Net
+  when: 2020
+  license: MIT

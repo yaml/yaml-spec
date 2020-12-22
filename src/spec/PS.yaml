@@ -1,0 +1,11 @@
+sidebar:
+- title: YAML RFCs
+  slug: rfc
+  pages:
+  - title: Overview
+  - title: RFC-0001
+  - title: RFC-0002
+  - title: RFC-0003
+  - title: RFC-0004
+  - title: RFC-0005
+  - title: RFC-0006

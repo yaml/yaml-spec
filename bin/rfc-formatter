@@ -1,0 +1,166 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+
+my ($text, $lines);
+my $data = {};
+
+sub error;
+
+sub main {
+    my $input = do { local $/; <> };
+    parse($input);
+    print formatter();
+}
+
+sub parse {
+    ($text) = @_;
+    $lines = () = $text =~ /\n/g;
+
+    $text =~ s/^(RFC-\d{4})\n={8}\n\n\s*// or
+        error "Expected RFC name";
+    $data->{name} = $1;
+
+    $text =~ s/^(\S.*)\n\n\n\s*// or
+        error "Expected RFC title";
+    $data->{title} = $1;
+
+    while ($text and $text !~ /^\n/) {
+        if ($text =~ s/^Key \| Value\n//) {}
+        elsif ($text =~ s/^-\|-\n//) {}
+        elsif ($text =~ s/^Target(?: \| (\S.*))?\n//) { $data->{target} = $1 }
+        elsif ($text =~ s/^Status(?: \| (\S.*))?\n//) { $data->{status} = $1 + 0 }
+        elsif ($text =~ s/^Requires(?: \| (\S.*))?\n//) { $data->{requires} = $1 }
+        elsif ($text =~ s/^Related(?: \| (\S.*))?\n//) { $data->{related} = $1 }
+        elsif ($text =~ s/^Discuss(?: \| (\S.*))?\n//) {
+            $1 =~ /(\d+)/
+                or error "Can't parse Discuss";
+            $data->{discuss} = $1
+        }
+        elsif ($text =~ s/^Tags(?: \| (\S.*))?\n//) { $data->{tags} = $1 }
+        elsif ($text =~ s/^Tests(?: \| (\S.*))?\n//) { $data->{tests} = $1 }
+        else {
+            error;
+        }
+    }
+    $text =~ s/^\n\n\s*//
+        or error "Missing blanks lines after table";
+
+    $text =~ s/^## Problem\n+((?:.*\n)+?)(?=## |\z)//
+        or error "Can't parse 'Problem'";
+    ($data->{problem} = $1) =~ s/\n+\z/\n/;
+
+    $text =~ s/^## Proposal\n+((?:.*\n)+?)(?=## |\z)//
+        or error;
+    ($data->{proposal} = $1) =~ s/\n+\z/\n/;
+
+    if ($text =~ s/^## Explanation\n+((?:.*\n)+?)(?=## |\z)//) {
+        ($data->{explanation} = $1) =~ s/\n+\z/\n/;
+    }
+
+    $text eq ''
+        or error "Extra text found";
+}
+
+sub formatter {
+    %_ = %$data;
+
+    my $meta = format_meta_section();
+    my $out = <<"...";
+---
+title: $_{name}
+description: $_{title}
+---
+
+$meta
+
+## Problem
+
+$_{problem}
+
+## Proposal
+
+$_{proposal}
+
+## Explanation
+
+$_{explanation}
+...
+
+    return $out;
+}
+
+sub format_meta_section {
+    %_ = %$data;
+    my $out = <<"...";
+* Target YAML Version: **${\($_{target} || 'Undecided')}**
+* RFC Status: **${\($_{status} || 'None')}**
+* [RFC Discussion](https://github.com/yaml/yaml-spec/discussions/$_{discuss})
+...
+
+    if ($_{requires}) {
+        $out .= "* Requires:\n";
+        for my $rfc (split /\s+/, $_{requires}) {
+            if ($rfc =~ /^RFC-\d{4}$/) {
+                $out .= "  * [$rfc](../${\ lc($rfc)}/)\n";
+            }
+            else {
+                $out .= "  * [$rfc](../overview/)\n";
+            }
+        }
+    }
+
+    if ($_{related}) {
+        $out .= "* Related:\n";
+        for my $rfc (split /\s+/, $_{related}) {
+            if ($rfc =~ /^RFC-\d{4}$/) {
+                $out .= "  * [$rfc](../${\ lc($rfc)}/)\n";
+            }
+            else {
+                $out .= "  * [$rfc](../overview/)\n";
+            }
+        }
+    }
+
+    if ($_{tags}) {
+        $out .= "* Tags:";
+        for my $tag (split /\s+/, $_{tags}) {
+            $out .= " [$tag](https://github.com/yaml/yaml-test-suite/tree/master/test/tags/$tag)";
+        }
+        $out .= "\n";
+    }
+
+    if ($_{tests}) {
+        $out .= "* Tests:";
+        for my $test (split /\s+/, $_{tests}) {
+            $out .= " [$test](https://github.com/yaml/yaml-test-suite/blob/master/test/$test.tml)";
+        }
+        $out .= "\n";
+    }
+
+    return $out;
+}
+
+sub error {
+    my ($msg) = @_;
+    $msg //= 'Died';
+    my $name = $data->{name} || 'UNKNOWN';
+    my $left = () = $text =~ /\n/g;
+    my $left4 = $left - 4;
+    my $line = $lines - $left + 1;
+    my $head = $text;
+    $head =~ s/((?:\N*\n){4}).+/$1<...$left4 more lines...>/s;
+
+    use XXX; WWW $data;
+    die <<"...";
+
+Error parsing RFC: "$msg"
+In rfc '$name' at line $line:
+"""
+$head
+"""
+...
+}
+
+main @ARGV;
