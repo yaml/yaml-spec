@@ -1,26 +1,20 @@
-yaml-spec
-=========
+YAML Specification
+==================
 
-The YAML Specification
+The YAML Data Language Specification
 
 ## Overview
 
-This repository contains the source materials and build files for the [YAML
-Specification](http://www.yaml.org/spec/1.2/spec.html).
+[YAML](https://en.wikipedia.org/wiki/YAML) (YAML Ain't Markup Language) is a
+_versioned_ language for data.
+The current versions of the language are 1.0, 1.1 and 1.2.
 
-## Build Process
+This repository is where the YAML language is further developed and the next
+versions are defined.
 
-To turn these files into HTML and PDF representations of the spec, you can run:
-`make all`, but that requires a lot of prerequisites to be installed. The
-easier method is to do this (requires Docker):
+This repository contains the source code and build system for the [published
+YAML 1.2 specification](https://yaml.org/spec/1.2/spec.html).
+Those files are under the `1.2` top level directory.
 
-```
-git clone https://github.com/yaml/yaml-spec-builder-docker
-cd yaml-spec-builder-docker
-make spec
-```
-
-## Contributing
-
-Contributions are welcome. File issues and pull requests
-[here](https://github.com/yaml/yaml-spec/issues).
+The various components of the next YAML specification version will be added
+here incrementally following a well defined methodology.
