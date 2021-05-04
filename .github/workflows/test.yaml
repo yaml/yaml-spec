@@ -1,0 +1,19 @@
+name: yaml-spec Testing
+
+on:
+  push:
+    # branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-make-targets:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Make the 1.2 spec.html from docbook
+      run:
+        source .rc &&
+        make -C 1.2 clean html

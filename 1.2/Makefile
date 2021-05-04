@@ -1,3 +1,7 @@
+DOCKER_TOOL := docbook-builder
+include ../tool/make/init.mk
+
+
 .SUFFIXES: .dbk .html .dia .eps .png .pdf
 
 # To make this work, you need:
@@ -81,7 +85,10 @@ site: all
 site.tgz: site
 	cd site && tar cvzf ../site.tgz *
 
-html: $(HTML)
+ifeq ($(wildcard /.dockerenv),)
+html:
+	$(call docker-run,make $(HTML))
+endif
 
 pdf: $(PDF)
 
@@ -104,8 +111,11 @@ $(PDF): single_fo.xsl ebnf_fo.xsl preprocess_fo.xsl
 
 $(HTML): single_html.xsl preprocess_html.xsl
 
+ifneq ($(wildcard /.dockerenv),)
 .dbk.html: single_html.xsl catalog docbook_xslt
 	$(XSLTPROC) single_html.xsl $*.dbk > $*.html
+	chown -R --reference=Makefile $@
+endif
 
 .dbk.pdf: single_fo.xsl Render-X-license.txt catalog docbook_xslt
 	$(XSLTPROC) --param generate.toc "''" single_fo.xsl $*.dbk | sed 's/\xa0/\&#160;/g;s/\xa9/\&#169;/' > tmp.xml
@@ -157,6 +167,10 @@ spec.pdf: spec.dbk \
 	ps2pdf spec.ps
 	rm tmp*.xml
 
+ifeq ($(wildcard /.dockerenv),)
+spec.html: spec.dbk
+	$(call docker-run,make spec.html)
+else
 spec.html: spec.dbk \
            preprocess_png.sed preprocess_html.pl catalog docbook_xslt
 	perl verify_lhs.pl < spec.dbk
@@ -166,6 +180,8 @@ spec.html: spec.dbk \
 	$(XSLTPROC) single_html.xsl tmp2.xml > tmp3.xml
 	perl preprocess_html.pl tmp3.xml > spec.html
 	rm tmp*.xml
+	chown -R --reference=Makefile .
+endif
 
 docbook_xslt:
 	ln -s $(DOCBOOK_XSLT) docbook_xslt
