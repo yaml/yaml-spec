@@ -1,3 +1,5 @@
+---
+---
 # YAML Ain’t Markup Language (YAML™) Version 1.2
 
 ## 3rd Edition, Patched at YYYY-MM-DD
