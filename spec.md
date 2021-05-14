@@ -1,4 +1,5 @@
 ---
+layout: default
 ---
 # YAML Ain’t Markup Language (YAML™) Version 1.2
 
