@@ -1910,7 +1910,8 @@ mapping: { sky: blue, sea: green }
   </ul>
 </blockquote>
 
-<p>An <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x23</code></strong>, octothorpe, hash, sharp, pound, number sign) denotes a <del><a href="#">comment</a></del>.</p>
+<p>An <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x23</code></strong>, octothorpe, hash, sharp, pound, number sign)
+denotes a <del><a href="#">comment</a></del>.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[12] c-comment ::= "#"
 </code></pre></div></div>
@@ -1932,7 +1933,8 @@ mapping: { sky: blue, sea: green }
   </ul>
 </blockquote>
 
-<p>An <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x26</code></strong>, ampersand) denotes a <del><a href="#">node’s anchor property</a></del>.</p>
+<p>An <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x26</code></strong>, ampersand) denotes a <del><a href="#">node’s anchor
+property</a></del>.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[13] c-anchor ::= "&amp;"
 </code></pre></div></div>
@@ -1942,7 +1944,11 @@ mapping: { sky: blue, sea: green }
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[14] c-alias ::= "*"
 </code></pre></div></div>
 
-<p>The <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x21</code></strong>, exclamation) is heavily overloaded for specifying <del><a href="#">node tags</a></del>. It is used to denote <del><a href="#">tag handles</a></del> used in <del><a href="#">tag directives</a></del> and <del><a href="#">tag properties</a></del>; to denote <del><a href="#">local tags</a></del>; and as the <del><a href="#">non-specific tag</a></del> for non-<del><a href="#">plain scalars</a></del>.</p>
+<p>The <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x21</code></strong>, exclamation) is heavily overloaded for
+specifying <del><a href="#">node tags</a></del>.
+It is used to denote <del><a href="#">tag handles</a></del> used in <del><a href="#">tag directives</a></del> and <del><a href="#">tag
+properties</a></del>; to denote <del><a href="#">local tags</a></del>; and as the <del><a href="#">non-specific tag</a></del> for
+non-<del><a href="#">plain scalars</a></del>.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[15] c-tag ::= "!"
 </code></pre></div></div>
@@ -2010,12 +2016,14 @@ folded: &gt;
   </ul>
 </blockquote>
 
-<p>An <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">'</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x27</code></strong>, apostrophe, single quote) surrounds a <del><a href="#">single-quoted flow scalar</a></del>.</p>
+<p>An <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">'</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x27</code></strong>, apostrophe, single quote) surrounds a
+<del><a href="#">single-quoted flow scalar</a></del>.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[18] c-single-quote ::= "'"
 </code></pre></div></div>
 
-<p>A <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">"</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x22</code></strong>, double quote) surrounds a <del><a href="#">double-quoted flow scalar</a></del>.</p>
+<p>A <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">"</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x22</code></strong>, double quote) surrounds a <del><a href="#">double-quoted flow
+scalar</a></del>.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[19] c-double-quote ::= '"'
 </code></pre></div></div>
@@ -2067,7 +2075,8 @@ double: "text"
   </ul>
 </blockquote>
 
-<p>The <em>“<strong><code class="language-plaintext highlighter-rouge">@</code></strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">#x40</code></strong>, at) and <em>“<strong>```</strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">#x60</code></strong>, grave accent) are <em>reserved</em> for future use.</p>
+<p>The <em>“<strong><code class="language-plaintext highlighter-rouge">@</code></strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">#x40</code></strong>, at) and <em>“<strong>```</strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">#x60</code></strong>, grave accent) are
+<em>reserved</em> for future use.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[21] c-reserved ::=
   "@" | "`"
@@ -2344,7 +2353,9 @@ and non-<del><a href="#">printable</a></del> characters are not available.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[44] ns-esc-backspace ::= "b"
 </code></pre></div></div>
 
-<p>Escaped ASCII horizontal tab (<strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>) character. This is useful at the start or the end of a line to force a leading or trailing tab to become part of the <del><a href="#">content</a></del>.</p>
+<p>Escaped ASCII horizontal tab (<strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>) character.
+This is useful at the start or the end of a line to force a leading or trailing
+tab to become part of the <del><a href="#">content</a></del>.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[45] ns-esc-horizontal-tab ::=
   "t" | #x9
@@ -2375,7 +2386,9 @@ and non-<del><a href="#">printable</a></del> characters are not available.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[50] ns-esc-escape ::= "e"
 </code></pre></div></div>
 
-<p>Escaped ASCII space (<strong><code class="language-plaintext highlighter-rouge">#x20</code></strong>) character. This is useful at the start or the end of a line to force a leading or trailing space to become part of the <del><a href="#">content</a></del>.</p>
+<p>Escaped ASCII space (<strong><code class="language-plaintext highlighter-rouge">#x20</code></strong>) character.
+This is useful at the start or the end of a line to force a leading or trailing
+space to become part of the <del><a href="#">content</a></del>.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[51] ns-esc-space ::= #x20
 </code></pre></div></div>
