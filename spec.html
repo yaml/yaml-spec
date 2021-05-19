@@ -13,7 +13,7 @@
 
 <h1 id="yamlaintmarkuplanguageyaml-version12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>3rd Edition, Patched at 2021-05-17</strong></p>
+<p><strong>3rd Edition, Patched at 2021-05-19</strong></p>
 
 <ul class="authorgroup">
   <li><strong>Oren Ben-Kiki &lt;<a href="mailto:oren@ben-kiki.org">oren@ben-kiki.org</a>&gt;</strong></li>
@@ -74,7 +74,7 @@ as well.</p>
 <p>The list of known errors in this specification is available at
 <a href="http://yaml.org/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a>.
 Please report errors in this document to the yaml-core mailing list.
-This revision contains fixes for all errors known as of 2021-05-17.</p>
+This revision contains fixes for all errors known as of 2021-05-19.</p>
 
 <p>We wish to thank implementers who have tirelessly tracked earlier versions of
 this specification, and our fabulous user community whose feedback has both
@@ -985,8 +985,8 @@ corresponds to a Perl hash table and a Python dictionary.
 The <del><a href="#">scalar</a></del> represents strings, integers, dates, and other atomic data
 types.</p>
 
-  <p>Each YAML <del><a href="#">node</a></del> requires, in addition to its <del><a href="#">kind</a></del> and <del><a href="#">content</a></del>, a
-<del><a href="#">tag</a></del> specifying its data type.
+  <p>Each YAML <del><a href="#">node</a></del> requires, in addition to its <del><a href="#">kind</a></del> and <del><a href="#">content</a></del>,
+a <del><a href="#">tag</a></del> specifying its data type.
 Type specifiers are either <del><a href="#">global</a></del> URIs, or are <del><a href="#">local</a></del> in scope to a
 single <del><a href="#">application</a></del>.
 For example, an integer is represented in YAML with a <del><a href="#">scalar</a></del> plus the
@@ -1203,8 +1203,8 @@ resolution</a></del>, or any other data that is applicable to all of the tag’s
 
 <p><strong>Equality</strong></p>
 
-<p>Since YAML <del><a href="#">mappings</a></del> require <del><a href="#">key</a></del> uniqueness, <del><a href="#">representations</a></del> must
-include a mechanism for testing the equality of <del><a href="#">nodes</a></del>.
+<p>Since YAML <del><a href="#">mappings</a></del> require <del><a href="#">key</a></del> uniqueness, <del><a href="#">representations</a></del>
+must include a mechanism for testing the equality of <del><a href="#">nodes</a></del>.
 In general, it is impossible to ensure uniqueness for <del><a href="#">presentations</a></del>, for
 the following reasons:</p>
 
@@ -1219,17 +1219,16 @@ duplicate <del><a href="#">key</a></del> as an error.</p>
   </li>
   <li>
     <p>The semantics of the <del><a href="#">representation</a></del> may require that values with
-different
-<del><a href="#">tags</a></del> be considered equal.
+different <del><a href="#">tags</a></del> be considered equal.
 For example, the integer one and the float one are considered equal.
 If both are used as <del><a href="#">keys</a></del> in the same <del><a href="#">mapping</a></del>, only a YAML
 <del><a href="#">processor</a></del> which recognizes integer and float <del><a href="#">representations</a></del> would
 correctly flag the duplicate <del><a href="#">key</a></del> as an error.
-YAML therefore requires that each <del><a href="#">tag</a></del> must specify a mechanism for testing
-any of its values for <em>equality</em> with any other value (including values of any
-different <del><a href="#">tag</a></del>).
-This is often implemented directly by the <del><a href="#">native data structure</a></del> instead of
-the YAML <del><a href="#">processor</a></del>.
+YAML therefore requires that each <del><a href="#">tag</a></del> must specify a mechanism for
+testing any of its values for <em>equality</em> with any other value (including
+values of any different <del><a href="#">tag</a></del>).
+This is often implemented directly by the <del><a href="#">native data structure</a></del> instead
+of the YAML <del><a href="#">processor</a></del>.
 That is, duplicate <del><a href="#">keys</a></del> are often flagged as an error during the
 <del><a href="#">construction</a></del> processing stage.</p>
   </li>
@@ -1238,11 +1237,11 @@ That is, duplicate <del><a href="#">keys</a></del> are often flagged as an error
 <p>In order to ensure greater compatibility and clarity, YAML allows the
 <del><a href="#">processor</a></del> to flag obvious duplicate <del><a href="#">keys</a></del> based on the
 <del><a href="#">presentation</a></del>.
-Specifically, two <del><a href="#">scalar</a></del> <del><a href="#">keys</a></del> in the same <del><a href="#">mapping</a></del>, with the same
-<del><a href="#">tag</a></del> and the same <del><a href="#">content</a></del>, may be flagged as an error as soon as the
-<del><a href="#">parsing</a></del> stage.
-Note that this tests also works for <del><a href="#">non-specific tags</a></del> due to the way that
-<del><a href="#">tag resolution</a></del> is defined.
+Specifically, two <del><a href="#">scalar</a></del> <del><a href="#">keys</a></del> in the same <del><a href="#">mapping</a></del>, with the
+same <del><a href="#">tag</a></del> and the same <del><a href="#">content</a></del>, may be flagged as an error as soon
+as the <del><a href="#">parsing</a></del> stage.
+Note that this tests also works for <del><a href="#">non-specific tags</a></del> due to the way
+that <del><a href="#">tag resolution</a></del> is defined.
 This allows a human reader to reasonably identify <strong><code class="language-plaintext highlighter-rouge">{ a: 1, a: 2 }</code></strong> as an
 error.
 Such constructs are silently accepted by many languages, but have no well
@@ -1273,11 +1272,11 @@ must be preserved.</p>
 <p>A common programming idiom is creating an empty object to obtain a value that
 is only equal to itself (for example, in order to generate a dynamic
 “enumerated type”).
-The proper way to <del><a href="#">represent</a></del> this in YAML would be <strong><code class="language-plaintext highlighter-rouge">!object {}</code></strong>, where
-the <strong><code class="language-plaintext highlighter-rouge">!object</code></strong> <del><a href="#">tag</a></del> defines two objects to be equal only if they are
-identical.
-The alternative <del><a href="#">scalar</a></del> <del><a href="#">representation</a></del> <strong><code class="language-plaintext highlighter-rouge">!object ''</code></strong> will not work
-as expected, as the YAML <del><a href="#">processor</a></del> is not required to preserve the
+The proper way to <del><a href="#">represent</a></del> this in YAML would be <strong><code class="language-plaintext highlighter-rouge">!object {}</code></strong>,
+where the <strong><code class="language-plaintext highlighter-rouge">!object</code></strong> <del><a href="#">tag</a></del> defines two objects to be equal only if they
+are identical.
+The alternative <del><a href="#">scalar</a></del> <del><a href="#">representation</a></del> <strong><code class="language-plaintext highlighter-rouge">!object ''</code></strong> will not
+work as expected, as the YAML <del><a href="#">processor</a></del> is not required to preserve the
 identity of such objects.</p>
 
 <h3 id="322serialization-tree">3.2.2. Serialization Tree</h3>
@@ -1596,12 +1595,12 @@ sequences</a></del> (<em>block-in context</em>) and outside them (<em>block-out 
   <p>In <del><a href="#">flow styles</a></del>, explicit <del><a href="#">indicators</a></del> are used to delineate structure.
 These styles can be viewed as the natural extension of JSON to cover
 <del><a href="#">tagged</a></del>, <del><a href="#">single-quoted</a></del> and <del><a href="#">plain scalars</a></del>.
-Since the latter have no delineating <del><a href="#">indicators</a></del>, they are subject to some
-restrictions to avoid ambiguities.
+Since the latter have no delineating <del><a href="#">indicators</a></del>, they are subject to
+some restrictions to avoid ambiguities.
 These restrictions depend on where they appear: as implicit keys directly
 inside a <del><a href="#">block mapping</a></del> (<em>block-key</em>); as implicit keys inside a <del><a href="#">flow
-mapping</a></del> (<em>flow-key</em>); as values inside a <del><a href="#">flow collection</a></del> (<em>flow-in</em>);
-or as values outside one (<em>flow-out</em>).</p>
+mapping</a></del> (<em>flow-key</em>); as values inside a <del><a href="#">flow collection</a></del>
+(<em>flow-in</em>); or as values outside one (<em>flow-out</em>).</p>
 </blockquote>
 
 <p><strong>(Block) Chomping: <code class="language-plaintext highlighter-rouge">t</code></strong></p>
@@ -2075,8 +2074,8 @@ double: "text"
   </ul>
 </blockquote>
 
-<p>The <em>“<strong><code class="language-plaintext highlighter-rouge">@</code></strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">#x40</code></strong>, at) and <em>“<strong>```</strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">#x60</code></strong>, grave accent) are
-<em>reserved</em> for future use.</p>
+<p>The <em>“<strong><code class="language-plaintext highlighter-rouge">@</code></strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">#x40</code></strong>, at) and <em>“<strong><code>&grave;</code></strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">#x60</code></strong>,
+grave accent) are <em>reserved</em> for future use.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[21] c-reserved ::=
   "@" | "`"
@@ -2085,7 +2084,7 @@ double: "text"
 <p><strong>Example 5.10. Invalid use of Reserved Indicators</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>commercial-at: @text
-grave-accent: ```text
+grave-accent: text
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:
@@ -2228,7 +2227,7 @@ Space characters are sometimes displayed as the glyph “<strong><code class="la
 quoted:·"Quoted →"
 block:→|
 ··void main() {
-··``→printf("Hello, world!\n");
+··→printf("Hello, world!\n");
 ··}
 </code></pre></div></div>
 
@@ -2298,11 +2297,11 @@ classes:</p>
 <a href="http://www.ietf.org/rfc/rfc2732.txt">RFC2732</a>.</p>
 
     <p>By convention, any URI characters other than the allowed printable ASCII
-characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em> using
-the <em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>“</em> character.
+characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em>
+using the <em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>“</em> character.
 The YAML <del><a href="#">processor</a></del> must not expand such escaped characters. <del><a href="#">Tag</a></del>
-characters must be preserved and compared exactly as <del><a href="#">presented</a></del> in the YAML
-<del><a href="#">stream</a></del>, without any processing.</p>
+characters must be preserved and compared exactly as <del><a href="#">presented</a></del> in the
+YAML <del><a href="#">stream</a></del>, without any processing.</p>
   </li>
 </ul>
 
@@ -2313,7 +2312,11 @@ characters must be preserved and compared exactly as <del><a href="#">presented<
 </code></pre></div></div>
 
 <ul>
-  <li>The <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> character is used to indicate the end of a <del><a href="#">named tag handle</a></del>; hence its use in <del><a href="#">tag shorthands</a></del> is restricted. In addition, such <del><a href="#">shorthands</a></del> must not contain the <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”</a></del>, <a href="#">“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”</a>, <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”</a></del>, <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”</a></del> and <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”</a></del> characters. These characters would cause ambiguity with <del><a href="#">flow collection</a></del> structures.</li>
+  <li>The <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> character is used to indicate the end of a <del><a href="#">named tag
+handle</a></del>; hence its use in <del><a href="#">tag shorthands</a></del> is restricted.
+In addition, such <del><a href="#">shorthands</a></del> must not contain the <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”</a></del>,
+<a href="#">“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”</a>, <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”</a></del>, <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”</a></del> and <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”</a></del> characters.
+These characters would cause ambiguity with <del><a href="#">flow collection</a></del> structures.</li>
 </ul>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[40] ns-tag-char ::=
@@ -2546,7 +2549,7 @@ independently.</p>
 Not indented:
 ·By one space: |
 ····By four
-····``··spaces
+······spaces
 ·Flow style: [    # Leading spaces
 ···By two,        # in flow style
 ··Also by two,    # are neither
@@ -2589,8 +2592,8 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>?·a
 :·-→b
-``··-··-→c
-``·····-·d
+··-··-→c
+·····-·d
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -2804,14 +2807,14 @@ Folding does distinguish between these cases in the following way:</p>
 <blockquote>
   <p>In the <del><a href="#">folded block style</a></del>, the final <del><a href="#">line break</a></del> and trailing <del><a href="#">empty
 lines</a></del> are subject to <del><a href="#">chomping</a></del>, and are never folded.
-In addition, folding does not apply to <del><a href="#">line breaks</a></del> surrounding text lines
-that contain leading <del><a href="#">white space</a></del>.
+In addition, folding does not apply to <del><a href="#">line breaks</a></del> surrounding text
+lines that contain leading <del><a href="#">white space</a></del>.
 Note that such a <del><a href="#">more-indented</a></del> line may consist only of such leading
 <del><a href="#">white space</a></del>.</p>
 
-  <p>The combined effect of the <em>block line folding</em> rules is that each “paragraph”
-is interpreted as a line, <del><a href="#">empty lines</a></del> are interpreted as a line feed, and
-the formatting of <del><a href="#">more-indented</a></del> lines is preserved.</p>
+  <p>The combined effect of the <em>block line folding</em> rules is that each
+“paragraph” is interpreted as a line, <del><a href="#">empty lines</a></del> are interpreted as a
+line feed, and the formatting of <del><a href="#">more-indented</a></del> lines is preserved.</p>
 </blockquote>
 
 <p><strong>Example 6.7. Block Folding</strong></p>
@@ -2833,8 +2836,7 @@ the formatting of <del><a href="#">more-indented</a></del> lines is preserved.</
   <p><strong>Legend:</strong></p>
   <ul>
     <li><a href="#rule-b-l-folded(n,c)">b-l-folded(n,c)</a></li>
-    <li>Non-content spaces</li>
-    <li>Content spaces</li>
+    <li>Non-content spaces Content spaces</li>
   </ul>
 </blockquote>
 
@@ -2863,11 +2865,11 @@ information.</p>
 <p><strong>Example 6.8. Flow Folding</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"↓
-··``foo``·↓
+··foo·↓
 ·↓
-··→·``bar↓
+··→·bar↓
 ↓
-··``baz↓ "
+··baz↓ "
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -2911,7 +2913,7 @@ However, as this confuses many tools, YAML <del><a href="#">processors</a></del>
 
 <p><strong>Example 6.9. Separated Comment</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>key:····# Comment``↓
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>key:····# Comment↓
   value_eof_
 </code></pre></div></div>
 
@@ -2943,9 +2945,9 @@ characters is taken to be a comment line.</p>
 
 <p><strong>Example 6.10. Comment Lines</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>··# Comment↓``
-···↓``
-``↓``
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>··# Comment↓
+···↓
+↓
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># This stream contains no
@@ -3094,7 +3096,7 @@ warning.</p>
 
 <p><strong>Example 6.13. Reserved Directives</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%``FOO  bar baz # Should be ignored
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%FOO  bar baz # Should be ignored
                # with a warning.
 --- "foo"
 </code></pre></div></div>
@@ -3148,7 +3150,7 @@ if they were version 1.2, giving a warning on points of incompatibility
 
 <p><strong>Example 6.14. ”</strong><code class="language-plaintext highlighter-rouge">YAML</code><strong>” directive</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.3`` # Attempt parsing
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.3 # Attempt parsing
            # with a warning
 ---
 "foo"
@@ -3461,9 +3463,9 @@ Either or both may be omitted.</p>
 
 <p><strong>Example 6.23. Node Properties</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!!str &amp;a1`` "foo":
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!!str &amp;a1 "foo":
   !!str bar
-``&amp;a2`` baz : *a1
+&amp;a2 baz : *a1
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -3553,11 +3555,11 @@ a valid URI (a <del><a href="#">global tag</a></del>).</p>
 <blockquote>
   <p>A <em>tag shorthand</em> consists of a valid <del><a href="#">tag handle</a></del> followed by a non-empty
 suffix.
-The <del><a href="#">tag handle</a></del> must be associated with a <del><a href="#">prefix</a></del>, either by default or
-by using a <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive</a></del>.
-The resulting <del><a href="#">parsed</a></del> <del><a href="#">tag</a></del> is the concatenation of the <del><a href="#">prefix</a></del> and
-the suffix, and must either begin with <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> (a <del><a href="#">local tag</a></del>) or be
-a valid URI (a <del><a href="#">global tag</a></del>).</p>
+The <del><a href="#">tag handle</a></del> must be associated with a <del><a href="#">prefix</a></del>, either by default
+or by using a <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive</a></del>.
+The resulting <del><a href="#">parsed</a></del> <del><a href="#">tag</a></del> is the concatenation of the <del><a href="#">prefix</a></del>
+and the suffix, and must either begin with <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> (a <del><a href="#">local tag</a></del>)
+or be a valid URI (a <del><a href="#">global tag</a></del>).</p>
 
   <p>The choice of <del><a href="#">tag handle</a></del> is a <del><a href="#">presentation detail</a></del> and must not be
 used to convey <del><a href="#">content</a></del> information.
@@ -3573,7 +3575,8 @@ These characters would cause ambiguity with <del><a href="#">flow collection</a>
 If the suffix needs to specify any of the above restricted characters, they
 must be <del><a href="#">escaped</a></del> using the <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>”</a></del> character.
 This behavior is consistent with the URI character escaping rules
-(specifically, section 2.3 of <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a>).</p>
+(specifically, section 2.3 of
+<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a>).</p>
 </blockquote>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[99] c-ns-shorthand-tag ::=
@@ -3621,8 +3624,8 @@ This behavior is consistent with the URI character escaping rules
 <p><strong>Non-Specific Tags</strong></p>
 
 <blockquote>
-  <p>If a <del><a href="#">node</a></del> has no tag property, it is assigned a <del><a href="#">non-specific tag</a></del> that
-needs to be <del><a href="#">resolved</a></del> to a <del><a href="#">specific</a></del> one.
+  <p>If a <del><a href="#">node</a></del> has no tag property, it is assigned a <del><a href="#">non-specific tag</a></del>
+that needs to be <del><a href="#">resolved</a></del> to a <del><a href="#">specific</a></del> one.
 This <del><a href="#">non-specific tag</a></del> is <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> for non-<del><a href="#">plain scalars</a></del> and
 <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>”</a></del> for all other <del><a href="#">nodes</a></del>.
 This is the only case where the <del><a href="#">node style</a></del> has any effect on the
@@ -3630,8 +3633,8 @@ This is the only case where the <del><a href="#">node style</a></del> has any ef
 
   <p>It is possible for the tag property to be explicitly set to the <del><a href="#">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”
 non-specific tag</a></del>.
-By <del><a href="#">convention</a></del>, this “disables” <del><a href="#">tag resolution</a></del>, forcing the <del><a href="#">node</a></del>
-to be interpreted as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”,
+By <del><a href="#">convention</a></del>, this “disables” <del><a href="#">tag resolution</a></del>, forcing the
+<del><a href="#">node</a></del> to be interpreted as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”,
 “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>”, or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
 its <del><a href="#">kind</a></del>.</p>
 
@@ -3699,7 +3702,7 @@ These characters would cause ambiguity with <del><a href="#">flow collection</a>
 
 <p><strong>Example 6.29. Node Anchors</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>First occurrence: &amp;anchor`` Value
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>First occurrence: &amp;anchor Value
 Second occurrence: *anchor
 </code></pre></div></div>
 
@@ -3753,9 +3756,9 @@ as these were already specified at the first occurrence of the <del><a href="#">
 <p><strong>Example 7.1. Alias Nodes</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>First occurrence: &amp;anchor Foo
-Second occurrence: *anchor``
+Second occurrence: *anchor
 Override anchor: &amp;anchor Bar
-Reuse anchor: *anchor``
+Reuse anchor: *anchor
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -3985,10 +3988,10 @@ Empty lines, if any, are consumed as part of the <del><a href="#">line folding</
 
 <p><strong>Example 7.6. Double Quoted Lines</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"·1st non-empty``↓
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>"·1st non-empty↓
 ↓
-·2nd non-empty```·
-→3rd non-empty``·"
+·2nd non-empty·
+→3rd non-empty·"
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -4113,10 +4116,10 @@ Empty lines, if any, are consumed as part of the <del><a href="#">line folding</
 
 <p><strong>Example 7.9. Single Quoted Lines</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'·1st non-empty``↓
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>'·1st non-empty↓
 ↓
-·2nd non-empty```·
-→3rd non-empty``·'
+·2nd non-empty·
+→3rd non-empty·'
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -4189,13 +4192,13 @@ These characters would cause ambiguity with <del><a href="#">flow collection</a>
 <p><strong>Example 7.10. Plain Characters</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Outside flow collection:
-- :``:vector
+- ::vector
 - ": - ()"
 - Up, up, and away!
 - -123
 - http://example.com/foo#bar
 # Inside flow collection:
-- [ :``:vector,
+- [ ::vector,
   ": - ()",
   "Up, up and away!",
   -123,
@@ -4224,7 +4227,8 @@ These characters would cause ambiguity with <del><a href="#">flow collection</a>
   <p><strong>Legend:</strong></p>
   <ul>
     <li><a href="#rule-ns-plain-first(c)">ns-plain-first(c)</a></li>
-    <li>Not ns-plain-first(c) <a href="#rule-ns-plain-char(c)">ns-plain-char(c)</a></li>
+    <li>Not ns-plain-first(c)</li>
+    <li><a href="#rule-ns-plain-char(c)">ns-plain-char(c)</a></li>
     <li>Not ns-plain-char(c)</li>
   </ul>
 </blockquote>
@@ -4292,10 +4296,10 @@ Empty lines, if any, are consumed as part of the <del><a href="#">line folding</
 
 <p><strong>Example 7.12. Plain Lines</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1st non-empty``↓
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1st non-empty↓
 ↓
-·2nd non-empty```·
-→3rd non-empty``
+·2nd non-empty·
+→3rd non-empty
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -4352,7 +4356,7 @@ characters.</p>
 <p><strong>Example 7.13. Flow Sequence</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- [ one, two, ]
-- [``three ,four``]
+- [three ,four]
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -4443,7 +4447,7 @@ characters.</p>
 <p><strong>Example 7.15. Flow Mappings</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- { one : two , three: four , }
-- {``five: six,seven : eight``}
+- {five: six,seven : eight}
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -4552,7 +4556,7 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
 unquoted·:·"separate",
 http://foo.com,
-omitted value``:°,
+omitted value:°,
 °:·omitted key,
 }
 </code></pre></div></div>
@@ -4725,8 +4729,8 @@ have been impossible to implement.</p>
 
 <p><strong>Example 7.21. Single Pair Implicit Entries</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- [ YAML·``: separate ]
-- [ °``: empty key entry ]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- [ YAML·: separate ]
+- [ °: empty key entry ]
 - [ {JSON: like}:adjacent ]
 </code></pre></div></div>
 
@@ -5270,10 +5274,10 @@ In addition, there is no way to break a long literal line.</p>
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>|
 ·
 ··
-··literal``↓
-···```↓
+··literal↓
+···↓
 ··
-··text``↓
+··text↓
 ↓
 ·# Comment
 </code></pre></div></div>
@@ -5339,18 +5343,18 @@ character separates two non-<del><a href="#">space</a></del> characters.</p>
 <p><strong>Example 8.10. Folded Lines</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;
-``·folded↓
+·folded↓
 ·line↓
 ↓
 ·next
-·line``↓
+·line↓
    * bullet
 
    * list
    * lines
 
-``·last↓
-·line``↓
+·last↓
+·line↓
 
 # Comment
 </code></pre></div></div>
@@ -5404,10 +5408,10 @@ different productions.)</p>
 
  next
  line
-``···* bullet↓
+···* bullet↓
 ↓
 ···* list↓
-···* lines``↓
+···* lines↓
 
  last
  line
@@ -5486,7 +5490,8 @@ are also not <del><a href="#">folded</a></del>.</p>
   <p><strong>Legend:</strong></p>
   <ul>
     <li><a href="#rule-b-as-line-feed">b-as-line-feed</a></li>
-    <li>(separation) <a href="#rule-l-empty(n,c)">l-empty(n,c)</a></li>
+    <li>(separation)</li>
+    <li><a href="#rule-l-empty(n,c)">l-empty(n,c)</a></li>
   </ul>
 </blockquote>
 
@@ -5665,7 +5670,7 @@ pair</a></del>.</p>
 <p><strong>Example 8.16. Block Mappings</strong></p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>block mapping:
-·``key: value↓
+·key: value↓
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -5778,9 +5783,9 @@ This prevents a potential ambiguity with multi-line <del><a href="#">plain scala
 
 <p><strong>Example 8.18. Implicit Block Mapping Entries</strong></p>
 
-<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plain key``: in-line value
-°``:° # Both empty
-"quoted key"``:
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plain key: in-line value
+°:° # Both empty
+"quoted key":
 - entry
 </code></pre></div></div>
 
@@ -5819,7 +5824,7 @@ mapping.</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- sun: yellow↓
 - ? earth: blue↓
-  : moon: white↓``
+  : moon: white↓
 </code></pre></div></div>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%YAML 1.2
@@ -6305,11 +6310,11 @@ heterogeneous log file entries.</p>
 encoding</a></del>.
 In addition, it is necessary to separate the last <del><a href="#">document</a></del> of the first
 stream and the first <del><a href="#">document</a></del> of the second stream.
-This is easily ensured by inserting a <del><a href="#">document end marker</a></del> between the two
-streams.
+This is easily ensured by inserting a <del><a href="#">document end marker</a></del> between the
+two streams.
 Note that this is safe regardless of the content of either stream.
-In particular, either or both may be empty, and the first stream may or may not
-already contain such a marker.</p>
+In particular, either or both may be empty, and the first stream may or may
+not already contain such a marker.</p>
 </blockquote>
 
 <p><strong>Communication Streams</strong></p>
@@ -6317,11 +6322,11 @@ already contain such a marker.</p>
 <blockquote>
   <p>The <del><a href="#">document end marker</a></del> allows signaling the end of a <del><a href="#">document</a></del>
 without closing the stream or starting the next <del><a href="#">document</a></del>.
-This allows the receiver to complete processing a <del><a href="#">document</a></del> without having
-to wait for the next one to arrive.
-The sender may also transmit “keep-alive” messages in the form of <del><a href="#">comment</a></del>
-lines or repeated <del><a href="#">document end markers</a></del> without signalling the start of the
-next <del><a href="#">document</a></del>.</p>
+This allows the receiver to complete processing a <del><a href="#">document</a></del> without
+having to wait for the next one to arrive.
+The sender may also transmit “keep-alive” messages in the form of
+<del><a href="#">comment</a></del> lines or repeated <del><a href="#">document end markers</a></del> without signalling
+the start of the next <del><a href="#">document</a></del>.</p>
 </blockquote>
 
 <h1 id="chapter10recommended-schemas">Chapter 10. Recommended Schemas</h1>
@@ -6355,8 +6360,8 @@ option.</p>
 <p><strong>Definition:</strong></p>
 
 <blockquote>
-  <p><del><a href="#">Represents</a></del> an associative container, where each <del><a href="#">key</a></del> is <del><a href="#">unique</a></del> in
-the association and mapped to exactly one <del><a href="#">value</a></del>.
+  <p><del><a href="#">Represents</a></del> an associative container, where each <del><a href="#">key</a></del> is <del><a href="#">unique</a></del>
+in the association and mapped to exactly one <del><a href="#">value</a></del>.
 YAML places no restrictions on the type of <del><a href="#">keys</a></del>; in particular, they are
 not restricted to being <del><a href="#">scalars</a></del>.
 Example <del><a href="#">bindings</a></del> to <del><a href="#">native</a></del> types include Perl’s hash, Python’s
@@ -6396,9 +6401,10 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 <p><strong>Definition:</strong></p>
 
 <blockquote>
-  <p><del><a href="#">Represents</a></del> a collection indexed by sequential integers starting with zero.
-Example <del><a href="#">bindings</a></del> to <del><a href="#">native</a></del> types include Perl’s array, Python’s list
-or tuple, and Java’s array or Vector.</p>
+  <p><del><a href="#">Represents</a></del> a collection indexed by sequential integers starting with
+zero.
+Example <del><a href="#">bindings</a></del> to <del><a href="#">native</a></del> types include Perl’s array, Python’s
+list or tuple, and Java’s array or Vector.</p>
 </blockquote>
 
 <p><strong>Equality:</strong></p>
@@ -6436,15 +6442,15 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 <blockquote>
   <p><del><a href="#">Represents</a></del> a Unicode string, a sequence of zero or more Unicode
 characters.
-This type is usually <del><a href="#">bound</a></del> to the <del><a href="#">native</a></del> language’s string type, or,
-for languages lacking one (such as C), to a character array.</p>
+This type is usually <del><a href="#">bound</a></del> to the <del><a href="#">native</a></del> language’s string type,
+or, for languages lacking one (such as C), to a character array.</p>
 </blockquote>
 
 <p><strong>Equality:</strong></p>
 
 <blockquote>
-  <p>Two strings are <del><a href="#">equal</a></del> if and only if they have the same length and contain
-the same characters in the same order.</p>
+  <p>Two strings are <del><a href="#">equal</a></del> if and only if they have the same length and
+contain the same characters in the same order.</p>
 </blockquote>
 
 <p><strong>Canonical Form:</strong></p>
@@ -6588,8 +6594,8 @@ Pluto is a planet: !!bool false
 Scalars of this type should be <del><a href="#">bound</a></del> to a <del><a href="#">native</a></del> integer data type,
 if possible.</p>
 
-  <p>Some languages (such as Perl) provide only a “number” type that allows for both
-integer and floating-point values.
+  <p>Some languages (such as Perl) provide only a “number” type that allows for
+both integer and floating-point values.
 A YAML <del><a href="#">processor</a></del> may use such a type for integers, as long as they
 round-trip properly.</p>
 
@@ -6604,8 +6610,8 @@ round-trip through most systems.</p>
 <p><strong>Equality:</strong></p>
 
 <blockquote>
-  <p>An integer value is <del><a href="#">equal</a></del> to any other numeric value that evaluates to the
-integer value.
+  <p>An integer value is <del><a href="#">equal</a></del> to any other numeric value that evaluates to
+the integer value.
 For example, the integer <strong><code class="language-plaintext highlighter-rouge">1</code></strong> is equal to the floating-point <strong><code class="language-plaintext highlighter-rouge">1.0</code></strong>.</p>
 </blockquote>
 
@@ -6643,8 +6649,8 @@ positive: !!int 34
   <p><del><a href="#">Represents</a></del> an approximation to real numbers, including three special
 values (positive and negative infinity, and “not a number”).</p>
 
-  <p>Some languages (such as Perl) provide only a “number” type that allows for both
-integer and floating-point values.
+  <p>Some languages (such as Perl) provide only a “number” type that allows for
+both integer and floating-point values.
 A YAML <del><a href="#">processor</a></del> may use such a type for floating-point numbers, as long
 as they round-trip properly.</p>
 
@@ -6660,14 +6666,15 @@ Since YAML does not specify a particular accuracy, using floating-point
 <p><strong>Equality:</strong></p>
 
 <blockquote>
-  <p>A floating-point value is <del><a href="#">equal</a></del> to any other numeric value that evaluates
-to the floating-point value.
-For example, floating-point <strong><code class="language-plaintext highlighter-rouge">1.0</code></strong> is <del><a href="#">equal</a></del> to the the integer <strong><code class="language-plaintext highlighter-rouge">1</code></strong>.
+  <p>A floating-point value is <del><a href="#">equal</a></del> to any other numeric value that
+evaluates to the floating-point value.
+For example, floating-point <strong><code class="language-plaintext highlighter-rouge">1.0</code></strong> is <del><a href="#">equal</a></del> to the the integer
+<strong><code class="language-plaintext highlighter-rouge">1</code></strong>.
 Note that for the purpose of <del><a href="#">key</a></del> <del><a href="#">uniqueness</a></del>, all <strong><code class="language-plaintext highlighter-rouge">.nan</code></strong> values
 are considered to be <del><a href="#">equal</a></del>.
 Note that in some languages (such as Ruby and Python) “not a number” has
-<del><a href="#">identity</a></del> semantics and therefore is not properly <del><a href="#">represented</a></del> in YAML
-as <strong><code class="language-plaintext highlighter-rouge">!!float .nan</code></strong>.</p>
+<del><a href="#">identity</a></del> semantics and therefore is not properly <del><a href="#">represented</a></del> in
+YAML as <strong><code class="language-plaintext highlighter-rouge">!!float .nan</code></strong>.</p>
 </blockquote>
 
 <p><strong>Canonical Form:</strong></p>
