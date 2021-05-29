@@ -1752,12 +1752,13 @@ In addition, any allowed characters known to be non-printable should also be
 This isn’t mandatory since a full implementation would require extensive
 character property tables.</p>
 
-<div id="rule-c-printable"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[1] c-printable ::=
+<div id="rule-"></div>
+<pre class="rule">
+[1] c-printable ::=
     #x9 | #xA | #xD | [#x20-#x7E]          /* 8 bit */
   | #x85 | [#xA0-#xD7FF] | [#xE000-#xFFFD] /* 16 bit */
   | [#x10000-#x10FFFF]                     /* 32 bit */
-</code></pre></div></div>
+</pre>
 
 <p>To ensure <del><a href="#undefined">JSON compatibility</a></del>, YAML <del><a href="#undefined">processors</a></del> must allow all non-control
 characters inside <del><a href="#undefined">quoted scalars</a></del>.
@@ -1766,10 +1767,11 @@ even inside such <del><a href="#undefined">scalars</a></del>.
 Note that JSON <del><a href="#undefined">quoted scalars</a></del> cannot span multiple lines or contain <del><a href="#undefined">tabs</a></del>,
 but YAML <del><a href="#undefined">quoted scalars</a></del> can.</p>
 
-<div id="rule-nb-json"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2] nb-json ::=
+<div id="rule-"></div>
+<pre class="rule">
+[2] nb-json ::=
   #x9 | [#x20-#x10FFFF]
-</code></pre></div></div>
+</pre>
 
 <div id="character-encodings"></div>
 <h2 id="52-character-encodings">5.2. Character Encodings</h2>
@@ -1908,9 +1910,10 @@ be used, even if the first <a href="#streams">stream</a> character is ASCII.</p>
 encoding schemes see the <a href="http://www.unicode.org/unicode/faq/utf_bom.html">Unicode
 FAQ</a>.</p>
 
-<div id="rule-c-byte-order-mark"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[3] c-byte-order-mark ::= #xFEFF
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[3] c-byte-order-mark ::= #xFEFF
+</pre>
 
 <p>In the examples, byte order mark characters are displayed as “<strong><code class="language-plaintext highlighter-rouge">⇔</code></strong>”.</p>
 
@@ -1977,21 +1980,24 @@ ERROR:
 
 <p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x2D</code></strong>, hyphen) denotes a <del><a href="#undefined">block sequence</a></del> entry.</p>
 
-<div id="rule-c-sequence-entry"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[4] c-sequence-entry ::= "-"
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[4] c-sequence-entry ::= "-"
+</pre>
 
 <p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x3F</code></strong>, question mark) denotes a <del><a href="#undefined">mapping key</a></del>.</p>
 
-<div id="rule-c-mapping-key"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[5] c-mapping-key ::= "?"
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[5] c-mapping-key ::= "?"
+</pre>
 
 <p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x3A</code></strong>, colon) denotes a <del><a href="#undefined">mapping value</a></del>.</p>
 
-<div id="rule-c-mapping-value"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[6] c-mapping-value ::= ":"
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[6] c-mapping-value ::= ":"
+</pre>
 
 <div id="example-block-structure-indicators" class="example">
   <p><strong>Example 5.3 Block Structure Indicators</strong></p>
@@ -2042,33 +2048,38 @@ mapping<code class="legend-3">:</code>
 
 <p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x2C</code></strong>, comma) ends a <del><a href="#undefined">flow collection</a></del> entry.</p>
 
-<div id="rule-c-collect-entry"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[7] c-collect-entry ::= ","
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[7] c-collect-entry ::= ","
+</pre>
 
 <p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x5B</code></strong>, left bracket) starts a <del><a href="#undefined">flow sequence</a></del>.</p>
 
-<div id="rule-c-sequence-start"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[8] c-sequence-start ::= "["
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[8] c-sequence-start ::= "["
+</pre>
 
 <p>A [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”] (<strong><code class="language-plaintext highlighter-rouge">#x5D</code></strong>, right bracket) ends a <del><a href="#undefined">flow sequence</a></del>.</p>
 
-<div id="rule-c-sequence-end"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[9] c-sequence-end ::= "]"
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[9] c-sequence-end ::= "]"
+</pre>
 
 <p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x7B</code></strong>, left brace) starts a <del><a href="#undefined">flow mapping</a></del>.</p>
 
-<div id="rule-c-mapping-start"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[10] c-mapping-start ::= "{"
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[10] c-mapping-start ::= "{"
+</pre>
 
 <p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x7D</code></strong>, right brace) ends a <del><a href="#undefined">flow mapping</a></del>.</p>
 
-<div id="rule-c-mapping-end"></div>
-<div class="language-plaintext rule highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[11] c-mapping-end ::= "}"
-</code></pre></div></div>
+<div id="rule-"></div>
+<pre class="rule">
+[11] c-mapping-end ::= "}"
+</pre>
 
 <div id="example-flow-collection-indicators" class="example">
   <p><strong>Example 5.4 Flow Collection Indicators</strong></p>
@@ -2111,11 +2122,10 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
 An ~~["**`#`**"](#undefined)~~ (**`#x23`**, octothorpe, hash, sharp, pound, number sign)
 denotes a ~~[comment](#undefined)~~.
 
-<div id="rule-c-comment" />
-```
+<div id="rule-" />
+<pre class="rule">
 [12] c-comment ::= "#"
-```
-{:.rule}
+</pre>
 
 <div id="example-comment-indicator" class="example">
 **Example 5.5 Comment Indicator**
@@ -2146,19 +2156,17 @@ denotes a ~~[comment](#undefined)~~.
 
 An ~~["**`&amp;`**"](#undefined)~~ (**`#x26`**, ampersand) denotes a ~~[node’s anchor property](#undefined)~~.
 
-<div id="rule-c-anchor" />
-```
+<div id="rule-" />
+<pre class="rule">
 [13] c-anchor ::= "&amp;"
-```
-{:.rule}
+</pre>
 
 An ~~["**`*`**"](#undefined)~~ (**`#x2A`**, asterisk) denotes an ~~[alias node](#undefined)~~.
 
-<div id="rule-c-alias" />
-```
+<div id="rule-" />
+<pre class="rule">
 [14] c-alias ::= "*"
-```
-{:.rule}
+</pre>
 
 The ~~["**`!`**"](#undefined)~~ (**`#x21`**, exclamation) is heavily overloaded for specifying
 ~~[node tags](#undefined)~~.
@@ -2166,11 +2174,10 @@ It is used to denote ~~[tag handles](#undefined)~~ used in ~~[tag directives](#u
 properties](#undefined)~~; to denote ~~[local tags](#undefined)~~; and as the ~~[non-specific tag](#undefined)~~ for
 non-~~[plain scalars](#undefined)~~.
 
-<div id="rule-c-tag" />
-```
+<div id="rule-" />
+<pre class="rule">
 [15] c-tag ::= "!"
-```
-{:.rule}
+</pre>
 
 <div id="example-node-property-indicators" class="example">
 **Example 5.6 Node Property Indicators**
@@ -2209,19 +2216,17 @@ alias: <code class="legend-3">*</code>anchor
 
 A ~~["**`|`**"](#undefined)~~ (**`7C`**, vertical bar) denotes a [literal block scalar](#literal-style).
 
-<div id="rule-c-literal" />
-```
+<div id="rule-" />
+<pre class="rule">
 [16] c-literal ::= "|"
-```
-{:.rule}
+</pre>
 
 A ~~["**`&gt;`**"](#undefined)~~ (**`#x3E`**, greater than) denotes a ~~[folded block scalar](#undefined)~~.
 
-<div id="rule-c-folded" />
-```
+<div id="rule-" />
+<pre class="rule">
 [17] c-folded ::= "&gt;"
-```
-{:.rule}
+</pre>
 
 <div id="example-block-scalar-indicators" class="example">
 **Example 5.7 Block Scalar Indicators**
@@ -2264,20 +2269,18 @@ folded: <code class="legend-2">&gt;</code>
 An ~~["**`'`**"](#undefined)~~ (**`#x27`**, apostrophe, single quote) surrounds a
 ~~[single-quoted flow scalar](#undefined)~~.
 
-<div id="rule-c-single-quote" />
-```
+<div id="rule-" />
+<pre class="rule">
 [18] c-single-quote ::= "'"
-```
-{:.rule}
+</pre>
 
 A ~~["**`"`**"](#undefined)~~ (**`#x22`**, double quote) surrounds a ~~[double-quoted flow
 scalar](#undefined)~~.
 
-<div id="rule-c-double-quote" />
-```
+<div id="rule-" />
+<pre class="rule">
 [19] c-double-quote ::= '"'
-```
-{:.rule}
+</pre>
 
 <div id="example-quoted-scalar-indicators" class="example">
 **Example 5.8 Quoted Scalar Indicators**
@@ -2315,11 +2318,10 @@ double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
 
 A ~~["**`%`**"](#undefined)~~ (**`#x25`**, percent) denotes a ~~[directive](#undefined)~~ line.
 
-<div id="rule-c-directive" />
-```
+<div id="rule-" />
+<pre class="rule">
 [20] c-directive ::= "%"
-```
-{:.rule}
+</pre>
 
 <div id="example-directive-indicator" class="example">
 **Example 5.9 Directive Indicator**
@@ -2352,12 +2354,11 @@ A ~~["**`%`**"](#undefined)~~ (**`#x25`**, percent) denotes a ~~[directive](#und
 The _"**`@`**"_ (**`#x40`**, at) and _"**<code>&grave;</code>**"_ (**`#x60`**,
 grave accent) are _reserved_ for future use.
 
-<div id="rule-c-reserved" />
-```
+<div id="rule-" />
+<pre class="rule">
 [21] c-reserved ::=
   "@" | "`"
-```
-{:.rule}
+</pre>
 
 <div id="example-invalid-use-of-reserved-indicators" class="example">
 **Example 5.10 Invalid use of Reserved Indicators**
@@ -2385,14 +2386,13 @@ ERROR:
 
 Any indicator character:
 
-<div id="rule-c-indicator" />
-```
+<div id="rule-" />
+<pre class="rule">
 [22] c-indicator ::=
     "-" | "?" | ":" | "," | "[" | "]" | "{" | "}"
   | "#" | "&amp;" | "*" | "!" | "|" | "&gt;" | "'" | '"'
   | "%" | "@" | "`"
-```
-{:.rule}
+</pre>
 
 The ~~["**`[`**"](#undefined)~~, ["**`]`**"], ~~["**`{`**"](#undefined)~~, ~~["**`}`**"](#undefined)~~ and ~~["**`,`**"](#undefined)~~
 indicators denote structure in ~~[flow collections](#undefined)~~.
@@ -2400,12 +2400,11 @@ They are therefore forbidden in some cases, to avoid ambiguity in several
 constructs.
 This is handled on a case-by-case basis by the relevant productions.
 
-<div id="rule-c-flow-indicator" />
-```
+<div id="rule-" />
+<pre class="rule">
 [23] c-flow-indicator ::=
   "," | "[" | "]" | "{" | "}"
-```
-{:.rule}
+</pre>
 
 <div id="line-break-characters" />
 ## 5.4. Line Break Characters
@@ -2413,26 +2412,23 @@ This is handled on a case-by-case basis by the relevant productions.
 
 YAML recognizes the following ASCII _line break_ characters.
 
-<div id="rule-b-line-feed" />
-```
+<div id="rule-" />
+<pre class="rule">
 [24] b-line-feed ::=
   #xA    /* LF */
-```
-{:.rule}
+</pre>
 
-<div id="rule-b-carriage-return" />
-```
+<div id="rule-" />
+<pre class="rule">
 [25] b-carriage-return ::=
   #xD    /* CR */
-```
-{:.rule}
+</pre>
 
-<div id="rule-b-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [26] b-char ::=
   b-line-feed | b-carriage-return
-```
-{:.rule}
+</pre>
 
 All other characters, including the form feed (**`#x0C`**), are considered to
 be non-break characters.
@@ -2448,44 +2444,40 @@ these characters were rarely (if ever) used.
 YAML 1.2 ~~[processors](#undefined)~~ ~~[parsing](#undefined)~~ a ~~[version 1.1](#undefined)~~ ~~[document](#undefined)~~ should therefore
 treat these line breaks as non-break characters, with an appropriate warning.
 
-<div id="rule-nb-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [27] nb-char ::=
   c-printable - b-char - c-byte-order-mark
-```
-{:.rule}
+</pre>
 
 Line breaks are interpreted differently by different systems, and have several
 widely used formats.
 
-<div id="rule-b-break" />
-```
+<div id="rule-" />
+<pre class="rule">
 [28] b-break ::=
     ( b-carriage-return b-line-feed ) /* DOS, Windows */
   | b-carriage-return                 /* MacOS upto 9.x */
   | b-line-feed                       /* UNIX, MacOS X */
-```
-{:.rule}
+</pre>
 
 Line breaks inside [scalar content](#scalar) must be _normalized_ by the YAML [processor](#processing-yaml-information).
 Each such line break must be ~~[parsed](#undefined)~~ into a single line feed character.
 The original line break format is a ~~[presentation detail](#undefined)~~ and must not be used
 to convey [content](#nodes) information.
 
-<div id="rule-b-as-line-feed" />
-```
+<div id="rule-" />
+<pre class="rule">
 [29] b-as-line-feed ::= b-break
-```
-{:.rule}
+</pre>
 
 Outside [scalar content](#scalar), YAML allows any line break to be used to terminate
 lines.
 
-<div id="rule-b-non-content" />
-```
+<div id="rule-" />
+<pre class="rule">
 [30] b-non-content ::= b-break
-```
-{:.rule}
+</pre>
 
 On output, a YAML [processor](#processing-yaml-information) is free to emit line breaks using whatever
 convention is most appropriate.
@@ -2529,36 +2521,32 @@ for clarity.
 
 YAML recognizes two _white space_ characters: _space_ and _tab_.
 
-<div id="rule-s-space" />
-```
+<div id="rule-" />
+<pre class="rule">
 [31] s-space ::=
   #x20 /* SP */
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-tab" />
-```
+<div id="rule-" />
+<pre class="rule">
 [32] s-tab ::=
   #x9  /* TAB */
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-white" />
-```
+<div id="rule-" />
+<pre class="rule">
 [33] s-white ::=
   s-space | s-tab
-```
-{:.rule}
+</pre>
 
 The rest of the ([printable](#character-set)) non-[break](#line-break-characters) characters are considered to be
 non-space characters.
 
-<div id="rule-ns-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [34] ns-char ::=
   nb-char - s-white
-```
-{:.rule}
+</pre>
 
 In the examples, tab characters are displayed as the glyph "**`→`**".
 Space characters are sometimes displayed as the glyph "**`·`**" for clarity.
@@ -2612,40 +2600,36 @@ classes:
 
 * A decimal digit for numbers:
 
-<div id="rule-ns-dec-digit" />
-```
+<div id="rule-" />
+<pre class="rule">
 [35] ns-dec-digit ::=
   [#x30-#x39] /* 0-9 */
-```
-{:.rule}
+</pre>
 
 * A hexadecimal digit for ~~[escape sequences](#undefined)~~:
 
-<div id="rule-ns-hex-digit" />
-```
+<div id="rule-" />
+<pre class="rule">
 [36] ns-hex-digit ::=
     ns-dec-digit
   | [#x41-#x46] /* A-F */ | [#x61-#x66] /* a-f */
-```
-{:.rule}
+</pre>
 
 * ASCII letter (alphabetic) characters:
 
-<div id="rule-ns-ascii-letter" />
-```
+<div id="rule-" />
+<pre class="rule">
 [37] ns-ascii-letter ::=
   [#x41-#x5A] /* A-Z */ | [#x61-#x7A] /* a-z */
-```
-{:.rule}
+</pre>
 
 * Word (alphanumeric) characters for identifiers:
 
-<div id="rule-ns-word-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [38] ns-word-char ::=
   ns-dec-digit | ns-ascii-letter | "-"
-```
-{:.rule}
+</pre>
 
 * URI characters for ~~[tags](#undefined)~~, as specified in
   [RFC2396](http://www.ietf.org/rfc/rfc2396.txt), with the addition of the
@@ -2659,14 +2643,13 @@ classes:
   characters must be preserved and compared exactly as ~~[presented](#undefined)~~ in the YAML
   [stream](#streams), without any processing.
 
-<div id="rule-ns-uri-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [39] ns-uri-char ::=
     "%" ns-hex-digit ns-hex-digit | ns-word-char | "#"
   | ";" | "/" | "?" | ":" | "@" | "&amp;" | "=" | "+" | "$" | ","
   | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")" | "[" | "]"
-```
-{:.rule}
+</pre>
 
 * The ~~["**`!`**"](#undefined)~~ character is used to indicate the end of a ~~[named tag
   handle](#undefined)~~; hence its use in ~~[tag shorthands](#undefined)~~ is restricted.
@@ -2674,12 +2657,11 @@ classes:
   ~~["**`{`**"](#undefined)~~, ~~["**`}`**"](#undefined)~~ and ~~["**`,`**"](#undefined)~~ characters.
   These characters would cause ambiguity with ~~[flow collection](#undefined)~~ structures.
 
-<div id="rule-ns-tag-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [40] ns-tag-char ::=
   ns-uri-char - "!" - c-flow-indicator
-```
-{:.rule}
+</pre>
 
 <div id="escaped-characters" />
 ## 5.7. Escaped Characters
@@ -2696,189 +2678,168 @@ Note that escape sequences are only interpreted in ~~[double-quoted scalars](#un
 In all other ~~[scalar styles](#undefined)~~, the "**`\`**" character has no special meaning
 and non-[printable](#character-set) characters are not available.
 
-<div id="rule-c-escape" />
-```
+<div id="rule-" />
+<pre class="rule">
 [41] c-escape ::= "\"
-```
-{:.rule}
+</pre>
 
 YAML escape sequences are a superset of C’s escape sequences:
 
 Escaped ASCII null (**`#x0`**) character.
 
-<div id="rule-ns-esc-null" />
-```
+<div id="rule-" />
+<pre class="rule">
 [42] ns-esc-null ::= "0"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII bell (**`#x7`**) character.
 
-<div id="rule-ns-esc-bell" />
-```
+<div id="rule-" />
+<pre class="rule">
 [43] ns-esc-bell ::= "a"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII backspace (**`#x8`**) character.
 
-<div id="rule-ns-esc-backspace" />
-```
+<div id="rule-" />
+<pre class="rule">
 [44] ns-esc-backspace ::= "b"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII horizontal tab (**`#x9`**) character.
 This is useful at the start or the end of a line to force a leading or trailing
 tab to become part of the [content](#nodes).
 
-<div id="rule-ns-esc-horizontal-tab" />
-```
+<div id="rule-" />
+<pre class="rule">
 [45] ns-esc-horizontal-tab ::=
   "t" | #x9
-```
-{:.rule}
+</pre>
 
 Escaped ASCII line feed (**`#xA`**) character.
 
-<div id="rule-ns-esc-line-feed" />
-```
+<div id="rule-" />
+<pre class="rule">
 [46] ns-esc-line-feed ::= "n"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII vertical tab (**`#xB`**) character.
 
-<div id="rule-ns-esc-vertical-tab" />
-```
+<div id="rule-" />
+<pre class="rule">
 [47] ns-esc-vertical-tab ::= "v"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII form feed (**`#xC`**) character.
 
-<div id="rule-ns-esc-form-feed" />
-```
+<div id="rule-" />
+<pre class="rule">
 [48] ns-esc-form-feed ::= "f"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII carriage return (**`#xD`**) character.
 
-<div id="rule-ns-esc-carriage-return" />
-```
+<div id="rule-" />
+<pre class="rule">
 [49] ns-esc-carriage-return ::= "r"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII escape (**`#x1B`**) character.
 
-<div id="rule-ns-esc-escape" />
-```
+<div id="rule-" />
+<pre class="rule">
 [50] ns-esc-escape ::= "e"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII space (**`#x20`**) character.
 This is useful at the start or the end of a line to force a leading or trailing
 space to become part of the [content](#nodes).
 
-<div id="rule-ns-esc-space" />
-```
+<div id="rule-" />
+<pre class="rule">
 [51] ns-esc-space ::= #x20
-```
-{:.rule}
+</pre>
 
 Escaped ASCII double quote (**`#x22`**).
 
-<div id="rule-ns-esc-double-quote" />
-```
+<div id="rule-" />
+<pre class="rule">
 [52] ns-esc-double-quote ::= '"'
-```
-{:.rule}
+</pre>
 
 Escaped ASCII slash (**`#x2F`**), for ~~[JSON compatibility](#undefined)~~.
 
-<div id="rule-ns-esc-slash" />
-```
+<div id="rule-" />
+<pre class="rule">
 [53] ns-esc-slash ::= "/"
-```
-{:.rule}
+</pre>
 
 Escaped ASCII back slash (**`#x5C`**).
 
-<div id="rule-ns-esc-backslash" />
-```
+<div id="rule-" />
+<pre class="rule">
 [54] ns-esc-backslash ::= "\"
-```
-{:.rule}
+</pre>
 
 Escaped Unicode next line (**`#x85`**) character.
 
-<div id="rule-ns-esc-next-line" />
-```
+<div id="rule-" />
+<pre class="rule">
 [55] ns-esc-next-line ::= "N"
-```
-{:.rule}
+</pre>
 
 Escaped Unicode non-breaking space (**`#xA0`**) character.
 
-<div id="rule-ns-esc-non-breaking-space" />
-```
+<div id="rule-" />
+<pre class="rule">
 [56] ns-esc-non-breaking-space ::= "_"
-```
-{:.rule}
+</pre>
 
 Escaped Unicode line separator (**`#x2028`**) character.
 
-<div id="rule-ns-esc-line-separator" />
-```
+<div id="rule-" />
+<pre class="rule">
 [57] ns-esc-line-separator ::= "L"
-```
-{:.rule}
+</pre>
 
 Escaped Unicode paragraph separator (**`#x2029`**) character.
 
-<div id="rule-ns-esc-paragraph-separator" />
-```
+<div id="rule-" />
+<pre class="rule">
 [58] ns-esc-paragraph-separator ::= "P"
-```
-{:.rule}
+</pre>
 
 Escaped 8-bit Unicode character.
 
-<div id="rule-ns-esc-8-bit" />
-```
+<div id="rule-" />
+<pre class="rule">
 [59] ns-esc-8-bit ::=
   "x"
   ( ns-hex-digit × 2 )
-```
-{:.rule}
+</pre>
 
 Escaped 16-bit Unicode character.
 
-<div id="rule-ns-esc-16-bit" />
-```
+<div id="rule-" />
+<pre class="rule">
 [60] ns-esc-16-bit ::=
   "u"
   ( ns-hex-digit × 4 )
-```
-{:.rule}
+</pre>
 
 Escaped 32-bit Unicode character.
 
-<div id="rule-ns-esc-32-bit" />
-```
+<div id="rule-" />
+<pre class="rule">
 [61] ns-esc-32-bit ::=
   "U"
   ( ns-hex-digit × 8 )
-```
-{:.rule}
+</pre>
 
 Any escaped character:
 
-<div id="rule-c-ns-esc-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [62] c-ns-esc-char ::=
   "\"
   ( ns-esc-null | ns-esc-bell | ns-esc-backspace
@@ -2889,8 +2850,7 @@ Any escaped character:
   | ns-esc-next-line | ns-esc-non-breaking-space
   | ns-esc-line-separator | ns-esc-paragraph-separator
   | ns-esc-8-bit | ns-esc-16-bit | ns-esc-32-bit )
-```
-{:.rule}
+</pre>
 
 <div id="example-escaped-characters" class="example">
 **Example 5.13 Escaped Characters**
@@ -2972,31 +2932,28 @@ results in the insertion of an appropriate number of [spaces](#white-space-chara
 The amount of indentation is a ~~[presentation detail](#undefined)~~ and must not be used to
 convey [content](#nodes) information.
 
-<div id="rule-s-indent-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [63] s-indent(n) ::=
   s-space × n
-```
-{:.rule}
+</pre>
 
 A ~~[block style](#undefined)~~ construct is terminated when encountering a line which is less
 indented than the construct.
 The productions use the notation "**`s-indent(&lt;n)`**" and "**`s-indent(≤n)`**"
 to express this.
 
-<div id="rule-s-indent-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [64] s-indent(&lt;n) ::=
   s-space × m /* Where m &lt; n */
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-indent-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [65] s-indent(≤n) ::=
   s-space × m /* Where m ≤ n */
-```
-{:.rule}
+</pre>
 
 Each [node](#nodes) must be indented further than its parent [node](#nodes).
 All sibling ~~[nodes](#undefined)~~ must use the exact same indentation level.
@@ -3108,12 +3065,11 @@ Note that such [white space](#white-space-characters) may safely include ~~[tab]
 Separation spaces are a ~~[presentation detail](#undefined)~~ and must not be used to convey
 [content](#nodes) information.
 
-<div id="rule-s-separate-in-line" />
-```
+<div id="rule-" />
+<pre class="rule">
 [66] s-separate-in-line ::=
   s-white+ | /* Start of line */
-```
-{:.rule}
+</pre>
 
 <div id="example-separation-spaces" class="example">
 **Example 6.3 Separation Spaces**
@@ -3161,28 +3117,25 @@ which may contain ~~[tab](#undefined)~~ characters.
 Line prefixes are a ~~[presentation detail](#undefined)~~ and must not be used to convey
 [content](#nodes) information.
 
-<div id="rule-s-line-prefix-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [67] s-line-prefix(n,c) ::=
   c = block-out ⇒ s-block-line-prefix(n)
   c = block-in  ⇒ s-block-line-prefix(n)
   c = flow-out  ⇒ s-flow-line-prefix(n)
   c = flow-in   ⇒ s-flow-line-prefix(n)
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-block-line-prefix-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [68] s-block-line-prefix(n) ::= s-indent(n)
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-flow-line-prefix-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [69] s-flow-line-prefix(n) ::=
   s-indent(n) s-separate-in-line?
-```
-{:.rule}
+</pre>
 
 <div id="example-line-prefixes" class="example">
 **Example 6.4 Line Prefixes**
@@ -3233,13 +3186,12 @@ block: |
 An _empty line_ line consists of the non-[content](#nodes) ~~[prefix](#undefined)~~ followed by a ~~[line
 break](#undefined)~~.
 
-<div id="rule-l-empty-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [70] l-empty(n,c) ::=
   ( s-line-prefix(n,c) | s-indent(&lt;n) )
   b-as-line-feed
-```
-{:.rule}
+</pre>
 
 The semantics of empty lines depend on the ~~[scalar style](#undefined)~~ they appear in.
 This is handled on a case-by-case basis by the relevant productions.
@@ -3291,30 +3243,27 @@ the semantics of the original long line.
 If a [line break](#line-break-characters) is followed by an ~~[empty line](#undefined)~~, it is _trimmed_; the first
 [line break](#line-break-characters) is discarded and the rest are retained as [content](#nodes).
 
-<div id="rule-b-l-trimmed-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [71] b-l-trimmed(n,c) ::=
   b-non-content l-empty(n,c)+
-```
-{:.rule}
+</pre>
 
 Otherwise (the following line is not ~~[empty](#undefined)~~), the [line break](#line-break-characters) is converted to
 a single [space](#white-space-characters) (**`#x20`**).
 
-<div id="rule-b-as-space" />
-```
+<div id="rule-" />
+<pre class="rule">
 [72] b-as-space ::= b-break
-```
-{:.rule}
+</pre>
 
 A folded non-~~[empty line](#undefined)~~ may end with either of the above [line breaks](#line-break-characters).
 
-<div id="rule-b-l-folded-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [73] b-l-folded(n,c) ::=
   b-l-trimmed(n,c) | b-as-space
-```
-{:.rule}
+</pre>
 
 <div id="example-line-folding" class="example">
 **Example 6.6 Line Folding**
@@ -3415,13 +3364,12 @@ Folding does distinguish between these cases in the following way:
 &gt; text can be freely ~~[more-indented](#undefined)~~ without affecting the [content](#nodes)
 &gt; information.
 
-<div id="rule-s-flow-folded-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [74] s-flow-folded(n) ::=
   s-separate-in-line? b-l-folded(n,flow-in)
   s-flow-line-prefix(n)
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-folding" class="example">
 **Example 6.8 Flow Folding**
@@ -3470,27 +3418,24 @@ of the final comment [line break](#line-break-characters) of the input [stream](
 However, as this confuses many tools, YAML ~~[processors](#undefined)~~ should terminate the
 [stream](#streams) with an explicit [line break](#line-break-characters) on output.
 
-<div id="rule-c-nb-comment-text" />
-```
+<div id="rule-" />
+<pre class="rule">
 [75] c-nb-comment-text ::=
   "#" nb-char*
-```
-{:.rule}
+</pre>
 
-<div id="rule-b-comment" />
-```
+<div id="rule-" />
+<pre class="rule">
 [76] b-comment ::=
   b-non-content | /* End of file */
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-b-comment" />
-```
+<div id="rule-" />
+<pre class="rule">
 [77] s-b-comment ::=
   ( s-separate-in-line c-nb-comment-text? )?
   b-comment
-```
-{:.rule}
+</pre>
 
 <div id="example-separated-comment" class="example">
 **Example 6.9 Separated Comment**
@@ -3530,12 +3475,11 @@ independent of the [indentation](#indentation-spaces) level.
 Note that outside [scalar content](#scalar), a line containing only [white space](#white-space-characters)
 characters is taken to be a comment line.
 
-<div id="rule-l-comment" />
-```
+<div id="rule-" />
+<pre class="rule">
 [78] l-comment ::=
   s-separate-in-line c-nb-comment-text? b-comment
-```
-{:.rule}
+</pre>
 
 <div id="example-comment-lines" class="example">
 **Example 6.10 Comment Lines**
@@ -3570,13 +3514,12 @@ In most cases, when a line may end with a comment, YAML allows it to be
 followed by additional comment lines.
 The only exception is a comment ending a ~~[block scalar header](#undefined)~~.
 
-<div id="rule-s-l-comments" />
-```
+<div id="rule-" />
+<pre class="rule">
 [79] s-l-comments ::=
   ( s-b-comment | /* Start of line */ )
   l-comment*
-```
-{:.rule}
+</pre>
 
 <div id="example-multi-line-comments" class="example">
 **Example 6.11 Multi-Line Comments**
@@ -3625,8 +3568,8 @@ Note that structures following multi-line comment separation must be properly
 [indented](#indentation-spaces), even though there is no such restriction on the separation
 ~~[comment](#undefined)~~ lines themselves.
 
-<div id="rule-s-separate-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [80] s-separate(n,c) ::=
   c = block-out ⇒ s-separate-lines(n)
   c = block-in  ⇒ s-separate-lines(n)
@@ -3634,16 +3577,14 @@ Note that structures following multi-line comment separation must be properly
   c = flow-in   ⇒ s-separate-lines(n)
   c = block-key ⇒ s-separate-in-line
   c = flow-key  ⇒ s-separate-in-line
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-separate-lines-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [81] s-separate-lines(n) ::=
     ( s-l-comments s-flow-line-prefix(n) )
   | s-separate-in-line
-```
-{:.rule}
+</pre>
 
 <div id="example-separation-spaces" class="example">
 **Example 6.12 Separation Spaces**
@@ -3705,16 +3646,15 @@ This is intentional.
 Directives are a ~~[presentation detail](#undefined)~~ and must not be used to convey [content](#nodes)
 information.
 
-<div id="rule-l-directive" />
-```
+<div id="rule-" />
+<pre class="rule">
 [82] l-directive ::=
   "%"
   ( ns-yaml-directive
   | ns-tag-directive
   | ns-reserved-directive )
   s-l-comments
-```
-{:.rule}
+</pre>
 
 Each directive is specified on a separate non-[indented](#indentation-spaces) line starting with the
 _"**`%`**" indicator_, followed by the directive name and a list of parameters.
@@ -3722,25 +3662,22 @@ The semantics of these parameters depends on the specific directive.
 A YAML [processor](#processing-yaml-information) should ignore unknown directives with an appropriate
 warning.
 
-<div id="rule-ns-reserved-directive" />
-```
+<div id="rule-" />
+<pre class="rule">
 [83] ns-reserved-directive ::=
   ns-directive-name
   ( s-separate-in-line ns-directive-parameter )*
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-directive-name" />
-```
+<div id="rule-" />
+<pre class="rule">
 [84] ns-directive-name ::= ns-char+
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-directive-parameter" />
-```
+<div id="rule-" />
+<pre class="rule">
 [85] ns-directive-parameter ::= ns-char+
-```
-{:.rule}
+</pre>
 
 <div id="example-reserved-directives" class="example">
 **Example 6.13 Reserved Directives**
@@ -3799,20 +3736,18 @@ Hence a version 1.2 [processor](#processing-yaml-information) should process ver
 they were version 1.2, giving a warning on points of incompatibility (handling
 of ~~[non-ASCII line breaks](#undefined)~~, as described ~~[above](#undefined)~~).
 
-<div id="rule-ns-yaml-directive" />
-```
+<div id="rule-" />
+<pre class="rule">
 [86] ns-yaml-directive ::=
   "Y" "A" "M" "L"
   s-separate-in-line ns-yaml-version
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-yaml-version" />
-```
+<div id="rule-" />
+<pre class="rule">
 [87] ns-yaml-version ::=
   ns-dec-digit+ "." ns-dec-digit+
-```
-{:.rule}
+</pre>
 
 <div id="example-yaml-directive" class="example">
 **Example 6.14 "**`YAML`**" directive**
@@ -3882,14 +3817,13 @@ specifying ~~[node tags](#undefined)~~.
 Each "**`TAG`**" directive associates a ~~[handle](#undefined)~~ with a ~~[prefix](#undefined)~~.
 This allows for compact and readable [tag](#tags) notation.
 
-<div id="rule-ns-tag-directive" />
-```
+<div id="rule-" />
+<pre class="rule">
 [88] ns-tag-directive ::=
   "T" "A" "G"
   s-separate-in-line c-tag-handle
   s-separate-in-line ns-tag-prefix
-```
-{:.rule}
+</pre>
 
 <div id="example-tag-directive" class="example">
 **Example 6.16 "**`TAG`**" directive**
@@ -3958,14 +3892,13 @@ handle in the same document.
 The _tag handle_ exactly matches the prefix of the affected ~~[tag shorthand](#undefined)~~.
 There are three tag handle variants:
 
-<div id="rule-c-tag-handle" />
-```
+<div id="rule-" />
+<pre class="rule">
 [89] c-tag-handle ::=
     c-named-tag-handle
   | c-secondary-tag-handle
   | c-primary-tag-handle
-```
-{:.rule}
+</pre>
 
 ##### Primary Handle
 
@@ -3981,11 +3914,10 @@ There are three tag handle variants:
 &gt; This provides smooth migration from using ~~[local tags](#undefined)~~ to using ~~[global
 &gt; tags](#undefined)~~, by the simple addition of a single "**`TAG`**" directive.
 
-<div id="rule-c-primary-tag-handle" />
-```
+<div id="rule-" />
+<pre class="rule">
 [90] c-primary-tag-handle ::= "!"
-```
-{:.rule}
+</pre>
 
 <div id="example-primary-tag-handle" class="example">
 **Example 6.18 Primary Tag Handle**
@@ -4034,12 +3966,11 @@ There are three tag handle variants:
 &gt; It is possible to override this default behavior by providing an explicit
 &gt; "**`TAG`**" directive associating a different prefix for this handle.
 
-<div id="rule-c-secondary-tag-handle" />
-```
+<div id="rule-" />
+<pre class="rule">
 [91] c-secondary-tag-handle ::=
   "!" "!"
-```
-{:.rule}
+</pre>
 
 <div id="example-secondary-tag-handle" class="example">
 **Example 6.19 Secondary Tag Handle**
@@ -4081,12 +4012,11 @@ There are three tag handle variants:
 &gt; In particular, the YAML [processor](#processing-yaml-information) need not preserve the handle name once
 &gt; ~~[parsing](#undefined)~~ is completed.
 
-<div id="rule-c-named-tag-handle" />
-```
+<div id="rule-" />
+<pre class="rule">
 [92] c-named-tag-handle ::=
   "!" ns-word-char+ "!"
-```
-{:.rule}
+</pre>
 
 <div id="example-tag-handles" class="example">
 **Example 6.20 Tag Handles**
@@ -4123,12 +4053,11 @@ There are three tag handle variants:
 
 There are two _tag prefix_ variants:
 
-<div id="rule-ns-tag-prefix" />
-```
+<div id="rule-" />
+<pre class="rule">
 [93] ns-tag-prefix ::=
   c-ns-local-tag-prefix | ns-global-tag-prefix
-```
-{:.rule}
+</pre>
 
 ##### Local Tag Prefix
 
@@ -4139,12 +4068,11 @@ There are two _tag prefix_ variants:
 &gt; In particular, two [documents](#document) in the same [stream](#streams) may assign different
 &gt; semantics to the same ~~[local tag](#undefined)~~.
 
-<div id="rule-c-ns-local-tag-prefix" />
-```
+<div id="rule-" />
+<pre class="rule">
 [94] c-ns-local-tag-prefix ::=
   "!" ns-uri-char*
-```
-{:.rule}
+</pre>
 
 <div id="example-local-tag-prefix" class="example">
 **Example 6.21 Local Tag Prefix**
@@ -4192,12 +4120,11 @@ There are two _tag prefix_ variants:
 &gt; In particular, every [documents](#document) in every [stream](#streams) must assign the same
 &gt; semantics to the same ~~[global tag](#undefined)~~.
 
-<div id="rule-ns-global-tag-prefix" />
-```
+<div id="rule-" />
+<pre class="rule">
 [95] ns-global-tag-prefix ::=
   ns-tag-char ns-uri-char*
-```
-{:.rule}
+</pre>
 
 <div id="example-global-tag-prefix" class="example">
 **Example 6.22 Global Tag Prefix**
@@ -4237,15 +4164,14 @@ to its [content](#nodes).
 Node properties may be specified in any order before the ~~[node’s content](#undefined)~~.
 Either or both may be omitted.
 
-<div id="rule-c-ns-properties-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [96] c-ns-properties(n,c) ::=
     ( c-ns-tag-property
       ( s-separate(n,c) c-ns-anchor-property )? )
   | ( c-ns-anchor-property
       ( s-separate(n,c) c-ns-tag-property )? )
-```
-{:.rule}
+</pre>
 
 <div id="example-node-properties" class="example">
 **Example 6.23 Node Properties**
@@ -4291,14 +4217,13 @@ The _tag property_ identifies the type of the ~~[native data structure](#undefin
 ~~[presented](#undefined)~~ by the [node](#nodes).
 A tag is denoted by the _"**`!`**" indicator_.
 
-<div id="rule-c-ns-tag-property" />
-```
+<div id="rule-" />
+<pre class="rule">
 [97] c-ns-tag-property ::=
     c-verbatim-tag
   | c-ns-shorthand-tag
   | c-non-specific-tag
-```
-{:.rule}
+</pre>
 
 ##### Verbatim Tags
 
@@ -4310,12 +4235,11 @@ A tag is denoted by the _"**`!`**" indicator_.
 &gt; A verbatim tag must either begin with a ~~["**`!`**"](#undefined)~~ (a ~~[local tag](#undefined)~~) or be a
 &gt; valid URI (a ~~[global tag](#undefined)~~).
 
-<div id="rule-c-verbatim-tag" />
-```
+<div id="rule-" />
+<pre class="rule">
 [98] c-verbatim-tag ::=
   "!" "&lt;" ns-uri-char+ "&gt;"
-```
-{:.rule}
+</pre>
 
 <div id="example-verbatim-tags" class="example">
 **Example 6.24 Verbatim Tags**
@@ -4401,12 +4325,11 @@ ERROR:
 &gt; (specifically, section 2.3 of
 &gt; [RFC2396](http://www.ietf.org/rfc/rfc2396.txt)).
 
-<div id="rule-c-ns-shorthand-tag" />
-```
+<div id="rule-" />
+<pre class="rule">
 [99] c-ns-shorthand-tag ::=
   c-tag-handle ns-tag-char+
-```
-{:.rule}
+</pre>
 
 <div id="example-tag-shorthands" class="example">
 **Example 6.26 Tag Shorthands**
@@ -4487,11 +4410,10 @@ ERROR:
 &gt; There is no way to explicitly specify the ~~["**`?`**" non-specific](#undefined)~~ tag.
 &gt; This is intentional.
 
-<div id="rule-c-non-specific-tag" />
-```
+<div id="rule-" />
+<pre class="rule">
 [100] c-non-specific-tag ::= "!"
-```
-{:.rule}
+</pre>
 
 <div id="example-non-specific-tags" class="example">
 **Example 6.28 Non-Specific Tags**
@@ -4538,12 +4460,11 @@ anchored [node](#nodes).
 An anchored [node](#nodes) need not be referenced by any ~~[alias nodes](#undefined)~~; in particular,
 it is valid for all ~~[nodes](#undefined)~~ to be anchored.
 
-<div id="rule-c-ns-anchor-property" />
-```
+<div id="rule-" />
+<pre class="rule">
 [101] c-ns-anchor-property ::=
   "&amp;" ns-anchor-name
-```
-{:.rule}
+</pre>
 
 Note that as a ~~[serialization detail](#undefined)~~, the anchor name is preserved in the
 ~~[serialization tree](#undefined)~~.
@@ -4556,18 +4477,16 @@ Anchor names must not contain the ~~["**`[`**"](#undefined)~~, ["**`]`**"], ~~["
 ~~["**`}`**"](#undefined)~~ and ~~["**`,`**"](#undefined)~~ characters.
 These characters would cause ambiguity with ~~[flow collection](#undefined)~~ structures.
 
-<div id="rule-ns-anchor-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [102] ns-anchor-char ::=
   ns-char - c-flow-indicator
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-anchor-name" />
-```
+<div id="rule-" />
+<pre class="rule">
 [103] ns-anchor-name ::= ns-anchor-char+
-```
-{:.rule}
+</pre>
 
 <div id="example-node-anchors" class="example">
 **Example 6.29 Node Anchors**
@@ -4630,12 +4549,11 @@ It is not an error to specify an ~~[anchor](#undefined)~~ that is not used by an
 Note that an alias node must not specify any ~~[properties](#undefined)~~ or [content](#nodes), as
 these were already specified at the first occurrence of the [node](#nodes).
 
-<div id="rule-c-ns-alias-node" />
-```
+<div id="rule-" />
+<pre class="rule">
 [104] c-ns-alias-node ::=
   "*" ns-anchor-name
-```
-{:.rule}
+</pre>
 
 <div id="example-alias-nodes" class="example">
 **Example 7.1 Alias Nodes**
@@ -4685,12 +4603,11 @@ YAML allows the ~~[node content](#undefined)~~ to be omitted in many cases. ~~[N
 [content](#nodes) are interpreted as if they were ~~[plain scalars](#undefined)~~ with an empty value.
 Such ~~[nodes](#undefined)~~ are commonly resolved to a ~~["**`null`**"](#undefined)~~ value.
 
-<div id="rule-e-scalar" />
-```
+<div id="rule-" />
+<pre class="rule">
 [105] e-scalar ::=
   /* Empty */
-```
-{:.rule}
+</pre>
 
 In the examples, empty ~~[scalars](#undefined)~~ are sometimes displayed as the glyph "**`°`**"
 for clarity.
@@ -4735,11 +4652,10 @@ This allows for a _completely empty node_.
 Completely empty nodes are only valid when following some explicit indication
 for their existence.
 
-<div id="rule-e-node" />
-```
+<div id="rule-" />
+<pre class="rule">
 [106] e-node ::= e-scalar
-```
-{:.rule}
+</pre>
 
 <div id="example-completely-empty-flow-nodes" class="example">
 **Example 7.3 Completely Empty Flow Nodes**
@@ -4796,45 +4712,40 @@ This is the only ~~[style](#undefined)~~ capable of expressing arbitrary strings
 This comes at the cost of having to escape the ~~["**`\`**"](#undefined)~~ and "**`"`**"
 characters.
 
-<div id="rule-nb-double-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [107] nb-double-char ::=
   c-ns-esc-char | ( nb-json - "\" - '"' )
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-double-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [108] ns-double-char ::=
   nb-double-char - s-white
-```
-{:.rule}
+</pre>
 
 Double-quoted scalars are restricted to a single line when contained inside an
 ~~[implicit key](#undefined)~~.
 
-<div id="rule-c-double-quoted-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [109] c-double-quoted(n,c) ::=
   '"' nb-double-text(n,c) '"'
-```
-{:.rule}
+</pre>
 
-<div id="rule-nb-double-text-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [110] nb-double-text(n,c) ::=
   c = flow-out  ⇒ nb-double-multi-line(n)
   c = flow-in   ⇒ nb-double-multi-line(n)
   c = block-key ⇒ nb-double-one-line
   c = flow-key  ⇒ nb-double-one-line
-```
-{:.rule}
+</pre>
 
-<div id="rule-nb-double-one-line" />
-```
+<div id="rule-" />
+<pre class="rule">
 [111] nb-double-one-line ::= nb-double-char*
-```
-{:.rule}
+</pre>
 
 <div id="example-double-quoted-implicit-keys" class="example">
 **Example 7.4 Double Quoted Implicit Keys**
@@ -4882,20 +4793,18 @@ In this case, the [line break](#line-break-characters) is excluded from the [con
 Combined with the ability to ~~[escape](#undefined)~~ [white space](#white-space-characters) characters, this allows
 double-quoted lines to be broken at arbitrary positions.
 
-<div id="rule-s-double-escaped-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [112] s-double-escaped(n) ::=
   s-white* "\" b-non-content
   l-empty(n,flow-in)* s-flow-line-prefix(n)
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-double-break-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [113] s-double-break(n) ::=
   s-double-escaped(n) | s-flow-folded(n)
-```
-{:.rule}
+</pre>
 
 <div id="example-double-quoted-line-breaks" class="example">
 **Example 7.5 Double Quoted Line Breaks**
@@ -4936,29 +4845,26 @@ All leading and trailing [white space](#white-space-characters) characters are e
 Each continuation line must therefore contain at least one non-[space](#white-space-characters) character.
 Empty lines, if any, are consumed as part of the ~~[line folding](#undefined)~~.
 
-<div id="rule-nb-ns-double-in-line" />
-```
+<div id="rule-" />
+<pre class="rule">
 [114] nb-ns-double-in-line ::=
   ( s-white* ns-double-char )*
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-double-next-line-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [115] s-double-next-line(n) ::=
   s-double-break(n)
   ( ns-double-char nb-ns-double-in-line
     ( s-double-next-line(n) | s-white* ) )?
-```
-{:.rule}
+</pre>
 
-<div id="rule-nb-double-multi-line-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [116] nb-double-multi-line(n) ::=
   nb-ns-double-in-line
   ( s-double-next-line(n) | s-white* )
-```
-{:.rule}
+</pre>
 
 <div id="example-double-quoted-lines" class="example">
 **Example 7.6 Double Quoted Lines**
@@ -5005,26 +4911,23 @@ This restricts single-quoted scalars to [printable](#character-set) characters.
 In addition, it is only possible to break a long single-quoted line where a
 [space](#white-space-characters) character is surrounded by non-[spaces](#white-space-characters).
 
-<div id="rule-c-quoted-quote" />
-```
+<div id="rule-" />
+<pre class="rule">
 [117] c-quoted-quote ::=
   "'" "'"
-```
-{:.rule}
+</pre>
 
-<div id="rule-nb-single-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [118] nb-single-char ::=
   c-quoted-quote | ( nb-json - "'" )
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-single-char" />
-```
+<div id="rule-" />
+<pre class="rule">
 [119] ns-single-char ::=
   nb-single-char - s-white
-```
-{:.rule}
+</pre>
 
 <div id="example-single-quoted-characters" class="example">
 **Example 7.7 Single Quoted Characters**
@@ -5056,28 +4959,25 @@ In addition, it is only possible to break a long single-quoted line where a
 Single-quoted scalars are restricted to a single line when contained inside a
 ~~[implicit key](#undefined)~~.
 
-<div id="rule-c-single-quoted-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [120] c-single-quoted(n,c) ::=
   "'" nb-single-text(n,c) "'"
-```
-{:.rule}
+</pre>
 
-<div id="rule-nb-single-text-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [121] nb-single-text(n,c) ::=
   c = flow-out  ⇒ nb-single-multi-line(n)
   c = flow-in   ⇒ nb-single-multi-line(n)
   c = block-key ⇒ nb-single-one-line
   c = flow-key  ⇒ nb-single-one-line
-```
-{:.rule}
+</pre>
 
-<div id="rule-nb-single-one-line" />
-```
+<div id="rule-" />
+<pre class="rule">
 [122] nb-single-one-line ::= nb-single-char*
-```
-{:.rule}
+</pre>
 
 <div id="example-single-quoted-implicit-keys" class="example">
 **Example 7.8 Single Quoted Implicit Keys**
@@ -5122,29 +5022,26 @@ All leading and trailing [white space](#white-space-characters) characters are e
 Each continuation line must therefore contain at least one non-[space](#white-space-characters) character.
 Empty lines, if any, are consumed as part of the ~~[line folding](#undefined)~~.
 
-<div id="rule-nb-ns-single-in-line" />
-```
+<div id="rule-" />
+<pre class="rule">
 [123] nb-ns-single-in-line ::=
   ( s-white* ns-single-char )*
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-single-next-line-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [124] s-single-next-line(n) ::=
   s-flow-folded(n)
   ( ns-single-char nb-ns-single-in-line
     ( s-single-next-line(n) | s-white* ) )?
-```
-{:.rule}
+</pre>
 
-<div id="rule-nb-single-multi-line-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [125] nb-single-multi-line(n) ::=
   nb-ns-single-in-line
   ( s-single-next-line(n) | s-white* )
-```
-{:.rule}
+</pre>
 
 <div id="example-single-quoted-lines" class="example">
 **Example 7.9 Single Quoted Lines**
@@ -5198,14 +5095,13 @@ However, the ~~["**`:`**"](#undefined)~~, ~~["**`?`**"](#undefined)~~ and ~~["**
 as the first character if followed by a non-[space](#white-space-characters) "safe" character, as this
 causes no ambiguity.
 
-<div id="rule-ns-plain-first-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [126] ns-plain-first(c) ::=
     ( ns-char - c-indicator )
   | ( ( "?" | ":" | "-" )
       /* Followed by an ns-plain-safe(c)) */ )
-```
-{:.rule}
+</pre>
 
 Plain scalars must never contain the ~~["**`:`** "](#undefined)~~ and ~~[" **`#`**"](#undefined)~~ character
 combinations.
@@ -5216,37 +5112,33 @@ scalars must not contain the ~~["**`[`**"](#undefined)~~, ["**`]`**"], ~~["**`{`
 and ~~["**`,`**"](#undefined)~~ characters.
 These characters would cause ambiguity with ~~[flow collection](#undefined)~~ structures.
 
-<div id="rule-ns-plain-safe-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [127] ns-plain-safe(c) ::=
   c = flow-out  ⇒ ns-plain-safe-out
   c = flow-in   ⇒ ns-plain-safe-in
   c = block-key ⇒ ns-plain-safe-out
   c = flow-key  ⇒ ns-plain-safe-in
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-plain-safe-out" />
-```
+<div id="rule-" />
+<pre class="rule">
 [128] ns-plain-safe-out ::= ns-char
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-plain-safe-in" />
-```
+<div id="rule-" />
+<pre class="rule">
 [129] ns-plain-safe-in ::=
   ns-char - c-flow-indicator
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-plain-char-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [130] ns-plain-char(c) ::=
     ( ns-plain-safe(c) - ":" - "#" )
   | ( /* An ns-char preceding */ "#" )
   | ( ":" /* Followed by an ns-plain-safe(c) */ )
-```
-{:.rule}
+</pre>
 
 <div id="example-plain-characters" class="example">
 **Example 7.10 Plain Characters**
@@ -5303,29 +5195,26 @@ These characters would cause ambiguity with ~~[flow collection](#undefined)~~ st
 Plain scalars are further restricted to a single line when contained inside an
 ~~[implicit key](#undefined)~~.
 
-<div id="rule-ns-plain-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [131] ns-plain(n,c) ::=
   c = flow-out  ⇒ ns-plain-multi-line(n,c)
   c = flow-in   ⇒ ns-plain-multi-line(n,c)
   c = block-key ⇒ ns-plain-one-line(c)
   c = flow-key  ⇒ ns-plain-one-line(c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-nb-ns-plain-in-line-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [132] nb-ns-plain-in-line(c) ::=
   ( s-white* ns-plain-char(c) )*
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-plain-one-line-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [133] ns-plain-one-line(c) ::=
   ns-plain-first(c) nb-ns-plain-in-line(c)
-```
-{:.rule}
+</pre>
 
 <div id="example-plain-implicit-keys" class="example">
 **Example 7.11 Plain Implicit Keys**
@@ -5369,21 +5258,19 @@ All leading and trailing [white space](#white-space-characters) characters are e
 Each continuation line must therefore contain at least one non-[space](#white-space-characters) character.
 Empty lines, if any, are consumed as part of the ~~[line folding](#undefined)~~.
 
-<div id="rule-s-ns-plain-next-line-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [134] s-ns-plain-next-line(n,c) ::=
   s-flow-folded(n)
   ns-plain-char(c) nb-ns-plain-in-line(c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-plain-multi-line-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [135] ns-plain-multi-line(n,c) ::=
   ns-plain-one-line(c)
   s-ns-plain-next-line(n,c)*
-```
-{:.rule}
+</pre>
 
 <div id="example-plain-lines" class="example">
 **Example 7.12 Plain Lines**
@@ -5431,15 +5318,14 @@ The final "**`,`**" may be omitted.
 This does not cause ambiguity because flow collection entries can never be
 ~~[completely empty](#undefined)~~.
 
-<div id="rule-in-flow-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [136] in-flow(c) ::=
   c = flow-out  ⇒ flow-in
   c = flow-in   ⇒ flow-in
   c = block-key ⇒ flow-key
   c = flow-key  ⇒ flow-key
-```
-{:.rule}
+</pre>
 
 <div id="flow-sequences" />
 ### 7.4.1. Flow Sequences
@@ -5448,24 +5334,22 @@ This does not cause ambiguity because flow collection entries can never be
 _Flow sequence content_ is denoted by surrounding _"**`[`**"_ and _"**`]`**"_
 characters.
 
-<div id="rule-c-flow-sequence-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [137] c-flow-sequence(n,c) ::=
   "[" s-separate(n,c)?
   ns-s-flow-seq-entries(n,in-flow(c))? "]"
-```
-{:.rule}
+</pre>
 
 Sequence entries are separated by a ~~["**`,`**"](#undefined)~~ character.
 
-<div id="rule-ns-s-flow-seq-entries-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [138] ns-s-flow-seq-entries(n,c) ::=
   ns-flow-seq-entry(n,c) s-separate(n,c)?
   ( "," s-separate(n,c)?
     ns-s-flow-seq-entries(n,c)? )?
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-sequence" class="example">
 **Example 7.13 Flow Sequence**
@@ -5509,12 +5393,11 @@ Any ~~[flow node](#undefined)~~ may be used as a flow sequence entry.
 In addition, YAML provides a ~~[compact notation](#undefined)~~ for the case where a flow
 sequence entry is a ~~[mapping](#undefined)~~ with a ~~[single key: value pair](#undefined)~~.
 
-<div id="rule-ns-flow-seq-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [139] ns-flow-seq-entry(n,c) ::=
   ns-flow-pair(n,c) | ns-flow-node(n,c)
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-sequence-entries" class="example">
 **Example 7.14 Flow Sequence Entries**
@@ -5569,24 +5452,22 @@ single: pair,
 _Flow mappings_ are denoted by surrounding _"**`{`**"_ and _"**`}`**"_
 characters.
 
-<div id="rule-c-flow-mapping-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [140] c-flow-mapping(n,c) ::=
   "{" s-separate(n,c)?
   ns-s-flow-map-entries(n,in-flow(c))? "}"
-```
-{:.rule}
+</pre>
 
 Mapping entries are separated by a ~~["**`,`**"](#undefined)~~ character.
 
-<div id="rule-ns-s-flow-map-entries-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [141] ns-s-flow-map-entries(n,c) ::=
   ns-flow-map-entry(n,c) s-separate(n,c)?
   ( "," s-separate(n,c)?
     ns-s-flow-map-entries(n,c)? )?
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-mappings" class="example">
 **Example 7.15 Flow Mappings**
@@ -5629,23 +5510,21 @@ Mapping entries are separated by a ~~["**`,`**"](#undefined)~~ character.
 If the optional _"**`?`**" mapping key indicator_ is specified, the rest of the
 entry may be ~~[completely empty](#undefined)~~.
 
-<div id="rule-ns-flow-map-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [142] ns-flow-map-entry(n,c) ::=
     ( "?" s-separate(n,c)
       ns-flow-map-explicit-entry(n,c) )
   | ns-flow-map-implicit-entry(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-flow-map-explicit-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [143] ns-flow-map-explicit-entry(n,c) ::=
     ns-flow-map-implicit-entry(n,c)
   | ( e-node /* Key */
       e-node /* Value */ )
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-mapping-entries" class="example">
 **Example 7.16 Flow Mapping Entries**
@@ -5695,42 +5574,38 @@ and not a ~~[key: value pair](#undefined)~~.
 Note that the ~~[value](#undefined)~~ may be ~~[completely empty](#undefined)~~ since its existence is
 indicated by the "**`:`**".
 
-<div id="rule-ns-flow-map-implicit-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [144] ns-flow-map-implicit-entry(n,c) ::=
     ns-flow-map-yaml-key-entry(n,c)
   | c-ns-flow-map-empty-key-entry(n,c)
   | c-ns-flow-map-json-key-entry(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-flow-map-yaml-key-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [145] ns-flow-map-yaml-key-entry(n,c) ::=
   ns-flow-yaml-node(n,c)
   ( ( s-separate(n,c)?
       c-ns-flow-map-separate-value(n,c) )
   | e-node )
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-ns-flow-map-empty-key-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [146] c-ns-flow-map-empty-key-entry(n,c) ::=
   e-node /* Key */
   c-ns-flow-map-separate-value(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-ns-flow-map-separate-value-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [147] c-ns-flow-map-separate-value(n,c) ::=
   ":" /* Not followed by an
          ns-plain-safe(c) */
   ( ( s-separate(n,c) ns-flow-node(n,c) )
   | e-node /* Value */ )
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-mapping-separate-values" class="example">
 **Example 7.17 Flow Mapping Separate Values**
@@ -5779,24 +5654,22 @@ This causes no ambiguity, as all ~~[JSON-like](#undefined)~~ ~~[keys](#undefined
 However, as this greatly reduces readability, YAML ~~[processors](#undefined)~~ should
 ~~[separate](#undefined)~~ the ~~[value](#undefined)~~ from the "**`:`**" on output, even in this case.
 
-<div id="rule-c-ns-flow-map-json-key-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [148] c-ns-flow-map-json-key-entry(n,c) ::=
   c-flow-json-node(n,c)
   ( ( s-separate(n,c)?
       c-ns-flow-map-adjacent-value(n,c) )
   | e-node )
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-ns-flow-map-adjacent-value-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [149] c-ns-flow-map-adjacent-value(n,c) ::=
   ":" ( ( s-separate(n,c)?
           ns-flow-node(n,c) )
       | e-node ) /* Value */
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-mapping-adjacent-values" class="example">
 **Example 7.18 Flow Mapping Adjacent Values**
@@ -5876,14 +5749,13 @@ foo: bar
 If the "**`?`**" indicator is explicitly specified, ~~[parsing](#undefined)~~ is unambiguous,
 and the syntax is identical to the general case.
 
-<div id="rule-ns-flow-pair-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [150] ns-flow-pair(n,c) ::=
     ( "?" s-separate(n,c)
       ns-flow-map-explicit-entry(n,c) )
   | ns-flow-pair-entry(n,c)
-```
-{:.rule}
+</pre>
 
 <div id="example-single-pair-explicit-entry" class="example">
 **Example 7.20 Single Pair Explicit Entry**
@@ -5931,46 +5803,41 @@ In particular, a [key](#nodes) may be a ~~[sequence](#undefined)~~ or a ~~[mappi
 Thus, without the above restrictions, practical one-pass ~~[parsing](#undefined)~~ would have
 been impossible to implement.
 
-<div id="rule-ns-flow-pair-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [151] ns-flow-pair-entry(n,c) ::=
     ns-flow-pair-yaml-key-entry(n,c)
   | c-ns-flow-map-empty-key-entry(n,c)
   | c-ns-flow-pair-json-key-entry(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-flow-pair-yaml-key-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [152] ns-flow-pair-yaml-key-entry(n,c) ::=
   ns-s-implicit-yaml-key(flow-key)
   c-ns-flow-map-separate-value(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-ns-flow-pair-json-key-entry-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [153] c-ns-flow-pair-json-key-entry(n,c) ::=
   c-s-implicit-json-key(flow-key)
   c-ns-flow-map-adjacent-value(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-s-implicit-yaml-key-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [154] ns-s-implicit-yaml-key(c) ::=
   ns-flow-yaml-node(n/a,c) s-separate-in-line?
   /* At most 1024 characters altogether */
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-s-implicit-json-key-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [155] c-s-implicit-json-key(c) ::=
   c-flow-json-node(n/a,c) s-separate-in-line?
   /* At most 1024 characters altogether */
-```
-{:.rule}
+</pre>
 
 <div id="example-single-pair-implicit-entries" class="example">
 **Example 7.21 Single Pair Implicit Entries**
@@ -6058,26 +5925,23 @@ The only ~~[flow style](#undefined)~~ that does not have this property is the ~~
 Note that none of the "JSON-like" styles is actually acceptable by JSON.
 Even the ~~[double-quoted style](#undefined)~~ is a superset of the JSON string format.
 
-<div id="rule-ns-flow-yaml-content-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [156] ns-flow-yaml-content(n,c) ::= ns-plain(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-flow-json-content-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [157] c-flow-json-content(n,c) ::=
     c-flow-sequence(n,c) | c-flow-mapping(n,c)
   | c-single-quoted(n,c) | c-double-quoted(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-flow-content-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [158] ns-flow-content(n,c) ::=
   ns-flow-yaml-content(n,c) | c-flow-json-content(n,c)
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-content" class="example">
 **Example 7.23 Flow Content**
@@ -6120,8 +5984,8 @@ Even the ~~[double-quoted style](#undefined)~~ is a superset of the JSON string 
 A complete ~~[flow](#undefined)~~ [node](#nodes) also has optional ~~[node properties](#undefined)~~, except for ~~[alias
 nodes](#undefined)~~ which refer to the ~~[anchored](#undefined)~~ ~~[node properties](#undefined)~~.
 
-<div id="rule-ns-flow-yaml-node-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [159] ns-flow-yaml-node(n,c) ::=
     c-ns-alias-node
   | ns-flow-yaml-content(n,c)
@@ -6129,19 +5993,17 @@ nodes](#undefined)~~ which refer to the ~~[anchored](#undefined)~~ ~~[node prope
       ( ( s-separate(n,c)
           ns-flow-yaml-content(n,c) )
         | e-scalar ) )
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-flow-json-node-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [160] c-flow-json-node(n,c) ::=
   ( c-ns-properties(n,c) s-separate(n,c) )?
   c-flow-json-content(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-flow-node-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [161] ns-flow-node(n,c) ::=
     c-ns-alias-node
   | ns-flow-content(n,c)
@@ -6149,8 +6011,7 @@ nodes](#undefined)~~ which refer to the ~~[anchored](#undefined)~~ ~~[node prope
       ( ( s-separate(n,c)
           ns-flow-content(n,c) )
         | e-scalar ) )
-```
-{:.rule}
+</pre>
 
 <div id="example-flow-nodes" class="example">
 **Example 7.24 Flow Nodes**
@@ -6215,16 +6076,15 @@ This header is followed by a non-content [line break](#line-break-characters) wi
 This is the only case where a ~~[comment](#undefined)~~ must not be followed by additional
 ~~[comment](#undefined)~~ lines.
 
-<div id="rule-c-b-block-header-m-t" />
-```
+<div id="rule-" />
+<pre class="rule">
 [162] c-b-block-header(m,t) ::=
   ( ( c-indentation-indicator(m)
       c-chomping-indicator(t) )
   | ( c-chomping-indicator(t)
       c-indentation-indicator(m) ) )
   s-b-comment
-```
-{:.rule}
+</pre>
 
 <div id="example-block-scalar-header" class="example">
 **Example 8.1 Block Scalar Header**
@@ -6288,13 +6148,12 @@ It is always valid to specify an indentation indicator for a ~~[block scalar](#u
 node, though a YAML [processor](#processing-yaml-information) should only emit an explicit indentation
 indicator for cases where detection will fail.
 
-<div id="rule-c-indentation-indicator-m" />
-```
+<div id="rule-" />
+<pre class="rule">
 [163] c-indentation-indicator(m) ::=
   ns-dec-digit ⇒ m = ns-dec-digit - #x30
   /* Empty */  ⇒ m = auto-detect()
-```
-{:.rule}
+</pre>
 
 <div id="example-block-indentation-indicator" class="example">
 **Example 8.2 Block Indentation Indicator**
@@ -6405,26 +6264,24 @@ YAML provides three chomping methods:
 The chomping method used is a ~~[presentation detail](#undefined)~~ and must not be used to
 convey [content](#nodes) information.
 
-<div id="rule-c-chomping-indicator-t" />
-```
+<div id="rule-" />
+<pre class="rule">
 [164] c-chomping-indicator(t) ::=
   "-"         ⇒ t = strip
   "+"         ⇒ t = keep
   /* Empty */ ⇒ t = clip
-```
-{:.rule}
+</pre>
 
 The interpretation of the final [line break](#line-break-characters) of a ~~[block scalar](#undefined)~~ is controlled
 by the chomping indicator specified in the ~~[block scalar header](#undefined)~~.
 
-<div id="rule-b-chomped-last-t" />
-```
+<div id="rule-" />
+<pre class="rule">
 [165] b-chomped-last(t) ::=
   t = strip ⇒ b-non-content | /* End of file */
   t = clip  ⇒ b-as-line-feed | /* End of file */
   t = keep  ⇒ b-as-line-feed | /* End of file */
-```
-{:.rule}
+</pre>
 
 <div id="example-chomping-final-line-break" class="example">
 **Example 8.4 Chomping Final Line Break**
@@ -6470,30 +6327,27 @@ The interpretation of the trailing ~~[empty lines](#undefined)~~ following a ~~[
 also controlled by the chomping indicator specified in the ~~[block scalar
 header](#undefined)~~.
 
-<div id="rule-l-chomped-empty-n-t" />
-```
+<div id="rule-" />
+<pre class="rule">
 [166] l-chomped-empty(n,t) ::=
   t = strip ⇒ l-strip-empty(n)
   t = clip  ⇒ l-strip-empty(n)
   t = keep  ⇒ l-keep-empty(n)
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-strip-empty-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [167] l-strip-empty(n) ::=
   ( s-indent(≤n) b-non-content )*
   l-trail-comments(n)?
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-keep-empty-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [168] l-keep-empty(n) ::=
   l-empty(n,block-in)*
   l-trail-comments(n)?
-```
-{:.rule}
+</pre>
 
 Explicit ~~[comment](#undefined)~~ lines may follow the trailing ~~[empty lines](#undefined)~~.
 To prevent ambiguity, the first such ~~[comment](#undefined)~~ line must be less [indented](#indentation-spaces)
@@ -6502,13 +6356,12 @@ Additional ~~[comment](#undefined)~~ lines, if any, are not so restricted.
 This is the only case where the [indentation](#indentation-spaces) of ~~[comment](#undefined)~~ lines is
 constrained.
 
-<div id="rule-l-trail-comments-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [169] l-trail-comments(n) ::=
   s-indent(&lt;n) c-nb-comment-text b-comment
   l-comment*
-```
-{:.rule}
+</pre>
 
 <div id="example-chomping-trailing-lines" class="example">
 **Example 8.5 Chomping Trailing Lines**
@@ -6614,13 +6467,12 @@ keep: |+
 The _literal style_ is denoted by the _"**`|`**" indicator_.
 It is the simplest, most restricted, and most readable ~~[scalar style](#undefined)~~.
 
-<div id="rule-c-l-literal-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [170] c-l+literal(n) ::=
   "|" c-b-block-header(m,t)
   l-literal-content(n+m,t)
-```
-{:.rule}
+</pre>
 
 <div id="example-literal-scalar" class="example">
 **Example 8.7 Literal Scalar**
@@ -6662,30 +6514,27 @@ There is no way to escape characters inside literal scalars.
 This restricts them to [printable](#character-set) characters.
 In addition, there is no way to break a long literal line.
 
-<div id="rule-l-nb-literal-text-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [171] l-nb-literal-text(n) ::=
   l-empty(n,block-in)*
   s-indent(n) nb-char+
-```
-{:.rule}
+</pre>
 
-<div id="rule-b-nb-literal-next-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [172] b-nb-literal-next(n) ::=
   b-as-line-feed
   l-nb-literal-text(n)
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-literal-content-n-t" />
-```
+<div id="rule-" />
+<pre class="rule">
 [173] l-literal-content(n,t) ::=
   ( l-nb-literal-text(n) b-nb-literal-next(n)*
     b-chomped-last(t) )?
   l-chomped-empty(n,t)
-```
-{:.rule}
+</pre>
 
 <div id="example-literal-content" class="example">
 **Example 8.8 Literal Content**
@@ -6733,13 +6582,12 @@ The _folded style_ is denoted by the _"**`&gt;`**" indicator_.
 It is similar to the ~~[literal style](#undefined)~~; however, folded scalars are subject to
 ~~[line folding](#undefined)~~.
 
-<div id="rule-c-l-folded-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [174] c-l+folded(n) ::=
   "&gt;" c-b-block-header(m,t)
   l-folded-content(n+m,t)
-```
-{:.rule}
+</pre>
 
 <div id="example-folded-scalar" class="example">
 **Example 8.9 Folded Scalar**
@@ -6774,20 +6622,18 @@ It is similar to the ~~[literal style](#undefined)~~; however, folded scalars ar
 ~~[Folding](#undefined)~~ allows long lines to be broken anywhere a single [space](#white-space-characters) character
 separates two non-[space](#white-space-characters) characters.
 
-<div id="rule-s-nb-folded-text-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [175] s-nb-folded-text(n) ::=
   s-indent(n) ns-char nb-char*
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-nb-folded-lines-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [176] l-nb-folded-lines(n) ::=
   s-nb-folded-text(n)
   ( b-l-folded(n,block-in) s-nb-folded-text(n) )*
-```
-{:.rule}
+</pre>
 
 <div id="example-folded-lines" class="example">
 **Example 8.10 Folded Lines**
@@ -6845,28 +6691,25 @@ different productions.)
 Lines starting with [white space](#white-space-characters) characters (_more-indented_ lines) are not
 ~~[folded](#undefined)~~.
 
-<div id="rule-s-nb-spaced-text-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [177] s-nb-spaced-text(n) ::=
   s-indent(n) s-white nb-char*
-```
-{:.rule}
+</pre>
 
-<div id="rule-b-l-spaced-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [178] b-l-spaced(n) ::=
   b-as-line-feed
   l-empty(n,block-in)*
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-nb-spaced-lines-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [179] l-nb-spaced-lines(n) ::=
   s-nb-spaced-text(n)
   ( b-l-spaced(n) s-nb-spaced-text(n) )*
-```
-{:.rule}
+</pre>
 
 <div id="example-more-indented-lines" class="example">
 **Example 8.11 More Indented Lines**
@@ -6921,21 +6764,19 @@ Lines starting with [white space](#white-space-characters) characters (_more-ind
 [Line breaks](#line-break-characters) and ~~[empty lines](#undefined)~~ separating folded and more-indented lines are
 also not ~~[folded](#undefined)~~.
 
-<div id="rule-l-nb-same-lines-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [180] l-nb-same-lines(n) ::=
   l-empty(n,block-in)*
   ( l-nb-folded-lines(n) | l-nb-spaced-lines(n) )
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-nb-diff-lines-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [181] l-nb-diff-lines(n) ::=
   l-nb-same-lines(n)
   ( b-as-line-feed l-nb-same-lines(n) )*
-```
-{:.rule}
+</pre>
 
 <div id="example-empty-separation-lines" class="example">
 **Example 8.12 Empty Separation Lines**
@@ -6992,13 +6833,12 @@ also not ~~[folded](#undefined)~~.
 The final [line break](#line-break-characters), and trailing ~~[empty lines](#undefined)~~ if any, are subject to
 ~~[chomping](#undefined)~~ and are never ~~[folded](#undefined)~~.
 
-<div id="rule-l-folded-content-n-t" />
-```
+<div id="rule-" />
+<pre class="rule">
 [182] l-folded-content(n,t) ::=
   ( l-nb-diff-lines(n) b-chomped-last(t) )?
   l-chomped-empty(n,t)
-```
-{:.rule}
+</pre>
 
 <div id="example-final-empty-lines" class="example">
 **Example 8.13 Final Empty Lines**
@@ -7069,21 +6909,19 @@ The "**`-`**" indicator must be [separated](#separation-spaces) from the [node](
 This allows "**`-`**" to be used as the first character in a ~~[plain scalar](#undefined)~~ if
 followed by a non-space character (e.g. "**`-1`**").
 
-<div id="rule-l-block-sequence-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [183] l+block-sequence(n) ::=
   ( s-indent(n+m) c-l-block-seq-entry(n+m) )+
   /* For some fixed auto-detected m &gt; 0 */
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-l-block-seq-entry-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [184] c-l-block-seq-entry(n) ::=
   "-" /* Not followed by an ns-char */
   s-l+block-indented(n,block-in)
-```
-{:.rule}
+</pre>
 
 <div id="example-block-sequence" class="example">
 **Example 8.14 Block Sequence**
@@ -7133,24 +6971,22 @@ considered to be part of the [indentation](#indentation-spaces) of the nested ~~
 Note that it is not possible to specify ~~[node properties](#undefined)~~ for such a
 ~~[collection](#undefined)~~.
 
-<div id="rule-s-l-block-indented-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [185] s-l+block-indented(n,c) ::=
     ( s-indent(m)
       ( ns-l-compact-sequence(n+1+m)
       | ns-l-compact-mapping(n+1+m) ) )
   | s-l+block-node(n,c)
   | ( e-node s-l-comments )
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-l-compact-sequence-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [186] ns-l-compact-sequence(n) ::=
   c-l-block-seq-entry(n)
   ( s-indent(n) c-l-block-seq-entry(n) )*
-```
-{:.rule}
+</pre>
 
 <div id="example-block-sequence-entry-types" class="example">
 **Example 8.15 Block Sequence Entry Types**
@@ -7205,13 +7041,12 @@ Note that it is not possible to specify ~~[node properties](#undefined)~~ for su
 A _Block mapping_ is a series of entries, each ~~[presenting](#undefined)~~ a ~~[key: value
 pair](#undefined)~~.
 
-<div id="rule-l-block-mapping-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [187] l+block-mapping(n) ::=
   ( s-indent(n+m) ns-l-block-map-entry(n+m) )+
   /* For some fixed auto-detected m &gt; 0 */
-```
-{:.rule}
+</pre>
 
 <div id="example-block-mappings" class="example">
 **Example 8.16 Block Mappings**
@@ -7253,37 +7088,33 @@ specified on a separate line, denoted by the ~~["**`:`**"](#undefined)~~ indicat
 Note that YAML allows here the same ~~[compact in-line notation](#undefined)~~ described above
 for ~~[block sequence](#undefined)~~ entries.
 
-<div id="rule-ns-l-block-map-entry-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [188] ns-l-block-map-entry(n) ::=
     c-l-block-map-explicit-entry(n)
   | ns-l-block-map-implicit-entry(n)
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-l-block-map-explicit-entry-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [189] c-l-block-map-explicit-entry(n) ::=
   c-l-block-map-explicit-key(n)
   ( l-block-map-explicit-value(n)
   | e-node )
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-l-block-map-explicit-key-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [190] c-l-block-map-explicit-key(n) ::=
   "?" s-l+block-indented(n,block-out)
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-block-map-explicit-value-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [191] l-block-map-explicit-value(n) ::=
   s-indent(n)
   ":" s-l+block-indented(n,block-out)
-```
-{:.rule}
+</pre>
 
 <div id="example-explicit-block-mapping-entries" class="example">
 **Example 8.17 Explicit Block Mapping Entries**
@@ -7332,22 +7163,20 @@ mapping](#undefined)~~.
 Hence, such ~~[keys](#undefined)~~ are subject to the same restrictions; they are limited to a
 single line and must not span more than 1024 Unicode characters.
 
-<div id="rule-ns-l-block-map-implicit-entry-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [192] ns-l-block-map-implicit-entry(n) ::=
   ( ns-s-block-map-implicit-key
   | e-node )
   c-l-block-map-implicit-value(n)
-```
-{:.rule}
+</pre>
 
-<div id="rule-ns-s-block-map-implicit-key" />
-```
+<div id="rule-" />
+<pre class="rule">
 [193] ns-s-block-map-implicit-key ::=
     c-s-implicit-json-key(block-key)
   | ns-s-implicit-yaml-key(block-key)
-```
-{:.rule}
+</pre>
 
 In this case, the ~~[value](#undefined)~~ may be specified on the same line as the ~~[implicit
 key](#undefined)~~.
@@ -7360,13 +7189,12 @@ Also, while both the ~~[implicit key](#undefined)~~ and the ~~[value](#undefined
 the ~~["**`:`**"](#undefined)~~ indicator is mandatory.
 This prevents a potential ambiguity with multi-line ~~[plain scalars](#undefined)~~.
 
-<div id="rule-c-l-block-map-implicit-value-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [194] c-l-block-map-implicit-value(n) ::=
   ":" ( s-l+block-node(n,block-out)
       | ( e-node s-l-comments ) )
-```
-{:.rule}
+</pre>
 
 <div id="example-implicit-block-mapping-entries" class="example">
 **Example 8.18 Implicit Block Mapping Entries**
@@ -7412,13 +7240,12 @@ mapping entries.
 Note that it is not possible to specify ~~[node properties](#undefined)~~ for such a nested
 mapping.
 
-<div id="rule-ns-l-compact-mapping-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [195] ns-l-compact-mapping(n) ::=
   ns-l-block-map-entry(n)
   ( s-indent(n) ns-l-block-map-entry(n) )*
-```
-{:.rule}
+</pre>
 
 <div id="example-compact-block-mappings" class="example">
 **Example 8.19 Compact Block Mappings**
@@ -7475,20 +7302,18 @@ Note that ~~[flow nodes](#undefined)~~ may begin on a following line.
 It is at this point that ~~[parsing](#undefined)~~ needs to distinguish between a ~~[plain
 scalar](#undefined)~~ and an ~~[implicit key](#undefined)~~ starting a nested ~~[block mapping](#undefined)~~.
 
-<div id="rule-s-l-block-node-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [196] s-l+block-node(n,c) ::=
   s-l+block-in-block(n,c) | s-l+flow-in-block(n)
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-l-flow-in-block-n" />
-```
+<div id="rule-" />
+<pre class="rule">
 [197] s-l+flow-in-block(n) ::=
   s-separate(n+1,flow-out)
   ns-flow-node(n+1,flow-out) s-l-comments
-```
-{:.rule}
+</pre>
 
 <div id="example-block-node-types" class="example">
 **Example 8.20 Block Node Types**
@@ -7535,21 +7360,19 @@ In this case, they must be [indented](#indentation-spaces) by at least one more 
 ~~[block collection](#undefined)~~, regardless of the [indentation](#indentation-spaces) of the ~~[block collection](#undefined)~~
 entries.
 
-<div id="rule-s-l-block-in-block-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [198] s-l+block-in-block(n,c) ::=
   s-l+block-scalar(n,c) | s-l+block-collection(n,c)
-```
-{:.rule}
+</pre>
 
-<div id="rule-s-l-block-scalar-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [199] s-l+block-scalar(n,c) ::=
   s-separate(n+1,c)
   ( c-ns-properties(n+1,c) s-separate(n+1,c) )?
   ( c-l+literal(n) | c-l+folded(n) )
-```
-{:.rule}
+</pre>
 
 <div id="example-block-scalar-nodes" class="example">
 **Example 8.21 Block Scalar Nodes**
@@ -7594,23 +7417,21 @@ sequences](#undefined)~~ may be [indented](#indentation-spaces) by one less [spa
 course, if nested inside another ~~[block sequence](#undefined)~~ (~~[**`block-out`** context](#undefined)~~
 vs. ~~[**`block-in`** context](#undefined)~~).
 
-<div id="rule-s-l-block-collection-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [200] s-l+block-collection(n,c) ::=
   ( s-separate(n+1,c) c-ns-properties(n+1,c) )?
   s-l-comments
   ( l+block-sequence(seq-spaces(n,c))
   | l+block-mapping(n) )
-```
-{:.rule}
+</pre>
 
-<div id="rule-seq-spaces-n-c" />
-```
+<div id="rule-" />
+<pre class="rule">
 [201] seq-spaces(n,c) ::=
   c = block-out ⇒ n-1
   c = block-in  ⇒ n
-```
-{:.rule}
+</pre>
 
 <div id="example-block-collection-nodes" class="example">
 **Example 8.22 Block Collection Nodes**
@@ -7681,12 +7502,11 @@ This makes it easier to concatenate streams.
 The existence of the optional prefix does not necessarily indicate the
 existence of an actual ~~[document](#undefined)~~.
 
-<div id="rule-l-document-prefix" />
-```
+<div id="rule-" />
+<pre class="rule">
 [202] l-document-prefix ::=
   c-byte-order-mark? l-comment*
-```
-{:.rule}
+</pre>
 
 <div id="example-document-prefix" class="example">
 **Example 9.1 Document Prefix**
@@ -7745,35 +7565,31 @@ the existence of an actual following ~~[document](#undefined)~~.
 Obviously, the actual [content](#nodes) lines are therefore forbidden to begin with
 either of these markers.
 
-<div id="rule-c-directives-end" />
-```
+<div id="rule-" />
+<pre class="rule">
 [203] c-directives-end ::=
   "-" "-" "-"
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-document-end" />
-```
+<div id="rule-" />
+<pre class="rule">
 [204] c-document-end ::=
   "." "." "."
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-document-suffix" />
-```
+<div id="rule-" />
+<pre class="rule">
 [205] l-document-suffix ::=
   c-document-end s-l-comments
-```
-{:.rule}
+</pre>
 
-<div id="rule-c-forbidden" />
-```
+<div id="rule-" />
+<pre class="rule">
 [206] c-forbidden ::=
   /* Start of line */
   ( c-directives-end | c-document-end )
   ( b-char | s-white | /* End of file */ )
-```
-{:.rule}
+</pre>
 
 <div id="example-document-markers" class="example">
 **Example 9.2 Document Markers**
@@ -7821,13 +7637,12 @@ Document ~~[nodes](#undefined)~~ are [indented](#indentation-spaces) as if they 
 Since a [node](#nodes) must be more [indented](#indentation-spaces) than its parent [node](#nodes), this allows the
 document’s [node](#nodes) to be [indented](#indentation-spaces) at zero or more [spaces](#white-space-characters).
 
-<div id="rule-l-bare-document" />
-```
+<div id="rule-" />
+<pre class="rule">
 [207] l-bare-document ::=
   s-l+block-node(-1,block-in)
   /* Excluding c-forbidden content */
-```
-{:.rule}
+</pre>
 
 <div id="example-bare-documents" class="example">
 **Example 9.3 Bare Documents**
@@ -7875,14 +7690,13 @@ no ~~[directives](#undefined)~~.
 Since the existence of the ~~[document](#undefined)~~ is indicated by this ~~[marker](#undefined)~~, the
 ~~[document](#undefined)~~ itself may be ~~[completely empty](#undefined)~~.
 
-<div id="rule-l-explicit-document" />
-```
+<div id="rule-" />
+<pre class="rule">
 [208] l-explicit-document ::=
   c-directives-end
   ( l-bare-document
   | ( e-node s-l-comments ) )
-```
-{:.rule}
+</pre>
 
 <div id="example-explicit-documents" class="example">
 **Example 9.4 Explicit Documents**
@@ -7930,13 +7744,12 @@ Since the existence of the ~~[document](#undefined)~~ is indicated by this ~~[ma
 A _directives document_ begins with some ~~[directives](#undefined)~~ followed by an explicit
 ~~[directives end marker](#undefined)~~ line.
 
-<div id="rule-l-directive-document" />
-```
+<div id="rule-" />
+<pre class="rule">
 [209] l-directive-document ::=
   l-directive+
   l-explicit-document
-```
-{:.rule}
+</pre>
 
 <div id="example-directives-documents" class="example">
 **Example 9.5 Directives Documents**
@@ -7988,23 +7801,21 @@ following ~~[document](#undefined)~~ must begin with a ~~[directives end marker]
 The stream format is intentionally "sloppy" to better support common use cases,
 such as stream concatenation.
 
-<div id="rule-l-any-document" />
-```
+<div id="rule-" />
+<pre class="rule">
 [210] l-any-document ::=
     l-directive-document
   | l-explicit-document
   | l-bare-document
-```
-{:.rule}
+</pre>
 
-<div id="rule-l-yaml-stream" />
-```
+<div id="rule-" />
+<pre class="rule">
 [211] l-yaml-stream ::=
   l-document-prefix* l-any-document?
   ( l-document-suffix+ l-document-prefix* l-any-document?
   | l-document-prefix* l-explicit-document? )*
-```
-{:.rule}
+</pre>
 
 <div id="example-stream" class="example">
 **Example 9.6 Stream**
