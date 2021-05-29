@@ -1,1 +1,8 @@
-div.rule div pre { background-color: #E0F8E0; border-style: ridge; }
+div.rule > * pre { background-color: #E0F8F8; border: none; }
+
+div.example > * td.side-by-side { vertical-align: top; border: none; width: 10%; }
+div.example > * pre { background-color: #E0F8E0; }
+
+div.legend > * code.legend-1 { background-color: #F8F8E0; border: 1px solid black; }
+div.legend > * code.legend-2 { background-color: #E0E0F8; border: 1px solid black; }
+div.legend > * code.legend-3 { background-color: #F8E0F8; border: 1px solid black; }
