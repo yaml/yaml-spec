@@ -6,3 +6,4 @@ div.example > * pre { background-color: #E0F8E0; }
 div.legend > * code.legend-1, pre code.legend-1 { background-color: #F8F8E0 !important; border: 1px solid black !important; }
 div.legend > * code.legend-2, pre code.legend-2 { background-color: #E0E0F8 !important; border: 1px solid black !important; }
 div.legend > * code.legend-3, pre code.legend-3 { background-color: #F8E0F8 !important; border: 1px solid black !important; }
+div.legend > * code.legend-4, pre code.legend-4 { background-color: #E0F8F8 !important; border: 1px solid black !important; }
