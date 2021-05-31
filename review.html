@@ -90,11 +90,13 @@ run = (m, n, o)->
     return unless e[0].isIntersecting
     h = $(e[0].target).text()
     h.match /^(#{1,4})\s/ or throw
+    say RegExp.$1
     l = RegExp.$1.length
     h = h.replace /^#+\s+/, ''
     h = h.replace(/^Chapter\s+/, '')
     h = h.replace(/^(\#\.)+\s+/, '')
     t = "H#{l} #{h}"
+    say t, nmap[t], omap[t]
     try
       goto nmap[t]
     try
