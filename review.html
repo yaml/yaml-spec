@@ -84,7 +84,7 @@ run = (m, n, o)->
 
   IO = $('iframe')[0].contentWindow.IntersectionObserver
 
-  height = 300 - document.documentElement.scrollHeight
+  height = 0 # 300 - document.documentElement.scrollHeight
 
   io = new IO (e)->
     return unless e[0].isIntersecting
