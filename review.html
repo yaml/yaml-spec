@@ -17,21 +17,21 @@
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js"></script>
 <style>
-.iframe {
-  overflow: hidden;
-  /* 16:9 aspect ratio */
-  padding-top: 56.25%;
+div.iframe {
   position: relative;
+  overflow: hidden;
+  padding-top: 50%;
+}
+div.iframe iframe {
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   border: none;
+   left: 0px;
+   top: 0px;
 }
 
-.iframe iframe {
-   border: 0;
-   height: 100%;
-   left: 0;
-   position: absolute;
-   top: 0;
-   width: 100%;
-}
+/* iframe { overflow:hidden;overflow-x:hidden;overflow-y:hidden;height:100%;width:100%;position:absolute;top:0px;left:0px;right:0px;bottom:0px;border:none; } */
 </style>
 
 </head>
@@ -80,7 +80,7 @@ run = (m, n, o)->
 
   IO = $('iframe')[0].contentWindow.IntersectionObserver
 
-  height = 300 - document.documentElement.scrollHeight
+  height = 200 - document.documentElement.scrollHeight
 
   io = new IO (e)->
     return unless e[0].isIntersecting
@@ -103,8 +103,6 @@ run = (m, n, o)->
   $(m).find('code').each ->
     io.observe(@)
 
-
-
 $(document).ready ->
   window.m = m = (Im = $('iframe')[0]).contentDocument
   window.n = n = (In = $('iframe')[1]).contentDocument
@@ -117,7 +115,7 @@ $(document).ready ->
        o.readyState == 'complete'
       setTimeout ->
         run m, n, o
-      , 1000
+      , 500
     else
       setTimeout wait, 100
   wait()
