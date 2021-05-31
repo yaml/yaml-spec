@@ -115,7 +115,9 @@ $(document).ready ->
     if m.readyState == 'complete' and
        n.readyState == 'complete' and
        o.readyState == 'complete'
-      run m, n, o
+      setTimeout ->
+        run m, n, o
+      , 1000
     else
       setTimeout wait, 100
   wait()
