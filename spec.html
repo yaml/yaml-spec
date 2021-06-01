@@ -31,14 +31,14 @@
 <p><strong>Latest (patched) version:</strong></p>
 
 <ul class="releaseinfo">
-  <li>HTML: <a href="http://yaml.org/spec/1.2/spec.html">http://yaml.org/spec/1.2/spec.html</a></li>
-  <li>PDF: <a href="http://yaml.org/spec/1.2/spec.pdf">http://yaml.org/spec/1.2/spec.pdf</a></li>
-  <li>PS: <a href="http://yaml.org/spec/1.2/spec.ps">http://yaml.org/spec/1.2/spec.ps</a></li>
-  <li>Errata: <a href="http://yaml.org/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a></li>
+  <li>HTML: <a href="/spec/1.2/spec.html">http://yaml.org/spec/1.2/spec.html</a></li>
+  <li>PDF: <a href="/spec/1.2/spec.pdf">http://yaml.org/spec/1.2/spec.pdf</a></li>
+  <li>PS: <a href="/spec/1.2/spec.ps">http://yaml.org/spec/1.2/spec.ps</a></li>
+  <li>Errata: <a href="/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a></li>
 </ul>
 
 <p><strong>Previous (original) version:</strong>
-<a href="http://yaml.org/spec/1.2/2009-07-21/spec.html">http://yaml.org/spec/1.2/2009-07-21/spec.html</a></p>
+<a href="/spec/1.2/2009-07-21/spec.html">http://yaml.org/spec/1.2/2009-07-21/spec.html</a></p>
 
 <p>Copyright © 2001-2009 Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 
@@ -80,7 +80,7 @@ Therefore, there are several incompatibilities between syck and this revision
 as well.</p>
 
 <p>The list of known errors in this specification is available at
-<a href="http://yaml.org/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a>.
+<a href="/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a>.
 Please report errors in this document to the yaml-core mailing list.
 This revision contains fixes for all errors known as of 2009-10-01.</p>
 
@@ -152,8 +152,8 @@ Version 1.2 and to create programs that process YAML information.</p>
               </li>
               <li><a href="#3212-tags" id="markdown-toc-3212-tags">3.2.1.2. Tags</a></li>
               <li><a href="#3213-node-comparison" id="markdown-toc-3213-node-comparison">3.2.1.3. Node Comparison</a>                <ul>
-                  <li><a href="#equality" id="markdown-toc-equality">Equality</a></li>
                   <li><a href="#canonical-form" id="markdown-toc-canonical-form">Canonical Form</a></li>
+                  <li><a href="#equality" id="markdown-toc-equality">Equality</a></li>
                   <li><a href="#identity" id="markdown-toc-identity">Identity</a></li>
                 </ul>
               </li>
@@ -309,21 +309,18 @@ Version 1.2 and to create programs that process YAML information.</p>
                   <li><a href="#uri" id="markdown-toc-uri">URI:</a></li>
                   <li><a href="#kind" id="markdown-toc-kind">Kind:</a></li>
                   <li><a href="#definition" id="markdown-toc-definition">Definition:</a></li>
-                  <li><a href="#equality-1" id="markdown-toc-equality-1">Equality:</a></li>
                 </ul>
               </li>
               <li><a href="#10112-generic-sequence" id="markdown-toc-10112-generic-sequence">10.1.1.2. Generic Sequence</a>                <ul>
                   <li><a href="#uri-1" id="markdown-toc-uri-1">URI:</a></li>
                   <li><a href="#kind-1" id="markdown-toc-kind-1">Kind:</a></li>
                   <li><a href="#definition-1" id="markdown-toc-definition-1">Definition:</a></li>
-                  <li><a href="#equality-2" id="markdown-toc-equality-2">Equality:</a></li>
                 </ul>
               </li>
               <li><a href="#10113-generic-string" id="markdown-toc-10113-generic-string">10.1.1.3. Generic String</a>                <ul>
                   <li><a href="#uri-2" id="markdown-toc-uri-2">URI:</a></li>
                   <li><a href="#kind-2" id="markdown-toc-kind-2">Kind:</a></li>
                   <li><a href="#definition-2" id="markdown-toc-definition-2">Definition:</a></li>
-                  <li><a href="#equality-3" id="markdown-toc-equality-3">Equality:</a></li>
                   <li><a href="#canonical-form-1" id="markdown-toc-canonical-form-1">Canonical Form:</a></li>
                 </ul>
               </li>
@@ -338,7 +335,6 @@ Version 1.2 and to create programs that process YAML information.</p>
                   <li><a href="#uri-3" id="markdown-toc-uri-3">URI:</a></li>
                   <li><a href="#kind-3" id="markdown-toc-kind-3">Kind:</a></li>
                   <li><a href="#definition-3" id="markdown-toc-definition-3">Definition:</a></li>
-                  <li><a href="#equality-4" id="markdown-toc-equality-4">Equality:</a></li>
                   <li><a href="#canonical-form-2" id="markdown-toc-canonical-form-2">Canonical Form:</a></li>
                 </ul>
               </li>
@@ -346,7 +342,6 @@ Version 1.2 and to create programs that process YAML information.</p>
                   <li><a href="#uri-4" id="markdown-toc-uri-4">URI:</a></li>
                   <li><a href="#kind-4" id="markdown-toc-kind-4">Kind:</a></li>
                   <li><a href="#definition-4" id="markdown-toc-definition-4">Definition:</a></li>
-                  <li><a href="#equality-5" id="markdown-toc-equality-5">Equality:</a></li>
                   <li><a href="#canonical-form-3" id="markdown-toc-canonical-form-3">Canonical Form:</a></li>
                 </ul>
               </li>
@@ -354,7 +349,6 @@ Version 1.2 and to create programs that process YAML information.</p>
                   <li><a href="#uri-5" id="markdown-toc-uri-5">URI:</a></li>
                   <li><a href="#kind-5" id="markdown-toc-kind-5">Kind:</a></li>
                   <li><a href="#definition-5" id="markdown-toc-definition-5">Definition:</a></li>
-                  <li><a href="#equality-6" id="markdown-toc-equality-6">Equality:</a></li>
                   <li><a href="#canonical-form-4" id="markdown-toc-canonical-form-4">Canonical Form:</a></li>
                 </ul>
               </li>
@@ -362,7 +356,6 @@ Version 1.2 and to create programs that process YAML information.</p>
                   <li><a href="#uri-6" id="markdown-toc-uri-6">URI:</a></li>
                   <li><a href="#kind-6" id="markdown-toc-kind-6">Kind:</a></li>
                   <li><a href="#definition-6" id="markdown-toc-definition-6">Definition:</a></li>
-                  <li><a href="#equality-7" id="markdown-toc-equality-7">Equality:</a></li>
                   <li><a href="#canonical-form-5" id="markdown-toc-canonical-form-5">Canonical Form:</a></li>
                 </ul>
               </li>
@@ -574,7 +567,7 @@ XML and other technologies.</p>
 XML/YAML mappings.
 This generally requires that a subset of each language be used.
 For more information on using both XML and YAML, please visit
-<a href="http://yaml.org/xml">http://yaml.org/xml</a>.</p>
+<a href="/xml">http://yaml.org/xml</a>.</p>
 
 <div id="terminology"></div>
 <h2 id="15-terminology">1.5. Terminology</h2>
@@ -944,9 +937,8 @@ and <del><a href="#undefined"><strong><code class="language-plaintext highlighte
 A few examples also use the <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">int</code></strong></a></del>, <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">float</code></strong></a></del>, and <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">null</code></strong></a></del> types
 from the <del><a href="#undefined">JSON schema</a></del>.
 The <del><a href="#undefined">repository</a></del> includes additional types such as
-<a href="http://yaml.org/type/binary.html"><strong><code class="language-plaintext highlighter-rouge">binary</code></strong></a>,
-<a href="http://yaml.org/type/omap.html"><strong><code class="language-plaintext highlighter-rouge">omap</code></strong></a>,
-<a href="http://yaml.org/type/set.html"><strong><code class="language-plaintext highlighter-rouge">set</code></strong></a> and others.</p>
+<a href="/type/binary.html"><strong><code class="language-plaintext highlighter-rouge">binary</code></strong></a>, <a href="/type/omap.html"><strong><code class="language-plaintext highlighter-rouge">omap</code></strong></a>,
+<a href="/type/set.html"><strong><code class="language-plaintext highlighter-rouge">set</code></strong></a> and others.</p>
 
 <div id="example-integers" class="example">
   <p><strong>Example 2.19 Integers</strong></p>
@@ -1432,81 +1424,59 @@ any other data that is applicable to all of the tag’s <del><a href="#undefined
 <div id="node-comparison"></div>
 <h4 id="3213-node-comparison">3.2.1.3. Node Comparison</h4>
 
-<h5 id="equality">Equality</h5>
-
-<p>Since YAML <a href="#mapping">mappings</a> require <a href="#nodes">key</a> uniqueness, <a href="#representation-graph">representations</a> must
-include a mechanism for testing the equality of <del><a href="#undefined">nodes</a></del>.
-In general, it is impossible to ensure uniqueness for <del><a href="#undefined">presentations</a></del>, for
-the following reasons:</p>
-
-<ul>
-  <li>
-    <p>YAML allows various ways to <del><a href="#undefined">format scalar content</a></del>.
+<p>Since YAML <a href="#mapping">mappings</a> require <a href="#nodes">key</a> uniqueness, <a href="#representation-graph">representations</a> must include
+a mechanism for testing the equality of <del><a href="#undefined">nodes</a></del>.
+This is non-trivial since YAML allows various ways to <del><a href="#undefined">format scalar content</a></del>.
 For example, the integer eleven can be written as “<strong><code class="language-plaintext highlighter-rouge">0o13</code></strong>” (octal) or
 “<strong><code class="language-plaintext highlighter-rouge">0xB</code></strong>” (hexadecimal).
 If both notations are used as <del><a href="#undefined">keys</a></del> in the same <del><a href="#undefined">mapping</a></del>, only a YAML
 <a href="#processing-yaml-information">processor</a> which recognizes integer <del><a href="#undefined">formats</a></del> would correctly flag the
 duplicate <a href="#nodes">key</a> as an error.</p>
-  </li>
-  <li>
-    <p>The semantics of the <a href="#representation-graph">representation</a> may require that values with different
-<del><a href="#undefined">tags</a></del> be considered equal.
-For example, the integer one and the float one are considered equal.
-If both are used as <del><a href="#undefined">keys</a></del> in the same <del><a href="#undefined">mapping</a></del>, only a YAML <a href="#processing-yaml-information">processor</a>
-which recognizes integer and float <a href="#representation-graph">representations</a> would correctly flag the
-duplicate <a href="#nodes">key</a> as an error.
-YAML therefore requires that each <a href="#tags">tag</a> must specify a mechanism for testing
-any of its values for <em>equality</em> with any other value (including values of
-any different <a href="#tags">tag</a>).
-This is often implemented directly by the <del><a href="#undefined">native data structure</a></del> instead of
-the YAML <a href="#processing-yaml-information">processor</a>.
-That is, duplicate <del><a href="#undefined">keys</a></del> are often flagged as an error during the
-<del><a href="#undefined">construction</a></del> processing stage.</p>
-  </li>
-</ul>
-
-<p>In order to ensure greater compatibility and clarity, YAML allows the
-<a href="#processing-yaml-information">processor</a> to flag obvious duplicate <del><a href="#undefined">keys</a></del> based on the <a href="#presentation-stream">presentation</a>.
-Specifically, two <a href="#scalar">scalar</a> <del><a href="#undefined">keys</a></del> in the same <del><a href="#undefined">mapping</a></del>, with the same <a href="#tags">tag</a>
-and the same <a href="#nodes">content</a>, may be flagged as an error as soon as the <del><a href="#undefined">parsing</a></del>
-stage.
-Note that this tests also works for <del><a href="#undefined">non-specific tags</a></del> due to the way that
-<del><a href="#undefined">tag resolution</a></del> is defined.
-This allows a human reader to reasonably identify <strong><code class="language-plaintext highlighter-rouge">{ a: 1, a: 2 }</code></strong> as an
-error.
-Such constructs are silently accepted by many languages, but have no well
-defined meaning, and are therefore disallowed in YAML to avoid surprising
-behavior.</p>
 
 <h5 id="canonical-form">Canonical Form</h5>
 
-<p>YAML also requires that every <a href="#scalar">scalar</a> <a href="#tags">tag</a> must specify a mechanism for
-producing the <em>canonical form</em> of any <a href="#scalar-formats">formatted content</a>.
-This form is a Unicode character string which also <del><a href="#undefined">presents</a></del> the same <a href="#nodes">content</a>.
-While this can be used for equality testing (as long as the compared values
-have the same <a href="#tags">tag</a>), it has other uses, such as the production of digital
-signatures.</p>
+<p>YAML supports the need for <a href="#scalar">scalar</a> equality by requiring that every
+<a href="#scalar">scalar</a> <a href="#tags">tag</a> must specify a mechanism for producing the <em>canonical form</em> of
+any <a href="#scalar-formats">formatted content</a>.
+This form is a Unicode character string which also <del><a href="#undefined">presents</a></del> the same
+<a href="#nodes">content</a>, and can be used for equality testing.
+While this requirement is stronger than a well defined equality operator, it
+has other uses, such as the production of digital signatures.</p>
+
+<h5 id="equality">Equality</h5>
+
+<p>Two <del><a href="#undefined">nodes</a></del> must have the same <a href="#tags">tag</a> and <a href="#nodes">content</a> to be <em>equal</em>.
+Since each <a href="#tags">tag</a> applies to exactly one <del><a href="#undefined">kind</a></del>, this implies that the two
+<del><a href="#undefined">nodes</a></del> must have the same <del><a href="#undefined">kind</a></del> to be equal.
+Two <del><a href="#undefined">scalars</a></del> are equal only when their <del><a href="#undefined">tags</a></del> and canonical forms are equal
+character-by-character.
+Equality of <del><a href="#undefined">collections</a></del> is defined recursively.
+Two <a href="#sequence">sequences</a> are equal only when they have the same <a href="#tags">tag</a> and length, and
+each <a href="#nodes">node</a> in one <del><a href="#undefined">sequence</a></del> is equal to the corresponding <a href="#nodes">node</a> in the
+other <del><a href="#undefined">sequence</a></del>.
+Two <a href="#mapping">mappings</a> are equal only when they have the same <a href="#tags">tag</a> and an equal set
+of <del><a href="#undefined">keys</a></del>, and each <a href="#nodes">key</a> in this set is associated with equal <del><a href="#undefined">values</a></del> in
+both <a href="#mapping">mappings</a>.</p>
+
+<p>Different URI schemes may define different rules for testing the equality of
+URIs.
+Since a YAML <a href="#processing-yaml-information">processor</a> cannot be reasonably expected to be aware of them
+all, it must resort to a simple character-by-character comparison of <del><a href="#undefined">tags</a></del>
+to ensure consistency.
+This also happens to be the comparison method defined by the “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI
+scheme. <del><a href="#undefined">Tags</a></del> in a YAML stream must therefore be <del><a href="#undefined">presented</a></del> in a canonical
+way so that such comparison would yield the correct results.</p>
 
 <h5 id="identity">Identity</h5>
 
 <p>Two <del><a href="#undefined">nodes</a></del> are <em>identical</em> only when they <del><a href="#undefined">represent</a></del> the same <del><a href="#undefined">native data
 structure</a></del>.
 Typically, this corresponds to a single memory address.
-Identity should not be confused with equality; two equal <del><a href="#undefined">nodes</a></del> need not
-have the same identity.
+Identity should not be confused with equality; two equal <del><a href="#undefined">nodes</a></del> need not have
+the same identity.
 A YAML <a href="#processing-yaml-information">processor</a> may treat equal <del><a href="#undefined">scalars</a></del> as if they were identical.
-In contrast, the separate identity of two distinct but equal <del><a href="#undefined">collections</a></del>
-must be preserved.</p>
-
-<p>A common programming idiom is creating an empty object to obtain a value that
-is only equal to itself (for example, in order to generate a dynamic
-“enumerated type”).
-The proper way to <del><a href="#undefined">represent</a></del> this in YAML would be <strong><code class="language-plaintext highlighter-rouge">!object {}</code></strong>, where
-the <strong><code class="language-plaintext highlighter-rouge">!object</code></strong> <a href="#tags">tag</a> defines two objects to be equal only if they are
-identical.
-The alternative <a href="#scalar">scalar</a> <a href="#representation-graph">representation</a> <strong><code class="language-plaintext highlighter-rouge">!object ''</code></strong> will not work as
-expected, as the YAML <a href="#processing-yaml-information">processor</a> is not required to preserve the identity of
-such objects.</p>
+In contrast, the separate identity of two distinct but equal <del><a href="#undefined">collections</a></del> must
+be preserved.</p>
 
 <div id="serialization-tree"></div>
 <h3 id="322-serialization-tree">3.2.2. Serialization Tree</h3>
@@ -1559,7 +1529,7 @@ It is therefore possible to provide an anchor for all <del><a href="#undefined">
 <div id="presentation-stream"></div>
 <h3 id="323-presentation-stream">3.2.3. Presentation Stream</h3>
 
-<p>A YAML <em>presentation</em> is a <a href="#streams">stream</a> of Unicode characters making use of
+<p>A YAML <em>presentation</em> is a <a href="#streams">stream</a> of Unicode characters making use of of
 <a href="#node-styles">styles</a>, <del><a href="#undefined">scalar content formats</a></del>, <del><a href="#undefined">comments</a></del>, <del><a href="#undefined">directives</a></del> and other
 <del><a href="#undefined">presentation details</a></del> to <del><a href="#undefined">present</a></del> a YAML <a href="#serialization-tree">serialization</a> in a human readable
 way.
@@ -1581,7 +1551,7 @@ not appear in more than one <del><a href="#undefined">serialization tree</a></de
 The node style is a <del><a href="#undefined">presentation detail</a></del> and is not reflected in the
 <del><a href="#undefined">serialization tree</a></del> or <a href="#representation-graph">representation graph</a>.
 There are two groups of styles. <del><a href="#undefined">Block styles</a></del> use <a href="#indentation-spaces">indentation</a> to denote
-structure; in contrast, <del><a href="#undefined">flow styles</a></del> rely on explicit <del><a href="#undefined">indicators</a></del>.</p>
+structure; In contrast, <del><a href="#undefined">flow styles</a></del> styles rely on explicit <del><a href="#undefined">indicators</a></del>.</p>
 
 <p>YAML provides a rich set of <em>scalar styles</em>. <del><a href="#undefined">Block scalar</a></del> styles include the
 <del><a href="#undefined">literal style</a></del> and the <del><a href="#undefined">folded style</a></del>. <del><a href="#undefined">Flow scalar</a></del> styles include the <del><a href="#undefined">plain
@@ -1631,7 +1601,7 @@ A directive has a name and an optional sequence of parameters.
 Directives are instructions to the YAML <a href="#processing-yaml-information">processor</a>, and like all other
 <del><a href="#undefined">presentation details</a></del> are not reflected in the YAML <del><a href="#undefined">serialization tree</a></del> or
 <a href="#representation-graph">representation graph</a>.
-This version of YAML defines two directives, <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>”</a></del> and <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”</a></del>.
+This version of YAML defines a two directives, <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>”</a></del> and <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”</a></del>.
 All other directives are <del><a href="#undefined">reserved</a></del> for future versions of YAML.</p>
 
 <div id="loading-failure-points"></div>
@@ -1966,7 +1936,7 @@ encodings.
 For <del><a href="#undefined">JSON compatibility</a></del>, the UTF-32 encodings must also be supported.</p>
 
 <p>If a character <a href="#streams">stream</a> begins with a <em>byte order mark</em>, the character encoding
-will be taken to be as indicated by the byte order mark.
+will be taken to be as as indicated by the byte order mark.
 Otherwise, the <a href="#streams">stream</a> must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (<strong><code class="language-plaintext highlighter-rouge">#x00</code></strong>)
 characters.</p>
@@ -2469,7 +2439,7 @@ scalar</a></del>.</p>
 
 <div id="rule-c-double-quote"></div>
 <pre class="rule">
-[19] c-double-quote ::= '"'
+[19] c-double-quote ::= """
 </pre>
 
 <div id="example-quoted-scalar-indicators" class="example">
@@ -2588,7 +2558,7 @@ ERROR:
 <pre class="rule">
 [22] c-indicator ::=
     "-" | "?" | ":" | "," | "[" | "]" | "{" | "}"
-  | "#" | "&amp;" | "*" | "!" | "|" | "&gt;" | "'" | '"'
+  | "#" | "&amp;" | "*" | "!" | "|" | "&gt;" | "'" | """
   | "%" | "@" | "`"
 </pre>
 
@@ -2980,7 +2950,7 @@ space to become part of the <a href="#nodes">content</a>.</p>
 
 <div id="rule-ns-esc-double-quote"></div>
 <pre class="rule">
-[52] ns-esc-double-quote ::= '"'
+[52] ns-esc-double-quote ::= """
 </pre>
 
 <p>Escaped ASCII slash (<strong><code class="language-plaintext highlighter-rouge">#x2F</code></strong>), for <del><a href="#undefined">JSON compatibility</a></del>.</p>
@@ -4409,7 +4379,7 @@ semantics to the same <del><a href="#undefined">local tag</a></del>.</p>
 <h5 id="global-tag-prefix">Global Tag Prefix</h5>
 
 <blockquote>
-  <p>If the prefix begins with a character other than <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del>, it must be a
+  <p>If the prefix begins with a character other than <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del>, it must to be a
 valid URI prefix, and should contain at least the scheme and the authority.
 <del><a href="#undefined">Shorthands</a></del> using the associated <del><a href="#undefined">handle</a></del> are expanded to globally unique URI
 tags, and their semantics is consistent across <a href="#processing-yaml-information">applications</a>.
@@ -5046,7 +5016,7 @@ characters.</p>
 <div id="rule-nb-double-char"></div>
 <pre class="rule">
 [107] nb-double-char ::=
-  c-ns-esc-char | ( nb-json - "\" - '"' )
+  c-ns-esc-char | ( nb-json - "\" - """ )
 </pre>
 
 <div id="rule-ns-double-char"></div>
@@ -5061,7 +5031,7 @@ characters.</p>
 <div id="rule-c-double-quoted(n,c)"></div>
 <pre class="rule">
 [109] c-double-quoted(n,c) ::=
-  '"' nb-double-text(n,c) '"'
+  """ nb-double-text(n,c) """
 </pre>
 
 <div id="rule-nb-double-text(n,c)"></div>
@@ -5120,8 +5090,8 @@ characters.</p>
   </div>
 </div>
 
-<p>In a multi-line double-quoted scalar, <a href="#line-break-characters">line breaks</a> are subject to <del><a href="#undefined">flow line
-folding</a></del>, which discards any trailing <a href="#white-space-characters">white space</a> characters.
+<p>In a multi-line double-quoted scalar, <a href="#line-break-characters">line breaks</a> are are subject to <del><a href="#undefined">flow
+line folding</a></del>, which discards any trailing <a href="#white-space-characters">white space</a> characters.
 It is also possible to <em>escape</em> the <a href="#line-break-characters">line break</a> character.
 In this case, the <a href="#line-break-characters">line break</a> is excluded from the <a href="#nodes">content</a>, and the trailing
 <a href="#white-space-characters">white space</a> characters are preserved.
@@ -6820,7 +6790,7 @@ keep: |+
   ? !!str "clip"
   : !!str "# text\n",
   ? !!str "keep"
-  : !!str "# text\n\n",
+  : !!str "# text\n",
 }
 </pre>
 
@@ -7872,9 +7842,9 @@ folded:↓
 ---
 !!map {
   ? !!str "literal"
-  : !!str "value\n",
+  : !!str "value",
   ? !!str "folded"
-  : !&lt;!foo&gt; "value\n",
+  : !&lt;!foo&gt; "value",
 }
 </pre>
 
@@ -8153,10 +8123,9 @@ document
 %YAML 1.2
 ---
 !!str "Bare document"
-...
 %YAML 1.2
 ---
-!!str "%!PS-Adobe-2.0 # Not the first line\n"
+!!str "%!PS-Adobe-2.0\n"
 </pre>
 
 </td>
@@ -8437,18 +8406,12 @@ option.</p>
 <h5 id="definition">Definition:</h5>
 
 <blockquote>
-  <p><del><a href="#undefined">Represents</a></del> an associative container, where each <a href="#nodes">key</a> is <a href="#node-comparison">unique</a> in the
+  <p><del><a href="#undefined">Represents</a></del> an associative container, where each <a href="#nodes">key</a> is unique in the
 association and mapped to exactly one <del><a href="#undefined">value</a></del>.
 YAML places no restrictions on the type of <del><a href="#undefined">keys</a></del>; in particular, they are
 not restricted to being <del><a href="#undefined">scalars</a></del>.
 Example <del><a href="#undefined">bindings</a></del> to <del><a href="#undefined">native</a></del> types include Perl’s hash, Python’s
 dictionary, and Java’s Hashtable.</p>
-</blockquote>
-
-<h5 id="equality-1">Equality:</h5>
-
-<blockquote>
-  <p>Two mappings are <del><a href="#undefined">equal</a></del> if and only if they are <del><a href="#undefined">identical</a></del>.</p>
 </blockquote>
 
 <div id="example-map-examples" class="example">
@@ -8488,12 +8451,6 @@ Example <del><a href="#undefined">bindings</a></del> to <del><a href="#undefined
 tuple, and Java’s array or Vector.</p>
 </blockquote>
 
-<h5 id="equality-2">Equality:</h5>
-
-<blockquote>
-  <p>Two sequences are <del><a href="#undefined">equal</a></del> if and only if they are <del><a href="#undefined">identical</a></del>.</p>
-</blockquote>
-
 <div id="example-seq-examples" class="example">
   <p><strong>Example 10.2 <code class="language-plaintext highlighter-rouge">!!seq</code> Examples</strong></p>
 
@@ -8531,13 +8488,6 @@ This type is usually <del><a href="#undefined">bound</a></del> to the <del><a hr
 languages lacking one (such as C), to a character array.</p>
 </blockquote>
 
-<h5 id="equality-3">Equality:</h5>
-
-<blockquote>
-  <p>Two strings are <del><a href="#undefined">equal</a></del> if and only if they have the same length and contain
-the same characters in the same order.</p>
-</blockquote>
-
 <h5 id="canonical-form-1">Canonical Form:</h5>
 
 <blockquote>
@@ -8548,7 +8498,10 @@ the same characters in the same order.</p>
   <p><strong>Example 10.3 <code class="language-plaintext highlighter-rouge">!!str</code> Examples</strong></p>
 
   <pre class="example">
-String: !!str "Just a theory."
+Block style: !!str |-
+  String: just a theory.
+
+Flow style: !!str "String: just a theory."
 </pre>
 
 </div>
@@ -8604,12 +8557,6 @@ Also, a <del><a href="#undefined">mapping</a></del> entry with some <a href="#no
 different from not having that <a href="#nodes">key</a> in the <del><a href="#undefined">mapping</a></del>.</p>
 </blockquote>
 
-<h5 id="equality-4">Equality:</h5>
-
-<blockquote>
-  <p>All <strong><code class="language-plaintext highlighter-rouge">null</code></strong> values are <del><a href="#undefined">equal</a></del>.</p>
-</blockquote>
-
 <h5 id="canonical-form-2">Canonical Form:</h5>
 
 <blockquote>
@@ -8647,13 +8594,6 @@ key with null value: !!null null
   <p><del><a href="#undefined">Represents</a></del> a true/false value.
 In languages without a <del><a href="#undefined">native</a></del> Boolean type (such as C), is usually <del><a href="#undefined">bound</a></del>
 to a native integer type, using one for true and zero for false.</p>
-</blockquote>
-
-<h5 id="equality-5">Equality:</h5>
-
-<blockquote>
-  <p>All <strong><code class="language-plaintext highlighter-rouge">true</code></strong> values are <del><a href="#undefined">equal</a></del>.
-Similarly, all <strong><code class="language-plaintext highlighter-rouge">false</code></strong> values are <del><a href="#undefined">equal</a></del>.</p>
 </blockquote>
 
 <h5 id="canonical-form-3">Canonical Form:</h5>
@@ -8707,14 +8647,6 @@ In general, integers representable using 32 binary digits should safely
 round-trip through most systems.</p>
 </blockquote>
 
-<h5 id="equality-6">Equality:</h5>
-
-<blockquote>
-  <p>An integer value is <del><a href="#undefined">equal</a></del> to any other numeric value that evaluates to the
-integer value.
-For example, the integer <strong><code class="language-plaintext highlighter-rouge">1</code></strong> is equal to the floating-point <strong><code class="language-plaintext highlighter-rouge">1.0</code></strong>.</p>
-</blockquote>
-
 <h5 id="canonical-form-4">Canonical Form:</h5>
 
 <blockquote>
@@ -8765,19 +8697,6 @@ The supported range and accuracy depends on the implementation, though 32 bit
 IEEE floats should be safe.
 Since YAML does not specify a particular accuracy, using floating-point
 <a href="#nodes">mapping keys</a> requires great care and is not recommended.</p>
-</blockquote>
-
-<h5 id="equality-7">Equality:</h5>
-
-<blockquote>
-  <p>A floating-point value is <del><a href="#undefined">equal</a></del> to any other numeric value that evaluates
-to the floating-point value.
-For example, floating-point <strong><code class="language-plaintext highlighter-rouge">1.0</code></strong> is <del><a href="#undefined">equal</a></del> to the the integer <strong><code class="language-plaintext highlighter-rouge">1</code></strong>.
-Note that for the purpose of <a href="#nodes">key</a> <del><a href="#undefined">uniqueness</a></del>, all <strong><code class="language-plaintext highlighter-rouge">.nan</code></strong> values are
-considered to be <del><a href="#undefined">equal</a></del>.
-Note that in some languages (such as Ruby and Python) “not a number” has
-<del><a href="#undefined">identity</a></del> semantics and therefore is not properly <del><a href="#undefined">represented</a></del> in YAML as
-<strong><code class="language-plaintext highlighter-rouge">!!float .nan</code></strong>.</p>
 </blockquote>
 
 <h5 id="canonical-form-5">Canonical Form:</h5>
@@ -9120,8 +9039,7 @@ This allows interoperable <del><a href="#undefined">schemas</a></del> to use <de
 <p>It is strongly recommended that such <del><a href="#undefined">schemas</a></del> be based on the <del><a href="#undefined">core schema</a></del>
 defined above.
 In addition, it is strongly recommended that such <del><a href="#undefined">schemas</a></del> make as much use as
-possible of the the <em>YAML tag repository</em> at
-<a href="http://yaml.org/type/">http://yaml.org/type/</a>.
+possible of the the <em>YAML tag repository</em> at <a href="/type/">http://yaml.org/type/</a>.
 This repository provides recommended <del><a href="#undefined">global tags</a></del> for increasing the
 portability of YAML <a href="#document">documents</a> between different <a href="#processing-yaml-information">applications</a>.</p>
 
