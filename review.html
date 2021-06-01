@@ -54,7 +54,6 @@ div.iframe iframe {
 
 <script type="text/coffeescript">
 window.say = console.log
-window.mmap = {}
 window.nmap = {}
 window.omap = {}
 
@@ -65,18 +64,44 @@ run = (m, n, o)->
   $(n).find('h1,h2,h3,h4').each ->
     tag = @.tagName
     text = $(@).text()
-      .replace(/^Chapter\s+/, '')
+      .replace(/^Chapter\s+(\d+\.)+\s+/, 'Chapter ')
       .replace(/^(\d+\.)+\s+/, '')
     nmap["#{tag} #{text}"] = @
+
+  $(n).find('p').each ->
+    children = @.childNodes
+    if children.length == 1 and children[0].tagName == 'STRONG'
+      text = $(children[0]).text()
+        .replace(/\s+/g, ' ')
+        .replace(/\s$/, '')
+        .replace(/^Example\s+\d+\.\d+\s+/, 'Example ')
+        .replace(/^Figure\s+\d+\.\d+\s+/, 'Figure ')
+        .replace(/^Figure\s+\#\.\s+/, 'Figure ')
+      nmap["HB #{text}"] = @
 
   $(o).find('h1,h2,h3,h4').each ->
     tag = @.tagName
     text = $(@).text()
+
+    if text.match /^\s*Chapter\s+\d+\.\s+/
+      tag = 'H1'
+    text = text
       .replace(/\s+/g, ' ')
       .replace(/\s$/, '')
-      .replace(/^Chapter\s+/, '')
+      .replace(/^Chapter\s+(\d+\.)+\s+/, 'Chapter ')
       .replace(/^(\d+\.)+\s+/, '')
     omap["#{tag} #{text}"] = @
+
+  $(o).find('B').each ->
+    text = $(@).text()
+      .replace(/^\s+/, '')
+    return unless text.match /^(Figure|Example|Status|Abstract|Table)/
+    text = text
+      .replace(/\s+/g, ' ')
+      .replace(/\s$/, '')
+      .replace(/^Example\s+\d+\.\d+\.\s+/, 'Example ')
+      .replace(/^Figure\s+\d+\.\d+\.\s+/, 'Figure ')
+    omap["HB #{text}"] = @
 
   IO = $('iframe')[0].contentWindow.IntersectionObserver
 
@@ -85,13 +110,23 @@ run = (m, n, o)->
   io = new IO (e)->
     return unless e[0].isIntersecting
     h = $(e[0].target).text()
-    h.match /^(#{1,4})\s/ or throw "Bad header #{h}"
-    l = RegExp.$1
-    l = l.length
-    h = h.replace /^#+\s+/, ''
-    h = h.replace(/^Chapter\s+/, '')
-    h = h.replace(/^(\#\.)+\s+/, '')
-    t = "H#{l} #{h}"
+    if h.match /^(#{1,4})\s/
+      l = RegExp.$1
+      l = l.length
+      h = h.replace /^#+\s+/, ''
+      h = h.replace(/^Chapter\s+\#\.\s+/, 'Chapter ')
+      h = h.replace(/^\#\.\s+/, '')
+      t = "H#{l} #{h}"
+    else if h.match /^\*\*/
+      h = h
+        .replace(/^\*\*/, '')
+        .replace(/\*\*$/, '')
+        .replace(/\s+/g, ' ')
+        .replace(/Example\s+\#\.\s+/, 'Example ')
+        .replace(/Figure\s+\#\.\s+/, 'Figure ')
+      t = "HB #{h}"
+    say t
+
     try
       goto nmap[t]
     try
@@ -104,9 +139,9 @@ run = (m, n, o)->
     io.observe(@)
 
 $(document).ready ->
-  window.m = m = (Im = $('iframe')[0]).contentDocument
-  window.n = n = (In = $('iframe')[1]).contentDocument
-  window.o = o = (Io = $('iframe')[2]).contentDocument
+  window.m = (Im = $('iframe')[0]).contentDocument
+  window.n = (In = $('iframe')[1]).contentDocument
+  window.o = (Io = $('iframe')[2]).contentDocument
   o = $('iframe')[2].contentDocument
   wait = ->
     say 'wait'
@@ -115,7 +150,7 @@ $(document).ready ->
        o.readyState == 'complete'
       setTimeout ->
         run m, n, o
-      , 500
+      , 2000
     else
       setTimeout wait, 100
   wait()

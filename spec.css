@@ -1,7 +1,7 @@
-div.rule > * pre { background-color: #E0F8F8; border: none; }
+pre.rule { background-color: #E0F8F8 !important; border: none !important; }
 
 div.example > * td.side-by-side { vertical-align: top; border: none; width: 10%; }
-div.example > * pre { background-color: #E0F8E0; }
+div.example > * pre { background-color: #E0F8E0; border: none; }
 
 div.legend > * code.legend-1, pre code.legend-1 { background-color: #F8F8E0 !important; border: 1px solid #ccc !important; }
 div.legend > * code.legend-2, pre code.legend-2 { background-color: #E0E0F8 !important; border: 1px solid #ccc !important; }
