@@ -17,7 +17,7 @@ div.example > * pre { background-color: #E0F8E0; border: none; }
 
 pre.example { background-color: #E1F8E0 !important; border: none !important; }
 
-.main-content blockquote { background-color: #000 !important; }
+.main-content blockquote { color: #000 !important; }
 
 div.legend > * code.legend-1, pre code.legend-1 { background-color: #F8F8E0 !important; border: 1px solid #ccc !important; }
 div.legend > * code.legend-2, pre code.legend-2 { background-color: #E0E0F8 !important; border: 1px solid #ccc !important; }
