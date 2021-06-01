@@ -75,8 +75,7 @@ run = (m, n, o)->
         .replace(/\s+/g, ' ')
         .replace(/\s$/, '')
         .replace(/^Example\s+\d+\.\d+\s+/, 'Example ')
-        .replace(/^Figure\s+\d+\.\d+\s+/, 'Figure ')
-        .replace(/^Figure\s+\#\.\s+/, 'Figure ')
+        .replace(/^Figure\s+\d+\.\d+\.\s+/, 'Figure ')
       nmap["HB #{text}"] = @
 
   $(o).find('h1,h2,h3,h4').each ->

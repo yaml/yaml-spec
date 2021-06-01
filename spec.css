@@ -1,7 +1,21 @@
+.main-content { font-size: 20px !important; line-height: 1.23 !important; margin-right: -5px !important; padding-right: -5px !important; color: #000 !important; }
+
+h1 { font-size: 140% !important; }
+
+h2 { font-size: 140% !important; }
+
+h3 { font-size: 120% !important; }
+
+h4 { font-size: 100% !important; }
+
+h5 { font-size: 100% !important; margin-top: 1em !important; }
+
 pre.rule { background-color: #E0F8F8 !important; border: none !important; }
 
 div.example > * td.side-by-side { vertical-align: top; border: none; width: 10%; }
 div.example > * pre { background-color: #E0F8E0; border: none; }
+
+pre.example { background-color: #E1F8E0 !important; border: none !important; }
 
 div.legend > * code.legend-1, pre code.legend-1 { background-color: #F8F8E0 !important; border: 1px solid #ccc !important; }
 div.legend > * code.legend-2, pre code.legend-2 { background-color: #E0E0F8 !important; border: 1px solid #ccc !important; }
