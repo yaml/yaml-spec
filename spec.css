@@ -1,27 +1,21 @@
-.main-content { font-size: 20px !important; line-height: 1.23 !important; color: #000 !important; }
-
-h1 { font-size: 140% !important; }
-
-h2 { font-size: 140% !important; }
-
-h3 { font-size: 120% !important; }
-
-h4 { font-size: 100% !important; }
-
-h5 { font-size: 100% !important; margin-top: 1em !important; }
-
-pre.rule { background-color: #E0F8F8 !important; border: none !important; }
+/*
+.main-content { font-size: 20px; line-height: 1.23; color: #000;
+}
+*/
+pre.rule { background-color: #E0F8F8; border: none; }
 
 div.example > * td.side-by-side { vertical-align: top; border: none; width: 10%; }
 div.example > * pre { background-color: #E0F8E0; border: none; }
 
-pre.example { background-color: #E1F8E0 !important; border: none !important; }
+pre.error { background-color: #F8E0E0 !important; }
 
-.main-content blockquote { color: #000 !important; }
+pre.example { background-color: #E1F8E0; border: none; }
+
+.main-content blockquote { color: #000; }
 
 code.container { padding-top: 3px !important; padding-bottom: 3px !important; }
 
-div.legend > * code.legend-1, pre code.legend-1 { background-color: #F8F8E0 !important; border: 1px solid #666 !important; }
-div.legend > * code.legend-2, pre code.legend-2 { background-color: #E0E0F8 !important; border: 1px solid #666 !important; }
-div.legend > * code.legend-3, pre code.legend-3 { background-color: #F8E0F8 !important; border: 1px solid #666 !important; }
-div.legend > * code.legend-4, pre code.legend-4 { background-color: #E0F8F8 !important; border: 1px solid #666 !important; }
+div.legend > * code.legend-1, pre code.legend-1 { background-color: #F8F8E0; border: 1px solid #666; }
+div.legend > * code.legend-2, pre code.legend-2 { background-color: #E0E0F8; border: 1px solid #666; }
+div.legend > * code.legend-3, pre code.legend-3 { background-color: #F8E0F8; border: 1px solid #666; }
+div.legend > * code.legend-4, pre code.legend-4 { background-color: #E0F8F8; border: 1px solid #666; }
