@@ -3048,9 +3048,9 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <td class="side-by-side">
 <pre>
 "Fun with \
-<code class="legend-1">\"</code> \a <code class="legend-1">\b</code> <code class="legend-1">\e</code> <code class="legend-1">\f</code> <code class="legend-1">\↓</code>
+<code class="legend-1">\"</code> <code class="legend-1">\a</code> <code class="legend-1">\b</code> <code class="legend-1">\e</code> <code class="legend-1">\f</code> <code class="legend-1">\↓</code>
 <code class="legend-1">\n</code> <code class="legend-1">\r</code> <code class="legend-1">\t</code> <code class="legend-1">\v</code> <code class="legend-1">\0</code> <code class="legend-1">\↓</code>
-<code class="legend-1">\ </code> _ \N <code class="legend-1">\L</code> <code class="legend-1">\P</code> <code class="legend-1">\↓</code>
+<code class="legend-1">\ </code> _ <code class="legend-1">\N</code> <code class="legend-1">\L</code> <code class="legend-1">\P</code> <code class="legend-1">\↓</code>
 <code class="legend-1">\x41</code> <code class="legend-1">\u0041</code> <code class="legend-1">\U00000041</code>"
 </pre>
 
@@ -4454,7 +4454,7 @@ Either or both may be omitted.</p>
 <pre>
 <code class="legend-1"><code class="legend-3">!!str</code> <code class="legend-2">&amp;a1</code></code> "foo":
   <code class="legend-1"><code class="legend-3">!!str</code></code> bar
-<code class="legend-1">&amp;a2</code> baz : *a1
+<code class="legend-1"><code class="legend-2">&amp;a2</code></code> baz : *a1
 </pre>
 
 </td>
@@ -5375,7 +5375,7 @@ Empty lines, if any, are consumed as part of the <del><a href="#undefined">line 
 '<code class="legend-1">·1st non-empty</code><code class="legend-2">↓</code>
 <code class="legend-2">↓</code><code class="legend-1"></code>
 <code class="legend-2">·<code class="legend-1">2nd non-empty</code>·</code>
-<code class="legend-2">→3rd non-empty</code>·'
+<code class="legend-2">→<code class="legend-1">3rd non-empty</code></code>·'
 </pre>
 
 </td>
@@ -6539,17 +6539,17 @@ indicator for cases where detection will fail.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- |°
-·detected
-- &gt;°
-·
-··
-··# detected
-- |1
-··explicit
-- &gt;°
-·→
-·detected
+- |<code class="legend-1">°</code>
+<code class="legend-2">·</code>detected
+- &gt;<code class="legend-1">°</code>
+<code class="legend-2">·</code>
+<code class="legend-2">··</code>
+<code class="legend-2">··</code># detected
+- |<code class="legend-1">1</code>
+<code class="legend-2">··</code>explicit
+- &gt;<code class="legend-1">°</code>
+<code class="legend-2">·</code>→
+<code class="legend-2">·</code>detected
 </pre>
 
 </td>
@@ -6677,11 +6677,11 @@ by the chomping indicator specified in the <del><a href="#undefined">block scala
 <td class="side-by-side">
 <pre>
 strip: |-
-  text↓
+  text<code class="legend-1">↓</code>
 clip: |
-  text↓
+  text<code class="legend-2">↓</code>
 keep: |+
-  text↓
+  text<code class="legend-2">↓</code>
 </pre>
 
 </td>
@@ -6764,21 +6764,21 @@ constrained.</p>
   # Comments:
 strip: |-
   # text↓
-··⇓
-·# Clip
-··# comments:
-↓
+<code class="legend-1">··⇓</code>
+<code class="legend-1"><code class="legend-3">·# Clip</code></code>
+<code class="legend-1"><code class="legend-3">··# comments:</code></code>
+<code class="legend-1"><code class="legend-3">↓</code></code>
 clip: |
   # text↓
-·↓
-·# Keep
-··# comments:
-↓
+<code class="legend-1">·↓</code>
+<code class="legend-1"><code class="legend-3">·# Keep</code></code>
+<code class="legend-1"><code class="legend-3">··# comments:</code></code>
+<code class="legend-1"><code class="legend-3">↓</code></code>
 keep: |+
   # text↓
-↓
-·# Trail
-··# comments.
+<code class="legend-2">↓</code>
+<code class="legend-2"><code class="legend-3">·# Trail</code></code>
+<code class="legend-2"><code class="legend-3">··# comments.</code></code>
 </pre>
 
 </td>
@@ -6822,11 +6822,11 @@ considered as trailing lines and hence are affected by chomping.</p>
 <td class="side-by-side">
 <pre>
 strip: &gt;-
-↓
+<code class="legend-1">↓</code>
 clip: &gt;
-↓
+<code class="legend-1">↓</code>
 keep: |+
-↓
+<code class="legend-2">↓</code>
 </pre>
 
 </td>
@@ -6878,10 +6878,10 @@ It is the simplest, most restricted, and most readable <del><a href="#undefined"
 <tr>
 <td class="side-by-side">
 <pre>
-|↓
-·literal↓
-·→text↓
-↓
+<code class="legend-1">|↓</code>
+<code class="legend-1">·literal↓</code>
+<code class="legend-1">·→text↓</code>
+<code class="legend-1">↓</code>
 </pre>
 
 </td>
@@ -6945,14 +6945,14 @@ In addition, there is no way to break a long literal line.</p>
 <td class="side-by-side">
 <pre>
 |
-·
-··
-··literal↓
-···↓
-··
-··text↓
+<code class="legend-1">·</code>
+<code class="legend-1">··</code>
+<code class="legend-1">··literal</code><code class="legend-2">↓</code>
+<code class="legend-1"><code class="legend-2">···</code></code><code class="legend-2">↓</code>
+<code class="legend-1"><code class="legend-2">··</code></code>
+<code class="legend-1"><code class="legend-2">··text</code></code><code class="legend-3">↓</code>
 ↓
-·# Comment
+<code class="legend-4">·# Comment</code>
 </pre>
 
 </td>
@@ -7000,10 +7000,10 @@ It is similar to the <del><a href="#undefined">literal style</a></del>; however,
 <tr>
 <td class="side-by-side">
 <pre>
-&gt;↓
-·folded↓
-·text↓
-↓
+<code class="legend-1">&gt;↓</code>
+<code class="legend-1">·folded↓</code>
+<code class="legend-1">·text↓</code>
+<code class="legend-1">↓</code>
 </pre>
 
 </td>
@@ -7052,18 +7052,18 @@ separates two non-<a href="#white-space-characters">space</a> characters.</p>
 <pre>
 &gt;
 ·folded↓
-·line↓
-↓
+<code class="legend-1"><code class="legend-2">·line↓</code></code>
+<code class="legend-1"><code class="legend-2">↓</code></code>
 ·next
-·line↓
-   * bullet
+<code class="legend-1"><code class="legend-2">·line↓</code></code>
+<code class="legend-1"><code class="legend-2">   *</code> bullet</code>
 
    * list
    * lines
 
 ·last↓
-·line↓
-
+<code class="legend-1"><code class="legend-2">·line</code>↓</code>
+<code class="legend-1"><code class="legend-2"></code></code>
 # Comment
 </pre>
 
@@ -7137,10 +7137,10 @@ different productions.)</p>
  next
  line
 ···* bullet↓
-↓
-···* list↓
-···* lines↓
-
+<code class="legend-1"><code class="legend-2">↓</code></code>
+<code class="legend-2">···* list↓</code>
+<code class="legend-1"><code class="legend-2">···* line</code>s↓</code>
+<code class="legend-1"><code class="legend-2"></code></code>
  last
  line
 
@@ -7202,17 +7202,17 @@ also not <del><a href="#undefined">folded</a></del>.</p>
 <td class="side-by-side">
 <pre>
 &gt;
-↓
+<code class="legend-2">↓</code>
  folded
- line↓
-↓
+ line<code class="legend-1">↓</code>
+<code class="legend-2">↓</code>
  next
- line↓
+ line<code class="legend-1">↓</code>
    * bullet
 
    * list
    * line↓
-↓
+<code class="legend-2">↓</code>
  last
  line
 
@@ -7279,9 +7279,9 @@ also not <del><a href="#undefined">folded</a></del>.</p>
    * line
 
  last
- line↓
-↓
-# Comment
+ line<code class="legend-1">↓</code>
+<code class="legend-2">↓</code>
+<code class="legend-2"># Comment</code>
 </pre>
 
 </td>
@@ -7353,8 +7353,8 @@ followed by a non-space character (e.g. “<strong><code class="language-plainte
 <td class="side-by-side">
 <pre>
 block sequence:
-··- one↓
-  - two : three↓
+··<code class="legend-1">- one↓</code>
+  <code class="legend-1">- two : three↓</code>
 </pre>
 
 </td>
@@ -7421,7 +7421,7 @@ Note that it is not possible to specify <del><a href="#undefined">node propertie
 <tr>
 <td class="side-by-side">
 <pre>
--° # Empty
+-<code class="legend-1">° # Empty</code>
 - |
  block node
 -·- one # Compact
@@ -7485,7 +7485,7 @@ pair</a></del>.</p>
 <td class="side-by-side">
 <pre>
 block mapping:
-·key: value↓
+<code class="legend-2">·</code><code class="legend-1">key: value↓</code>
 </pre>
 
 </td>
@@ -7556,11 +7556,11 @@ for <del><a href="#undefined">block sequence</a></del> entries.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-? explicit key # Empty value↓°
-? |
-  block key↓
-:·- one # Explicit compact
-··- two # block value↓
+<code class="legend-1">? explicit key # Empty value</code><code class="legend-3">↓</code>°
+<code class="legend-1">? |</code>
+<code class="legend-1">  block key↓</code>
+<code class="legend-2">:·- one # Explicit compact</code>
+<code class="legend-2">··- two # block value↓</code>
 </pre>
 
 </td>
@@ -7640,10 +7640,10 @@ This prevents a potential ambiguity with multi-line <del><a href="#undefined">pl
 <tr>
 <td class="side-by-side">
 <pre>
-plain key: in-line value
-°:° # Both empty
-"quoted key":
-- entry
+<code class="legend-1">plain key</code><code class="legend-2">: in-line value</code>
+<code class="legend-1">°</code><code class="legend-2">:° # Both empty</code>
+<code class="legend-1">"quoted key"</code><code class="legend-2">:</code>
+<code class="legend-2">- entry</code>
 </pre>
 
 </td>
@@ -7695,9 +7695,9 @@ mapping.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- sun: yellow↓
-- ? earth: blue↓
-  : moon: white↓
+- <code class="legend-1">sun: yellow↓</code>
+- <code class="legend-1">? earth: blue↓</code>
+<code class="legend-1">  : moon: white↓</code>
 </pre>
 
 </td>
@@ -7766,12 +7766,12 @@ scalar</a></del> and an <del><a href="#undefined">implicit key</a></del> startin
 <tr>
 <td class="side-by-side">
 <pre>
--↓
-··"flow in block"↓
--·&gt;
- Block scalar↓
--·!!map # Block collection
-  foo : bar↓
+-<code class="legend-1">↓</code>
+<code class="legend-1">··"flow in block"↓</code>
+-·<code class="legend-2">&gt;</code>
+<code class="legend-2"> Block scalar↓</code>
+-·<code class="legend-2">!!map # Block collection</code>
+<code class="legend-2">  foo : bar↓</code>
 </pre>
 
 </td>
@@ -7829,12 +7829,12 @@ entries.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-literal: |2
-··value
-folded:↓
-···!foo
-··&gt;1
-·value
+literal: <code class="legend-1">|2</code>
+<code class="legend-1">··value</code>
+folded:<code class="legend-2">↓</code>
+<code class="legend-2">···!foo</code>
+<code class="legend-2">··&gt;1</code>
+<code class="legend-2">·value</code>
 </pre>
 
 </td>
@@ -7892,12 +7892,12 @@ vs. <del><a href="#undefined"><strong><code class="language-plaintext highlighte
 <tr>
 <td class="side-by-side">
 <pre>
-sequence: !!seq
-- entry
-- !!seq
- - nested
-mapping: !!map
- foo: bar
+sequence:<code class="legend-3"> !!seq</code>
+<code class="legend-1"><code class="legend-3">- entry</code></code>
+<code class="legend-1"><code class="legend-3">- !!seq</code></code>
+<code class="legend-1"><code class="legend-3"> - nested</code></code>
+mapping:<code class="legend-3"> !!map</code>
+<code class="legend-2"><code class="legend-3"> foo: bar</code></code>
 </pre>
 
 </td>
@@ -7968,8 +7968,8 @@ existence of an actual <del><a href="#undefined">document</a></del>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-⇔# Comment
-# lines
+<code class="legend-1">⇔# Comment</code>
+<code class="legend-1"># lines</code>
 Document
 </pre>
 
@@ -8055,9 +8055,9 @@ either of these markers.</p>
 <td class="side-by-side">
 <pre>
 %YAML 1.2
----
+<code class="legend-1">---</code>
 Document
-... # Suffix
+<code class="legend-2"><code class="legend-3">...</code> # Suffix</code>
 </pre>
 
 </td>
@@ -8110,13 +8110,13 @@ document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">inden
 <tr>
 <td class="side-by-side">
 <pre>
-Bare
-document
+<code class="legend-1">Bare</code>
+<code class="legend-1">document</code>
 ...
 # No document
 ...
-|
-%!PS-Adobe-2.0 # Not the first line
+<code class="legend-1">|</code>
+<code class="legend-1">%!PS-Adobe-2.0 # Not the first line</code>
 </pre>
 
 </td>
@@ -8166,12 +8166,12 @@ Since the existence of the <del><a href="#undefined">document</a></del> is indic
 <tr>
 <td class="side-by-side">
 <pre>
----
-{ matches
-% : 20 }
+<code class="legend-1">---</code>
+<code class="legend-1">{ matches</code>
+<code class="legend-1">% : 20 }</code>
 ...
----
-# Empty
+<code class="legend-1">---</code>
+<code class="legend-1"># Empty</code>
 ...
 </pre>
 
@@ -8222,13 +8222,13 @@ Since the existence of the <del><a href="#undefined">document</a></del> is indic
 <tr>
 <td class="side-by-side">
 <pre>
-%YAML 1.2
---- |
-%!PS-Adobe-2.0
+<code class="legend-1">%YAML 1.2</code>
+<code class="legend-1">--- |</code>
+<code class="legend-1">%!PS-Adobe-2.0</code>
 ...
-%YAML1.2
----
-# Empty
+<code class="legend-1">%YAML1.2</code>
+<code class="legend-1">---</code>
+<code class="legend-1"># Empty</code>
 ...
 </pre>
 
@@ -8291,13 +8291,13 @@ such as stream concatenation.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-Document
----
-# Empty
+<code class="legend-1">Document</code>
+<code class="legend-1">---</code>
+<code class="legend-1"># Empty</code>
 ...
-%YAML 1.2
----
-matches %: 20
+<code class="legend-3">%YAML 1.2</code>
+<code class="legend-3">---</code>
+<code class="legend-3">matches %: 20</code>
 </pre>
 
 </td>
