@@ -33,10 +33,8 @@
 </main>
 
 <script>
-var i, s, l;
-s = document.querySelectorAll('code > code');
-for (i = 0, l = s.length; i < l; i++) {
-  s[i].parentElement.classList.add('container');
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
 }
 </script>
 
