@@ -12,8 +12,51 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+
+    - name: Set up Ubuntu environment
+      run:
+        sudo apt-get update &&
+        sudo apt-get install -y
+            build-essential
+            cpanminus
+
+    - name: Install prerequisites
+      run:
+        sudo cpanm -n YAML::PP XXX &&
+        npm install -g coffeescript &&
+        npm install
+            domino
+            ingy-prelude
+            turndown
+            turndown-plugin-gfm
+            smartwrap
+
+    - name: Fetch the work branch
+      run:
+        git fetch origin work gh-pages
 
     - name: Make the 1.2 spec.html from docbook
       run:
         source .rc &&
         make -C 1.2 clean html
+
+    - name: Make spec/index.md from 1.2/spec.html
+      run:
+        source .rc &&
+        make -C spec force build
+
+    - name: Make web content
+      run:
+        source .rc &&
+        make -C www force-all build
+
+    - name: Check output files
+      run:
+        bash -c '
+          set -x;
+          [[ -e 1.2/spec.html ]] &&
+          [[ -e www/_gh-pages/spec.html ]] &&
+          true
+        '
+

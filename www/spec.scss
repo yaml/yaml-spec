@@ -1,0 +1,58 @@
+---
+---
+pre.rule {
+  background-color: #E0F8F8;
+  border: none;
+}
+
+div.example > * {
+  td.side-by-side {
+    vertical-align: top;
+    border: none;
+    width: 10%;
+  }
+
+  pre {
+    background-color: #E0F8E0;
+    border: none;
+  }
+}
+
+pre.error {
+  background-color: #F8E0E0 !important;
+}
+
+pre.example {
+  background-color: #E1F8E0;
+  border: none;
+}
+
+.main-content blockquote {
+  color: #000;
+}
+
+code.container {
+  padding-top: 3px !important;
+  padding-bottom: 3px !important;
+}
+
+div.legend > *, pre {
+  code {
+    &.legend-1 {
+      background-color: #F8F8E0;
+      border: 1px solid #666;
+    }
+    &.legend-2 {
+      background-color: #E0E0F8;
+      border: 1px solid #666;
+    }
+    &.legend-3 {
+      background-color: #F8E0F8;
+      border: 1px solid #666;
+    }
+    &.legend-4 {
+      background-color: #E0F8F8;
+      border: 1px solid #666;
+    }
+  }
+}

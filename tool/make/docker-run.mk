@@ -3,7 +3,13 @@ $(error DOCKER_IMAGE_NAME not set)
 endif
 
 DOCKER_IMAGE_ORG ?= yamlio
-DOCKER_IMAGE ?= $(DOCKER_IMAGE_ORG)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
+DOCKER_IMAGE ?= \
+    $(DOCKER_IMAGE_ORG)/$(DOCKER_IMAGE_NAME):$(DOCKER_IMAGE_TAG)
+
+HISTORY_FILE := /tmp/docker-bash_history
+
+DOCKER_SHELL_OPTS := \
+    --volume $(HISTORY_FILE):/root/.bash_history \
 
 IT :=
 ifdef TTY
@@ -11,10 +17,15 @@ ifdef TTY
 endif
 
 define docker-run
+touch $(HISTORY_FILE)
 docker run $(IT) --rm \
     --volume $(ROOT):/host \
-    --workdir /host/$(CWD) \
+    --workdir /host/$(YAML_SPEC_DIR) \
+    $(DOCKER_RUN_OPTS) \
     $2 \
     $(DOCKER_IMAGE) \
     $1
 endef
+
+docker-shell: docker-build
+	$(call docker-run,bash)

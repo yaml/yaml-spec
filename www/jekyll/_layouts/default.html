@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta http-equiv="Content-Type"
+      content="text/html; charset=UTF-8" />
+<title>{{ site.title }}</title>
+{% unless page.plain %}
+<link rel="stylesheet"
+      type="text/css"
+      href="/assets/css/style.css" />
+{% endunless %}
+<link rel="stylesheet"
+      type="text/css"
+      href="/spec.css" />
+</head>
+
+<body>
+<main id="content" class="main-content" role="main">
+<div class="wrapper">
+<section>
+
+{{content}}
+
+</section>
+</div>
+</main>
+
+<script>
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
+}
+</script>
+
+</body>
+
+</html>

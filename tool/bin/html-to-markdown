@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+set -eu
+source "$YAML_SPEC_ROOT/tool/lib/runner.bash"
+
+check() (
+  [[ $(command -v node) ]] || return 1
+  [[ $(command -v coffee) ]] || return 1
+
+  node -e '
+    require("ingy-prelude");
+    require("turndown");
+    require("domino/lib/Node");
+    require("smartwrap");
+  ' || return 1
+)
+
+run "$@"
