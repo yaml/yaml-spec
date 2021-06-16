@@ -85,7 +85,7 @@ site: all
 site.tgz: site
 	cd site && tar cvzf ../site.tgz *
 
-ifeq ($(wildcard /.dockerenv),)
+ifndef IN_DOCKER
 html:
 	$(call docker-run,make $(HTML))
 endif
@@ -111,8 +111,10 @@ $(PDF): single_fo.xsl ebnf_fo.xsl preprocess_fo.xsl
 
 $(HTML): single_html.xsl preprocess_html.xsl
 
-ifneq ($(wildcard /.dockerenv),)
 .dbk.html: single_html.xsl catalog docbook_xslt
+ifndef IN_DOCKER
+	$(call docker-run,make $@)
+else
 	$(XSLTPROC) single_html.xsl $*.dbk > $*.html
 	chown -R --reference=Makefile $@
 endif
@@ -167,7 +169,7 @@ spec.pdf: spec.dbk \
 	ps2pdf spec.ps
 	rm tmp*.xml
 
-ifeq ($(wildcard /.dockerenv),)
+ifndef IN_DOCKER
 spec.html: spec.dbk
 	$(call docker-run,make spec.html)
 else

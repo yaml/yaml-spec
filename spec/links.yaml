@@ -1,0 +1,34 @@
+application: processing-yaml-information
+applications: processing-yaml-information
+break: line-break-characters
+content: nodes
+documents: document
+double-quoted-scalars: double-quoted style
+formatted content: scalar-formats
+indented: indentation-spaces
+indentation: indentation-spaces
+key: nodes
+line break: line-break-characters
+line breaks: line-break-characters
+literal block scalar: literal-style
+mapping keys: nodes
+mappings: mapping
+node: nodes
+presentation: presentation-stream
+printable: character-set
+processor: processing-yaml-information
+representation: representation-graph
+representation graph: representation-graph
+representations: representation-graph
+scalar content: scalar
+scalar: scalar
+separated: separation-spaces
+sequences: sequence
+serialization: serialization-tree
+space: white-space-characters
+spaces: white-space-characters
+stream: streams
+styles: node-styles
+tag: tags
+unique: node-comparison
+white space: white-space-characters

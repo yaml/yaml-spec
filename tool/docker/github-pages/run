@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -x
+
+"$@"
+
+chown -R --reference=/host/ReadMe.md /host
