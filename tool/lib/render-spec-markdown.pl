@@ -48,6 +48,9 @@ sub parse_sections {
   my @s;
   while ($_) {
     # Headings:
+    s/\A(\S.*\n)===+\n\n+//
+      and push @s, {heading => "# $1"} and next;
+
     s/\A(#{1,5} .*\n)\n+//
       and push @s, {heading => $1} and next;
 
@@ -78,7 +81,11 @@ sub parse_sections {
           .*\n
         )+
       )
-      \n+
+      (?:
+        (?=```) |
+        \z |
+        \n+
+      )
     //x
       and push @s, {p => $1} and next;
 
