@@ -381,22 +381,22 @@ language designed to be human-friendly and work well with modern programming
 languages for common everyday tasks.
 This specification is both an introduction to the YAML language and the
 concepts supporting it, and also a complete specification of the information
-needed to develop <del><a href="#undefined">applications</a></del> for processing YAML.</p>
+needed to develop <a href="#processing-yaml-information">applications</a> for processing YAML.</p>
 
 <p>Open, interoperable and readily understandable tools have advanced computing
 immensely.
 YAML was designed from the start to be useful and friendly to people working
 with data.
-It uses Unicode <del><a href="#undefined">printable</a></del> characters, <del><a href="#undefined">some</a></del> of which provide structural
+It uses Unicode <a href="#character-set">printable</a> characters, <del><a href="#undefined">some</a></del> of which provide structural
 information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful way.
-For example, <del><a href="#undefined">indentation</a></del> may be used for structure, <del><a href="#undefined">colons</a></del> separate
+For example, <a href="#indentation-spaces">indentation</a> may be used for structure, <del><a href="#undefined">colons</a></del> separate
 <del><a href="#undefined">key: value pairs</a></del>, and <del><a href="#undefined">dashes</a></del> are used to create “bullet” <del><a href="#undefined">lists</a></del>.</p>
 
 <p>There are myriad flavors of <del><a href="#undefined">data structures</a></del>, but they can all be adequately
-<del><a href="#undefined">represented</a></del> with three basic primitives: <del><a href="#undefined">mappings</a></del> (hashes/dictionaries),
-<del><a href="#undefined">sequences</a></del> (arrays/lists) and <del><a href="#undefined">scalars</a></del> (strings/numbers).
+<del><a href="#undefined">represented</a></del> with three basic primitives: <a href="#mapping">mappings</a> (hashes/dictionaries),
+<a href="#sequence">sequences</a> (arrays/lists) and <del><a href="#undefined">scalars</a></del> (strings/numbers).
 YAML leverages these primitives, and adds a simple typing system and <del><a href="#undefined">aliasing</a></del>
 mechanism to form a complete language for <del><a href="#undefined">serializing</a></del> any <del><a href="#undefined">native data
 structure</a></del>.
@@ -452,35 +452,35 @@ Since then, YAML has matured through ideas and support from its user community.<
 <p>The syntax of YAML was motivated by Internet Mail (RFC0822) and remains
 partially compatible with that standard.
 Further, borrowing from MIME (RFC2045), YAML’s top-level production is a
-<del><a href="#undefined">stream</a></del> of independent <del><a href="#undefined">documents</a></del>, ideal for message-based distributed
+<a href="#streams">stream</a> of independent <a href="#document">documents</a>, ideal for message-based distributed
 processing systems.</p>
 
-<p>YAML’s <del><a href="#undefined">indentation</a></del>-based scoping is similar to Python’s (without the
+<p>YAML’s <a href="#indentation-spaces">indentation</a>-based scoping is similar to Python’s (without the
 ambiguities caused by <del><a href="#undefined">tabs</a></del>). <del><a href="#undefined">Indented blocks</a></del> facilitate easy inspection of
 the data’s structure.
 YAML’s <del><a href="#undefined">literal style</a></del> leverages this by enabling formatted text to be cleanly
-mixed within an <del><a href="#undefined">indented</a></del> structure without troublesome <del><a href="#undefined">escaping</a></del>.
+mixed within an <a href="#indentation-spaces">indented</a> structure without troublesome <del><a href="#undefined">escaping</a></del>.
 YAML also allows the use of traditional <del><a href="#undefined">indicator</a></del>-based scoping similar to
 JSON’s and Perl’s.
 Such <del><a href="#undefined">flow content</a></del> can be freely nested inside <del><a href="#undefined">indented blocks</a></del>.</p>
 
 <p>YAML’s <del><a href="#undefined">double-quoted style</a></del> uses familiar C-style <del><a href="#undefined">escape sequences</a></del>.
-This enables ASCII encoding of non-<del><a href="#undefined">printable</a></del> or 8-bit (ISO 8859-1) characters
+This enables ASCII encoding of non-<a href="#character-set">printable</a> or 8-bit (ISO 8859-1) characters
 such as <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">\x3B</code></strong>”</a></del>.
-Non-<del><a href="#undefined">printable</a></del> 16-bit Unicode and 32-bit (ISO/IEC 10646) characters are
+Non-<a href="#character-set">printable</a> 16-bit Unicode and 32-bit (ISO/IEC 10646) characters are
 supported with <del><a href="#undefined">escape sequences</a></del> such as <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">\u003B</code></strong>”</a></del> and
 <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">\U0000003B</code></strong>”</a></del>.</p>
 
 <p>Motivated by HTML’s end-of-line normalization, YAML’s <del><a href="#undefined">line folding</a></del> employs an
-intuitive method of handling <del><a href="#undefined">line breaks</a></del>.
-A single <del><a href="#undefined">line break</a></del> is <del><a href="#undefined">folded</a></del> into a single <del><a href="#undefined">space</a></del>, while <del><a href="#undefined">empty lines</a></del>
-are interpreted as <del><a href="#undefined">line break</a></del> characters.
+intuitive method of handling <a href="#line-break-characters">line breaks</a>.
+A single <a href="#line-break-characters">line break</a> is <del><a href="#undefined">folded</a></del> into a single <a href="#white-space-characters">space</a>, while <del><a href="#undefined">empty lines</a></del>
+are interpreted as <a href="#line-break-characters">line break</a> characters.
 This technique allows for paragraphs to be word-wrapped without affecting the
-<del><a href="#undefined">canonical form</a></del> of the <del><a href="#undefined">scalar content</a></del>.</p>
+<del><a href="#undefined">canonical form</a></del> of the <a href="#scalar">scalar content</a>.</p>
 
 <p>YAML’s core type system is based on the requirements of agile languages such as
 Perl, Python, and Ruby.
-YAML directly supports both <del><a href="#undefined">collections</a></del> (<del><a href="#undefined">mappings</a></del>, <del><a href="#undefined">sequences</a></del>) and
+YAML directly supports both <del><a href="#undefined">collections</a></del> (<a href="#mapping">mappings</a>, <a href="#sequence">sequences</a>) and
 <del><a href="#undefined">scalars</a></del>.
 Support for these common types enables programmers to use their language’s
 <del><a href="#undefined">native data structures</a></del> for YAML manipulation, instead of requiring a special
@@ -488,18 +488,18 @@ document object model (DOM).</p>
 
 <p>Like XML’s SOAP, YAML supports <del><a href="#undefined">serializing</a></del> a graph of <del><a href="#undefined">native data
 structures</a></del> through an <del><a href="#undefined">aliasing</a></del> mechanism.
-Also like SOAP, YAML provides for <del><a href="#undefined">application</a></del>-defined <del><a href="#undefined">types</a></del>.
+Also like SOAP, YAML provides for <a href="#processing-yaml-information">application</a>-defined <del><a href="#undefined">types</a></del>.
 This allows YAML to <del><a href="#undefined">represent</a></del> rich data structures required for modern
 distributed computing.
 YAML provides globally unique <del><a href="#undefined">type names</a></del> using a namespace mechanism inspired
 by Java’s DNS-based package naming convention and XML’s URI-based namespaces.
 In addition, YAML allows for private <del><a href="#undefined">types</a></del> specific to a single
-<del><a href="#undefined">application</a></del>.</p>
+<a href="#processing-yaml-information">application</a>.</p>
 
 <p>YAML was designed to support incremental interfaces that include both input
 (“<strong><code class="language-plaintext highlighter-rouge">getNextEvent()</code></strong>”) and output (“<strong><code class="language-plaintext highlighter-rouge">sendNextEvent()</code></strong>”) one-pass
 interfaces.
-Together, these enable YAML to support the processing of large <del><a href="#undefined">documents</a></del>
+Together, these enable YAML to support the processing of large <a href="#document">documents</a>
 (e.g. transaction logs) or continuous <del><a href="#undefined">streams</a></del> (e.g. feeds from a production
 machine).</p>
 
@@ -528,8 +528,8 @@ This is also the case in practice; every JSON file is also a valid YAML file.
 This makes it easy to migrate from JSON to YAML if/when the additional features
 are required.</p>
 
-<p>JSON’s <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC4627</a> requires that <del><a href="#undefined">mappings</a></del>
-<del><a href="#undefined">keys</a></del> merely “SHOULD” be <del><a href="#undefined">unique</a></del>, while YAML insists they “MUST” be.
+<p>JSON’s <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC4627</a> requires that <a href="#mapping">mappings</a>
+<del><a href="#undefined">keys</a></del> merely “SHOULD” be <a href="#node-comparison">unique</a>, while YAML insists they “MUST” be.
 Technically, YAML therefore complies with the JSON spec, choosing to treat
 duplicates as an error.
 In practice, since JSON is silent on the semantics of such duplicates, the only
@@ -573,7 +573,7 @@ For more information on using both XML and YAML, please visit
 <p>This specification uses key words based on
 <a href="http://www.ietf.org/rfc/rfc2119.txt">RFC2119</a> to indicate requirement level.
 In particular, the following words are used to describe the actions of a YAML
-<del><a href="#undefined">processor</a></del>:</p>
+<a href="#processing-yaml-information">processor</a>:</p>
 
 <h5 id="may">May</h5>
 
@@ -586,7 +586,7 @@ In particular, the following words are used to describe the actions of a YAML
 
 <blockquote>
   <p>The word <em>should</em>, or the adjective <em>recommended</em>, mean that there could be
-reasons for a YAML <del><a href="#undefined">processor</a></del> to deviate from the behavior described, but that
+reasons for a YAML <a href="#processing-yaml-information">processor</a> to deviate from the behavior described, but that
 such deviation could hurt interoperability and should therefore be advertised
 with appropriate notice.</p>
 </blockquote>
@@ -617,9 +617,9 @@ specification.</p>
 <div id="collections"></div>
 <h2 id="21-collections">2.1. Collections</h2>
 
-<p>YAML’s <del><a href="#undefined">block collections</a></del> use <del><a href="#undefined">indentation</a></del> for scope and begin each entry on
+<p>YAML’s <del><a href="#undefined">block collections</a></del> use <a href="#indentation-spaces">indentation</a> for scope and begin each entry on
 its own line. <del><a href="#undefined">Block sequences</a></del> indicate each entry with a dash and space (
-<del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">-</code></strong> “</a></del>). <del><a href="#undefined">Mappings</a></del> use a colon and space (<del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “</a></del>) to mark each
+<del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">-</code></strong> “</a></del>). <a href="#mapping">Mappings</a> use a colon and space (<del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “</a></del>) to mark each
 <del><a href="#undefined">key: value pair</a></del>. <del><a href="#undefined">Comments</a></del> begin with an octothorpe (also called a “hash”,
 “sharp”, “pound”, or “number sign” - <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”</a></del>).</p>
 
@@ -678,7 +678,7 @@ national:
 </div>
 
 <p>YAML also has <del><a href="#undefined">flow styles</a></del>, using explicit <del><a href="#undefined">indicators</a></del> rather than
-<del><a href="#undefined">indentation</a></del> to denote scope.
+<a href="#indentation-spaces">indentation</a> to denote scope.
 The <del><a href="#undefined">flow sequence</a></del> is written as a <del><a href="#undefined">comma</a></del> separated list within <del><a href="#undefined">square</a></del>
 <del><a href="#undefined">brackets</a></del>.
 In a similar manner, the <del><a href="#undefined">flow mapping</a></del> uses <del><a href="#undefined">curly</a></del> <del><a href="#undefined">braces</a></del>.</p>
@@ -711,7 +711,7 @@ Sammy Sosa: {
 <h2 id="22-structures">2.2. Structures</h2>
 
 <p>YAML uses three dashes (<del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">---</code></strong>”</a></del>) to separate <del><a href="#undefined">directives</a></del> from <del><a href="#undefined">document</a></del>
-<del><a href="#undefined">content</a></del>.
+<a href="#nodes">content</a>.
 This also serves to signal the start of a document if no <del><a href="#undefined">directives</a></del> are
 present.
 Three dots ( <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">...</code></strong>”</a></del>) indicate the end of a document without starting a
@@ -789,7 +789,7 @@ rbi:
 
 </div>
 
-<p>A question mark and space (<del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">?</code></strong> “</a></del>) indicate a complex <del><a href="#undefined">mapping</a></del> <del><a href="#undefined">key</a></del>.
+<p>A question mark and space (<del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">?</code></strong> “</a></del>) indicate a complex <del><a href="#undefined">mapping</a></del> <a href="#nodes">key</a>.
 Within a <del><a href="#undefined">block collection</a></del>, <del><a href="#undefined">key: value pairs</a></del> can start immediately following
 the <del><a href="#undefined">dash</a></del>, <del><a href="#undefined">colon</a></del>, or <del><a href="#undefined">question mark</a></del>.</p>
 
@@ -829,10 +829,10 @@ the <del><a href="#undefined">dash</a></del>, <del><a href="#undefined">colon</a
 <div id="scalars"></div>
 <h2 id="23-scalars">2.3. Scalars</h2>
 
-<p><del><a href="#undefined">Scalar content</a></del> can be written in <del><a href="#undefined">block</a></del> notation, using a <del><a href="#undefined">literal
-style</a></del> (indicated by <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>”</a></del>) where all <del><a href="#undefined">line breaks</a></del> are significant.
+<p><a href="#scalar">Scalar content</a> can be written in <del><a href="#undefined">block</a></del> notation, using a <del><a href="#undefined">literal
+style</a></del> (indicated by <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>”</a></del>) where all <a href="#line-break-characters">line breaks</a> are significant.
 Alternatively, they can be written with the <del><a href="#undefined">folded style</a></del> <del><a href="#undefined">(denoted by
-“<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>”</a></del>) where each <del><a href="#undefined">line break</a></del> is <del><a href="#undefined">folded</a></del> to a <del><a href="#undefined">space</a></del> unless it ends an
+“<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>”</a></del>) where each <a href="#line-break-characters">line break</a> is <del><a href="#undefined">folded</a></del> to a <a href="#white-space-characters">space</a> unless it ends an
 <del><a href="#undefined">empty</a></del> or a <del><a href="#undefined">more-indented</a></del> line.</p>
 
 <div id="example-in-literals-newlines-are-preserved" class="example">
@@ -895,7 +895,7 @@ stats: |
 two quoted styles.
 The <del><a href="#undefined">double-quoted style</a></del> provides <del><a href="#undefined">escape sequences</a></del>.
 The <del><a href="#undefined">single-quoted style</a></del> is useful when <del><a href="#undefined">escaping</a></del> is not needed.
-All <del><a href="#undefined">flow scalars</a></del> can span multiple lines; <del><a href="#undefined">line breaks</a></del> are always <del><a href="#undefined">folded</a></del>.</p>
+All <del><a href="#undefined">flow scalars</a></del> can span multiple lines; <a href="#line-break-characters">line breaks</a> are always <del><a href="#undefined">folded</a></del>.</p>
 
 <div id="example-quoted-scalars" class="example">
   <p><strong>Example 2.17 Quoted Scalars</strong></p>
@@ -929,7 +929,7 @@ quoted: "So does this
 <div id="tags"></div>
 <h2 id="24-tags">2.4. Tags</h2>
 
-<p>In YAML, <del><a href="#undefined">untagged nodes</a></del> are given a type depending on the <del><a href="#undefined">application</a></del>.
+<p>In YAML, <del><a href="#undefined">untagged nodes</a></del> are given a type depending on the <a href="#processing-yaml-information">application</a>.
 The examples in this specification generally use the <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">seq</code></strong></a></del>, <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">map</code></strong></a></del>
 and <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">str</code></strong></a></del> types from the <del><a href="#undefined">fail safe schema</a></del>.
 A few examples also use the <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">int</code></strong></a></del>, <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">float</code></strong></a></del>, and <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">null</code></strong></a></del> types
@@ -986,9 +986,9 @@ date: 2002-12-14
 
 </div>
 
-<p>Explicit typing is denoted with a <del><a href="#undefined">tag</a></del> using the exclamation point
+<p>Explicit typing is denoted with a <a href="#tags">tag</a> using the exclamation point
 (<del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del>) symbol. <del><a href="#undefined">Global tags</a></del> are URIs and may be specified in a <del><a href="#undefined">tag
-shorthand</a></del> notation using a <del><a href="#undefined">handle</a></del>. <del><a href="#undefined">Application</a></del>-specific <del><a href="#undefined">local tags</a></del> may
+shorthand</a></del> notation using a <del><a href="#undefined">handle</a></del>. <a href="#processing-yaml-information">Application</a>-specific <del><a href="#undefined">local tags</a></del> may
 also be used.</p>
 
 <div id="example-various-explicit-tags" class="example">
@@ -1147,8 +1147,8 @@ Stack:
 <p>YAML is both a text format and a method for <del><a href="#undefined">presenting</a></del> any <del><a href="#undefined">native data
 structure</a></del> in this format.
 Therefore, this specification defines two concepts: a class of data objects
-called YAML <del><a href="#undefined">representations</a></del>, and a syntax for <del><a href="#undefined">presenting</a></del> YAML
-<del><a href="#undefined">representations</a></del> as a series of characters, called a YAML <del><a href="#undefined">stream</a></del>.
+called YAML <a href="#representation-graph">representations</a>, and a syntax for <del><a href="#undefined">presenting</a></del> YAML
+<a href="#representation-graph">representations</a> as a series of characters, called a YAML <a href="#streams">stream</a>.
 A YAML <em>processor</em> is a tool for converting information between these
 complementary views.
 It is assumed that a YAML processor does its work on behalf of another module,
@@ -1159,18 +1159,18 @@ to or obtain from the application.</p>
 <p>YAML information is used in two ways: for machine processing, and for human
 consumption.
 The challenge of reconciling these two perspectives is best done in three
-distinct translation stages: <del><a href="#undefined">representation</a></del>, <del><a href="#undefined">serialization</a></del>, and
-<del><a href="#undefined">presentation</a></del>. <del><a href="#undefined">Representation</a></del> addresses how YAML views <del><a href="#undefined">native data
+distinct translation stages: <a href="#representation-graph">representation</a>, <a href="#serialization-tree">serialization</a>, and
+<a href="#presentation-stream">presentation</a>. <a href="#representation-graph">Representation</a> addresses how YAML views <del><a href="#undefined">native data
 structures</a></del> to achieve portability between programming environments.
-<del><a href="#undefined">Serialization</a></del> concerns itself with turning a YAML <del><a href="#undefined">representation</a></del> into a
-serial form, that is, a form with sequential access constraints. <del><a href="#undefined">Presentation</a></del>
-deals with the formatting of a YAML <del><a href="#undefined">serialization</a></del> as a series of characters
+<a href="#serialization-tree">Serialization</a> concerns itself with turning a YAML <a href="#representation-graph">representation</a> into a
+serial form, that is, a form with sequential access constraints. <a href="#presentation-stream">Presentation</a>
+deals with the formatting of a YAML <a href="#serialization-tree">serialization</a> as a series of characters
 in a human-friendly manner.</p>
 
 <div id="processes"></div>
 <h2 id="31-processes">3.1. Processes</h2>
 
-<p>Translating between <del><a href="#undefined">native data structures</a></del> and a character <del><a href="#undefined">stream</a></del> is done
+<p>Translating between <del><a href="#undefined">native data structures</a></del> and a character <a href="#streams">stream</a> is done
 in several logically distinct stages, each with a well defined input and output
 data model, as shown in the following diagram:</p>
 
@@ -1178,19 +1178,19 @@ data model, as shown in the following diagram:</p>
 
 <p><img src="/img/overview2.png" alt="Processing Overview" /></p>
 
-<p>A YAML processor need not expose the <del><a href="#undefined">serialization</a></del> or <del><a href="#undefined">representation</a></del> stages.
+<p>A YAML processor need not expose the <a href="#serialization-tree">serialization</a> or <a href="#representation-graph">representation</a> stages.
 It may translate directly between <del><a href="#undefined">native data structures</a></del> and a character
-<del><a href="#undefined">stream</a></del> (<del><a href="#undefined">dump</a></del> and <del><a href="#undefined">load</a></del> in the diagram above).
+<a href="#streams">stream</a> (<del><a href="#undefined">dump</a></del> and <del><a href="#undefined">load</a></del> in the diagram above).
 However, such a direct translation should take place so that the <del><a href="#undefined">native data
 structures</a></del> are <del><a href="#undefined">constructed</a></del> only from information available in the
-<del><a href="#undefined">representation</a></del>.
+<a href="#representation-graph">representation</a>.
 In particular, <del><a href="#undefined">mapping key order</a></del>, <del><a href="#undefined">comments</a></del>, and <del><a href="#undefined">tag handles</a></del> should not be
 referenced during <del><a href="#undefined">composition</a></del>.</p>
 
 <div id="dump"></div>
 <h3 id="311-dump">3.1.1. Dump</h3>
 
-<p><em>Dumping</em> native data structures to a character <del><a href="#undefined">stream</a></del> is done using the
+<p><em>Dumping</em> native data structures to a character <a href="#streams">stream</a> is done using the
 following three stages:</p>
 
 <h5 id="representing-native-data-structures">Representing Native Data Structures</h5>
@@ -1198,20 +1198,20 @@ following three stages:</p>
 <blockquote>
   <p>YAML <em>represents</em> any <em>native data structure</em> using three <del><a href="#undefined">node kinds</a></del>:
 <del><a href="#undefined">sequence</a></del> - an ordered series of entries; <del><a href="#undefined">mapping</a></del> - an unordered
-association of <del><a href="#undefined">unique</a></del> <del><a href="#undefined">keys</a></del> to <del><a href="#undefined">values</a></del>; and <del><a href="#undefined">scalar</a></del> - any datum with
+association of <a href="#node-comparison">unique</a> <del><a href="#undefined">keys</a></del> to <del><a href="#undefined">values</a></del>; and <a href="#scalar">scalar</a> - any datum with
 opaque structure presentable as a series of Unicode characters.
 Combined, these primitives generate directed graph structures.
 These primitives were chosen because they are both powerful and familiar: the
 <del><a href="#undefined">sequence</a></del> corresponds to a Perl array and a Python list, the <del><a href="#undefined">mapping</a></del>
 corresponds to a Perl hash table and a Python dictionary.
-The <del><a href="#undefined">scalar</a></del> represents strings, integers, dates, and other atomic data
+The <a href="#scalar">scalar</a> represents strings, integers, dates, and other atomic data
 types.</p>
 
-  <p>Each YAML <del><a href="#undefined">node</a></del> requires, in addition to its <del><a href="#undefined">kind</a></del> and <del><a href="#undefined">content</a></del>, a <del><a href="#undefined">tag</a></del>
+  <p>Each YAML <a href="#nodes">node</a> requires, in addition to its <del><a href="#undefined">kind</a></del> and <a href="#nodes">content</a>, a <a href="#tags">tag</a>
 specifying its data type.
 Type specifiers are either <del><a href="#undefined">global</a></del> URIs, or are <del><a href="#undefined">local</a></del> in scope to a single
-<del><a href="#undefined">application</a></del>.
-For example, an integer is represented in YAML with a <del><a href="#undefined">scalar</a></del> plus the
+<a href="#processing-yaml-information">application</a>.
+For example, an integer is represented in YAML with a <a href="#scalar">scalar</a> plus the
 <del><a href="#undefined">global tag</a></del> “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></strong>”.
 Similarly, an invoice object, particular to a given organization, could be
 represented as a <del><a href="#undefined">mapping</a></del> together with the <del><a href="#undefined">local tag</a></del> “<strong><code class="language-plaintext highlighter-rouge">!invoice</code></strong>”.
@@ -1223,15 +1223,15 @@ language.</p>
 
 <blockquote>
   <p>For sequential access mediums, such as an event callback API, a YAML
-<del><a href="#undefined">representation</a></del> must be <em>serialized</em> to an ordered tree.
-Since in a YAML <del><a href="#undefined">representation</a></del>, <del><a href="#undefined">mapping keys</a></del> are unordered and <del><a href="#undefined">nodes</a></del> may
+<a href="#representation-graph">representation</a> must be <em>serialized</em> to an ordered tree.
+Since in a YAML <a href="#representation-graph">representation</a>, <a href="#nodes">mapping keys</a> are unordered and <del><a href="#undefined">nodes</a></del> may
 be referenced more than once (have more than one incoming “arrow”), the
-serialization process is required to impose an <del><a href="#undefined">ordering</a></del> on the <del><a href="#undefined">mapping keys</a></del>
-and to replace the second and subsequent references to a given <del><a href="#undefined">node</a></del> with
+serialization process is required to impose an <del><a href="#undefined">ordering</a></del> on the <a href="#nodes">mapping keys</a>
+and to replace the second and subsequent references to a given <a href="#nodes">node</a> with
 place holders called <del><a href="#undefined">aliases</a></del>.
 YAML does not specify how these <em>serialization details</em> are chosen.
-It is up to the YAML <del><a href="#undefined">processor</a></del> to come up with human-friendly <del><a href="#undefined">key order</a></del> and
-<del><a href="#undefined">anchor</a></del> names, possibly with the help of the <del><a href="#undefined">application</a></del>.
+It is up to the YAML <a href="#processing-yaml-information">processor</a> to come up with human-friendly <del><a href="#undefined">key order</a></del> and
+<del><a href="#undefined">anchor</a></del> names, possibly with the help of the <a href="#processing-yaml-information">application</a>.
 The result of this process, a YAML <del><a href="#undefined">serialization tree</a></del>, can then be traversed
 to produce a series of event calls for one-pass processing of YAML data.</p>
 </blockquote>
@@ -1240,41 +1240,41 @@ to produce a series of event calls for one-pass processing of YAML data.</p>
 
 <blockquote>
   <p>The final output process is <em>presenting</em> the YAML <del><a href="#undefined">serializations</a></del> as a
-character <del><a href="#undefined">stream</a></del> in a human-friendly manner.
+character <a href="#streams">stream</a> in a human-friendly manner.
 To maximize human readability, YAML offers a rich set of stylistic options
 which go far beyond the minimal functional needs of simple data storage.
-Therefore the YAML <del><a href="#undefined">processor</a></del> is required to introduce various <em>presentation
-details</em> when creating the <del><a href="#undefined">stream</a></del>, such as the choice of <del><a href="#undefined">node styles</a></del>, how
-to <del><a href="#undefined">format scalar content</a></del>, the amount of <del><a href="#undefined">indentation</a></del>, which <del><a href="#undefined">tag handles</a></del> to
+Therefore the YAML <a href="#processing-yaml-information">processor</a> is required to introduce various <em>presentation
+details</em> when creating the <a href="#streams">stream</a>, such as the choice of <del><a href="#undefined">node styles</a></del>, how
+to <del><a href="#undefined">format scalar content</a></del>, the amount of <a href="#indentation-spaces">indentation</a>, which <del><a href="#undefined">tag handles</a></del> to
 use, the <del><a href="#undefined">node tags</a></del> to leave <del><a href="#undefined">unspecified</a></del>, the set of <del><a href="#undefined">directives</a></del> to provide
 and possibly even what <del><a href="#undefined">comments</a></del> to add.
-While some of this can be done with the help of the <del><a href="#undefined">application</a></del>, in general
+While some of this can be done with the help of the <a href="#processing-yaml-information">application</a>, in general
 this process should be guided by the preferences of the user.</p>
 </blockquote>
 
 <div id="load"></div>
 <h3 id="312-load">3.1.2. Load</h3>
 
-<p><em>Loading</em> <del><a href="#undefined">native data structures</a></del> from a character <del><a href="#undefined">stream</a></del> is done using the
+<p><em>Loading</em> <del><a href="#undefined">native data structures</a></del> from a character <a href="#streams">stream</a> is done using the
 following three stages:</p>
 
 <h5 id="parsing-the-presentation-stream">Parsing the Presentation Stream</h5>
 
 <blockquote>
-  <p><em>Parsing</em> is the inverse process of <del><a href="#undefined">presentation</a></del>, it takes a <del><a href="#undefined">stream</a></del> of
+  <p><em>Parsing</em> is the inverse process of <a href="#presentation-stream">presentation</a>, it takes a <a href="#streams">stream</a> of
 characters and produces a series of events.
-Parsing discards all the <del><a href="#undefined">details</a></del> introduced in the <del><a href="#undefined">presentation</a></del> process,
-reporting only the <del><a href="#undefined">serialization</a></del> events.
+Parsing discards all the <del><a href="#undefined">details</a></del> introduced in the <a href="#presentation-stream">presentation</a> process,
+reporting only the <a href="#serialization-tree">serialization</a> events.
 Parsing can fail due to <del><a href="#undefined">ill-formed</a></del> input.</p>
 </blockquote>
 
 <h5 id="composing-the-representation-graph">Composing the Representation Graph</h5>
 
 <blockquote>
-  <p><em>Composing</em> takes a series of <del><a href="#undefined">serialization</a></del> events and produces a
-<del><a href="#undefined">representation graph</a></del>.
-Composing discards all the <del><a href="#undefined">details</a></del> introduced in the <del><a href="#undefined">serialization</a></del> process,
-producing only the <del><a href="#undefined">representation graph</a></del>.
+  <p><em>Composing</em> takes a series of <a href="#serialization-tree">serialization</a> events and produces a
+<a href="#representation-graph">representation graph</a>.
+Composing discards all the <del><a href="#undefined">details</a></del> introduced in the <a href="#serialization-tree">serialization</a> process,
+producing only the <a href="#representation-graph">representation graph</a>.
 Composing can fail due to any of several reasons, detailed <del><a href="#undefined">below</a></del>.</p>
 </blockquote>
 
@@ -1282,11 +1282,11 @@ Composing can fail due to any of several reasons, detailed <del><a href="#undefi
 
 <blockquote>
   <p>The final input process is <em>constructing</em> <del><a href="#undefined">native data structures</a></del> from the
-YAML <del><a href="#undefined">representation</a></del>.
+YAML <a href="#representation-graph">representation</a>.
 Construction must be based only on the information available in the
-<del><a href="#undefined">representation</a></del>, and not on additional <del><a href="#undefined">serialization</a></del> or <del><a href="#undefined">presentation
+<a href="#representation-graph">representation</a>, and not on additional <a href="#serialization-tree">serialization</a> or <del><a href="#undefined">presentation
 details</a></del> such as <del><a href="#undefined">comments</a></del>, <del><a href="#undefined">directives</a></del>, <del><a href="#undefined">mapping key order</a></del>, <del><a href="#undefined">node styles</a></del>,
-<del><a href="#undefined">scalar content format</a></del>, <del><a href="#undefined">indentation</a></del> levels etc.
+<del><a href="#undefined">scalar content format</a></del>, <a href="#indentation-spaces">indentation</a> levels etc.
 Construction can fail due to the <del><a href="#undefined">unavailability</a></del> of the required <del><a href="#undefined">native data
 types</a></del>.</p>
 </blockquote>
@@ -1296,23 +1296,23 @@ types</a></del>.</p>
 
 <p>This section specifies the formal details of the results of the above processes.
 To maximize data portability between programming languages and implementations,
-users of YAML should be mindful of the distinction between <del><a href="#undefined">serialization</a></del> or
-<del><a href="#undefined">presentation</a></del> properties and those which are part of the YAML <del><a href="#undefined">representation</a></del>.
-Thus, while imposing a <del><a href="#undefined">order</a></del> on <del><a href="#undefined">mapping keys</a></del> is necessary for flattening
-YAML <del><a href="#undefined">representations</a></del> to a sequential access medium, this <del><a href="#undefined">serialization
-detail</a></del> must not be used to convey <del><a href="#undefined">application</a></del> level information.
-In a similar manner, while <del><a href="#undefined">indentation</a></del> technique and a choice of a <del><a href="#undefined">node
+users of YAML should be mindful of the distinction between <a href="#serialization-tree">serialization</a> or
+<a href="#presentation-stream">presentation</a> properties and those which are part of the YAML <a href="#representation-graph">representation</a>.
+Thus, while imposing a <del><a href="#undefined">order</a></del> on <a href="#nodes">mapping keys</a> is necessary for flattening
+YAML <a href="#representation-graph">representations</a> to a sequential access medium, this <del><a href="#undefined">serialization
+detail</a></del> must not be used to convey <a href="#processing-yaml-information">application</a> level information.
+In a similar manner, while <a href="#indentation-spaces">indentation</a> technique and a choice of a <del><a href="#undefined">node
 style</a></del> are needed for the human readability, these <del><a href="#undefined">presentation details</a></del> are
-neither part of the YAML <del><a href="#undefined">serialization</a></del> nor the YAML <del><a href="#undefined">representation</a></del>.
-By carefully separating properties needed for <del><a href="#undefined">serialization</a></del> and
-<del><a href="#undefined">presentation</a></del>, YAML <del><a href="#undefined">representations</a></del> of <del><a href="#undefined">application</a></del> information will be
+neither part of the YAML <a href="#serialization-tree">serialization</a> nor the YAML <a href="#representation-graph">representation</a>.
+By carefully separating properties needed for <a href="#serialization-tree">serialization</a> and
+<a href="#presentation-stream">presentation</a>, YAML <a href="#representation-graph">representations</a> of <a href="#processing-yaml-information">application</a> information will be
 consistent and portable between various programming environments.</p>
 
 <p>The following diagram summarizes the three <em>information models</em>.
 Full arrows denote composition, hollow arrows denote inheritance, “<strong><code class="language-plaintext highlighter-rouge">1</code></strong>” and
 “<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” denote “one” and “many” relationships.
-A single “<strong><code class="language-plaintext highlighter-rouge">+</code></strong>” denotes <del><a href="#undefined">serialization</a></del> details, a double “<strong><code class="language-plaintext highlighter-rouge">++</code></strong>” denotes
-<del><a href="#undefined">presentation</a></del> details.</p>
+A single “<strong><code class="language-plaintext highlighter-rouge">+</code></strong>” denotes <a href="#serialization-tree">serialization</a> details, a double “<strong><code class="language-plaintext highlighter-rouge">++</code></strong>” denotes
+<a href="#presentation-stream">presentation</a> details.</p>
 
 <p><strong>Figure 3.2. Information Models</strong></p>
 
@@ -1324,17 +1324,17 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 <p>YAML’s <em>representation</em> of <del><a href="#undefined">native data structure</a></del> is a rooted, connected,
 directed graph of <del><a href="#undefined">tagged</a></del> <del><a href="#undefined">nodes</a></del>.
 By “directed graph” we mean a set of <del><a href="#undefined">nodes</a></del> and directed edges (“arrows”),
-where each edge connects one <del><a href="#undefined">node</a></del> to another (see <a href="http://www.nist.gov/dads/HTML/directedGraph.html">a formal
+where each edge connects one <a href="#nodes">node</a> to another (see <a href="http://www.nist.gov/dads/HTML/directedGraph.html">a formal
 definition</a>).
 All the <del><a href="#undefined">nodes</a></del> must be reachable from the <em>root node</em> via such edges.
-Note that the YAML graph may include cycles, and a <del><a href="#undefined">node</a></del> may have more than
+Note that the YAML graph may include cycles, and a <a href="#nodes">node</a> may have more than
 one incoming edge.</p>
 
 <p><del><a href="#undefined">Nodes</a></del> that are defined in terms of other <del><a href="#undefined">nodes</a></del> are <del><a href="#undefined">collections</a></del>; <del><a href="#undefined">nodes</a></del>
 that are independent of any other <del><a href="#undefined">nodes</a></del> are <del><a href="#undefined">scalars</a></del>.
-YAML supports two <del><a href="#undefined">kinds</a></del> of <del><a href="#undefined">collection nodes</a></del>: <del><a href="#undefined">sequences</a></del> and <del><a href="#undefined">mappings</a></del>.
+YAML supports two <del><a href="#undefined">kinds</a></del> of <del><a href="#undefined">collection nodes</a></del>: <a href="#sequence">sequences</a> and <a href="#mapping">mappings</a>.
 <del><a href="#undefined">Mapping nodes</a></del> are somewhat tricky because their <del><a href="#undefined">keys</a></del> are unordered and must
-be <del><a href="#undefined">unique</a></del>.</p>
+be <a href="#node-comparison">unique</a>.</p>
 
 <p><strong>Figure 3.3. Representation Model</strong></p>
 
@@ -1345,7 +1345,7 @@ be <del><a href="#undefined">unique</a></del>.</p>
 
 <p>A YAML <em>node</em> <del><a href="#undefined">represents</a></del> a single <del><a href="#undefined">native data structure</a></del>.
 Such nodes have <em>content</em> of one of three <em>kinds</em>: scalar, sequence, or mapping.
-In addition, each node has a <del><a href="#undefined">tag</a></del> which serves to restrict the set of possible
+In addition, each node has a <a href="#tags">tag</a> which serves to restrict the set of possible
 values the content can have.</p>
 
 <h5 id="scalar">Scalar</h5>
@@ -1367,7 +1367,7 @@ It could even contain itself (directly or indirectly).</p>
 
 <blockquote>
   <p>The content of a <em>mapping</em> node is an unordered set of <em>key:</em> <em>value</em> node
-<em>pairs</em>, with the restriction that each of the keys is <del><a href="#undefined">unique</a></del>.
+<em>pairs</em>, with the restriction that each of the keys is <a href="#node-comparison">unique</a>.
 YAML places no further restrictions on the nodes.
 In particular, keys may be arbitrary nodes, the same node may be used as the
 value of several key: value pairs, and a mapping could even contain itself as a
@@ -1388,10 +1388,10 @@ This strategy is also used by the Javascript programming language.</p>
 <p>YAML <del><a href="#undefined">represents</a></del> type information of <del><a href="#undefined">native data structures</a></del> with a simple
 identifier, called a <em>tag</em>. <em>Global tags</em> are
 <a href="http://www.ietf.org/rfc/rfc2396.txt">URIs</a> and hence globally unique across
-all <del><a href="#undefined">applications</a></del>.
+all <a href="#processing-yaml-information">applications</a>.
 The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” <a href="http://www.faqs.org/rfcs/rfc4151.html">URI scheme</a> is
 recommended for all global YAML tags.
-In contrast, <em>local tags</em> are specific to a single <del><a href="#undefined">application</a></del>.
+In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
 Local tags start with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em>, are not URIs and are not expected to be
 globally unique.
 YAML provides a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive</a></del> to make tag notation less verbose; it
@@ -1410,55 +1410,55 @@ However, this is merely a convention, and each tag may employ its own rules.
 For example, Perl tags may use “<strong><code class="language-plaintext highlighter-rouge">::</code></strong>” to express namespace hierarchies,
 Java tags may use “<strong><code class="language-plaintext highlighter-rouge">.</code></strong>”, etc.</p>
 
-<p>YAML tags are used to associate meta information with each <del><a href="#undefined">node</a></del>.
-In particular, each tag must specify the expected <del><a href="#undefined">node kind</a></del> (<del><a href="#undefined">scalar</a></del>,
-<del><a href="#undefined">sequence</a></del>, or <del><a href="#undefined">mapping</a></del>). <del><a href="#undefined">Scalar</a></del> tags must also provide a mechanism for
-converting <del><a href="#undefined">formatted content</a></del> to a <del><a href="#undefined">canonical form</a></del> for supporting <del><a href="#undefined">equality</a></del>
+<p>YAML tags are used to associate meta information with each <a href="#nodes">node</a>.
+In particular, each tag must specify the expected <del><a href="#undefined">node kind</a></del> (<a href="#scalar">scalar</a>,
+<del><a href="#undefined">sequence</a></del>, or <del><a href="#undefined">mapping</a></del>). <a href="#scalar">Scalar</a> tags must also provide a mechanism for
+converting <a href="#scalar-formats">formatted content</a> to a <del><a href="#undefined">canonical form</a></del> for supporting <del><a href="#undefined">equality</a></del>
 testing.
 Furthermore, a tag may provide additional information such as the set of
-allowed <del><a href="#undefined">content</a></del> values for validation, a mechanism for <del><a href="#undefined">tag resolution</a></del>, or
+allowed <a href="#nodes">content</a> values for validation, a mechanism for <del><a href="#undefined">tag resolution</a></del>, or
 any other data that is applicable to all of the tag’s <del><a href="#undefined">nodes</a></del>.</p>
 
 <div id="node-comparison"></div>
 <h4 id="3213-node-comparison">3.2.1.3. Node Comparison</h4>
 
-<p>Since YAML <del><a href="#undefined">mappings</a></del> require <del><a href="#undefined">key</a></del> uniqueness, <del><a href="#undefined">representations</a></del> must include
+<p>Since YAML <a href="#mapping">mappings</a> require <a href="#nodes">key</a> uniqueness, <a href="#representation-graph">representations</a> must include
 a mechanism for testing the equality of <del><a href="#undefined">nodes</a></del>.
 This is non-trivial since YAML allows various ways to <del><a href="#undefined">format scalar content</a></del>.
 For example, the integer eleven can be written as “<strong><code class="language-plaintext highlighter-rouge">0o13</code></strong>” (octal) or
 “<strong><code class="language-plaintext highlighter-rouge">0xB</code></strong>” (hexadecimal).
 If both notations are used as <del><a href="#undefined">keys</a></del> in the same <del><a href="#undefined">mapping</a></del>, only a YAML
-<del><a href="#undefined">processor</a></del> which recognizes integer <del><a href="#undefined">formats</a></del> would correctly flag the
-duplicate <del><a href="#undefined">key</a></del> as an error.</p>
+<a href="#processing-yaml-information">processor</a> which recognizes integer <del><a href="#undefined">formats</a></del> would correctly flag the
+duplicate <a href="#nodes">key</a> as an error.</p>
 
 <h5 id="canonical-form">Canonical Form</h5>
 
-<p>YAML supports the need for <del><a href="#undefined">scalar</a></del> equality by requiring that every
-<del><a href="#undefined">scalar</a></del> <del><a href="#undefined">tag</a></del> must specify a mechanism for producing the <em>canonical form</em> of
-any <del><a href="#undefined">formatted content</a></del>.
+<p>YAML supports the need for <a href="#scalar">scalar</a> equality by requiring that every
+<a href="#scalar">scalar</a> <a href="#tags">tag</a> must specify a mechanism for producing the <em>canonical form</em> of
+any <a href="#scalar-formats">formatted content</a>.
 This form is a Unicode character string which also <del><a href="#undefined">presents</a></del> the same
-<del><a href="#undefined">content</a></del>, and can be used for equality testing.
+<a href="#nodes">content</a>, and can be used for equality testing.
 While this requirement is stronger than a well defined equality operator, it
 has other uses, such as the production of digital signatures.</p>
 
 <h5 id="equality">Equality</h5>
 
-<p>Two <del><a href="#undefined">nodes</a></del> must have the same <del><a href="#undefined">tag</a></del> and <del><a href="#undefined">content</a></del> to be <em>equal</em>.
-Since each <del><a href="#undefined">tag</a></del> applies to exactly one <del><a href="#undefined">kind</a></del>, this implies that the two
+<p>Two <del><a href="#undefined">nodes</a></del> must have the same <a href="#tags">tag</a> and <a href="#nodes">content</a> to be <em>equal</em>.
+Since each <a href="#tags">tag</a> applies to exactly one <del><a href="#undefined">kind</a></del>, this implies that the two
 <del><a href="#undefined">nodes</a></del> must have the same <del><a href="#undefined">kind</a></del> to be equal.
 Two <del><a href="#undefined">scalars</a></del> are equal only when their <del><a href="#undefined">tags</a></del> and canonical forms are equal
 character-by-character.
 Equality of <del><a href="#undefined">collections</a></del> is defined recursively.
-Two <del><a href="#undefined">sequences</a></del> are equal only when they have the same <del><a href="#undefined">tag</a></del> and length, and
-each <del><a href="#undefined">node</a></del> in one <del><a href="#undefined">sequence</a></del> is equal to the corresponding <del><a href="#undefined">node</a></del> in the
+Two <a href="#sequence">sequences</a> are equal only when they have the same <a href="#tags">tag</a> and length, and
+each <a href="#nodes">node</a> in one <del><a href="#undefined">sequence</a></del> is equal to the corresponding <a href="#nodes">node</a> in the
 other <del><a href="#undefined">sequence</a></del>.
-Two <del><a href="#undefined">mappings</a></del> are equal only when they have the same <del><a href="#undefined">tag</a></del> and an equal set
-of <del><a href="#undefined">keys</a></del>, and each <del><a href="#undefined">key</a></del> in this set is associated with equal <del><a href="#undefined">values</a></del> in
-both <del><a href="#undefined">mappings</a></del>.</p>
+Two <a href="#mapping">mappings</a> are equal only when they have the same <a href="#tags">tag</a> and an equal set
+of <del><a href="#undefined">keys</a></del>, and each <a href="#nodes">key</a> in this set is associated with equal <del><a href="#undefined">values</a></del> in
+both <a href="#mapping">mappings</a>.</p>
 
 <p>Different URI schemes may define different rules for testing the equality of
 URIs.
-Since a YAML <del><a href="#undefined">processor</a></del> cannot be reasonably expected to be aware of them
+Since a YAML <a href="#processing-yaml-information">processor</a> cannot be reasonably expected to be aware of them
 all, it must resort to a simple character-by-character comparison of <del><a href="#undefined">tags</a></del>
 to ensure consistency.
 This also happens to be the comparison method defined by the “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI
@@ -1472,21 +1472,21 @@ structure</a></del>.
 Typically, this corresponds to a single memory address.
 Identity should not be confused with equality; two equal <del><a href="#undefined">nodes</a></del> need not have
 the same identity.
-A YAML <del><a href="#undefined">processor</a></del> may treat equal <del><a href="#undefined">scalars</a></del> as if they were identical.
+A YAML <a href="#processing-yaml-information">processor</a> may treat equal <del><a href="#undefined">scalars</a></del> as if they were identical.
 In contrast, the separate identity of two distinct but equal <del><a href="#undefined">collections</a></del> must
 be preserved.</p>
 
 <div id="serialization-tree"></div>
 <h3 id="322-serialization-tree">3.2.2. Serialization Tree</h3>
 
-<p>To express a YAML <del><a href="#undefined">representation</a></del> using a serial API, it is necessary to
-impose an <del><a href="#undefined">order</a></del> on <del><a href="#undefined">mapping keys</a></del> and employ <del><a href="#undefined">alias nodes</a></del> to indicate a
-subsequent occurrence of a previously encountered <del><a href="#undefined">node</a></del>.
-The result of this process is a <em>serialization tree</em>, where each <del><a href="#undefined">node</a></del> has an
+<p>To express a YAML <a href="#representation-graph">representation</a> using a serial API, it is necessary to
+impose an <del><a href="#undefined">order</a></del> on <a href="#nodes">mapping keys</a> and employ <del><a href="#undefined">alias nodes</a></del> to indicate a
+subsequent occurrence of a previously encountered <a href="#nodes">node</a>.
+The result of this process is a <em>serialization tree</em>, where each <a href="#nodes">node</a> has an
 ordered set of children.
 This tree can be traversed for a serial event-based API. <del><a href="#undefined">Construction</a></del> of
 <del><a href="#undefined">native data structures</a></del> from the serial interface should not use <del><a href="#undefined">key order</a></del>
-or <del><a href="#undefined">anchor names</a></del> for the preservation of <del><a href="#undefined">application</a></del> data.</p>
+or <del><a href="#undefined">anchor names</a></del> for the preservation of <a href="#processing-yaml-information">application</a> data.</p>
 
 <p><strong>Figure 3.4. Serialization Model</strong></p>
 
@@ -1495,48 +1495,48 @@ or <del><a href="#undefined">anchor names</a></del> for the preservation of <del
 <div id="keys-order"></div>
 <h4 id="3221-keys-order">3.2.2.1. Keys Order</h4>
 
-<p>In the <del><a href="#undefined">representation</a></del> model, <del><a href="#undefined">mapping keys</a></del> do not have an order.
+<p>In the <a href="#representation-graph">representation</a> model, <a href="#nodes">mapping keys</a> do not have an order.
 To <del><a href="#undefined">serialize</a></del> a <del><a href="#undefined">mapping</a></del>, it is necessary to impose an <em>ordering</em> on its
 <del><a href="#undefined">keys</a></del>.
 This order is a <del><a href="#undefined">serialization detail</a></del> and should not be used when <del><a href="#undefined">composing</a></del>
-the <del><a href="#undefined">representation graph</a></del> (and hence for the preservation of <del><a href="#undefined">application</a></del>
+the <a href="#representation-graph">representation graph</a> (and hence for the preservation of <a href="#processing-yaml-information">application</a>
 data).
-In every case where <del><a href="#undefined">node</a></del> order is significant, a <del><a href="#undefined">sequence</a></del> must be used.
+In every case where <a href="#nodes">node</a> order is significant, a <del><a href="#undefined">sequence</a></del> must be used.
 For example, an ordered <del><a href="#undefined">mapping</a></del> can be <del><a href="#undefined">represented</a></del> as a <del><a href="#undefined">sequence</a></del> of
-<del><a href="#undefined">mappings</a></del>, where each <del><a href="#undefined">mapping</a></del> is a single <del><a href="#undefined">key: value pair</a></del>.
+<a href="#mapping">mappings</a>, where each <del><a href="#undefined">mapping</a></del> is a single <del><a href="#undefined">key: value pair</a></del>.
 YAML provides convenient <del><a href="#undefined">compact notation</a></del> for this case.</p>
 
 <div id="anchors-and-aliases"></div>
 <h4 id="3222-anchors-and-aliases">3.2.2.2. Anchors and Aliases</h4>
 
-<p>In the <del><a href="#undefined">representation graph</a></del>, a <del><a href="#undefined">node</a></del> may appear in more than one <del><a href="#undefined">collection</a></del>.
-When <del><a href="#undefined">serializing</a></del> such data, the first occurrence of the <del><a href="#undefined">node</a></del> is
+<p>In the <a href="#representation-graph">representation graph</a>, a <a href="#nodes">node</a> may appear in more than one <del><a href="#undefined">collection</a></del>.
+When <del><a href="#undefined">serializing</a></del> such data, the first occurrence of the <a href="#nodes">node</a> is
 <em>identified</em> by an <em>anchor</em>.
 Each subsequent occurrence is <del><a href="#undefined">serialized</a></del> as an <del><a href="#undefined">alias node</a></del> which refers back
 to this anchor.
 Otherwise, anchor names are a <del><a href="#undefined">serialization detail</a></del> and are discarded once
 <del><a href="#undefined">composing</a></del> is completed.
-When <del><a href="#undefined">composing</a></del> a <del><a href="#undefined">representation graph</a></del> from <del><a href="#undefined">serialized</a></del> events, an alias
-node refers to the most recent <del><a href="#undefined">node</a></del> in the <del><a href="#undefined">serialization</a></del> having the
+When <del><a href="#undefined">composing</a></del> a <a href="#representation-graph">representation graph</a> from <del><a href="#undefined">serialized</a></del> events, an alias
+node refers to the most recent <a href="#nodes">node</a> in the <a href="#serialization-tree">serialization</a> having the
 specified anchor.
-Therefore, anchors need not be unique within a <del><a href="#undefined">serialization</a></del>.
+Therefore, anchors need not be unique within a <a href="#serialization-tree">serialization</a>.
 In addition, an anchor need not have an alias node referring to it.
 It is therefore possible to provide an anchor for all <del><a href="#undefined">nodes</a></del> in
-<del><a href="#undefined">serialization</a></del>.</p>
+<a href="#serialization-tree">serialization</a>.</p>
 
 <div id="presentation-stream"></div>
 <h3 id="323-presentation-stream">3.2.3. Presentation Stream</h3>
 
-<p>A YAML <em>presentation</em> is a <del><a href="#undefined">stream</a></del> of Unicode characters making use of of
-<del><a href="#undefined">styles</a></del>, <del><a href="#undefined">scalar content formats</a></del>, <del><a href="#undefined">comments</a></del>, <del><a href="#undefined">directives</a></del> and other
-<del><a href="#undefined">presentation details</a></del> to <del><a href="#undefined">present</a></del> a YAML <del><a href="#undefined">serialization</a></del> in a human readable
+<p>A YAML <em>presentation</em> is a <a href="#streams">stream</a> of Unicode characters making use of of
+<a href="#node-styles">styles</a>, <del><a href="#undefined">scalar content formats</a></del>, <del><a href="#undefined">comments</a></del>, <del><a href="#undefined">directives</a></del> and other
+<del><a href="#undefined">presentation details</a></del> to <del><a href="#undefined">present</a></del> a YAML <a href="#serialization-tree">serialization</a> in a human readable
 way.
-Although a YAML <del><a href="#undefined">processor</a></del> may provide these <del><a href="#undefined">details</a></del> when <del><a href="#undefined">parsing</a></del>, they
-should not be reflected in the resulting <del><a href="#undefined">serialization</a></del>.
+Although a YAML <a href="#processing-yaml-information">processor</a> may provide these <del><a href="#undefined">details</a></del> when <del><a href="#undefined">parsing</a></del>, they
+should not be reflected in the resulting <a href="#serialization-tree">serialization</a>.
 YAML allows several <del><a href="#undefined">serialization trees</a></del> to be contained in the same YAML
-character stream, as a series of <del><a href="#undefined">documents</a></del> separated by <del><a href="#undefined">markers</a></del>.
-Documents appearing in the same stream are independent; that is, a <del><a href="#undefined">node</a></del> must
-not appear in more than one <del><a href="#undefined">serialization tree</a></del> or <del><a href="#undefined">representation graph</a></del>.</p>
+character stream, as a series of <a href="#document">documents</a> separated by <del><a href="#undefined">markers</a></del>.
+Documents appearing in the same stream are independent; that is, a <a href="#nodes">node</a> must
+not appear in more than one <del><a href="#undefined">serialization tree</a></del> or <a href="#representation-graph">representation graph</a>.</p>
 
 <p><strong>Figure 3.5. Presentation Model</strong></p>
 
@@ -1545,10 +1545,10 @@ not appear in more than one <del><a href="#undefined">serialization tree</a></de
 <div id="node-styles"></div>
 <h4 id="3231-node-styles">3.2.3.1. Node Styles</h4>
 
-<p>Each <del><a href="#undefined">node</a></del> is presented in some <em>style</em>, depending on its <del><a href="#undefined">kind</a></del>.
+<p>Each <a href="#nodes">node</a> is presented in some <em>style</em>, depending on its <del><a href="#undefined">kind</a></del>.
 The node style is a <del><a href="#undefined">presentation detail</a></del> and is not reflected in the
-<del><a href="#undefined">serialization tree</a></del> or <del><a href="#undefined">representation graph</a></del>.
-There are two groups of styles. <del><a href="#undefined">Block styles</a></del> use <del><a href="#undefined">indentation</a></del> to denote
+<del><a href="#undefined">serialization tree</a></del> or <a href="#representation-graph">representation graph</a>.
+There are two groups of styles. <del><a href="#undefined">Block styles</a></del> use <a href="#indentation-spaces">indentation</a> to denote
 structure; In contrast, <del><a href="#undefined">flow styles</a></del> styles rely on explicit <del><a href="#undefined">indicators</a></del>.</p>
 
 <p>YAML provides a rich set of <em>scalar styles</em>. <del><a href="#undefined">Block scalar</a></del> styles include the
@@ -1558,7 +1558,7 @@ style</a></del>.
 These styles offer a range of trade-offs between expressive power and
 readability.</p>
 
-<p>Normally, <del><a href="#undefined">block sequences</a></del> and <del><a href="#undefined">mappings</a></del> begin on the next line.
+<p>Normally, <del><a href="#undefined">block sequences</a></del> and <a href="#mapping">mappings</a> begin on the next line.
 In some cases, YAML also allows nested <del><a href="#undefined">block</a></del> <del><a href="#undefined">collections</a></del> to start in-line
 for a more <del><a href="#undefined">compact notation</a></del>.
 In addition, YAML provides a <del><a href="#undefined">compact notation</a></del> for <del><a href="#undefined">flow mappings</a></del> with a
@@ -1577,14 +1577,14 @@ For example, the integer “<strong><code class="language-plaintext highlighter-
 <del><a href="#undefined">Tags</a></del> must specify a mechanism for converting the formatted content to a
 <del><a href="#undefined">canonical form</a></del> for use in <del><a href="#undefined">equality</a></del> testing.
 Like <del><a href="#undefined">node style</a></del>, the format is a <del><a href="#undefined">presentation detail</a></del> and is not reflected
-in the <del><a href="#undefined">serialization tree</a></del> and <del><a href="#undefined">representation graph</a></del>.</p>
+in the <del><a href="#undefined">serialization tree</a></del> and <a href="#representation-graph">representation graph</a>.</p>
 
 <div id="comments"></div>
 <h4 id="3233-comments">3.2.3.3. Comments</h4>
 
 <p><del><a href="#undefined">Comments</a></del> are a <del><a href="#undefined">presentation detail</a></del> and must not have any effect on the
-<del><a href="#undefined">serialization tree</a></del> or <del><a href="#undefined">representation graph</a></del>.
-In particular, comments are not associated with a particular <del><a href="#undefined">node</a></del>.
+<del><a href="#undefined">serialization tree</a></del> or <a href="#representation-graph">representation graph</a>.
+In particular, comments are not associated with a particular <a href="#nodes">node</a>.
 The usual purpose of a comment is to communicate between the human maintainers
 of a file.
 A typical example is comments in a configuration file.
@@ -1596,27 +1596,27 @@ Comments must not appear inside <del><a href="#undefined">scalars</a></del>, but
 
 <p>Each <del><a href="#undefined">document</a></del> may be associated with a set of <del><a href="#undefined">directives</a></del>.
 A directive has a name and an optional sequence of parameters.
-Directives are instructions to the YAML <del><a href="#undefined">processor</a></del>, and like all other
+Directives are instructions to the YAML <a href="#processing-yaml-information">processor</a>, and like all other
 <del><a href="#undefined">presentation details</a></del> are not reflected in the YAML <del><a href="#undefined">serialization tree</a></del> or
-<del><a href="#undefined">representation graph</a></del>.
+<a href="#representation-graph">representation graph</a>.
 This version of YAML defines a two directives, <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>”</a></del> and <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”</a></del>.
 All other directives are <del><a href="#undefined">reserved</a></del> for future versions of YAML.</p>
 
 <div id="loading-failure-points"></div>
 <h2 id="33-loading-failure-points">3.3. Loading Failure Points</h2>
 
-<p>The process of <del><a href="#undefined">loading</a></del> <del><a href="#undefined">native data structures</a></del> from a YAML <del><a href="#undefined">stream</a></del> has
+<p>The process of <del><a href="#undefined">loading</a></del> <del><a href="#undefined">native data structures</a></del> from a YAML <a href="#streams">stream</a> has
 several potential <em>failure points</em>.
-The character <del><a href="#undefined">stream</a></del> may be <del><a href="#undefined">ill-formed</a></del>, <del><a href="#undefined">aliases</a></del> may be <del><a href="#undefined">unidentified</a></del>,
+The character <a href="#streams">stream</a> may be <del><a href="#undefined">ill-formed</a></del>, <del><a href="#undefined">aliases</a></del> may be <del><a href="#undefined">unidentified</a></del>,
 <del><a href="#undefined">unspecified tags</a></del> may be <del><a href="#undefined">unresolvable</a></del>, <del><a href="#undefined">tags</a></del> may be <del><a href="#undefined">unrecognized</a></del>, the
-<del><a href="#undefined">content</a></del> may be <del><a href="#undefined">invalid</a></del>, and a native type may be <del><a href="#undefined">unavailable</a></del>.
+<a href="#nodes">content</a> may be <del><a href="#undefined">invalid</a></del>, and a native type may be <del><a href="#undefined">unavailable</a></del>.
 Each of these failures results with an incomplete loading.</p>
 
-<p>A <em>partial representation</em> need not <del><a href="#undefined">resolve</a></del> the <del><a href="#undefined">tag</a></del> of each <del><a href="#undefined">node</a></del>, and the
+<p>A <em>partial representation</em> need not <del><a href="#undefined">resolve</a></del> the <a href="#tags">tag</a> of each <a href="#nodes">node</a>, and the
 <del><a href="#undefined">canonical form</a></del> of <del><a href="#undefined">formatted scalar content</a></del> need not be available.
 This weaker representation is useful for cases of incomplete knowledge of the
 types used in the <del><a href="#undefined">document</a></del>.
-In contrast, a <em>complete representation</em> specifies the <del><a href="#undefined">tag</a></del> of each <del><a href="#undefined">node</a></del>,
+In contrast, a <em>complete representation</em> specifies the <a href="#tags">tag</a> of each <a href="#nodes">node</a>,
 and provides the <del><a href="#undefined">canonical form</a></del> of <del><a href="#undefined">formatted scalar content</a></del>, allowing for
 <del><a href="#undefined">equality</a></del> testing.
 A complete representation is required in order to <del><a href="#undefined">construct</a></del> <del><a href="#undefined">native data
@@ -1629,43 +1629,43 @@ structures</a></del>.</p>
 <div id="well-formed-streams-and-identified-aliases"></div>
 <h3 id="331-well-formed-streams-and-identified-aliases">3.3.1. Well-Formed Streams and Identified Aliases</h3>
 
-<p>A <del><a href="#undefined">well-formed</a></del> character <del><a href="#undefined">stream</a></del> must match the BNF productions specified in
+<p>A <del><a href="#undefined">well-formed</a></del> character <a href="#streams">stream</a> must match the BNF productions specified in
 the following chapters.
 Successful loading also requires that each <del><a href="#undefined">alias</a></del> shall refer to a previous
-<del><a href="#undefined">node</a></del> <del><a href="#undefined">identified</a></del> by the <del><a href="#undefined">anchor</a></del>.
-A YAML <del><a href="#undefined">processor</a></del> should reject <em>ill-formed streams</em> and <em>unidentified aliases</em>.
-A YAML <del><a href="#undefined">processor</a></del> may recover from syntax errors, possibly by ignoring certain
+<a href="#nodes">node</a> <del><a href="#undefined">identified</a></del> by the <del><a href="#undefined">anchor</a></del>.
+A YAML <a href="#processing-yaml-information">processor</a> should reject <em>ill-formed streams</em> and <em>unidentified aliases</em>.
+A YAML <a href="#processing-yaml-information">processor</a> may recover from syntax errors, possibly by ignoring certain
 parts of the input, but it must provide a mechanism for reporting such errors.</p>
 
 <div id="resolved-tags"></div>
 <h3 id="332-resolved-tags">3.3.2. Resolved Tags</h3>
 
-<p>Typically, most <del><a href="#undefined">tags</a></del> are not explicitly specified in the character <del><a href="#undefined">stream</a></del>.
-During <del><a href="#undefined">parsing</a></del>, <del><a href="#undefined">nodes</a></del> lacking an explicit <del><a href="#undefined">tag</a></del> are given a <em>non-specific
+<p>Typically, most <del><a href="#undefined">tags</a></del> are not explicitly specified in the character <a href="#streams">stream</a>.
+During <del><a href="#undefined">parsing</a></del>, <del><a href="#undefined">nodes</a></del> lacking an explicit <a href="#tags">tag</a> are given a <em>non-specific
 tag</em>: <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em> for non-<del><a href="#undefined">plain scalars</a></del>, and <em>“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>“</em> for all other
 <del><a href="#undefined">nodes</a></del>. <del><a href="#undefined">Composing</a></del> a <del><a href="#undefined">complete representation</a></del> requires each such
 non-specific tag to be <em>resolved</em> to a <em>specific tag</em>, be it a <del><a href="#undefined">global tag</a></del> or
 a <del><a href="#undefined">local tag</a></del>.</p>
 
-<p>Resolving the <del><a href="#undefined">tag</a></del> of a <del><a href="#undefined">node</a></del> must only depend on the following three
-parameters: (1) the non-specific tag of the <del><a href="#undefined">node</a></del>, (2) the path leading from
-the <del><a href="#undefined">root</a></del> to the <del><a href="#undefined">node</a></del>, and (3) the <del><a href="#undefined">content</a></del> (and hence the <del><a href="#undefined">kind</a></del>) of the
-<del><a href="#undefined">node</a></del>.
-When a <del><a href="#undefined">node</a></del> has more than one occurrence (using <del><a href="#undefined">aliases</a></del>), tag resolution
+<p>Resolving the <a href="#tags">tag</a> of a <a href="#nodes">node</a> must only depend on the following three
+parameters: (1) the non-specific tag of the <a href="#nodes">node</a>, (2) the path leading from
+the <del><a href="#undefined">root</a></del> to the <a href="#nodes">node</a>, and (3) the <a href="#nodes">content</a> (and hence the <del><a href="#undefined">kind</a></del>) of the
+<a href="#nodes">node</a>.
+When a <a href="#nodes">node</a> has more than one occurrence (using <del><a href="#undefined">aliases</a></del>), tag resolution
 must depend only on the path to the first (<del><a href="#undefined">anchored</a></del>) occurrence of the
-<del><a href="#undefined">node</a></del>.</p>
+<a href="#nodes">node</a>.</p>
 
 <p>Note that resolution must not consider <del><a href="#undefined">presentation details</a></del> such as
-<del><a href="#undefined">comments</a></del>, <del><a href="#undefined">indentation</a></del> and <del><a href="#undefined">node style</a></del>.
-Also, resolution must not consider the <del><a href="#undefined">content</a></del> of any other <del><a href="#undefined">node</a></del>, except
-for the <del><a href="#undefined">content</a></del> of the <del><a href="#undefined">key nodes</a></del> directly along the path leading from the
-<del><a href="#undefined">root</a></del> to the resolved <del><a href="#undefined">node</a></del>.
-Finally, resolution must not consider the <del><a href="#undefined">content</a></del> of a sibling <del><a href="#undefined">node</a></del> in a
-<del><a href="#undefined">collection</a></del>, or the <del><a href="#undefined">content</a></del> of the <del><a href="#undefined">value node</a></del> associated with a <del><a href="#undefined">key node</a></del>
+<del><a href="#undefined">comments</a></del>, <a href="#indentation-spaces">indentation</a> and <del><a href="#undefined">node style</a></del>.
+Also, resolution must not consider the <a href="#nodes">content</a> of any other <a href="#nodes">node</a>, except
+for the <a href="#nodes">content</a> of the <del><a href="#undefined">key nodes</a></del> directly along the path leading from the
+<del><a href="#undefined">root</a></del> to the resolved <a href="#nodes">node</a>.
+Finally, resolution must not consider the <a href="#nodes">content</a> of a sibling <a href="#nodes">node</a> in a
+<del><a href="#undefined">collection</a></del>, or the <a href="#nodes">content</a> of the <del><a href="#undefined">value node</a></del> associated with a <del><a href="#undefined">key node</a></del>
 being resolved.</p>
 
-<p>These rules ensure that tag resolution can be performed as soon as a <del><a href="#undefined">node</a></del> is
-first encountered in the <del><a href="#undefined">stream</a></del>, typically before its <del><a href="#undefined">content</a></del> is <del><a href="#undefined">parsed</a></del>.
+<p>These rules ensure that tag resolution can be performed as soon as a <a href="#nodes">node</a> is
+first encountered in the <a href="#streams">stream</a>, typically before its <a href="#nodes">content</a> is <del><a href="#undefined">parsed</a></del>.
 Also, tag resolution only requires referring to a relatively small number of
 previously parsed <del><a href="#undefined">nodes</a></del>.
 Thus, in most cases, tag resolution in one-pass <del><a href="#undefined">processors</a></del> is both possible
@@ -1674,38 +1674,38 @@ and practical.</p>
 <p>YAML <del><a href="#undefined">processors</a></del> should resolve <del><a href="#undefined">nodes</a></del> having the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific tag
 as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or
 “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>” depending on their <del><a href="#undefined">kind</a></del>.
-This <em>tag resolution convention</em> allows the author of a YAML character <del><a href="#undefined">stream</a></del>
+This <em>tag resolution convention</em> allows the author of a YAML character <a href="#streams">stream</a>
 to effectively “disable” the tag resolution process.
-By explicitly specifying a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific <del><a href="#undefined">tag property</a></del>, the <del><a href="#undefined">node</a></del>
+By explicitly specifying a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific <del><a href="#undefined">tag property</a></del>, the <a href="#nodes">node</a>
 would then be resolved to a “vanilla” <del><a href="#undefined">sequence</a></del>, <del><a href="#undefined">mapping</a></del>, or string,
 according to its <del><a href="#undefined">kind</a></del>.</p>
 
-<p><del><a href="#undefined">Application</a></del> specific tag resolution rules should be restricted to resolving
+<p><a href="#processing-yaml-information">Application</a> specific tag resolution rules should be restricted to resolving
 the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag, most commonly to resolving <del><a href="#undefined">plain scalars</a></del>.
 These may be matched against a set of regular expressions to provide automatic
 resolution of integers, floats, timestamps, and similar types.
-An <del><a href="#undefined">application</a></del> may also match the <del><a href="#undefined">content</a></del> of <del><a href="#undefined">mapping nodes</a></del> against sets
+An <a href="#processing-yaml-information">application</a> may also match the <a href="#nodes">content</a> of <del><a href="#undefined">mapping nodes</a></del> against sets
 of expected <del><a href="#undefined">keys</a></del> to automatically resolve points, complex numbers, and
 similar types.
 Resolved <del><a href="#undefined">sequence node</a></del> types such as the “ordered mapping” are also possible.</p>
 
-<p>That said, tag resolution is specific to the <del><a href="#undefined">application</a></del>.
+<p>That said, tag resolution is specific to the <a href="#processing-yaml-information">application</a>.
 YAML <del><a href="#undefined">processors</a></del> should therefore provide a mechanism allowing the
-<del><a href="#undefined">application</a></del> to override and expand these default tag resolution rules.</p>
+<a href="#processing-yaml-information">application</a> to override and expand these default tag resolution rules.</p>
 
-<p>If a <del><a href="#undefined">document</a></del> contains <em>unresolved tags</em>, the YAML <del><a href="#undefined">processor</a></del> is unable to
+<p>If a <del><a href="#undefined">document</a></del> contains <em>unresolved tags</em>, the YAML <a href="#processing-yaml-information">processor</a> is unable to
 <del><a href="#undefined">compose</a></del> a <del><a href="#undefined">complete representation</a></del> graph.
-In such a case, the YAML <del><a href="#undefined">processor</a></del> may <del><a href="#undefined">compose</a></del> a <del><a href="#undefined">partial representation</a></del>,
+In such a case, the YAML <a href="#processing-yaml-information">processor</a> may <del><a href="#undefined">compose</a></del> a <del><a href="#undefined">partial representation</a></del>,
 based on each <del><a href="#undefined">node’s kind</a></del> and allowing for non-specific tags.</p>
 
 <div id="recognized-and-valid-tags"></div>
 <h3 id="333-recognized-and-valid-tags">3.3.3. Recognized and Valid Tags</h3>
 
-<p>To be <em>valid</em>, a <del><a href="#undefined">node</a></del> must have a <del><a href="#undefined">tag</a></del> which is <em>recognized</em> by the YAML
-<del><a href="#undefined">processor</a></del> and its <del><a href="#undefined">content</a></del> must satisfy the constraints imposed by this <del><a href="#undefined">tag</a></del>.
+<p>To be <em>valid</em>, a <a href="#nodes">node</a> must have a <a href="#tags">tag</a> which is <em>recognized</em> by the YAML
+<a href="#processing-yaml-information">processor</a> and its <a href="#nodes">content</a> must satisfy the constraints imposed by this <a href="#tags">tag</a>.
 If a <del><a href="#undefined">document</a></del> contains a <del><a href="#undefined">scalar node</a></del> with an <em>unrecognized tag</em> or <em>invalid
 content</em>, only a <del><a href="#undefined">partial representation</a></del> may be <del><a href="#undefined">composed</a></del>.
-In contrast, a YAML <del><a href="#undefined">processor</a></del> can always <del><a href="#undefined">compose</a></del> a <del><a href="#undefined">complete
+In contrast, a YAML <a href="#processing-yaml-information">processor</a> can always <del><a href="#undefined">compose</a></del> a <del><a href="#undefined">complete
 representation</a></del> for an unrecognized or an invalid <del><a href="#undefined">collection</a></del>, since
 <del><a href="#undefined">collection</a></del> <del><a href="#undefined">equality</a></del> does not depend upon knowledge of the <del><a href="#undefined">collection’s</a></del>
 data type.
@@ -1716,11 +1716,11 @@ However, such a <del><a href="#undefined">complete representation</a></del> cann
 <h3 id="334-available-tags">3.3.4. Available Tags</h3>
 
 <p>In a given processing environment, there need not be an <em>available</em> native type
-corresponding to a given <del><a href="#undefined">tag</a></del>.
-If a <del><a href="#undefined">node’s tag</a></del> is <em>unavailable</em>, a YAML <del><a href="#undefined">processor</a></del> will not be able to
+corresponding to a given <a href="#tags">tag</a>.
+If a <del><a href="#undefined">node’s tag</a></del> is <em>unavailable</em>, a YAML <a href="#processing-yaml-information">processor</a> will not be able to
 <del><a href="#undefined">construct</a></del> a <del><a href="#undefined">native data structure</a></del> for it.
 In this case, a <del><a href="#undefined">complete representation</a></del> may still be <del><a href="#undefined">composed</a></del>, and an
-<del><a href="#undefined">application</a></del> may wish to use this <del><a href="#undefined">representation</a></del> directly.</p>
+<a href="#processing-yaml-information">application</a> may wish to use this <a href="#representation-graph">representation</a> directly.</p>
 
 <div id="syntax-conventions"></div>
 <h1 id="chapter-4-syntax-conventions">Chapter 4. Syntax Conventions</h1>
@@ -1741,7 +1741,7 @@ are always expected to match as much of the input as possible.</p>
 <p>The productions are accompanied by examples, which are given side-by-side next
 to equivalent YAML text in an explanatory format.
 This format uses only <del><a href="#undefined">flow collections</a></del>, <del><a href="#undefined">double-quoted scalars</a></del>, and explicit
-<del><a href="#undefined">tags</a></del> for each <del><a href="#undefined">node</a></del>.</p>
+<del><a href="#undefined">tags</a></del> for each <a href="#nodes">node</a>.</p>
 
 <p>A reference implementation using the productions is available as the
 <a href="http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Yaml
@@ -1769,7 +1769,7 @@ These complications are of course the source of most of YAML’s power to
 <h5 id="indentation-n-or-m">Indentation: <code class="language-plaintext highlighter-rouge">n</code> or <code class="language-plaintext highlighter-rouge">m</code></h5>
 
 <blockquote>
-  <p>Many productions use an explicit <del><a href="#undefined">indentation</a></del> level parameter.
+  <p>Many productions use an explicit <a href="#indentation-spaces">indentation</a> level parameter.
 This is less elegant than Python’s “indent” and “undent” conceptual tokens.
 However it is required to formally express YAML’s indentation rules.</p>
 </blockquote>
@@ -1782,8 +1782,8 @@ surrounding.
 YAML supports two groups of <em>contexts</em>, distinguishing between <del><a href="#undefined">block styles</a></del>
 and <del><a href="#undefined">flow styles</a></del>.</p>
 
-  <p>In <del><a href="#undefined">block styles</a></del>, <del><a href="#undefined">indentation</a></del> is used to delineate structure.
-To capture human perception of <del><a href="#undefined">indentation</a></del> the rules require special
+  <p>In <del><a href="#undefined">block styles</a></del>, <a href="#indentation-spaces">indentation</a> is used to delineate structure.
+To capture human perception of <a href="#indentation-spaces">indentation</a> the rules require special
 treatment of the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>”</a></del> character, used in <del><a href="#undefined">block sequences</a></del>.
 Hence in some cases productions need to behave differently inside <del><a href="#undefined">block
 sequences</a></del> (<em>block-in context</em>) and outside them (<em>block-out context</em>).</p>
@@ -1831,25 +1831,25 @@ ends with.</p>
 <p><strong><code class="language-plaintext highlighter-rouge">b-</code></strong></p>
 
 <blockquote>
-  <p>A production matching a single <del><a href="#undefined">line break</a></del>.</p>
+  <p>A production matching a single <a href="#line-break-characters">line break</a>.</p>
 </blockquote>
 
 <p><strong><code class="language-plaintext highlighter-rouge">nb-</code></strong></p>
 
 <blockquote>
-  <p>A production starting and ending with a non-<del><a href="#undefined">break</a></del> character.</p>
+  <p>A production starting and ending with a non-<a href="#line-break-characters">break</a> character.</p>
 </blockquote>
 
 <p><strong><code class="language-plaintext highlighter-rouge">s-</code></strong></p>
 
 <blockquote>
-  <p>A production starting and ending with a <del><a href="#undefined">white space</a></del> character.</p>
+  <p>A production starting and ending with a <a href="#white-space-characters">white space</a> character.</p>
 </blockquote>
 
 <p><strong><code class="language-plaintext highlighter-rouge">ns-</code></strong></p>
 
 <blockquote>
-  <p>A production starting and ending with a non-<del><a href="#undefined">space</a></del> character.</p>
+  <p>A production starting and ending with a non-<a href="#white-space-characters">space</a> character.</p>
 </blockquote>
 
 <p><strong><code class="language-plaintext highlighter-rouge">l-</code></strong></p>
@@ -1869,7 +1869,7 @@ character, where <code class="language-plaintext highlighter-rouge">X</code><str
 
 <blockquote>
   <p>A production as above, with the additional property that the matched content
-<del><a href="#undefined">indentation</a></del> level is greater than the specified <code class="language-plaintext highlighter-rouge">n</code> parameter.</p>
+<a href="#indentation-spaces">indentation</a> level is greater than the specified <code class="language-plaintext highlighter-rouge">n</code> parameter.</p>
 </blockquote>
 
 <div id="characters"></div>
@@ -1886,10 +1886,10 @@ are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">#x7
 NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the surrogate block <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
 <strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong>, and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
 
-<p>On input, a YAML <del><a href="#undefined">processor</a></del> must accept all Unicode characters except those
+<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all Unicode characters except those
 explicitly excluded above.</p>
 
-<p>On output, a YAML <del><a href="#undefined">processor</a></del> must only produce acceptable characters.
+<p>On output, a YAML <a href="#processing-yaml-information">processor</a> must only produce acceptable characters.
 Any excluded characters must be <del><a href="#undefined">presented</a></del> using <del><a href="#undefined">escape</a></del> sequences.
 In addition, any allowed characters known to be non-printable should also be
 <del><a href="#undefined">escaped</a></del>.
@@ -1927,29 +1927,29 @@ Note that in UTF-16, characters above <strong><code class="language-plaintext hi
 using a surrogate pair.</p>
 
 <p>The character encoding is a <del><a href="#undefined">presentation detail</a></del> and must not be used to
-convey <del><a href="#undefined">content</a></del> information.</p>
+convey <a href="#nodes">content</a> information.</p>
 
-<p>On input, a YAML <del><a href="#undefined">processor</a></del> must support the UTF-8 and UTF-16 character
+<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must support the UTF-8 and UTF-16 character
 encodings.
 For <del><a href="#undefined">JSON compatibility</a></del>, the UTF-32 encodings must also be supported.</p>
 
-<p>If a character <del><a href="#undefined">stream</a></del> begins with a <em>byte order mark</em>, the character encoding
+<p>If a character <a href="#streams">stream</a> begins with a <em>byte order mark</em>, the character encoding
 will be taken to be as as indicated by the byte order mark.
-Otherwise, the <del><a href="#undefined">stream</a></del> must begin with an ASCII character.
+Otherwise, the <a href="#streams">stream</a> must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (<strong><code class="language-plaintext highlighter-rouge">#x00</code></strong>)
 characters.</p>
 
 <p>To make it easier to concatenate <del><a href="#undefined">streams</a></del>, byte order marks may appear at the
 start of any <del><a href="#undefined">document</a></del>.
-However all <del><a href="#undefined">documents</a></del> in the same <del><a href="#undefined">stream</a></del> must use the same character
+However all <a href="#document">documents</a> in the same <a href="#streams">stream</a> must use the same character
 encoding.</p>
 
 <p>To allow for <del><a href="#undefined">JSON compatibility</a></del>, byte order marks are also allowed inside
 <del><a href="#undefined">quoted scalars</a></del>.
-For readability, such <del><a href="#undefined">content</a></del> byte order marks should be <del><a href="#undefined">escaped</a></del> on output.</p>
+For readability, such <a href="#nodes">content</a> byte order marks should be <del><a href="#undefined">escaped</a></del> on output.</p>
 
 <p>The encoding can therefore be deduced by matching the first few bytes of the
-<del><a href="#undefined">stream</a></del> with the following table rows (in order):</p>
+<a href="#streams">stream</a> with the following table rows (in order):</p>
 
 <table>
   <thead>
@@ -2048,7 +2048,7 @@ For readability, such <del><a href="#undefined">content</a></del> byte order mar
 
 <p>The recommended output encoding is UTF-8.
 If another encoding is used, it is recommended that an explicit byte order mark
-be used, even if the first <del><a href="#undefined">stream</a></del> character is ASCII.</p>
+be used, even if the first <a href="#streams">stream</a> character is ASCII.</p>
 
 <p>For more information about the byte order mark and the Unicode character
 encoding schemes see the <a href="http://www.unicode.org/unicode/faq/utf_bom.html">Unicode
@@ -2368,7 +2368,7 @@ alias: <code class="legend-3">*</code>anchor
   </div>
 </div>
 
-<p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">7C</code></strong>, vertical bar) denotes a <del><a href="#undefined">literal block scalar</a></del>.</p>
+<p>A <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>”</a></del> (<strong><code class="language-plaintext highlighter-rouge">7C</code></strong>, vertical bar) denotes a <a href="#literal-style">literal block scalar</a>.</p>
 
 <div id="rule-c-literal"></div>
 <pre class="rule">
@@ -2626,17 +2626,17 @@ widely used formats.</p>
   | b-line-feed                       /* UNIX, MacOS X */
 </pre>
 
-<p>Line breaks inside <del><a href="#undefined">scalar content</a></del> must be <em>normalized</em> by the YAML <del><a href="#undefined">processor</a></del>.
+<p>Line breaks inside <a href="#scalar">scalar content</a> must be <em>normalized</em> by the YAML <a href="#processing-yaml-information">processor</a>.
 Each such line break must be <del><a href="#undefined">parsed</a></del> into a single line feed character.
 The original line break format is a <del><a href="#undefined">presentation detail</a></del> and must not be used
-to convey <del><a href="#undefined">content</a></del> information.</p>
+to convey <a href="#nodes">content</a> information.</p>
 
 <div id="rule-b-as-line-feed"></div>
 <pre class="rule">
 [29] b-as-line-feed ::= b-break
 </pre>
 
-<p>Outside <del><a href="#undefined">scalar content</a></del>, YAML allows any line break to be used to terminate
+<p>Outside <a href="#scalar">scalar content</a>, YAML allows any line break to be used to terminate
 lines.</p>
 
 <div id="rule-b-non-content"></div>
@@ -2644,7 +2644,7 @@ lines.</p>
 [30] b-non-content ::= b-break
 </pre>
 
-<p>On output, a YAML <del><a href="#undefined">processor</a></del> is free to emit line breaks using whatever
+<p>On output, a YAML <a href="#processing-yaml-information">processor</a> is free to emit line breaks using whatever
 convention is most appropriate.</p>
 
 <p>In the examples, line breaks are sometimes displayed using the “<strong><code class="language-plaintext highlighter-rouge">↓</code></strong>” glyph
@@ -2707,7 +2707,7 @@ for clarity.</p>
   s-space | s-tab
 </pre>
 
-<p>The rest of the (<del><a href="#undefined">printable</a></del>) non-<del><a href="#undefined">break</a></del> characters are considered to be
+<p>The rest of the (<a href="#character-set">printable</a>) non-<a href="#line-break-characters">break</a> characters are considered to be
 non-space characters.</p>
 
 <div id="rule-ns-char"></div>
@@ -2820,9 +2820,9 @@ classes:</p>
     <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em>
 using the <em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>“</em> character.
-The YAML <del><a href="#undefined">processor</a></del> must not expand such escaped characters. <del><a href="#undefined">Tag</a></del>
+The YAML <a href="#processing-yaml-information">processor</a> must not expand such escaped characters. <a href="#tags">Tag</a>
 characters must be preserved and compared exactly as <del><a href="#undefined">presented</a></del> in the YAML
-<del><a href="#undefined">stream</a></del>, without any processing.</p>
+<a href="#streams">stream</a>, without any processing.</p>
   </li>
 </ul>
 
@@ -2851,16 +2851,16 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
 <div id="escaped-characters"></div>
 <h2 id="57-escaped-characters">5.7. Escaped Characters</h2>
 
-<p>All non-<del><a href="#undefined">printable</a></del> characters must be <em>escaped</em>.
+<p>All non-<a href="#character-set">printable</a> characters must be <em>escaped</em>.
 YAML escape sequences use the <em>“<strong><code class="language-plaintext highlighter-rouge">\</code></strong>“</em> notation common to most modern
 computer languages.
 Each escape sequence must be <del><a href="#undefined">parsed</a></del> into the appropriate Unicode character.
 The original escape sequence is a <del><a href="#undefined">presentation detail</a></del> and must not be used to
-convey <del><a href="#undefined">content</a></del> information.</p>
+convey <a href="#nodes">content</a> information.</p>
 
 <p>Note that escape sequences are only interpreted in <del><a href="#undefined">double-quoted scalars</a></del>.
 In all other <del><a href="#undefined">scalar styles</a></del>, the “<strong><code class="language-plaintext highlighter-rouge">\</code></strong>” character has no special meaning
-and non-<del><a href="#undefined">printable</a></del> characters are not available.</p>
+and non-<a href="#character-set">printable</a> characters are not available.</p>
 
 <div id="rule-c-escape"></div>
 <pre class="rule">
@@ -2892,7 +2892,7 @@ and non-<del><a href="#undefined">printable</a></del> characters are not availab
 
 <p>Escaped ASCII horizontal tab (<strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>) character.
 This is useful at the start or the end of a line to force a leading or trailing
-tab to become part of the <del><a href="#undefined">content</a></del>.</p>
+tab to become part of the <a href="#nodes">content</a>.</p>
 
 <div id="rule-ns-esc-horizontal-tab"></div>
 <pre class="rule">
@@ -2937,7 +2937,7 @@ tab to become part of the <del><a href="#undefined">content</a></del>.</p>
 
 <p>Escaped ASCII space (<strong><code class="language-plaintext highlighter-rouge">#x20</code></strong>) character.
 This is useful at the start or the end of a line to force a leading or trailing
-space to become part of the <del><a href="#undefined">content</a></del>.</p>
+space to become part of the <a href="#nodes">content</a>.</p>
 
 <div id="rule-ns-esc-space"></div>
 <pre class="rule">
@@ -3107,16 +3107,16 @@ ERROR:
 <h2 id="61-indentation-spaces">6.1. Indentation Spaces</h2>
 
 <p>In YAML <del><a href="#undefined">block styles</a></del>, structure is determined by <em>indentation</em>.
-In general, indentation is defined as a zero or more <del><a href="#undefined">space</a></del> characters at the
+In general, indentation is defined as a zero or more <a href="#white-space-characters">space</a> characters at the
 start of a line.</p>
 
 <p>To maintain portability, <del><a href="#undefined">tab</a></del> characters must not be used in indentation,
 since different systems treat <del><a href="#undefined">tabs</a></del> differently.
 Note that most modern editors may be configured so that pressing the <del><a href="#undefined">tab</a></del> key
-results in the insertion of an appropriate number of <del><a href="#undefined">spaces</a></del>.</p>
+results in the insertion of an appropriate number of <a href="#white-space-characters">spaces</a>.</p>
 
 <p>The amount of indentation is a <del><a href="#undefined">presentation detail</a></del> and must not be used to
-convey <del><a href="#undefined">content</a></del> information.</p>
+convey <a href="#nodes">content</a> information.</p>
 
 <div id="rule-s-indent(n)"></div>
 <pre class="rule">
@@ -3141,9 +3141,9 @@ to express this.</p>
   s-space × m /* Where m ≤ n */
 </pre>
 
-<p>Each <del><a href="#undefined">node</a></del> must be indented further than its parent <del><a href="#undefined">node</a></del>.
+<p>Each <a href="#nodes">node</a> must be indented further than its parent <a href="#nodes">node</a>.
 All sibling <del><a href="#undefined">nodes</a></del> must use the exact same indentation level.
-However the <del><a href="#undefined">content</a></del> of each sibling <del><a href="#undefined">node</a></del> may be further indented
+However the <a href="#nodes">content</a> of each sibling <a href="#nodes">node</a> may be further indented
 independently.</p>
 
 <div id="example-indentation-spaces" class="example">
@@ -3251,12 +3251,12 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 <div id="separation-spaces"></div>
 <h2 id="62-separation-spaces">6.2. Separation Spaces</h2>
 
-<p>Outside <del><a href="#undefined">indentation</a></del> and <del><a href="#undefined">scalar content</a></del>, YAML uses <del><a href="#undefined">white space</a></del> characters
+<p>Outside <a href="#indentation-spaces">indentation</a> and <a href="#scalar">scalar content</a>, YAML uses <a href="#white-space-characters">white space</a> characters
 for <em>separation</em> between tokens within a line.
-Note that such <del><a href="#undefined">white space</a></del> may safely include <del><a href="#undefined">tab</a></del> characters.</p>
+Note that such <a href="#white-space-characters">white space</a> may safely include <del><a href="#undefined">tab</a></del> characters.</p>
 
 <p>Separation spaces are a <del><a href="#undefined">presentation detail</a></del> and must not be used to convey
-<del><a href="#undefined">content</a></del> information.</p>
+<a href="#nodes">content</a> information.</p>
 
 <div id="rule-s-separate-in-line"></div>
 <pre class="rule">
@@ -3305,13 +3305,13 @@ Note that such <del><a href="#undefined">white space</a></del> may safely includ
 <div id="line-prefixes"></div>
 <h2 id="63-line-prefixes">6.3. Line Prefixes</h2>
 
-<p>Inside <del><a href="#undefined">scalar content</a></del>, each line begins with a non-<del><a href="#undefined">content</a></del> <em>line prefix</em>.
-This prefix always includes the <del><a href="#undefined">indentation</a></del>.
-For <del><a href="#undefined">flow scalar styles</a></del> it additionally includes all leading <del><a href="#undefined">white space</a></del>,
+<p>Inside <a href="#scalar">scalar content</a>, each line begins with a non-<a href="#nodes">content</a> <em>line prefix</em>.
+This prefix always includes the <a href="#indentation-spaces">indentation</a>.
+For <del><a href="#undefined">flow scalar styles</a></del> it additionally includes all leading <a href="#white-space-characters">white space</a>,
 which may contain <del><a href="#undefined">tab</a></del> characters.</p>
 
 <p>Line prefixes are a <del><a href="#undefined">presentation detail</a></del> and must not be used to convey
-<del><a href="#undefined">content</a></del> information.</p>
+<a href="#nodes">content</a> information.</p>
 
 <div id="rule-s-line-prefix(n,c)"></div>
 <pre class="rule">
@@ -3382,7 +3382,7 @@ block: |
 <div id="empty-lines"></div>
 <h2 id="64-empty-lines">6.4. Empty Lines</h2>
 
-<p>An <em>empty line</em> line consists of the non-<del><a href="#undefined">content</a></del> <del><a href="#undefined">prefix</a></del> followed by a <del><a href="#undefined">line
+<p>An <em>empty line</em> line consists of the non-<a href="#nodes">content</a> <del><a href="#undefined">prefix</a></del> followed by a <del><a href="#undefined">line
 break</a></del>.</p>
 
 <div id="rule-l-empty(n,c)"></div>
@@ -3442,8 +3442,8 @@ Chomping: |
 
 <p><em>Line folding</em> allows long lines to be broken for readability, while retaining
 the semantics of the original long line.
-If a <del><a href="#undefined">line break</a></del> is followed by an <del><a href="#undefined">empty line</a></del>, it is <em>trimmed</em>; the first
-<del><a href="#undefined">line break</a></del> is discarded and the rest are retained as <del><a href="#undefined">content</a></del>.</p>
+If a <a href="#line-break-characters">line break</a> is followed by an <del><a href="#undefined">empty line</a></del>, it is <em>trimmed</em>; the first
+<a href="#line-break-characters">line break</a> is discarded and the rest are retained as <a href="#nodes">content</a>.</p>
 
 <div id="rule-b-l-trimmed(n,c)"></div>
 <pre class="rule">
@@ -3451,15 +3451,15 @@ If a <del><a href="#undefined">line break</a></del> is followed by an <del><a hr
   b-non-content l-empty(n,c)+
 </pre>
 
-<p>Otherwise (the following line is not <del><a href="#undefined">empty</a></del>), the <del><a href="#undefined">line break</a></del> is converted to
-a single <del><a href="#undefined">space</a></del> (<strong><code class="language-plaintext highlighter-rouge">#x20</code></strong>).</p>
+<p>Otherwise (the following line is not <del><a href="#undefined">empty</a></del>), the <a href="#line-break-characters">line break</a> is converted to
+a single <a href="#white-space-characters">space</a> (<strong><code class="language-plaintext highlighter-rouge">#x20</code></strong>).</p>
 
 <div id="rule-b-as-space"></div>
 <pre class="rule">
 [72] b-as-space ::= b-break
 </pre>
 
-<p>A folded non-<del><a href="#undefined">empty line</a></del> may end with either of the above <del><a href="#undefined">line breaks</a></del>.</p>
+<p>A folded non-<del><a href="#undefined">empty line</a></del> may end with either of the above <a href="#line-break-characters">line breaks</a>.</p>
 
 <div id="rule-b-l-folded(n,c)"></div>
 <pre class="rule">
@@ -3512,10 +3512,10 @@ Folding does distinguish between these cases in the following way:</p>
 <h5 id="block-folding">Block Folding</h5>
 
 <blockquote>
-  <p>In the <del><a href="#undefined">folded block style</a></del>, the final <del><a href="#undefined">line break</a></del> and trailing <del><a href="#undefined">empty
+  <p>In the <del><a href="#undefined">folded block style</a></del>, the final <a href="#line-break-characters">line break</a> and trailing <del><a href="#undefined">empty
 lines</a></del> are subject to <del><a href="#undefined">chomping</a></del>, and are never folded.
-In addition, folding does not apply to <del><a href="#undefined">line breaks</a></del> surrounding text lines
-that contain leading <del><a href="#undefined">white space</a></del>.
+In addition, folding does not apply to <a href="#line-break-characters">line breaks</a> surrounding text lines
+that contain leading <a href="#white-space-characters">white space</a>.
 Note that such a <del><a href="#undefined">more-indented</a></del> line may consist only of such leading <del><a href="#undefined">white
 space</a></del>.</p>
 
@@ -3565,16 +3565,16 @@ feed, and the formatting of <del><a href="#undefined">more-indented</a></del> li
 
 <blockquote>
   <p>Folding in <del><a href="#undefined">flow styles</a></del> provides more relaxed semantics. <del><a href="#undefined">Flow styles</a></del>
-typically depend on explicit <del><a href="#undefined">indicators</a></del> rather than <del><a href="#undefined">indentation</a></del> to convey
+typically depend on explicit <del><a href="#undefined">indicators</a></del> rather than <a href="#indentation-spaces">indentation</a> to convey
 structure.
 Hence spaces preceding or following the text in a line are a <del><a href="#undefined">presentation
-detail</a></del> and must not be used to convey <del><a href="#undefined">content</a></del> information.
-Once all such spaces have been discarded, all <del><a href="#undefined">line breaks</a></del> are folded,
+detail</a></del> and must not be used to convey <a href="#nodes">content</a> information.
+Once all such spaces have been discarded, all <a href="#line-break-characters">line breaks</a> are folded,
 without exception.</p>
 
   <p>The combined effect of the <em>flow line folding</em> rules is that each “paragraph”
 is interpreted as a line, <del><a href="#undefined">empty lines</a></del> are interpreted as line feeds, and
-text can be freely <del><a href="#undefined">more-indented</a></del> without affecting the <del><a href="#undefined">content</a></del>
+text can be freely <del><a href="#undefined">more-indented</a></del> without affecting the <a href="#nodes">content</a>
 information.</p>
 </blockquote>
 
@@ -3626,14 +3626,14 @@ information.</p>
 <h2 id="66-comments">6.6. Comments</h2>
 
 <p>An explicit <em>comment</em> is marked by a <em>“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” indicator</em>.
-Comments are a <del><a href="#undefined">presentation detail</a></del> and must not be used to convey <del><a href="#undefined">content</a></del>
+Comments are a <del><a href="#undefined">presentation detail</a></del> and must not be used to convey <a href="#nodes">content</a>
 information.</p>
 
-<p>Comments must be <del><a href="#undefined">separated</a></del> from other tokens by <del><a href="#undefined">white space</a></del> characters.
+<p>Comments must be <a href="#separation-spaces">separated</a> from other tokens by <a href="#white-space-characters">white space</a> characters.
 To ensure <del><a href="#undefined">JSON compatibility</a></del>, YAML <del><a href="#undefined">processors</a></del> must allow for the omission
-of the final comment <del><a href="#undefined">line break</a></del> of the input <del><a href="#undefined">stream</a></del>.
+of the final comment <a href="#line-break-characters">line break</a> of the input <a href="#streams">stream</a>.
 However, as this confuses many tools, YAML <del><a href="#undefined">processors</a></del> should terminate the
-<del><a href="#undefined">stream</a></del> with an explicit <del><a href="#undefined">line break</a></del> on output.</p>
+<a href="#streams">stream</a> with an explicit <a href="#line-break-characters">line break</a> on output.</p>
 
 <div id="rule-c-nb-comment-text"></div>
 <pre class="rule">
@@ -3691,9 +3691,9 @@ key:<code class="legend-3">····<code class="legend-1"># Comment</code><code 
   </div>
 </div>
 
-<p>Outside <del><a href="#undefined">scalar content</a></del>, comments may appear on a line of their own,
-independent of the <del><a href="#undefined">indentation</a></del> level.
-Note that outside <del><a href="#undefined">scalar content</a></del>, a line containing only <del><a href="#undefined">white space</a></del>
+<p>Outside <a href="#scalar">scalar content</a>, comments may appear on a line of their own,
+independent of the <a href="#indentation-spaces">indentation</a> level.
+Note that outside <a href="#scalar">scalar content</a>, a line containing only <a href="#white-space-characters">white space</a>
 characters is taken to be a comment line.</p>
 
 <div id="rule-l-comment"></div>
@@ -3793,7 +3793,7 @@ In all other cases, YAML allows tokens to be separated by multi-line (possibly
 empty) <del><a href="#undefined">comments</a></del>.</p>
 
 <p>Note that structures following multi-line comment separation must be properly
-<del><a href="#undefined">indented</a></del>, even though there is no such restriction on the separation
+<a href="#indentation-spaces">indented</a>, even though there is no such restriction on the separation
 <del><a href="#undefined">comment</a></del> lines themselves.</p>
 
 <div id="rule-s-separate(n,c)"></div>
@@ -3868,13 +3868,13 @@ empty) <del><a href="#undefined">comments</a></del>.</p>
 <div id="directives"></div>
 <h2 id="68-directives">6.8. Directives</h2>
 
-<p><em>Directives</em> are instructions to the YAML <del><a href="#undefined">processor</a></del>.
+<p><em>Directives</em> are instructions to the YAML <a href="#processing-yaml-information">processor</a>.
 This specification defines two directives, <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>”</a></del> and <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”</a></del>,
 and <em>reserves</em> all other directives for future use.
 There is no way to define private directives.
 This is intentional.</p>
 
-<p>Directives are a <del><a href="#undefined">presentation detail</a></del> and must not be used to convey <del><a href="#undefined">content</a></del>
+<p>Directives are a <del><a href="#undefined">presentation detail</a></del> and must not be used to convey <a href="#nodes">content</a>
 information.</p>
 
 <div id="rule-l-directive"></div>
@@ -3887,10 +3887,10 @@ information.</p>
   s-l-comments
 </pre>
 
-<p>Each directive is specified on a separate non-<del><a href="#undefined">indented</a></del> line starting with the
+<p>Each directive is specified on a separate non-<a href="#indentation-spaces">indented</a> line starting with the
 <em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” indicator</em>, followed by the directive name and a list of parameters.
 The semantics of these parameters depends on the specific directive.
-A YAML <del><a href="#undefined">processor</a></del> should ignore unknown directives with an appropriate
+A YAML <a href="#processing-yaml-information">processor</a> should ignore unknown directives with an appropriate
 warning.</p>
 
 <div id="rule-ns-reserved-directive"></div>
@@ -3953,20 +3953,20 @@ conforms to.
 This specification defines version “<strong><code class="language-plaintext highlighter-rouge">1.2</code></strong>”, including recommendations for
 <em>YAML 1.1 processing</em>.</p>
 
-<p>A version 1.2 YAML <del><a href="#undefined">processor</a></del> must accept <del><a href="#undefined">documents</a></del> with an explicit
-“<strong><code class="language-plaintext highlighter-rouge">%YAML 1.2</code></strong>” directive, as well as <del><a href="#undefined">documents</a></del> lacking a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>”
+<p>A version 1.2 YAML <a href="#processing-yaml-information">processor</a> must accept <a href="#document">documents</a> with an explicit
+“<strong><code class="language-plaintext highlighter-rouge">%YAML 1.2</code></strong>” directive, as well as <a href="#document">documents</a> lacking a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>”
 directive.
-Such <del><a href="#undefined">documents</a></del> are assumed to conform to the 1.2 version specification.
-<del><a href="#undefined">Documents</a></del> with a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” directive specifying a higher minor version
+Such <a href="#document">documents</a> are assumed to conform to the 1.2 version specification.
+<a href="#document">Documents</a> with a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” directive specifying a higher minor version
 (e.g. “<strong><code class="language-plaintext highlighter-rouge">%YAML 1.3</code></strong>”) should be processed with an appropriate warning.
-<del><a href="#undefined">Documents</a></del> with a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” directive specifying a higher major version
+<a href="#document">Documents</a> with a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” directive specifying a higher major version
 (e.g. “<strong><code class="language-plaintext highlighter-rouge">%YAML 2.0</code></strong>”) should be rejected with an appropriate error message.</p>
 
-<p>A version 1.2 YAML <del><a href="#undefined">processor</a></del> must also accept <del><a href="#undefined">documents</a></del> with an explicit
+<p>A version 1.2 YAML <a href="#processing-yaml-information">processor</a> must also accept <a href="#document">documents</a> with an explicit
 “<strong><code class="language-plaintext highlighter-rouge">%YAML 1.1</code></strong>” directive.
 Note that version 1.2 is mostly a superset of version 1.1, defined for the
 purpose of ensuring <em>JSON compatibility</em>.
-Hence a version 1.2 <del><a href="#undefined">processor</a></del> should process version 1.1 <del><a href="#undefined">documents</a></del> as if
+Hence a version 1.2 <a href="#processing-yaml-information">processor</a> should process version 1.1 <a href="#document">documents</a> as if
 they were version 1.2, giving a warning on points of incompatibility (handling
 of <del><a href="#undefined">non-ASCII line breaks</a></del>, as described <del><a href="#undefined">above</a></del>).</p>
 
@@ -4052,7 +4052,7 @@ given at most once per document.
 <p>The <em>“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive</em> establishes a <del><a href="#undefined">tag shorthand</a></del> notation for
 specifying <del><a href="#undefined">node tags</a></del>.
 Each “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive associates a <del><a href="#undefined">handle</a></del> with a <del><a href="#undefined">prefix</a></del>.
-This allows for compact and readable <del><a href="#undefined">tag</a></del> notation.</p>
+This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 
 <div id="rule-ns-tag-directive"></div>
 <pre class="rule">
@@ -4261,8 +4261,8 @@ A handle name must not be used in a <del><a href="#undefined">tag shorthand</a><
 “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive has associated some prefix with it.</p>
 
   <p>The name of the handle is a <del><a href="#undefined">presentation detail</a></del> and must not be used to
-convey <del><a href="#undefined">content</a></del> information.
-In particular, the YAML <del><a href="#undefined">processor</a></del> need not preserve the handle name once
+convey <a href="#nodes">content</a> information.
+In particular, the YAML <a href="#processing-yaml-information">processor</a> need not preserve the handle name once
 <del><a href="#undefined">parsing</a></del> is completed.</p>
 </blockquote>
 
@@ -4321,9 +4321,9 @@ In particular, the YAML <del><a href="#undefined">processor</a></del> need not p
 <blockquote>
   <p>If the prefix begins with a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> character, <del><a href="#undefined">shorthands</a></del> using the
 <del><a href="#undefined">handle</a></del> are expanded to a <del><a href="#undefined">local tag</a></del>.
-Note that such a <del><a href="#undefined">tag</a></del> is intentionally not a valid URI, and its semantics are
-specific to the <del><a href="#undefined">application</a></del>.
-In particular, two <del><a href="#undefined">documents</a></del> in the same <del><a href="#undefined">stream</a></del> may assign different
+Note that such a <a href="#tags">tag</a> is intentionally not a valid URI, and its semantics are
+specific to the <a href="#processing-yaml-information">application</a>.
+In particular, two <a href="#document">documents</a> in the same <a href="#streams">stream</a> may assign different
 semantics to the same <del><a href="#undefined">local tag</a></del>.</p>
 </blockquote>
 
@@ -4380,8 +4380,8 @@ semantics to the same <del><a href="#undefined">local tag</a></del>.</p>
   <p>If the prefix begins with a character other than <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del>, it must to be a
 valid URI prefix, and should contain at least the scheme and the authority.
 <del><a href="#undefined">Shorthands</a></del> using the associated <del><a href="#undefined">handle</a></del> are expanded to globally unique URI
-tags, and their semantics is consistent across <del><a href="#undefined">applications</a></del>.
-In particular, every <del><a href="#undefined">documents</a></del> in every <del><a href="#undefined">stream</a></del> must assign the same
+tags, and their semantics is consistent across <a href="#processing-yaml-information">applications</a>.
+In particular, every <a href="#document">documents</a> in every <a href="#streams">stream</a> must assign the same
 semantics to the same <del><a href="#undefined">global tag</a></del>.</p>
 </blockquote>
 
@@ -4427,8 +4427,8 @@ semantics to the same <del><a href="#undefined">global tag</a></del>.</p>
 <div id="node-properties"></div>
 <h2 id="69-node-properties">6.9. Node Properties</h2>
 
-<p>Each <del><a href="#undefined">node</a></del> may have two optional <em>properties</em>, <del><a href="#undefined">anchor</a></del> and <del><a href="#undefined">tag</a></del>, in addition
-to its <del><a href="#undefined">content</a></del>.
+<p>Each <a href="#nodes">node</a> may have two optional <em>properties</em>, <del><a href="#undefined">anchor</a></del> and <a href="#tags">tag</a>, in addition
+to its <a href="#nodes">content</a>.
 Node properties may be specified in any order before the <del><a href="#undefined">node’s content</a></del>.
 Either or both may be omitted.</p>
 
@@ -4485,7 +4485,7 @@ Either or both may be omitted.</p>
 <h3 id="691-node-tags">6.9.1. Node Tags</h3>
 
 <p>The <em>tag property</em> identifies the type of the <del><a href="#undefined">native data structure</a></del>
-<del><a href="#undefined">presented</a></del> by the <del><a href="#undefined">node</a></del>.
+<del><a href="#undefined">presented</a></del> by the <a href="#nodes">node</a>.
 A tag is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” indicator</em>.</p>
 
 <div id="rule-c-ns-tag-property"></div>
@@ -4501,8 +4501,8 @@ A tag is denoted by the <em>“<strong><code class="language-plaintext highlight
 <blockquote>
   <p>A tag may be written <em>verbatim</em> by surrounding it with the <em>“<strong><code class="language-plaintext highlighter-rouge">&lt;</code></strong>” and
 “<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>“</em> characters.
-In this case, the YAML <del><a href="#undefined">processor</a></del> must deliver the verbatim tag as-is to the
-<del><a href="#undefined">application</a></del>.
+In this case, the YAML <a href="#processing-yaml-information">processor</a> must deliver the verbatim tag as-is to the
+<a href="#processing-yaml-information">application</a>.
 In particular, verbatim tags are not subject to <del><a href="#undefined">tag resolution</a></del>.
 A verbatim tag must either begin with a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> (a <del><a href="#undefined">local tag</a></del>) or be a
 valid URI (a <del><a href="#undefined">global tag</a></del>).</p>
@@ -4583,12 +4583,12 @@ ERROR:
 suffix.
 The <del><a href="#undefined">tag handle</a></del> must be associated with a <del><a href="#undefined">prefix</a></del>, either by default or by
 using a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive</a></del>.
-The resulting <del><a href="#undefined">parsed</a></del> <del><a href="#undefined">tag</a></del> is the concatenation of the <del><a href="#undefined">prefix</a></del> and the
+The resulting <del><a href="#undefined">parsed</a></del> <a href="#tags">tag</a> is the concatenation of the <del><a href="#undefined">prefix</a></del> and the
 suffix, and must either begin with <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> (a <del><a href="#undefined">local tag</a></del>) or be a valid
 URI (a <del><a href="#undefined">global tag</a></del>).</p>
 
   <p>The choice of <del><a href="#undefined">tag handle</a></del> is a <del><a href="#undefined">presentation detail</a></del> and must not be used to
-convey <del><a href="#undefined">content</a></del> information.
+convey <a href="#nodes">content</a> information.
 In particular, the <del><a href="#undefined">tag handle</a></del> may be discarded once <del><a href="#undefined">parsing</a></del> is completed.</p>
 
   <p>The suffix must not contain any <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> character.
@@ -4678,16 +4678,16 @@ ERROR:
 <h5 id="non-specific-tags">Non-Specific Tags</h5>
 
 <blockquote>
-  <p>If a <del><a href="#undefined">node</a></del> has no tag property, it is assigned a <del><a href="#undefined">non-specific tag</a></del> that
+  <p>If a <a href="#nodes">node</a> has no tag property, it is assigned a <del><a href="#undefined">non-specific tag</a></del> that
 needs to be <del><a href="#undefined">resolved</a></del> to a <del><a href="#undefined">specific</a></del> one.
 This <del><a href="#undefined">non-specific tag</a></del> is <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”</a></del> for non-<del><a href="#undefined">plain scalars</a></del> and
 <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>”</a></del> for all other <del><a href="#undefined">nodes</a></del>.
-This is the only case where the <del><a href="#undefined">node style</a></del> has any effect on the <del><a href="#undefined">content</a></del>
+This is the only case where the <del><a href="#undefined">node style</a></del> has any effect on the <a href="#nodes">content</a>
 information.</p>
 
   <p>It is possible for the tag property to be explicitly set to the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”
 non-specific tag</a></del>.
-By <del><a href="#undefined">convention</a></del>, this “disables” <del><a href="#undefined">tag resolution</a></del>, forcing the <del><a href="#undefined">node</a></del> to be
+By <del><a href="#undefined">convention</a></del>, this “disables” <del><a href="#undefined">tag resolution</a></del>, forcing the <a href="#nodes">node</a> to be
 interpreted as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>”,
 or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to its <del><a href="#undefined">kind</a></del>.</p>
 
@@ -4742,10 +4742,10 @@ This is intentional.</p>
 <h3 id="692-node-anchors">6.9.2. Node Anchors</h3>
 
 <p>An anchor is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” indicator</em>.
-It marks a <del><a href="#undefined">node</a></del> for future reference.
+It marks a <a href="#nodes">node</a> for future reference.
 An <del><a href="#undefined">alias node</a></del> can then be used to indicate additional inclusions of the
-anchored <del><a href="#undefined">node</a></del>.
-An anchored <del><a href="#undefined">node</a></del> need not be referenced by any <del><a href="#undefined">alias nodes</a></del>; in particular,
+anchored <a href="#nodes">node</a>.
+An anchored <a href="#nodes">node</a> need not be referenced by any <del><a href="#undefined">alias nodes</a></del>; in particular,
 it is valid for all <del><a href="#undefined">nodes</a></del> to be anchored.</p>
 
 <div id="rule-c-ns-anchor-property"></div>
@@ -4756,10 +4756,10 @@ it is valid for all <del><a href="#undefined">nodes</a></del> to be anchored.</p
 
 <p>Note that as a <del><a href="#undefined">serialization detail</a></del>, the anchor name is preserved in the
 <del><a href="#undefined">serialization tree</a></del>.
-However, it is not reflected in the <del><a href="#undefined">representation</a></del> graph and must not be used
-to convey <del><a href="#undefined">content</a></del> information.
-In particular, the YAML <del><a href="#undefined">processor</a></del> need not preserve the anchor name once the
-<del><a href="#undefined">representation</a></del> is <del><a href="#undefined">composed</a></del>.</p>
+However, it is not reflected in the <a href="#representation-graph">representation</a> graph and must not be used
+to convey <a href="#nodes">content</a> information.
+In particular, the YAML <a href="#processing-yaml-information">processor</a> need not preserve the anchor name once the
+<a href="#representation-graph">representation</a> is <del><a href="#undefined">composed</a></del>.</p>
 
 <p>Anchor names must not contain the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”</a></del>, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”], <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”</a></del>,
 <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”</a></del> and <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”</a></del> characters.
@@ -4827,17 +4827,17 @@ to reuse <del><a href="#undefined">constructed</a></del> object instances.</p>
 
 <p>Subsequent occurrences of a previously <del><a href="#undefined">serialized</a></del> node are <del><a href="#undefined">presented</a></del> as
 <em>alias nodes</em>.
-The first occurrence of the <del><a href="#undefined">node</a></del> must be marked by an <del><a href="#undefined">anchor</a></del> to allow
+The first occurrence of the <a href="#nodes">node</a> must be marked by an <del><a href="#undefined">anchor</a></del> to allow
 subsequent occurrences to be <del><a href="#undefined">presented</a></del> as alias nodes.</p>
 
 <p>An alias node is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” indicator</em>.
-The alias refers to the most recent preceding <del><a href="#undefined">node</a></del> having the same <del><a href="#undefined">anchor</a></del>.
+The alias refers to the most recent preceding <a href="#nodes">node</a> having the same <del><a href="#undefined">anchor</a></del>.
 It is an error for an alias node to use an <del><a href="#undefined">anchor</a></del> that does not previously
 occur in the <del><a href="#undefined">document</a></del>.
 It is not an error to specify an <del><a href="#undefined">anchor</a></del> that is not used by any alias node.</p>
 
-<p>Note that an alias node must not specify any <del><a href="#undefined">properties</a></del> or <del><a href="#undefined">content</a></del>, as
-these were already specified at the first occurrence of the <del><a href="#undefined">node</a></del>.</p>
+<p>Note that an alias node must not specify any <del><a href="#undefined">properties</a></del> or <a href="#nodes">content</a>, as
+these were already specified at the first occurrence of the <a href="#nodes">node</a>.</p>
 
 <div id="rule-c-ns-alias-node"></div>
 <pre class="rule">
@@ -4893,7 +4893,7 @@ Reuse anchor: <code class="legend-1">*<code class="legend-2">anchor</code></code
 <h2 id="72-empty-nodes">7.2. Empty Nodes</h2>
 
 <p>YAML allows the <del><a href="#undefined">node content</a></del> to be omitted in many cases. <del><a href="#undefined">Nodes</a></del> with empty
-<del><a href="#undefined">content</a></del> are interpreted as if they were <del><a href="#undefined">plain scalars</a></del> with an empty value.
+<a href="#nodes">content</a> are interpreted as if they were <del><a href="#undefined">plain scalars</a></del> with an empty value.
 Such <del><a href="#undefined">nodes</a></del> are commonly resolved to a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">null</code></strong>”</a></del> value.</p>
 
 <div id="rule-e-scalar"></div>
@@ -4904,7 +4904,7 @@ Such <del><a href="#undefined">nodes</a></del> are commonly resolved to a <del><
 
 <p>In the examples, empty <del><a href="#undefined">scalars</a></del> are sometimes displayed as the glyph “<strong><code class="language-plaintext highlighter-rouge">°</code></strong>”
 for clarity.
-Note that this glyph corresponds to a position in the characters <del><a href="#undefined">stream</a></del>
+Note that this glyph corresponds to a position in the characters <a href="#streams">stream</a>
 rather than to an actual character.</p>
 
 <div id="example-empty-content" class="example">
@@ -4999,7 +4999,7 @@ for their existence.</p>
 Each provides a different trade-off between readability and expressive power.</p>
 
 <p>The <del><a href="#undefined">scalar style</a></del> is a <del><a href="#undefined">presentation detail</a></del> and must not be used to convey
-<del><a href="#undefined">content</a></del> information, with the exception that <del><a href="#undefined">plain scalars</a></del> are
+<a href="#nodes">content</a> information, with the exception that <del><a href="#undefined">plain scalars</a></del> are
 distinguished for the purpose of <del><a href="#undefined">tag resolution</a></del>.</p>
 
 <div id="double-quoted-style"></div>
@@ -5088,12 +5088,12 @@ characters.</p>
   </div>
 </div>
 
-<p>In a multi-line double-quoted scalar, <del><a href="#undefined">line breaks</a></del> are are subject to <del><a href="#undefined">flow
-line folding</a></del>, which discards any trailing <del><a href="#undefined">white space</a></del> characters.
-It is also possible to <em>escape</em> the <del><a href="#undefined">line break</a></del> character.
-In this case, the <del><a href="#undefined">line break</a></del> is excluded from the <del><a href="#undefined">content</a></del>, and the trailing
-<del><a href="#undefined">white space</a></del> characters are preserved.
-Combined with the ability to <del><a href="#undefined">escape</a></del> <del><a href="#undefined">white space</a></del> characters, this allows
+<p>In a multi-line double-quoted scalar, <a href="#line-break-characters">line breaks</a> are are subject to <del><a href="#undefined">flow
+line folding</a></del>, which discards any trailing <a href="#white-space-characters">white space</a> characters.
+It is also possible to <em>escape</em> the <a href="#line-break-characters">line break</a> character.
+In this case, the <a href="#line-break-characters">line break</a> is excluded from the <a href="#nodes">content</a>, and the trailing
+<a href="#white-space-characters">white space</a> characters are preserved.
+Combined with the ability to <del><a href="#undefined">escape</a></del> <a href="#white-space-characters">white space</a> characters, this allows
 double-quoted lines to be broken at arbitrary positions.</p>
 
 <div id="rule-s-double-escaped(n)"></div>
@@ -5147,9 +5147,9 @@ to a line feed, or<code class="legend-2">·→\↓</code>
   </div>
 </div>
 
-<p>All leading and trailing <del><a href="#undefined">white space</a></del> characters are excluded from the
-<del><a href="#undefined">content</a></del>.
-Each continuation line must therefore contain at least one non-<del><a href="#undefined">space</a></del> character.
+<p>All leading and trailing <a href="#white-space-characters">white space</a> characters are excluded from the
+<a href="#nodes">content</a>.
+Each continuation line must therefore contain at least one non-<a href="#white-space-characters">space</a> character.
 Empty lines, if any, are consumed as part of the <del><a href="#undefined">line folding</a></del>.</p>
 
 <div id="rule-nb-ns-double-in-line"></div>
@@ -5217,9 +5217,9 @@ Empty lines, if any, are consumed as part of the <del><a href="#undefined">line 
 Therefore, within a single-quoted scalar, such characters need to be repeated.
 This is the only form of <em>escaping</em> performed in single-quoted scalars.
 In particular, the “<strong><code class="language-plaintext highlighter-rouge">\</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” characters may be freely used.
-This restricts single-quoted scalars to <del><a href="#undefined">printable</a></del> characters.
+This restricts single-quoted scalars to <a href="#character-set">printable</a> characters.
 In addition, it is only possible to break a long single-quoted line where a
-<del><a href="#undefined">space</a></del> character is surrounded by non-<del><a href="#undefined">spaces</a></del>.</p>
+<a href="#white-space-characters">space</a> character is surrounded by non-<a href="#white-space-characters">spaces</a>.</p>
 
 <div id="rule-c-quoted-quote"></div>
 <pre class="rule">
@@ -5335,9 +5335,9 @@ In addition, it is only possible to break a long single-quoted line where a
   </div>
 </div>
 
-<p>All leading and trailing <del><a href="#undefined">white space</a></del> characters are excluded from the
-<del><a href="#undefined">content</a></del>.
-Each continuation line must therefore contain at least one non-<del><a href="#undefined">space</a></del> character.
+<p>All leading and trailing <a href="#white-space-characters">white space</a> characters are excluded from the
+<a href="#nodes">content</a>.
+Each continuation line must therefore contain at least one non-<a href="#white-space-characters">space</a> character.
 Empty lines, if any, are consumed as part of the <del><a href="#undefined">line folding</a></del>.</p>
 
 <div id="rule-nb-ns-single-in-line"></div>
@@ -5406,14 +5406,14 @@ form of escaping.
 It is therefore the most readable, most limited and most <del><a href="#undefined">context</a></del> sensitive
 <del><a href="#undefined">style</a></del>.
 In addition to a restricted character set, a plain scalar must not be empty, or
-contain leading or trailing <del><a href="#undefined">white space</a></del> characters.
-It is only possible to break a long plain line where a <del><a href="#undefined">space</a></del> character is
-surrounded by non-<del><a href="#undefined">spaces</a></del>.</p>
+contain leading or trailing <a href="#white-space-characters">white space</a> characters.
+It is only possible to break a long plain line where a <a href="#white-space-characters">space</a> character is
+surrounded by non-<a href="#white-space-characters">spaces</a>.</p>
 
 <p>Plain scalars must not begin with most <del><a href="#undefined">indicators</a></del>, as this would cause
 ambiguity with other YAML constructs.
 However, the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”</a></del>, <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>”</a></del> and <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>”</a></del> <del><a href="#undefined">indicators</a></del> may be used
-as the first character if followed by a non-<del><a href="#undefined">space</a></del> “safe” character, as this
+as the first character if followed by a non-<a href="#white-space-characters">space</a> “safe” character, as this
 causes no ambiguity.</p>
 
 <div id="rule-ns-plain-first(c)"></div>
@@ -5582,9 +5582,9 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
   </div>
 </div>
 
-<p>All leading and trailing <del><a href="#undefined">white space</a></del> characters are excluded from the
-<del><a href="#undefined">content</a></del>.
-Each continuation line must therefore contain at least one non-<del><a href="#undefined">space</a></del> character.
+<p>All leading and trailing <a href="#white-space-characters">white space</a> characters are excluded from the
+<a href="#nodes">content</a>.
+Each continuation line must therefore contain at least one non-<a href="#white-space-characters">space</a> character.
 Empty lines, if any, are consumed as part of the <del><a href="#undefined">line folding</a></del>.</p>
 
 <div id="rule-s-ns-plain-next-line(n,c)"></div>
@@ -5909,10 +5909,10 @@ entry may be <del><a href="#undefined">completely empty</a></del>.</p>
   </div>
 </div>
 
-<p>Normally, YAML insists the <em>“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” mapping value indicator</em> be <del><a href="#undefined">separated</a></del>
-from the <del><a href="#undefined">value</a></del> by <del><a href="#undefined">white space</a></del>.
+<p>Normally, YAML insists the <em>“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” mapping value indicator</em> be <a href="#separation-spaces">separated</a>
+from the <del><a href="#undefined">value</a></del> by <a href="#white-space-characters">white space</a>.
 A benefit of this restriction is that the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” character can be used
-inside <del><a href="#undefined">plain scalars</a></del>, as long as it is not followed by <del><a href="#undefined">white space</a></del>.
+inside <del><a href="#undefined">plain scalars</a></del>, as long as it is not followed by <a href="#white-space-characters">white space</a>.
 This allows for unquoted URLs and timestamps.
 It is also a potential source for confusion as “<strong><code class="language-plaintext highlighter-rouge">a:1</code></strong>” is a <del><a href="#undefined">plain scalar</a></del>
 and not a <del><a href="#undefined">key: value pair</a></del>.</p>
@@ -5996,7 +5996,7 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
   </div>
 </div>
 
-<p>To ensure <del><a href="#undefined">JSON compatibility</a></del>, if a <del><a href="#undefined">key</a></del> inside a flow mapping is
+<p>To ensure <del><a href="#undefined">JSON compatibility</a></del>, if a <a href="#nodes">key</a> inside a flow mapping is
 <del><a href="#undefined">JSON-like</a></del>, YAML allows the following <del><a href="#undefined">value</a></del> to be specified adjacent to the
 “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”.
 This causes no ambiguity, as all <del><a href="#undefined">JSON-like</a></del> <del><a href="#undefined">keys</a></del> are surrounded by
@@ -6157,11 +6157,11 @@ and the syntax is identical to the general case.</p>
 <p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is omitted, <del><a href="#undefined">parsing</a></del> needs to see past the
 <em>implicit key</em> to recognize it as such.
 To limit the amount of lookahead required, the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” indicator must appear
-at most 1024 Unicode characters beyond the start of the <del><a href="#undefined">key</a></del>.
-In addition, the <del><a href="#undefined">key</a></del> is restricted to a single line.</p>
+at most 1024 Unicode characters beyond the start of the <a href="#nodes">key</a>.
+In addition, the <a href="#nodes">key</a> is restricted to a single line.</p>
 
 <p>Note that YAML allows arbitrary <del><a href="#undefined">nodes</a></del> to be used as <del><a href="#undefined">keys</a></del>.
-In particular, a <del><a href="#undefined">key</a></del> may be a <del><a href="#undefined">sequence</a></del> or a <del><a href="#undefined">mapping</a></del>.
+In particular, a <a href="#nodes">key</a> may be a <del><a href="#undefined">sequence</a></del> or a <del><a href="#undefined">mapping</a></del>.
 Thus, without the above restrictions, practical one-pass <del><a href="#undefined">parsing</a></del> would have
 been impossible to implement.</p>
 
@@ -6350,7 +6350,7 @@ Even the <del><a href="#undefined">double-quoted style</a></del> is a superset o
   </div>
 </div>
 
-<p>A complete <del><a href="#undefined">flow</a></del> <del><a href="#undefined">node</a></del> also has optional <del><a href="#undefined">node properties</a></del>, except for <del><a href="#undefined">alias
+<p>A complete <del><a href="#undefined">flow</a></del> <a href="#nodes">node</a> also has optional <del><a href="#undefined">node properties</a></del>, except for <del><a href="#undefined">alias
 nodes</a></del> which refer to the <del><a href="#undefined">anchored</a></del> <del><a href="#undefined">node properties</a></del>.</p>
 
 <div id="rule-ns-flow-yaml-node(n,c)"></div>
@@ -6427,7 +6427,7 @@ nodes</a></del> which refer to the <del><a href="#undefined">anchored</a></del> 
 <div id="block-styles"></div>
 <h1 id="chapter-8-block-styles">Chapter 8. Block Styles</h1>
 
-<p>YAML’s <em>block styles</em> employ <del><a href="#undefined">indentation</a></del> rather than <del><a href="#undefined">indicators</a></del> to denote
+<p>YAML’s <em>block styles</em> employ <a href="#indentation-spaces">indentation</a> rather than <del><a href="#undefined">indicators</a></del> to denote
 structure.
 This results in a more human readable (though less compact) notation.</p>
 
@@ -6441,8 +6441,8 @@ Each provides a different trade-off between readability and expressive power.</p
 <h3 id="811-block-scalar-headers">8.1.1. Block Scalar Headers</h3>
 
 <p><del><a href="#undefined">Block scalars</a></del> are controlled by a few <del><a href="#undefined">indicators</a></del> given in a <em>header</em>
-preceding the <del><a href="#undefined">content</a></del> itself.
-This header is followed by a non-content <del><a href="#undefined">line break</a></del> with an optional <del><a href="#undefined">comment</a></del>.
+preceding the <a href="#nodes">content</a> itself.
+This header is followed by a non-content <a href="#line-break-characters">line break</a> with an optional <del><a href="#undefined">comment</a></del>.
 This is the only case where a <del><a href="#undefined">comment</a></del> must not be followed by additional
 <del><a href="#undefined">comment</a></del> lines.</p>
 
@@ -6503,22 +6503,22 @@ This is the only case where a <del><a href="#undefined">comment</a></del> must n
 <div id="block-indentation-indicator"></div>
 <h4 id="8111-block-indentation-indicator">8.1.1.1. Block Indentation Indicator</h4>
 
-<p>Typically, the <del><a href="#undefined">indentation</a></del> level of a <del><a href="#undefined">block scalar</a></del> is detected from its
+<p>Typically, the <a href="#indentation-spaces">indentation</a> level of a <del><a href="#undefined">block scalar</a></del> is detected from its
 first non-<del><a href="#undefined">empty</a></del> line.
-It is an error for any of the leading <del><a href="#undefined">empty lines</a></del> to contain more <del><a href="#undefined">spaces</a></del>
+It is an error for any of the leading <del><a href="#undefined">empty lines</a></del> to contain more <a href="#white-space-characters">spaces</a>
 than the first non-<del><a href="#undefined">empty line</a></del>.</p>
 
 <p>Detection fails when the first non-<del><a href="#undefined">empty line</a></del> contains leading content
-<del><a href="#undefined">space</a></del> characters. <del><a href="#undefined">Content</a></del> may safely start with a <del><a href="#undefined">tab</a></del> or a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”</a></del>
+<a href="#white-space-characters">space</a> characters. <a href="#nodes">Content</a> may safely start with a <del><a href="#undefined">tab</a></del> or a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”</a></del>
 character.</p>
 
-<p>When detection would fail, YAML requires that the <del><a href="#undefined">indentation</a></del> level for the
-<del><a href="#undefined">content</a></del> be given using an explicit <em>indentation indicator</em>.
-This level is specified as the integer number of the additional <del><a href="#undefined">indentation</a></del>
-spaces used for the <del><a href="#undefined">content</a></del>, relative to its parent <del><a href="#undefined">node</a></del>.</p>
+<p>When detection would fail, YAML requires that the <a href="#indentation-spaces">indentation</a> level for the
+<a href="#nodes">content</a> be given using an explicit <em>indentation indicator</em>.
+This level is specified as the integer number of the additional <a href="#indentation-spaces">indentation</a>
+spaces used for the <a href="#nodes">content</a>, relative to its parent <a href="#nodes">node</a>.</p>
 
 <p>It is always valid to specify an indentation indicator for a <del><a href="#undefined">block scalar</a></del>
-node, though a YAML <del><a href="#undefined">processor</a></del> should only emit an explicit indentation
+node, though a YAML <a href="#processing-yaml-information">processor</a> should only emit an explicit indentation
 indicator for cases where detection will fail.</p>
 
 <div id="rule-c-indentation-indicator(m)"></div>
@@ -6612,7 +6612,7 @@ ERROR:
 <div id="block-chomping-indicator"></div>
 <h4 id="8112-block-chomping-indicator">8.1.1.2. Block Chomping Indicator</h4>
 
-<p><em>Chomping</em> controls how final <del><a href="#undefined">line breaks</a></del> and trailing <del><a href="#undefined">empty lines</a></del> are
+<p><em>Chomping</em> controls how final <a href="#line-break-characters">line breaks</a> and trailing <del><a href="#undefined">empty lines</a></del> are
 interpreted.
 YAML provides three chomping methods:</p>
 
@@ -6620,7 +6620,7 @@ YAML provides three chomping methods:</p>
 
 <blockquote>
   <p><em>Stripping</em> is specified by the <em>“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” chomping indicator</em>.
-In this case, the final <del><a href="#undefined">line break</a></del> and any trailing <del><a href="#undefined">empty lines</a></del> are
+In this case, the final <a href="#line-break-characters">line break</a> and any trailing <del><a href="#undefined">empty lines</a></del> are
 excluded from the <del><a href="#undefined">scalar’s content</a></del>.</p>
 </blockquote>
 
@@ -6629,7 +6629,7 @@ excluded from the <del><a href="#undefined">scalar’s content</a></del>.</p>
 <blockquote>
   <p><em>Clipping</em> is the default behavior used if no explicit chomping indicator is
 specified.
-In this case, the final <del><a href="#undefined">line break</a></del> character is preserved in the <del><a href="#undefined">scalar’s
+In this case, the final <a href="#line-break-characters">line break</a> character is preserved in the <del><a href="#undefined">scalar’s
 content</a></del>.
 However, any trailing <del><a href="#undefined">empty lines</a></del> are excluded from the <del><a href="#undefined">scalar’s content</a></del>.</p>
 </blockquote>
@@ -6638,13 +6638,13 @@ However, any trailing <del><a href="#undefined">empty lines</a></del> are exclud
 
 <blockquote>
   <p><em>Keeping</em> is specified by the <em>“<strong><code class="language-plaintext highlighter-rouge">+</code></strong>” chomping indicator</em>.
-In this case, the final <del><a href="#undefined">line break</a></del> and any trailing <del><a href="#undefined">empty lines</a></del> are
+In this case, the final <a href="#line-break-characters">line break</a> and any trailing <del><a href="#undefined">empty lines</a></del> are
 considered to be part of the <del><a href="#undefined">scalar’s content</a></del>.
 These additional lines are not subject to <del><a href="#undefined">folding</a></del>.</p>
 </blockquote>
 
 <p>The chomping method used is a <del><a href="#undefined">presentation detail</a></del> and must not be used to
-convey <del><a href="#undefined">content</a></del> information.</p>
+convey <a href="#nodes">content</a> information.</p>
 
 <div id="rule-c-chomping-indicator(t)"></div>
 <pre class="rule">
@@ -6654,7 +6654,7 @@ convey <del><a href="#undefined">content</a></del> information.</p>
   /* Empty */ ⇒ t = clip
 </pre>
 
-<p>The interpretation of the final <del><a href="#undefined">line break</a></del> of a <del><a href="#undefined">block scalar</a></del> is controlled
+<p>The interpretation of the final <a href="#line-break-characters">line break</a> of a <del><a href="#undefined">block scalar</a></del> is controlled
 by the chomping indicator specified in the <del><a href="#undefined">block scalar header</a></del>.</p>
 
 <div id="rule-b-chomped-last(t)"></div>
@@ -6736,10 +6736,10 @@ header</a></del>.</p>
 </pre>
 
 <p>Explicit <del><a href="#undefined">comment</a></del> lines may follow the trailing <del><a href="#undefined">empty lines</a></del>.
-To prevent ambiguity, the first such <del><a href="#undefined">comment</a></del> line must be less <del><a href="#undefined">indented</a></del>
+To prevent ambiguity, the first such <del><a href="#undefined">comment</a></del> line must be less <a href="#indentation-spaces">indented</a>
 than the <del><a href="#undefined">block scalar content</a></del>.
 Additional <del><a href="#undefined">comment</a></del> lines, if any, are not so restricted.
-This is the only case where the <del><a href="#undefined">indentation</a></del> of <del><a href="#undefined">comment</a></del> lines is
+This is the only case where the <a href="#indentation-spaces">indentation</a> of <del><a href="#undefined">comment</a></del> lines is
 constrained.</p>
 
 <div id="rule-l-trail-comments(n)"></div>
@@ -6901,14 +6901,14 @@ It is the simplest, most restricted, and most readable <del><a href="#undefined"
   </div>
 </div>
 
-<p>Inside literal scalars, all (<del><a href="#undefined">indented</a></del>) characters are considered to be
-<del><a href="#undefined">content</a></del>, including <del><a href="#undefined">white space</a></del> characters.
-Note that all <del><a href="#undefined">line break</a></del> characters are <del><a href="#undefined">normalized</a></del>.
-In addition, <del><a href="#undefined">empty lines</a></del> are not <del><a href="#undefined">folded</a></del>, though final <del><a href="#undefined">line breaks</a></del> and
+<p>Inside literal scalars, all (<a href="#indentation-spaces">indented</a>) characters are considered to be
+<a href="#nodes">content</a>, including <a href="#white-space-characters">white space</a> characters.
+Note that all <a href="#line-break-characters">line break</a> characters are <del><a href="#undefined">normalized</a></del>.
+In addition, <del><a href="#undefined">empty lines</a></del> are not <del><a href="#undefined">folded</a></del>, though final <a href="#line-break-characters">line breaks</a> and
 trailing <del><a href="#undefined">empty lines</a></del> are <del><a href="#undefined">chomped</a></del>.</p>
 
 <p>There is no way to escape characters inside literal scalars.
-This restricts them to <del><a href="#undefined">printable</a></del> characters.
+This restricts them to <a href="#character-set">printable</a> characters.
 In addition, there is no way to break a long literal line.</p>
 
 <div id="rule-l-nb-literal-text(n)"></div>
@@ -7023,8 +7023,8 @@ It is similar to the <del><a href="#undefined">literal style</a></del>; however,
   </div>
 </div>
 
-<p><del><a href="#undefined">Folding</a></del> allows long lines to be broken anywhere a single <del><a href="#undefined">space</a></del> character
-separates two non-<del><a href="#undefined">space</a></del> characters.</p>
+<p><del><a href="#undefined">Folding</a></del> allows long lines to be broken anywhere a single <a href="#white-space-characters">space</a> character
+separates two non-<a href="#white-space-characters">space</a> characters.</p>
 
 <div id="rule-s-nb-folded-text(n)"></div>
 <pre class="rule">
@@ -7096,7 +7096,7 @@ separates two non-<del><a href="#undefined">space</a></del> characters.</p>
 <p>(The following three examples duplicate this example, each highlighting
 different productions.)</p>
 
-<p>Lines starting with <del><a href="#undefined">white space</a></del> characters (<em>more-indented</em> lines) are not
+<p>Lines starting with <a href="#white-space-characters">white space</a> characters (<em>more-indented</em> lines) are not
 <del><a href="#undefined">folded</a></del>.</p>
 
 <div id="rule-s-nb-spaced-text(n)"></div>
@@ -7173,7 +7173,7 @@ different productions.)</p>
   </div>
 </div>
 
-<p><del><a href="#undefined">Line breaks</a></del> and <del><a href="#undefined">empty lines</a></del> separating folded and more-indented lines are
+<p><a href="#line-break-characters">Line breaks</a> and <del><a href="#undefined">empty lines</a></del> separating folded and more-indented lines are
 also not <del><a href="#undefined">folded</a></del>.</p>
 
 <div id="rule-l-nb-same-lines(n)"></div>
@@ -7246,7 +7246,7 @@ also not <del><a href="#undefined">folded</a></del>.</p>
   </div>
 </div>
 
-<p>The final <del><a href="#undefined">line break</a></del>, and trailing <del><a href="#undefined">empty lines</a></del> if any, are subject to
+<p>The final <a href="#line-break-characters">line break</a>, and trailing <del><a href="#undefined">empty lines</a></del> if any, are subject to
 <del><a href="#undefined">chomping</a></del> and are never <del><a href="#undefined">folded</a></del>.</p>
 
 <div id="rule-l-folded-content(n,t)"></div>
@@ -7323,7 +7323,7 @@ distinguished from a <del><a href="#undefined">plain scalar</a></del> only when 
 
 <p>A <em>block sequence</em> is simply a series of <del><a href="#undefined">nodes</a></del>, each denoted by a leading
 <em>“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator</em>.
-The “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator must be <del><a href="#undefined">separated</a></del> from the <del><a href="#undefined">node</a></del> by <del><a href="#undefined">white space</a></del>.
+The “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator must be <a href="#separation-spaces">separated</a> from the <a href="#nodes">node</a> by <a href="#white-space-characters">white space</a>.
 This allows “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” to be used as the first character in a <del><a href="#undefined">plain scalar</a></del> if
 followed by a non-space character (e.g. “<strong><code class="language-plaintext highlighter-rouge">-1</code></strong>”).</p>
 
@@ -7384,12 +7384,12 @@ block sequence:
   </div>
 </div>
 
-<p>The entry <del><a href="#undefined">node</a></del> may be either <del><a href="#undefined">completely empty</a></del>, be a nested <del><a href="#undefined">block node</a></del>, or
+<p>The entry <a href="#nodes">node</a> may be either <del><a href="#undefined">completely empty</a></del>, be a nested <del><a href="#undefined">block node</a></del>, or
 use a <em>compact in-line notation</em>.
 The compact notation may be used when the entry is itself a nested <del><a href="#undefined">block
 collection</a></del>.
-In this case, both the “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator and the following <del><a href="#undefined">spaces</a></del> are
-considered to be part of the <del><a href="#undefined">indentation</a></del> of the nested <del><a href="#undefined">collection</a></del>.
+In this case, both the “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator and the following <a href="#white-space-characters">spaces</a> are
+considered to be part of the <a href="#indentation-spaces">indentation</a> of the nested <del><a href="#undefined">collection</a></del>.
 Note that it is not possible to specify <del><a href="#undefined">node properties</a></del> for such a
 <del><a href="#undefined">collection</a></del>.</p>
 
@@ -7735,7 +7735,7 @@ mapping.</p>
 <h3 id="823-block-nodes">8.2.3. Block Nodes</h3>
 
 <p>YAML allows <del><a href="#undefined">flow nodes</a></del> to be embedded inside <del><a href="#undefined">block collections</a></del> (but not
-vice-versa). <del><a href="#undefined">Flow nodes</a></del> must be <del><a href="#undefined">indented</a></del> by at least one more <del><a href="#undefined">space</a></del> than
+vice-versa). <del><a href="#undefined">Flow nodes</a></del> must be <a href="#indentation-spaces">indented</a> by at least one more <a href="#white-space-characters">space</a> than
 the parent <del><a href="#undefined">block collection</a></del>.
 Note that <del><a href="#undefined">flow nodes</a></del> may begin on a following line.</p>
 
@@ -7800,8 +7800,8 @@ scalar</a></del> and an <del><a href="#undefined">implicit key</a></del> startin
 </div>
 
 <p>The block <del><a href="#undefined">node’s properties</a></del> may span across several lines.
-In this case, they must be <del><a href="#undefined">indented</a></del> by at least one more <del><a href="#undefined">space</a></del> than the
-<del><a href="#undefined">block collection</a></del>, regardless of the <del><a href="#undefined">indentation</a></del> of the <del><a href="#undefined">block collection</a></del>
+In this case, they must be <a href="#indentation-spaces">indented</a> by at least one more <a href="#white-space-characters">space</a> than the
+<del><a href="#undefined">block collection</a></del>, regardless of the <a href="#indentation-spaces">indentation</a> of the <del><a href="#undefined">block collection</a></del>
 entries.</p>
 
 <div id="rule-s-l+block-in-block(n,c)"></div>
@@ -7860,8 +7860,8 @@ folded:<code class="legend-2">↓</code>
   </div>
 </div>
 
-<p>Since people perceive the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator</a></del> as <del><a href="#undefined">indentation</a></del>, nested <del><a href="#undefined">block
-sequences</a></del> may be <del><a href="#undefined">indented</a></del> by one less <del><a href="#undefined">space</a></del> to compensate, except, of
+<p>Since people perceive the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator</a></del> as <a href="#indentation-spaces">indentation</a>, nested <del><a href="#undefined">block
+sequences</a></del> may be <a href="#indentation-spaces">indented</a> by one less <a href="#white-space-characters">space</a> to compensate, except, of
 course, if nested inside another <del><a href="#undefined">block sequence</a></del> (<del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">block-out</code></strong> context</a></del>
 vs. <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">block-in</code></strong> context</a></del>).</p>
 
@@ -7935,7 +7935,7 @@ mapping:<code class="legend-3"> !!map</code>
 <div id="documents"></div>
 <h2 id="91-documents">9.1. Documents</h2>
 
-<p>A YAML character <del><a href="#undefined">stream</a></del> may contain several <em>documents</em>.
+<p>A YAML character <a href="#streams">stream</a> may contain several <em>documents</em>.
 Each document is completely independent from the rest.</p>
 
 <div id="document-prefix"></div>
@@ -7943,7 +7943,7 @@ Each document is completely independent from the rest.</p>
 
 <p>A document may be preceded by a <em>prefix</em> specifying the <del><a href="#undefined">character encoding</a></del>,
 and optional <del><a href="#undefined">comment</a></del> lines.
-Note that all <del><a href="#undefined">documents</a></del> in a stream must use the same <del><a href="#undefined">character encoding</a></del>.
+Note that all <a href="#document">documents</a> in a stream must use the same <del><a href="#undefined">character encoding</a></del>.
 However it is valid to re-specify the <del><a href="#undefined">encoding</a></del> using a <del><a href="#undefined">byte order mark</a></del> for
 each <del><a href="#undefined">document</a></del> in the stream.
 This makes it easier to concatenate streams.</p>
@@ -7996,7 +7996,7 @@ Document
 <p>Using <del><a href="#undefined">directives</a></del> creates a potential ambiguity.
 It is valid to have a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>”</a></del> character at the start of a line (e.g. as the
 first character of the second line of a <del><a href="#undefined">plain scalar</a></del>).
-How, then, to distinguish between an actual <del><a href="#undefined">directive</a></del> and a <del><a href="#undefined">content</a></del> line
+How, then, to distinguish between an actual <del><a href="#undefined">directive</a></del> and a <a href="#nodes">content</a> line
 that happens to start with a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>”</a></del> character?</p>
 
 <p>The solution is the use of two special <em>marker</em> lines to control the processing
@@ -8014,7 +8014,7 @@ Lines following this marker can safely use <del><a href="#undefined">“<strong>
 <p>The existence of this optional <em>document suffix</em> does not necessarily indicate
 the existence of an actual following <del><a href="#undefined">document</a></del>.</p>
 
-<p>Obviously, the actual <del><a href="#undefined">content</a></del> lines are therefore forbidden to begin with
+<p>Obviously, the actual <a href="#nodes">content</a> lines are therefore forbidden to begin with
 either of these markers.</p>
 
 <div id="rule-c-directives-end"></div>
@@ -8083,14 +8083,14 @@ Document
 <h3 id="913-bare-documents">9.1.3. Bare Documents</h3>
 
 <p>A <em>bare document</em> does not begin with any <del><a href="#undefined">directives</a></del> or <del><a href="#undefined">marker</a></del> lines.
-Such documents are very “clean” as they contain nothing other than the <del><a href="#undefined">content</a></del>.
+Such documents are very “clean” as they contain nothing other than the <a href="#nodes">content</a>.
 In this case, the first non-comment line may not start with a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>”</a></del> first
 character.</p>
 
-<p>Document <del><a href="#undefined">nodes</a></del> are <del><a href="#undefined">indented</a></del> as if they have a parent <del><a href="#undefined">indented</a></del> at -1
-<del><a href="#undefined">spaces</a></del>.
-Since a <del><a href="#undefined">node</a></del> must be more <del><a href="#undefined">indented</a></del> than its parent <del><a href="#undefined">node</a></del>, this allows the
-document’s <del><a href="#undefined">node</a></del> to be <del><a href="#undefined">indented</a></del> at zero or more <del><a href="#undefined">spaces</a></del>.</p>
+<p>Document <del><a href="#undefined">nodes</a></del> are <a href="#indentation-spaces">indented</a> as if they have a parent <a href="#indentation-spaces">indented</a> at -1
+<a href="#white-space-characters">spaces</a>.
+Since a <a href="#nodes">node</a> must be more <a href="#indentation-spaces">indented</a> than its parent <a href="#nodes">node</a>, this allows the
+document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">indented</a> at zero or more <a href="#white-space-characters">spaces</a>.</p>
 
 <div id="rule-l-bare-document"></div>
 <pre class="rule">
@@ -8256,8 +8256,8 @@ Since the existence of the <del><a href="#undefined">document</a></del> is indic
 <div id="streams"></div>
 <h2 id="92-streams">9.2. Streams</h2>
 
-<p>A YAML <em>stream</em> consists of zero or more <del><a href="#undefined">documents</a></del>.
-Subsequent <del><a href="#undefined">documents</a></del> require some sort of separation <del><a href="#undefined">marker</a></del> line.
+<p>A YAML <em>stream</em> consists of zero or more <a href="#document">documents</a>.
+Subsequent <a href="#document">documents</a> require some sort of separation <del><a href="#undefined">marker</a></del> line.
 If a <del><a href="#undefined">document</a></del> is not terminated by a <del><a href="#undefined">document end marker</a></del> line, then the
 following <del><a href="#undefined">document</a></del> must begin with a <del><a href="#undefined">directives end marker</a></del> line.</p>
 
@@ -8337,8 +8337,8 @@ with the above <strong><code class="language-plaintext highlighter-rouge">l-yaml
 <h5 id="appending-to-streams">Appending to Streams</h5>
 
 <blockquote>
-  <p>Allowing multiple <del><a href="#undefined">documents</a></del> in a single stream makes YAML suitable for log
-files and similar <del><a href="#undefined">applications</a></del>.
+  <p>Allowing multiple <a href="#document">documents</a> in a single stream makes YAML suitable for log
+files and similar <a href="#processing-yaml-information">applications</a>.
 Note that each <del><a href="#undefined">document</a></del> is independent of the rest, allowing for
 heterogeneous log file entries.</p>
 </blockquote>
@@ -8380,7 +8380,7 @@ next <del><a href="#undefined">document</a></del>.</p>
 
 <p>The <em>failsafe schema</em> is guaranteed to work with any YAML <del><a href="#undefined">document</a></del>.
 It is therefore the recommended <del><a href="#undefined">schema</a></del> for generic YAML tools.
-A YAML <del><a href="#undefined">processor</a></del> should therefore support this <del><a href="#undefined">schema</a></del>, at least as an
+A YAML <a href="#processing-yaml-information">processor</a> should therefore support this <del><a href="#undefined">schema</a></del>, at least as an
 option.</p>
 
 <div id="tags"></div>
@@ -8404,7 +8404,7 @@ option.</p>
 <h5 id="definition">Definition:</h5>
 
 <blockquote>
-  <p><del><a href="#undefined">Represents</a></del> an associative container, where each <del><a href="#undefined">key</a></del> is unique in the
+  <p><del><a href="#undefined">Represents</a></del> an associative container, where each <a href="#nodes">key</a> is unique in the
 association and mapped to exactly one <del><a href="#undefined">value</a></del>.
 YAML places no restrictions on the type of <del><a href="#undefined">keys</a></del>; in particular, they are
 not restricted to being <del><a href="#undefined">scalars</a></del>.
@@ -8475,7 +8475,7 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 <h5 id="kind-2">Kind:</h5>
 
 <blockquote>
-  <p><del><a href="#undefined">Scalar</a></del>.</p>
+  <p><a href="#scalar">Scalar</a>.</p>
 </blockquote>
 
 <h5 id="definition-2">Definition:</h5>
@@ -8513,14 +8513,14 @@ standard <del><a href="#undefined">convention</a></del>, to “<strong><code cla
 their <del><a href="#undefined">kind</a></del>.</p>
 
 <p>All <del><a href="#undefined">nodes</a></del> with the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag</a></del> are left <del><a href="#undefined">unresolved</a></del>.
-This constrains the <del><a href="#undefined">application</a></del> to deal with a <del><a href="#undefined">partial representation</a></del>.</p>
+This constrains the <a href="#processing-yaml-information">application</a> to deal with a <del><a href="#undefined">partial representation</a></del>.</p>
 
 <div id="json-schema"></div>
 <h2 id="102-json-schema">10.2. JSON Schema</h2>
 
 <p>The <em>JSON schema</em> is the lowest common denominator of most modern computer
 languages, and allows <del><a href="#undefined">parsing</a></del> JSON files.
-A YAML <del><a href="#undefined">processor</a></del> should therefore support this <del><a href="#undefined">schema</a></del>, at least as an option.
+A YAML <a href="#processing-yaml-information">processor</a> should therefore support this <del><a href="#undefined">schema</a></del>, at least as an option.
 It is also strongly recommended that other <del><a href="#undefined">schemas</a></del> should be based on it.</p>
 
 <div id="tags"></div>
@@ -8541,7 +8541,7 @@ It is also strongly recommended that other <del><a href="#undefined">schemas</a>
 <h5 id="kind-3">Kind:</h5>
 
 <blockquote>
-  <p><del><a href="#undefined">Scalar</a></del>.</p>
+  <p><a href="#scalar">Scalar</a>.</p>
 </blockquote>
 
 <h5 id="definition-3">Definition:</h5>
@@ -8551,8 +8551,8 @@ It is also strongly recommended that other <del><a href="#undefined">schemas</a>
 This is typically <del><a href="#undefined">bound</a></del> to a <del><a href="#undefined">native</a></del> null-like value (e.g., <strong><code class="language-plaintext highlighter-rouge">undef</code></strong> in
 Perl, <strong><code class="language-plaintext highlighter-rouge">None</code></strong> in Python).
 Note that a null is different from an empty string.
-Also, a <del><a href="#undefined">mapping</a></del> entry with some <del><a href="#undefined">key</a></del> and a null <del><a href="#undefined">value</a></del> is valid, and
-different from not having that <del><a href="#undefined">key</a></del> in the <del><a href="#undefined">mapping</a></del>.</p>
+Also, a <del><a href="#undefined">mapping</a></del> entry with some <a href="#nodes">key</a> and a null <del><a href="#undefined">value</a></del> is valid, and
+different from not having that <a href="#nodes">key</a> in the <del><a href="#undefined">mapping</a></del>.</p>
 </blockquote>
 
 <h5 id="canonical-form-2">Canonical Form:</h5>
@@ -8583,7 +8583,7 @@ key with null value: !!null null
 <h5 id="kind-4">Kind:</h5>
 
 <blockquote>
-  <p><del><a href="#undefined">Scalar</a></del>.</p>
+  <p><a href="#scalar">Scalar</a>.</p>
 </blockquote>
 
 <h5 id="definition-4">Definition:</h5>
@@ -8622,7 +8622,7 @@ Pluto is a planet: !!bool false
 <h5 id="kind-5">Kind:</h5>
 
 <blockquote>
-  <p><del><a href="#undefined">Scalar</a></del>.</p>
+  <p><a href="#scalar">Scalar</a>.</p>
 </blockquote>
 
 <h5 id="definition-5">Definition:</h5>
@@ -8634,12 +8634,12 @@ possible.</p>
 
   <p>Some languages (such as Perl) provide only a “number” type that allows for
 both integer and floating-point values.
-A YAML <del><a href="#undefined">processor</a></del> may use such a type for integers, as long as they
+A YAML <a href="#processing-yaml-information">processor</a> may use such a type for integers, as long as they
 round-trip properly.</p>
 
   <p>In some languages (such as C), an integer may overflow the <del><a href="#undefined">native</a></del> type’s
 storage capability.
-A YAML <del><a href="#undefined">processor</a></del> may reject such a value as an error, truncate it with a
+A YAML <a href="#processing-yaml-information">processor</a> may reject such a value as an error, truncate it with a
 warning, or find some other manner to round-trip it.
 In general, integers representable using 32 binary digits should safely
 round-trip through most systems.</p>
@@ -8675,7 +8675,7 @@ positive: !!int 34
 <h5 id="kind-6">Kind:</h5>
 
 <blockquote>
-  <p><del><a href="#undefined">Scalar</a></del>.</p>
+  <p><a href="#scalar">Scalar</a>.</p>
 </blockquote>
 
 <h5 id="definition-6">Definition:</h5>
@@ -8686,7 +8686,7 @@ positive: !!int 34
 
   <p>Some languages (such as Perl) provide only a “number” type that allows for
 both integer and floating-point values.
-A YAML <del><a href="#undefined">processor</a></del> may use such a type for floating-point numbers, as long as
+A YAML <a href="#processing-yaml-information">processor</a> may use such a type for floating-point numbers, as long as
 they round-trip properly.</p>
 
   <p>Not all floating-point values can be stored exactly in any given <del><a href="#undefined">native</a></del> type.
@@ -8694,7 +8694,7 @@ Hence a float value may change by “a small amount” when round-tripped.
 The supported range and accuracy depends on the implementation, though 32 bit
 IEEE floats should be safe.
 Since YAML does not specify a particular accuracy, using floating-point
-<del><a href="#undefined">mapping keys</a></del> requires great care and is not recommended.</p>
+<a href="#nodes">mapping keys</a> requires great care and is not recommended.</p>
 </blockquote>
 
 <h5 id="canonical-form-5">Canonical Form:</h5>
@@ -8738,7 +8738,7 @@ matched with a list of regular expressions (first match wins, e.g. <strong><code
 resolved as <strong><code class="language-plaintext highlighter-rouge">!!int</code></strong>).
 In principle, JSON files should not contain any <del><a href="#undefined">scalars</a></del> that do not match at
 least one of these.
-Hence the YAML <del><a href="#undefined">processor</a></del> should consider them to be an error.</p>
+Hence the YAML <a href="#processing-yaml-information">processor</a> should consider them to be an error.</p>
 
 <table>
   <thead>
@@ -8826,8 +8826,8 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
 <h2 id="103-core-schema">10.3. Core Schema</h2>
 
 <p>The <em>Core schema</em> is an extension of the <del><a href="#undefined">JSON schema</a></del>, allowing for more
-human-readable <del><a href="#undefined">presentation</a></del> of the same types.
-This is the recommended default <del><a href="#undefined">schema</a></del> that YAML <del><a href="#undefined">processor</a></del> should use
+human-readable <a href="#presentation-stream">presentation</a> of the same types.
+This is the recommended default <del><a href="#undefined">schema</a></del> that YAML <a href="#processing-yaml-information">processor</a> should use
 unless instructed otherwise.
 It is also strongly recommended that other <del><a href="#undefined">schemas</a></del> should be based on it.</p>
 
@@ -8853,7 +8853,7 @@ their <del><a href="#undefined">kind</a></del>.</p>
 
 <p><del><a href="#undefined">Scalars</a></del> with the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag</a></del> (that is, <del><a href="#undefined">plain scalars</a></del>) are
 matched with an extended list of regular expressions.
-However, in this case, if none of the regular expressions matches, the <del><a href="#undefined">scalar</a></del>
+However, in this case, if none of the regular expressions matches, the <a href="#scalar">scalar</a>
 is <del><a href="#undefined">resolved</a></del> to <strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong> (that is, considered to be a
 string).</p>
 
@@ -9022,8 +9022,8 @@ Hence YAML <del><a href="#undefined">processors</a></del> for a particular progr
 some form of <del><a href="#undefined">local tags</a></del> that map directly to the language’s <del><a href="#undefined">native data
 structures</a></del> (e.g., <strong><code class="language-plaintext highlighter-rouge">!ruby/object:Set</code></strong>).</p>
 
-<p>While such <del><a href="#undefined">local tags</a></del> are useful for ad-hoc <del><a href="#undefined">applications</a></del>, they do not
-suffice for stable, interoperable cross-<del><a href="#undefined">application</a></del> or cross-platform data
+<p>While such <del><a href="#undefined">local tags</a></del> are useful for ad-hoc <a href="#processing-yaml-information">applications</a>, they do not
+suffice for stable, interoperable cross-<a href="#processing-yaml-information">application</a> or cross-platform data
 exchange.</p>
 
 <p>Interoperable <del><a href="#undefined">schemas</a></del> make use of <del><a href="#undefined">global tags</a></del> (URIs) that <del><a href="#undefined">represent</a></del> the
@@ -9031,7 +9031,7 @@ same data across different programming languages.
 In addition, an interoperable <del><a href="#undefined">schema</a></del> may provide additional <del><a href="#undefined">tag resolution</a></del>
 rules.
 Such rules may provide additional regular expressions, as well as consider the
-path to the <del><a href="#undefined">node</a></del>.
+path to the <a href="#nodes">node</a>.
 This allows interoperable <del><a href="#undefined">schemas</a></del> to use <del><a href="#undefined">untagged</a></del> <del><a href="#undefined">nodes</a></del>.</p>
 
 <p>It is strongly recommended that such <del><a href="#undefined">schemas</a></del> be based on the <del><a href="#undefined">core schema</a></del>
@@ -9039,10 +9039,10 @@ defined above.
 In addition, it is strongly recommended that such <del><a href="#undefined">schemas</a></del> make as much use as
 possible of the the <em>YAML tag repository</em> at <a href="/type/">http://yaml.org/type/</a>.
 This repository provides recommended <del><a href="#undefined">global tags</a></del> for increasing the
-portability of YAML <del><a href="#undefined">documents</a></del> between different <del><a href="#undefined">applications</a></del>.</p>
+portability of YAML <a href="#document">documents</a> between different <a href="#processing-yaml-information">applications</a>.</p>
 
 <p>The tag repository is intentionally left out of the scope of this specification.
-This allows it to evolve to better support YAML <del><a href="#undefined">applications</a></del>.
+This allows it to evolve to better support YAML <a href="#processing-yaml-information">applications</a>.
 Hence, developers are encouraged to submit new “universal” types to the
 repository.
 The yaml-core mailing list at
