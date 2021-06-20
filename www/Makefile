@@ -15,7 +15,10 @@ SPEC_IMAGE := $(shell ls $(SPEC)/img/)
 SPEC_MD_HTML := $(WORK)/markdown.html
 INPUT_HTML := $(WORK)/spec-1.2.html
 
-STORY_MD := $(shell find $(STORY) -name '*.md')
+STORY_MD := $(shell \
+    find $(STORY) -name '*.md' | \
+    grep -v ReadMe.md \
+)
 STORY_MD := $(STORY_MD:$(ROOT)/%=%)
 
 DOCKER_BUILD_OPTS := \
@@ -41,27 +44,27 @@ WWW_FILES := $(WWW_FILES:%.yaml=%)
 
 STAGE_FILES := \
     $(WWW_FILES) \
+    spec.md \
     $(SPEC_IMAGE) \
     $(STORY_MD) \
     Gemfile \
     _config.yml \
     _layouts \
-    index.md \
     review.html \
-    spec-plain.md \
     spec.scss \
     img \
 
 STAGE_FILES := $(STAGE_FILES:%=$(STAGE)/%)
+STAGE_FILES := $(STAGE_FILES:%.swp=)
 
 JEKYLL_BUILD := jekyll build
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 
 
 stage-files:
-	@printf "%s\n" $(STAGE_FILES)
+	@printf "%s\n" $(STAGE_FILES) | sort
 
-stage: $(STAGE_FILES) $(GH_PAGES)
+stage: $(STAGE) $(STAGE_FILES) $(GH_PAGES)
 
 build: stage
 	$(eval override export YAML_SPEC_DIR := www/$(STAGE))
@@ -106,19 +109,18 @@ $(STAGE)/%: % $(STAGE)
 $(STAGE)/%: jekyll/% $(STAGE)
 	cp -r $< $@
 
-$(STAGE)/%.md: %.md $(STAGE)
-	cat $< > $@
+$(STAGE)/%.md: $(ROOT) %.md
+	mkdir -p $(dir $@)
+	render-markdown $^ > $@
 
-$(STAGE)/%.md: %.md.yaml $(SPEC)/%.md $(SPEC_LINKS) $(STAGE)
-	render-spec-markdown $^ > $@
+$(STAGE)/%.md: $(ROOT) $(SPEC)/%.md $(SPEC_LINKS)
+	mkdir -p $(dir $@)
+	render-markdown $^ > $@
 	cp $@ $(WORK)/
 
-$(STAGE)/spec-plain.md: spec-plain.md.yaml $(SPEC)/spec.md $(SPEC_LINKS) $(STAGE)
-	render-spec-markdown $^ > $@
-
-$(STAGE)/story/%.md: default.front.yaml $(STORY)/%.md $(SPEC_LINKS) $(STAGE)
-	mkdir -p $(STAGE)/story
-	render-spec-markdown $^ > $@
+$(STAGE)/story/%.md: $(ROOT) $(STORY)/%.md
+	mkdir -p $(dir $@)
+	render-markdown $^ > $@
 
 $(STAGE)/%.png: $(SPEC)/img/%.png
 	cp $< $@
