@@ -22,9 +22,9 @@ The Makefile supports:
 
   Build the site content into a finalized `./_gh-pages/` directory.
 
-* `make stage`
+* `make site`
 
-  Gather the site content into a `./_stage/` Jekyll source directory.
+  Gather the site content into a `./_site/` Jekyll source directory.
 
 * `make shell`
 
@@ -86,7 +86,7 @@ This system is made out of Markdown, YAML, SCSS and images.
 It is currently using Jekyll to build the final result.
 
 It gathers all the content in various directories throughout the repository and
-puts them into the `./_stage/` directory in a standard Jekyll layout.
+puts them into the `./_site/` directory in a standard Jekyll layout.
 
 The intent is to not tie things too close to Jekyll or any other build system.
 
@@ -99,7 +99,7 @@ repository, and in turn served as <https://spec.yaml.io/>.
 No further Jekyll processing happens on the GitHub side after pushing.
 
 The Markdown files in the repository get preprocessed into a more complicated
-but less readable Markdown form and put into `_stage` directory.
+but less readable Markdown form and put into `_site` directory.
 For instance the post-processed forms might have a lot more Markdown HTML in
 them.
 
