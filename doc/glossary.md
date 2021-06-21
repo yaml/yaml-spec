@@ -94,8 +94,8 @@ meanings.
 
 * DOM
 
-  A DOM is an information state that is a tree of created by a composer or a
-  representer and consumed by a constructor or a serializer.
+  A DOM is an information state that is a tree of nodes created by a composer
+  or a representer and consumed by a constructor or a serializer.
   A DOM may also be consumed directly by an application.
   A DOM API can offer a lot more information and processing options than a
   native data structure.
