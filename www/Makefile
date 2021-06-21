@@ -5,13 +5,28 @@ PUBLISH_CNAME := spec.yaml.io
 
 SPEC12 := $(ROOT)/1.2
 SPEC := $(ROOT)/spec
+DOC := $(ROOT)/doc
+STORY := $(ROOT)/story
 WORK := $(ROOT)/work
-STAGE := _stage
-PAGES := _gh-pages
-LINKS := $(ROOT)/spec/links.yaml
-IMAGE := $(shell ls $(SPEC)/img/)
+SITE := _site
+GH_PAGES := _gh-pages
+
+SPEC_LINKS := $(SPEC)/links.yaml
+SPEC_IMAGE := $(shell ls $(SPEC)/img/)
 SPEC_MD_HTML := $(WORK)/markdown.html
 INPUT_HTML := $(WORK)/spec-1.2.html
+
+DOC_MD := $(shell \
+    find $(DOC) -name '*.md' | \
+    grep -v ReadMe.md \
+)
+DOC_MD := $(DOC_MD:$(ROOT)/%=%)
+
+STORY_MD := $(shell \
+    find $(STORY) -name '*.md' | \
+    grep -v ReadMe.md \
+)
+STORY_MD := $(STORY_MD:$(ROOT)/%=%)
 
 DOCKER_BUILD_OPTS := \
     --user $(UID):$(GID) \
@@ -24,104 +39,140 @@ DOCKER_SHELL_OPTS := \
     $(DOCKER_SERVE_OPTS) \
     --volume $(HISTORY_FILE):/home/jekyll/.bash_history \
 
-CMD ?= bash
+SHELL_CMD ?= bash
 
-FILES := $(shell \
+WWW_FILES := $(shell \
     find . -type f -name '*.md*' | \
     grep -v ReadMe | \
     grep -v /_ \
 )
-FILES := $(FILES:./%=%)
-FILES := $(FILES:%.yaml=%)
+WWW_FILES := $(WWW_FILES:./%=%)
+WWW_FILES := $(WWW_FILES:%.yaml=%)
 
-FILES := \
-    $(FILES) \
-    $(IMAGE) \
+SITE_FILES := \
+    $(WWW_FILES) \
+    spec.md \
+    $(SPEC_IMAGE) \
+    $(DOC_MD) \
+    $(STORY_MD) \
     Gemfile \
     _config.yml \
     _layouts \
-    index.md \
     review.html \
-    spec-plain.md \
     spec.scss \
     img \
 
-FILES := $(FILES:%=$(STAGE)/%)
+SITE_FILES := $(SITE_FILES:%=$(SITE)/%)
+SITE_FILES := $(SITE_FILES:%.swp=)
 
 JEKYLL_BUILD := jekyll build
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 
+FORK_USER_ID := $(shell $(ROOT)/tool/bin/get-fork-id)
 
-list-files:
-	@printf "%s\n" $(FILES)
+site-files:
+	@printf "%s\n" $(SITE_FILES) | sort
 
-stage: $(FILES) $(PAGES)
+site: $(SITE) $(SITE_FILES) $(GH_PAGES)
 
-build: stage
-	$(eval override export YAML_SPEC_DIR := www/$(STAGE))
+build: site
+	$(eval override export YAML_SPEC_DIR := www/$(SITE))
 	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
-	echo $(PUBLISH_CNAME) > $(PAGES)/CNAME
-	cp $(PAGES)/spec.html $(WORK)/
+	echo $(PUBLISH_CNAME) > $(GH_PAGES)/CNAME
+	cp $(GH_PAGES)/spec.html $(WORK)/
 
-serve: stage
-	$(eval override export YAML_SPEC_DIR := www/$(STAGE))
+serve: site
+	$(eval override export YAML_SPEC_DIR := www/$(SITE))
 	$(call docker-run,run $(JEKYLL_SERVE),$(DOCKER_SERVE_OPTS))
 
-shell: stage
-	$(eval override export YAML_SPEC_DIR := www/$(STAGE))
-	$(call docker-run,run $(CMD),$(DOCKER_SHELL_OPTS))
+shell: site
+	$(eval override export YAML_SPEC_DIR := www/$(SITE))
+	$(call docker-run,run $(SHELL_CMD),$(DOCKER_SHELL_OPTS))
+
+stage: build
+ifeq ($(FORK_USER_ID),)
+	@echo '*** ERROR'
+	@echo "No git remote called 'fork' found"
+	@echo "It should have a url like 'git@github.com:<user>/yaml-spec.git'"
+	@exit 1
+endif
+	( \
+	    cd $(GH_PAGES) && \
+	    perl -pi -e "s/spec/$(FORK_USER_ID)-spec/" CNAME && \
+	    git add -A . && \
+	    git commit -m 'Stage' && \
+	    git push -f fork gh-pages \
+	) || true
+	@echo
+	@echo "Staged: http://$(FORK_USER_ID)-$(PUBLISH_CNAME)"
+	@echo
 
 publish: build
+ifneq ($(shell git rev-parse --abbrev-ref HEAD),main)
+	@echo '*** Error'
+	@echo "You may only 'publish' from the 'main' branch"
+	@exit 1
+endif
 	( \
-	    cd $(PAGES) && \
+	    cd $(GH_PAGES) && \
 	    git add -A . && \
 	    git commit -m 'Publish' && \
-	    git push \
-	)
+	    git push -f \
+	) || true
+	@echo
+	@echo "Published: https://$(PUBLISH_CNAME)"
+	@echo
 
 # Remove generated files to force rebuild:
 force:
-	$(call clean,$(PAGES))
-	rm -fr $(STAGE)
+	$(call clean,$(GH_PAGES))
+	rm -fr $(SITE)
 
 # Also touch the original spec-1.2 html:
 force-all: force
 	make -C $(SPEC) force
 
 clean:
-	rm -fr $(STAGE) $(PAGES)
+	rm -fr $(SITE) $(GH_PAGES)
 
 $(SPEC)/spec.md: $(INPUT_HTML)
 	make -C $(SPEC) spec.md YAML_SPEC_DIR=
 
-$(STAGE)/%: % $(STAGE)
+$(SITE)/%: % $(SITE)
 	cp -r $< $@
 
-$(STAGE)/%: jekyll/% $(STAGE)
+$(SITE)/%: jekyll/% $(SITE)
 	cp -r $< $@
 
-$(STAGE)/%.md: %.md $(STAGE)
-	cat $< > $@
+$(SITE)/%.md: $(ROOT) %.md
+	mkdir -p $(dir $@)
+	render-markdown $^ > $@
 
-$(STAGE)/%.md: %.md.yaml $(SPEC)/%.md $(LINKS) $(STAGE)
-	render-spec-markdown $^ > $@
+$(SITE)/%.md: $(ROOT) $(SPEC)/%.md $(SPEC_LINKS)
+	mkdir -p $(dir $@)
+	render-markdown $^ > $@
 	cp $@ $(WORK)/
 
-$(STAGE)/spec-plain.md: spec-plain.md.yaml $(SPEC)/spec.md $(LINKS) $(STAGE)
-	render-spec-markdown $^ > $@
+$(SITE)/doc/%.md: $(ROOT) $(DOC)/%.md
+	mkdir -p $(dir $@)
+	render-markdown $^ > $@
 
-$(STAGE)/%.png: $(SPEC)/img/%.png
+$(SITE)/story/%.md: $(ROOT) $(STORY)/%.md
+	mkdir -p $(dir $@)
+	render-markdown $^ > $@
+
+$(SITE)/%.png: $(SPEC)/img/%.png
 	cp $< $@
 
-$(STAGE)/%.css: %.css $(STAGE)
+$(SITE)/%.css: %.css $(SITE)
 	cp -r $< $@
 
-$(STAGE): $(SPEC_MD_HTML) $(WORK)
+$(SITE): $(SPEC_MD_HTML) $(WORK)
 	mkdir -p $@
 	cp $< $@/
 	cp $(WORK)/1.2/* $@/
 
-$(STAGE)/img: $(SPEC)/img
+$(SITE)/img: $(SPEC)/img
 	mkdir -p $@
 	cp -r $</* $@/
 
@@ -136,7 +187,7 @@ $(SPEC_MD_HTML): $(SPEC)/spec.md
 	) > $@
 
 
-$(PAGES):
+$(GH_PAGES):
 	-git branch --track gh-pages origin/gh-pages
 	git worktree add -f $@ gh-pages
 

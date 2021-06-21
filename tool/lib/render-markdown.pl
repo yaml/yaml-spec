@@ -11,12 +11,12 @@ my (@lvl) = (0, 0, 0, 0);
 my $links = {};
 
 sub main {
-  my ($front, $markdown, $links_hash) = read_files(@_);
+  my ($front, $markdown, $link_map) = read_files(@_);
 
   my $parsed = parse_sections($markdown);
 
   set_vars();
-  make_link_index($parsed, $links_hash);
+  make_link_index($parsed, $link_map);
 
   my @sections;
   for my $section (@$parsed) {
@@ -48,6 +48,9 @@ sub parse_sections {
   my @s;
   while ($_) {
     # Headings:
+    s/\A(\S.*\n)===+\n\n+//
+      and push @s, {heading => "# $1"} and next;
+
     s/\A(#{1,5} .*\n)\n+//
       and push @s, {heading => $1} and next;
 
@@ -64,7 +67,17 @@ sub parse_sections {
     s/\A
       (
         (::.*\n)?
-        (?:\*\ .*\n)+
+        (?:
+          (?:\*\ \S.*\n)
+          (?:
+            (?:
+              \n
+              (\ \ \S.*\n)+
+            )+
+            \n?
+          )?
+          (?:\ \ \*\ .*\n)*
+        )+
         (?:\{:\.\S+\}\n)?
       )
       \n+
@@ -78,7 +91,11 @@ sub parse_sections {
           .*\n
         )+
       )
-      \n+
+      (?:
+        (?=```) |
+        \z |
+        \n+
+      )
     //x
       and push @s, {p => $1} and next;
 
@@ -112,9 +129,14 @@ sub parse_sections {
     s/\A((?:\* .*\n)(?:  .*\n|\n(?=  ))+)\n+//
       and push @s, {ul => $1} and next;
 
+    s/\A(<!--(?:.*\n)+?-->\n)\n*//
+      and push @s, {comment => $1} and next;
+
+    s/\n+\z// and next;
+
     s/((?:.*\n){20})(?s:.*)/$1/;
     WWW(\@s);
-    die "------\n$_<<<";
+    die "*** ERROR ***\nParse failed at this point:\n$_\n*** EOF ***\n";
   }
 
   return \@s;
@@ -232,6 +254,8 @@ $pre
   $_ = $pre;
 }
 
+sub fmt_comment {}
+
 sub fmt_img {}
 
 sub fmt_table {}
@@ -251,10 +275,31 @@ sub fmt_index {
 
 #------------------------------------------------------------------------------
 sub read_files {
-  my ($front_file, $markdown_file, $links_file) = @_;
-  my $front = read_file($front_file);
-  my $markdown = read_file($markdown_file);
-  my $links = YAML::PP::LoadFile($links_file);
+  my ($root, $markdown_file, $links_file) = @_;
+  my ($front, $markdown, $links);
+  $markdown = read_file($markdown_file);
+  if ($markdown =~ s/\A(---\n.*?\n---\n)//s) {
+    $front = $1;
+  }
+  else {
+    $front = "---\n---\n";
+  }
+  if ($links_file) {
+    $links = YAML::PP::LoadFile($links_file);
+  }
+  else {
+    $links = {};
+  }
+  my $yaml = $front;
+  $yaml =~ s/\A---\n//;
+  $yaml =~ s/---\n\z//;
+  if ($yaml) {
+    my $data = YAML::PP::Load($yaml);
+    if (my $source = $data->{source}) {
+      $markdown = read_file("$root/$source");
+    }
+  }
+  $markdown .= "\n";
   return ($front, $markdown, $links)
 }
 
