@@ -68,6 +68,7 @@ SITE_FILES := $(SITE_FILES:%.swp=)
 JEKYLL_BUILD := jekyll build
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 
+FORK_USER_ID := $(shell $(ROOT)/tool/bin/get-fork-id)
 
 site-files:
 	@printf "%s\n" $(SITE_FILES) | sort
@@ -89,13 +90,22 @@ shell: site
 	$(call docker-run,run $(SHELL_CMD),$(DOCKER_SHELL_OPTS))
 
 stage: build
+ifeq ($(FORK_USER_ID),)
+	@echo '*** ERROR'
+	@echo "No git remote called 'fork' found"
+	@echo "It should have a url like 'git@github.com:<user>/yaml-spec.git'"
+	@exit 1
+endif
 	( \
 	    cd $(GH_PAGES) && \
-	    perl -pi -e "s/spec/$$USER-spec/" CNAME && \
+	    perl -pi -e "s/spec/$(FORK_USER_ID)-spec/" CNAME && \
 	    git add -A . && \
 	    git commit -m 'Stage' && \
 	    git push -f fork gh-pages \
-	)
+	) || true
+	@echo
+	@echo "Staged: http://$(FORK_USER_ID)-$(PUBLISH_CNAME)"
+	@echo
 
 publish: build
 	( \
@@ -103,7 +113,10 @@ publish: build
 	    git add -A . && \
 	    git commit -m 'Publish' && \
 	    git push -f \
-	)
+	) || true
+	@echo
+	@echo "Published: https://$(PUBLISH_CNAME)"
+	@echo
 
 # Remove generated files to force rebuild:
 force:
