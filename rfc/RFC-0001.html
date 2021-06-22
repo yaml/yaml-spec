@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta http-equiv="Content-Type"
+      content="text/html; charset=UTF-8" />
+<title>YAML™ Ain’t Markup Language — Version 1.x</title>
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/assets/css/style.css" />
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/spec.css" />
+</head>
+
+<body>
+<main id="content" class="main-content" role="main">
+<div class="wrapper">
+<section>
+
+<h2 id="problem">Problem</h2>
+
+<p>YAML 1.2 allows “nothing” to be a valid value; a plain empty scalar that often
+is loaded as a null value.</p>
+
+<p>The null value isn’t very useful as a mapping key, and using an empty value to
+specify it is confusing to read.</p>
+
+<h2 id="proposal">Proposal</h2>
+
+<p>Disallow (untagged) plain empty scalars as mapping keys.</p>
+
+<h2 id="explanation">Explanation</h2>
+
+<p>In YAML 1.2, the absence of any value is a valid plain scalar, and usually that
+loads to a native <code class="language-plaintext highlighter-rouge">null</code> value.</p>
+
+<p>This can be used nicely to encode unspecified values:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>size: 5
+shape:
+color:
+</code></pre></div></div>
+
+<p>You can also use these “empty” values as mapping keys.
+This means that <code class="language-plaintext highlighter-rouge">:</code> is same as <code class="language-plaintext highlighter-rouge">null: null</code>.</p>
+
+<p>Using a null value as a mapping key is a rare thing for a program to do (if it
+is even allowed by the programming language).</p>
+
+<p>Under this RFC you can still have a null key, but it needs to happen explicitly
+like in these examples:</p>
+
+<pre>
+- null: foo
+- !!null : foo
+- !null "": foo
+- key: &amp;null !null
+  *null : foo
+</pre>
+
+<p>The following will be parse errors:</p>
+
+<pre>
+- :
+- : foo
+- { : foo }
+- &amp;x :
+</pre>
+
+
+</section>
+</div>
+</main>
+
+<script>
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
+}
+</script>
+
+</body>
+
+</html>

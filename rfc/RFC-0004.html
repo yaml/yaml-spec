@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta http-equiv="Content-Type"
+      content="text/html; charset=UTF-8" />
+<title>YAML™ Ain’t Markup Language — Version 1.x</title>
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/assets/css/style.css" />
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/spec.css" />
+</head>
+
+<body>
+<main id="content" class="main-content" role="main">
+<div class="wrapper">
+<section>
+
+<h2 id="problem">Problem</h2>
+
+<p>YAML 1.2 indentation can be an unlimited number of spaces per level.</p>
+
+<p>This is not needed and might be exploited for nefarious goals.</p>
+
+<h2 id="proposal">Proposal</h2>
+
+<p>Only allow a maximum of 8 spaces per indentation level.</p>
+
+<h2 id="explanation">Explanation</h2>
+
+<p>YAML’s preferred indentation is 2 spaces.
+Almost all known dumpers use 2 as the default.</p>
+
+<p>People sometimes use more than 2, but there should be a limit.</p>
+
+<p>In general, indentation in any programming scoping use is not more than 8
+columns.
+Hard tabs, even though configurable, are either set to 8 columns or less in
+practice.</p>
+
+<p>It’s conceivable that a petabyte of indentation spaces could cause some parsers
+to break.
+It’s also conceivable that someone might use the indentation to “hide” values
+from casual observation; possibly to accomplish a security exploit.</p>
+
+<p>Limiting indentation to 8 spaces should be a good thing for YAML.</p>
+
+<p>OK:</p>
+
+<pre>
+foo:
+        bar: 42
+</pre>
+
+<p>Error:</p>
+
+<pre>
+foo:
+                                                bar: 42
+</pre>
+
+
+</section>
+</div>
+</main>
+
+<script>
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
+}
+</script>
+
+</body>
+
+</html>

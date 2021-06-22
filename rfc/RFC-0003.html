@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta http-equiv="Content-Type"
+      content="text/html; charset=UTF-8" />
+<title>YAML™ Ain’t Markup Language — Version 1.x</title>
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/assets/css/style.css" />
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/spec.css" />
+</head>
+
+<body>
+<main id="content" class="main-content" role="main">
+<div class="wrapper">
+<section>
+
+<h2 id="problem">Problem</h2>
+
+<p>At the moment, an anchor name can consist of almost any printable character,
+with the following specific exceptions:</p>
+
+<pre>
+\t | \r | \n | ' ' | ',' | '[' | ']' | '{' | '}'
+</pre>
+
+<p>Some implementations support a stricter subset of characters.
+LibYAML, for instance, only supports:</p>
+
+<pre>
+'A'-'Z' | 'a'-'z' | '0'-'9' | '_' | '-'
+</pre>
+
+<p>This freedom in anchor names is useless to the user, while making parsing more
+difficult.</p>
+
+<h2 id="proposal">Proposal</h2>
+
+<p>An implementation MUST accept anchor names composed of one or more of the
+following characters:</p>
+
+<pre>
+'A'-'Z' | 'a'-'z' | '0'-'9' | '_' | '-'
+</pre>
+
+<p>An implementation MAY accept anchor names that start with one of the following
+characters:</p>
+
+<pre>
+\p{ID_Start} | \p{Nd} | \p{Pc} | \p{Pd}
+</pre>
+
+<p>and for which any subsequent characters are from:</p>
+
+<pre>
+\p{ID_Continue} | \p{Pd}
+</pre>
+
+<p>These categories are defined in terms of Unicode code point properties:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">ID_Start</code>, <code class="language-plaintext highlighter-rouge">ID_Continue</code>: As described in
+<a href="http://www.unicode.org/reports/tr31/">Unicode Standard Annex #31</a>,
+“Unicode Identifier and Pattern Syntax”.
+<code class="language-plaintext highlighter-rouge">ID_Continue</code> is a superset of <code class="language-plaintext highlighter-rouge">ID_Start</code> which also includes <code class="language-plaintext highlighter-rouge">Nd</code> and <code class="language-plaintext highlighter-rouge">Pc</code>
+characters, among others.</li>
+  <li><code class="language-plaintext highlighter-rouge">Nd</code>: Number, decimal digit</li>
+  <li><code class="language-plaintext highlighter-rouge">Pc</code>: Punctuation, connector (includes <code class="language-plaintext highlighter-rouge">_</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">Pd</code>: Punctuation, dash (includes <code class="language-plaintext highlighter-rouge">-</code>)</li>
+</ul>
+
+<h2 id="explanation">Explanation</h2>
+
+<p>These are always fine:</p>
+
+<pre>
+&amp;foo
+&amp;Bar-baz
+&amp;42
+&amp;_
+</pre>
+
+<p>These will work with implementations that support the full set of Unicode
+characters:</p>
+
+<pre>
+&amp;kääk
+&amp;😁
+&amp;شيء
+</pre>
+
+<p>These are errors:</p>
+
+<pre>
+&amp;foo.bar
+&amp;syntax/is:not*allowed&amp;
+&amp; # empty string
+</pre>
+
+<p>A less technical way to express this is that anchor names should consist of
+letters, numbers, underscores and dashes.
+If you use characters outside of the ASCII set, those might not be supported by
+all implementations.</p>
+
+<p>Earlier versions of this RFC also included period <code class="language-plaintext highlighter-rouge">.</code> and forward slash <code class="language-plaintext highlighter-rouge">/</code> as
+valid anchor name characters.
+These have been left out in order to effectively reserve them for future use in
+aliases, for instance as path separators.</p>
+
+
+</section>
+</div>
+</main>
+
+<script>
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
+}
+</script>
+
+</body>
+
+</html>

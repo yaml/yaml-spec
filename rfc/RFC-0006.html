@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta http-equiv="Content-Type"
+      content="text/html; charset=UTF-8" />
+<title>YAML™ Ain’t Markup Language — Version 1.x</title>
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/assets/css/style.css" />
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/spec.css" />
+</head>
+
+<body>
+<main id="content" class="main-content" role="main">
+<div class="wrapper">
+<section>
+
+<h2 id="problem">Problem</h2>
+
+<p>While JSON itself does not support streaming or otherwise allow multiple
+separate documents to be defined in a single file,
+<a href="https://en.wikipedia.org/wiki/JSON_streaming">JSON streaming</a> does.
+The term refers to a family of protocols such as JSON Lines that allow the
+concatenation of multiple JSON documents, most often by using a newline <code class="language-plaintext highlighter-rouge">\n</code> as
+a delimiter.
+These are not currently supported by YAML, but they could be.</p>
+
+<h2 id="proposal">Proposal</h2>
+
+<p>Adjacent documents with root-level flow collection values do not need a
+document marker separating them, but do need at least one newline <code class="language-plaintext highlighter-rouge">\n</code> between
+them.</p>
+
+<p>On output, YAML libraries SHOULD by default include a <code class="language-plaintext highlighter-rouge">---</code> separator for
+documents even if the output could be parsed as valid YAML without it.
+If it’s desirable for the output to be parsed by non-YAML line-delimited JSON
+consumers, each document SHOULD be formatted as valid JSON and output on a
+single line.</p>
+
+<p>A valid stream of three documents:</p>
+
+<pre>
+{ "first": "doc" }
+[ second, doc ]
+{ third }
+</pre>
+
+<p>Comments and empty lines between such documents are allowed, and flow
+collections are not required to fit on a single line:</p>
+
+<pre>
+{
+  first: doc
+}
+
+# this is fine
+[
+    second,
+    doc
+]
+</pre>
+
+<p>Using no separator, or only whitespace not including <code class="language-plaintext highlighter-rouge">\n</code> as a separator, is an
+error:</p>
+
+<pre>
+# ERROR
+[ not ] { fine }
+</pre>
+
+<h2 id="explanation">Explanation</h2>
+
+<p>Normally, documents after the first in a stream need a document marker
+separating them to ensure clarity.
+For flow mappings and sequences, this is not required as there is no ambiguity.
+Requiring at least one newline <code class="language-plaintext highlighter-rouge">\n</code> as a separator makes it more obvious that
+the documents are intentionally separated, and clarifies the starting index of
+the second document</p>
+
+<p>This change could be considered semver-minor, as it does not change any
+existing working code.
+This would also support parsing most real-world line-delimited JSON, but it
+would not support JSON streams that may contain documents that are JSON scalar
+values.</p>
+
+<p>For complete line-delimited JSON support, see RFC-top-plain-single-line, which
+builds on this and other spec changes.</p>
+
+
+</section>
+</div>
+</main>
+
+<script>
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
+}
+</script>
+
+</body>
+
+</html>

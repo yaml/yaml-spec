@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta http-equiv="Content-Type"
+      content="text/html; charset=UTF-8" />
+<title>YAML™ Ain’t Markup Language — Version 1.x</title>
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/assets/css/style.css" />
+
+<link rel="stylesheet"
+      type="text/css"
+      href="/spec.css" />
+</head>
+
+<body>
+<main id="content" class="main-content" role="main">
+<div class="wrapper">
+<section>
+
+<h2 id="problem">Problem</h2>
+
+<p>The YAML 1.1 spec defines a stream as consisting of a series of documents, each
+of which “may be preceded by a series of directives.”
+Documents after the first (<code class="language-plaintext highlighter-rouge">l-next-document</code>) have this additional
+specification:</p>
+
+<blockquote>
+  <p>If the document specifies no directives, it is parsed using the same settings
+as the previous document.
+If the document does specify any directives, all directives of previous
+documents, if any, are ignored.</p>
+</blockquote>
+
+<p>In the YAML 1.2 spec, a document in a stream “is completely independent from
+the rest”.
+This version of the spec does not define an <code class="language-plaintext highlighter-rouge">l-next-document</code> construct, but
+does define an <code class="language-plaintext highlighter-rouge">l-directive-document</code> as starting “with some directives”.</p>
+
+<p>The complete independence of documents from each other severely limits the
+usability of multi-document streams, in particular with repect to directives.
+The YAML 1.1 implementation should be returned to, while clarifying the
+relationship between documents and directives.</p>
+
+<h2 id="proposal">Proposal</h2>
+
+<p>This RFC follows on from RFC-tail-docs-require-header, which renames the
+“directives end” marker as “document start” and requires it for documents after
+the first in a stream.</p>
+
+<p>Directives are defined as belonging to the stream, rather than any single
+document.
+Each directive may be repeated, and a directive with the same name as an
+earlier directive completely replaces the earlier directive.
+Directives may themselves limit whether they may be repeated, or defined after
+the first document.
+When parsing a document, only the values of directives declared before that
+document are taken into account.</p>
+
+<p>If any directives are declared before the first document, that document must
+have a document-start marker.
+If directives need to be set between documents, the preceding document must
+have a document-end marker.</p>
+
+<p>A stream therefore consists of a sequence of four different constructs, each of
+which may be parsed a single line at a time:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">empty</code> lines, consisting only of white space</li>
+  <li><code class="language-plaintext highlighter-rouge">comment</code> lines, which have <code class="language-plaintext highlighter-rouge">#</code> as their first non-white-space character</li>
+  <li><code class="language-plaintext highlighter-rouge">directive</code> lines, which start with <code class="language-plaintext highlighter-rouge">%</code></li>
+  <li>documents, which may include:
+    <ul>
+      <li>document <code class="language-plaintext highlighter-rouge">start</code> (line starts with <code class="language-plaintext highlighter-rouge">---</code>) and <code class="language-plaintext highlighter-rouge">end</code> (line starts with
+<code class="language-plaintext highlighter-rouge">...</code>) markers as well as</li>
+      <li>all <code class="language-plaintext highlighter-rouge">other</code> valid document constructs, which includes <code class="language-plaintext highlighter-rouge">empty</code> and <code class="language-plaintext highlighter-rouge">comment</code>
+lines.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>The stream parser may be implemented based on a state machine that is in one of
+three states.
+At any point, <code class="language-plaintext highlighter-rouge">empty</code> lines and <code class="language-plaintext highlighter-rouge">comment</code>s may be encountered; they are not
+considered here.</p>
+
+<ol>
+  <li><code class="language-plaintext highlighter-rouge">START</code>: The state at the beginning of the stream.
+When encountering the first non-<code class="language-plaintext highlighter-rouge">empty</code> non-<code class="language-plaintext highlighter-rouge">comment</code> construct, the state
+switches to <code class="language-plaintext highlighter-rouge">STREAM</code> if it is a <code class="language-plaintext highlighter-rouge">directive</code> or to <code class="language-plaintext highlighter-rouge">DOCUMENT</code> if it is
+<code class="language-plaintext highlighter-rouge">start</code> or <code class="language-plaintext highlighter-rouge">other</code>.
+Encountering <code class="language-plaintext highlighter-rouge">end</code> here is an error.</li>
+  <li><code class="language-plaintext highlighter-rouge">STREAM</code>: Only <code class="language-plaintext highlighter-rouge">directive</code> and <code class="language-plaintext highlighter-rouge">start</code> are valid constructs, everything else
+is an error.
+When encountering <code class="language-plaintext highlighter-rouge">start</code>, the state switches to <code class="language-plaintext highlighter-rouge">DOCUMENT</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">DOCUMENT</code>:
+When encountering <code class="language-plaintext highlighter-rouge">start</code>, any previous document ends and a new document is
+started.
+After encountering <code class="language-plaintext highlighter-rouge">end</code>, the document ends and the stream state switches to
+<code class="language-plaintext highlighter-rouge">STREAM</code>.
+Within a document, <code class="language-plaintext highlighter-rouge">directive</code> parsing does not take place and <code class="language-plaintext highlighter-rouge">other</code>
+constructs may occur.</li>
+</ol>
+
+<p>The stream may end at any point, at which any remaining document should be
+considered to end.
+On output, implementations should include all directives before the first
+document, if possible.</p>
+
+<p>For single-document streams, this matches the behaviour of YAML 1.1 and YAML
+1.2.
+For multi-document streams, this matches the behaviour of YAML 1.1.
+Compared to YAML 1.2, there is a difference in directives preceding earlier
+documents also being taken into accound when parsing.</p>
+
+<p>If both RFC-json-streaming and this are accepted, certain <code class="language-plaintext highlighter-rouge">other</code> constructs
+such as flow mappings and sequences may begin a new document when within the
+<code class="language-plaintext highlighter-rouge">DOCUMENT</code> state.</p>
+
+<p>OK:</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>plain: document
+</code></pre></div></div>
+
+<p>OK:</p>
+
+<pre>
+%YAML 1.3
+%TAG ! !foo/
+---
+document: with directives
+...
+
+%TAG ! !bar/
+---
+other: document with redefined ! tag
+</pre>
+
+<p>Error:</p>
+
+<pre>
+...
+</pre>
+
+
+</section>
+</div>
+</main>
+
+<script>
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
+}
+</script>
+
+</body>
+
+</html>
