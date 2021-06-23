@@ -3585,7 +3585,7 @@ information.</p>
 <div id="rule-s-flow-folded(n)"></div>
 <pre class="rule">
 [74] s-flow-folded(n) ::=
-  <a href="#rule-s-separate-in-line">s-separate-in-line</a>? <a href="#rule-b-l-folded(n,flow-in)">b-l-folded(n,flow-in)</a>
+  <a href="#rule-s-separate-in-line">s-separate-in-line</a>? <a href="#rule-b-l-folded(n,c)">b-l-folded(n,flow-in)</a>
   <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
 </pre>
 
@@ -5104,7 +5104,7 @@ double-quoted lines to be broken at arbitrary positions.</p>
 <pre class="rule">
 [112] s-double-escaped(n) ::=
   <a href="#rule-s-white">s-white</a>* "\" <a href="#rule-b-non-content">b-non-content</a>
-  <a href="#rule-l-empty(n,flow-in)">l-empty(n,flow-in)</a>* <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
+  <a href="#rule-l-empty(n,c)">l-empty(n,flow-in)</a>* <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
 </pre>
 
 <div id="rule-s-double-break(n)"></div>
@@ -5673,7 +5673,7 @@ characters.</p>
 <pre class="rule">
 [137] c-flow-sequence(n,c) ::=
   "[" <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
-  <a href="#rule-ns-s-flow-seq-entries(n,in-flow(c))">ns-s-flow-seq-entries(n,in-flow(c))</a>? "]"
+  <a href="#rule-ns-s-flow-seq-entries(n,c)">ns-s-flow-seq-entries(n,in-flow(c))</a>? "]"
 </pre>
 
 <p>Sequence entries are separated by a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”</a></del> character.</p>
@@ -5798,7 +5798,7 @@ characters.</p>
 <pre class="rule">
 [140] c-flow-mapping(n,c) ::=
   "{" <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
-  <a href="#rule-ns-s-flow-map-entries(n,in-flow(c))">ns-s-flow-map-entries(n,in-flow(c))</a>? "}"
+  <a href="#rule-ns-s-flow-map-entries(n,c)">ns-s-flow-map-entries(n,in-flow(c))</a>? "}"
 </pre>
 
 <p>Mapping entries are separated by a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”</a></del> character.</p>
@@ -6180,14 +6180,14 @@ been impossible to implement.</p>
 <div id="rule-ns-flow-pair-yaml-key-entry(n,c)"></div>
 <pre class="rule">
 [152] ns-flow-pair-yaml-key-entry(n,c) ::=
-  <a href="#rule-ns-s-implicit-yaml-key(flow-key)">ns-s-implicit-yaml-key(flow-key)</a>
+  <a href="#rule-ns-s-implicit-yaml-key(c)">ns-s-implicit-yaml-key(flow-key)</a>
   <a href="#rule-c-ns-flow-map-separate-value(n,c)">c-ns-flow-map-separate-value(n,c)</a>
 </pre>
 
 <div id="rule-c-ns-flow-pair-json-key-entry(n,c)"></div>
 <pre class="rule">
 [153] c-ns-flow-pair-json-key-entry(n,c) ::=
-  <a href="#rule-c-s-implicit-json-key(flow-key)">c-s-implicit-json-key(flow-key)</a>
+  <a href="#rule-c-s-implicit-json-key(c)">c-s-implicit-json-key(flow-key)</a>
   <a href="#rule-c-ns-flow-map-adjacent-value(n,c)">c-ns-flow-map-adjacent-value(n,c)</a>
 </pre>
 
@@ -6864,11 +6864,11 @@ keep: |+
 <p>The <em>literal style</em> is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>” indicator</em>.
 It is the simplest, most restricted, and most readable <del><a href="#undefined">scalar style</a></del>.</p>
 
-<div id="rule-c-l+literal(n)"></div>
+<div id="rule-c-l-literal(n)"></div>
 <pre class="rule">
 [170] c-l+literal(n) ::=
   "|" <a href="#rule-c-b-block-header(m,t)">c-b-block-header(m,t)</a>
-  <a href="#rule-l-literal-content(n+m,t)">l-literal-content(n+m,t)</a>
+  <a href="#rule-l-literal-content(n,t)">l-literal-content(n+m,t)</a>
 </pre>
 
 <div id="example-literal-scalar" class="example">
@@ -6986,11 +6986,11 @@ In addition, there is no way to break a long literal line.</p>
 It is similar to the <del><a href="#undefined">literal style</a></del>; however, folded scalars are subject to
 <del><a href="#undefined">line folding</a></del>.</p>
 
-<div id="rule-c-l+folded(n)"></div>
+<div id="rule-c-l-folded(n)"></div>
 <pre class="rule">
 [174] c-l+folded(n) ::=
   "&gt;" <a href="#rule-c-b-block-header(m,t)">c-b-block-header(m,t)</a>
-  <a href="#rule-l-folded-content(n+m,t)">l-folded-content(n+m,t)</a>
+  <a href="#rule-l-folded-content(n,t)">l-folded-content(n+m,t)</a>
 </pre>
 
 <div id="example-folded-scalar" class="example">
@@ -7331,10 +7331,10 @@ The “<strong><code class="language-plaintext highlighter-rouge">-</code></stro
 This allows “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” to be used as the first character in a <del><a href="#undefined">plain scalar</a></del> if
 followed by a non-space character (e.g. “<strong><code class="language-plaintext highlighter-rouge">-1</code></strong>”).</p>
 
-<div id="rule-l+block-sequence(n)"></div>
+<div id="rule-l-block-sequence(n)"></div>
 <pre class="rule">
 [183] l+block-sequence(n) ::=
-  ( <a href="#rule-s-indent(n+m)">s-indent(n+m)</a> <a href="#rule-c-l-block-seq-entry(n+m)">c-l-block-seq-entry(n+m)</a> )+
+  ( <a href="#rule-s-indent(n)">s-indent(n+m)</a> <a href="#rule-c-l-block-seq-entry(n)">c-l-block-seq-entry(n+m)</a> )+
   /* For some fixed auto-detected m &gt; 0 */
 </pre>
 
@@ -7342,7 +7342,7 @@ followed by a non-space character (e.g. “<strong><code class="language-plainte
 <pre class="rule">
 [184] c-l-block-seq-entry(n) ::=
   "-" /* Not followed by an <a href="#rule-ns-char">ns-char</a> */
-  <a href="#rule-s-l+block-indented(n,c)">s-l+block-indented(n,block-in)</a>
+  <a href="#rule-s-l-block-indented(n,c)">s-l+block-indented(n,block-in)</a>
 </pre>
 
 <div id="example-block-sequence" class="example">
@@ -7397,13 +7397,13 @@ considered to be part of the <a href="#indentation-spaces">indentation</a> of th
 Note that it is not possible to specify <del><a href="#undefined">node properties</a></del> for such a
 <del><a href="#undefined">collection</a></del>.</p>
 
-<div id="rule-s-l+block-indented(n,c)"></div>
+<div id="rule-s-l-block-indented(n,c)"></div>
 <pre class="rule">
 [185] s-l+block-indented(n,c) ::=
     ( <a href="#rule-s-indent(m)">s-indent(m)</a>
-      ( <a href="#rule-ns-l-compact-sequence(n+1+m)">ns-l-compact-sequence(n+1+m)</a>
-      | <a href="#rule-ns-l-compact-mapping(n+1+m)">ns-l-compact-mapping(n+1+m)</a> ) )
-  | <a href="#rule-s-l+block-node(n,c)">s-l+block-node(n,c)</a>
+      ( <a href="#rule-ns-l-compact-sequence(n)">ns-l-compact-sequence(n+1+m)</a>
+      | <a href="#rule-ns-l-compact-mapping(n)">ns-l-compact-mapping(n+1+m)</a> ) )
+  | <a href="#rule-s-l-block-node(n,c)">s-l+block-node(n,c)</a>
   | ( <a href="#rule-e-node">e-node</a> <a href="#rule-s-l-comments">s-l-comments</a> )
 </pre>
 
@@ -7470,10 +7470,10 @@ Note that it is not possible to specify <del><a href="#undefined">node propertie
 <p>A <em>Block mapping</em> is a series of entries, each <del><a href="#undefined">presenting</a></del> a <del><a href="#undefined">key: value
 pair</a></del>.</p>
 
-<div id="rule-l+block-mapping(n)"></div>
+<div id="rule-l-block-mapping(n)"></div>
 <pre class="rule">
 [187] l+block-mapping(n) ::=
-  ( <a href="#rule-s-indent(n+m)">s-indent(n+m)</a> <a href="#rule-ns-l-block-map-entry(n+m)">ns-l-block-map-entry(n+m)</a> )+
+  ( <a href="#rule-s-indent(n)">s-indent(n+m)</a> <a href="#rule-ns-l-block-map-entry(n)">ns-l-block-map-entry(n+m)</a> )+
   /* For some fixed auto-detected m &gt; 0 */
 </pre>
 
@@ -7539,14 +7539,14 @@ for <del><a href="#undefined">block sequence</a></del> entries.</p>
 <div id="rule-c-l-block-map-explicit-key(n)"></div>
 <pre class="rule">
 [190] c-l-block-map-explicit-key(n) ::=
-  "?" <a href="#rule-s-l+block-indented(n,block-out)">s-l+block-indented(n,block-out)</a>
+  "?" <a href="#rule-s-l-block-indented(n,c)">s-l+block-indented(n,block-out)</a>
 </pre>
 
 <div id="rule-l-block-map-explicit-value(n)"></div>
 <pre class="rule">
 [191] l-block-map-explicit-value(n) ::=
   <a href="#rule-s-indent(n)">s-indent(n)</a>
-  ":" <a href="#rule-s-l+block-indented(n,block-out)">s-l+block-indented(n,block-out)</a>
+  ":" <a href="#rule-s-l-block-indented(n,c)">s-l+block-indented(n,block-out)</a>
 </pre>
 
 <div id="example-explicit-block-mapping-entries" class="example">
@@ -7611,8 +7611,8 @@ single line and must not span more than 1024 Unicode characters.</p>
 <div id="rule-ns-s-block-map-implicit-key"></div>
 <pre class="rule">
 [193] ns-s-block-map-implicit-key ::=
-    <a href="#rule-c-s-implicit-json-key(block-key)">c-s-implicit-json-key(block-key)</a>
-  | <a href="#rule-ns-s-implicit-yaml-key(block-key)">ns-s-implicit-yaml-key(block-key)</a>
+    <a href="#rule-c-s-implicit-json-key(c)">c-s-implicit-json-key(block-key)</a>
+  | <a href="#rule-ns-s-implicit-yaml-key(c)">ns-s-implicit-yaml-key(block-key)</a>
 </pre>
 
 <p>In this case, the <del><a href="#undefined">value</a></del> may be specified on the same line as the <del><a href="#undefined">implicit
@@ -7629,7 +7629,7 @@ This prevents a potential ambiguity with multi-line <del><a href="#undefined">pl
 <div id="rule-c-l-block-map-implicit-value(n)"></div>
 <pre class="rule">
 [194] c-l-block-map-implicit-value(n) ::=
-  ":" ( <a href="#rule-s-l+block-node(n,block-out)">s-l+block-node(n,block-out)</a>
+  ":" ( <a href="#rule-s-l-block-node(n,c)">s-l+block-node(n,block-out)</a>
       | ( <a href="#rule-e-node">e-node</a> <a href="#rule-s-l-comments">s-l-comments</a> ) )
 </pre>
 
@@ -7746,17 +7746,17 @@ Note that <del><a href="#undefined">flow nodes</a></del> may begin on a followin
 <p>It is at this point that <del><a href="#undefined">parsing</a></del> needs to distinguish between a <del><a href="#undefined">plain
 scalar</a></del> and an <del><a href="#undefined">implicit key</a></del> starting a nested <del><a href="#undefined">block mapping</a></del>.</p>
 
-<div id="rule-s-l+block-node(n,c)"></div>
+<div id="rule-s-l-block-node(n,c)"></div>
 <pre class="rule">
 [196] s-l+block-node(n,c) ::=
-  <a href="#rule-s-l+block-in-block(n,c)">s-l+block-in-block(n,c)</a> | <a href="#rule-s-l+flow-in-block(n)">s-l+flow-in-block(n)</a>
+  <a href="#rule-s-l-block-in-block(n,c)">s-l+block-in-block(n,c)</a> | <a href="#rule-s-l-flow-in-block(n)">s-l+flow-in-block(n)</a>
 </pre>
 
-<div id="rule-s-l+flow-in-block(n)"></div>
+<div id="rule-s-l-flow-in-block(n)"></div>
 <pre class="rule">
 [197] s-l+flow-in-block(n) ::=
-  <a href="#rule-s-separate(n+1,flow-out)">s-separate(n+1,flow-out)</a>
-  <a href="#rule-ns-flow-node(n+1,flow-out)">ns-flow-node(n+1,flow-out)</a> <a href="#rule-s-l-comments">s-l-comments</a>
+  <a href="#rule-s-separate(n,c)">s-separate(n+1,flow-out)</a>
+  <a href="#rule-ns-flow-node(n,c)">ns-flow-node(n+1,flow-out)</a> <a href="#rule-s-l-comments">s-l-comments</a>
 </pre>
 
 <div id="example-block-node-types" class="example">
@@ -7808,18 +7808,18 @@ In this case, they must be <a href="#indentation-spaces">indented</a> by at leas
 <del><a href="#undefined">block collection</a></del>, regardless of the <a href="#indentation-spaces">indentation</a> of the <del><a href="#undefined">block collection</a></del>
 entries.</p>
 
-<div id="rule-s-l+block-in-block(n,c)"></div>
+<div id="rule-s-l-block-in-block(n,c)"></div>
 <pre class="rule">
 [198] s-l+block-in-block(n,c) ::=
-  <a href="#rule-s-l+block-scalar(n,c)">s-l+block-scalar(n,c)</a> | <a href="#rule-s-l+block-collection(n,c)">s-l+block-collection(n,c)</a>
+  <a href="#rule-s-l-block-scalar(n,c)">s-l+block-scalar(n,c)</a> | <a href="#rule-s-l-block-collection(n,c)">s-l+block-collection(n,c)</a>
 </pre>
 
-<div id="rule-s-l+block-scalar(n,c)"></div>
+<div id="rule-s-l-block-scalar(n,c)"></div>
 <pre class="rule">
 [199] s-l+block-scalar(n,c) ::=
-  <a href="#rule-s-separate(n+1,c)">s-separate(n+1,c)</a>
-  ( <a href="#rule-c-ns-properties(n+1,c)">c-ns-properties(n+1,c)</a> <a href="#rule-s-separate(n+1,c)">s-separate(n+1,c)</a> )?
-  ( <a href="#rule-c-l+literal(n)">c-l+literal(n)</a> | <a href="#rule-c-l+folded(n)">c-l+folded(n)</a> )
+  <a href="#rule-s-separate(n,c)">s-separate(n+1,c)</a>
+  ( <a href="#rule-c-ns-properties(n,c)">c-ns-properties(n+1,c)</a> <a href="#rule-s-separate(n,c)">s-separate(n+1,c)</a> )?
+  ( <a href="#rule-c-l-literal(n)">c-l+literal(n)</a> | <a href="#rule-c-l-folded(n)">c-l+folded(n)</a> )
 </pre>
 
 <div id="example-block-scalar-nodes" class="example">
@@ -7869,10 +7869,10 @@ sequences</a></del> may be <a href="#indentation-spaces">indented</a> by one les
 course, if nested inside another <del><a href="#undefined">block sequence</a></del> (<del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">block-out</code></strong> context</a></del>
 vs. <del><a href="#undefined"><strong><code class="language-plaintext highlighter-rouge">block-in</code></strong> context</a></del>).</p>
 
-<div id="rule-s-l+block-collection(n,c)"></div>
+<div id="rule-s-l-block-collection(n,c)"></div>
 <pre class="rule">
 [200] s-l+block-collection(n,c) ::=
-  ( <a href="#rule-s-separate(n+1,c)">s-separate(n+1,c)</a> <a href="#rule-c-ns-properties(n+1,c)">c-ns-properties(n+1,c)</a> )?
+  ( <a href="#rule-s-separate(n,c)">s-separate(n+1,c)</a> <a href="#rule-c-ns-properties(n,c)">c-ns-properties(n+1,c)</a> )?
   <a href="#rule-s-l-comments">s-l-comments</a>
   ( l+block-sequence(seq-spaces(n,c))
   | l+block-mapping(n) )
@@ -8099,7 +8099,7 @@ document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">inden
 <div id="rule-l-bare-document"></div>
 <pre class="rule">
 [207] l-bare-document ::=
-  <a href="#rule-s-l+block-node(-1,block-in)">s-l+block-node(-1,block-in)</a>
+  <a href="#rule-s-l-block-node(n,c)">s-l+block-node(-1,block-in)</a>
   /* Excluding <a href="#rule-c-forbidden">c-forbidden</a> content */
 </pre>
 
