@@ -6731,7 +6731,7 @@ header</a></del>.</p>
 <div id="rule-l-keep-empty(n)"></div>
 <pre class="rule">
 [168] l-keep-empty(n) ::=
-  <a href="#rule-l-empty(n,block-in)">l-empty(n,block-in)</a>*
+  <a href="#rule-l-empty(n,c)">l-empty(n,block-in)</a>*
   <a href="#rule-l-trail-comments(n)">l-trail-comments(n)</a>?
 </pre>
 
@@ -6914,7 +6914,7 @@ In addition, there is no way to break a long literal line.</p>
 <div id="rule-l-nb-literal-text(n)"></div>
 <pre class="rule">
 [171] l-nb-literal-text(n) ::=
-  <a href="#rule-l-empty(n,block-in)">l-empty(n,block-in)</a>*
+  <a href="#rule-l-empty(n,c)">l-empty(n,block-in)</a>*
   <a href="#rule-s-indent(n)">s-indent(n)</a> <a href="#rule-nb-char">nb-char</a>+
 </pre>
 
@@ -7036,7 +7036,7 @@ separates two non-<del><a href="#undefined">space</a></del> characters.</p>
 <pre class="rule">
 [176] l-nb-folded-lines(n) ::=
   <a href="#rule-s-nb-folded-text(n)">s-nb-folded-text(n)</a>
-  ( <a href="#rule-b-l-folded(n,block-in)">b-l-folded(n,block-in)</a> <a href="#rule-s-nb-folded-text(n)">s-nb-folded-text(n)</a> )*
+  ( <a href="#rule-b-l-folded(n,c)">b-l-folded(n,block-in)</a> <a href="#rule-s-nb-folded-text(n)">s-nb-folded-text(n)</a> )*
 </pre>
 
 <div id="example-folded-lines" class="example">
@@ -7109,7 +7109,7 @@ different productions.)</p>
 <pre class="rule">
 [178] b-l-spaced(n) ::=
   <a href="#rule-b-as-line-feed">b-as-line-feed</a>
-  <a href="#rule-l-empty(n,block-in)">l-empty(n,block-in)</a>*
+  <a href="#rule-l-empty(n,c)">l-empty(n,block-in)</a>*
 </pre>
 
 <div id="rule-l-nb-spaced-lines(n)"></div>
@@ -7179,7 +7179,7 @@ also not <del><a href="#undefined">folded</a></del>.</p>
 <div id="rule-l-nb-same-lines(n)"></div>
 <pre class="rule">
 [180] l-nb-same-lines(n) ::=
-  <a href="#rule-l-empty(n,block-in)">l-empty(n,block-in)</a>*
+  <a href="#rule-l-empty(n,c)">l-empty(n,block-in)</a>*
   ( <a href="#rule-l-nb-folded-lines(n)">l-nb-folded-lines(n)</a> | <a href="#rule-l-nb-spaced-lines(n)">l-nb-spaced-lines(n)</a> )
 </pre>
 
@@ -7338,7 +7338,7 @@ followed by a non-space character (e.g. “<strong><code class="language-plainte
 <pre class="rule">
 [184] c-l-block-seq-entry(n) ::=
   "-" /* Not followed by an <a href="#rule-ns-char">ns-char</a> */
-  <a href="#rule-s-l+block-indented(n,block-in)">s-l+block-indented(n,block-in)</a>
+  <a href="#rule-s-l+block-indented(n,c)">s-l+block-indented(n,block-in)</a>
 </pre>
 
 <div id="example-block-sequence" class="example">
