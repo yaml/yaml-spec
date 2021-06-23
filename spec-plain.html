@@ -2592,7 +2592,7 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 <div id="rule-b-char"></div>
 <pre class="rule">
 [26] b-char ::=
-  b-line-feed | b-carriage-return
+  <a href="#rule-b-line-feed">b-line-feed</a> | <a href="#rule-b-carriage-return">b-carriage-return</a>
 </pre>
 
 <p>All other characters, including the form feed (<strong><code class="language-plaintext highlighter-rouge">#x0C</code></strong>), are considered to
@@ -2612,7 +2612,7 @@ treat these line breaks as non-break characters, with an appropriate warning.</p
 <div id="rule-nb-char"></div>
 <pre class="rule">
 [27] nb-char ::=
-  c-printable - b-char - c-byte-order-mark
+  <a href="#rule-c-printable">c-printable</a> - <a href="#rule-b-char">b-char</a> - <a href="#rule-c-byte-order-mark">c-byte-order-mark</a>
 </pre>
 
 <p>Line breaks are interpreted differently by different systems, and have several
@@ -2621,9 +2621,9 @@ widely used formats.</p>
 <div id="rule-b-break"></div>
 <pre class="rule">
 [28] b-break ::=
-    ( b-carriage-return b-line-feed ) /* DOS, Windows */
-  | b-carriage-return                 /* MacOS upto 9.x */
-  | b-line-feed                       /* UNIX, MacOS X */
+    ( <a href="#rule-b-carriage-return">b-carriage-return</a> <a href="#rule-b-line-feed">b-line-feed</a> ) /* DOS, Windows */
+  | <a href="#rule-b-carriage-return">b-carriage-return</a>                 /* MacOS upto 9.x */
+  | <a href="#rule-b-line-feed">b-line-feed</a>                       /* UNIX, MacOS X */
 </pre>
 
 <p>Line breaks inside <del><a href="#undefined">scalar content</a></del> must be <em>normalized</em> by the YAML <del><a href="#undefined">processor</a></del>.
@@ -2633,7 +2633,7 @@ to convey <del><a href="#undefined">content</a></del> information.</p>
 
 <div id="rule-b-as-line-feed"></div>
 <pre class="rule">
-[29] b-as-line-feed ::= b-break
+[29] b-as-line-feed ::= <a href="#rule-b-break">b-break</a>
 </pre>
 
 <p>Outside <del><a href="#undefined">scalar content</a></del>, YAML allows any line break to be used to terminate
@@ -2641,7 +2641,7 @@ lines.</p>
 
 <div id="rule-b-non-content"></div>
 <pre class="rule">
-[30] b-non-content ::= b-break
+[30] b-non-content ::= <a href="#rule-b-break">b-break</a>
 </pre>
 
 <p>On output, a YAML <del><a href="#undefined">processor</a></del> is free to emit line breaks using whatever
@@ -2704,7 +2704,7 @@ for clarity.</p>
 <div id="rule-s-white"></div>
 <pre class="rule">
 [33] s-white ::=
-  s-space | s-tab
+  <a href="#rule-s-space">s-space</a> | <a href="#rule-s-tab">s-tab</a>
 </pre>
 
 <p>The rest of the (<del><a href="#undefined">printable</a></del>) non-<del><a href="#undefined">break</a></del> characters are considered to be
@@ -2713,7 +2713,7 @@ non-space characters.</p>
 <div id="rule-ns-char"></div>
 <pre class="rule">
 [34] ns-char ::=
-  nb-char - s-white
+  <a href="#rule-nb-char">nb-char</a> - <a href="#rule-s-white">s-white</a>
 </pre>
 
 <p>In the examples, tab characters are displayed as the glyph “<strong><code class="language-plaintext highlighter-rouge">→</code></strong>”.
@@ -2786,7 +2786,7 @@ classes:</p>
 <div id="rule-ns-hex-digit"></div>
 <pre class="rule">
 [36] ns-hex-digit ::=
-    ns-dec-digit
+    <a href="#rule-ns-dec-digit">ns-dec-digit</a>
   | [#x41-#x46] /* A-F */ | [#x61-#x66] /* a-f */
 </pre>
 
@@ -2807,7 +2807,7 @@ classes:</p>
 <div id="rule-ns-word-char"></div>
 <pre class="rule">
 [38] ns-word-char ::=
-  ns-dec-digit | ns-ascii-letter | "-"
+  <a href="#rule-ns-dec-digit">ns-dec-digit</a> | <a href="#rule-ns-ascii-letter">ns-ascii-letter</a> | "-"
 </pre>
 
 <ul>
@@ -2829,7 +2829,7 @@ characters must be preserved and compared exactly as <del><a href="#undefined">p
 <div id="rule-ns-uri-char"></div>
 <pre class="rule">
 [39] ns-uri-char ::=
-    "%" ns-hex-digit ns-hex-digit | ns-word-char | "#"
+    "%" <a href="#rule-ns-hex-digit">ns-hex-digit</a> <a href="#rule-ns-hex-digit">ns-hex-digit</a> | <a href="#rule-ns-word-char">ns-word-char</a> | "#"
   | ";" | "/" | "?" | ":" | "@" | "&amp;" | "=" | "+" | "$" | ","
   | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")" | "[" | "]"
 </pre>
@@ -2845,7 +2845,7 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
 <div id="rule-ns-tag-char"></div>
 <pre class="rule">
 [40] ns-tag-char ::=
-  ns-uri-char - "!" - c-flow-indicator
+  <a href="#rule-ns-uri-char">ns-uri-char</a> - "!" - <a href="#rule-c-flow-indicator">c-flow-indicator</a>
 </pre>
 
 <div id="escaped-characters"></div>
@@ -2999,7 +2999,7 @@ space to become part of the <del><a href="#undefined">content</a></del>.</p>
 <pre class="rule">
 [59] ns-esc-8-bit ::=
   "x"
-  ( ns-hex-digit × 2 )
+  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> × 2 )
 </pre>
 
 <p>Escaped 16-bit Unicode character.</p>
@@ -3008,7 +3008,7 @@ space to become part of the <del><a href="#undefined">content</a></del>.</p>
 <pre class="rule">
 [60] ns-esc-16-bit ::=
   "u"
-  ( ns-hex-digit × 4 )
+  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> × 4 )
 </pre>
 
 <p>Escaped 32-bit Unicode character.</p>
@@ -3017,7 +3017,7 @@ space to become part of the <del><a href="#undefined">content</a></del>.</p>
 <pre class="rule">
 [61] ns-esc-32-bit ::=
   "U"
-  ( ns-hex-digit × 8 )
+  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> × 8 )
 </pre>
 
 <p>Any escaped character:</p>
@@ -3026,14 +3026,14 @@ space to become part of the <del><a href="#undefined">content</a></del>.</p>
 <pre class="rule">
 [62] c-ns-esc-char ::=
   "\"
-  ( ns-esc-null | ns-esc-bell | ns-esc-backspace
-  | ns-esc-horizontal-tab | ns-esc-line-feed
-  | ns-esc-vertical-tab | ns-esc-form-feed
-  | ns-esc-carriage-return | ns-esc-escape | ns-esc-space
-  | ns-esc-double-quote | ns-esc-slash | ns-esc-backslash
-  | ns-esc-next-line | ns-esc-non-breaking-space
-  | ns-esc-line-separator | ns-esc-paragraph-separator
-  | ns-esc-8-bit | ns-esc-16-bit | ns-esc-32-bit )
+  ( <a href="#rule-ns-esc-null">ns-esc-null</a> | <a href="#rule-ns-esc-bell">ns-esc-bell</a> | <a href="#rule-ns-esc-backspace">ns-esc-backspace</a>
+  | <a href="#rule-ns-esc-horizontal-tab">ns-esc-horizontal-tab</a> | <a href="#rule-ns-esc-line-feed">ns-esc-line-feed</a>
+  | <a href="#rule-ns-esc-vertical-tab">ns-esc-vertical-tab</a> | <a href="#rule-ns-esc-form-feed">ns-esc-form-feed</a>
+  | <a href="#rule-ns-esc-carriage-return">ns-esc-carriage-return</a> | <a href="#rule-ns-esc-escape">ns-esc-escape</a> | <a href="#rule-ns-esc-space">ns-esc-space</a>
+  | <a href="#rule-ns-esc-double-quote">ns-esc-double-quote</a> | <a href="#rule-ns-esc-slash">ns-esc-slash</a> | <a href="#rule-ns-esc-backslash">ns-esc-backslash</a>
+  | <a href="#rule-ns-esc-next-line">ns-esc-next-line</a> | <a href="#rule-ns-esc-non-breaking-space">ns-esc-non-breaking-space</a>
+  | <a href="#rule-ns-esc-line-separator">ns-esc-line-separator</a> | <a href="#rule-ns-esc-paragraph-separator">ns-esc-paragraph-separator</a>
+  | <a href="#rule-ns-esc-8-bit">ns-esc-8-bit</a> | <a href="#rule-ns-esc-16-bit">ns-esc-16-bit</a> | <a href="#rule-ns-esc-32-bit">ns-esc-32-bit</a> )
 </pre>
 
 <div id="example-escaped-characters" class="example">
@@ -3121,7 +3121,7 @@ convey <del><a href="#undefined">content</a></del> information.</p>
 <div id="rule-s-indent(n)"></div>
 <pre class="rule">
 [63] s-indent(n) ::=
-  s-space × n
+  <a href="#rule-s-space">s-space</a> × n
 </pre>
 
 <p>A <del><a href="#undefined">block style</a></del> construct is terminated when encountering a line which is less
@@ -3132,13 +3132,13 @@ to express this.</p>
 <div id="rule-s-indent(&lt;n)"></div>
 <pre class="rule">
 [64] s-indent(&lt;n) ::=
-  s-space × m /* Where m &lt; n */
+  <a href="#rule-s-space">s-space</a> × m /* Where m &lt; n */
 </pre>
 
 <div id="rule-s-indent(≤n)"></div>
 <pre class="rule">
 [65] s-indent(≤n) ::=
-  s-space × m /* Where m ≤ n */
+  <a href="#rule-s-space">s-space</a> × m /* Where m ≤ n */
 </pre>
 
 <p>Each <del><a href="#undefined">node</a></del> must be indented further than its parent <del><a href="#undefined">node</a></del>.
@@ -3261,7 +3261,7 @@ Note that such <del><a href="#undefined">white space</a></del> may safely includ
 <div id="rule-s-separate-in-line"></div>
 <pre class="rule">
 [66] s-separate-in-line ::=
-  s-white+ | /* Start of line */
+  <a href="#rule-s-white">s-white</a>+ | /* Start of line */
 </pre>
 
 <div id="example-separation-spaces" class="example">
@@ -3316,21 +3316,21 @@ which may contain <del><a href="#undefined">tab</a></del> characters.</p>
 <div id="rule-s-line-prefix(n,c)"></div>
 <pre class="rule">
 [67] s-line-prefix(n,c) ::=
-  c = block-out ⇒ s-block-line-prefix(n)
-  c = block-in  ⇒ s-block-line-prefix(n)
-  c = flow-out  ⇒ s-flow-line-prefix(n)
-  c = flow-in   ⇒ s-flow-line-prefix(n)
+  c = block-out ⇒ <a href="#rule-s-block-line-prefix(n)">s-block-line-prefix(n)</a>
+  c = block-in  ⇒ <a href="#rule-s-block-line-prefix(n)">s-block-line-prefix(n)</a>
+  c = flow-out  ⇒ <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
+  c = flow-in   ⇒ <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
 </pre>
 
 <div id="rule-s-block-line-prefix(n)"></div>
 <pre class="rule">
-[68] s-block-line-prefix(n) ::= s-indent(n)
+[68] s-block-line-prefix(n) ::= <a href="#rule-s-indent(n)">s-indent(n)</a>
 </pre>
 
 <div id="rule-s-flow-line-prefix(n)"></div>
 <pre class="rule">
 [69] s-flow-line-prefix(n) ::=
-  s-indent(n) s-separate-in-line?
+  <a href="#rule-s-indent(n)">s-indent(n)</a> <a href="#rule-s-separate-in-line">s-separate-in-line</a>?
 </pre>
 
 <div id="example-line-prefixes" class="example">
@@ -3388,8 +3388,8 @@ break</a></del>.</p>
 <div id="rule-l-empty(n,c)"></div>
 <pre class="rule">
 [70] l-empty(n,c) ::=
-  ( s-line-prefix(n,c) | s-indent(&lt;n) )
-  b-as-line-feed
+  ( <a href="#rule-s-line-prefix(n,c)">s-line-prefix(n,c)</a> | <a href="#rule-s-indent(&lt;n)">s-indent(&lt;n)</a> )
+  <a href="#rule-b-as-line-feed">b-as-line-feed</a>
 </pre>
 
 <p>The semantics of empty lines depend on the <del><a href="#undefined">scalar style</a></del> they appear in.
@@ -3448,7 +3448,7 @@ If a <del><a href="#undefined">line break</a></del> is followed by an <del><a hr
 <div id="rule-b-l-trimmed(n,c)"></div>
 <pre class="rule">
 [71] b-l-trimmed(n,c) ::=
-  b-non-content l-empty(n,c)+
+  <a href="#rule-b-non-content">b-non-content</a> <a href="#rule-l-empty(n,c)">l-empty(n,c)</a>+
 </pre>
 
 <p>Otherwise (the following line is not <del><a href="#undefined">empty</a></del>), the <del><a href="#undefined">line break</a></del> is converted to
@@ -3456,7 +3456,7 @@ a single <del><a href="#undefined">space</a></del> (<strong><code class="languag
 
 <div id="rule-b-as-space"></div>
 <pre class="rule">
-[72] b-as-space ::= b-break
+[72] b-as-space ::= <a href="#rule-b-break">b-break</a>
 </pre>
 
 <p>A folded non-<del><a href="#undefined">empty line</a></del> may end with either of the above <del><a href="#undefined">line breaks</a></del>.</p>
@@ -3464,7 +3464,7 @@ a single <del><a href="#undefined">space</a></del> (<strong><code class="languag
 <div id="rule-b-l-folded(n,c)"></div>
 <pre class="rule">
 [73] b-l-folded(n,c) ::=
-  b-l-trimmed(n,c) | b-as-space
+  <a href="#rule-b-l-trimmed(n,c)">b-l-trimmed(n,c)</a> | <a href="#rule-b-as-space">b-as-space</a>
 </pre>
 
 <div id="example-line-folding" class="example">
@@ -3581,8 +3581,8 @@ information.</p>
 <div id="rule-s-flow-folded(n)"></div>
 <pre class="rule">
 [74] s-flow-folded(n) ::=
-  s-separate-in-line? b-l-folded(n,flow-in)
-  s-flow-line-prefix(n)
+  <a href="#rule-s-separate-in-line">s-separate-in-line</a>? <a href="#rule-b-l-folded(n,flow-in)">b-l-folded(n,flow-in)</a>
+  <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
 </pre>
 
 <div id="example-flow-folding" class="example">
@@ -3638,20 +3638,20 @@ However, as this confuses many tools, YAML <del><a href="#undefined">processors<
 <div id="rule-c-nb-comment-text"></div>
 <pre class="rule">
 [75] c-nb-comment-text ::=
-  "#" nb-char*
+  "#" <a href="#rule-nb-char">nb-char</a>*
 </pre>
 
 <div id="rule-b-comment"></div>
 <pre class="rule">
 [76] b-comment ::=
-  b-non-content | /* End of file */
+  <a href="#rule-b-non-content">b-non-content</a> | /* End of file */
 </pre>
 
 <div id="rule-s-b-comment"></div>
 <pre class="rule">
 [77] s-b-comment ::=
-  ( s-separate-in-line c-nb-comment-text? )?
-  b-comment
+  ( <a href="#rule-s-separate-in-line">s-separate-in-line</a> <a href="#rule-c-nb-comment-text">c-nb-comment-text</a>? )?
+  <a href="#rule-b-comment">b-comment</a>
 </pre>
 
 <div id="example-separated-comment" class="example">
@@ -3699,7 +3699,7 @@ characters is taken to be a comment line.</p>
 <div id="rule-l-comment"></div>
 <pre class="rule">
 [78] l-comment ::=
-  s-separate-in-line c-nb-comment-text? b-comment
+  <a href="#rule-s-separate-in-line">s-separate-in-line</a> <a href="#rule-c-nb-comment-text">c-nb-comment-text</a>? <a href="#rule-b-comment">b-comment</a>
 </pre>
 
 <div id="example-comment-lines" class="example">
@@ -3742,8 +3742,8 @@ The only exception is a comment ending a <del><a href="#undefined">block scalar 
 <div id="rule-s-l-comments"></div>
 <pre class="rule">
 [79] s-l-comments ::=
-  ( s-b-comment | /* Start of line */ )
-  l-comment*
+  ( <a href="#rule-s-b-comment">s-b-comment</a> | /* Start of line */ )
+  <a href="#rule-l-comment">l-comment</a>*
 </pre>
 
 <div id="example-multi-line-comments" class="example">
@@ -3799,19 +3799,19 @@ empty) <del><a href="#undefined">comments</a></del>.</p>
 <div id="rule-s-separate(n,c)"></div>
 <pre class="rule">
 [80] s-separate(n,c) ::=
-  c = block-out ⇒ s-separate-lines(n)
-  c = block-in  ⇒ s-separate-lines(n)
-  c = flow-out  ⇒ s-separate-lines(n)
-  c = flow-in   ⇒ s-separate-lines(n)
-  c = block-key ⇒ s-separate-in-line
-  c = flow-key  ⇒ s-separate-in-line
+  c = block-out ⇒ <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
+  c = block-in  ⇒ <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
+  c = flow-out  ⇒ <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
+  c = flow-in   ⇒ <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
+  c = block-key ⇒ <a href="#rule-s-separate-in-line">s-separate-in-line</a>
+  c = flow-key  ⇒ <a href="#rule-s-separate-in-line">s-separate-in-line</a>
 </pre>
 
 <div id="rule-s-separate-lines(n)"></div>
 <pre class="rule">
 [81] s-separate-lines(n) ::=
-    ( s-l-comments s-flow-line-prefix(n) )
-  | s-separate-in-line
+    ( <a href="#rule-s-l-comments">s-l-comments</a> <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a> )
+  | <a href="#rule-s-separate-in-line">s-separate-in-line</a>
 </pre>
 
 <div id="example-separation-spaces" class="example">
@@ -3881,10 +3881,10 @@ information.</p>
 <pre class="rule">
 [82] l-directive ::=
   "%"
-  ( ns-yaml-directive
-  | ns-tag-directive
-  | ns-reserved-directive )
-  s-l-comments
+  ( <a href="#rule-ns-yaml-directive">ns-yaml-directive</a>
+  | <a href="#rule-ns-tag-directive">ns-tag-directive</a>
+  | <a href="#rule-ns-reserved-directive">ns-reserved-directive</a> )
+  <a href="#rule-s-l-comments">s-l-comments</a>
 </pre>
 
 <p>Each directive is specified on a separate non-<del><a href="#undefined">indented</a></del> line starting with the
@@ -3896,18 +3896,18 @@ warning.</p>
 <div id="rule-ns-reserved-directive"></div>
 <pre class="rule">
 [83] ns-reserved-directive ::=
-  ns-directive-name
-  ( s-separate-in-line ns-directive-parameter )*
+  <a href="#rule-ns-directive-name">ns-directive-name</a>
+  ( <a href="#rule-s-separate-in-line">s-separate-in-line</a> <a href="#rule-ns-directive-parameter">ns-directive-parameter</a> )*
 </pre>
 
 <div id="rule-ns-directive-name"></div>
 <pre class="rule">
-[84] ns-directive-name ::= ns-char+
+[84] ns-directive-name ::= <a href="#rule-ns-char">ns-char</a>+
 </pre>
 
 <div id="rule-ns-directive-parameter"></div>
 <pre class="rule">
-[85] ns-directive-parameter ::= ns-char+
+[85] ns-directive-parameter ::= <a href="#rule-ns-char">ns-char</a>+
 </pre>
 
 <div id="example-reserved-directives" class="example">
@@ -3974,13 +3974,13 @@ of <del><a href="#undefined">non-ASCII line breaks</a></del>, as described <del>
 <pre class="rule">
 [86] ns-yaml-directive ::=
   "Y" "A" "M" "L"
-  s-separate-in-line ns-yaml-version
+  <a href="#rule-s-separate-in-line">s-separate-in-line</a> <a href="#rule-ns-yaml-version">ns-yaml-version</a>
 </pre>
 
 <div id="rule-ns-yaml-version"></div>
 <pre class="rule">
 [87] ns-yaml-version ::=
-  ns-dec-digit+ "." ns-dec-digit+
+  <a href="#rule-ns-dec-digit">ns-dec-digit</a>+ "." <a href="#rule-ns-dec-digit">ns-dec-digit</a>+
 </pre>
 
 <div id="example-yaml-directive" class="example">
@@ -4058,8 +4058,8 @@ This allows for compact and readable <del><a href="#undefined">tag</a></del> not
 <pre class="rule">
 [88] ns-tag-directive ::=
   "T" "A" "G"
-  s-separate-in-line c-tag-handle
-  s-separate-in-line ns-tag-prefix
+  <a href="#rule-s-separate-in-line">s-separate-in-line</a> <a href="#rule-c-tag-handle">c-tag-handle</a>
+  <a href="#rule-s-separate-in-line">s-separate-in-line</a> <a href="#rule-ns-tag-prefix">ns-tag-prefix</a>
 </pre>
 
 <div id="example-tag-directive" class="example">
@@ -4135,9 +4135,9 @@ There are three tag handle variants:</p>
 <div id="rule-c-tag-handle"></div>
 <pre class="rule">
 [89] c-tag-handle ::=
-    c-named-tag-handle
-  | c-secondary-tag-handle
-  | c-primary-tag-handle
+    <a href="#rule-c-named-tag-handle">c-named-tag-handle</a>
+  | <a href="#rule-c-secondary-tag-handle">c-secondary-tag-handle</a>
+  | <a href="#rule-c-primary-tag-handle">c-primary-tag-handle</a>
 </pre>
 
 <h5 id="primary-handle">Primary Handle</h5>
@@ -4269,7 +4269,7 @@ In particular, the YAML <del><a href="#undefined">processor</a></del> need not p
 <div id="rule-c-named-tag-handle"></div>
 <pre class="rule">
 [92] c-named-tag-handle ::=
-  "!" ns-word-char+ "!"
+  "!" <a href="#rule-ns-word-char">ns-word-char</a>+ "!"
 </pre>
 
 <div id="example-tag-handles" class="example">
@@ -4313,7 +4313,7 @@ In particular, the YAML <del><a href="#undefined">processor</a></del> need not p
 <div id="rule-ns-tag-prefix"></div>
 <pre class="rule">
 [93] ns-tag-prefix ::=
-  c-ns-local-tag-prefix | ns-global-tag-prefix
+  <a href="#rule-c-ns-local-tag-prefix">c-ns-local-tag-prefix</a> | <a href="#rule-ns-global-tag-prefix">ns-global-tag-prefix</a>
 </pre>
 
 <h5 id="local-tag-prefix">Local Tag Prefix</h5>
@@ -4330,7 +4330,7 @@ semantics to the same <del><a href="#undefined">local tag</a></del>.</p>
 <div id="rule-c-ns-local-tag-prefix"></div>
 <pre class="rule">
 [94] c-ns-local-tag-prefix ::=
-  "!" ns-uri-char*
+  "!" <a href="#rule-ns-uri-char">ns-uri-char</a>*
 </pre>
 
 <div id="example-local-tag-prefix" class="example">
@@ -4388,7 +4388,7 @@ semantics to the same <del><a href="#undefined">global tag</a></del>.</p>
 <div id="rule-ns-global-tag-prefix"></div>
 <pre class="rule">
 [95] ns-global-tag-prefix ::=
-  ns-tag-char ns-uri-char*
+  <a href="#rule-ns-tag-char">ns-tag-char</a> <a href="#rule-ns-uri-char">ns-uri-char</a>*
 </pre>
 
 <div id="example-global-tag-prefix" class="example">
@@ -4435,10 +4435,10 @@ Either or both may be omitted.</p>
 <div id="rule-c-ns-properties(n,c)"></div>
 <pre class="rule">
 [96] c-ns-properties(n,c) ::=
-    ( c-ns-tag-property
-      ( s-separate(n,c) c-ns-anchor-property )? )
-  | ( c-ns-anchor-property
-      ( s-separate(n,c) c-ns-tag-property )? )
+    ( <a href="#rule-c-ns-tag-property">c-ns-tag-property</a>
+      ( <a href="#rule-s-separate(n,c)">s-separate(n,c)</a> <a href="#rule-c-ns-anchor-property">c-ns-anchor-property</a> )? )
+  | ( <a href="#rule-c-ns-anchor-property">c-ns-anchor-property</a>
+      ( <a href="#rule-s-separate(n,c)">s-separate(n,c)</a> <a href="#rule-c-ns-tag-property">c-ns-tag-property</a> )? )
 </pre>
 
 <div id="example-node-properties" class="example">
@@ -4491,9 +4491,9 @@ A tag is denoted by the <em>“<strong><code class="language-plaintext highlight
 <div id="rule-c-ns-tag-property"></div>
 <pre class="rule">
 [97] c-ns-tag-property ::=
-    c-verbatim-tag
-  | c-ns-shorthand-tag
-  | c-non-specific-tag
+    <a href="#rule-c-verbatim-tag">c-verbatim-tag</a>
+  | <a href="#rule-c-ns-shorthand-tag">c-ns-shorthand-tag</a>
+  | <a href="#rule-c-non-specific-tag">c-non-specific-tag</a>
 </pre>
 
 <h5 id="verbatim-tags">Verbatim Tags</h5>
@@ -4511,7 +4511,7 @@ valid URI (a <del><a href="#undefined">global tag</a></del>).</p>
 <div id="rule-c-verbatim-tag"></div>
 <pre class="rule">
 [98] c-verbatim-tag ::=
-  "!" "&lt;" ns-uri-char+ "&gt;"
+  "!" "&lt;" <a href="#rule-ns-uri-char">ns-uri-char</a>+ "&gt;"
 </pre>
 
 <div id="example-verbatim-tags" class="example">
@@ -4607,7 +4607,7 @@ This behavior is consistent with the URI character escaping rules
 <div id="rule-c-ns-shorthand-tag"></div>
 <pre class="rule">
 [99] c-ns-shorthand-tag ::=
-  c-tag-handle ns-tag-char+
+  <a href="#rule-c-tag-handle">c-tag-handle</a> <a href="#rule-ns-tag-char">ns-tag-char</a>+
 </pre>
 
 <div id="example-tag-shorthands" class="example">
@@ -4751,7 +4751,7 @@ it is valid for all <del><a href="#undefined">nodes</a></del> to be anchored.</p
 <div id="rule-c-ns-anchor-property"></div>
 <pre class="rule">
 [101] c-ns-anchor-property ::=
-  "&amp;" ns-anchor-name
+  "&amp;" <a href="#rule-ns-anchor-name">ns-anchor-name</a>
 </pre>
 
 <p>Note that as a <del><a href="#undefined">serialization detail</a></del>, the anchor name is preserved in the
@@ -4768,12 +4768,12 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
 <div id="rule-ns-anchor-char"></div>
 <pre class="rule">
 [102] ns-anchor-char ::=
-  ns-char - c-flow-indicator
+  <a href="#rule-ns-char">ns-char</a> - <a href="#rule-c-flow-indicator">c-flow-indicator</a>
 </pre>
 
 <div id="rule-ns-anchor-name"></div>
 <pre class="rule">
-[103] ns-anchor-name ::= ns-anchor-char+
+[103] ns-anchor-name ::= <a href="#rule-ns-anchor-char">ns-anchor-char</a>+
 </pre>
 
 <div id="example-node-anchors" class="example">
@@ -4842,7 +4842,7 @@ these were already specified at the first occurrence of the <del><a href="#undef
 <div id="rule-c-ns-alias-node"></div>
 <pre class="rule">
 [104] c-ns-alias-node ::=
-  "*" ns-anchor-name
+  "*" <a href="#rule-ns-anchor-name">ns-anchor-name</a>
 </pre>
 
 <div id="example-alias-nodes" class="example">
@@ -4951,7 +4951,7 @@ for their existence.</p>
 
 <div id="rule-e-node"></div>
 <pre class="rule">
-[106] e-node ::= e-scalar
+[106] e-node ::= <a href="#rule-e-scalar">e-scalar</a>
 </pre>
 
 <div id="example-completely-empty-flow-nodes" class="example">
@@ -5014,13 +5014,13 @@ characters.</p>
 <div id="rule-nb-double-char"></div>
 <pre class="rule">
 [107] nb-double-char ::=
-  c-ns-esc-char | ( nb-json - "\" - """ )
+  <a href="#rule-c-ns-esc-char">c-ns-esc-char</a> | ( <a href="#rule-nb-json">nb-json</a> - "\" - """ )
 </pre>
 
 <div id="rule-ns-double-char"></div>
 <pre class="rule">
 [108] ns-double-char ::=
-  nb-double-char - s-white
+  <a href="#rule-nb-double-char">nb-double-char</a> - <a href="#rule-s-white">s-white</a>
 </pre>
 
 <p>Double-quoted scalars are restricted to a single line when contained inside an
@@ -5029,21 +5029,21 @@ characters.</p>
 <div id="rule-c-double-quoted(n,c)"></div>
 <pre class="rule">
 [109] c-double-quoted(n,c) ::=
-  """ nb-double-text(n,c) """
+  """ <a href="#rule-nb-double-text(n,c)">nb-double-text(n,c)</a> """
 </pre>
 
 <div id="rule-nb-double-text(n,c)"></div>
 <pre class="rule">
 [110] nb-double-text(n,c) ::=
-  c = flow-out  ⇒ nb-double-multi-line(n)
-  c = flow-in   ⇒ nb-double-multi-line(n)
-  c = block-key ⇒ nb-double-one-line
-  c = flow-key  ⇒ nb-double-one-line
+  c = flow-out  ⇒ <a href="#rule-nb-double-multi-line(n)">nb-double-multi-line(n)</a>
+  c = flow-in   ⇒ <a href="#rule-nb-double-multi-line(n)">nb-double-multi-line(n)</a>
+  c = block-key ⇒ <a href="#rule-nb-double-one-line">nb-double-one-line</a>
+  c = flow-key  ⇒ <a href="#rule-nb-double-one-line">nb-double-one-line</a>
 </pre>
 
 <div id="rule-nb-double-one-line"></div>
 <pre class="rule">
-[111] nb-double-one-line ::= nb-double-char*
+[111] nb-double-one-line ::= <a href="#rule-nb-double-char">nb-double-char</a>*
 </pre>
 
 <div id="example-double-quoted-implicit-keys" class="example">
@@ -5099,14 +5099,14 @@ double-quoted lines to be broken at arbitrary positions.</p>
 <div id="rule-s-double-escaped(n)"></div>
 <pre class="rule">
 [112] s-double-escaped(n) ::=
-  s-white* "\" b-non-content
-  l-empty(n,flow-in)* s-flow-line-prefix(n)
+  <a href="#rule-s-white">s-white</a>* "\" <a href="#rule-b-non-content">b-non-content</a>
+  <a href="#rule-l-empty(n,flow-in)">l-empty(n,flow-in)</a>* <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
 </pre>
 
 <div id="rule-s-double-break(n)"></div>
 <pre class="rule">
 [113] s-double-break(n) ::=
-  s-double-escaped(n) | s-flow-folded(n)
+  <a href="#rule-s-double-escaped(n)">s-double-escaped(n)</a> | <a href="#rule-s-flow-folded(n)">s-flow-folded(n)</a>
 </pre>
 
 <div id="example-double-quoted-line-breaks" class="example">
@@ -5155,22 +5155,22 @@ Empty lines, if any, are consumed as part of the <del><a href="#undefined">line 
 <div id="rule-nb-ns-double-in-line"></div>
 <pre class="rule">
 [114] nb-ns-double-in-line ::=
-  ( s-white* ns-double-char )*
+  ( <a href="#rule-s-white">s-white</a>* <a href="#rule-ns-double-char">ns-double-char</a> )*
 </pre>
 
 <div id="rule-s-double-next-line(n)"></div>
 <pre class="rule">
 [115] s-double-next-line(n) ::=
-  s-double-break(n)
-  ( ns-double-char nb-ns-double-in-line
-    ( s-double-next-line(n) | s-white* ) )?
+  <a href="#rule-s-double-break(n)">s-double-break(n)</a>
+  ( <a href="#rule-ns-double-char">ns-double-char</a> <a href="#rule-nb-ns-double-in-line">nb-ns-double-in-line</a>
+    ( <a href="#rule-s-double-next-line(n)">s-double-next-line(n)</a> | <a href="#rule-s-white">s-white</a>* ) )?
 </pre>
 
 <div id="rule-nb-double-multi-line(n)"></div>
 <pre class="rule">
 [116] nb-double-multi-line(n) ::=
-  nb-ns-double-in-line
-  ( s-double-next-line(n) | s-white* )
+  <a href="#rule-nb-ns-double-in-line">nb-ns-double-in-line</a>
+  ( <a href="#rule-s-double-next-line(n)">s-double-next-line(n)</a> | <a href="#rule-s-white">s-white</a>* )
 </pre>
 
 <div id="example-double-quoted-lines" class="example">
@@ -5230,13 +5230,13 @@ In addition, it is only possible to break a long single-quoted line where a
 <div id="rule-nb-single-char"></div>
 <pre class="rule">
 [118] nb-single-char ::=
-  c-quoted-quote | ( nb-json - "'" )
+  <a href="#rule-c-quoted-quote">c-quoted-quote</a> | ( <a href="#rule-nb-json">nb-json</a> - "'" )
 </pre>
 
 <div id="rule-ns-single-char"></div>
 <pre class="rule">
 [119] ns-single-char ::=
-  nb-single-char - s-white
+  <a href="#rule-nb-single-char">nb-single-char</a> - <a href="#rule-s-white">s-white</a>
 </pre>
 
 <div id="example-single-quoted-characters" class="example">
@@ -5276,21 +5276,21 @@ In addition, it is only possible to break a long single-quoted line where a
 <div id="rule-c-single-quoted(n,c)"></div>
 <pre class="rule">
 [120] c-single-quoted(n,c) ::=
-  "'" nb-single-text(n,c) "'"
+  "'" <a href="#rule-nb-single-text(n,c)">nb-single-text(n,c)</a> "'"
 </pre>
 
 <div id="rule-nb-single-text(n,c)"></div>
 <pre class="rule">
 [121] nb-single-text(n,c) ::=
-  c = flow-out  ⇒ nb-single-multi-line(n)
-  c = flow-in   ⇒ nb-single-multi-line(n)
-  c = block-key ⇒ nb-single-one-line
-  c = flow-key  ⇒ nb-single-one-line
+  c = flow-out  ⇒ <a href="#rule-nb-single-multi-line(n)">nb-single-multi-line(n)</a>
+  c = flow-in   ⇒ <a href="#rule-nb-single-multi-line(n)">nb-single-multi-line(n)</a>
+  c = block-key ⇒ <a href="#rule-nb-single-one-line">nb-single-one-line</a>
+  c = flow-key  ⇒ <a href="#rule-nb-single-one-line">nb-single-one-line</a>
 </pre>
 
 <div id="rule-nb-single-one-line"></div>
 <pre class="rule">
-[122] nb-single-one-line ::= nb-single-char*
+[122] nb-single-one-line ::= <a href="#rule-nb-single-char">nb-single-char</a>*
 </pre>
 
 <div id="example-single-quoted-implicit-keys" class="example">
@@ -5343,22 +5343,22 @@ Empty lines, if any, are consumed as part of the <del><a href="#undefined">line 
 <div id="rule-nb-ns-single-in-line"></div>
 <pre class="rule">
 [123] nb-ns-single-in-line ::=
-  ( s-white* ns-single-char )*
+  ( <a href="#rule-s-white">s-white</a>* <a href="#rule-ns-single-char">ns-single-char</a> )*
 </pre>
 
 <div id="rule-s-single-next-line(n)"></div>
 <pre class="rule">
 [124] s-single-next-line(n) ::=
-  s-flow-folded(n)
-  ( ns-single-char nb-ns-single-in-line
-    ( s-single-next-line(n) | s-white* ) )?
+  <a href="#rule-s-flow-folded(n)">s-flow-folded(n)</a>
+  ( <a href="#rule-ns-single-char">ns-single-char</a> <a href="#rule-nb-ns-single-in-line">nb-ns-single-in-line</a>
+    ( <a href="#rule-s-single-next-line(n)">s-single-next-line(n)</a> | <a href="#rule-s-white">s-white</a>* ) )?
 </pre>
 
 <div id="rule-nb-single-multi-line(n)"></div>
 <pre class="rule">
 [125] nb-single-multi-line(n) ::=
-  nb-ns-single-in-line
-  ( s-single-next-line(n) | s-white* )
+  <a href="#rule-nb-ns-single-in-line">nb-ns-single-in-line</a>
+  ( <a href="#rule-s-single-next-line(n)">s-single-next-line(n)</a> | <a href="#rule-s-white">s-white</a>* )
 </pre>
 
 <div id="example-single-quoted-lines" class="example">
@@ -5419,9 +5419,9 @@ causes no ambiguity.</p>
 <div id="rule-ns-plain-first(c)"></div>
 <pre class="rule">
 [126] ns-plain-first(c) ::=
-    ( ns-char - c-indicator )
+    ( <a href="#rule-ns-char">ns-char</a> - <a href="#rule-c-indicator">c-indicator</a> )
   | ( ( "?" | ":" | "-" )
-      /* Followed by an ns-plain-safe(c)) */ )
+      /* Followed by an <a href="#rule-ns-plain-safe(c))">ns-plain-safe(c))</a> */ )
 </pre>
 
 <p>Plain scalars must never contain the <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “</a></del> and <del><a href="#undefined">” <strong><code class="language-plaintext highlighter-rouge">#</code></strong>”</a></del> character
@@ -5436,29 +5436,29 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
 <div id="rule-ns-plain-safe(c)"></div>
 <pre class="rule">
 [127] ns-plain-safe(c) ::=
-  c = flow-out  ⇒ ns-plain-safe-out
-  c = flow-in   ⇒ ns-plain-safe-in
-  c = block-key ⇒ ns-plain-safe-out
-  c = flow-key  ⇒ ns-plain-safe-in
+  c = flow-out  ⇒ <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
+  c = flow-in   ⇒ <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
+  c = block-key ⇒ <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
+  c = flow-key  ⇒ <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
 </pre>
 
 <div id="rule-ns-plain-safe-out"></div>
 <pre class="rule">
-[128] ns-plain-safe-out ::= ns-char
+[128] ns-plain-safe-out ::= <a href="#rule-ns-char">ns-char</a>
 </pre>
 
 <div id="rule-ns-plain-safe-in"></div>
 <pre class="rule">
 [129] ns-plain-safe-in ::=
-  ns-char - c-flow-indicator
+  <a href="#rule-ns-char">ns-char</a> - <a href="#rule-c-flow-indicator">c-flow-indicator</a>
 </pre>
 
 <div id="rule-ns-plain-char(c)"></div>
 <pre class="rule">
 [130] ns-plain-char(c) ::=
-    ( ns-plain-safe(c) - ":" - "#" )
-  | ( /* An ns-char preceding */ "#" )
-  | ( ":" /* Followed by an ns-plain-safe(c) */ )
+    ( <a href="#rule-ns-plain-safe(c)">ns-plain-safe(c)</a> - ":" - "#" )
+  | ( /* An <a href="#rule-ns-char">ns-char</a> preceding */ "#" )
+  | ( ":" /* Followed by an <a href="#rule-ns-plain-safe(c)">ns-plain-safe(c)</a> */ )
 </pre>
 
 <div id="example-plain-characters" class="example">
@@ -5523,22 +5523,22 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
 <div id="rule-ns-plain(n,c)"></div>
 <pre class="rule">
 [131] ns-plain(n,c) ::=
-  c = flow-out  ⇒ ns-plain-multi-line(n,c)
-  c = flow-in   ⇒ ns-plain-multi-line(n,c)
-  c = block-key ⇒ ns-plain-one-line(c)
-  c = flow-key  ⇒ ns-plain-one-line(c)
+  c = flow-out  ⇒ <a href="#rule-ns-plain-multi-line(n,c)">ns-plain-multi-line(n,c)</a>
+  c = flow-in   ⇒ <a href="#rule-ns-plain-multi-line(n,c)">ns-plain-multi-line(n,c)</a>
+  c = block-key ⇒ <a href="#rule-ns-plain-one-line(c)">ns-plain-one-line(c)</a>
+  c = flow-key  ⇒ <a href="#rule-ns-plain-one-line(c)">ns-plain-one-line(c)</a>
 </pre>
 
 <div id="rule-nb-ns-plain-in-line(c)"></div>
 <pre class="rule">
 [132] nb-ns-plain-in-line(c) ::=
-  ( s-white* ns-plain-char(c) )*
+  ( <a href="#rule-s-white">s-white</a>* <a href="#rule-ns-plain-char(c)">ns-plain-char(c)</a> )*
 </pre>
 
 <div id="rule-ns-plain-one-line(c)"></div>
 <pre class="rule">
 [133] ns-plain-one-line(c) ::=
-  ns-plain-first(c) nb-ns-plain-in-line(c)
+  <a href="#rule-ns-plain-first(c)">ns-plain-first(c)</a> <a href="#rule-nb-ns-plain-in-line(c)">nb-ns-plain-in-line(c)</a>
 </pre>
 
 <div id="example-plain-implicit-keys" class="example">
@@ -5590,15 +5590,15 @@ Empty lines, if any, are consumed as part of the <del><a href="#undefined">line 
 <div id="rule-s-ns-plain-next-line(n,c)"></div>
 <pre class="rule">
 [134] s-ns-plain-next-line(n,c) ::=
-  s-flow-folded(n)
-  ns-plain-char(c) nb-ns-plain-in-line(c)
+  <a href="#rule-s-flow-folded(n)">s-flow-folded(n)</a>
+  <a href="#rule-ns-plain-char(c)">ns-plain-char(c)</a> <a href="#rule-nb-ns-plain-in-line(c)">nb-ns-plain-in-line(c)</a>
 </pre>
 
 <div id="rule-ns-plain-multi-line(n,c)"></div>
 <pre class="rule">
 [135] ns-plain-multi-line(n,c) ::=
-  ns-plain-one-line(c)
-  s-ns-plain-next-line(n,c)*
+  <a href="#rule-ns-plain-one-line(c)">ns-plain-one-line(c)</a>
+  <a href="#rule-s-ns-plain-next-line(n,c)">s-ns-plain-next-line(n,c)</a>*
 </pre>
 
 <div id="example-plain-lines" class="example">
@@ -5668,8 +5668,8 @@ characters.</p>
 <div id="rule-c-flow-sequence(n,c)"></div>
 <pre class="rule">
 [137] c-flow-sequence(n,c) ::=
-  "[" s-separate(n,c)?
-  ns-s-flow-seq-entries(n,in-flow(c))? "]"
+  "[" <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+  <a href="#rule-ns-s-flow-seq-entries(n,in-flow(c))">ns-s-flow-seq-entries(n,in-flow(c))</a>? "]"
 </pre>
 
 <p>Sequence entries are separated by a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”</a></del> character.</p>
@@ -5677,9 +5677,9 @@ characters.</p>
 <div id="rule-ns-s-flow-seq-entries(n,c)"></div>
 <pre class="rule">
 [138] ns-s-flow-seq-entries(n,c) ::=
-  ns-flow-seq-entry(n,c) s-separate(n,c)?
-  ( "," s-separate(n,c)?
-    ns-s-flow-seq-entries(n,c)? )?
+  <a href="#rule-ns-flow-seq-entry(n,c)">ns-flow-seq-entry(n,c)</a> <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+  ( "," <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+    <a href="#rule-ns-s-flow-seq-entries(n,c)">ns-s-flow-seq-entries(n,c)</a>? )?
 </pre>
 
 <div id="example-flow-sequence" class="example">
@@ -5731,7 +5731,7 @@ sequence entry is a <del><a href="#undefined">mapping</a></del> with a <del><a h
 <div id="rule-ns-flow-seq-entry(n,c)"></div>
 <pre class="rule">
 [139] ns-flow-seq-entry(n,c) ::=
-  ns-flow-pair(n,c) | ns-flow-node(n,c)
+  <a href="#rule-ns-flow-pair(n,c)">ns-flow-pair(n,c)</a> | <a href="#rule-ns-flow-node(n,c)">ns-flow-node(n,c)</a>
 </pre>
 
 <div id="example-flow-sequence-entries" class="example">
@@ -5793,8 +5793,8 @@ characters.</p>
 <div id="rule-c-flow-mapping(n,c)"></div>
 <pre class="rule">
 [140] c-flow-mapping(n,c) ::=
-  "{" s-separate(n,c)?
-  ns-s-flow-map-entries(n,in-flow(c))? "}"
+  "{" <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+  <a href="#rule-ns-s-flow-map-entries(n,in-flow(c))">ns-s-flow-map-entries(n,in-flow(c))</a>? "}"
 </pre>
 
 <p>Mapping entries are separated by a <del><a href="#undefined">“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”</a></del> character.</p>
@@ -5802,9 +5802,9 @@ characters.</p>
 <div id="rule-ns-s-flow-map-entries(n,c)"></div>
 <pre class="rule">
 [141] ns-s-flow-map-entries(n,c) ::=
-  ns-flow-map-entry(n,c) s-separate(n,c)?
-  ( "," s-separate(n,c)?
-    ns-s-flow-map-entries(n,c)? )?
+  <a href="#rule-ns-flow-map-entry(n,c)">ns-flow-map-entry(n,c)</a> <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+  ( "," <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+    <a href="#rule-ns-s-flow-map-entries(n,c)">ns-s-flow-map-entries(n,c)</a>? )?
 </pre>
 
 <div id="example-flow-mappings" class="example">
@@ -5855,17 +5855,17 @@ entry may be <del><a href="#undefined">completely empty</a></del>.</p>
 <div id="rule-ns-flow-map-entry(n,c)"></div>
 <pre class="rule">
 [142] ns-flow-map-entry(n,c) ::=
-    ( "?" s-separate(n,c)
-      ns-flow-map-explicit-entry(n,c) )
-  | ns-flow-map-implicit-entry(n,c)
+    ( "?" <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>
+      <a href="#rule-ns-flow-map-explicit-entry(n,c)">ns-flow-map-explicit-entry(n,c)</a> )
+  | <a href="#rule-ns-flow-map-implicit-entry(n,c)">ns-flow-map-implicit-entry(n,c)</a>
 </pre>
 
 <div id="rule-ns-flow-map-explicit-entry(n,c)"></div>
 <pre class="rule">
 [143] ns-flow-map-explicit-entry(n,c) ::=
-    ns-flow-map-implicit-entry(n,c)
-  | ( e-node /* Key */
-      e-node /* Value */ )
+    <a href="#rule-ns-flow-map-implicit-entry(n,c)">ns-flow-map-implicit-entry(n,c)</a>
+  | ( <a href="#rule-e-node">e-node</a> /* Key */
+      <a href="#rule-e-node">e-node</a> /* Value */ )
 </pre>
 
 <div id="example-flow-mapping-entries" class="example">
@@ -5923,34 +5923,34 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 <div id="rule-ns-flow-map-implicit-entry(n,c)"></div>
 <pre class="rule">
 [144] ns-flow-map-implicit-entry(n,c) ::=
-    ns-flow-map-yaml-key-entry(n,c)
-  | c-ns-flow-map-empty-key-entry(n,c)
-  | c-ns-flow-map-json-key-entry(n,c)
+    <a href="#rule-ns-flow-map-yaml-key-entry(n,c)">ns-flow-map-yaml-key-entry(n,c)</a>
+  | <a href="#rule-c-ns-flow-map-empty-key-entry(n,c)">c-ns-flow-map-empty-key-entry(n,c)</a>
+  | <a href="#rule-c-ns-flow-map-json-key-entry(n,c)">c-ns-flow-map-json-key-entry(n,c)</a>
 </pre>
 
 <div id="rule-ns-flow-map-yaml-key-entry(n,c)"></div>
 <pre class="rule">
 [145] ns-flow-map-yaml-key-entry(n,c) ::=
-  ns-flow-yaml-node(n,c)
-  ( ( s-separate(n,c)?
-      c-ns-flow-map-separate-value(n,c) )
-  | e-node )
+  <a href="#rule-ns-flow-yaml-node(n,c)">ns-flow-yaml-node(n,c)</a>
+  ( ( <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+      <a href="#rule-c-ns-flow-map-separate-value(n,c)">c-ns-flow-map-separate-value(n,c)</a> )
+  | <a href="#rule-e-node">e-node</a> )
 </pre>
 
 <div id="rule-c-ns-flow-map-empty-key-entry(n,c)"></div>
 <pre class="rule">
 [146] c-ns-flow-map-empty-key-entry(n,c) ::=
-  e-node /* Key */
-  c-ns-flow-map-separate-value(n,c)
+  <a href="#rule-e-node">e-node</a> /* Key */
+  <a href="#rule-c-ns-flow-map-separate-value(n,c)">c-ns-flow-map-separate-value(n,c)</a>
 </pre>
 
 <div id="rule-c-ns-flow-map-separate-value(n,c)"></div>
 <pre class="rule">
 [147] c-ns-flow-map-separate-value(n,c) ::=
   ":" /* Not followed by an
-         ns-plain-safe(c) */
-  ( ( s-separate(n,c) ns-flow-node(n,c) )
-  | e-node /* Value */ )
+         <a href="#rule-ns-plain-safe(c)">ns-plain-safe(c)</a> */
+  ( ( <a href="#rule-s-separate(n,c)">s-separate(n,c)</a> <a href="#rule-ns-flow-node(n,c)">ns-flow-node(n,c)</a> )
+  | <a href="#rule-e-node">e-node</a> /* Value */ )
 </pre>
 
 <div id="example-flow-mapping-separate-values" class="example">
@@ -6007,18 +6007,18 @@ However, as this greatly reduces readability, YAML <del><a href="#undefined">pro
 <div id="rule-c-ns-flow-map-json-key-entry(n,c)"></div>
 <pre class="rule">
 [148] c-ns-flow-map-json-key-entry(n,c) ::=
-  c-flow-json-node(n,c)
-  ( ( s-separate(n,c)?
-      c-ns-flow-map-adjacent-value(n,c) )
-  | e-node )
+  <a href="#rule-c-flow-json-node(n,c)">c-flow-json-node(n,c)</a>
+  ( ( <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+      <a href="#rule-c-ns-flow-map-adjacent-value(n,c)">c-ns-flow-map-adjacent-value(n,c)</a> )
+  | <a href="#rule-e-node">e-node</a> )
 </pre>
 
 <div id="rule-c-ns-flow-map-adjacent-value(n,c)"></div>
 <pre class="rule">
 [149] c-ns-flow-map-adjacent-value(n,c) ::=
-  ":" ( ( s-separate(n,c)?
-          ns-flow-node(n,c) )
-      | e-node ) /* Value */
+  ":" ( ( <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>?
+          <a href="#rule-ns-flow-node(n,c)">ns-flow-node(n,c)</a> )
+      | <a href="#rule-e-node">e-node</a> ) /* Value */
 </pre>
 
 <div id="example-flow-mapping-adjacent-values" class="example">
@@ -6110,9 +6110,9 @@ and the syntax is identical to the general case.</p>
 <div id="rule-ns-flow-pair(n,c)"></div>
 <pre class="rule">
 [150] ns-flow-pair(n,c) ::=
-    ( "?" s-separate(n,c)
-      ns-flow-map-explicit-entry(n,c) )
-  | ns-flow-pair-entry(n,c)
+    ( "?" <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>
+      <a href="#rule-ns-flow-map-explicit-entry(n,c)">ns-flow-map-explicit-entry(n,c)</a> )
+  | <a href="#rule-ns-flow-pair-entry(n,c)">ns-flow-pair-entry(n,c)</a>
 </pre>
 
 <div id="example-single-pair-explicit-entry" class="example">
@@ -6168,36 +6168,36 @@ been impossible to implement.</p>
 <div id="rule-ns-flow-pair-entry(n,c)"></div>
 <pre class="rule">
 [151] ns-flow-pair-entry(n,c) ::=
-    ns-flow-pair-yaml-key-entry(n,c)
-  | c-ns-flow-map-empty-key-entry(n,c)
-  | c-ns-flow-pair-json-key-entry(n,c)
+    <a href="#rule-ns-flow-pair-yaml-key-entry(n,c)">ns-flow-pair-yaml-key-entry(n,c)</a>
+  | <a href="#rule-c-ns-flow-map-empty-key-entry(n,c)">c-ns-flow-map-empty-key-entry(n,c)</a>
+  | <a href="#rule-c-ns-flow-pair-json-key-entry(n,c)">c-ns-flow-pair-json-key-entry(n,c)</a>
 </pre>
 
 <div id="rule-ns-flow-pair-yaml-key-entry(n,c)"></div>
 <pre class="rule">
 [152] ns-flow-pair-yaml-key-entry(n,c) ::=
-  ns-s-implicit-yaml-key(flow-key)
-  c-ns-flow-map-separate-value(n,c)
+  <a href="#rule-ns-s-implicit-yaml-key(flow-key)">ns-s-implicit-yaml-key(flow-key)</a>
+  <a href="#rule-c-ns-flow-map-separate-value(n,c)">c-ns-flow-map-separate-value(n,c)</a>
 </pre>
 
 <div id="rule-c-ns-flow-pair-json-key-entry(n,c)"></div>
 <pre class="rule">
 [153] c-ns-flow-pair-json-key-entry(n,c) ::=
-  c-s-implicit-json-key(flow-key)
-  c-ns-flow-map-adjacent-value(n,c)
+  <a href="#rule-c-s-implicit-json-key(flow-key)">c-s-implicit-json-key(flow-key)</a>
+  <a href="#rule-c-ns-flow-map-adjacent-value(n,c)">c-ns-flow-map-adjacent-value(n,c)</a>
 </pre>
 
 <div id="rule-ns-s-implicit-yaml-key(c)"></div>
 <pre class="rule">
 [154] ns-s-implicit-yaml-key(c) ::=
-  ns-flow-yaml-node(n/a,c) s-separate-in-line?
+  <a href="#rule-ns-flow-yaml-node(n/a,c)">ns-flow-yaml-node(n/a,c)</a> <a href="#rule-s-separate-in-line">s-separate-in-line</a>?
   /* At most 1024 characters altogether */
 </pre>
 
 <div id="rule-c-s-implicit-json-key(c)"></div>
 <pre class="rule">
 [155] c-s-implicit-json-key(c) ::=
-  c-flow-json-node(n/a,c) s-separate-in-line?
+  <a href="#rule-c-flow-json-node(n/a,c)">c-flow-json-node(n/a,c)</a> <a href="#rule-s-separate-in-line">s-separate-in-line</a>?
   /* At most 1024 characters altogether */
 </pre>
 
@@ -6292,20 +6292,20 @@ Even the <del><a href="#undefined">double-quoted style</a></del> is a superset o
 
 <div id="rule-ns-flow-yaml-content(n,c)"></div>
 <pre class="rule">
-[156] ns-flow-yaml-content(n,c) ::= ns-plain(n,c)
+[156] ns-flow-yaml-content(n,c) ::= <a href="#rule-ns-plain(n,c)">ns-plain(n,c)</a>
 </pre>
 
 <div id="rule-c-flow-json-content(n,c)"></div>
 <pre class="rule">
 [157] c-flow-json-content(n,c) ::=
-    c-flow-sequence(n,c) | c-flow-mapping(n,c)
-  | c-single-quoted(n,c) | c-double-quoted(n,c)
+    <a href="#rule-c-flow-sequence(n,c)">c-flow-sequence(n,c)</a> | <a href="#rule-c-flow-mapping(n,c)">c-flow-mapping(n,c)</a>
+  | <a href="#rule-c-single-quoted(n,c)">c-single-quoted(n,c)</a> | <a href="#rule-c-double-quoted(n,c)">c-double-quoted(n,c)</a>
 </pre>
 
 <div id="rule-ns-flow-content(n,c)"></div>
 <pre class="rule">
 [158] ns-flow-content(n,c) ::=
-  ns-flow-yaml-content(n,c) | c-flow-json-content(n,c)
+  <a href="#rule-ns-flow-yaml-content(n,c)">ns-flow-yaml-content(n,c)</a> | <a href="#rule-c-flow-json-content(n,c)">c-flow-json-content(n,c)</a>
 </pre>
 
 <div id="example-flow-content" class="example">
@@ -6356,30 +6356,30 @@ nodes</a></del> which refer to the <del><a href="#undefined">anchored</a></del> 
 <div id="rule-ns-flow-yaml-node(n,c)"></div>
 <pre class="rule">
 [159] ns-flow-yaml-node(n,c) ::=
-    c-ns-alias-node
-  | ns-flow-yaml-content(n,c)
-  | ( c-ns-properties(n,c)
-      ( ( s-separate(n,c)
-          ns-flow-yaml-content(n,c) )
-        | e-scalar ) )
+    <a href="#rule-c-ns-alias-node">c-ns-alias-node</a>
+  | <a href="#rule-ns-flow-yaml-content(n,c)">ns-flow-yaml-content(n,c)</a>
+  | ( <a href="#rule-c-ns-properties(n,c)">c-ns-properties(n,c)</a>
+      ( ( <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>
+          <a href="#rule-ns-flow-yaml-content(n,c)">ns-flow-yaml-content(n,c)</a> )
+        | <a href="#rule-e-scalar">e-scalar</a> ) )
 </pre>
 
 <div id="rule-c-flow-json-node(n,c)"></div>
 <pre class="rule">
 [160] c-flow-json-node(n,c) ::=
-  ( c-ns-properties(n,c) s-separate(n,c) )?
-  c-flow-json-content(n,c)
+  ( <a href="#rule-c-ns-properties(n,c)">c-ns-properties(n,c)</a> <a href="#rule-s-separate(n,c)">s-separate(n,c)</a> )?
+  <a href="#rule-c-flow-json-content(n,c)">c-flow-json-content(n,c)</a>
 </pre>
 
 <div id="rule-ns-flow-node(n,c)"></div>
 <pre class="rule">
 [161] ns-flow-node(n,c) ::=
-    c-ns-alias-node
-  | ns-flow-content(n,c)
-  | ( c-ns-properties(n,c)
-      ( ( s-separate(n,c)
-          ns-flow-content(n,c) )
-        | e-scalar ) )
+    <a href="#rule-c-ns-alias-node">c-ns-alias-node</a>
+  | <a href="#rule-ns-flow-content(n,c)">ns-flow-content(n,c)</a>
+  | ( <a href="#rule-c-ns-properties(n,c)">c-ns-properties(n,c)</a>
+      ( ( <a href="#rule-s-separate(n,c)">s-separate(n,c)</a>
+          <a href="#rule-ns-flow-content(n,c)">ns-flow-content(n,c)</a> )
+        | <a href="#rule-e-scalar">e-scalar</a> ) )
 </pre>
 
 <div id="example-flow-nodes" class="example">
@@ -6449,11 +6449,11 @@ This is the only case where a <del><a href="#undefined">comment</a></del> must n
 <div id="rule-c-b-block-header(m,t)"></div>
 <pre class="rule">
 [162] c-b-block-header(m,t) ::=
-  ( ( c-indentation-indicator(m)
-      c-chomping-indicator(t) )
-  | ( c-chomping-indicator(t)
-      c-indentation-indicator(m) ) )
-  s-b-comment
+  ( ( <a href="#rule-c-indentation-indicator(m)">c-indentation-indicator(m)</a>
+      <a href="#rule-c-chomping-indicator(t)">c-chomping-indicator(t)</a> )
+  | ( <a href="#rule-c-chomping-indicator(t)">c-chomping-indicator(t)</a>
+      <a href="#rule-c-indentation-indicator(m)">c-indentation-indicator(m)</a> ) )
+  <a href="#rule-s-b-comment">s-b-comment</a>
 </pre>
 
 <div id="example-block-scalar-header" class="example">
@@ -6524,7 +6524,7 @@ indicator for cases where detection will fail.</p>
 <div id="rule-c-indentation-indicator(m)"></div>
 <pre class="rule">
 [163] c-indentation-indicator(m) ::=
-  ns-dec-digit ⇒ m = ns-dec-digit - #x30
+  <a href="#rule-ns-dec-digit">ns-dec-digit</a> ⇒ m = <a href="#rule-ns-dec-digit">ns-dec-digit</a> - #x30
   /* Empty */  ⇒ m = auto-detect()
 </pre>
 
@@ -6660,9 +6660,9 @@ by the chomping indicator specified in the <del><a href="#undefined">block scala
 <div id="rule-b-chomped-last(t)"></div>
 <pre class="rule">
 [165] b-chomped-last(t) ::=
-  t = strip ⇒ b-non-content | /* End of file */
-  t = clip  ⇒ b-as-line-feed | /* End of file */
-  t = keep  ⇒ b-as-line-feed | /* End of file */
+  t = strip ⇒ <a href="#rule-b-non-content">b-non-content</a> | /* End of file */
+  t = clip  ⇒ <a href="#rule-b-as-line-feed">b-as-line-feed</a> | /* End of file */
+  t = keep  ⇒ <a href="#rule-b-as-line-feed">b-as-line-feed</a> | /* End of file */
 </pre>
 
 <div id="example-chomping-final-line-break" class="example">
@@ -6716,23 +6716,23 @@ header</a></del>.</p>
 <div id="rule-l-chomped-empty(n,t)"></div>
 <pre class="rule">
 [166] l-chomped-empty(n,t) ::=
-  t = strip ⇒ l-strip-empty(n)
-  t = clip  ⇒ l-strip-empty(n)
-  t = keep  ⇒ l-keep-empty(n)
+  t = strip ⇒ <a href="#rule-l-strip-empty(n)">l-strip-empty(n)</a>
+  t = clip  ⇒ <a href="#rule-l-strip-empty(n)">l-strip-empty(n)</a>
+  t = keep  ⇒ <a href="#rule-l-keep-empty(n)">l-keep-empty(n)</a>
 </pre>
 
 <div id="rule-l-strip-empty(n)"></div>
 <pre class="rule">
 [167] l-strip-empty(n) ::=
-  ( s-indent(≤n) b-non-content )*
-  l-trail-comments(n)?
+  ( <a href="#rule-s-indent(≤n)">s-indent(≤n)</a> <a href="#rule-b-non-content">b-non-content</a> )*
+  <a href="#rule-l-trail-comments(n)">l-trail-comments(n)</a>?
 </pre>
 
 <div id="rule-l-keep-empty(n)"></div>
 <pre class="rule">
 [168] l-keep-empty(n) ::=
-  l-empty(n,block-in)*
-  l-trail-comments(n)?
+  <a href="#rule-l-empty(n,block-in)">l-empty(n,block-in)</a>*
+  <a href="#rule-l-trail-comments(n)">l-trail-comments(n)</a>?
 </pre>
 
 <p>Explicit <del><a href="#undefined">comment</a></del> lines may follow the trailing <del><a href="#undefined">empty lines</a></del>.
@@ -6745,8 +6745,8 @@ constrained.</p>
 <div id="rule-l-trail-comments(n)"></div>
 <pre class="rule">
 [169] l-trail-comments(n) ::=
-  s-indent(&lt;n) c-nb-comment-text b-comment
-  l-comment*
+  <a href="#rule-s-indent(&lt;n)">s-indent(&lt;n)</a> <a href="#rule-c-nb-comment-text">c-nb-comment-text</a> <a href="#rule-b-comment">b-comment</a>
+  <a href="#rule-l-comment">l-comment</a>*
 </pre>
 
 <div id="example-chomping-trailing-lines" class="example">
@@ -6863,8 +6863,8 @@ It is the simplest, most restricted, and most readable <del><a href="#undefined"
 <div id="rule-c-l+literal(n)"></div>
 <pre class="rule">
 [170] c-l+literal(n) ::=
-  "|" c-b-block-header(m,t)
-  l-literal-content(n+m,t)
+  "|" <a href="#rule-c-b-block-header(m,t)">c-b-block-header(m,t)</a>
+  <a href="#rule-l-literal-content(n+m,t)">l-literal-content(n+m,t)</a>
 </pre>
 
 <div id="example-literal-scalar" class="example">
@@ -6914,23 +6914,23 @@ In addition, there is no way to break a long literal line.</p>
 <div id="rule-l-nb-literal-text(n)"></div>
 <pre class="rule">
 [171] l-nb-literal-text(n) ::=
-  l-empty(n,block-in)*
-  s-indent(n) nb-char+
+  <a href="#rule-l-empty(n,block-in)">l-empty(n,block-in)</a>*
+  <a href="#rule-s-indent(n)">s-indent(n)</a> <a href="#rule-nb-char">nb-char</a>+
 </pre>
 
 <div id="rule-b-nb-literal-next(n)"></div>
 <pre class="rule">
 [172] b-nb-literal-next(n) ::=
-  b-as-line-feed
-  l-nb-literal-text(n)
+  <a href="#rule-b-as-line-feed">b-as-line-feed</a>
+  <a href="#rule-l-nb-literal-text(n)">l-nb-literal-text(n)</a>
 </pre>
 
 <div id="rule-l-literal-content(n,t)"></div>
 <pre class="rule">
 [173] l-literal-content(n,t) ::=
-  ( l-nb-literal-text(n) b-nb-literal-next(n)*
-    b-chomped-last(t) )?
-  l-chomped-empty(n,t)
+  ( <a href="#rule-l-nb-literal-text(n)">l-nb-literal-text(n)</a> <a href="#rule-b-nb-literal-next(n)">b-nb-literal-next(n)</a>*
+    <a href="#rule-b-chomped-last(t)">b-chomped-last(t)</a> )?
+  <a href="#rule-l-chomped-empty(n,t)">l-chomped-empty(n,t)</a>
 </pre>
 
 <div id="example-literal-content" class="example">
@@ -6985,8 +6985,8 @@ It is similar to the <del><a href="#undefined">literal style</a></del>; however,
 <div id="rule-c-l+folded(n)"></div>
 <pre class="rule">
 [174] c-l+folded(n) ::=
-  "&gt;" c-b-block-header(m,t)
-  l-folded-content(n+m,t)
+  "&gt;" <a href="#rule-c-b-block-header(m,t)">c-b-block-header(m,t)</a>
+  <a href="#rule-l-folded-content(n+m,t)">l-folded-content(n+m,t)</a>
 </pre>
 
 <div id="example-folded-scalar" class="example">
@@ -7029,14 +7029,14 @@ separates two non-<del><a href="#undefined">space</a></del> characters.</p>
 <div id="rule-s-nb-folded-text(n)"></div>
 <pre class="rule">
 [175] s-nb-folded-text(n) ::=
-  s-indent(n) ns-char nb-char*
+  <a href="#rule-s-indent(n)">s-indent(n)</a> <a href="#rule-ns-char">ns-char</a> <a href="#rule-nb-char">nb-char</a>*
 </pre>
 
 <div id="rule-l-nb-folded-lines(n)"></div>
 <pre class="rule">
 [176] l-nb-folded-lines(n) ::=
-  s-nb-folded-text(n)
-  ( b-l-folded(n,block-in) s-nb-folded-text(n) )*
+  <a href="#rule-s-nb-folded-text(n)">s-nb-folded-text(n)</a>
+  ( <a href="#rule-b-l-folded(n,block-in)">b-l-folded(n,block-in)</a> <a href="#rule-s-nb-folded-text(n)">s-nb-folded-text(n)</a> )*
 </pre>
 
 <div id="example-folded-lines" class="example">
@@ -7102,21 +7102,21 @@ different productions.)</p>
 <div id="rule-s-nb-spaced-text(n)"></div>
 <pre class="rule">
 [177] s-nb-spaced-text(n) ::=
-  s-indent(n) s-white nb-char*
+  <a href="#rule-s-indent(n)">s-indent(n)</a> <a href="#rule-s-white">s-white</a> <a href="#rule-nb-char">nb-char</a>*
 </pre>
 
 <div id="rule-b-l-spaced(n)"></div>
 <pre class="rule">
 [178] b-l-spaced(n) ::=
-  b-as-line-feed
-  l-empty(n,block-in)*
+  <a href="#rule-b-as-line-feed">b-as-line-feed</a>
+  <a href="#rule-l-empty(n,block-in)">l-empty(n,block-in)</a>*
 </pre>
 
 <div id="rule-l-nb-spaced-lines(n)"></div>
 <pre class="rule">
 [179] l-nb-spaced-lines(n) ::=
-  s-nb-spaced-text(n)
-  ( b-l-spaced(n) s-nb-spaced-text(n) )*
+  <a href="#rule-s-nb-spaced-text(n)">s-nb-spaced-text(n)</a>
+  ( <a href="#rule-b-l-spaced(n)">b-l-spaced(n)</a> <a href="#rule-s-nb-spaced-text(n)">s-nb-spaced-text(n)</a> )*
 </pre>
 
 <div id="example-more-indented-lines" class="example">
@@ -7179,15 +7179,15 @@ also not <del><a href="#undefined">folded</a></del>.</p>
 <div id="rule-l-nb-same-lines(n)"></div>
 <pre class="rule">
 [180] l-nb-same-lines(n) ::=
-  l-empty(n,block-in)*
-  ( l-nb-folded-lines(n) | l-nb-spaced-lines(n) )
+  <a href="#rule-l-empty(n,block-in)">l-empty(n,block-in)</a>*
+  ( <a href="#rule-l-nb-folded-lines(n)">l-nb-folded-lines(n)</a> | <a href="#rule-l-nb-spaced-lines(n)">l-nb-spaced-lines(n)</a> )
 </pre>
 
 <div id="rule-l-nb-diff-lines(n)"></div>
 <pre class="rule">
 [181] l-nb-diff-lines(n) ::=
-  l-nb-same-lines(n)
-  ( b-as-line-feed l-nb-same-lines(n) )*
+  <a href="#rule-l-nb-same-lines(n)">l-nb-same-lines(n)</a>
+  ( <a href="#rule-b-as-line-feed">b-as-line-feed</a> <a href="#rule-l-nb-same-lines(n)">l-nb-same-lines(n)</a> )*
 </pre>
 
 <div id="example-empty-separation-lines" class="example">
@@ -7252,8 +7252,8 @@ also not <del><a href="#undefined">folded</a></del>.</p>
 <div id="rule-l-folded-content(n,t)"></div>
 <pre class="rule">
 [182] l-folded-content(n,t) ::=
-  ( l-nb-diff-lines(n) b-chomped-last(t) )?
-  l-chomped-empty(n,t)
+  ( <a href="#rule-l-nb-diff-lines(n)">l-nb-diff-lines(n)</a> <a href="#rule-b-chomped-last(t)">b-chomped-last(t)</a> )?
+  <a href="#rule-l-chomped-empty(n,t)">l-chomped-empty(n,t)</a>
 </pre>
 
 <div id="example-final-empty-lines" class="example">
@@ -7330,15 +7330,15 @@ followed by a non-space character (e.g. “<strong><code class="language-plainte
 <div id="rule-l+block-sequence(n)"></div>
 <pre class="rule">
 [183] l+block-sequence(n) ::=
-  ( s-indent(n+m) c-l-block-seq-entry(n+m) )+
+  ( <a href="#rule-s-indent(n+m)">s-indent(n+m)</a> <a href="#rule-c-l-block-seq-entry(n+m)">c-l-block-seq-entry(n+m)</a> )+
   /* For some fixed auto-detected m &gt; 0 */
 </pre>
 
 <div id="rule-c-l-block-seq-entry(n)"></div>
 <pre class="rule">
 [184] c-l-block-seq-entry(n) ::=
-  "-" /* Not followed by an ns-char */
-  s-l+block-indented(n,block-in)
+  "-" /* Not followed by an <a href="#rule-ns-char">ns-char</a> */
+  <a href="#rule-s-l+block-indented(n,block-in)">s-l+block-indented(n,block-in)</a>
 </pre>
 
 <div id="example-block-sequence" class="example">
@@ -7396,18 +7396,18 @@ Note that it is not possible to specify <del><a href="#undefined">node propertie
 <div id="rule-s-l+block-indented(n,c)"></div>
 <pre class="rule">
 [185] s-l+block-indented(n,c) ::=
-    ( s-indent(m)
-      ( ns-l-compact-sequence(n+1+m)
-      | ns-l-compact-mapping(n+1+m) ) )
-  | s-l+block-node(n,c)
-  | ( e-node s-l-comments )
+    ( <a href="#rule-s-indent(m)">s-indent(m)</a>
+      ( <a href="#rule-ns-l-compact-sequence(n+1+m)">ns-l-compact-sequence(n+1+m)</a>
+      | <a href="#rule-ns-l-compact-mapping(n+1+m)">ns-l-compact-mapping(n+1+m)</a> ) )
+  | <a href="#rule-s-l+block-node(n,c)">s-l+block-node(n,c)</a>
+  | ( <a href="#rule-e-node">e-node</a> <a href="#rule-s-l-comments">s-l-comments</a> )
 </pre>
 
 <div id="rule-ns-l-compact-sequence(n)"></div>
 <pre class="rule">
 [186] ns-l-compact-sequence(n) ::=
-  c-l-block-seq-entry(n)
-  ( s-indent(n) c-l-block-seq-entry(n) )*
+  <a href="#rule-c-l-block-seq-entry(n)">c-l-block-seq-entry(n)</a>
+  ( <a href="#rule-s-indent(n)">s-indent(n)</a> <a href="#rule-c-l-block-seq-entry(n)">c-l-block-seq-entry(n)</a> )*
 </pre>
 
 <div id="example-block-sequence-entry-types" class="example">
@@ -7469,7 +7469,7 @@ pair</a></del>.</p>
 <div id="rule-l+block-mapping(n)"></div>
 <pre class="rule">
 [187] l+block-mapping(n) ::=
-  ( s-indent(n+m) ns-l-block-map-entry(n+m) )+
+  ( <a href="#rule-s-indent(n+m)">s-indent(n+m)</a> <a href="#rule-ns-l-block-map-entry(n+m)">ns-l-block-map-entry(n+m)</a> )+
   /* For some fixed auto-detected m &gt; 0 */
 </pre>
 
@@ -7520,29 +7520,29 @@ for <del><a href="#undefined">block sequence</a></del> entries.</p>
 <div id="rule-ns-l-block-map-entry(n)"></div>
 <pre class="rule">
 [188] ns-l-block-map-entry(n) ::=
-    c-l-block-map-explicit-entry(n)
-  | ns-l-block-map-implicit-entry(n)
+    <a href="#rule-c-l-block-map-explicit-entry(n)">c-l-block-map-explicit-entry(n)</a>
+  | <a href="#rule-ns-l-block-map-implicit-entry(n)">ns-l-block-map-implicit-entry(n)</a>
 </pre>
 
 <div id="rule-c-l-block-map-explicit-entry(n)"></div>
 <pre class="rule">
 [189] c-l-block-map-explicit-entry(n) ::=
-  c-l-block-map-explicit-key(n)
-  ( l-block-map-explicit-value(n)
-  | e-node )
+  <a href="#rule-c-l-block-map-explicit-key(n)">c-l-block-map-explicit-key(n)</a>
+  ( <a href="#rule-l-block-map-explicit-value(n)">l-block-map-explicit-value(n)</a>
+  | <a href="#rule-e-node">e-node</a> )
 </pre>
 
 <div id="rule-c-l-block-map-explicit-key(n)"></div>
 <pre class="rule">
 [190] c-l-block-map-explicit-key(n) ::=
-  "?" s-l+block-indented(n,block-out)
+  "?" <a href="#rule-s-l+block-indented(n,block-out)">s-l+block-indented(n,block-out)</a>
 </pre>
 
 <div id="rule-l-block-map-explicit-value(n)"></div>
 <pre class="rule">
 [191] l-block-map-explicit-value(n) ::=
-  s-indent(n)
-  ":" s-l+block-indented(n,block-out)
+  <a href="#rule-s-indent(n)">s-indent(n)</a>
+  ":" <a href="#rule-s-l+block-indented(n,block-out)">s-l+block-indented(n,block-out)</a>
 </pre>
 
 <div id="example-explicit-block-mapping-entries" class="example">
@@ -7599,16 +7599,16 @@ single line and must not span more than 1024 Unicode characters.</p>
 <div id="rule-ns-l-block-map-implicit-entry(n)"></div>
 <pre class="rule">
 [192] ns-l-block-map-implicit-entry(n) ::=
-  ( ns-s-block-map-implicit-key
-  | e-node )
-  c-l-block-map-implicit-value(n)
+  ( <a href="#rule-ns-s-block-map-implicit-key">ns-s-block-map-implicit-key</a>
+  | <a href="#rule-e-node">e-node</a> )
+  <a href="#rule-c-l-block-map-implicit-value(n)">c-l-block-map-implicit-value(n)</a>
 </pre>
 
 <div id="rule-ns-s-block-map-implicit-key"></div>
 <pre class="rule">
 [193] ns-s-block-map-implicit-key ::=
-    c-s-implicit-json-key(block-key)
-  | ns-s-implicit-yaml-key(block-key)
+    <a href="#rule-c-s-implicit-json-key(block-key)">c-s-implicit-json-key(block-key)</a>
+  | <a href="#rule-ns-s-implicit-yaml-key(block-key)">ns-s-implicit-yaml-key(block-key)</a>
 </pre>
 
 <p>In this case, the <del><a href="#undefined">value</a></del> may be specified on the same line as the <del><a href="#undefined">implicit
@@ -7625,8 +7625,8 @@ This prevents a potential ambiguity with multi-line <del><a href="#undefined">pl
 <div id="rule-c-l-block-map-implicit-value(n)"></div>
 <pre class="rule">
 [194] c-l-block-map-implicit-value(n) ::=
-  ":" ( s-l+block-node(n,block-out)
-      | ( e-node s-l-comments ) )
+  ":" ( <a href="#rule-s-l+block-node(n,block-out)">s-l+block-node(n,block-out)</a>
+      | ( <a href="#rule-e-node">e-node</a> <a href="#rule-s-l-comments">s-l-comments</a> ) )
 </pre>
 
 <div id="example-implicit-block-mapping-entries" class="example">
@@ -7680,8 +7680,8 @@ mapping.</p>
 <div id="rule-ns-l-compact-mapping(n)"></div>
 <pre class="rule">
 [195] ns-l-compact-mapping(n) ::=
-  ns-l-block-map-entry(n)
-  ( s-indent(n) ns-l-block-map-entry(n) )*
+  <a href="#rule-ns-l-block-map-entry(n)">ns-l-block-map-entry(n)</a>
+  ( <a href="#rule-s-indent(n)">s-indent(n)</a> <a href="#rule-ns-l-block-map-entry(n)">ns-l-block-map-entry(n)</a> )*
 </pre>
 
 <div id="example-compact-block-mappings" class="example">
@@ -7745,14 +7745,14 @@ scalar</a></del> and an <del><a href="#undefined">implicit key</a></del> startin
 <div id="rule-s-l+block-node(n,c)"></div>
 <pre class="rule">
 [196] s-l+block-node(n,c) ::=
-  s-l+block-in-block(n,c) | s-l+flow-in-block(n)
+  <a href="#rule-s-l+block-in-block(n,c)">s-l+block-in-block(n,c)</a> | <a href="#rule-s-l+flow-in-block(n)">s-l+flow-in-block(n)</a>
 </pre>
 
 <div id="rule-s-l+flow-in-block(n)"></div>
 <pre class="rule">
 [197] s-l+flow-in-block(n) ::=
-  s-separate(n+1,flow-out)
-  ns-flow-node(n+1,flow-out) s-l-comments
+  <a href="#rule-s-separate(n+1,flow-out)">s-separate(n+1,flow-out)</a>
+  <a href="#rule-ns-flow-node(n+1,flow-out)">ns-flow-node(n+1,flow-out)</a> <a href="#rule-s-l-comments">s-l-comments</a>
 </pre>
 
 <div id="example-block-node-types" class="example">
@@ -7807,15 +7807,15 @@ entries.</p>
 <div id="rule-s-l+block-in-block(n,c)"></div>
 <pre class="rule">
 [198] s-l+block-in-block(n,c) ::=
-  s-l+block-scalar(n,c) | s-l+block-collection(n,c)
+  <a href="#rule-s-l+block-scalar(n,c)">s-l+block-scalar(n,c)</a> | <a href="#rule-s-l+block-collection(n,c)">s-l+block-collection(n,c)</a>
 </pre>
 
 <div id="rule-s-l+block-scalar(n,c)"></div>
 <pre class="rule">
 [199] s-l+block-scalar(n,c) ::=
-  s-separate(n+1,c)
-  ( c-ns-properties(n+1,c) s-separate(n+1,c) )?
-  ( c-l+literal(n) | c-l+folded(n) )
+  <a href="#rule-s-separate(n+1,c)">s-separate(n+1,c)</a>
+  ( <a href="#rule-c-ns-properties(n+1,c)">c-ns-properties(n+1,c)</a> <a href="#rule-s-separate(n+1,c)">s-separate(n+1,c)</a> )?
+  ( <a href="#rule-c-l+literal(n)">c-l+literal(n)</a> | <a href="#rule-c-l+folded(n)">c-l+folded(n)</a> )
 </pre>
 
 <div id="example-block-scalar-nodes" class="example">
@@ -7868,8 +7868,8 @@ vs. <del><a href="#undefined"><strong><code class="language-plaintext highlighte
 <div id="rule-s-l+block-collection(n,c)"></div>
 <pre class="rule">
 [200] s-l+block-collection(n,c) ::=
-  ( s-separate(n+1,c) c-ns-properties(n+1,c) )?
-  s-l-comments
+  ( <a href="#rule-s-separate(n+1,c)">s-separate(n+1,c)</a> <a href="#rule-c-ns-properties(n+1,c)">c-ns-properties(n+1,c)</a> )?
+  <a href="#rule-s-l-comments">s-l-comments</a>
   ( l+block-sequence(seq-spaces(n,c))
   | l+block-mapping(n) )
 </pre>
@@ -7954,7 +7954,7 @@ existence of an actual <del><a href="#undefined">document</a></del>.</p>
 <div id="rule-l-document-prefix"></div>
 <pre class="rule">
 [202] l-document-prefix ::=
-  c-byte-order-mark? l-comment*
+  <a href="#rule-c-byte-order-mark">c-byte-order-mark</a>? <a href="#rule-l-comment">l-comment</a>*
 </pre>
 
 <div id="example-document-prefix" class="example">
@@ -8032,15 +8032,15 @@ either of these markers.</p>
 <div id="rule-l-document-suffix"></div>
 <pre class="rule">
 [205] l-document-suffix ::=
-  c-document-end s-l-comments
+  <a href="#rule-c-document-end">c-document-end</a> <a href="#rule-s-l-comments">s-l-comments</a>
 </pre>
 
 <div id="rule-c-forbidden"></div>
 <pre class="rule">
 [206] c-forbidden ::=
   /* Start of line */
-  ( c-directives-end | c-document-end )
-  ( b-char | s-white | /* End of file */ )
+  ( <a href="#rule-c-directives-end">c-directives-end</a> | <a href="#rule-c-document-end">c-document-end</a> )
+  ( <a href="#rule-b-char">b-char</a> | <a href="#rule-s-white">s-white</a> | /* End of file */ )
 </pre>
 
 <div id="example-document-markers" class="example">
@@ -8095,8 +8095,8 @@ document’s <del><a href="#undefined">node</a></del> to be <del><a href="#undef
 <div id="rule-l-bare-document"></div>
 <pre class="rule">
 [207] l-bare-document ::=
-  s-l+block-node(-1,block-in)
-  /* Excluding c-forbidden content */
+  <a href="#rule-s-l+block-node(-1,block-in)">s-l+block-node(-1,block-in)</a>
+  /* Excluding <a href="#rule-c-forbidden">c-forbidden</a> content */
 </pre>
 
 <div id="example-bare-documents" class="example">
@@ -8150,9 +8150,9 @@ Since the existence of the <del><a href="#undefined">document</a></del> is indic
 <div id="rule-l-explicit-document"></div>
 <pre class="rule">
 [208] l-explicit-document ::=
-  c-directives-end
-  ( l-bare-document
-  | ( e-node s-l-comments ) )
+  <a href="#rule-c-directives-end">c-directives-end</a>
+  ( <a href="#rule-l-bare-document">l-bare-document</a>
+  | ( <a href="#rule-e-node">e-node</a> <a href="#rule-s-l-comments">s-l-comments</a> ) )
 </pre>
 
 <div id="example-explicit-documents" class="example">
@@ -8207,8 +8207,8 @@ Since the existence of the <del><a href="#undefined">document</a></del> is indic
 <div id="rule-l-directive-document"></div>
 <pre class="rule">
 [209] l-directive-document ::=
-  l-directive+
-  l-explicit-document
+  <a href="#rule-l-directive">l-directive</a>+
+  <a href="#rule-l-explicit-document">l-explicit-document</a>
 </pre>
 
 <div id="example-directives-documents" class="example">
@@ -8267,17 +8267,17 @@ such as stream concatenation.</p>
 <div id="rule-l-any-document"></div>
 <pre class="rule">
 [210] l-any-document ::=
-    l-directive-document
-  | l-explicit-document
-  | l-bare-document
+    <a href="#rule-l-directive-document">l-directive-document</a>
+  | <a href="#rule-l-explicit-document">l-explicit-document</a>
+  | <a href="#rule-l-bare-document">l-bare-document</a>
 </pre>
 
 <div id="rule-l-yaml-stream"></div>
 <pre class="rule">
 [211] l-yaml-stream ::=
-  l-document-prefix* l-any-document?
-  ( l-document-suffix+ l-document-prefix* l-any-document?
-  | l-document-prefix* l-explicit-document? )*
+  <a href="#rule-l-document-prefix">l-document-prefix</a>* <a href="#rule-l-any-document">l-any-document</a>?
+  ( <a href="#rule-l-document-suffix">l-document-suffix</a>+ <a href="#rule-l-document-prefix">l-document-prefix</a>* <a href="#rule-l-any-document">l-any-document</a>?
+  | <a href="#rule-l-document-prefix">l-document-prefix</a>* <a href="#rule-l-explicit-document">l-explicit-document</a>? )*
 </pre>
 
 <div id="example-stream" class="example">
