@@ -1,0 +1,42 @@
+#!/usr/bin/env perl
+
+use v5.18;
+
+use YAML::PP;
+use IO::All;
+
+my ($spec, $rules);
+sub main {
+  my ($spec_file, $rules_file) = @_;
+
+  $spec = io($spec_file)->all;
+  $rules = YAML::PP::Load io($rules_file)->all;
+  $spec =~ s{
+    ``` \n
+    (\S+) \s+ ::= .*\n
+    (?: .*\n )*?
+    ``` \n
+  }{replace($1)}xeg or die;
+
+  print $spec;
+}
+
+sub replace {
+  my ($name) = @_;
+  $name =~ s/≤/<=/;
+  my $rule = $rules->{$name}
+    or die "Can't file rule for '$name'";
+  chomp $rule;
+  my $body = $rule;
+  $rule =~ s/^/  /gm;
+  my $new = <<"...";
+```
+$name ::=
+$rule
+```
+...
+  $new =~ s/::=\s+/::= / unless $body =~ /\s/;
+  return $new;
+}
+
+main @ARGV;

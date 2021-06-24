@@ -1,24 +1,19 @@
 DOCKER_TOOL := html-to-markdown
 include ../tool/make/init.mk
 
-
-WORK := $(ROOT)/work
-INPUT_HTML := $(WORK)/spec-1.2.html
-LEGEND := $(ROOT)/spec/legend.yaml
+RULES := $(GRAMMAR)/rules.yaml
 
 ALL := \
     spec.md \
 
 build: $(ALL)
 
-force: $(INPUT_HTML)
-	touch $<
+force:
+	touch $(RULES)
 
-spec.md: $(INPUT_HTML) $(LEGEND)
-	html-to-markdown $^ > $@
-
-$(INPUT_HTML): $(WORK)
-	touch $@
+spec.md: $(RULES)
+	insert-rules $@ $< > /tmp/$@
+	mv /tmp/$@ $@
 
 $(WORK):
 	make -C $(ROOT) work

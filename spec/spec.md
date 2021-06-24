@@ -1406,7 +1406,7 @@ This isn’t mandatory since a full implementation would require extensive
 character property tables.
 
 ```
-[#] c-printable ::=
+c-printable ::=
     #x9 | #xA | #xD | [#x20-#x7E]          /* 8 bit */
   | #x85 | [#xA0-#xD7FF] | [#xE000-#xFFFD] /* 16 bit */
   | [#x10000-#x10FFFF]                     /* 32 bit */
@@ -1420,7 +1420,7 @@ Note that JSON [quoted scalars] cannot span multiple lines or contain [tabs],
 but YAML [quoted scalars] can.
 
 ```
-[#] nb-json ::=
+nb-json ::=
   #x9 | [#x20-#x10FFFF]
 ```
 
@@ -1479,7 +1479,7 @@ encoding schemes see the [Unicode
 FAQ](http://www.unicode.org/unicode/faq/utf_bom.html).
 
 ```
-[#] c-byte-order-mark ::= #xFEFF
+c-byte-order-mark ::= #xFEFF
 ```
 
 In the examples, byte order mark characters are displayed as "**`⇔`**".
@@ -1515,19 +1515,19 @@ _Indicators_ are characters that have special semantics.
 A ["**`-`**"] (**`#x2D`**, hyphen) denotes a [block sequence] entry.
 
 ```
-[#] c-sequence-entry ::= "-"
+c-sequence-entry ::= "-"
 ```
 
 A ["**`?`**"] (**`#x3F`**, question mark) denotes a [mapping key].
 
 ```
-[#] c-mapping-key ::= "?"
+c-mapping-key ::= "?"
 ```
 
 A ["**`:`**"] (**`#x3A`**, colon) denotes a [mapping value].
 
 ```
-[#] c-mapping-value ::= ":"
+c-mapping-value ::= ":"
 ```
 
 **Example #. Block Structure Indicators**
@@ -1561,31 +1561,31 @@ mapping:
 A ["**`,`**"] (**`#x2C`**, comma) ends a [flow collection] entry.
 
 ```
-[#] c-collect-entry ::= ","
+c-collect-entry ::= ","
 ```
 
 A ["**`[`**"] (**`#x5B`**, left bracket) starts a [flow sequence].
 
 ```
-[#] c-sequence-start ::= "["
+c-sequence-start ::= "["
 ```
 
 A ["**`]`**"] (**`#x5D`**, right bracket) ends a [flow sequence].
 
 ```
-[#] c-sequence-end ::= "]"
+c-sequence-end ::= "]"
 ```
 
 A ["**`{`**"] (**`#x7B`**, left brace) starts a [flow mapping].
 
 ```
-[#] c-mapping-start ::= "{"
+c-mapping-start ::= "{"
 ```
 
 A ["**`}`**"] (**`#x7D`**, right brace) ends a [flow mapping].
 
 ```
-[#] c-mapping-end ::= "}"
+c-mapping-end ::= "}"
 ```
 
 **Example #. Flow Collection Indicators**
@@ -1615,7 +1615,7 @@ An ["**`#`**"] (**`#x23`**, octothorpe, hash, sharp, pound, number sign)
 denotes a [comment].
 
 ```
-[#] c-comment ::= "#"
+c-comment ::= "#"
 ```
 
 **Example #. Comment Indicator**
@@ -1633,13 +1633,13 @@ denotes a [comment].
 An ["**`&`**"] (**`#x26`**, ampersand) denotes a [node’s anchor property].
 
 ```
-[#] c-anchor ::= "&"
+c-anchor ::= "&"
 ```
 
 An ["**`*`**"] (**`#x2A`**, asterisk) denotes an [alias node].
 
 ```
-[#] c-alias ::= "*"
+c-alias ::= "*"
 ```
 
 The ["**`!`**"] (**`#x21`**, exclamation) is heavily overloaded for specifying
@@ -1649,7 +1649,7 @@ properties]; to denote [local tags]; and as the [non-specific tag] for
 non-[plain scalars].
 
 ```
-[#] c-tag ::= "!"
+c-tag ::= "!"
 ```
 
 **Example #. Node Property Indicators**
@@ -1675,13 +1675,13 @@ alias: *anchor
 A ["**`|`**"] (**`7C`**, vertical bar) denotes a [literal block scalar].
 
 ```
-[#] c-literal ::= "|"
+c-literal ::= "|"
 ```
 
 A ["**`>`**"] (**`#x3E`**, greater than) denotes a [folded block scalar].
 
 ```
-[#] c-folded ::= ">"
+c-folded ::= ">"
 ```
 
 **Example #. Block Scalar Indicators**
@@ -1711,14 +1711,14 @@ An ["**`'`**"] (**`#x27`**, apostrophe, single quote) surrounds a
 [single-quoted flow scalar].
 
 ```
-[#] c-single-quote ::= "'"
+c-single-quote ::= "'"
 ```
 
 A ["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow
 scalar].
 
 ```
-[#] c-double-quote ::= """
+c-double-quote ::= """
 ```
 
 **Example #. Quoted Scalar Indicators**
@@ -1743,7 +1743,7 @@ double: "text"
 A ["**`%`**"] (**`#x25`**, percent) denotes a [directive] line.
 
 ```
-[#] c-directive ::= "%"
+c-directive ::= "%"
 ```
 
 **Example #. Directive Indicator**
@@ -1763,7 +1763,7 @@ The _"**`@`**"_ (**`#x40`**, at) and _"**<code>&grave;</code>**"_ (**`#x60`**,
 grave accent) are _reserved_ for future use.
 
 ```
-[#] c-reserved ::=
+c-reserved ::=
   "@" | "`"
 ```
 
@@ -1781,7 +1781,7 @@ ERROR:
 Any indicator character:
 
 ```
-[#] c-indicator ::=
+c-indicator ::=
     "-" | "?" | ":" | "," | "[" | "]" | "{" | "}"
   | "#" | "&" | "*" | "!" | "|" | ">" | "'" | """
   | "%" | "@" | "`"
@@ -1794,7 +1794,7 @@ constructs.
 This is handled on a case-by-case basis by the relevant productions.
 
 ```
-[#] c-flow-indicator ::=
+c-flow-indicator ::=
   "," | "[" | "]" | "{" | "}"
 ```
 
@@ -1803,17 +1803,17 @@ This is handled on a case-by-case basis by the relevant productions.
 YAML recognizes the following ASCII _line break_ characters.
 
 ```
-[#] b-line-feed ::=
+b-line-feed ::=
   #xA    /* LF */
 ```
 
 ```
-[#] b-carriage-return ::=
+b-carriage-return ::=
   #xD    /* CR */
 ```
 
 ```
-[#] b-char ::=
+b-char ::=
   b-line-feed | b-carriage-return
 ```
 
@@ -1832,7 +1832,7 @@ YAML 1.2 [processors] [parsing] a [version 1.1] [document] should therefore
 treat these line breaks as non-break characters, with an appropriate warning.
 
 ```
-[#] nb-char ::=
+nb-char ::=
   c-printable - b-char - c-byte-order-mark
 ```
 
@@ -1840,7 +1840,7 @@ Line breaks are interpreted differently by different systems, and have several
 widely used formats.
 
 ```
-[#] b-break ::=
+b-break ::=
     ( b-carriage-return b-line-feed ) /* DOS, Windows */
   | b-carriage-return                 /* MacOS upto 9.x */
   | b-line-feed                       /* UNIX, MacOS X */
@@ -1852,14 +1852,14 @@ The original line break format is a [presentation detail] and must not be used
 to convey [content] information.
 
 ```
-[#] b-as-line-feed ::= b-break
+b-as-line-feed ::= b-break
 ```
 
 Outside [scalar content], YAML allows any line break to be used to terminate
 lines.
 
 ```
-[#] b-non-content ::= b-break
+b-non-content ::= b-break
 ```
 
 On output, a YAML [processor] is free to emit line breaks using whatever
@@ -1888,17 +1888,17 @@ for clarity.
 YAML recognizes two _white space_ characters: _space_ and _tab_.
 
 ```
-[#] s-space ::=
+s-space ::=
   #x20 /* SP */
 ```
 
 ```
-[#] s-tab ::=
+s-tab ::=
   #x9  /* TAB */
 ```
 
 ```
-[#] s-white ::=
+s-white ::=
   s-space | s-tab
 ```
 
@@ -1906,7 +1906,7 @@ The rest of the ([printable]) non-[break] characters are considered to be
 non-space characters.
 
 ```
-[#] ns-char ::=
+ns-char ::=
   nb-char - s-white
 ```
 
@@ -1946,14 +1946,14 @@ classes:
 * A decimal digit for numbers:
 
 ```
-[#] ns-dec-digit ::=
+ns-dec-digit ::=
   [#x30-#x39] /* 0-9 */
 ```
 
 * A hexadecimal digit for [escape sequences]:
 
 ```
-[#] ns-hex-digit ::=
+ns-hex-digit ::=
     ns-dec-digit
   | [#x41-#x46] /* A-F */ | [#x61-#x66] /* a-f */
 ```
@@ -1961,14 +1961,14 @@ classes:
 * ASCII letter (alphabetic) characters:
 
 ```
-[#] ns-ascii-letter ::=
+ns-ascii-letter ::=
   [#x41-#x5A] /* A-Z */ | [#x61-#x7A] /* a-z */
 ```
 
 * Word (alphanumeric) characters for identifiers:
 
 ```
-[#] ns-word-char ::=
+ns-word-char ::=
   ns-dec-digit | ns-ascii-letter | "-"
 ```
 
@@ -1985,7 +1985,7 @@ classes:
   [stream], without any processing.
 
 ```
-[#] ns-uri-char ::=
+ns-uri-char ::=
     "%" ns-hex-digit ns-hex-digit | ns-word-char | "#"
   | ";" | "/" | "?" | ":" | "@" | "&" | "=" | "+" | "$" | ","
   | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")" | "[" | "]"
@@ -1998,7 +1998,7 @@ classes:
   These characters would cause ambiguity with [flow collection] structures.
 
 ```
-[#] ns-tag-char ::=
+ns-tag-char ::=
   ns-uri-char - "!" - c-flow-indicator
 ```
 
@@ -2016,7 +2016,7 @@ In all other [scalar styles], the "**`\`**" character has no special meaning
 and non-[printable] characters are not available.
 
 ```
-[#] c-escape ::= "\"
+c-escape ::= "\"
 ```
 
 YAML escape sequences are a superset of C’s escape sequences:
@@ -2024,19 +2024,19 @@ YAML escape sequences are a superset of C’s escape sequences:
 Escaped ASCII null (**`#x0`**) character.
 
 ```
-[#] ns-esc-null ::= "0"
+ns-esc-null ::= "0"
 ```
 
 Escaped ASCII bell (**`#x7`**) character.
 
 ```
-[#] ns-esc-bell ::= "a"
+ns-esc-bell ::= "a"
 ```
 
 Escaped ASCII backspace (**`#x8`**) character.
 
 ```
-[#] ns-esc-backspace ::= "b"
+ns-esc-backspace ::= "b"
 ```
 
 Escaped ASCII horizontal tab (**`#x9`**) character.
@@ -2044,38 +2044,38 @@ This is useful at the start or the end of a line to force a leading or trailing
 tab to become part of the [content].
 
 ```
-[#] ns-esc-horizontal-tab ::=
+ns-esc-horizontal-tab ::=
   "t" | #x9
 ```
 
 Escaped ASCII line feed (**`#xA`**) character.
 
 ```
-[#] ns-esc-line-feed ::= "n"
+ns-esc-line-feed ::= "n"
 ```
 
 Escaped ASCII vertical tab (**`#xB`**) character.
 
 ```
-[#] ns-esc-vertical-tab ::= "v"
+ns-esc-vertical-tab ::= "v"
 ```
 
 Escaped ASCII form feed (**`#xC`**) character.
 
 ```
-[#] ns-esc-form-feed ::= "f"
+ns-esc-form-feed ::= "f"
 ```
 
 Escaped ASCII carriage return (**`#xD`**) character.
 
 ```
-[#] ns-esc-carriage-return ::= "r"
+ns-esc-carriage-return ::= "r"
 ```
 
 Escaped ASCII escape (**`#x1B`**) character.
 
 ```
-[#] ns-esc-escape ::= "e"
+ns-esc-escape ::= "e"
 ```
 
 Escaped ASCII space (**`#x20`**) character.
@@ -2083,79 +2083,79 @@ This is useful at the start or the end of a line to force a leading or trailing
 space to become part of the [content].
 
 ```
-[#] ns-esc-space ::= #x20
+ns-esc-space ::= #x20
 ```
 
 Escaped ASCII double quote (**`#x22`**).
 
 ```
-[#] ns-esc-double-quote ::= """
+ns-esc-double-quote ::= """
 ```
 
 Escaped ASCII slash (**`#x2F`**), for [JSON compatibility].
 
 ```
-[#] ns-esc-slash ::= "/"
+ns-esc-slash ::= "/"
 ```
 
 Escaped ASCII back slash (**`#x5C`**).
 
 ```
-[#] ns-esc-backslash ::= "\"
+ns-esc-backslash ::= "\"
 ```
 
 Escaped Unicode next line (**`#x85`**) character.
 
 ```
-[#] ns-esc-next-line ::= "N"
+ns-esc-next-line ::= "N"
 ```
 
 Escaped Unicode non-breaking space (**`#xA0`**) character.
 
 ```
-[#] ns-esc-non-breaking-space ::= "_"
+ns-esc-non-breaking-space ::= "_"
 ```
 
 Escaped Unicode line separator (**`#x2028`**) character.
 
 ```
-[#] ns-esc-line-separator ::= "L"
+ns-esc-line-separator ::= "L"
 ```
 
 Escaped Unicode paragraph separator (**`#x2029`**) character.
 
 ```
-[#] ns-esc-paragraph-separator ::= "P"
+ns-esc-paragraph-separator ::= "P"
 ```
 
 Escaped 8-bit Unicode character.
 
 ```
-[#] ns-esc-8-bit ::=
+ns-esc-8-bit ::=
   "x"
-  ( ns-hex-digit × 2 )
+  ( ns-hex-digit * 2 )
 ```
 
 Escaped 16-bit Unicode character.
 
 ```
-[#] ns-esc-16-bit ::=
+ns-esc-16-bit ::=
   "u"
-  ( ns-hex-digit × 4 )
+  ( ns-hex-digit * 4 )
 ```
 
 Escaped 32-bit Unicode character.
 
 ```
-[#] ns-esc-32-bit ::=
+ns-esc-32-bit ::=
   "U"
-  ( ns-hex-digit × 8 )
+  ( ns-hex-digit * 8 )
 ```
 
 Any escaped character:
 
 ```
-[#] c-ns-esc-char ::=
+c-ns-esc-char ::=
   "\"
   ( ns-esc-null | ns-esc-bell | ns-esc-backspace
   | ns-esc-horizontal-tab | ns-esc-line-feed
@@ -2216,8 +2216,8 @@ The amount of indentation is a [presentation detail] and must not be used to
 convey [content] information.
 
 ```
-[#] s-indent(n) ::=
-  s-space × n
+s-indent(n) ::=
+  s-space * n
 ```
 
 A [block style] construct is terminated when encountering a line which is less
@@ -2226,13 +2226,13 @@ The productions use the notation "**`s-indent(<n)`**" and "**`s-indent(≤n)`**"
 to express this.
 
 ```
-[#] s-indent(<n) ::=
-  s-space × m /* Where m < n */
+s-indent(<n) ::=
+  s-space * m /* Where m < n */
 ```
 
 ```
-[#] s-indent(≤n) ::=
-  s-space × m /* Where m ≤ n */
+s-indent(<=n) ::=
+  s-space * m /* Where m <= n */
 ```
 
 Each [node] must be indented further than its parent [node].
@@ -2314,7 +2314,7 @@ Separation spaces are a [presentation detail] and must not be used to convey
 [content] information.
 
 ```
-[#] s-separate-in-line ::=
+s-separate-in-line ::=
   s-white+ | /* Start of line */
 ```
 
@@ -2348,19 +2348,19 @@ Line prefixes are a [presentation detail] and must not be used to convey
 [content] information.
 
 ```
-[#] s-line-prefix(n,c) ::=
-  c = block-out ⇒ s-block-line-prefix(n)
-  c = block-in  ⇒ s-block-line-prefix(n)
-  c = flow-out  ⇒ s-flow-line-prefix(n)
-  c = flow-in   ⇒ s-flow-line-prefix(n)
+s-line-prefix(n,c) ::=
+  c = block-out => s-block-line-prefix(n)
+  c = block-in  => s-block-line-prefix(n)
+  c = flow-out  => s-flow-line-prefix(n)
+  c = flow-in   => s-flow-line-prefix(n)
 ```
 
 ```
-[#] s-block-line-prefix(n) ::= s-indent(n)
+s-block-line-prefix(n) ::= s-indent(n)
 ```
 
 ```
-[#] s-flow-line-prefix(n) ::=
+s-flow-line-prefix(n) ::=
   s-indent(n) s-separate-in-line?
 ```
 
@@ -2397,7 +2397,7 @@ An _empty line_ line consists of the non-[content] [prefix] followed by a [line
 break].
 
 ```
-[#] l-empty(n,c) ::=
+l-empty(n,c) ::=
   ( s-line-prefix(n,c) | s-indent(<n) )
   b-as-line-feed
 ```
@@ -2436,7 +2436,7 @@ If a [line break] is followed by an [empty line], it is _trimmed_; the first
 [line break] is discarded and the rest are retained as [content].
 
 ```
-[#] b-l-trimmed(n,c) ::=
+b-l-trimmed(n,c) ::=
   b-non-content l-empty(n,c)+
 ```
 
@@ -2444,13 +2444,13 @@ Otherwise (the following line is not [empty]), the [line break] is converted to
 a single [space] (**`#x20`**).
 
 ```
-[#] b-as-space ::= b-break
+b-as-space ::= b-break
 ```
 
 A folded non-[empty line] may end with either of the above [line breaks].
 
 ```
-[#] b-l-folded(n,c) ::=
+b-l-folded(n,c) ::=
   b-l-trimmed(n,c) | b-as-space
 ```
 
@@ -2524,7 +2524,7 @@ Folding does distinguish between these cases in the following way:
 > information.
 
 ```
-[#] s-flow-folded(n) ::=
+s-flow-folded(n) ::=
   s-separate-in-line? b-l-folded(n,flow-in)
   s-flow-line-prefix(n)
 ```
@@ -2560,17 +2560,17 @@ However, as this confuses many tools, YAML [processors] should terminate the
 [stream] with an explicit [line break] on output.
 
 ```
-[#] c-nb-comment-text ::=
+c-nb-comment-text ::=
   "#" nb-char*
 ```
 
 ```
-[#] b-comment ::=
+b-comment ::=
   b-non-content | /* End of file */
 ```
 
 ```
-[#] s-b-comment ::=
+s-b-comment ::=
   ( s-separate-in-line c-nb-comment-text? )?
   b-comment
 ```
@@ -2599,7 +2599,7 @@ Note that outside [scalar content], a line containing only [white space]
 characters is taken to be a comment line.
 
 ```
-[#] l-comment ::=
+l-comment ::=
   s-separate-in-line c-nb-comment-text? b-comment
 ```
 
@@ -2622,7 +2622,7 @@ followed by additional comment lines.
 The only exception is a comment ending a [block scalar header].
 
 ```
-[#] s-l-comments ::=
+s-l-comments ::=
   ( s-b-comment | /* Start of line */ )
   l-comment*
 ```
@@ -2658,17 +2658,17 @@ Note that structures following multi-line comment separation must be properly
 [comment] lines themselves.
 
 ```
-[#] s-separate(n,c) ::=
-  c = block-out ⇒ s-separate-lines(n)
-  c = block-in  ⇒ s-separate-lines(n)
-  c = flow-out  ⇒ s-separate-lines(n)
-  c = flow-in   ⇒ s-separate-lines(n)
-  c = block-key ⇒ s-separate-in-line
-  c = flow-key  ⇒ s-separate-in-line
+s-separate(n,c) ::=
+  c = block-out => s-separate-lines(n)
+  c = block-in  => s-separate-lines(n)
+  c = flow-out  => s-separate-lines(n)
+  c = flow-in   => s-separate-lines(n)
+  c = block-key => s-separate-in-line
+  c = flow-key  => s-separate-in-line
 ```
 
 ```
-[#] s-separate-lines(n) ::=
+s-separate-lines(n) ::=
     ( s-l-comments s-flow-line-prefix(n) )
   | s-separate-in-line
 ```
@@ -2717,7 +2717,7 @@ Directives are a [presentation detail] and must not be used to convey [content]
 information.
 
 ```
-[#] l-directive ::=
+l-directive ::=
   "%"
   ( ns-yaml-directive
   | ns-tag-directive
@@ -2732,17 +2732,17 @@ A YAML [processor] should ignore unknown directives with an appropriate
 warning.
 
 ```
-[#] ns-reserved-directive ::=
+ns-reserved-directive ::=
   ns-directive-name
   ( s-separate-in-line ns-directive-parameter )*
 ```
 
 ```
-[#] ns-directive-name ::= ns-char+
+ns-directive-name ::= ns-char+
 ```
 
 ```
-[#] ns-directive-parameter ::= ns-char+
+ns-directive-parameter ::= ns-char+
 ```
 
 **Example #. Reserved Directives**
@@ -2786,13 +2786,13 @@ they were version 1.2, giving a warning on points of incompatibility (handling
 of [non-ASCII line breaks], as described [above]).
 
 ```
-[#] ns-yaml-directive ::=
+ns-yaml-directive ::=
   "Y" "A" "M" "L"
   s-separate-in-line ns-yaml-version
 ```
 
 ```
-[#] ns-yaml-version ::=
+ns-yaml-version ::=
   ns-dec-digit+ "." ns-dec-digit+
 ```
 
@@ -2835,7 +2835,7 @@ Each "**`TAG`**" directive associates a [handle] with a [prefix].
 This allows for compact and readable [tag] notation.
 
 ```
-[#] ns-tag-directive ::=
+ns-tag-directive ::=
   "T" "A" "G"
   s-separate-in-line c-tag-handle
   s-separate-in-line ns-tag-prefix
@@ -2879,7 +2879,7 @@ The _tag handle_ exactly matches the prefix of the affected [tag shorthand].
 There are three tag handle variants:
 
 ```
-[#] c-tag-handle ::=
+c-tag-handle ::=
     c-named-tag-handle
   | c-secondary-tag-handle
   | c-primary-tag-handle
@@ -2900,7 +2900,7 @@ There are three tag handle variants:
 > tags], by the simple addition of a single "**`TAG`**" directive.
 
 ```
-[#] c-primary-tag-handle ::= "!"
+c-primary-tag-handle ::= "!"
 ```
 
 **Example #. Primary Tag Handle**
@@ -2936,7 +2936,7 @@ There are three tag handle variants:
 > "**`TAG`**" directive associating a different prefix for this handle.
 
 ```
-[#] c-secondary-tag-handle ::=
+c-secondary-tag-handle ::=
   "!" "!"
 ```
 
@@ -2966,7 +2966,7 @@ There are three tag handle variants:
 > [parsing] is completed.
 
 ```
-[#] c-named-tag-handle ::=
+c-named-tag-handle ::=
   "!" ns-word-char+ "!"
 ```
 
@@ -2989,7 +2989,7 @@ There are three tag handle variants:
 There are two _tag prefix_ variants:
 
 ```
-[#] ns-tag-prefix ::=
+ns-tag-prefix ::=
   c-ns-local-tag-prefix | ns-global-tag-prefix
 ```
 
@@ -3003,7 +3003,7 @@ There are two _tag prefix_ variants:
 > semantics to the same [local tag].
 
 ```
-[#] c-ns-local-tag-prefix ::=
+c-ns-local-tag-prefix ::=
   "!" ns-uri-char*
 ```
 
@@ -3039,7 +3039,7 @@ There are two _tag prefix_ variants:
 > semantics to the same [global tag].
 
 ```
-[#] ns-global-tag-prefix ::=
+ns-global-tag-prefix ::=
   ns-tag-char ns-uri-char*
 ```
 
@@ -3065,7 +3065,7 @@ Node properties may be specified in any order before the [node’s content].
 Either or both may be omitted.
 
 ```
-[#] c-ns-properties(n,c) ::=
+c-ns-properties(n,c) ::=
     ( c-ns-tag-property
       ( s-separate(n,c) c-ns-anchor-property )? )
   | ( c-ns-anchor-property
@@ -3100,7 +3100,7 @@ The _tag property_ identifies the type of the [native data structure]
 A tag is denoted by the _"**`!`**" indicator_.
 
 ```
-[#] c-ns-tag-property ::=
+c-ns-tag-property ::=
     c-verbatim-tag
   | c-ns-shorthand-tag
   | c-non-specific-tag
@@ -3117,7 +3117,7 @@ A tag is denoted by the _"**`!`**" indicator_.
 > valid URI (a [global tag]).
 
 ```
-[#] c-verbatim-tag ::=
+c-verbatim-tag ::=
   "!" "<" ns-uri-char+ ">"
 ```
 
@@ -3178,7 +3178,7 @@ ERROR:
 > [RFC2396](http://www.ietf.org/rfc/rfc2396.txt)).
 
 ```
-[#] c-ns-shorthand-tag ::=
+c-ns-shorthand-tag ::=
   c-tag-handle ns-tag-char+
 ```
 
@@ -3234,7 +3234,7 @@ ERROR:
 > This is intentional.
 
 ```
-[#] c-non-specific-tag ::= "!"
+c-non-specific-tag ::= "!"
 ```
 
 **Example #. Non-Specific Tags**
@@ -3266,7 +3266,7 @@ An anchored [node] need not be referenced by any [alias nodes]; in particular,
 it is valid for all [nodes] to be anchored.
 
 ```
-[#] c-ns-anchor-property ::=
+c-ns-anchor-property ::=
   "&" ns-anchor-name
 ```
 
@@ -3282,12 +3282,12 @@ Anchor names must not contain the ["**`[`**"], ["**`]`**"], ["**`{`**"],
 These characters would cause ambiguity with [flow collection] structures.
 
 ```
-[#] ns-anchor-char ::=
+ns-anchor-char ::=
   ns-char - c-flow-indicator
 ```
 
 ```
-[#] ns-anchor-name ::= ns-anchor-char+
+ns-anchor-name ::= ns-anchor-char+
 ```
 
 **Example #. Node Anchors**
@@ -3333,7 +3333,7 @@ Note that an alias node must not specify any [properties] or [content], as
 these were already specified at the first occurrence of the [node].
 
 ```
-[#] c-ns-alias-node ::=
+c-ns-alias-node ::=
   "*" ns-anchor-name
 ```
 
@@ -3369,7 +3369,7 @@ YAML allows the [node content] to be omitted in many cases. [Nodes] with empty
 Such [nodes] are commonly resolved to a ["**`null`**"] value.
 
 ```
-[#] e-scalar ::=
+e-scalar ::=
   /* Empty */
 ```
 
@@ -3402,7 +3402,7 @@ Completely empty nodes are only valid when following some explicit indication
 for their existence.
 
 ```
-[#] e-node ::= e-scalar
+e-node ::= e-scalar
 ```
 
 **Example #. Completely Empty Flow Nodes**
@@ -3442,12 +3442,12 @@ This comes at the cost of having to escape the ["**`\`**"] and "**`"`**"
 characters.
 
 ```
-[#] nb-double-char ::=
+nb-double-char ::=
   c-ns-esc-char | ( nb-json - "\" - """ )
 ```
 
 ```
-[#] ns-double-char ::=
+ns-double-char ::=
   nb-double-char - s-white
 ```
 
@@ -3455,20 +3455,20 @@ Double-quoted scalars are restricted to a single line when contained inside an
 [implicit key].
 
 ```
-[#] c-double-quoted(n,c) ::=
+c-double-quoted(n,c) ::=
   """ nb-double-text(n,c) """
 ```
 
 ```
-[#] nb-double-text(n,c) ::=
-  c = flow-out  ⇒ nb-double-multi-line(n)
-  c = flow-in   ⇒ nb-double-multi-line(n)
-  c = block-key ⇒ nb-double-one-line
-  c = flow-key  ⇒ nb-double-one-line
+nb-double-text(n,c) ::=
+  c = flow-out  => nb-double-multi-line(n)
+  c = flow-in   => nb-double-multi-line(n)
+  c = block-key => nb-double-one-line
+  c = flow-key  => nb-double-one-line
 ```
 
 ```
-[#] nb-double-one-line ::= nb-double-char*
+nb-double-one-line ::= nb-double-char*
 ```
 
 **Example #. Double Quoted Implicit Keys**
@@ -3503,13 +3503,13 @@ Combined with the ability to [escape] [white space] characters, this allows
 double-quoted lines to be broken at arbitrary positions.
 
 ```
-[#] s-double-escaped(n) ::=
+s-double-escaped(n) ::=
   s-white* "\" b-non-content
   l-empty(n,flow-in)* s-flow-line-prefix(n)
 ```
 
 ```
-[#] s-double-break(n) ::=
+s-double-break(n) ::=
   s-double-escaped(n) | s-flow-folded(n)
 ```
 
@@ -3538,19 +3538,19 @@ Each continuation line must therefore contain at least one non-[space] character
 Empty lines, if any, are consumed as part of the [line folding].
 
 ```
-[#] nb-ns-double-in-line ::=
+nb-ns-double-in-line ::=
   ( s-white* ns-double-char )*
 ```
 
 ```
-[#] s-double-next-line(n) ::=
+s-double-next-line(n) ::=
   s-double-break(n)
   ( ns-double-char nb-ns-double-in-line
     ( s-double-next-line(n) | s-white* ) )?
 ```
 
 ```
-[#] nb-double-multi-line(n) ::=
+nb-double-multi-line(n) ::=
   nb-ns-double-in-line
   ( s-double-next-line(n) | s-white* )
 ```
@@ -3584,17 +3584,17 @@ In addition, it is only possible to break a long single-quoted line where a
 [space] character is surrounded by non-[spaces].
 
 ```
-[#] c-quoted-quote ::=
+c-quoted-quote ::=
   "'" "'"
 ```
 
 ```
-[#] nb-single-char ::=
+nb-single-char ::=
   c-quoted-quote | ( nb-json - "'" )
 ```
 
 ```
-[#] ns-single-char ::=
+ns-single-char ::=
   nb-single-char - s-white
 ```
 
@@ -3614,20 +3614,20 @@ Single-quoted scalars are restricted to a single line when contained inside a
 [implicit key].
 
 ```
-[#] c-single-quoted(n,c) ::=
+c-single-quoted(n,c) ::=
   "'" nb-single-text(n,c) "'"
 ```
 
 ```
-[#] nb-single-text(n,c) ::=
-  c = flow-out  ⇒ nb-single-multi-line(n)
-  c = flow-in   ⇒ nb-single-multi-line(n)
-  c = block-key ⇒ nb-single-one-line
-  c = flow-key  ⇒ nb-single-one-line
+nb-single-text(n,c) ::=
+  c = flow-out  => nb-single-multi-line(n)
+  c = flow-in   => nb-single-multi-line(n)
+  c = block-key => nb-single-one-line
+  c = flow-key  => nb-single-one-line
 ```
 
 ```
-[#] nb-single-one-line ::= nb-single-char*
+nb-single-one-line ::= nb-single-char*
 ```
 
 **Example #. Single Quoted Implicit Keys**
@@ -3659,19 +3659,19 @@ Each continuation line must therefore contain at least one non-[space] character
 Empty lines, if any, are consumed as part of the [line folding].
 
 ```
-[#] nb-ns-single-in-line ::=
+nb-ns-single-in-line ::=
   ( s-white* ns-single-char )*
 ```
 
 ```
-[#] s-single-next-line(n) ::=
+s-single-next-line(n) ::=
   s-flow-folded(n)
   ( ns-single-char nb-ns-single-in-line
     ( s-single-next-line(n) | s-white* ) )?
 ```
 
 ```
-[#] nb-single-multi-line(n) ::=
+nb-single-multi-line(n) ::=
   nb-ns-single-in-line
   ( s-single-next-line(n) | s-white* )
 ```
@@ -3712,7 +3712,7 @@ as the first character if followed by a non-[space] "safe" character, as this
 causes no ambiguity.
 
 ```
-[#] ns-plain-first(c) ::=
+ns-plain-first(c) ::=
     ( ns-char - c-indicator )
   | ( ( "?" | ":" | "-" )
       /* Followed by an ns-plain-safe(c)) */ )
@@ -3728,24 +3728,24 @@ and ["**`,`**"] characters.
 These characters would cause ambiguity with [flow collection] structures.
 
 ```
-[#] ns-plain-safe(c) ::=
-  c = flow-out  ⇒ ns-plain-safe-out
-  c = flow-in   ⇒ ns-plain-safe-in
-  c = block-key ⇒ ns-plain-safe-out
-  c = flow-key  ⇒ ns-plain-safe-in
+ns-plain-safe(c) ::=
+  c = flow-out  => ns-plain-safe-out
+  c = flow-in   => ns-plain-safe-in
+  c = block-key => ns-plain-safe-out
+  c = flow-key  => ns-plain-safe-in
 ```
 
 ```
-[#] ns-plain-safe-out ::= ns-char
+ns-plain-safe-out ::= ns-char
 ```
 
 ```
-[#] ns-plain-safe-in ::=
+ns-plain-safe-in ::=
   ns-char - c-flow-indicator
 ```
 
 ```
-[#] ns-plain-char(c) ::=
+ns-plain-char(c) ::=
     ( ns-plain-safe(c) - ":" - "#" )
   | ( /* An ns-char preceding */ "#" )
   | ( ":" /* Followed by an ns-plain-safe(c) */ )
@@ -3792,20 +3792,20 @@ Plain scalars are further restricted to a single line when contained inside an
 [implicit key].
 
 ```
-[#] ns-plain(n,c) ::=
-  c = flow-out  ⇒ ns-plain-multi-line(n,c)
-  c = flow-in   ⇒ ns-plain-multi-line(n,c)
-  c = block-key ⇒ ns-plain-one-line(c)
-  c = flow-key  ⇒ ns-plain-one-line(c)
+ns-plain(n,c) ::=
+  c = flow-out  => ns-plain-multi-line(n,c)
+  c = flow-in   => ns-plain-multi-line(n,c)
+  c = block-key => ns-plain-one-line(c)
+  c = flow-key  => ns-plain-one-line(c)
 ```
 
 ```
-[#] nb-ns-plain-in-line(c) ::=
+nb-ns-plain-in-line(c) ::=
   ( s-white* ns-plain-char(c) )*
 ```
 
 ```
-[#] ns-plain-one-line(c) ::=
+ns-plain-one-line(c) ::=
   ns-plain-first(c) nb-ns-plain-in-line(c)
 ```
 
@@ -3837,13 +3837,13 @@ Each continuation line must therefore contain at least one non-[space] character
 Empty lines, if any, are consumed as part of the [line folding].
 
 ```
-[#] s-ns-plain-next-line(n,c) ::=
+s-ns-plain-next-line(n,c) ::=
   s-flow-folded(n)
   ns-plain-char(c) nb-ns-plain-in-line(c)
 ```
 
 ```
-[#] ns-plain-multi-line(n,c) ::=
+ns-plain-multi-line(n,c) ::=
   ns-plain-one-line(c)
   s-ns-plain-next-line(n,c)*
 ```
@@ -3878,11 +3878,11 @@ This does not cause ambiguity because flow collection entries can never be
 [completely empty].
 
 ```
-[#] in-flow(c) ::=
-  c = flow-out  ⇒ flow-in
-  c = flow-in   ⇒ flow-in
-  c = block-key ⇒ flow-key
-  c = flow-key  ⇒ flow-key
+in-flow(c) ::=
+  c = flow-out  => flow-in
+  c = flow-in   => flow-in
+  c = block-key => flow-key
+  c = flow-key  => flow-key
 ```
 
 ### #. Flow Sequences
@@ -3891,7 +3891,7 @@ _Flow sequence content_ is denoted by surrounding _"**`[`**"_ and _"**`]`**"_
 characters.
 
 ```
-[#] c-flow-sequence(n,c) ::=
+c-flow-sequence(n,c) ::=
   "[" s-separate(n,c)?
   ns-s-flow-seq-entries(n,in-flow(c))? "]"
 ```
@@ -3899,7 +3899,7 @@ characters.
 Sequence entries are separated by a ["**`,`**"] character.
 
 ```
-[#] ns-s-flow-seq-entries(n,c) ::=
+ns-s-flow-seq-entries(n,c) ::=
   ns-flow-seq-entry(n,c) s-separate(n,c)?
   ( "," s-separate(n,c)?
     ns-s-flow-seq-entries(n,c)? )?
@@ -3933,7 +3933,7 @@ In addition, YAML provides a [compact notation] for the case where a flow
 sequence entry is a [mapping] with a [single key: value pair].
 
 ```
-[#] ns-flow-seq-entry(n,c) ::=
+ns-flow-seq-entry(n,c) ::=
   ns-flow-pair(n,c) | ns-flow-node(n,c)
 ```
 
@@ -3974,7 +3974,7 @@ _Flow mappings_ are denoted by surrounding _"**`{`**"_ and _"**`}`**"_
 characters.
 
 ```
-[#] c-flow-mapping(n,c) ::=
+c-flow-mapping(n,c) ::=
   "{" s-separate(n,c)?
   ns-s-flow-map-entries(n,in-flow(c))? "}"
 ```
@@ -3982,7 +3982,7 @@ characters.
 Mapping entries are separated by a ["**`,`**"] character.
 
 ```
-[#] ns-s-flow-map-entries(n,c) ::=
+ns-s-flow-map-entries(n,c) ::=
   ns-flow-map-entry(n,c) s-separate(n,c)?
   ( "," s-separate(n,c)?
     ns-s-flow-map-entries(n,c)? )?
@@ -4015,14 +4015,14 @@ If the optional _"**`?`**" mapping key indicator_ is specified, the rest of the
 entry may be [completely empty].
 
 ```
-[#] ns-flow-map-entry(n,c) ::=
+ns-flow-map-entry(n,c) ::=
     ( "?" s-separate(n,c)
       ns-flow-map-explicit-entry(n,c) )
   | ns-flow-map-implicit-entry(n,c)
 ```
 
 ```
-[#] ns-flow-map-explicit-entry(n,c) ::=
+ns-flow-map-explicit-entry(n,c) ::=
     ns-flow-map-implicit-entry(n,c)
   | ( e-node /* Key */
       e-node /* Value */ )
@@ -4062,14 +4062,14 @@ Note that the [value] may be [completely empty] since its existence is
 indicated by the "**`:`**".
 
 ```
-[#] ns-flow-map-implicit-entry(n,c) ::=
+ns-flow-map-implicit-entry(n,c) ::=
     ns-flow-map-yaml-key-entry(n,c)
   | c-ns-flow-map-empty-key-entry(n,c)
   | c-ns-flow-map-json-key-entry(n,c)
 ```
 
 ```
-[#] ns-flow-map-yaml-key-entry(n,c) ::=
+ns-flow-map-yaml-key-entry(n,c) ::=
   ns-flow-yaml-node(n,c)
   ( ( s-separate(n,c)?
       c-ns-flow-map-separate-value(n,c) )
@@ -4077,13 +4077,13 @@ indicated by the "**`:`**".
 ```
 
 ```
-[#] c-ns-flow-map-empty-key-entry(n,c) ::=
+c-ns-flow-map-empty-key-entry(n,c) ::=
   e-node /* Key */
   c-ns-flow-map-separate-value(n,c)
 ```
 
 ```
-[#] c-ns-flow-map-separate-value(n,c) ::=
+c-ns-flow-map-separate-value(n,c) ::=
   ":" /* Not followed by an
          ns-plain-safe(c) */
   ( ( s-separate(n,c) ns-flow-node(n,c) )
@@ -4123,7 +4123,7 @@ However, as this greatly reduces readability, YAML [processors] should
 [separate] the [value] from the "**`:`**" on output, even in this case.
 
 ```
-[#] c-ns-flow-map-json-key-entry(n,c) ::=
+c-ns-flow-map-json-key-entry(n,c) ::=
   c-flow-json-node(n,c)
   ( ( s-separate(n,c)?
       c-ns-flow-map-adjacent-value(n,c) )
@@ -4131,7 +4131,7 @@ However, as this greatly reduces readability, YAML [processors] should
 ```
 
 ```
-[#] c-ns-flow-map-adjacent-value(n,c) ::=
+c-ns-flow-map-adjacent-value(n,c) ::=
   ":" ( ( s-separate(n,c)?
           ns-flow-node(n,c) )
       | e-node ) /* Value */
@@ -4186,7 +4186,7 @@ If the "**`?`**" indicator is explicitly specified, [parsing] is unambiguous,
 and the syntax is identical to the general case.
 
 ```
-[#] ns-flow-pair(n,c) ::=
+ns-flow-pair(n,c) ::=
     ( "?" s-separate(n,c)
       ns-flow-map-explicit-entry(n,c) )
   | ns-flow-pair-entry(n,c)
@@ -4224,32 +4224,32 @@ Thus, without the above restrictions, practical one-pass [parsing] would have
 been impossible to implement.
 
 ```
-[#] ns-flow-pair-entry(n,c) ::=
+ns-flow-pair-entry(n,c) ::=
     ns-flow-pair-yaml-key-entry(n,c)
   | c-ns-flow-map-empty-key-entry(n,c)
   | c-ns-flow-pair-json-key-entry(n,c)
 ```
 
 ```
-[#] ns-flow-pair-yaml-key-entry(n,c) ::=
+ns-flow-pair-yaml-key-entry(n,c) ::=
   ns-s-implicit-yaml-key(flow-key)
   c-ns-flow-map-separate-value(n,c)
 ```
 
 ```
-[#] c-ns-flow-pair-json-key-entry(n,c) ::=
+c-ns-flow-pair-json-key-entry(n,c) ::=
   c-s-implicit-json-key(flow-key)
   c-ns-flow-map-adjacent-value(n,c)
 ```
 
 ```
-[#] ns-s-implicit-yaml-key(c) ::=
+ns-s-implicit-yaml-key(c) ::=
   ns-flow-yaml-node(n/a,c) s-separate-in-line?
   /* At most 1024 characters altogether */
 ```
 
 ```
-[#] c-s-implicit-json-key(c) ::=
+c-s-implicit-json-key(c) ::=
   c-flow-json-node(n/a,c) s-separate-in-line?
   /* At most 1024 characters altogether */
 ```
@@ -4311,17 +4311,17 @@ Note that none of the "JSON-like" styles is actually acceptable by JSON.
 Even the [double-quoted style] is a superset of the JSON string format.
 
 ```
-[#] ns-flow-yaml-content(n,c) ::= ns-plain(n,c)
+ns-flow-yaml-content(n,c) ::= ns-plain(n,c)
 ```
 
 ```
-[#] c-flow-json-content(n,c) ::=
+c-flow-json-content(n,c) ::=
     c-flow-sequence(n,c) | c-flow-mapping(n,c)
   | c-single-quoted(n,c) | c-double-quoted(n,c)
 ```
 
 ```
-[#] ns-flow-content(n,c) ::=
+ns-flow-content(n,c) ::=
   ns-flow-yaml-content(n,c) | c-flow-json-content(n,c)
 ```
 
@@ -4352,7 +4352,7 @@ A complete [flow] [node] also has optional [node properties], except for [alias
 nodes] which refer to the [anchored] [node properties].
 
 ```
-[#] ns-flow-yaml-node(n,c) ::=
+ns-flow-yaml-node(n,c) ::=
     c-ns-alias-node
   | ns-flow-yaml-content(n,c)
   | ( c-ns-properties(n,c)
@@ -4362,13 +4362,13 @@ nodes] which refer to the [anchored] [node properties].
 ```
 
 ```
-[#] c-flow-json-node(n,c) ::=
+c-flow-json-node(n,c) ::=
   ( c-ns-properties(n,c) s-separate(n,c) )?
   c-flow-json-content(n,c)
 ```
 
 ```
-[#] ns-flow-node(n,c) ::=
+ns-flow-node(n,c) ::=
     c-ns-alias-node
   | ns-flow-content(n,c)
   | ( c-ns-properties(n,c)
@@ -4420,7 +4420,7 @@ This is the only case where a [comment] must not be followed by additional
 [comment] lines.
 
 ```
-[#] c-b-block-header(m,t) ::=
+c-b-block-header(m,t) ::=
   ( ( c-indentation-indicator(m)
       c-chomping-indicator(t) )
   | ( c-chomping-indicator(t)
@@ -4474,9 +4474,9 @@ node, though a YAML [processor] should only emit an explicit indentation
 indicator for cases where detection will fail.
 
 ```
-[#] c-indentation-indicator(m) ::=
-  ns-dec-digit ⇒ m = ns-dec-digit - #x30
-  /* Empty */  ⇒ m = auto-detect()
+c-indentation-indicator(m) ::=
+  ns-dec-digit => m = ns-dec-digit - #x30
+  /* Empty */  => m = auto-detect()
 ```
 
 **Example #. Block Indentation Indicator**
@@ -4559,20 +4559,20 @@ The chomping method used is a [presentation detail] and must not be used to
 convey [content] information.
 
 ```
-[#] c-chomping-indicator(t) ::=
-  "-"         ⇒ t = strip
-  "+"         ⇒ t = keep
-  /* Empty */ ⇒ t = clip
+c-chomping-indicator(t) ::=
+  "-"         => t = strip
+  "+"         => t = keep
+  /* Empty */ => t = clip
 ```
 
 The interpretation of the final [line break] of a [block scalar] is controlled
 by the chomping indicator specified in the [block scalar header].
 
 ```
-[#] b-chomped-last(t) ::=
-  t = strip ⇒ b-non-content | /* End of file */
-  t = clip  ⇒ b-as-line-feed | /* End of file */
-  t = keep  ⇒ b-as-line-feed | /* End of file */
+b-chomped-last(t) ::=
+  t = strip => b-non-content | /* End of file */
+  t = clip  => b-as-line-feed | /* End of file */
+  t = keep  => b-as-line-feed | /* End of file */
 ```
 
 **Example #. Chomping Final Line Break**
@@ -4605,20 +4605,20 @@ also controlled by the chomping indicator specified in the [block scalar
 header].
 
 ```
-[#] l-chomped-empty(n,t) ::=
-  t = strip ⇒ l-strip-empty(n)
-  t = clip  ⇒ l-strip-empty(n)
-  t = keep  ⇒ l-keep-empty(n)
+l-chomped-empty(n,t) ::=
+  t = strip => l-strip-empty(n)
+  t = clip  => l-strip-empty(n)
+  t = keep  => l-keep-empty(n)
 ```
 
 ```
-[#] l-strip-empty(n) ::=
-  ( s-indent(≤n) b-non-content )*
+l-strip-empty(n) ::=
+  ( s-indent(<=n) b-non-content )*
   l-trail-comments(n)?
 ```
 
 ```
-[#] l-keep-empty(n) ::=
+l-keep-empty(n) ::=
   l-empty(n,block-in)*
   l-trail-comments(n)?
 ```
@@ -4631,7 +4631,7 @@ This is the only case where the [indentation] of [comment] lines is
 constrained.
 
 ```
-[#] l-trail-comments(n) ::=
+l-trail-comments(n) ::=
   s-indent(<n) c-nb-comment-text b-comment
   l-comment*
 ```
@@ -4709,7 +4709,7 @@ The _literal style_ is denoted by the _"**`|`**" indicator_.
 It is the simplest, most restricted, and most readable [scalar style].
 
 ```
-[#] c-l+literal(n) ::=
+c-l+literal(n) ::=
   "|" c-b-block-header(m,t)
   l-literal-content(n+m,t)
 ```
@@ -4740,19 +4740,19 @@ This restricts them to [printable] characters.
 In addition, there is no way to break a long literal line.
 
 ```
-[#] l-nb-literal-text(n) ::=
+l-nb-literal-text(n) ::=
   l-empty(n,block-in)*
   s-indent(n) nb-char+
 ```
 
 ```
-[#] b-nb-literal-next(n) ::=
+b-nb-literal-next(n) ::=
   b-as-line-feed
   l-nb-literal-text(n)
 ```
 
 ```
-[#] l-literal-content(n,t) ::=
+l-literal-content(n,t) ::=
   ( l-nb-literal-text(n) b-nb-literal-next(n)*
     b-chomped-last(t) )?
   l-chomped-empty(n,t)
@@ -4788,7 +4788,7 @@ It is similar to the [literal style]; however, folded scalars are subject to
 [line folding].
 
 ```
-[#] c-l+folded(n) ::=
+c-l+folded(n) ::=
   ">" c-b-block-header(m,t)
   l-folded-content(n+m,t)
 ```
@@ -4812,12 +4812,12 @@ It is similar to the [literal style]; however, folded scalars are subject to
 separates two non-[space] characters.
 
 ```
-[#] s-nb-folded-text(n) ::=
+s-nb-folded-text(n) ::=
   s-indent(n) ns-char nb-char*
 ```
 
 ```
-[#] l-nb-folded-lines(n) ::=
+l-nb-folded-lines(n) ::=
   s-nb-folded-text(n)
   ( b-l-folded(n,block-in) s-nb-folded-text(n) )*
 ```
@@ -4864,18 +4864,18 @@ Lines starting with [white space] characters (_more-indented_ lines) are not
 [folded].
 
 ```
-[#] s-nb-spaced-text(n) ::=
+s-nb-spaced-text(n) ::=
   s-indent(n) s-white nb-char*
 ```
 
 ```
-[#] b-l-spaced(n) ::=
+b-l-spaced(n) ::=
   b-as-line-feed
   l-empty(n,block-in)*
 ```
 
 ```
-[#] l-nb-spaced-lines(n) ::=
+l-nb-spaced-lines(n) ::=
   s-nb-spaced-text(n)
   ( b-l-spaced(n) s-nb-spaced-text(n) )*
 ```
@@ -4919,13 +4919,13 @@ Lines starting with [white space] characters (_more-indented_ lines) are not
 also not [folded].
 
 ```
-[#] l-nb-same-lines(n) ::=
+l-nb-same-lines(n) ::=
   l-empty(n,block-in)*
   ( l-nb-folded-lines(n) | l-nb-spaced-lines(n) )
 ```
 
 ```
-[#] l-nb-diff-lines(n) ::=
+l-nb-diff-lines(n) ::=
   l-nb-same-lines(n)
   ( b-as-line-feed l-nb-same-lines(n) )*
 ```
@@ -4971,7 +4971,7 @@ The final [line break], and trailing [empty lines] if any, are subject to
 [chomping] and are never [folded].
 
 ```
-[#] l-folded-content(n,t) ::=
+l-folded-content(n,t) ::=
   ( l-nb-diff-lines(n) b-chomped-last(t) )?
   l-chomped-empty(n,t)
 ```
@@ -5027,13 +5027,13 @@ This allows "**`-`**" to be used as the first character in a [plain scalar] if
 followed by a non-space character (e.g. "**`-1`**").
 
 ```
-[#] l+block-sequence(n) ::=
+l+block-sequence(n) ::=
   ( s-indent(n+m) c-l-block-seq-entry(n+m) )+
   /* For some fixed auto-detected m > 0 */
 ```
 
 ```
-[#] c-l-block-seq-entry(n) ::=
+c-l-block-seq-entry(n) ::=
   "-" /* Not followed by an ns-char */
   s-l+block-indented(n,block-in)
 ```
@@ -5072,7 +5072,7 @@ Note that it is not possible to specify [node properties] for such a
 [collection].
 
 ```
-[#] s-l+block-indented(n,c) ::=
+s-l+block-indented(n,c) ::=
     ( s-indent(m)
       ( ns-l-compact-sequence(n+1+m)
       | ns-l-compact-mapping(n+1+m) ) )
@@ -5081,7 +5081,7 @@ Note that it is not possible to specify [node properties] for such a
 ```
 
 ```
-[#] ns-l-compact-sequence(n) ::=
+ns-l-compact-sequence(n) ::=
   c-l-block-seq-entry(n)
   ( s-indent(n) c-l-block-seq-entry(n) )*
 ```
@@ -5123,7 +5123,7 @@ A _Block mapping_ is a series of entries, each [presenting] a [key: value
 pair].
 
 ```
-[#] l+block-mapping(n) ::=
+l+block-mapping(n) ::=
   ( s-indent(n+m) ns-l-block-map-entry(n+m) )+
   /* For some fixed auto-detected m > 0 */
 ```
@@ -5154,25 +5154,25 @@ Note that YAML allows here the same [compact in-line notation] described above
 for [block sequence] entries.
 
 ```
-[#] ns-l-block-map-entry(n) ::=
+ns-l-block-map-entry(n) ::=
     c-l-block-map-explicit-entry(n)
   | ns-l-block-map-implicit-entry(n)
 ```
 
 ```
-[#] c-l-block-map-explicit-entry(n) ::=
+c-l-block-map-explicit-entry(n) ::=
   c-l-block-map-explicit-key(n)
   ( l-block-map-explicit-value(n)
   | e-node )
 ```
 
 ```
-[#] c-l-block-map-explicit-key(n) ::=
+c-l-block-map-explicit-key(n) ::=
   "?" s-l+block-indented(n,block-out)
 ```
 
 ```
-[#] l-block-map-explicit-value(n) ::=
+l-block-map-explicit-value(n) ::=
   s-indent(n)
   ":" s-l+block-indented(n,block-out)
 ```
@@ -5210,14 +5210,14 @@ Hence, such [keys] are subject to the same restrictions; they are limited to a
 single line and must not span more than 1024 Unicode characters.
 
 ```
-[#] ns-l-block-map-implicit-entry(n) ::=
+ns-l-block-map-implicit-entry(n) ::=
   ( ns-s-block-map-implicit-key
   | e-node )
   c-l-block-map-implicit-value(n)
 ```
 
 ```
-[#] ns-s-block-map-implicit-key ::=
+ns-s-block-map-implicit-key ::=
     c-s-implicit-json-key(block-key)
   | ns-s-implicit-yaml-key(block-key)
 ```
@@ -5234,7 +5234,7 @@ the ["**`:`**"] indicator is mandatory.
 This prevents a potential ambiguity with multi-line [plain scalars].
 
 ```
-[#] c-l-block-map-implicit-value(n) ::=
+c-l-block-map-implicit-value(n) ::=
   ":" ( s-l+block-node(n,block-out)
       | ( e-node s-l-comments ) )
 ```
@@ -5269,7 +5269,7 @@ Note that it is not possible to specify [node properties] for such a nested
 mapping.
 
 ```
-[#] ns-l-compact-mapping(n) ::=
+ns-l-compact-mapping(n) ::=
   ns-l-block-map-entry(n)
   ( s-indent(n) ns-l-block-map-entry(n) )*
 ```
@@ -5313,12 +5313,12 @@ It is at this point that [parsing] needs to distinguish between a [plain
 scalar] and an [implicit key] starting a nested [block mapping].
 
 ```
-[#] s-l+block-node(n,c) ::=
+s-l+block-node(n,c) ::=
   s-l+block-in-block(n,c) | s-l+flow-in-block(n)
 ```
 
 ```
-[#] s-l+flow-in-block(n) ::=
+s-l+flow-in-block(n) ::=
   s-separate(n+1,flow-out)
   ns-flow-node(n+1,flow-out) s-l-comments
 ```
@@ -5354,12 +5354,12 @@ In this case, they must be [indented] by at least one more [space] than the
 entries.
 
 ```
-[#] s-l+block-in-block(n,c) ::=
+s-l+block-in-block(n,c) ::=
   s-l+block-scalar(n,c) | s-l+block-collection(n,c)
 ```
 
 ```
-[#] s-l+block-scalar(n,c) ::=
+s-l+block-scalar(n,c) ::=
   s-separate(n+1,c)
   ( c-ns-properties(n+1,c) s-separate(n+1,c) )?
   ( c-l+literal(n) | c-l+folded(n) )
@@ -5394,7 +5394,7 @@ course, if nested inside another [block sequence] ([**`block-out`** context]
 vs. [**`block-in`** context]).
 
 ```
-[#] s-l+block-collection(n,c) ::=
+s-l+block-collection(n,c) ::=
   ( s-separate(n+1,c) c-ns-properties(n+1,c) )?
   s-l-comments
   ( l+block-sequence(seq-spaces(n,c))
@@ -5402,9 +5402,9 @@ vs. [**`block-in`** context]).
 ```
 
 ```
-[#] seq-spaces(n,c) ::=
-  c = block-out ⇒ n-1
-  c = block-in  ⇒ n
+seq-spaces(n,c) ::=
+  c = block-out => n-1
+  c = block-in  => n
 ```
 
 **Example #. Block Collection Nodes**
@@ -5456,7 +5456,7 @@ The existence of the optional prefix does not necessarily indicate the
 existence of an actual [document].
 
 ```
-[#] l-document-prefix ::=
+l-document-prefix ::=
   c-byte-order-mark? l-comment*
 ```
 
@@ -5501,22 +5501,22 @@ Obviously, the actual [content] lines are therefore forbidden to begin with
 either of these markers.
 
 ```
-[#] c-directives-end ::=
+c-directives-end ::=
   "-" "-" "-"
 ```
 
 ```
-[#] c-document-end ::=
+c-document-end ::=
   "." "." "."
 ```
 
 ```
-[#] l-document-suffix ::=
+l-document-suffix ::=
   c-document-end s-l-comments
 ```
 
 ```
-[#] c-forbidden ::=
+c-forbidden ::=
   /* Start of line */
   ( c-directives-end | c-document-end )
   ( b-char | s-white | /* End of file */ )
@@ -5552,7 +5552,7 @@ Since a [node] must be more [indented] than its parent [node], this allows the
 document’s [node] to be [indented] at zero or more [spaces].
 
 ```
-[#] l-bare-document ::=
+l-bare-document ::=
   s-l+block-node(-1,block-in)
   /* Excluding c-forbidden content */
 ```
@@ -5586,7 +5586,7 @@ Since the existence of the [document] is indicated by this [marker], the
 [document] itself may be [completely empty].
 
 ```
-[#] l-explicit-document ::=
+l-explicit-document ::=
   c-directives-end
   ( l-bare-document
   | ( e-node s-l-comments ) )
@@ -5622,7 +5622,7 @@ A _directives document_ begins with some [directives] followed by an explicit
 [directives end marker] line.
 
 ```
-[#] l-directive-document ::=
+l-directive-document ::=
   l-directive+
   l-explicit-document
 ```
@@ -5661,14 +5661,14 @@ The stream format is intentionally "sloppy" to better support common use cases,
 such as stream concatenation.
 
 ```
-[#] l-any-document ::=
+l-any-document ::=
     l-directive-document
   | l-explicit-document
   | l-bare-document
 ```
 
 ```
-[#] l-yaml-stream ::=
+l-yaml-stream ::=
   l-document-prefix* l-any-document?
   ( l-document-suffix+ l-document-prefix* l-any-document?
   | l-document-prefix* l-explicit-document? )*
