@@ -236,16 +236,43 @@ sub fmt_indent {
   undefined_links();
 }
 
+sub format_rule_link {
+  my ($link, $suff) = @_;
+  my $text = $link;
+
+  $link =~ s/\(
+    (?: n | n\+1 | -1 ),
+    (?:
+      c |
+      (?: block | flow )-(?: in | out ) |
+      in-flow\(c\)
+    )
+  \)/(n,c)/x;
+
+  $link =~ s/\((?:block|flow)-key\)/(c)/;
+
+  $link =~ s/\(n\+m,t\)/(n,t)/;
+
+  $link =~ s/\(n\+1\+m\)/(n)/;
+  $link =~ s/\(n\+m\)/(n)/;
+
+  $link =~ s/\+/-/g;
+
+  qq{<a href="#rule-$link">$text</a>$suff};
+}
+
 my $num = 0;
 sub fmt_pre {
   my $pre = format_pre($_);
   if (/(\S+)\s+::=/) {
     my $rule = $1;
     $num++;
-    $pre =~ s/\[\#\]/[$num]/;
-    $pre =~ s/<pre>/<pre class="rule">/;
-    # $pre =~ s/(\b(?:ns|nb|s|l)-\S*)/<a href="rule-$1">$1<\/a>/g;
+    $pre =~ s{<pre>\n}{<pre class="rule">\n[$num] };
+    $pre =~
+        s{(\b(?:[bcels]|n[bs])-\S*?)([\+\*\?]?(?:\s|\z))(?!::=)}
+         {format_rule_link($1,$2)}ge;
     chomp $pre;
+    $rule =~ s/\+/-/g;
     $pre = <<"...";
 <div id="rule-$rule" />
 $pre
