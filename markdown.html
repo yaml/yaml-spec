@@ -2134,7 +2134,7 @@ Escaped 8-bit Unicode character.
 ```
 ns-esc-8-bit ::=
   "x"
-  ( ns-hex-digit × 2 )
+  ( ns-hex-digit * 2 )
 ```
 
 Escaped 16-bit Unicode character.
@@ -2142,7 +2142,7 @@ Escaped 16-bit Unicode character.
 ```
 ns-esc-16-bit ::=
   "u"
-  ( ns-hex-digit × 4 )
+  ( ns-hex-digit * 4 )
 ```
 
 Escaped 32-bit Unicode character.
@@ -2150,7 +2150,7 @@ Escaped 32-bit Unicode character.
 ```
 ns-esc-32-bit ::=
   "U"
-  ( ns-hex-digit × 8 )
+  ( ns-hex-digit * 8 )
 ```
 
 Any escaped character:
@@ -2218,7 +2218,7 @@ convey [content] information.
 
 ```
 s-indent(n) ::=
-  s-space × n
+  s-space * n
 ```
 
 A [block style] construct is terminated when encountering a line which is less
@@ -2228,12 +2228,12 @@ to express this.
 
 ```
 s-indent(&lt;n) ::=
-  s-space × m /* Where m &lt; n */
+  s-space * m /* Where m &lt; n */
 ```
 
 ```
-s-indent(≤n) ::=
-  s-space × m /* Where m ≤ n */
+s-indent(&lt;=n) ::=
+  s-space * m /* Where m &lt;= n */
 ```
 
 Each [node] must be indented further than its parent [node].
@@ -2350,10 +2350,10 @@ Line prefixes are a [presentation detail] and must not be used to convey
 
 ```
 s-line-prefix(n,c) ::=
-  c = block-out ⇒ s-block-line-prefix(n)
-  c = block-in  ⇒ s-block-line-prefix(n)
-  c = flow-out  ⇒ s-flow-line-prefix(n)
-  c = flow-in   ⇒ s-flow-line-prefix(n)
+  c = block-out =&gt; s-block-line-prefix(n)
+  c = block-in  =&gt; s-block-line-prefix(n)
+  c = flow-out  =&gt; s-flow-line-prefix(n)
+  c = flow-in   =&gt; s-flow-line-prefix(n)
 ```
 
 ```
@@ -2660,12 +2660,12 @@ Note that structures following multi-line comment separation must be properly
 
 ```
 s-separate(n,c) ::=
-  c = block-out ⇒ s-separate-lines(n)
-  c = block-in  ⇒ s-separate-lines(n)
-  c = flow-out  ⇒ s-separate-lines(n)
-  c = flow-in   ⇒ s-separate-lines(n)
-  c = block-key ⇒ s-separate-in-line
-  c = flow-key  ⇒ s-separate-in-line
+  c = block-out =&gt; s-separate-lines(n)
+  c = block-in  =&gt; s-separate-lines(n)
+  c = flow-out  =&gt; s-separate-lines(n)
+  c = flow-in   =&gt; s-separate-lines(n)
+  c = block-key =&gt; s-separate-in-line
+  c = flow-key  =&gt; s-separate-in-line
 ```
 
 ```
@@ -3462,10 +3462,10 @@ c-double-quoted(n,c) ::=
 
 ```
 nb-double-text(n,c) ::=
-  c = flow-out  ⇒ nb-double-multi-line(n)
-  c = flow-in   ⇒ nb-double-multi-line(n)
-  c = block-key ⇒ nb-double-one-line
-  c = flow-key  ⇒ nb-double-one-line
+  c = flow-out  =&gt; nb-double-multi-line(n)
+  c = flow-in   =&gt; nb-double-multi-line(n)
+  c = block-key =&gt; nb-double-one-line
+  c = flow-key  =&gt; nb-double-one-line
 ```
 
 ```
@@ -3621,10 +3621,10 @@ c-single-quoted(n,c) ::=
 
 ```
 nb-single-text(n,c) ::=
-  c = flow-out  ⇒ nb-single-multi-line(n)
-  c = flow-in   ⇒ nb-single-multi-line(n)
-  c = block-key ⇒ nb-single-one-line
-  c = flow-key  ⇒ nb-single-one-line
+  c = flow-out  =&gt; nb-single-multi-line(n)
+  c = flow-in   =&gt; nb-single-multi-line(n)
+  c = block-key =&gt; nb-single-one-line
+  c = flow-key  =&gt; nb-single-one-line
 ```
 
 ```
@@ -3730,10 +3730,10 @@ These characters would cause ambiguity with [flow collection] structures.
 
 ```
 ns-plain-safe(c) ::=
-  c = flow-out  ⇒ ns-plain-safe-out
-  c = flow-in   ⇒ ns-plain-safe-in
-  c = block-key ⇒ ns-plain-safe-out
-  c = flow-key  ⇒ ns-plain-safe-in
+  c = flow-out  =&gt; ns-plain-safe-out
+  c = flow-in   =&gt; ns-plain-safe-in
+  c = block-key =&gt; ns-plain-safe-out
+  c = flow-key  =&gt; ns-plain-safe-in
 ```
 
 ```
@@ -3794,10 +3794,10 @@ Plain scalars are further restricted to a single line when contained inside an
 
 ```
 ns-plain(n,c) ::=
-  c = flow-out  ⇒ ns-plain-multi-line(n,c)
-  c = flow-in   ⇒ ns-plain-multi-line(n,c)
-  c = block-key ⇒ ns-plain-one-line(c)
-  c = flow-key  ⇒ ns-plain-one-line(c)
+  c = flow-out  =&gt; ns-plain-multi-line(n,c)
+  c = flow-in   =&gt; ns-plain-multi-line(n,c)
+  c = block-key =&gt; ns-plain-one-line(c)
+  c = flow-key  =&gt; ns-plain-one-line(c)
 ```
 
 ```
@@ -3880,10 +3880,10 @@ This does not cause ambiguity because flow collection entries can never be
 
 ```
 in-flow(c) ::=
-  c = flow-out  ⇒ flow-in
-  c = flow-in   ⇒ flow-in
-  c = block-key ⇒ flow-key
-  c = flow-key  ⇒ flow-key
+  c = flow-out  =&gt; flow-in
+  c = flow-in   =&gt; flow-in
+  c = block-key =&gt; flow-key
+  c = flow-key  =&gt; flow-key
 ```
 
 <code>### #. Flow Sequences</code>
@@ -4476,8 +4476,8 @@ indicator for cases where detection will fail.
 
 ```
 c-indentation-indicator(m) ::=
-  ns-dec-digit ⇒ m = ns-dec-digit - #x30
-  /* Empty */  ⇒ m = auto-detect()
+  ns-dec-digit =&gt; m = ns-dec-digit - #x30
+  /* Empty */  =&gt; m = auto-detect()
 ```
 
 <code>**Example #. Block Indentation Indicator**</code>
@@ -4561,9 +4561,9 @@ convey [content] information.
 
 ```
 c-chomping-indicator(t) ::=
-  "-"         ⇒ t = strip
-  "+"         ⇒ t = keep
-  /* Empty */ ⇒ t = clip
+  "-"         =&gt; t = strip
+  "+"         =&gt; t = keep
+  /* Empty */ =&gt; t = clip
 ```
 
 The interpretation of the final [line break] of a [block scalar] is controlled
@@ -4571,9 +4571,9 @@ by the chomping indicator specified in the [block scalar header].
 
 ```
 b-chomped-last(t) ::=
-  t = strip ⇒ b-non-content | /* End of file */
-  t = clip  ⇒ b-as-line-feed | /* End of file */
-  t = keep  ⇒ b-as-line-feed | /* End of file */
+  t = strip =&gt; b-non-content | /* End of file */
+  t = clip  =&gt; b-as-line-feed | /* End of file */
+  t = keep  =&gt; b-as-line-feed | /* End of file */
 ```
 
 <code>**Example #. Chomping Final Line Break**</code>
@@ -4607,14 +4607,14 @@ header].
 
 ```
 l-chomped-empty(n,t) ::=
-  t = strip ⇒ l-strip-empty(n)
-  t = clip  ⇒ l-strip-empty(n)
-  t = keep  ⇒ l-keep-empty(n)
+  t = strip =&gt; l-strip-empty(n)
+  t = clip  =&gt; l-strip-empty(n)
+  t = keep  =&gt; l-keep-empty(n)
 ```
 
 ```
 l-strip-empty(n) ::=
-  ( s-indent(≤n) b-non-content )*
+  ( s-indent(&lt;=n) b-non-content )*
   l-trail-comments(n)?
 ```
 
@@ -5404,8 +5404,8 @@ s-l+block-collection(n,c) ::=
 
 ```
 seq-spaces(n,c) ::=
-  c = block-out ⇒ n-1
-  c = block-in  ⇒ n
+  c = block-out =&gt; n-1
+  c = block-in  =&gt; n
 ```
 
 <code>**Example #. Block Collection Nodes**</code>

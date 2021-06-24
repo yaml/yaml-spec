@@ -2999,7 +2999,7 @@ space to become part of the <del><a href="#undefined">content</a></del>.</p>
 <pre class="rule">
 [59] ns-esc-8-bit ::=
   "x"
-  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> × 2 )
+  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> * 2 )
 </pre>
 
 <p>Escaped 16-bit Unicode character.</p>
@@ -3008,7 +3008,7 @@ space to become part of the <del><a href="#undefined">content</a></del>.</p>
 <pre class="rule">
 [60] ns-esc-16-bit ::=
   "u"
-  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> × 4 )
+  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> * 4 )
 </pre>
 
 <p>Escaped 32-bit Unicode character.</p>
@@ -3017,7 +3017,7 @@ space to become part of the <del><a href="#undefined">content</a></del>.</p>
 <pre class="rule">
 [61] ns-esc-32-bit ::=
   "U"
-  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> × 8 )
+  ( <a href="#rule-ns-hex-digit">ns-hex-digit</a> * 8 )
 </pre>
 
 <p>Any escaped character:</p>
@@ -3121,7 +3121,7 @@ convey <del><a href="#undefined">content</a></del> information.</p>
 <div id="rule-s-indent(n)"></div>
 <pre class="rule">
 [63] s-indent(n) ::=
-  <a href="#rule-s-space">s-space</a> × n
+  <a href="#rule-s-space">s-space</a> * n
 </pre>
 
 <p>A <del><a href="#undefined">block style</a></del> construct is terminated when encountering a line which is less
@@ -3132,13 +3132,13 @@ to express this.</p>
 <div id="rule-s-indent(&lt;n)"></div>
 <pre class="rule">
 [64] s-indent(&lt;n) ::=
-  <a href="#rule-s-space">s-space</a> × m /* Where m &lt; n */
+  <a href="#rule-s-space">s-space</a> * m /* Where m &lt; n */
 </pre>
 
-<div id="rule-s-indent(≤n)"></div>
+<div id="rule-s-indent(&lt;=n)"></div>
 <pre class="rule">
-[65] s-indent(≤n) ::=
-  <a href="#rule-s-space">s-space</a> × m /* Where m ≤ n */
+[65] s-indent(&lt;=n) ::=
+  <a href="#rule-s-space">s-space</a> * m /* Where m &lt;= n */
 </pre>
 
 <p>Each <del><a href="#undefined">node</a></del> must be indented further than its parent <del><a href="#undefined">node</a></del>.
@@ -3316,10 +3316,10 @@ which may contain <del><a href="#undefined">tab</a></del> characters.</p>
 <div id="rule-s-line-prefix(n,c)"></div>
 <pre class="rule">
 [67] s-line-prefix(n,c) ::=
-  c = block-out ⇒ <a href="#rule-s-block-line-prefix(n)">s-block-line-prefix(n)</a>
-  c = block-in  ⇒ <a href="#rule-s-block-line-prefix(n)">s-block-line-prefix(n)</a>
-  c = flow-out  ⇒ <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
-  c = flow-in   ⇒ <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
+  c = block-out =&gt; <a href="#rule-s-block-line-prefix(n)">s-block-line-prefix(n)</a>
+  c = block-in  =&gt; <a href="#rule-s-block-line-prefix(n)">s-block-line-prefix(n)</a>
+  c = flow-out  =&gt; <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
+  c = flow-in   =&gt; <a href="#rule-s-flow-line-prefix(n)">s-flow-line-prefix(n)</a>
 </pre>
 
 <div id="rule-s-block-line-prefix(n)"></div>
@@ -3799,12 +3799,12 @@ empty) <del><a href="#undefined">comments</a></del>.</p>
 <div id="rule-s-separate(n,c)"></div>
 <pre class="rule">
 [80] s-separate(n,c) ::=
-  c = block-out ⇒ <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
-  c = block-in  ⇒ <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
-  c = flow-out  ⇒ <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
-  c = flow-in   ⇒ <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
-  c = block-key ⇒ <a href="#rule-s-separate-in-line">s-separate-in-line</a>
-  c = flow-key  ⇒ <a href="#rule-s-separate-in-line">s-separate-in-line</a>
+  c = block-out =&gt; <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
+  c = block-in  =&gt; <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
+  c = flow-out  =&gt; <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
+  c = flow-in   =&gt; <a href="#rule-s-separate-lines(n)">s-separate-lines(n)</a>
+  c = block-key =&gt; <a href="#rule-s-separate-in-line">s-separate-in-line</a>
+  c = flow-key  =&gt; <a href="#rule-s-separate-in-line">s-separate-in-line</a>
 </pre>
 
 <div id="rule-s-separate-lines(n)"></div>
@@ -5035,10 +5035,10 @@ characters.</p>
 <div id="rule-nb-double-text(n,c)"></div>
 <pre class="rule">
 [110] nb-double-text(n,c) ::=
-  c = flow-out  ⇒ <a href="#rule-nb-double-multi-line(n)">nb-double-multi-line(n)</a>
-  c = flow-in   ⇒ <a href="#rule-nb-double-multi-line(n)">nb-double-multi-line(n)</a>
-  c = block-key ⇒ <a href="#rule-nb-double-one-line">nb-double-one-line</a>
-  c = flow-key  ⇒ <a href="#rule-nb-double-one-line">nb-double-one-line</a>
+  c = flow-out  =&gt; <a href="#rule-nb-double-multi-line(n)">nb-double-multi-line(n)</a>
+  c = flow-in   =&gt; <a href="#rule-nb-double-multi-line(n)">nb-double-multi-line(n)</a>
+  c = block-key =&gt; <a href="#rule-nb-double-one-line">nb-double-one-line</a>
+  c = flow-key  =&gt; <a href="#rule-nb-double-one-line">nb-double-one-line</a>
 </pre>
 
 <div id="rule-nb-double-one-line"></div>
@@ -5282,10 +5282,10 @@ In addition, it is only possible to break a long single-quoted line where a
 <div id="rule-nb-single-text(n,c)"></div>
 <pre class="rule">
 [121] nb-single-text(n,c) ::=
-  c = flow-out  ⇒ <a href="#rule-nb-single-multi-line(n)">nb-single-multi-line(n)</a>
-  c = flow-in   ⇒ <a href="#rule-nb-single-multi-line(n)">nb-single-multi-line(n)</a>
-  c = block-key ⇒ <a href="#rule-nb-single-one-line">nb-single-one-line</a>
-  c = flow-key  ⇒ <a href="#rule-nb-single-one-line">nb-single-one-line</a>
+  c = flow-out  =&gt; <a href="#rule-nb-single-multi-line(n)">nb-single-multi-line(n)</a>
+  c = flow-in   =&gt; <a href="#rule-nb-single-multi-line(n)">nb-single-multi-line(n)</a>
+  c = block-key =&gt; <a href="#rule-nb-single-one-line">nb-single-one-line</a>
+  c = flow-key  =&gt; <a href="#rule-nb-single-one-line">nb-single-one-line</a>
 </pre>
 
 <div id="rule-nb-single-one-line"></div>
@@ -5436,10 +5436,10 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
 <div id="rule-ns-plain-safe(c)"></div>
 <pre class="rule">
 [127] ns-plain-safe(c) ::=
-  c = flow-out  ⇒ <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
-  c = flow-in   ⇒ <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
-  c = block-key ⇒ <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
-  c = flow-key  ⇒ <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
+  c = flow-out  =&gt; <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
+  c = flow-in   =&gt; <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
+  c = block-key =&gt; <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
+  c = flow-key  =&gt; <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
 </pre>
 
 <div id="rule-ns-plain-safe-out"></div>
@@ -5523,10 +5523,10 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
 <div id="rule-ns-plain(n,c)"></div>
 <pre class="rule">
 [131] ns-plain(n,c) ::=
-  c = flow-out  ⇒ <a href="#rule-ns-plain-multi-line(n,c)">ns-plain-multi-line(n,c)</a>
-  c = flow-in   ⇒ <a href="#rule-ns-plain-multi-line(n,c)">ns-plain-multi-line(n,c)</a>
-  c = block-key ⇒ <a href="#rule-ns-plain-one-line(c)">ns-plain-one-line(c)</a>
-  c = flow-key  ⇒ <a href="#rule-ns-plain-one-line(c)">ns-plain-one-line(c)</a>
+  c = flow-out  =&gt; <a href="#rule-ns-plain-multi-line(n,c)">ns-plain-multi-line(n,c)</a>
+  c = flow-in   =&gt; <a href="#rule-ns-plain-multi-line(n,c)">ns-plain-multi-line(n,c)</a>
+  c = block-key =&gt; <a href="#rule-ns-plain-one-line(c)">ns-plain-one-line(c)</a>
+  c = flow-key  =&gt; <a href="#rule-ns-plain-one-line(c)">ns-plain-one-line(c)</a>
 </pre>
 
 <div id="rule-nb-ns-plain-in-line(c)"></div>
@@ -5653,10 +5653,10 @@ This does not cause ambiguity because flow collection entries can never be
 <div id="rule-in-flow(c)"></div>
 <pre class="rule">
 [136] in-flow(c) ::=
-  c = flow-out  ⇒ flow-in
-  c = flow-in   ⇒ flow-in
-  c = block-key ⇒ flow-key
-  c = flow-key  ⇒ flow-key
+  c = flow-out  =&gt; flow-in
+  c = flow-in   =&gt; flow-in
+  c = block-key =&gt; flow-key
+  c = flow-key  =&gt; flow-key
 </pre>
 
 <div id="flow-sequences"></div>
@@ -6524,8 +6524,8 @@ indicator for cases where detection will fail.</p>
 <div id="rule-c-indentation-indicator(m)"></div>
 <pre class="rule">
 [163] c-indentation-indicator(m) ::=
-  <a href="#rule-ns-dec-digit">ns-dec-digit</a> ⇒ m = <a href="#rule-ns-dec-digit">ns-dec-digit</a> - #x30
-  /* Empty */  ⇒ m = auto-detect()
+  <a href="#rule-ns-dec-digit">ns-dec-digit</a> =&gt; m = <a href="#rule-ns-dec-digit">ns-dec-digit</a> - #x30
+  /* Empty */  =&gt; m = auto-detect()
 </pre>
 
 <div id="example-block-indentation-indicator" class="example">
@@ -6649,9 +6649,9 @@ convey <del><a href="#undefined">content</a></del> information.</p>
 <div id="rule-c-chomping-indicator(t)"></div>
 <pre class="rule">
 [164] c-chomping-indicator(t) ::=
-  "-"         ⇒ t = strip
-  "+"         ⇒ t = keep
-  /* Empty */ ⇒ t = clip
+  "-"         =&gt; t = strip
+  "+"         =&gt; t = keep
+  /* Empty */ =&gt; t = clip
 </pre>
 
 <p>The interpretation of the final <del><a href="#undefined">line break</a></del> of a <del><a href="#undefined">block scalar</a></del> is controlled
@@ -6660,9 +6660,9 @@ by the chomping indicator specified in the <del><a href="#undefined">block scala
 <div id="rule-b-chomped-last(t)"></div>
 <pre class="rule">
 [165] b-chomped-last(t) ::=
-  t = strip ⇒ <a href="#rule-b-non-content">b-non-content</a> | /* End of file */
-  t = clip  ⇒ <a href="#rule-b-as-line-feed">b-as-line-feed</a> | /* End of file */
-  t = keep  ⇒ <a href="#rule-b-as-line-feed">b-as-line-feed</a> | /* End of file */
+  t = strip =&gt; <a href="#rule-b-non-content">b-non-content</a> | /* End of file */
+  t = clip  =&gt; <a href="#rule-b-as-line-feed">b-as-line-feed</a> | /* End of file */
+  t = keep  =&gt; <a href="#rule-b-as-line-feed">b-as-line-feed</a> | /* End of file */
 </pre>
 
 <div id="example-chomping-final-line-break" class="example">
@@ -6716,15 +6716,15 @@ header</a></del>.</p>
 <div id="rule-l-chomped-empty(n,t)"></div>
 <pre class="rule">
 [166] l-chomped-empty(n,t) ::=
-  t = strip ⇒ <a href="#rule-l-strip-empty(n)">l-strip-empty(n)</a>
-  t = clip  ⇒ <a href="#rule-l-strip-empty(n)">l-strip-empty(n)</a>
-  t = keep  ⇒ <a href="#rule-l-keep-empty(n)">l-keep-empty(n)</a>
+  t = strip =&gt; <a href="#rule-l-strip-empty(n)">l-strip-empty(n)</a>
+  t = clip  =&gt; <a href="#rule-l-strip-empty(n)">l-strip-empty(n)</a>
+  t = keep  =&gt; <a href="#rule-l-keep-empty(n)">l-keep-empty(n)</a>
 </pre>
 
 <div id="rule-l-strip-empty(n)"></div>
 <pre class="rule">
 [167] l-strip-empty(n) ::=
-  ( <a href="#rule-s-indent(≤n)">s-indent(≤n)</a> <a href="#rule-b-non-content">b-non-content</a> )*
+  ( <a href="#rule-s-indent(&lt;=n)">s-indent(&lt;=n)</a> <a href="#rule-b-non-content">b-non-content</a> )*
   <a href="#rule-l-trail-comments(n)">l-trail-comments(n)</a>?
 </pre>
 
@@ -7877,8 +7877,8 @@ vs. <del><a href="#undefined"><strong><code class="language-plaintext highlighte
 <div id="rule-seq-spaces(n,c)"></div>
 <pre class="rule">
 [201] seq-spaces(n,c) ::=
-  c = block-out ⇒ n-1
-  c = block-in  ⇒ n
+  c = block-out =&gt; n-1
+  c = block-in  =&gt; n
 </pre>
 
 <div id="example-block-collection-nodes" class="example">
