@@ -145,7 +145,7 @@ meanings.
 * File
 
   File is the term for YAML information in a final textual state, external to
-  the yaml stack.
+  the YAML stack.
   A YAML framework loads from a file and dumps to a file.
   The term is abstract and doesn't have to be a file stored to disk.
   It might be a socket or other external data source/target.
@@ -189,7 +189,7 @@ meanings.
 
 * JSON
 
-  When used in with a the JSON Schema or a derivative of that schema, YAML is a
+  When used with the JSON Schema or a derivative of that schema, YAML is a
   syntactic and semantic superset of the JSON data format.
   That is, a YAML loader using such a schema (which is typical) can load a JSON
   file and produce the same result as a JSON loading (often called `parse`)
@@ -209,7 +209,7 @@ meanings.
 
   The DOM resolves tags to functions.
   These functions come from the library that is registered to the DOM; often
-  the yaml standard library.
+  the YAML standard library.
 
 * List
 
@@ -286,7 +286,7 @@ meanings.
 
   A parser is the processor in the load stack that reads tokens, matches them
   against a grammar and write events.
-  It make also throw an error if the tokens don't match the grammar.
+  It may also throw an error if the tokens don't match the grammar.
   The events are usually consumed by the composer to create a DOM, but they
   might also be processed directly by a streaming application.
 
@@ -334,7 +334,7 @@ meanings.
 * Schema
 
   Schema in YAML refers to all the external information required to process a
-  YAML information.
+  YAML stream.
   Unlike traditional schemas which typically enforce the structural typing of
   information, a YAML schema can alter the semantic meaning of a YAML file.
 
@@ -414,6 +414,10 @@ meanings.
   A tag identifier is used to identify a function that will be applied to a
   node when it is retrieved from the DOM.
   The function's return type is can be considered the "type" of the node.
+
+  While tags may be written explicitly into a YAML file using the `!abc`
+  syntax, it is quite common for tags to be added to nodes implicitly according
+  to the rules of a schema.
 
 * Token
 
