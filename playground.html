@@ -53,6 +53,7 @@ textarea {
 }
 select {
   width: 100%;
+  background-color: pink;
 }
 option[value="yaml-input"] { color: yellow; }
 option[value="parser-events"] { color: orange; }
@@ -117,14 +118,15 @@ option[value="parser-grammar"] { color: red; }
 <script type="text/coffeescript">
 say = console.log
 $(document).ready ->
-  $('#yaml-input').appendTo('#column-1')
   $('#column-1 select').val('yaml-input')
+  $('#yaml-input').appendTo('#column-1')
 
-  $('#parser-events').appendTo('#column-2')
   $('#column-2 select').val('parser-events')
+  $('#parser-events').appendTo('#column-2')
 
-  $('#parser-grammar').appendTo('#column-3')
   $('#column-3 select').val('parser-grammar')
+  $('#parser-grammar').appendTo('#column-3')
+  $('#parser-grammar textarea').load('/grammar.yaml')
 </script>
 
 </body>
