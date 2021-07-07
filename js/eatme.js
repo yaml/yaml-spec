@@ -32,7 +32,7 @@
     };
 
     EatMe.init = function(root, conf, func) {
-      var $root;
+      var $root, eatme;
       EatMe.set = [];
       if (root instanceof jQuery) {
         $root = root;
@@ -42,15 +42,23 @@
         die("Bad 'root' argument for EatMe.init");
       }
       this.normalize(conf);
-      return EatMe.set.push(new EatMe($root, conf, func));
+      eatme = new EatMe($root, conf, func);
+      EatMe.set.push(eatme);
+      return eatme;
     };
 
     function EatMe(root1, conf1, func1) {
+      var $first, text;
       this.root = root1;
       this.conf = conf1;
       this.func = func1;
       this.panes = $('<div hidden>').appendTo(this.root);
       this.make_cols();
+      $first = $(this.root).find('.eatme-pane:has(textarea)').first();
+      if ($first.length === 1) {
+        text = $first.find('.eatme-box').focus().text();
+        this.call(text, $first);
+      }
     }
 
     EatMe.normalize = function(conf) {
@@ -136,7 +144,7 @@
       }
       $pane.find('select').val(pane_id).attr('pane', pane_id);
       $pane.find('textarea').bind('change keyup', $.debounce(400, function() {
-        return self.send($(this).val(), $pane);
+        return self.call($(this).val(), $pane);
       }));
       copy_button = $pane.find('.eatme-btn-copy-text')[0];
       return $pane.clipboard = new ClipboardJS(copy_button, {
@@ -146,13 +154,14 @@
       });
     };
 
-    EatMe.prototype.send = function(text, $from) {
-      var $to, dest, e, from, func, i, len, ref, ref1, results;
+    EatMe.prototype.call = function(text, $from) {
+      var $to, all_errors, dest, e, error, from, func, i, len, ref, ref1, to;
       from = EatMe.pane_map[$from.attr('id')];
+      all_errors = '';
       ref = from.call;
-      results = [];
       for (i = 0, len = ref.length; i < len; i++) {
         ref1 = ref[i], func = ref1[0], dest = ref1[1];
+        to = EatMe.pane_map[dest];
         $to = $(".eatme-pane-" + dest);
         $to[0].data = null;
         $to[0].error = null;
@@ -160,26 +169,30 @@
           $to[0].data = this.func[func](text);
         } catch (error1) {
           e = error1;
-          $to[0].error = e;
+          error = (e.stack || e.msg || e).toString();
+          all_errors += ("*** Errors in '" + to.name + "' ***\n" + error) + "\n\n";
+          $to[0].error = error;
         }
-        results.push(this.show($to));
+        this.show($to);
       }
-      return results;
+      return $('.eatme-error').text(all_errors);
     };
 
     EatMe.prototype.show = function($pane) {
       var $box, $err_btn, $tb_btn, error, text;
-      $err_btn = $pane.find('.eatme-btn-show-error').removeClass('error');
+      $err_btn = $pane.find('.eatme-btn-toggle-error').removeClass('error');
       $tb_btn = $pane.find('.eatme-toolbar-btn').removeClass('error');
       if ((error = $pane[0].error) != null) {
         $err_btn.addClass('error');
-        return $tb_btn.addClass('error');
+        $tb_btn.addClass('error');
+        return $pane.find('.eatme-box-error').text(error);
       } else if ((text = $pane[0].data) != null) {
         $box = $pane.find('.eatme-box');
         if (!_.isString(text)) {
           text = JSON.stringify(text, null, 2);
         }
-        return $box.text(text);
+        $box.text(text);
+        return $pane.find('.eatme-box-error').text('');
       } else {
         return die();
       }
@@ -206,8 +219,10 @@
       }
       if (pane.type === 'edit') {
         $box = $('<textarea class="eatme-box">');
+      } else if (pane.type === 'error') {
+        $box = $('<pre class="eatme-box eatme-error">');
       } else {
-        $box = $('<pre class="eatme-box">').css('font-size', '');
+        $box = $('<pre class="eatme-box">');
       }
       if (pane.load != null) {
         $box.load(pane.load);
@@ -350,6 +365,18 @@
       return say(size);
     };
 
+    EatMe.prototype.toggle_error = function($button) {
+      var $error, $pane, error;
+      say(qqq($pane = $button.closest('.eatme-pane')));
+      if (($error = $pane.find('.eatme-box-error')).length === 0) {
+        $error = $('<pre class="eatme-box-error" style="display:none">').appendTo($pane);
+        if ((error = $pane[0].error) != null) {
+          $error.text(error);
+        }
+      }
+      return $pane.find('.eatme-box, .eatme-box-error').toggle();
+    };
+
     EatMe.prototype.make_toolbar = function() {
       var $li, $toolbar, $ul, btn, i, j, len, len1, line, ref, self;
       self = this;
@@ -386,13 +413,12 @@
 
     EatMe.toolbar_div = "<div class=\"eatme-btns dropdown\">\n  <button\n    class=\"btn btn-default dropdown-toggle eatme-toolbar-btn\"\n    type=\"button\"\n    data-toggle=\"dropdown\"\n    title=\"Pane toolbar\"\n  ></button>\n\n  <ul class=\"dropdown-menu\">\n  </ul>\n</div>";
 
-    EatMe.toolbar = [['show-error', 'edit-pane', 'copy-text', 'clear-text', 'zoom-in', 'zoom-out'], ['pause-auto', 'start-auto', 'permalink', 'settings'], ['add-pane', 'close-pane', 'move-pane'], ['add-col', 'close-col', 'move-col']];
+    EatMe.toolbar = [['toggle-error', 'edit-pane', 'copy-text', 'clear-text', 'zoom-in', 'zoom-out'], ['pause-auto', 'start-auto', 'permalink', 'settings'], ['add-pane', 'close-pane', 'move-pane'], ['add-col', 'close-col', 'move-col']];
 
     EatMe.buttons = {
-      'show-error': {
-        name: 'Show Errors',
-        icon: 'exclamation-square',
-        dead: true
+      'toggle-error': {
+        name: 'Toggle Error Display',
+        icon: 'exclamation-square'
       },
       'edit-pane': {
         name: 'Edit this pane',

@@ -92,6 +92,68 @@ import { YAML } from 'https://unpkg.com/yaml/browser/dist/index.js';
 window.EYAML = YAML;
 </script>
 
+  <script type="text/javascript">
+  window.require = function(name) {
+    if (name === 'lodash') {
+      return window._;
+    }
+    if (name === 'yaml') {
+      return window.EYAML;
+    }
+    if (name === 'sprintf-js') {
+      return {};
+    }
+    return null;
+  };
+  window.global = window;
+  window.ENV = {};
+  window.process = {
+    'ENV': ENV,
+    'exit': function(rc) {
+      throw `Exit ${rc}`;
+    },
+  };
+</script>
+
+<script
+  type="text/javascript"
+  src="https://unpkg.com/sprint-js@0.1.0/sprint.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="https://unpkg.com/ingy-prelude@0.0.4/lib/ingy-prelude/index.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/js/ref-parser/prelude.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/js/ref-parser/grammar.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/js/ref-parser/receiver.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/js/ref-parser/test-receiver.js"
+></script>
+
+<script type="text/javascript">
+  window.ENV = {};
+</script>
+
+<script
+  type="text/javascript"
+  src="/js/ref-parser/parser.js"
+></script>
+
   <link
   rel="stylesheet"
   href="/css/eatme.css"
@@ -118,7 +180,7 @@ window.EYAML = YAML;
   <div id="playground" class="eatme-container container-fluid row" />
 
   <script type="text/javascript">
-    var conf = {"conf":{"cols":3},"pane":[{"name":"Playground Menu","slug":"menu","load":"/main-menu.html"},{"name":"YAML Text","slug":"text","init":"col-1","call":[["parse","events"],["eload","native"]],"text":"%YAML 1.2\n---\nfoo: 111\nbar: [222, true]\nbaz:\n"},{"name":"Events","init":"col-2","type":"text"},{"name":"DOM State","slug":"dom"},{"name":"Native","type":"text","init":"col-3"},{"name":"JavaScript","type":"text"},{"name":"Parser Grammar","slug":"grammar","load":"/grammar.yaml","call":"rebuild","font":"0.8em"},{"name":"EatMe Settings","slug":"settings","type":"eatme"}]};
+    var conf = {"conf":{"cols":4},"pane":[{"name":"Playground Menu","slug":"menu","load":"/main-menu.html"},{"name":"YAML Text","slug":"text","init":"col-1","call":[["parse","events"],["eload","eemeli"]],"text":"%YAML 1.2\n---\nfoo: 111\nbar: [222, true]\nbaz:\n"},{"name":"Events","init":"col-2","type":"text"},{"name":"DOM State","slug":"dom"},{"name":"Native Data Structure","type":"text"},{"name":"Eemeli's YAML Loader","slug":"eemeli","type":"text","init":"col-3"},{"name":"JavaScript","type":"text"},{"name":"Parser Grammar","slug":"grammar","load":"/grammar.yaml","call":"rebuild","font":"0.8em"},{"name":"All Errors","slug":"error","type":"error","init":"col-4"},{"name":"EatMe Settings","slug":"settings","type":"eatme"}]};
 
     $(document).ready(
       function() {
