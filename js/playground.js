@@ -36,7 +36,7 @@
       try {
         resp = $.ajax({
           type: 'POST',
-          url: scheme + "://0.0.0.0:" + port + "/?" + args,
+          url: scheme + "://localhost:" + port + "/?" + args,
           data: {
             text: text
           },
@@ -61,7 +61,7 @@
       console.dir(resp);
       msg = "This pane requires a localhost sandbox server.\nSimply run:\n\n$ docker run --rm \\\n    --net host \\\n    -p " + port + ":" + port + " \\\n    -e HTTPS=" + env + " \\\n    yamlio/playground-sandbox:0.0.1\n\non the same computer as your web browser.";
       if (scheme === 'https') {
-        msg += "\n" + ("And start a Chrome browser like this:\n\n$ google-chrome \\\n    --ignore-certificate-errors \\\n    --ignore-urlfetcher-cert-requests \\\n    --new-window \\\n    " + loc);
+        msg += "\n\n" + ("In a Google Chrome browser:\n\n* Open this internal URL: 'chrome:flags'\n* Search for '#allow-insecure-localhost'\n  * Enable it\n* Click the [Relaunch] button\n* Open " + scheme + "://localhost:" + port + "\n  * Accept the untrusted cert\n* Reload " + loc);
       }
       return msg;
     };
