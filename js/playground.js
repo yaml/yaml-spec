@@ -22,11 +22,12 @@
     };
 
     PlayGround.localhost_server = function(text, args) {
-      var data, e, resp;
+      var data, e, resp, scheme;
+      scheme = window.location.href.match(/^https/) ? 'https' : 'http';
       try {
         resp = $.ajax({
           type: 'POST',
-          url: "https://0.0.0.0:5000/?" + args,
+          url: scheme + "://0.0.0.0:5000/?" + args,
           data: {
             text: text
           },
@@ -49,7 +50,7 @@
         }
       }
       console.dir(resp);
-      return "This requires a localhost sandbox server.\nSimply run:\n\n$ docker run --rm \\\n    --network host \\\n    --publish 5000:5000 \\\n    yamlio/playground-sandbox:0.0.1\n\non the same computer as your web browser.";
+      return "This requires a localhost sandbox server.\nSimply run:\n\n$ docker run --rm \\\n    --network host \\\n    --publish 5000:5000 \\\n    --env HTTPS=1 \\\n    yamlio/playground-sandbox:0.0.1\n\non the same computer as your web browser.";
     };
 
     return PlayGround;
