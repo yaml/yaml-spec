@@ -59,7 +59,7 @@
         }
       }
       console.dir(resp);
-      return "This pane requires a localhost sandbox server.\nSimply run:\n\n$ docker run --rm \\\n    --net host \\\n    --p " + port + ":" + port + " \\\n    --e HTTPS=" + env + " \\\n    yamlio/playground-sandbox:0.0.1\n\non the same computer as your web browser.\n\nAnd start a Chrome browser like this:\n\n$ <google-chrome> \\\n    --ignore-certificate-errors \\\n    --ignore-urlfetcher-cert-requests \\\n    --new-window \\\n    " + loc;
+      return "This pane requires a localhost sandbox server.\nSimply run:\n\n$ docker run --rm \\\n    --net host \\\n    -p " + port + ":" + port + " \\\n    -e HTTPS=" + env + " \\\n    yamlio/playground-sandbox:0.0.1\n\non the same computer as your web browser.\n\nAnd start a Chrome browser like this:\n\n$ <google-chrome> \\\n    --ignore-certificate-errors \\\n    --ignore-urlfetcher-cert-requests \\\n    --new-window \\\n    " + loc;
     };
 
     return PlayGround;
