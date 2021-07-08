@@ -23,7 +23,7 @@
 
     PlayGround.localhost_server = function(text, args) {
       var data, e, resp, scheme;
-      scheme = window.location.href.match(/^https/) ? 'https' : 'http';
+      scheme = window.location.href.match(/^https/) ? 'http' : 'http';
       try {
         resp = $.ajax({
           type: 'POST',
