@@ -59,7 +59,6 @@
         text = $first.find('.eatme-box').focus().text();
         this.call(text, $first);
       }
-      say($.get('http://127.0.0.1:5000/'));
     }
 
     EatMe.normalize = function(conf) {
@@ -162,6 +161,7 @@
       ref = from.call;
       for (i = 0, len = ref.length; i < len; i++) {
         ref1 = ref[i], func = ref1[0], dest = ref1[1];
+        func = func.replace(/-/g, '_');
         to = EatMe.pane_map[dest];
         $to = $(".eatme-pane-" + dest);
         $to[0].data = null;
@@ -349,8 +349,7 @@
         return;
       }
       size++;
-      $pane.css('font-size', size + "px");
-      return say(size);
+      return $pane.css('font-size', size + "px");
     };
 
     EatMe.prototype.zoom_out = function($button, e) {
@@ -362,13 +361,12 @@
         return;
       }
       size--;
-      $pane.css('font-size', size + "px");
-      return say(size);
+      return $pane.css('font-size', size + "px");
     };
 
     EatMe.prototype.toggle_error = function($button) {
       var $error, $pane, error;
-      say(qqq($pane = $button.closest('.eatme-pane')));
+      $pane = $button.closest('.eatme-pane');
       if (($error = $pane.find('.eatme-box-error')).length === 0) {
         $error = $('<pre class="eatme-box-error" style="display:none">').appendTo($pane);
         if ((error = $pane[0].error) != null) {
