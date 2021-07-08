@@ -59,6 +59,7 @@
         text = $first.find('.eatme-box').focus().text();
         this.call(text, $first);
       }
+      say($.get('http://127.0.0.1:5000/'));
     }
 
     EatMe.normalize = function(conf) {
