@@ -91,7 +91,7 @@
       }
       size = 12 / cols;
       results = [];
-      for (col = i = 1, ref1 = this.conf.conf.cols; 1 <= ref1 ? i <= ref1 : i >= ref1; col = 1 <= ref1 ? ++i : --i) {
+      for (col = i = 1, ref1 = cols; 1 <= ref1 ? i <= ref1 : i >= ref1; col = 1 <= ref1 ? ++i : --i) {
         $col = this.make_col(size);
         this.root.append($col);
         $pane = $col.find('.eatme-pane');
@@ -114,8 +114,27 @@
       return results;
     };
 
+    EatMe.prototype.make_resizable = function() {
+      return this.root.splitobj = say(Split(this.root.find('.col').toArray(), {
+        elementStyle: function(dimension, size, gutterSize) {
+          return {
+            'flex-basis': "calc(" + size + "% - " + gutterSize + "px)"
+          };
+        },
+        gutterStyle: function(dimension, gutterSize) {
+          return {
+            'flex-basis': gutterSize + "px"
+          };
+        },
+        sizes: [20, 60, 20],
+        minSize: 150,
+        gutterSize: 6,
+        cursor: 'col-resize'
+      }));
+    };
+
     EatMe.prototype.make_col = function(size) {
-      return $("<div class=\"eatme-col col-lg-" + size + "\">").append(this.make_empty_pane());
+      return $("<div class=\"eatme-col col col-lg-" + size + "\">").append(this.make_empty_pane());
     };
 
     EatMe.prototype.switch_pane = function($old, $new) {

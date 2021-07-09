@@ -2,192 +2,127 @@
 <html lang="en-US">
 
 <head>
-  <meta http-equiv="Content-Type"
+<meta http-equiv="Content-Type"
       content="text/html; charset=UTF-8" />
+<title>YAML™ Ain’t Markup Language — Version 1.x</title>
 
-<title>YAML Dev Playground</title>
+<link rel="stylesheet"
+      type="text/css"
+      href="/assets/css/style.css" />
 
-  <script
-  type="text/javascript"
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"
-></script>
-
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"
-  integrity="sha512-JZSo0h5TONFYmyLMqp8k4oPhuo6yNk9mHM+FY50aBjpypfofqtEWsAgRDQm94ImLCzSaHeqNvYuD9382CEn2zw=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-></script>
-
-  <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
-  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"s
-  crossorigin="anonymous"
-/>
-
-<script
-  type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
-  crossorigin="anonymous"
-></script>
-
-<link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
-/>
-
-  <link
-  rel="stylesheet"
-  href="https://unpkg.com/@primer/css@^16.0.0/dist/primer.css"
-/>
-
-  <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
-  integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-></script>
-
-  <link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css"
-  integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-/>
-
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"
-  integrity="sha512-i9pd5Q6ntCp6LwSgAZDzsrsOlE8SN+H5E0T5oumSXWQz5l1Oc4Kb5ZrXASfyjjqtc6Mg6xWbu+ePbbmiEPJlDg=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-></script>
-
-<script
-  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/keymap/vim.min.js"
-  integrity="sha512-icZkIkXjOTeE0e01uWzfFuWvMGjYGKaQQ1Aeq5VaO7NSaC1tnAdCZAuf9KMGoNZ0ngODW26dWnTbb8N9dvfb9Q=="
-  crossorigin="anonymous"
-  referrerpolicy="no-referrer"
-></script>
-
-  <script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js"
-  crossorigin="anonymous"></script>
-
-  <script
-  src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"
-></script>
-
-  <script
-  src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"
-></script>
-
-  <script type="module">
-import { YAML } from 'https://unpkg.com/yaml/browser/dist/index.js';
-window.EYAML = YAML;
-</script>
-
-  <script type="text/javascript">
-  window.require = function(name) {
-    if (name === 'lodash') {
-      return window._;
-    }
-    if (name === 'yaml') {
-      return window.EYAML;
-    }
-    if (name === 'sprintf-js') {
-      return {};
-    }
-    return null;
-  };
-  window.global = window;
-  window.ENV = {};
-  window.process = {
-    'ENV': ENV,
-    'exit': function(rc) {
-      throw `Exit ${rc}`;
-    },
-  };
-</script>
-
-<script
-  type="text/javascript"
-  src="https://unpkg.com/sprint-js@0.1.0/sprint.js"
-></script>
-
-<script
-  type="text/javascript"
-  src="https://unpkg.com/ingy-prelude@0.0.4/lib/ingy-prelude/index.js"
-></script>
-
-<script
-  type="text/javascript"
-  src="/js/ref-parser/prelude.js"
-></script>
-
-<script
-  type="text/javascript"
-  src="/js/ref-parser/grammar.js"
-></script>
-
-<script
-  type="text/javascript"
-  src="/js/ref-parser/receiver.js"
-></script>
-
-<script
-  type="text/javascript"
-  src="/js/ref-parser/test-receiver.js"
-></script>
-
-<script type="text/javascript">
-  window.ENV = {};
-</script>
-
-<script
-  type="text/javascript"
-  src="/js/ref-parser/parser.js"
-></script>
-
-  <link
-  rel="stylesheet"
-  href="/css/eatme.css"
-/>
-
-<script
-  type="text/javascript"
-  src="/js/eatme.js"
-></script>
-
-  <link
-  rel="stylesheet"
-  href="/css/playground.css"
-/>
-
-<script
-  type="text/javascript"
-  src="/js/playground.js"
-></script>
-
+<link rel="stylesheet"
+      type="text/css"
+      href="/spec.css" />
 </head>
 
 <body>
-  <div id="playground" class="eatme-container container-fluid row" />
+<main id="content" class="main-content" role="main">
+<div class="wrapper">
+<section>
 
-  <script type="text/javascript">
-    var conf = {"conf":{"cols":4},"pane":[{"name":"Playground Menu","slug":"menu","load":"/main-menu.html"},{"name":"YAML Text","slug":"text","init":"col-1","call":[["ref-parser-events","events"],["eemeli-loader-json","eemeli"],["yamlpp-parse-events","yamlpp"],["fytool-parse-events","fytool"]],"text":"%YAML 1.2\n---\nfoo: 111\nbar: [222, true]\nbaz:\n"},{"name":"YAML Reference Parser Events","slug":"events","init":"col-2","type":"text"},{"name":"YAML::PP Events","slug":"yamlpp","type":"text","init":"col-3"},{"name":"yaml.js Load to JSON","slug":"eemeli","type":"text","init":"col-4"},{"name":"fy-tool Events","slug":"fytool","type":"text"},{"name":"DOM State","slug":"dom"},{"name":"Native Data Structure","slug":"native","type":"text"},{"name":"JavaScript","type":"text"},{"name":"Parser Grammar","slug":"grammar","load":"/grammar.yaml","call":"rebuild","font":"0.8em"},{"name":"All Errors","slug":"error","type":"error"},{"name":"EatMe Settings","slug":"settings","type":"eatme"}]};
+<h1 id="yaml-development-playgrounds">YAML Development Playgrounds</h1>
 
-    $(document).ready(
-      function() {
-        EatMe.init('#playground', conf, PlayGround);
-      }
-    );
-  </script>
+<p>Welcome to the playground area.
+Here you’ll find live demos of activity related to ongoing YAML language
+development.</p>
+
+<h2 id="playgrounds">Playgrounds</h2>
+
+<ul>
+  <li>
+    <p><a href="parser/">YAML Parsers</a></p>
+
+    <p>Compare YAML parsers in several programming languages.
+The non-JavaScript parsers require you to run a local Docker sandbox
+container.
+See below for details.</p>
+  </li>
+  <li>
+    <p><a href="devel">Kitchen Sink</a></p>
+
+    <p>This is a playground that we use mostly for developing the playground
+functionality itself.</p>
+  </li>
+</ul>
+
+<h2 id="setting-up-a-local-sandbox">Setting up a Local Sandbox</h2>
+
+<p>YAML frameworks are implemented in many programming languages.
+We want to be able to let you try all of them.
+This means we need a backend server to run the code.</p>
+
+<p>This, of course, has lots of security and hosting concerns.</p>
+
+<p>The way we get around all that is to have you host the backend yourself!
+Docker makes this trivial to do, and also assures that the only evil you can do
+is to your own machine. :)</p>
+
+<p>The playground will inform you when you need to run Docker, but we’ll cover it
+here.</p>
+
+<p>Assuming you have <a href="https://docs.docker.com/get-docker/">Docker installed</a>, just
+run this command from a terminal:</p>
+
+<pre>
+docker run --rm \
+    -p 1337:1337 \
+    -p 31337:31337 \
+    yamlio/playground-sandbox:0.0.1
+</pre>
+
+<p>This will start a local YAML Playground backend server, and your playgrounds
+will be able to work with them.</p>
+
+<p>NOTE: Port 1337 is for http calls, and port 31337 is for https calls.
+These defaults will likely be made configurable in the future.</p>
+
+<h3 id="required-browser-tweaks">Required Browser Tweaks</h3>
+
+<p>Calling a localhost server from a web page breaks some browser security rules,
+but it’s pretty simple to work around them for this.</p>
+
+<p>You’ll need to open this URL one time:</p>
+
+<ul>
+  <li>https://spec.yaml.io:31337/</li>
+</ul>
+
+<p>and authorize the untrusted SSL certificate for it.</p>
+
+<p>The other thing you need to do is allow JavaScript to “allow invalid
+certificates for resources loaded from localhost”.
+So far, we only have figured out how to do this on the Google Chrome browser.</p>
+
+<ul>
+  <li>Google Chrome
+    <ul>
+      <li>Type <code class="language-plaintext highlighter-rouge">chrome://flags</code> into the browser URL location</li>
+      <li>Search for <code class="language-plaintext highlighter-rouge">#allow-insecure-localhost</code> in the “Search flags” box</li>
+      <li>Enable the “Allow invalid certificates for resources loaded from localhost”
+flag</li>
+      <li>Click the “Relaunch” button</li>
+    </ul>
+  </li>
+</ul>
+
+<p>That’s everything.
+You should be all set to use all the playground things that need to
+run untrusted input on a server!</p>
+
+<p>We’ll keep looking for ways to make this simpler.
+If you have ideas, let us know!</p>
+
+
+</section>
+</div>
+</main>
+
+<script>
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
+}
+</script>
+
 </body>
 
 </html>
