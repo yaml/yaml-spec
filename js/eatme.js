@@ -113,7 +113,7 @@
     };
 
     EatMe.prototype.make_resizable = function() {
-      return this.root.splitobj = say(Split(this.root.find('.col').toArray(), {
+      return this.root.splitobj = Split(this.root.find('.col').toArray(), {
         elementStyle: function(dimension, size, gutterSize) {
           return {
             'flex-basis': "calc(" + size + "% - " + gutterSize + "px)"
@@ -128,7 +128,7 @@
         minSize: 150,
         gutterSize: 6,
         cursor: 'col-resize'
-      }));
+      });
     };
 
     EatMe.prototype.make_col = function(size) {
@@ -172,7 +172,7 @@
     };
 
     EatMe.prototype.call = function(text, $from) {
-      var $to, all_errors, dest, e, error, from, func, i, len, ref, ref1, to;
+      var $to, all_errors, dest, e, error, from, func, i, len, ref, ref1, show, to;
       from = EatMe.pane_map[$from.attr('id')];
       all_errors = '';
       ref = from.call;
@@ -181,38 +181,44 @@
         func = func.replace(/-/g, '_');
         to = EatMe.pane_map[dest];
         $to = $(".eatme-pane-" + dest);
-        $to[0].data = null;
-        $to[0].error = null;
         try {
-          $to[0].data = this.func[func](text);
+          show = this.func[func](text);
+          if (_.isString(show)) {
+            say(typeof show);
+            show = {
+              output: show
+            };
+          }
         } catch (error1) {
           e = error1;
           error = (e.stack || e.msg || e).toString();
           all_errors += ("*** Errors in '" + to.name + "' ***\n" + error) + "\n\n";
-          $to[0].error = error;
+          show = {
+            error: error
+          };
         }
-        this.show($to);
+        this.show($to, show);
       }
-      return $('.eatme-error').text(all_errors);
+      return $('.eatme-errors').text(all_errors);
     };
 
-    EatMe.prototype.show = function($pane) {
-      var $box, $err_btn, $tb_btn, error, text;
-      $err_btn = $pane.find('.eatme-btn-toggle-error').removeClass('error');
-      $tb_btn = $pane.find('.eatme-toolbar-btn').removeClass('error');
-      if ((error = $pane[0].error) != null) {
-        $err_btn.addClass('error');
-        $tb_btn.addClass('error');
-        return $pane.find('.eatme-box-error').text(error);
-      } else if ((text = $pane[0].data) != null) {
-        $box = $pane.find('.eatme-box');
-        if (!_.isString(text)) {
-          text = JSON.stringify(text, null, 2);
-        }
-        $box.text(text);
-        return $pane.find('.eatme-box-error').text('');
+    EatMe.prototype.show = function($pane, show) {
+      var $box, $show, error, html, markdown, output, pane;
+      pane = $pane[0];
+      if ((html = show.html) != null) {
+        $box = pane.$html.html(html);
+      } else if ((markdown = show.mark) != null) {
+        $box = pane.$html.html(marked(markdown));
+      } else if ((error = show.error) != null) {
+        $box = pane.$error.text(error);
+      } else if ((output = show.output) != null) {
+        $box = pane.$output.text(output);
       } else {
-        return die();
+        die("Invalid show value: '" + show + "'");
+      }
+      $show = $pane.children().last();
+      if ($show[0] !== $box[0]) {
+        return $show.replaceWith($box);
       }
     };
 
@@ -235,10 +241,14 @@
       if (_.isString(pane)) {
         pane = EatMe.pane_map[pane] || die("Unknown pane id '" + pane + "'");
       }
+      $pane = $("<div\n  id=\"" + pane.slug + "\"\n  class=\"eatme-pane eatme-pane-" + pane.slug + "\"\n>").append(this.make_nav());
+      $pane[0].$output = $('<pre class="eatme-box">');
+      $pane[0].$error = $('<pre class="eatme-box eatme-error">');
+      $pane[0].$html = $('<div class="eatme-box">');
       if (pane.type === 'edit') {
         $box = $('<textarea class="eatme-box">');
       } else if (pane.type === 'error') {
-        $box = $('<pre class="eatme-box eatme-error">');
+        $box = $('<pre class="eatme-box eatme-errors">');
       } else {
         $box = $('<pre class="eatme-box">');
       }
@@ -247,7 +257,7 @@
       } else {
         $box.html(pane.text || '');
       }
-      $pane = $("<div\n  id=\"" + pane.slug + "\"\n  class=\"eatme-pane eatme-pane-" + pane.slug + "\"\n>").append(this.make_nav()).append($box);
+      $pane.append($box);
       return $pane;
     };
 

@@ -10,23 +10,33 @@
     };
 
     PlayGround.yamlpp_events = function(text) {
-      return this.localhost_server(text, 'cmd=perl-pp-event');
+      return this.sandbox_events(text, 'cmd=perl-pp-event');
     };
 
     PlayGround.yamljs_events = function(text) {
-      return this.localhost_server(text, 'cmd=js-yaml-event');
+      return this.sandbox_events(text, 'cmd=js-yaml-event');
     };
 
     PlayGround.pyyaml_events = function(text) {
-      return this.localhost_server(text, 'cmd=py-pyyaml-event');
+      return this.sandbox_events(text, 'cmd=py-pyyaml-event');
     };
 
     PlayGround.libfyaml_events = function(text) {
-      return this.localhost_server(text, 'cmd=c-libfyaml-event');
+      return this.sandbox_events(text, 'cmd=c-libfyaml-event');
     };
 
     PlayGround.libyaml_events = function(text) {
-      return this.localhost_server(text, 'cmd=c-libyaml-event');
+      return this.sandbox_events(text, 'cmd=c-libyaml-event');
+    };
+
+    PlayGround.sandbox_events = function(text, args) {
+      var value;
+      value = this.localhost_server(text, args);
+      if (_.isString(value) && value.match(/^[^\+\-\=]/m)) {
+        throw value;
+      } else {
+        return value;
+      }
     };
 
     PlayGround.localhost_server = function(text, args) {
@@ -64,9 +74,12 @@
           }
         }
       }
+      console.dir('Error calling localhost sandbox:');
       console.dir(resp);
       help = loc.replace(/(\/playground\/).*/, "$1");
-      return "This pane requires a localhost sandbox server.\nSimply run:\n\n$ docker run --rm -p " + port + ":" + port + " \\\n    yamlio/playground-sandbox:0.0.3 " + scheme + "\n\non the same computer as your web browser.\n\nSee " + help + "\nfor more instructions.";
+      return {
+        mark: "This pane requires a localhost sandbox server.\n\nSimply run:\n\n```\n$ docker run --rm -p " + port + ":" + port + " \\\n    yamlio/playground-sandbox:0.0.3 " + scheme + "\n```\n\n\non the same computer as your web browser.\n\nSee " + help + "  \nfor more instructions."
+      };
     };
 
     return PlayGround;
