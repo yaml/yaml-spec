@@ -284,6 +284,17 @@
       return this.switch_pane($old, $new);
     };
 
+    EatMe.prototype.add_pane = function($button, e) {
+      var $col, $pane, panes;
+      $col = $button.closest('.eatme-col');
+      panes = $col.find('div.eatme-pane').length;
+      if (panes < 4) {
+        e.stopPropagation();
+        $pane = this.make_empty_pane();
+        return $col.append($pane);
+      }
+    };
+
     EatMe.prototype.close_pane = function($button) {
       var $col, $pane;
       $pane = $button.closest('.eatme-pane');

@@ -64,10 +64,8 @@ here.</p>
 run this command from a terminal:</p>
 
 <pre>
-docker run --rm \
-    -p 1337:1337 \
-    -p 31337:31337 \
-    yamlio/playground-sandbox:0.0.2
+docker run --rm -p 31337:31337 \
+  yamlio/playground-sandbox:0.0.3 https
 </pre>
 
 <p>This will start a local YAML Playground backend server, and your playgrounds

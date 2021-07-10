@@ -30,16 +30,14 @@
     };
 
     PlayGround.localhost_server = function(text, args) {
-      var data, e, env, loc, msg, port, resp, scheme;
+      var data, e, help, loc, port, resp, scheme;
       loc = window.location.href.replace(/#$/, '');
       if (window.location.href.match(/^https/)) {
         scheme = 'https';
         port = 31337;
-        env = 1;
       } else {
         scheme = 'http';
         port = 1337;
-        env = 0;
       }
       try {
         resp = $.ajax({
@@ -67,11 +65,8 @@
         }
       }
       console.dir(resp);
-      msg = "This pane requires a localhost sandbox server.\nSimply run:\n\n$ docker run --rm \\\n    -p " + port + ":" + port + " \\\n    -e HTTPS=" + env + " \\\n    yamlio/playground-sandbox:0.0.2\n\non the same computer as your web browser.";
-      if (scheme === 'https') {
-        msg += "\n\n" + ("In a Google Chrome browser:\n\n* Open this internal URL: 'chrome:flags'\n* Search for '#allow-insecure-localhost'\n  * Enable it\n* Click the [Relaunch] button\n* Open " + scheme + "://localhost:" + port + "\n  * Accept the untrusted cert\n* Reload " + loc);
-      }
-      return msg;
+      help = loc.replace(/(\/playground\/).*/, "$1");
+      return "This pane requires a localhost sandbox server.\nSimply run:\n\n$ docker run --rm -p " + port + ":" + port + " \\\n    yamlio/playground-sandbox:0.0.3 " + scheme + "\n\non the same computer as your web browser.\n\nSee " + help + "\nfor more instructions.";
     };
 
     return PlayGround;
