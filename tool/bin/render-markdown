@@ -12,4 +12,6 @@ check() (
   ' || return 1
 )
 
+export PERL5LIB=$YAML_SPEC_ROOT/tool/lib
+
 run "$@"

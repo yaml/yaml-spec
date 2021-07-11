@@ -1,8 +1,8 @@
 #!/usr/bin/env perl
 
 use v5.18;
-# use utf8;
 
+use MarkdownParser;
 use YAML::PP;
 use XXX;
 
@@ -13,7 +13,7 @@ my $links = {};
 sub main {
   my ($front, $markdown, $link_map) = read_files(@_);
 
-  my $parsed = parse_sections($markdown);
+  my $parsed = MarkdownParser::parse_sections($markdown);
 
   set_vars();
   make_link_index($parsed, $link_map);
@@ -32,116 +32,6 @@ sub main {
 }
 
 #------------------------------------------------------------------------------
-my $re_pre = qr/
-  ```\n
-  (?:.*\n)+?
-  ```\n
-/x;
-my $re_legend = qr/
-  \*\*Legend:\*\*\n
-  (?:\*\ .*\n)+
-/x;
-
-sub parse_sections {
-  ($_) = @_;
-
-  my @s;
-  while ($_) {
-    # Headings:
-    s/\A(\S.*\n)===+\n\n+//
-      and push @s, {heading => "# $1"} and next;
-
-    s/\A(#{1,5} .*\n)\n+//
-      and push @s, {heading => $1} and next;
-
-    # Example section:
-    s/\A
-      (\*\*Example\ \# [\s\S]*?\*\*)\n
-      ($re_pre)
-      ($re_pre)?
-      ($re_legend)?
-      \n+
-    //x
-      and push @s, {example => [$1, $2, $3, $4]} and next;
-
-    s/\A
-      (
-        (::.*\n)?
-        (?:
-          (?:\*\ \S.*\n)
-          (?:
-            (?:
-              \n
-              (\ \ \S.*\n)+
-            )+
-            \n?
-          )?
-          (?:\ \ \*\ .*\n)*
-        )+
-        (?:\{:\.\S+\}\n)?
-      )
-      \n+
-    //x
-      and push @s, {ul => $1} and next;
-
-    s/\A
-      (
-        (?:
-          (?:\*\*|-1\ |\[[\w\"\*]|[\w\"\(])
-          .*\n
-        )+
-      )
-      (?:
-        (?=```) |
-        \z |
-        \n+
-      )
-    //x
-      and push @s, {p => $1} and next;
-
-    s/\A(----\n)\n+//
-      and push @s, {hr => $1} and next;
-
-    s/\A\::toc\n\n+//
-      and push @s, {toc => 1} and next;
-
-    s/\A\::index\n//
-      and push @s, {index => 1} and next;
-
-    s/\A((?:>.*\n)+)\n+//
-      and push @s, {indent => $1} and next;
-
-    s/\A((?s:```.+?\n```\n))\n+//
-      and push @s, {pre => $1} and next;
-
-    s/\A(!\[.*\.png\)\n)\s+//
-      and push @s, {img => $1} and next;
-
-    s/\A(\* .*\n(?:  \S.*\n|\n(?=  \S))+)\n+//
-      and push @s, {ul => $1} and next;
-
-    s/\A(\`\w.*\n)\n+//
-      and push @s, {p => $1} and next;
-
-    s/\A((?:\| .*\n)+)\n+//
-      and push @s, {table => $1} and next;
-
-    s/\A((?:\* .*\n)(?:  .*\n|\n(?=  ))+)\n+//
-      and push @s, {ul => $1} and next;
-
-    s/\A(<!--(?:.*\n)+?-->\n)\n*//
-      and push @s, {comment => $1} and next;
-
-    s/\n+\z// and next;
-
-    s/((?:.*\n){20})(?s:.*)/$1/;
-    WWW(\@s);
-    die "*** ERROR ***\nParse failed at this point:\n$_\n*** EOF ***\n";
-  }
-
-  return \@s;
-}
-
 #------------------------------------------------------------------------------
 sub fmt_heading {
   set_dates();

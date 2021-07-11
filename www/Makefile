@@ -5,6 +5,7 @@ PUBLISH_CNAME := spec.yaml.io
 
 SPEC12 := $(ROOT)/1.2
 SPEC := $(ROOT)/spec
+RFC := $(ROOT)/rfc
 DOC := $(ROOT)/doc
 STORY := $(ROOT)/story
 WORK := $(ROOT)/work
@@ -15,6 +16,13 @@ SPEC_LINKS := $(SPEC)/links.yaml
 SPEC_IMAGE := $(shell ls $(SPEC)/img/)
 SPEC_MD_HTML := $(WORK)/markdown.html
 INPUT_HTML := $(WORK)/spec-1.2.html
+
+RFC_MD := $(shell \
+    find $(RFC) -name '*.md' | \
+    sort | \
+    grep -Ev '(ReadMe.md|0000)' \
+)
+RFC_MD := $(RFC_MD:$(ROOT)/%=%)
 
 DOC_MD := $(shell \
     find $(DOC) -name '*.md' | \
@@ -53,6 +61,7 @@ SITE_FILES := \
     $(WWW_FILES) \
     spec.md \
     $(SPEC_IMAGE) \
+    $(RFC_MD) \
     $(DOC_MD) \
     $(STORY_MD) \
     Gemfile \
@@ -152,6 +161,10 @@ $(SITE)/%.md: $(ROOT) $(SPEC)/%.md $(SPEC_LINKS)
 	mkdir -p $(dir $@)
 	render-markdown $^ > $@
 	cp $@ $(WORK)/
+
+$(SITE)/rfc/%.md: $(ROOT) $(RFC)/%.md
+	mkdir -p $(dir $@)
+	render-markdown $^ > $@
 
 $(SITE)/doc/%.md: $(ROOT) $(DOC)/%.md
 	mkdir -p $(dir $@)
