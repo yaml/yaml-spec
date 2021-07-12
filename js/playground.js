@@ -9,17 +9,29 @@
       return parser.receiver.output();
     };
 
-    Playground.npm_yaml_json = function(text) {
-      var yaml;
-      yaml = npmYAML.parse(text);
-      return JSON.stringify(yaml, null, 2);
+    Playground.npmyaml_json = function(text) {
+      var data;
+      data = npmYAML.parse(text);
+      return JSON.stringify(data, null, 2);
+    };
+
+    Playground.npmyaml2_json = function(text) {
+      var data;
+      data = npmYAML2.parse(text);
+      return JSON.stringify(data, null, 2);
+    };
+
+    Playground.npmjsyaml_json = function(text) {
+      var data;
+      data = npmJSYAML.load(text);
+      return JSON.stringify(data, null, 2);
     };
 
     Playground.yamlpp_events = function(text) {
       return this.sandbox_events(text, 'cmd=perl-pp-event');
     };
 
-    Playground.yamljs_events = function(text) {
+    Playground.npmyaml_events = function(text) {
       return this.sandbox_events(text, 'cmd=js-yaml-event');
     };
 

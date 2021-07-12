@@ -99,11 +99,6 @@
 ></script>
 
 
-  <script type="module">
-import { YAML } from 'https://unpkg.com/yaml/browser/dist/index.js';
-window.npmYAML = YAML;
-</script>
-
   <script type="text/javascript">
   window.require = function(name) {
     if (name === 'lodash') {
@@ -166,6 +161,32 @@ window.npmYAML = YAML;
   src="/js/ref-parser/parser.js"
 ></script>
 
+  <script type="module">
+import { YAML } from 'https://unpkg.com/yaml@1.10.2/browser/dist/index.js';
+window.npmYAML = YAML;
+</script>
+
+  <script type="module">
+import { parse } from 'https://unpkg.com/yaml@next/browser/dist/index.js';
+window.npmYAML2 = {
+  'parse': parse,
+};
+</script>
+
+  <script type="module">
+  import {parse} from 'https://unpkg.com/yamljs@0.3.0/lib/Yaml.js';
+  window.npmYAMLJS = {
+    'parse': parse,
+  };
+</script>
+
+  <script type="module">
+  import {load} from 'https://unpkg.com/js-yaml@4.1.0/dist/js-yaml.min.js';
+  window.npmJSYAML = {
+    'load': load,
+  };
+</script>
+
 
   <link
   rel="stylesheet"
@@ -227,31 +248,36 @@ pane:
 - name: YAML Reference Parser
   slug: refparser
   call: [refparser-events, yaml-input]
-  colx: 2
-
-- name: yaml.js (NodeJS)
-  slug: yamljs
-  call: [yamljs-events, yaml-input]
-  colx: 2
+  colx: 1
 
 - name: libfyaml (C)
   slug: libfyaml
   call: [libfyaml-events, yaml-input]
-  colx: 3
+  colx: 2
 
 - name: libyaml (C)
   slug: libyaml
   call: [libyaml-events, yaml-input]
-  colx: 3
+  colx: 2
 
 - name: YAML::PP (Perl)
   slug: yamlpp
   call: [yamlpp-events, yaml-input]
-  colx: 4
+  colx: 3
 
 - name: PyYAML (Python)
   slug: pyyaml
   call: [pyyaml-events, yaml-input]
+  colx: 3
+
+- name: yaml.js 1.10.2 (NodeJS)
+  slug: yamljs
+  call: [npmyaml-events, yaml-input]
+  colx: 4
+
+- name: yaml.js 2.0.0 or JSON
+  slug: yamljs2
+  call: [npmyaml2-json, yaml-input]
   colx: 4
 
       `);
