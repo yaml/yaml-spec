@@ -1,13 +1,19 @@
 (function() {
-  var die, qqq, say,
+  var $,
     slice = [].slice;
 
-  qqq = function(a) {
+  if (window.jQuery != null) {
+    $ = jQuery;
+  } else {
+    throw "EatMe requires is jQuery to be loaded first.";
+  }
+
+  window.qqq = function(a) {
     window.q = a;
     return a;
   };
 
-  say = function() {
+  window.say = function() {
     var a, i, len, o;
     a = 1 <= arguments.length ? slice.call(arguments, 0) : [];
     for (i = 0, len = a.length; i < len; i++) {
@@ -19,95 +25,82 @@
     return a[0];
   };
 
-  die = function(msg) {
-    if (msg == null) {
-      msg = 'Died';
-    }
-    throw msg.toString();
-  };
-
   window.EatMe = (function() {
-    EatMe.conf = {
-      cols: 2
-    };
+    EatMe.configs = {};
 
-    EatMe.init = function(root, conf, func) {
-      var $root, eatme;
-      EatMe.set = [];
-      if (root instanceof jQuery) {
-        $root = root;
-      } else if (_.isString(root)) {
-        $root = $(root);
-      } else {
-        die("Bad 'root' argument for EatMe.init");
+    EatMe.objects = [];
+
+    EatMe.conf = function(conf) {
+      var slug;
+      conf = new EatMe.Config(conf);
+      slug = conf.slug;
+      if (this.configs[slug] != null) {
+        throw "Eatme conf '" + slug + "' already exists";
       }
-      this.normalize(conf);
-      eatme = new EatMe($root, conf, func);
-      EatMe.set.push(eatme);
-      return eatme;
+      this.configs[slug] = conf;
+      return slug;
     };
 
-    function EatMe(root1, conf1, func1) {
-      var $first, text;
-      this.root = root1;
+    EatMe.init = function(arg) {
+      var $elem, code, conf, config, elem;
+      elem = arg.elem, conf = arg.conf, code = arg.code;
+      if (elem instanceof jQuery) {
+        $elem = elem;
+      } else if (_.isString(elem) || elem instanceof Element) {
+        $elem = $(elem);
+      } else {
+        throw "Bad 'elem' argument for EatMe.init";
+      }
+      if (!(config = this.configs[conf])) {
+        throw "No EatMe.Config named '" + conf + "' found";
+      }
+      return $elem.each(function() {
+        var $from, eatme;
+        $from = $(this);
+        eatme = new EatMe($from, config, code);
+        return EatMe.objects.push(eatme);
+      });
+    };
+
+    function EatMe($from, conf1, code1) {
       this.conf = conf1;
-      this.func = func1;
+      this.code = code1;
+      this.make_root($from);
       this.panes = $('<div hidden>').appendTo(this.root);
       this.make_cols();
-      $first = $(this.root).find('.eatme-pane:has(textarea)').first();
-      if ($first.length === 1) {
-        text = $first.find('.eatme-box').focus().text();
-        this.call(text, $first);
-      }
+      $from.replaceWith(this.root);
+      $(this.root).find('.eatme-pane:has(textarea)').first().find('.eatme-box').text($from.text()).change().focus();
     }
 
-    EatMe.normalize = function(conf) {
-      var i, len, pane, ref, results;
-      this.pane_map = {};
-      ref = conf.pane;
-      results = [];
-      for (i = 0, len = ref.length; i < len; i++) {
-        pane = ref[i];
-        if (pane.slug == null) {
-          pane.slug = pane.name.toLowerCase().replace(/\ /g, '-');
-        }
-        if (pane.type == null) {
-          if ((pane.load != null) && pane.load.match(/\.html$/)) {
-            pane.type = 'html';
-          } else {
-            pane.type = 'edit';
-          }
-        }
-        results.push(this.pane_map[pane.slug] = pane);
+    EatMe.prototype.make_root = function($from) {
+      if ($from[0].tagName !== 'PRE') {
+        throw "Can only make EatMe from '<pre>'";
       }
-      return results;
+      return this.root = $(this.conf.html).addClass('eatme-container');
     };
 
     EatMe.prototype.make_cols = function() {
-      var $col, $pane, col, cols, i, idx, j, len, pane, ref, ref1, ref2, size;
-      cols = this.conf.conf.cols;
-      if ((ref = cols.toString()) !== '2' && ref !== '3' && ref !== '4') {
-        die("'cols' must be 2, 3 or 4");
-      }
+      var $col, $pane, col, cols, column, i, j, len, pane, ref, ref1, self, size;
+      cols = this.conf.cols;
       size = 12 / cols;
-      for (col = i = 1, ref1 = cols; 1 <= ref1 ? i <= ref1 : i >= ref1; col = 1 <= ref1 ? ++i : --i) {
+      for (col = i = 1, ref = cols; 1 <= ref ? i <= ref : i >= ref; col = 1 <= ref ? ++i : --i) {
         $col = this.make_col(size);
         this.root.append($col);
       }
-      ref2 = this.conf.pane;
-      for (j = 0, len = ref2.length; j < len; j++) {
-        pane = ref2[j];
-        if (pane.init != null) {
-          idx = Number(pane.init.replace(/^col-/, '')) - 1;
-          $col = $(this.root.find(".eatme-col")[idx]);
+      ref1 = this.conf.pane;
+      for (j = 0, len = ref1.length; j < len; j++) {
+        pane = ref1[j];
+        if ((column = pane.colx) != null) {
+          $col = $(this.root.find(".eatme-col")[column - 1]);
           $pane = this.make_pane(pane.slug).appendTo($col);
           this.setup_pane($pane);
         }
       }
+      self = this;
       return this.root.find('.eatme-col').each(function() {
         $col = $(this);
         if ($col.find('.eatme-pane').length === 0) {
-          return this.make_empty_pane().appendTo($col);
+          return self.make_empty_pane().appendTo($col);
         }
       });
     };
@@ -153,53 +146,49 @@
     };
 
     EatMe.prototype.setup_pane = function($pane) {
-      var copy_button, pane_id, self;
+      var $from, call, conf, copy_button, from, func, pane_id, self;
       self = this;
       pane_id = $pane.attr('id');
       if (pane_id.match(/^empty-/)) {
         pane_id = 'empty';
       }
       $pane.find('select').val(pane_id).attr('pane', pane_id);
-      $pane.find('textarea').bind('change keyup', $.debounce(400, function() {
-        return self.call($(this).val(), $pane);
-      }));
       copy_button = $pane.find('.eatme-btn-copy-text')[0];
-      return $pane.clipboard = new ClipboardJS(copy_button, {
+      $pane.clipboard = new ClipboardJS(copy_button, {
         target: function(btn) {
           return self.copy_text($(btn));
         }
       });
+      conf = this.conf.panes[pane_id];
+      if ((call = conf.call) != null) {
+        func = call[0], from = call[1];
+        $from = this.root.find(".eatme-pane-" + from);
+        return $from.find('textarea').bind('change keyup', $.debounce(400, function() {
+          var text;
+          text = $(this).val();
+          return self.call(func, text, $pane);
+        }));
+      }
     };
 
-    EatMe.prototype.call = function(text, $from) {
-      var $to, all_errors, dest, e, error, from, func, i, len, ref, ref1, show, to;
-      from = EatMe.pane_map[$from.attr('id')];
-      all_errors = '';
-      ref = from.call;
-      for (i = 0, len = ref.length; i < len; i++) {
-        ref1 = ref[i], func = ref1[0], dest = ref1[1];
-        func = func.replace(/-/g, '_');
-        to = EatMe.pane_map[dest];
-        $to = $(".eatme-pane-" + dest);
-        try {
-          show = this.func[func](text);
-          if (_.isString(show)) {
-            say(typeof show);
-            show = {
-              output: show
-            };
-          }
-        } catch (error1) {
-          e = error1;
-          error = (e.stack || e.msg || e).toString();
-          all_errors += ("*** Errors in '" + to.name + "' ***\n" + error) + "\n\n";
+    EatMe.prototype.call = function(func, text, $to) {
+      var e, error, show;
+      func = func.replace(/-/g, '_');
+      try {
+        show = this.code[func](text);
+        if (_.isString(show)) {
           show = {
-            error: error
+            output: show
           };
         }
-        this.show($to, show);
+      } catch (error1) {
+        e = error1;
+        error = (e.stack || e.msg || e).toString();
+        show = {
+          error: error
+        };
       }
-      return $('.eatme-errors').text(all_errors);
+      return this.show($to, show);
     };
 
     EatMe.prototype.show = function($pane, show) {
@@ -214,7 +203,7 @@
       } else if ((output = show.output) != null) {
         $box = pane.$output.text(output);
       } else {
-        die("Invalid show value: '" + show + "'");
+        throw "Invalid show value: '" + show + "'";
       }
       $show = $pane.children().last();
       if ($show[0] !== $box[0]) {
@@ -239,13 +228,15 @@
     EatMe.prototype.make_pane = function(pane) {
       var $box, $pane;
       if (_.isString(pane)) {
-        pane = EatMe.pane_map[pane] || die("Unknown pane id '" + pane + "'");
+        pane = this.conf.panes[pane] || (function() {
+          throw "Unknown pane id '" + pane + "'";
+        })();
       }
       $pane = $("<div\n  id=\"" + pane.slug + "\"\n  class=\"eatme-pane eatme-pane-" + pane.slug + "\"\n>").append(this.make_nav());
       $pane[0].$output = $('<pre class="eatme-box">');
       $pane[0].$error = $('<pre class="eatme-box eatme-error">');
       $pane[0].$html = $('<div class="eatme-box">');
-      if (pane.type === 'edit') {
+      if (pane.type === 'input') {
         $box = $('<textarea class="eatme-box">');
       } else if (pane.type === 'error') {
         $box = $('<pre class="eatme-box eatme-errors">');
@@ -514,6 +505,133 @@
     };
 
     return EatMe;
+
+  })();
+
+  EatMe.Config = (function() {
+    function Config(conf) {
+      var ref;
+      ref = [conf, this, 'top level'], this.src = ref[0], this.trg = ref[1], this.lvl = ref[2];
+      this.required_slug('slug');
+      this.optional_num('cols', 1, 4);
+      this.required_str('html');
+      this.pane = [];
+      this.panes = {};
+      this.set_panes();
+      delete this.src;
+      delete this.trg;
+      delete this.lvl;
+    }
+
+    Config.prototype.set_panes = function() {
+      var i, len, obj, objs, pane, ref, results;
+      if (((objs = this.src.pane) == null) || !_.isArray(objs)) {
+        throw "EatMe.Config requires 'pane' array";
+      }
+      results = [];
+      for (i = 0, len = objs.length; i < len; i++) {
+        obj = objs[i];
+        if (!_.isPlainObject(obj)) {
+          throw "Each element of 'pane' array must be an object";
+        }
+        pane = {};
+        ref = [obj, pane, 'pane object'], this.src = ref[0], this.trg = ref[1], this.lvl = ref[2];
+        this.required_str('name');
+        this.required_slug('slug');
+        pane.type = null;
+        this.set_call();
+        this.optional_str('mark');
+        this.optional_str('html');
+        this.optional_num('colx', 1, 4);
+        this.set_type();
+        this.pane.push(pane);
+        results.push(this.panes[this.trg.slug] = pane);
+      }
+      return results;
+    };
+
+    Config.prototype.set_type = function() {
+      var type;
+      type = this.src.type;
+      if (type == null) {
+        if (this.trg.call != null) {
+          type = 'text';
+        } else if ((this.trg.mark != null) || this.trg.html) {
+          type = 'html';
+        } else {
+          say(this.src);
+          throw "No 'type' value set";
+        }
+      }
+      return this.trg.type = type;
+    };
+
+    Config.prototype.set_call = function() {
+      var call;
+      if ((call = this.src.call) == null) {
+        return;
+      }
+      if ((!_.isArray(call)) || !(_.isString(call[0]) && _.isString(call[1]))) {
+        throw "EatMe.Config 'call' value must be array of strings";
+      }
+      return this.trg.call = call;
+    };
+
+    Config.prototype.required = function(name) {
+      var value;
+      if ((value = this.src[name]) == null) {
+        throw "Config value '" + name + "' required for " + this.lvl;
+      }
+      return value;
+    };
+
+    Config.prototype.required_str = function(name) {
+      var value;
+      value = this.required(name);
+      this.validate_str(value, name);
+      return this.trg[name] = value;
+    };
+
+    Config.prototype.required_slug = function(name) {
+      var value;
+      value = this.required(name);
+      this.validate_slug(value, name);
+      return this.trg[name] = value;
+    };
+
+    Config.prototype.optional_str = function(name) {
+      var value;
+      if ((value = this.src[name]) == null) {
+        return;
+      }
+      this.validate_str(value, name);
+      return this.trg[name] = value;
+    };
+
+    Config.prototype.optional_num = function(name, min, max) {
+      var value;
+      if ((value = this.src[name]) == null) {
+        return;
+      }
+      if ((!_.isNumber(value)) || value < min || value > max) {
+        throw "Invalid value '" + value + "' for '" + name + "', must be a number from " + min + " to " + max;
+      }
+      return this.trg[name] = value;
+    };
+
+    Config.prototype.validate_str = function(value, name) {
+      if (!_.isString(value)) {
+        throw "Invalid value '" + value + "' for '" + name + "' in '" + this.lvl + "', must be a string";
+      }
+    };
+
+    Config.prototype.validate_slug = function(value, name) {
+      if (!value.match(/^[-a-z0-9]+$/)) {
+        throw "Invalid slug value '" + value + "'";
+      }
+    };
+
+    return Config;
 
   })();
 

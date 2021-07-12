@@ -101,7 +101,7 @@
 
   <script type="module">
 import { YAML } from 'https://unpkg.com/yaml/browser/dist/index.js';
-window.EYAML = YAML;
+window.npmYAML = YAML;
 </script>
 
   <script type="text/javascript">
@@ -190,16 +190,79 @@ window.EYAML = YAML;
 </head>
 
 <body>
-  <div id="playground" class="eatme-container container-fluid row no-gutters" />
+  <pre>
+# Edit Me!
+
+%YAML 1.2
+---
+foo: Hello, YAML!
+bar: [123, true]
+baz:
+- one
+- two
+- null
+</pre>
+
 
   <script type="text/javascript">
-    var conf = {"conf":{"cols":4},"pane":[{"name":"Menu of Examples","slug":"menu","html":""},{"name":"YAML Input","slug":"text","init":"col-1","call":[["refparser-events","refparser"],["yamljs-events","yamljs"],["yamlpp-events","yamlpp"],["pyyaml-events","pyyaml"],["libfyaml-events","libfyaml"],["libyaml-events","libyaml"]],"text":"# Edit Me!\n\n%YAML 1.2\n---\nfoo: Hello, YAML!\nbar: [123, true]\nbaz:\n- one\n- two\n- null\n"},{"name":"YAML Reference Parser","slug":"refparser","init":"col-2","type":"text"},{"name":"yaml.js (NodeJS)","slug":"yamljs","type":"text","init":"col-2"},{"name":"libfyaml (C)","slug":"libfyaml","type":"text","init":"col-3"},{"name":"libyaml (C)","slug":"libyaml","type":"text","init":"col-3"},{"name":"YAML::PP (Perl)","slug":"yamlpp","type":"text","init":"col-4"},{"name":"PyYAML (Python)","slug":"pyyaml","type":"text","init":"col-4"},{"name":"All Errors","slug":"error","type":"error"}]};
+    $(document).ready(()=> {
 
-    $(document).ready(
-      function() {
-        EatMe.init('#playground', conf, PlayGround);
-      }
-    );
+      var conf = npmYAML.parse(`
+slug: playground-parser-events
+cols: 4
+html: <div class="container-fluid row">
+
+pane:
+- name: Menu of Examples
+  slug: menu
+  mark: |
+    * foo
+    * bar
+
+- name: YAML Input
+  slug: yaml-input
+  type: input
+  colx: 1
+
+- name: YAML Reference Parser
+  slug: refparser
+  call: [refparser-events, yaml-input]
+  colx: 2
+
+- name: yaml.js (NodeJS)
+  slug: yamljs
+  call: [yamljs-events, yaml-input]
+  colx: 2
+
+- name: libfyaml (C)
+  slug: libfyaml
+  call: [libfyaml-events, yaml-input]
+  colx: 3
+
+- name: libyaml (C)
+  slug: libyaml
+  call: [libyaml-events, yaml-input]
+  colx: 3
+
+- name: YAML::PP (Perl)
+  slug: yamlpp
+  call: [yamlpp-events, yaml-input]
+  colx: 4
+
+- name: PyYAML (Python)
+  slug: pyyaml
+  call: [pyyaml-events, yaml-input]
+  colx: 4
+
+      `);
+
+      var conf_name = EatMe.conf(conf);
+      EatMe.init({
+        elem: 'pre',
+        conf: conf_name,
+        code: Playground,
+      });
+    });
   </script>
 </body>
 

@@ -1,35 +1,41 @@
 (function() {
-  window.PlayGround = (function() {
-    function PlayGround() {}
+  window.Playground = (function() {
+    function Playground() {}
 
-    PlayGround.refparser_events = function(text) {
+    Playground.refparser_events = function(text) {
       var parser;
       parser = new Parser(new TestReceiver);
       parser.parse(text);
       return parser.receiver.output();
     };
 
-    PlayGround.yamlpp_events = function(text) {
+    Playground.npm_yaml_json = function(text) {
+      var yaml;
+      yaml = npmYAML.parse(text);
+      return JSON.stringify(yaml, null, 2);
+    };
+
+    Playground.yamlpp_events = function(text) {
       return this.sandbox_events(text, 'cmd=perl-pp-event');
     };
 
-    PlayGround.yamljs_events = function(text) {
+    Playground.yamljs_events = function(text) {
       return this.sandbox_events(text, 'cmd=js-yaml-event');
     };
 
-    PlayGround.pyyaml_events = function(text) {
+    Playground.pyyaml_events = function(text) {
       return this.sandbox_events(text, 'cmd=py-pyyaml-event');
     };
 
-    PlayGround.libfyaml_events = function(text) {
+    Playground.libfyaml_events = function(text) {
       return this.sandbox_events(text, 'cmd=c-libfyaml-event');
     };
 
-    PlayGround.libyaml_events = function(text) {
+    Playground.libyaml_events = function(text) {
       return this.sandbox_events(text, 'cmd=c-libyaml-event');
     };
 
-    PlayGround.sandbox_events = function(text, args) {
+    Playground.sandbox_events = function(text, args) {
       var value;
       value = this.localhost_server(text, args);
       if (_.isString(value) && value.match(/^[^\+\-\=]/m)) {
@@ -39,7 +45,7 @@
       }
     };
 
-    PlayGround.localhost_server = function(text, args) {
+    Playground.localhost_server = function(text, args) {
       var data, e, help, loc, port, resp, scheme;
       loc = window.location.href.replace(/#$/, '');
       if (window.location.href.match(/^https/)) {
@@ -82,7 +88,7 @@
       };
     };
 
-    return PlayGround;
+    return Playground;
 
   })();
 

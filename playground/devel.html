@@ -101,7 +101,7 @@
 
   <script type="module">
 import { YAML } from 'https://unpkg.com/yaml/browser/dist/index.js';
-window.EYAML = YAML;
+window.npmYAML = YAML;
 </script>
 
   <script type="text/javascript">
@@ -190,16 +190,32 @@ window.EYAML = YAML;
 </head>
 
 <body>
-  <div id="playground" class="eatme-container container-fluid row no-gutters" />
+  <pre>
+# Edit Me!
+
+%YAML 1.2
+---
+foo: Hello, YAML!
+bar: [123, true]
+baz:
+- one
+- two
+- null
+</pre>
+
 
   <script type="text/javascript">
-    var conf = {"conf":{"cols":4},"pane":[{"name":"Playground Menu","slug":"menu","load":"/main-menu.html"},{"name":"YAML Text","slug":"text","init":"col-1","call":[["ref-parser-events","events"],["eemeli-loader-json","eemeli"],["yamlpp-parse-events","yamlpp"],["fytool-parse-events","fytool"]],"text":"%YAML 1.2\n---\nfoo: 111\nbar: [222, true]\nbaz:\n"},{"name":"YAML Reference Parser Events","slug":"events","init":"col-2","type":"text"},{"name":"YAML::PP Events","slug":"yamlpp","type":"text","init":"col-3"},{"name":"yaml.js Load to JSON","slug":"eemeli","type":"text","init":"col-4"},{"name":"fy-tool Events","slug":"fytool","type":"text"},{"name":"DOM State","slug":"dom"},{"name":"Native Data Structure","slug":"native","type":"text"},{"name":"JavaScript","type":"text"},{"name":"Parser Grammar","slug":"grammar","load":"/grammar.yaml","call":"rebuild","font":"0.8em"},{"name":"All Errors","slug":"error","type":"error"},{"name":"EatMe Settings","slug":"settings","type":"eatme"}]};
+    $(document).ready(()=> {
 
-    $(document).ready(
-      function() {
-        EatMe.init('#playground', conf, PlayGround);
-      }
-    );
+      var conf = {"slug":"playground-devel","cols":3,"html":"<div class=\"container-fluid row\">","pane":[{"name":"Playground Menu","slug":"menu","type":"menu","load":"/main-menu.html"},{"name":"YAML Text Input","slug":"text","type":"input","colx":1},{"name":"YAML Reference Parser Events","slug":"events","call":["refparser-events","text"],"colx":2},{"name":"YAML::PP Events","slug":"yamlpp","type":"text"},{"name":"NPM yaml.js Parse to JSON","slug":"eemeli","type":"text","call":["npm-yaml-json","text"],"colx":3},{"name":"DOM State","type":"text","slug":"dom"},{"name":"Native Data Structure","slug":"native","type":"text"},{"name":"JavaScript","slug":"javascript","type":"text"},{"name":"Parser Grammar","slug":"grammar","type":"input","load":"/grammar.yaml"},{"name":"EatMe Settings","slug":"settings","type":"settings"}]};
+
+      var conf_name = EatMe.conf(conf);
+      EatMe.init({
+        elem: 'pre',
+        conf: conf_name,
+        code: Playground,
+      });
+    });
   </script>
 </body>
 
