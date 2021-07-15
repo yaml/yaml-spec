@@ -134,22 +134,22 @@
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/prelude.js"
+  src="/ext/ref-parser/javascript/lib/prelude.js"
 ></script>
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/grammar.js"
+  src="/ext/ref-parser/javascript/lib/grammar.js"
 ></script>
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/receiver.js"
+  src="/ext/ref-parser/javascript/lib/receiver.js"
 ></script>
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/test-receiver.js"
+  src="/ext/ref-parser/javascript/lib/test-receiver.js"
 ></script>
 
 <script type="text/javascript">
@@ -158,18 +158,31 @@
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/parser.js"
+  src="/ext/ref-parser/javascript/lib/parser.js"
 ></script>
 
   <script type="module">
-import { YAML } from 'https://unpkg.com/yaml@1.10.2/browser/dist/index.js';
-window.npmYAML = YAML;
+import { parse } from '/ext/npm-yaml/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/browser/dist/test-events.js';
+window.npmYAML = {
+  'parse': parse,
+  'events': testEvents,
+};
 </script>
 
-  <script type="module">
-import { parse } from 'https://unpkg.com/yaml@next/browser/dist/index.js';
+<script type="module">
+import { YAML } from '/ext/npm-yaml/v1/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/v1/browser/dist/test-events.js';
+YAML.events = testEvents;
+window.npmYAML1 = YAML;
+</script>
+
+<script type="module">
+import { parse } from '/ext/npm-yaml/v2/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/v2/browser/dist/test-events.js';
 window.npmYAML2 = {
   'parse': parse,
+  'events': testEvents,
 };
 </script>
 
@@ -190,22 +203,22 @@ window.npmYAML2 = {
 
   <link
   rel="stylesheet"
-  href="/css/eatme.css"
+  href="/ext/eatme/src/eatme.css"
 />
 
 <script
   type="text/javascript"
-  src="/js/eatme.js"
+  src="/ext/eatme/src/eatme.js"
 ></script>
 
   <link
   rel="stylesheet"
-  href="/css/playground.css"
+  href="/playground/playground.css"
 />
 
 <script
   type="text/javascript"
-  src="/js/playground.js"
+  src="/playground/playground.js"
 ></script>
 
 </head>

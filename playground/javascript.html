@@ -134,22 +134,22 @@
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/prelude.js"
+  src="/ext/ref-parser/javascript/lib/prelude.js"
 ></script>
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/grammar.js"
+  src="/ext/ref-parser/javascript/lib/grammar.js"
 ></script>
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/receiver.js"
+  src="/ext/ref-parser/javascript/lib/receiver.js"
 ></script>
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/test-receiver.js"
+  src="/ext/ref-parser/javascript/lib/test-receiver.js"
 ></script>
 
 <script type="text/javascript">
@@ -158,18 +158,31 @@
 
 <script
   type="text/javascript"
-  src="/js/ref-parser/parser.js"
+  src="/ext/ref-parser/javascript/lib/parser.js"
 ></script>
 
   <script type="module">
-import { YAML } from 'https://unpkg.com/yaml@1.10.2/browser/dist/index.js';
-window.npmYAML = YAML;
+import { parse } from '/ext/npm-yaml/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/browser/dist/test-events.js';
+window.npmYAML = {
+  'parse': parse,
+  'events': testEvents,
+};
 </script>
 
-  <script type="module">
-import { parse } from 'https://unpkg.com/yaml@next/browser/dist/index.js';
+<script type="module">
+import { YAML } from '/ext/npm-yaml/v1/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/v1/browser/dist/test-events.js';
+YAML.events = testEvents;
+window.npmYAML1 = YAML;
+</script>
+
+<script type="module">
+import { parse } from '/ext/npm-yaml/v2/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/v2/browser/dist/test-events.js';
 window.npmYAML2 = {
   'parse': parse,
+  'events': testEvents,
 };
 </script>
 
@@ -190,22 +203,22 @@ window.npmYAML2 = {
 
   <link
   rel="stylesheet"
-  href="/css/eatme.css"
+  href="/ext/eatme/src/eatme.css"
 />
 
 <script
   type="text/javascript"
-  src="/js/eatme.js"
+  src="/ext/eatme/src/eatme.js"
 ></script>
 
   <link
   rel="stylesheet"
-  href="/css/playground.css"
+  href="/playground/playground.css"
 />
 
 <script
   type="text/javascript"
-  src="/js/playground.js"
+  src="/playground/playground.js"
 ></script>
 
 </head>
@@ -228,7 +241,7 @@ baz:
   <script type="text/javascript">
     $(document).ready(()=> {
 
-      var conf = {"slug":"playground-devel","cols":4,"html":"<div class=\"container-fluid row\">","pane":[{"name":"YAML Text Input","slug":"text","type":"input","colx":1},{"name":"YAML Reference Parser Events","slug":"events","call":["refparser-events","text"],"colx":2},{"name":"NPM yaml.js 1.10.2 Load to JSON","slug":"npmyaml","type":"text","call":["npmyaml-json","text"],"colx":3},{"name":"NPM yaml.js 2.0.0 Load to JSON","slug":"npmyaml2","type":"text","call":["npmyaml2-json","text"],"colx":4}]};
+      var conf = {"slug":"playground-devel","cols":4,"html":"<div class=\"container-fluid row\">","pane":[{"name":"YAML Text Input","slug":"text","type":"input","colx":1},{"name":"YAML Reference Parser Events","slug":"events","call":["refparser-events","text"],"colx":1},{"name":"NPM yaml.js master Parse to Events","slug":"npmyamlmasterevent","type":"text","call":["npmyamlmaster-event","text"],"colx":2},{"name":"NPM yaml.js master Load to JSON","slug":"npmyamlmasterjson","type":"text","call":["npmyamlmaster-json","text"],"colx":2},{"name":"NPM yaml.js v2.0.0.6 Parse to Events","slug":"npmyaml2event","type":"text","call":["npmyaml2-event","text"],"colx":3},{"name":"NPM yaml.js v2.0.0.6 Load to JSON","slug":"npmyaml2","type":"text","call":["npmyaml2-json","text"],"colx":3},{"name":"NPM yaml.js v1.10.2 Parse to Events","slug":"npmyaml1event","type":"text","call":["npmyaml1-event","text"],"colx":4},{"name":"NPM yaml.js v1.10.2 Load to JSON","slug":"npmyaml1","type":"text","call":["npmyaml1-json","text"],"colx":4}]};
 
       var conf_name = EatMe.conf(conf);
       EatMe.init({

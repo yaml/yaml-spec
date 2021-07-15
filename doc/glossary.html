@@ -202,7 +202,7 @@ Event types include:</p>
     <p>File</p>
 
     <p>File is the term for YAML information in a final textual state, external to
-the yaml stack.
+the YAML stack.
 A YAML framework loads from a file and dumps to a file.
 The term is abstract and doesn’t have to be a file stored to disk.
 It might be a socket or other external data source/target.</p>
@@ -261,7 +261,7 @@ constructed from a mapping node.</p>
   <li>
     <p>JSON</p>
 
-    <p>When used in with a the JSON Schema or a derivative of that schema, YAML is a
+    <p>When used with the JSON Schema or a derivative of that schema, YAML is a
 syntactic and semantic superset of the JSON data format.
 That is, a YAML loader using such a schema (which is typical) can load a JSON
 file and produce the same result as a JSON loading (often called <code class="language-plaintext highlighter-rouge">parse</code>)
@@ -289,7 +289,7 @@ A kind should not be confused with a type.</p>
 
     <p>The DOM resolves tags to functions.
 These functions come from the library that is registered to the DOM; often
-the yaml standard library.</p>
+the YAML standard library.</p>
   </li>
   <li>
     <p>List</p>
@@ -385,7 +385,7 @@ represent it.</p>
 
     <p>A parser is the processor in the load stack that reads tokens, matches them
 against a grammar and write events.
-It make also throw an error if the tokens don’t match the grammar.
+It may also throw an error if the tokens don’t match the grammar.
 The events are usually consumed by the composer to create a DOM, but they
 might also be processed directly by a streaming application.</p>
   </li>
@@ -446,7 +446,7 @@ Strings, numbers and booean values are examples of scalars.</p>
     <p>Schema</p>
 
     <p>Schema in YAML refers to all the external information required to process a
-YAML information.
+YAML stream.
 Unlike traditional schemas which typically enforce the structural typing of
 information, a YAML schema can alter the semantic meaning of a YAML file.</p>
 
@@ -541,6 +541,10 @@ Tags are identifers preceded by a <code class="language-plaintext highlighter-ro
 A tag identifier is used to identify a function that will be applied to a
 node when it is retrieved from the DOM.
 The function’s return type is can be considered the “type” of the node.</p>
+
+    <p>While tags may be written explicitly into a YAML file using the <code class="language-plaintext highlighter-rouge">!abc</code>
+syntax, it is quite common for tags to be added to nodes implicitly according
+to the rules of a schema.</p>
   </li>
   <li>
     <p>Token</p>

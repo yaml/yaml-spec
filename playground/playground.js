@@ -9,16 +9,49 @@
       return parser.receiver.output();
     };
 
-    Playground.npmyaml_json = function(text) {
+    Playground.npmyamlmaster_json = function(text) {
       var data;
       data = npmYAML.parse(text);
       return JSON.stringify(data, null, 2);
+    };
+
+    Playground.npmyamlmaster_event = function(text) {
+      var error, events, ref;
+      ref = npmYAML.events(text), events = ref.events, error = ref.error;
+      if (error != null) {
+        throw error;
+      }
+      return events.join("\n");
+    };
+
+    Playground.npmyaml1_json = function(text) {
+      var data;
+      data = npmYAML1.parse(text);
+      return JSON.stringify(data, null, 2);
+    };
+
+    Playground.npmyaml1_event = function(text) {
+      var error, events, ref;
+      ref = npmYAML1.events(text), events = ref.events, error = ref.error;
+      if (error != null) {
+        throw error;
+      }
+      return events.join("\n");
     };
 
     Playground.npmyaml2_json = function(text) {
       var data;
       data = npmYAML2.parse(text);
       return JSON.stringify(data, null, 2);
+    };
+
+    Playground.npmyaml2_event = function(text) {
+      var error, events, ref;
+      ref = npmYAML2.events(text), events = ref.events, error = ref.error;
+      if (error != null) {
+        throw error;
+      }
+      return events.join("\n");
     };
 
     Playground.npmjsyaml_json = function(text) {
@@ -77,8 +110,8 @@
           dataType: 'json',
           async: false
         });
-      } catch (error) {
-        e = error;
+      } catch (error1) {
+        e = error1;
         throw 'Try: docker run -it --rm -p 31337:8000 yamlio/...';
       }
       if (resp.status === 200) {
