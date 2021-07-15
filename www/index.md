@@ -5,6 +5,7 @@ YAML Specification Development
   * [Spec to Markdown Review](/review)
 * [YAML Developers Documentation](/doc/)
 * [YAML Development Stories](/story/)
+* [YAML Interactive Playground](/playground/)
 
 <!--
 * [YAML Development Overview]()

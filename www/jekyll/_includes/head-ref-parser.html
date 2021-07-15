@@ -1,0 +1,61 @@
+<script type="text/javascript">
+  window.require = function(name) {
+    if (name === 'lodash') {
+      return window._;
+    }
+    if (name === 'yaml') {
+      return window.EYAML;
+    }
+    if (name === 'sprintf-js') {
+      return {};
+    }
+    return null;
+  };
+  window.global = window;
+  window.ENV = {};
+  window.process = {
+    'ENV': ENV,
+    'exit': function(rc) {
+      throw `Exit ${rc}`;
+    },
+  };
+</script>
+
+<script
+  type="text/javascript"
+  src="https://unpkg.com/sprint-js@0.1.0/sprint.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="https://unpkg.com/ingy-prelude@0.0.4/lib/ingy-prelude/index.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/ext/ref-parser/javascript/lib/prelude.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/ext/ref-parser/javascript/lib/grammar.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/ext/ref-parser/javascript/lib/receiver.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/ext/ref-parser/javascript/lib/test-receiver.js"
+></script>
+
+<script type="text/javascript">
+  window.ENV = {};
+</script>
+
+<script
+  type="text/javascript"
+  src="/ext/ref-parser/javascript/lib/parser.js"
+></script>

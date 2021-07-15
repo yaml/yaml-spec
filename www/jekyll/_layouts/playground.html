@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  {% include head-init.html %}
+
+  {% include head-jquery.html %}
+  {% include head-bootstrap.html %}
+  {% include head-primer.html %}
+
+  {% include head-lodash.html %}
+  {% include head-coffeescript.html %}
+
+  {% include head-cookie.html %}
+  {% include head-clipboard.html %}
+  {% include head-split.html %}
+  {% include head-marked.html %}
+  {% include head-codemirror.html %}
+
+  {% include head-ref-parser.html %}
+  {% include head-npm-yaml.html %}
+
+  {% include head-eatme.html %}
+  {% include head-playground.html %}
+</head>
+
+<body>
+  {{ content }}
+
+  <script type="text/javascript">
+    $(document).ready(()=> {
+{% if page.eatme.first %}
+      var conf = {{ page.eatme | jsonify}};
+{% else %}
+      var conf = npmYAML.parse(`
+{% include {{ page.eatme }}.eatme.yaml %}
+      `);
+{% endif %}
+      var conf_name = EatMe.conf(conf);
+      EatMe.init({
+        elem: 'pre',
+        conf: conf_name,
+        code: Playground,
+      });
+    });
+  </script>
+</body>
+
+</html>

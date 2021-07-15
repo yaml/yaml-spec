@@ -3,7 +3,8 @@ CMD ?= bash
 
 docker-build: $(DOCKER_DEPS) $(DOCKER_BIN)
 	docker build \
-	    -t $(DOCKER_IMAGE) \
+	    --network host \
+	    --tag $(DOCKER_IMAGE) \
 	    $(DOCKERFILE) \
 	    $(DOCKER_DIR)
 

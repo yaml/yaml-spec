@@ -1,32 +1,14 @@
 DOCKER_TOOL := github-pages
 include ../tool/make/init.mk
 
-PUBLISH_CNAME := spec.yaml.io
 
-SPEC12 := $(ROOT)/1.2
-SPEC := $(ROOT)/spec
-DOC := $(ROOT)/doc
-STORY := $(ROOT)/story
-WORK := $(ROOT)/work
+PUBLISH_CNAME := spec.yaml.io
+JEKYLL_BUILD := jekyll build --trace
+JEKYLL_SERVE := jekyll serve --host 0.0.0.0
+FORK_USER_ID := $(shell $(ROOT)/tool/bin/get-fork-id)
 SITE := _site
 GH_PAGES := _gh-pages
 
-SPEC_LINKS := $(SPEC)/links.yaml
-SPEC_IMAGE := $(shell ls $(SPEC)/img/)
-SPEC_MD_HTML := $(WORK)/markdown.html
-INPUT_HTML := $(WORK)/spec-1.2.html
-
-DOC_MD := $(shell \
-    find $(DOC) -name '*.md' | \
-    grep -v ReadMe.md \
-)
-DOC_MD := $(DOC_MD:$(ROOT)/%=%)
-
-STORY_MD := $(shell \
-    find $(STORY) -name '*.md' | \
-    grep -v ReadMe.md \
-)
-STORY_MD := $(STORY_MD:$(ROOT)/%=%)
 
 DOCKER_BUILD_OPTS := \
     --user $(UID):$(GID) \
@@ -39,41 +21,87 @@ DOCKER_SHELL_OPTS := \
     $(DOCKER_SERVE_OPTS) \
     --volume $(HISTORY_FILE):/home/jekyll/.bash_history \
 
-SHELL_CMD ?= bash
+DOCKER_SHELL_CMD ?= bash
+
 
 WWW_FILES := $(shell \
-    find . -type f -name '*.md*' | \
+    find . -name '*.md' \
+        -o -name '*.html' \
+        -o -name '*.scss' \
+	-o -name '*.coffee' \
+	-o -name '*.js' \
+	-o -name '*.yaml' \
+	| \
     grep -v ReadMe | \
-    grep -v /_ \
+    grep -v /_ | \
+    cut -c3- | \
+    grep -v '^ext/' | \
+    cat \
 )
-WWW_FILES := $(WWW_FILES:./%=%)
-WWW_FILES := $(WWW_FILES:%.yaml=%)
+
+WWW_FILES := $(shell \
+    find . -name '*.md' \
+        -o -name '*.html' \
+        -o -name '*.scss' \
+	-o -name '*.coffee' \
+	-o -name '*.js' \
+	-o -name '*.yaml' \
+	| \
+    grep -v ReadMe | \
+    grep -v /_ | \
+    cut -c3- | \
+    grep -v '^ext/' | \
+    cat \
+)
+
+include ext/ext.mk
+
+SPEC_LINKS := $(SPEC)/links.yaml
+SPEC_IMAGE := $(shell ls $(SPEC)/img/)
+SPEC_MD_HTML := $(WORK)/markdown.html
+INPUT_HTML := $(WORK)/spec-1.2.html
+SPEC_FILES := \
+    spec.md \
+    $(SPEC_IMAGE) \
+    img \
+
+DOC_FILES := $(shell \
+    cd $(DOC) && \
+    find . -name '*.md' | \
+    grep -v ReadMe.md | \
+    sed 's/^\./doc/' \
+)
+
+STORY_FILES := $(shell \
+    cd $(STORY) && \
+    find . -name '*.md' | \
+    grep -v ReadMe.md | \
+    sed 's/^\./story/' \
+)
+
+JEKYLL_FILES := $(shell \
+    cd jekyll/ && \
+    find . -type f | \
+    cut -c3- \
+)
 
 SITE_FILES := \
     $(WWW_FILES) \
-    spec.md \
-    $(SPEC_IMAGE) \
-    $(DOC_MD) \
-    $(STORY_MD) \
-    Gemfile \
-    _config.yml \
-    _layouts \
-    review.html \
-    spec.scss \
-    img \
+    $(EXT_FILES) \
+    $(SPEC_FILES) \
+    $(DOC_FILES) \
+    $(STORY_FILES) \
+    $(JEKYLL_FILES) \
 
 SITE_FILES := $(SITE_FILES:%=$(SITE)/%)
 SITE_FILES := $(SITE_FILES:%.swp=)
 
-JEKYLL_BUILD := jekyll build
-JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 
-FORK_USER_ID := $(shell $(ROOT)/tool/bin/get-fork-id)
 
 site-files:
-	@printf "%s\n" $(SITE_FILES) | sort
+	@printf "%s\n" $(SITE_FILES)
 
-site: $(SITE) $(SITE_FILES) $(GH_PAGES)
+site: $(EXT) $(SITE) $(SITE_FILES) $(GH_PAGES)
 
 build: site
 	$(eval override export YAML_SPEC_DIR := www/$(SITE))
@@ -87,7 +115,7 @@ serve: site
 
 shell: site
 	$(eval override export YAML_SPEC_DIR := www/$(SITE))
-	$(call docker-run,run $(SHELL_CMD),$(DOCKER_SHELL_OPTS))
+	$(call docker-run,run $(DOCKER_SHELL_CMD),$(DOCKER_SHELL_OPTS))
 
 stage: build
 ifeq ($(FORK_USER_ID),)
@@ -132,13 +160,27 @@ force:
 force-all: force
 	make -C $(SPEC) force
 
-clean:
+clean: force
 	rm -fr $(SITE) $(GH_PAGES)
+	make -C ext clean
 
 $(SPEC)/spec.md: $(INPUT_HTML)
 	make -C $(SPEC) spec.md YAML_SPEC_DIR=
 
+$(SITE)/%.coffee: %.coffee $(SITE)
+	mkdir -p $(dir $@)
+	(echo '---'; echo '---'; cat $<) > $@
+
+$(SITE)/js/%.js: %.js $(SITE)
+	mkdir -p $(dir $@)
+	cp $< $@
+
+$(SITE)/%.scss: %.scss $(SITE)
+	mkdir -p $(dir $@)
+	(echo '---'; echo '---'; cat $<) > $@
+
 $(SITE)/%: % $(SITE)
+	mkdir -p $(dir $@)
 	cp -r $< $@
 
 $(SITE)/%: jekyll/% $(SITE)
@@ -168,13 +210,16 @@ $(SITE)/%.css: %.css $(SITE)
 	cp -r $< $@
 
 $(SITE): $(SPEC_MD_HTML) $(WORK)
-	mkdir -p $@
+	mkdir -p $@/_includes $@/_layouts
 	cp $< $@/
 	cp $(WORK)/1.2/* $@/
 
 $(SITE)/img: $(SPEC)/img
 	mkdir -p $@
 	cp -r $</* $@/
+
+$(EXT):
+	make -C ext build
 
 $(SPEC_MD_HTML): $(SPEC)/spec.md
 	( \

@@ -1,0 +1,12 @@
+diff --git a/rollup.browser-config.js b/rollup.browser-config.js
+index d74f4cb..40d6240 100644
+--- a/rollup.browser-config.js
++++ b/rollup.browser-config.js
+@@ -5,6 +5,7 @@ export default {
+     index: 'src/index.js',
+     'legacy-exports': 'src/legacy-exports.js',
+     'parse-cst': 'src/cst/parse.js',
++    'test-events': 'src/test-events.js',
+     types: 'src/types.js',
+     util: 'src/util.js'
+   },

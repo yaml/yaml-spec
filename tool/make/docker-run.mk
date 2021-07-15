@@ -21,6 +21,7 @@ touch $(HISTORY_FILE)
 docker run $(IT) --rm \
     --volume $(ROOT):/host \
     --workdir /host/$(YAML_SPEC_DIR) \
+    --entrypoint= \
     $(DOCKER_RUN_OPTS) \
     $2 \
     $(DOCKER_IMAGE) \

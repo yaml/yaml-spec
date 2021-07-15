@@ -20,7 +20,17 @@ endif
 
 ROOT := $(YAML_SPEC_ROOT)
 
-export PATH := $(ROOT)/tool/bin:$(PATH)
+SPEC12 := $(ROOT)/1.2
+SPEC := $(ROOT)/spec
+DOC := $(ROOT)/doc
+GRAMMAR := $(ROOT)/grammar
+RFC := $(ROOT)/rfc
+STORY := $(ROOT)/story
+TOOL := $(ROOT)/tool
+WWW := $(ROOT)/www
+WORK := $(ROOT)/work
+
+export PATH := $(TOOL)/bin:$(PATH)
 
 ifeq ($(YAML_SPEC_DIR),)
 base := $(shell dirname $(abspath $(firstword $(MAKEFILE_LIST))))
