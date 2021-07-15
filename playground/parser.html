@@ -270,14 +270,16 @@ pane:
   call: [pyyaml-events, yaml-input]
   colx: 3
 
-- name: NPM yaml.js 1.10.2 (NodeJS)
-  slug: yamljs
-  call: [npmyaml-events, yaml-input]
+- name: NPM yaml.js v1.10.2 (JS)
+  slug: npmyaml1
+  type: text
+  call: [npmyaml1-event, yaml-input]
   colx: 4
 
-- name: NPM yaml.js 2.0.0 to JSON
-  slug: yamljs2
-  call: [npmyaml2-json, yaml-input]
+- name: NPM yaml.js master (JS)
+  slug: npmyamlmaster
+  type: text
+  call: [npmyamlmaster-event, yaml-input]
   colx: 4
 
       `);
