@@ -15,6 +15,7 @@ function getErrorPos(src) {
     return [offset, offset + (typeof source === 'string' ? source.length : 1)];
 }
 function parsePrelude(prelude) {
+    var _a;
     let comment = '';
     let atComment = false;
     let afterEmptyLine = false;
@@ -29,7 +30,7 @@ function parsePrelude(prelude) {
                 afterEmptyLine = false;
                 break;
             case '%':
-                if (prelude[i + 1][0] !== '#')
+                if (((_a = prelude[i + 1]) === null || _a === void 0 ? void 0 : _a[0]) !== '#')
                     i += 1;
                 atComment = false;
                 break;
