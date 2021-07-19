@@ -188,20 +188,20 @@ $(SITE)/%: jekyll/% $(SITE)
 
 $(SITE)/%.md: $(ROOT) %.md
 	mkdir -p $(dir $@)
-	render-markdown $^ > $@
+	markydown-to-kramdown $^ > $@
 
 $(SITE)/%.md: $(ROOT) $(SPEC)/%.md $(SPEC_LINKS)
 	mkdir -p $(dir $@)
-	render-markdown $^ > $@
+	markydown-to-kramdown $^ > $@
 	cp $@ $(WORK)/
 
 $(SITE)/doc/%.md: $(ROOT) $(DOC)/%.md
 	mkdir -p $(dir $@)
-	render-markdown $^ > $@
+	markydown-to-kramdown $^ > $@
 
 $(SITE)/story/%.md: $(ROOT) $(STORY)/%.md
 	mkdir -p $(dir $@)
-	render-markdown $^ > $@
+	markydown-to-kramdown $^ > $@
 
 $(SITE)/%.png: $(SPEC)/img/%.png
 	cp $< $@

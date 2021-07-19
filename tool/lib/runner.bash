@@ -5,15 +5,10 @@ shopt -s inherit_errexit
 
 declare -a docker_run_options
 
-run() (
-  prog=${BASH_SOURCE[1]}
-  lib=$YAML_SPEC_ROOT/tool/lib
-  code=$(echo "$lib/${prog##*/}"*)
-  lang=$(head -n1 "${code:?}")
-  lang=${lang#*\ }
-  name=$(basename "$prog")
+run-local-or-docker() (
+  name=$(basename "${BASH_SOURCE[1]}")
 
-  if check; then
+  if (set -x; check); then
     run-local "$@"
   else
     run-docker "$@"
@@ -21,7 +16,7 @@ run() (
 )
 
 run-local() (
-  "$lang" "$code" "$@"
+  "$YAML_SPEC_ROOT/tool/bin/$name" "$@"
 )
 
 run-docker() (

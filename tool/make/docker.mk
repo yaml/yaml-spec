@@ -5,12 +5,12 @@ docker-build: $(DOCKER_DEPS) $(DOCKER_BIN)
 	docker build \
 	    --network host \
 	    --tag $(DOCKER_IMAGE) \
+	    $(DOCKER_OPTS) \
 	    $(DOCKERFILE) \
 	    $(DOCKER_DIR)
 
 $(DOCKER_BIN):
-	cp $(ROOT)/tool/lib/$@.* $@
-	chmod +x $@
+	cp $(ROOT)/tool/bin/$@ $@
 
 docker-shell: docker-build
 	$(call docker-run,$(CMD))

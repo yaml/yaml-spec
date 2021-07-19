@@ -30,7 +30,7 @@ TOOL := $(ROOT)/tool
 WWW := $(ROOT)/www
 WORK := $(ROOT)/work
 
-export PATH := $(TOOL)/bin:$(PATH)
+export PATH := $(TOOL)/docker/bin:$(TOOL)/bin:$(PATH)
 
 ifeq ($(YAML_SPEC_DIR),)
 base := $(shell dirname $(abspath $(firstword $(MAKEFILE_LIST))))

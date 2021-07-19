@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+source "$YAML_SPEC_ROOT/tool/lib/runner.bash"
+
+check() (
+  [[ $(command -v perl) ]] || return
+  perl -e 'use XXX; use YAML::PP' || return
+)
+
+run-local-or-docker "$@"

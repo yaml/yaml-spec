@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-set -eu
 source "$YAML_SPEC_ROOT/tool/lib/runner.bash"
 
 check() (
@@ -15,4 +14,4 @@ check() (
   ' || return 1
 )
 
-run "$@"
+run-local-or-docker "$@"

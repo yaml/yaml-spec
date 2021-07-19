@@ -1,4 +1,4 @@
-DOCKER_TOOL := html-to-markdown
+DOCKER_TOOL := html-to-markydown
 include ../tool/make/init.mk
 
 
@@ -15,7 +15,7 @@ force: $(INPUT_HTML)
 	touch $<
 
 spec.md: $(INPUT_HTML) $(LEGEND)
-	html-to-markdown $^ > $@
+	html-to-markydown $^ > $@
 
 $(INPUT_HTML): $(WORK)
 	touch $@

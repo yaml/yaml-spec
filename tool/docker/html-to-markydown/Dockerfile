@@ -19,7 +19,7 @@ RUN mkdir /node_modules \
         smartwrap \
  && true
 
-COPY html-to-markdown /bin
+COPY html-to-markydown /bin
 
 RUN apt-get install -y \
         git \

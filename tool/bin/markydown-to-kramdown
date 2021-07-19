@@ -47,6 +47,13 @@ sub parse_sections {
 
   my @s;
   while ($_) {
+    # HTML block:
+    if (/\A<([a-z]+)[^>]*>\n/) {
+      my $tag = $1;
+      s{\A(<$tag.*\n(?:.*\n)*?</$tag>\n+)}{}
+        and push @s, {html_block => $1} and next;
+    }
+
     # Headings:
     s/\A(\S.*\n)===+\n\n+//
       and push @s, {heading => "# $1"} and next;
@@ -143,6 +150,49 @@ sub parse_sections {
 }
 
 #------------------------------------------------------------------------------
+sub fmt_html_block {
+  s/\A<([a-z]+)(.*)>\n// or die;
+  my $out = $_;
+  my $tag = $1;
+  my $more = $2;
+  $more =~ s/^\s*(.*?)\s*$/$1/;
+  my $id;
+  my @class;
+  my @attrs;
+  if (not grep /^$tag$/, qw(div table blockquote)) {
+    push @class, $tag;
+    $tag = 'div';
+  }
+  while ($more) {
+    $more =~ s/^\.([-a-z0-9]+)\s*// and push @class, $1 and next;
+    $more =~ s/^\#([-a-z]+)\s*// and $id = $1 and next;
+    ( $more =~ s/^([-a-z]+)=([-a-z0-9]+)\s*// or
+      $more =~ s/^([-a-z]+)="([^"]*)"\s*//
+    ) and do {
+      my $attr = $1;
+      my $val = $2;
+      $attr = "data-$attr" unless
+        $attr =~ /^(?:(?:id|class|style)$|data-)/;
+      push @attrs, qq{$attr="$val"};
+      next;
+    };
+    die "Parse html_block failed here: '$more'";
+  }
+  my $line = "<$tag";
+  if ($id) {
+    $line .= qq{ id="$id"};
+  }
+  if (@class) {
+    $line .= qq< class="${\ join ' ', @class}">;
+  }
+  if (@attrs) {
+    $line .= qq< ${\ join ' ', @attrs}>;
+  }
+  $line .= ">\n";
+  $out =~ s{</\w+>\n+\z}{</$tag>};
+  $_ = "$line$out";
+}
+
 sub fmt_heading {
   set_dates();
   set_heading_level();
