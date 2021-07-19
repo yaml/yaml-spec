@@ -1,7 +1,7 @@
 DOCKER_TOOL := github-pages
 include ../tool/make/init.mk
 
-
+#------------------------------------------------------------------------------
 PUBLISH_CNAME := spec.yaml.io
 JEKYLL_BUILD := jekyll build --trace
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
@@ -9,7 +9,7 @@ FORK_USER_ID := $(shell $(ROOT)/tool/bin/get-fork-id)
 SITE := _site
 GH_PAGES := _gh-pages
 
-
+#------------------------------------------------------------------------------
 DOCKER_BUILD_OPTS := \
     --user $(UID):$(GID) \
 
@@ -23,47 +23,33 @@ DOCKER_SHELL_OPTS := \
 
 DOCKER_SHELL_CMD ?= bash
 
-
+#------------------------------------------------------------------------------
 WWW_FILES := $(shell \
     find . -name '*.md' \
         -o -name '*.html' \
         -o -name '*.scss' \
-	-o -name '*.coffee' \
-	-o -name '*.js' \
-	-o -name '*.yaml' \
-	| \
+        -o -name '*.coffee' \
+        -o -name '*.js' \
+        -o -name '*.yaml' \
+        | \
     grep -v ReadMe | \
     grep -v /_ | \
     cut -c3- | \
-    grep -v '^ext/' | \
     cat \
 )
 
-WWW_FILES := $(shell \
-    find . -name '*.md' \
-        -o -name '*.html' \
-        -o -name '*.scss' \
-	-o -name '*.coffee' \
-	-o -name '*.js' \
-	-o -name '*.yaml' \
-	| \
-    grep -v ReadMe | \
-    grep -v /_ | \
-    cut -c3- | \
-    grep -v '^ext/' | \
-    cat \
-)
-
-include ext/ext.mk
+include _ext/ext.mk
 
 SPEC_LINKS := $(SPEC)/links.yaml
-SPEC_IMAGE := $(shell ls $(SPEC)/img/)
-SPEC_MD_HTML := $(WORK)/markdown.html
-INPUT_HTML := $(WORK)/spec-1.2.html
 SPEC_FILES := \
     spec.md \
-    $(SPEC_IMAGE) \
     img \
+
+REVIEW_FILES := \
+    review/markdown.html \
+    review/spec-plain.md \
+    review/spec-12.html \
+    review/single_html.css \
 
 DOC_FILES := $(shell \
     cd $(DOC) && \
@@ -80,7 +66,7 @@ STORY_FILES := $(shell \
 )
 
 JEKYLL_FILES := $(shell \
-    cd jekyll/ && \
+    cd _jekyll/ && \
     find . -type f | \
     cut -c3- \
 )
@@ -89,6 +75,7 @@ SITE_FILES := \
     $(WWW_FILES) \
     $(EXT_FILES) \
     $(SPEC_FILES) \
+    $(REVIEW_FILES) \
     $(DOC_FILES) \
     $(STORY_FILES) \
     $(JEKYLL_FILES) \
@@ -97,17 +84,16 @@ SITE_FILES := $(SITE_FILES:%=$(SITE)/%)
 SITE_FILES := $(SITE_FILES:%.swp=)
 
 
-
+#------------------------------------------------------------------------------
 site-files:
 	@printf "%s\n" $(SITE_FILES)
 
-site: $(EXT) $(SITE) $(SITE_FILES) $(GH_PAGES)
+site: $(EXT) $(SITE_FILES) $(GH_PAGES)
 
 build: site
 	$(eval override export YAML_SPEC_DIR := www/$(SITE))
 	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
 	echo $(PUBLISH_CNAME) > $(GH_PAGES)/CNAME
-	cp $(GH_PAGES)/spec.html $(WORK)/
 
 serve: site
 	$(eval override export YAML_SPEC_DIR := www/$(SITE))
@@ -162,66 +148,57 @@ force-all: force
 
 clean: force
 	rm -fr $(SITE) $(GH_PAGES)
-	make -C ext clean
+	make -C _ext clean
 
-$(SPEC)/spec.md: $(INPUT_HTML)
-	make -C $(SPEC) spec.md YAML_SPEC_DIR=
+#------------------------------------------------------------------------------
+$(SITE)/%: % $$(dir $$@)
+	cp -r $< $@
+$(SITE)/%: _% $$(dir $$@)
+	cp -r $< $@
 
-$(SITE)/%.coffee: %.coffee $(SITE)
-	mkdir -p $(dir $@)
+$(SITE)/%.coffee: %.coffee $$(dir $$@)
+	(echo '---'; echo '---'; cat $<) > $@
+$(SITE)/%.coffee: _%.coffee $$(dir $$@)
 	(echo '---'; echo '---'; cat $<) > $@
 
-$(SITE)/js/%.js: %.js $(SITE)
-	mkdir -p $(dir $@)
-	cp $< $@
-
-$(SITE)/%.scss: %.scss $(SITE)
-	mkdir -p $(dir $@)
+$(SITE)/%.scss: %.scss $$(dir $$@)
+	(echo '---'; echo '---'; cat $<) > $@
+$(SITE)/%.scss: _%.scss $$(dir $$@)
 	(echo '---'; echo '---'; cat $<) > $@
 
-$(SITE)/%: % $(SITE)
-	mkdir -p $(dir $@)
+$(SITE)/%: _jekyll/% $$(dir $$@)
 	cp -r $< $@
 
-$(SITE)/%: jekyll/% $(SITE)
-	cp -r $< $@
-
-$(SITE)/%.md: $(ROOT) %.md
+$(SITE)/%.md: %.md
 	mkdir -p $(dir $@)
-	markydown-to-kramdown $^ > $@
+	markydown-to-kramdown $(ROOT) $^ > $@
 
-$(SITE)/%.md: $(ROOT) $(SPEC)/%.md $(SPEC_LINKS)
+$(SITE)/%.md: $(SPEC)/%.md $(SPEC_LINKS)
 	mkdir -p $(dir $@)
-	markydown-to-kramdown $^ > $@
-	cp $@ $(WORK)/
+	markydown-to-kramdown $(ROOT) $^ > $@
 
-$(SITE)/doc/%.md: $(ROOT) $(DOC)/%.md
+$(SITE)/doc/%.md: $(DOC)/%.md
 	mkdir -p $(dir $@)
-	markydown-to-kramdown $^ > $@
+	markydown-to-kramdown $(ROOT) $^ > $@
 
-$(SITE)/story/%.md: $(ROOT) $(STORY)/%.md
+$(SITE)/story/%.md: $(STORY)/%.md
 	mkdir -p $(dir $@)
-	markydown-to-kramdown $^ > $@
-
-$(SITE)/%.png: $(SPEC)/img/%.png
-	cp $< $@
-
-$(SITE)/%.css: %.css $(SITE)
-	cp -r $< $@
-
-$(SITE): $(SPEC_MD_HTML) $(WORK)
-	mkdir -p $@/_includes $@/_layouts
-	cp $< $@/
-	cp $(WORK)/1.2/* $@/
+	markydown-to-kramdown $(ROOT) $^ > $@
 
 $(SITE)/img: $(SPEC)/img
+	cp -r $< $@
+
+$(SITE)/:
 	mkdir -p $@
-	cp -r $</* $@/
 
-$(EXT):
-	make -C ext build
+$(SITE)/%/:
+	mkdir -p $@
 
-$(SPEC_MD_HTML): $(SPEC)/spec.md
+$(SITE)/review/spec-12.html: _ext/yaml-spec-12.html
+	cp $< $@
+	perl -pi -e 's{"(.*?\.png)"}{"/img/$$1"}' $@
+
+$(SITE)/review/markdown.html: $(SPEC)/spec.md
 	( \
 	    echo '<pre>'; \
 	    perl -Mstrict -p0 \
@@ -231,16 +208,25 @@ $(SPEC_MD_HTML): $(SPEC)/spec.md
 	    echo '</pre>' \
 	) > $@
 
+$(SITE)/review/spec-plain.md: $(SITE)/spec.md
+	( \
+	    echo '---'; \
+	    echo 'layout: default'; \
+	    echo 'plain: true'; \
+	    echo '---'; \
+	    tail -n+3 $<; \
+	) > $@
+	perl -pi -e 's{\(img/}{(/img/}' $@
+
+#------------------------------------------------------------------------------
+$(EXT):
+	make -C _ext build
 
 $(GH_PAGES):
 	-git branch --track gh-pages origin/gh-pages
 	git worktree add -f $@ gh-pages
 
-$(INPUT_HTML): $(WORK)
-
-$(WORK):
-	make -C $(ROOT) work
-
+#------------------------------------------------------------------------------
 define clean
 find $1 -mindepth 1 -type f -o -type d | \
     ( grep -Ev '(\.git|ReadMe\.md)' || true) | \

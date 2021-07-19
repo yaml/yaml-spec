@@ -13,6 +13,13 @@ The Makefile supports:
 * `make publish`
 
   Build and publish the content to <https://spec.yaml.io/>.
+  This can only be run in `main` branch.
+
+* `make stage`
+
+  Build and publish the content to
+  `https://<your-github-username>-spec.yaml.io/`.
+  This can only be run in a non `main` branch.
 
 * `make serve`
 
