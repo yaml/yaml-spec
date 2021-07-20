@@ -196,11 +196,11 @@ $(SITE)/%/:
 
 $(SITE)/review/spec-12.html: _ext/yaml-spec-12.html
 	cp $< $@
-	perl -pi -e 's{"(.*?\.png)"}{"/img/$$1"}' $@
+	perl -pi -e 's{"(.*?\.png)"}{"../img/$$1"}' $@
 
 $(SITE)/review/markdown.html: $(SPEC)/spec.md
 	( \
-	    echo '<pre>'; \
+	    echo '<pre style="overflow:hidden">'; \
 	    perl -Mstrict -p0 \
 		-e 's/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g;' \
 		-e 's{^(#.*)}{<code>$$1</code>}gm;' \
@@ -216,7 +216,7 @@ $(SITE)/review/spec-plain.md: $(SITE)/spec.md
 	    echo '---'; \
 	    tail -n+3 $<; \
 	) > $@
-	perl -pi -e 's{\(img/}{(/img/}' $@
+	perl -pi -e 's{\(img/}{(../img/}' $@
 
 #------------------------------------------------------------------------------
 $(EXT):

@@ -1,3 +1,4 @@
+{% assign u = site.baseurl -%}
 <!DOCTYPE html>
 <html lang="en-US">
 
@@ -8,11 +9,11 @@
 {% unless page.plain %}
 <link rel="stylesheet"
       type="text/css"
-      href="/assets/css/style.css" />
+      href="{{u}}/assets/css/style.css" />
 {% endunless %}
 <link rel="stylesheet"
       type="text/css"
-      href="/spec.css" />
+      href="{{u}}/spec.css" />
 </head>
 
 <body>
