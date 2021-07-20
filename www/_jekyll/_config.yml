@@ -1,42 +1,11 @@
+# See https://jekyllrb.com/docs/configuration/default/
+
 title: YAML™ Ain’t Markup Language — Version 1.x
 name: null
 
 destination: /host/www/_gh-pages
 
-markdown: kramdown
-highlighter: rouge
 kramdown:
-  auto_ids: true
   parse_block_html: true
 
-###
-# GitHub Pages Supported Themes
-###
-
-# theme: jekyll-theme-architect
 theme: jekyll-theme-cayman
-# theme: jekyll-theme-dinky
-# theme: jekyll-theme-hacker
-# theme: jekyll-theme-leap-day
-# theme: jekyll-theme-merlot
-# theme: jekyll-theme-midnight
-# theme: jekyll-theme-minimal
-# theme: jekyll-theme-modernist
-# theme: jekyll-theme-primer
-# theme: jekyll-theme-slate
-# theme: jekyll-theme-tactile
-# theme: jekyll-theme-time-machine
-
-###
-# Plugins config:
-###
-
-# plugins:
-# - jekyll-relative-links
-
-# relative_links:
-#   enabled: true
-#   collections: true
-
-exclude:
-- Gemfile
