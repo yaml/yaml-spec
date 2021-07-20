@@ -2,9 +2,8 @@ name: yaml-spec Testing
 
 on:
   push:
-    # branches: [ main ]
   pull_request:
-    branches: [ main ]
+    types: [opened]
 
 jobs:
   test-make-targets:
