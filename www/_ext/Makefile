@@ -1,3 +1,5 @@
+SHELL := bash
+
 EATME := eatme
 REF_PARSER := ref-parser
 NPM_YAML := npm-yaml
@@ -13,6 +15,7 @@ ALL := \
     $(NPM_YAML) \
     $(SPEC_12_HTML) \
 
+.DELETE_ON_ERROR:
 default:
 
 build: $(ALL)
@@ -27,6 +30,7 @@ $(REF_PARSER):
 	git clone $(REF_PARSER_REPO) $@
 
 $(NPM_YAML):
+ifneq ($(shell command -v npm),)
 	git clone $(NPM_YAML_REPO) $@
 	git -C $(NPM_YAML) worktree add -f v2 v2.0.0-6
 	git -C $(NPM_YAML) worktree add -f v1 v1.10.2
@@ -36,6 +40,10 @@ $(NPM_YAML):
 	(cd $@/v1 && npm install . && npm run build)
 	patch $@/v2/config/rollup.browser-config.js < npm-yaml-rollup-v2.patch
 	(cd $@/v2 && npm install . && npm run build)
+else
+	@echo "*** NOTICE: 'npm' not available."
+	@echo "*** Can't build NodeJS variants for 'yaml.js'."
+endif
 
 $(SPEC_12_HTML):
 	curl https://yaml.org/spec/1.2/spec.html > $@
