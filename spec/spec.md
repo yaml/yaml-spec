@@ -2506,7 +2506,8 @@ Folding does distinguish between these cases in the following way:
 ```
 **Legend:**
 * [b-l-folded(n,c)] <!-- 2:7 3:1,2 4:8 5:1 -->
-* Non-content spaces Content spaces
+* Non-content spaces <!-- 2:1,2 4:1,2 6:1,2 -->
+* Content spaces <!-- 2:6 4:3,2 -->
 
 ##### Flow Folding
 
