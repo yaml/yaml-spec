@@ -2274,8 +2274,8 @@ Not indented:
 ```
 **Legend:**
 * [s-indent(n)] <!-- 5:1 6:1,4 7:1,4 8:1 9:1,2 10:1,2 11:1,2 12:1,2 -->
-* Content
-* Neither content nor indentation
+* Content <!-- 7:5,2 -->
+* Neither content nor indentation <!-- 1:1,2 2:1,3 3 9:3,1 12:3,2 -->
 
 The ["**`-`**"], ["**`?`**"] and ["**`:`**"] characters used to denote [block
 collection] entries are perceived by people to be part of the indentation.
