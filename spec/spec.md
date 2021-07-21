@@ -2275,7 +2275,7 @@ Not indented:
 **Legend:**
 * [s-indent(n)] <!-- 5:1 6:1,4 7:1,4 8:1 9:1,2 10:1,2 11:1,2 12:1,2 -->
 * Content <!-- 7:5,2 -->
-* Neither content nor indentation <!-- 1:1,2 2:1,3 3 9:3,1 12:3,2 -->
+* Neither content nor indentation <!-- 1:1,2 2:1,3 3 9:3 12:3,2 -->
 
 The ["**`-`**"], ["**`?`**"] and ["**`:`**"] characters used to denote [block
 collection] entries are perceived by people to be part of the indentation.
@@ -2300,9 +2300,9 @@ This is handled on a case-by-case basis by the relevant productions.
 }
 ```
 **Legend:**
-* Total Indentation
-* [s-indent(n)] <!-- 1:1 2:1,3 3:1,6 4:1,6 -->
-* Indicator as indentation
+* Total Indentation <!-- 1:1 2:1,3 3:1,6 4:1,6 -->
+* [s-indent(n)] <!-- 2:2 3:1,2 3:4,2 4:1,5 -->
+* Indicator as indentation <!-- 1:1 2:1 2:3 3:3 3:6 4:6 -->
 
 ## #. Separation Spaces
 
