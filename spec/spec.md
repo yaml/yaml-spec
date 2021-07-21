@@ -5438,9 +5438,9 @@ mapping: !!map
 }
 ```
 **Legend:**
+* [s-l+block-collection(n,c)] <!-- 1:10, 2 3 4 5:9, 6 -->
 * [l+block-sequence(n)] <!-- 2 3 4 -->
 * [l+block-mapping(n)] <!-- 6 -->
-* [s-l+block-collection(n,c)] <!-- 1:10, 2 3 4 5:9, 6 -->
 
 # Chapter #. YAML Character Stream
 
