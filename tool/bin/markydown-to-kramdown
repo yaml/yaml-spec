@@ -548,11 +548,11 @@ sub format_legend {
   chomp;
   s/\s*<!--.*-->//g;
   my @lines = split /\n/, $_;
-  my $i = 0;
+  my $i = 1;
   for (@lines) {
-    if (/\[/) {
+    if (/^\*\ /) {
+      s{^\*\ (.*)}{* <code class="legend-$i">$1</code>}g;
       $i++;
-      s{\[([^\]]+)\]}{<code class="legend-$i">[$1]</code>}g;
     }
   }
   $_ = join "\n", @lines;
