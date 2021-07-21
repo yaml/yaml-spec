@@ -3492,8 +3492,8 @@ Double-quoted scalars are restricted to a single line when contained inside an
 }
 ```
 **Legend:**
-* [nb-double-one-line] <!-- 1:2,19 2:4,18 -->
-* [c-double-quoted(n,c)] <!-- 1:1,21 2:3,20 -->
+* [nb-double-one-line] <!-- 1:2,18 2:4,17 -->
+* [c-double-quoted(n,c)] <!-- 1:1,20 2:3,19 -->
 
 In a multi-line double-quoted scalar, [line breaks] are are subject to [flow
 line folding], which discards any trailing [white space] characters.
