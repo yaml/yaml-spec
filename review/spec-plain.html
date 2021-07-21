@@ -2258,8 +2258,8 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li><code class="legend-1"><a href="#rule-c-sequence-start">c-sequence-start</a></code> <code class="legend-1"><a href="#rule-c-sequence-end">c-sequence-end</a></code></li>
-        <li><code class="legend-2"><a href="#rule-c-mapping-start">c-mapping-start</a></code> <code class="legend-2"><a href="#rule-c-mapping-end">c-mapping-end</a></code></li>
+        <li><code class="legend-1"><a href="#rule-c-sequence-start">c-sequence-start</a> <a href="#rule-c-sequence-end">c-sequence-end</a></code></li>
+        <li><code class="legend-2"><a href="#rule-c-mapping-start">c-mapping-start</a> <a href="#rule-c-mapping-end">c-mapping-end</a></code></li>
         <li><code class="legend-3"><a href="#rule-c-collect-entry">c-collect-entry</a></code></li>
       </ul>
     </blockquote>
@@ -3043,10 +3043,10 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-"Fun with \
+"Fun with <code class="legend-1">\\</code>
 <code class="legend-1">\"</code> <code class="legend-1">\a</code> <code class="legend-1">\b</code> <code class="legend-1">\e</code> <code class="legend-1">\f</code> <code class="legend-1">\↓</code>
 <code class="legend-1">\n</code> <code class="legend-1">\r</code> <code class="legend-1">\t</code> <code class="legend-1">\v</code> <code class="legend-1">\0</code> <code class="legend-1">\↓</code>
-<code class="legend-1">\ </code> _ <code class="legend-1">\N</code> <code class="legend-1">\L</code> <code class="legend-1">\P</code> <code class="legend-1">\↓</code>
+<code class="legend-1">\ </code> <code class="legend-1">\_</code> <code class="legend-1">\N</code> <code class="legend-1">\L</code> <code class="legend-1">\P</code> <code class="legend-1">\↓</code>
 <code class="legend-1">\x41</code> <code class="legend-1">\u0041</code> <code class="legend-1">\U00000041</code>"
 </pre>
 
@@ -3153,18 +3153,18 @@ independently.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-··# Leading comment line spaces are
-···# neither content nor indentation.
-····
+<code class="legend-3">··</code># Leading comment line spaces are
+<code class="legend-3">···</code># neither content nor indentation.
+<code class="legend-3">····</code>
 Not indented:
 <code class="legend-1">·</code>By one space: |
 <code class="legend-1">····</code>By four
-<code class="legend-1">····</code>··spaces
+<code class="legend-1">····</code><code class="legend-2">··</code>spaces
 <code class="legend-1">·</code>Flow style: [    # Leading spaces
-<code class="legend-1">··</code>·By two,        # in flow style
+<code class="legend-1">··</code><code class="legend-3">·</code>By two,        # in flow style
 <code class="legend-1">··</code>Also by two,    # are neither
 <code class="legend-1">··</code>→Still by two   # content nor
-<code class="legend-1">··</code>··]             # indentation.
+<code class="legend-1">··</code><code class="legend-3">··</code>]             # indentation.
 </pre>
 
 </td>
@@ -3195,8 +3195,8 @@ Not indented:
       <p><strong>Legend:</strong></p>
       <ul>
         <li><code class="legend-1"><a href="#rule-s-indent(n)">s-indent(n)</a></code></li>
-        <li>Content</li>
-        <li>Neither content nor indentation</li>
+        <li><code class="legend-2">Content</code></li>
+        <li><code class="legend-3">Neither content nor indentation</code></li>
       </ul>
     </blockquote>
   </div>
@@ -3213,10 +3213,10 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">?</code>·a
-<code class="legend-1">:·-</code>→b
-<code class="legend-1">··-··-</code>→c
-<code class="legend-1">·····-</code>·d
+<code class="legend-1"><code class="legend-3">?</code></code>·a
+<code class="legend-1"><code class="legend-3">:</code><code class="legend-2">·</code><code class="legend-3">-</code></code>→b
+<code class="legend-1"><code class="legend-2">··</code><code class="legend-3">-</code><code class="legend-2">··</code><code class="legend-3">-</code></code>→c
+<code class="legend-1"><code class="legend-2">·····</code><code class="legend-3">-</code></code>·d
 </pre>
 
 </td>
@@ -3240,9 +3240,9 @@ This is handled on a case-by-case basis by the relevant productions.</p>
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li>Total Indentation</li>
-        <li><code class="legend-1"><a href="#rule-s-indent(n)">s-indent(n)</a></code></li>
-        <li>Indicator as indentation</li>
+        <li><code class="legend-1">Total Indentation</code></li>
+        <li><code class="legend-2"><a href="#rule-s-indent(n)">s-indent(n)</a></code></li>
+        <li><code class="legend-3">Indicator as indentation</code></li>
       </ul>
     </blockquote>
   </div>
@@ -3532,11 +3532,11 @@ feed, and the formatting of <del><a href="#undefined">more-indented</a></del> li
 <td class="side-by-side">
 <pre>
 &gt;
-··foo·<code class="legend-1">↓</code>
+<code class="legend-2">··</code>foo<code class="legend-3">·</code><code class="legend-1">↓</code>
 <code class="legend-1">·↓</code>
-··→·bar<code class="legend-1">↓</code>
+<code class="legend-2">··</code><code class="legend-3">→·</code>bar<code class="legend-1">↓</code>
 <code class="legend-1">↓</code>
-··baz↓
+<code class="legend-2">··</code>baz↓
 </pre>
 
 </td>
@@ -3555,7 +3555,8 @@ feed, and the formatting of <del><a href="#undefined">more-indented</a></del> li
       <p><strong>Legend:</strong></p>
       <ul>
         <li><code class="legend-1"><a href="#rule-b-l-folded(n,c)">b-l-folded(n,c)</a></code></li>
-        <li>Non-content spaces Content spaces</li>
+        <li><code class="legend-2">Non-content spaces</code></li>
+        <li><code class="legend-3">Content spaces</code></li>
       </ul>
     </blockquote>
   </div>
@@ -3593,11 +3594,11 @@ information.</p>
 <td class="side-by-side">
 <pre>
 "<code class="legend-1">↓</code>
-<code class="legend-1">··</code>foo<code class="legend-1">·↓</code>
-<code class="legend-1">·↓</code>
-<code class="legend-1">··→·</code>bar<code class="legend-1">↓</code>
+<code class="legend-1"><code class="legend-2">··</code></code>foo<code class="legend-1"><code class="legend-2">·</code>↓</code>
+<code class="legend-1"><code class="legend-2">·</code>↓</code>
+<code class="legend-1"><code class="legend-2">··→·</code></code>bar<code class="legend-1">↓</code>
 <code class="legend-1">↓</code>
-<code class="legend-1">··</code>baz<code class="legend-1">↓</code> "
+<code class="legend-1"><code class="legend-2">··</code></code>baz<code class="legend-1">↓</code> "
 </pre>
 
 </td>
@@ -3616,7 +3617,7 @@ information.</p>
       <p><strong>Legend:</strong></p>
       <ul>
         <li><code class="legend-1"><a href="#rule-s-flow-folded(n)">s-flow-folded(n)</a></code></li>
-        <li>Non-content spaces</li>
+        <li><code class="legend-2">Non-content spaces</code></li>
       </ul>
     </blockquote>
   </div>
@@ -3662,7 +3663,7 @@ However, as this confuses many tools, YAML <del><a href="#undefined">processors<
 <td class="side-by-side">
 <pre>
 key:<code class="legend-3">····<code class="legend-1"># Comment</code><code class="legend-2">↓</code></code>
-  value<code class="legend-3">_eo</code>f_
+  value<code class="legend-2"><code class="legend-3"><i>eof</i></code></code>
 </pre>
 
 </td>
@@ -5053,8 +5054,8 @@ characters.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-2">"<code class="legend-1">implicit block key"</code> </code>: [
-  <code class="legend-2">"<code class="legend-1">implicit flow key"</code> </code>: value,
+<code class="legend-2">"<code class="legend-1">implicit block key</code>"</code> : [
+  <code class="legend-2">"<code class="legend-1">implicit flow key</code>"</code> : value,
  ]
 </pre>
 
@@ -5469,17 +5470,17 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
 <td class="side-by-side">
 <pre>
 # Outside flow collection:
-- ::vector
-- ": - ()"
-- Up, up, and away!
-- -123
-- http://example.com/foo#bar
+- <code class="legend-1">:</code><code class="legend-2">:</code>vector
+- "<code class="legend-3">:</code> - ()"
+- Up<code class="legend-2">,</code> up, and away!
+- <code class="legend-1">-</code>123
+- http<code class="legend-2">:</code>//example.com/foo<code class="legend-2">#</code>bar
 # Inside flow collection:
-- [ ::vector,
-  ": - ()",
-  "Up, up and away!",
-  -123,
-  http://example.com/foo#bar ]
+- [ <code class="legend-1">:</code><code class="legend-2">:</code>vector,
+  "<code class="legend-3">:</code> - ()",
+  "Up<code class="legend-4">,</code> up and away!",
+  <code class="legend-1">-</code>123,
+  http<code class="legend-2">:</code>//example.com/foo<code class="legend-2">#</code>bar ]
 </pre>
 
 </td>
@@ -5510,8 +5511,10 @@ These characters would cause ambiguity with <del><a href="#undefined">flow colle
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li><code class="legend-1"><a href="#rule-ns-plain-first(c)">ns-plain-first(c)</a></code> Not ns-plain-first(c)</li>
-        <li><code class="legend-2"><a href="#rule-ns-plain-char(c)">ns-plain-char(c)</a></code> Not ns-plain-char(c)</li>
+        <li><code class="legend-1"><a href="#rule-ns-plain-first(c)">ns-plain-first(c)</a></code></li>
+        <li><code class="legend-2"><a href="#rule-ns-plain-char(c)">ns-plain-char(c)</a></code></li>
+        <li><code class="legend-3">Not ns-plain-first(c)</code></li>
+        <li><code class="legend-4">Not ns-plain-char(c)</code></li>
       </ul>
     </blockquote>
   </div>
@@ -5717,7 +5720,7 @@ characters.</p>
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li><code class="legend-1"><a href="#rule-c-sequence-start">c-sequence-start</a></code> <code class="legend-1"><a href="#rule-c-sequence-end">c-sequence-end</a></code></li>
+        <li><code class="legend-1"><a href="#rule-c-sequence-start">c-sequence-start</a> <a href="#rule-c-sequence-end">c-sequence-end</a></code></li>
         <li><code class="legend-2"><a href="#rule-ns-flow-seq-entry(n,c)">ns-flow-seq-entry(n,c)</a></code></li>
       </ul>
     </blockquote>
@@ -5842,7 +5845,7 @@ characters.</p>
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li><code class="legend-1"><a href="#rule-c-mapping-start">c-mapping-start</a></code> <code class="legend-1"><a href="#rule-c-mapping-end">c-mapping-end</a></code></li>
+        <li><code class="legend-1"><a href="#rule-c-mapping-start">c-mapping-start</a> <a href="#rule-c-mapping-end">c-mapping-end</a></code></li>
         <li><code class="legend-2"><a href="#rule-ns-flow-map-entry(n,c)">ns-flow-map-entry(n,c)</a></code></li>
       </ul>
     </blockquote>
@@ -6208,9 +6211,9 @@ been impossible to implement.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- [ <code class="legend-1">YAML·</code>: separate ]
-- [ °: empty key entry ]
-- [ <code class="legend-2">{JSON: like}</code>:adjacent ]
+- [ <code class="legend-1">YAML·</code><code class="legend-4">: separate</code> ]
+- [ <code class="legend-2">°</code><code class="legend-4">: empty key entry</code> ]
+- [ <code class="legend-3">{JSON: like}</code><code class="legend-4">:adjacent</code> ]
 </pre>
 
 </td>
@@ -6250,8 +6253,9 @@ been impossible to implement.</p>
       <p><strong>Legend:</strong></p>
       <ul>
         <li><code class="legend-1"><a href="#rule-ns-s-implicit-yaml-key">ns-s-implicit-yaml-key</a></code></li>
-        <li><code class="legend-2"><a href="#rule-c-s-implicit-json-key">c-s-implicit-json-key</a></code></li>
-        <li><code class="legend-3"><a href="#rule-e-node">e-node</a></code> Value</li>
+        <li><code class="legend-2"><a href="#rule-e-node">e-node</a></code></li>
+        <li><code class="legend-3"><a href="#rule-c-s-implicit-json-key">c-s-implicit-json-key</a></code></li>
+        <li><code class="legend-4">Value</code></li>
       </ul>
     </blockquote>
   </div>
@@ -7047,19 +7051,20 @@ separates two non-<a href="#white-space-characters">space</a> characters.</p>
 <td class="side-by-side">
 <pre>
 &gt;
-·folded↓
-<code class="legend-1"><code class="legend-2">·line↓</code></code>
-<code class="legend-1"><code class="legend-2">↓</code></code>
-·next
-<code class="legend-1"><code class="legend-2">·line↓</code></code>
-<code class="legend-1"><code class="legend-2">   *</code> bullet</code>
+
+<code class="legend-1"><code class="legend-2">·folded</code>↓</code>
+<code class="legend-1"><code class="legend-2">·line</code>↓</code>
+↓
+<code class="legend-1"><code class="legend-2">·next</code></code>
+<code class="legend-1"><code class="legend-2">·line</code></code>↓
+   * bullet
 
    * list
    * lines
 
-·last↓
-<code class="legend-1"><code class="legend-2">·line</code>↓</code>
-<code class="legend-1"><code class="legend-2"></code></code>
+<code class="legend-1"><code class="legend-2">·last</code>↓</code>
+<code class="legend-1"><code class="legend-2">·line</code></code>↓
+
 # Comment
 </pre>
 
@@ -7086,8 +7091,8 @@ separates two non-<a href="#white-space-characters">space</a> characters.</p>
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li><code class="legend-1"><a href="#rule-s-nb-folded-text(n)">s-nb-folded-text(n)</a></code></li>
-        <li><code class="legend-2"><a href="#rule-l-nb-folded-lines(n)">l-nb-folded-lines(n)</a></code></li>
+        <li><code class="legend-1"><a href="#rule-l-nb-folded-lines(n)">l-nb-folded-lines(n)</a></code></li>
+        <li><code class="legend-2"><a href="#rule-s-nb-folded-text(n)">s-nb-folded-text(n)</a></code></li>
       </ul>
     </blockquote>
   </div>
@@ -7127,16 +7132,17 @@ different productions.)</p>
 <td class="side-by-side">
 <pre>
 &gt;
+
  folded
  line
 
  next
  line
-···* bullet↓
-<code class="legend-1"><code class="legend-2">↓</code></code>
-<code class="legend-2">···* list↓</code>
-<code class="legend-1"><code class="legend-2">···* line</code>s↓</code>
-<code class="legend-1"><code class="legend-2"></code></code>
+<code class="legend-1"><code class="legend-2">···* bullet</code>↓</code>
+<code class="legend-1">↓</code>
+<code class="legend-1"><code class="legend-2">···* list</code>↓</code>
+<code class="legend-1"><code class="legend-2">···* lines</code></code>↓
+
  last
  line
 
@@ -7166,8 +7172,8 @@ different productions.)</p>
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li><code class="legend-1"><a href="#rule-s-nb-spaced-text(n)">s-nb-spaced-text(n)</a></code></li>
-        <li><code class="legend-2"><a href="#rule-l-nb-spaced-lines(n)">l-nb-spaced-lines(n)</a></code></li>
+        <li><code class="legend-1"><a href="#rule-l-nb-spaced-lines(n)">l-nb-spaced-lines(n)</a></code></li>
+        <li><code class="legend-2"><a href="#rule-s-nb-spaced-text(n)">s-nb-spaced-text(n)</a></code></li>
       </ul>
     </blockquote>
   </div>
@@ -7239,8 +7245,8 @@ also not <del><a href="#undefined">folded</a></del>.</p>
       <p><strong>Legend:</strong></p>
       <ul>
         <li><code class="legend-1"><a href="#rule-b-as-line-feed">b-as-line-feed</a></code></li>
-        <li>(separation)</li>
-        <li><code class="legend-2"><a href="#rule-l-empty(n,c)">l-empty(n,c)</a></code></li>
+        <li><code class="legend-2">(separation)</code></li>
+        <li><code class="legend-3"><a href="#rule-l-empty(n,c)">l-empty(n,c)</a></code></li>
       </ul>
     </blockquote>
   </div>
@@ -7378,7 +7384,7 @@ block sequence:
       <p><strong>Legend:</strong></p>
       <ul>
         <li><code class="legend-1"><a href="#rule-c-l-block-seq-entry(n)">c-l-block-seq-entry(n)</a></code></li>
-        <li>auto-detected <code class="legend-2"><a href="#rule-s-indent(n)">s-indent(n)</a></code></li>
+        <li><code class="legend-2">auto-detected <a href="#rule-s-indent(n)">s-indent(n)</a></code></li>
       </ul>
     </blockquote>
   </div>
@@ -7418,11 +7424,11 @@ Note that it is not possible to specify <del><a href="#undefined">node propertie
 <td class="side-by-side">
 <pre>
 -<code class="legend-1">° # Empty</code>
-- |
- block node
--·- one # Compact
-··- two # sequence
-- one: two # Compact mapping
+-<code class="legend-2"> |</code>
+ <code class="legend-2">block node</code>
+-<code class="legend-3">·- one # Compact</code>
+<code class="legend-3">··- two # sequence</code>
+-<code class="legend-4"> one: two # Compact mapping</code>
 </pre>
 
 </td>
@@ -7451,10 +7457,10 @@ Note that it is not possible to specify <del><a href="#undefined">node propertie
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li>Empty</li>
-        <li><code class="legend-1"><a href="#rule-s-l+block-node(n,c)">s-l+block-node(n,c)</a></code></li>
-        <li><code class="legend-2"><a href="#rule-ns-l-compact-sequence(n)">ns-l-compact-sequence(n)</a></code></li>
-        <li><code class="legend-3"><a href="#rule-ns-l-compact-mapping(n)">ns-l-compact-mapping(n)</a></code></li>
+        <li><code class="legend-1">Empty</code></li>
+        <li><code class="legend-2"><a href="#rule-s-l+block-node(n,c)">s-l+block-node(n,c)</a></code></li>
+        <li><code class="legend-3"><a href="#rule-ns-l-compact-sequence(n)">ns-l-compact-sequence(n)</a></code></li>
+        <li><code class="legend-4"><a href="#rule-ns-l-compact-mapping(n)">ns-l-compact-mapping(n)</a></code></li>
       </ul>
     </blockquote>
   </div>
@@ -7506,7 +7512,7 @@ block mapping:
       <p><strong>Legend:</strong></p>
       <ul>
         <li><code class="legend-1"><a href="#rule-ns-l-block-map-entry(n)">ns-l-block-map-entry(n)</a></code></li>
-        <li>auto-detected <code class="legend-2"><a href="#rule-s-indent(n)">s-indent(n)</a></code></li>
+        <li><code class="legend-2">auto-detected <a href="#rule-s-indent(n)">s-indent(n)</a></code></li>
       </ul>
     </blockquote>
   </div>
@@ -7888,12 +7894,12 @@ vs. <del><a href="#undefined"><strong><code class="language-plaintext highlighte
 <tr>
 <td class="side-by-side">
 <pre>
-sequence:<code class="legend-3"> !!seq</code>
-<code class="legend-1"><code class="legend-3">- entry</code></code>
-<code class="legend-1"><code class="legend-3">- !!seq</code></code>
-<code class="legend-1"><code class="legend-3"> - nested</code></code>
-mapping:<code class="legend-3"> !!map</code>
-<code class="legend-2"><code class="legend-3"> foo: bar</code></code>
+sequence:<code class="legend-1"> !!seq</code>
+<code class="legend-1"><code class="legend-2">- entry</code></code>
+<code class="legend-1"><code class="legend-2">- !!seq</code></code>
+<code class="legend-1"><code class="legend-2"> - nested</code></code>
+mapping:<code class="legend-1"> !!map</code>
+<code class="legend-1"><code class="legend-3"> foo: bar</code></code>
 </pre>
 
 </td>
@@ -7921,9 +7927,9 @@ mapping:<code class="legend-3"> !!map</code>
     <blockquote>
       <p><strong>Legend:</strong></p>
       <ul>
-        <li><code class="legend-1"><a href="#rule-l+block-sequence(n)">l+block-sequence(n)</a></code></li>
-        <li><code class="legend-2"><a href="#rule-l+block-mapping(n)">l+block-mapping(n)</a></code></li>
-        <li><code class="legend-3"><a href="#rule-s-l+block-collection(n,c)">s-l+block-collection(n,c)</a></code></li>
+        <li><code class="legend-1"><a href="#rule-s-l+block-collection(n,c)">s-l+block-collection(n,c)</a></code></li>
+        <li><code class="legend-2"><a href="#rule-l+block-sequence(n)">l+block-sequence(n)</a></code></li>
+        <li><code class="legend-3"><a href="#rule-l+block-mapping(n)">l+block-mapping(n)</a></code></li>
       </ul>
     </blockquote>
   </div>
@@ -8072,8 +8078,8 @@ Document
       <p><strong>Legend:</strong></p>
       <ul>
         <li><code class="legend-1"><a href="#rule-c-directives-end">c-directives-end</a></code></li>
-        <li><code class="legend-2"><a href="#rule-c-document-end">c-document-end</a></code></li>
-        <li><code class="legend-3"><a href="#rule-l-document-suffix">l-document-suffix</a></code></li>
+        <li><code class="legend-2"><a href="#rule-l-document-suffix">l-document-suffix</a></code></li>
+        <li><code class="legend-3"><a href="#rule-c-document-end">c-document-end</a></code></li>
       </ul>
     </blockquote>
   </div>

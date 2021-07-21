@@ -87,23 +87,34 @@ but it’s pretty simple to work around them for this.</p>
 <p>You’ll need to open this URL one time:</p>
 
 <ul>
-  <li>https://spec.yaml.io:31337/</li>
+  <li><a href="https://localhost:31337/">https://localhost:31337/</a></li>
 </ul>
 
-<p>and authorize the untrusted SSL certificate for it.</p>
+<p>and authorize the untrusted SSL certificate for it.
+Note: You should see the word <code class="language-plaintext highlighter-rouge">Hello</code> on the page if it works.</p>
 
 <p>The other thing you need to do is allow JavaScript to “allow invalid
 certificates for resources loaded from localhost”.
-So far, we only have figured out how to do this on the Google Chrome browser.</p>
+So far, we have figured out how to do this on the Google Chrome and Firefox
+browsers.</p>
 
 <ul>
-  <li>Google Chrome
+  <li>Google Chrome (also works for Chromium)
     <ul>
       <li>Type <code class="language-plaintext highlighter-rouge">chrome://flags</code> into the browser URL location</li>
       <li>Search for <code class="language-plaintext highlighter-rouge">#allow-insecure-localhost</code> in the “Search flags” box</li>
       <li>Enable the “Allow invalid certificates for resources loaded from localhost”
 flag</li>
       <li>Click the “Relaunch” button</li>
+    </ul>
+  </li>
+  <li>Firefox
+    <ul>
+      <li>Type <code class="language-plaintext highlighter-rouge">about:config</code> into the browser URL location</li>
+      <li>Search for <code class="language-plaintext highlighter-rouge">security.fileuri.strict_origin_policy</code> in the “Search
+preference name” box</li>
+      <li>Change value from <code class="language-plaintext highlighter-rouge">true</code> to <code class="language-plaintext highlighter-rouge">false</code></li>
+      <li>Restart Firefox</li>
     </ul>
   </li>
 </ul>
