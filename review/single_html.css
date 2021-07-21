@@ -226,9 +226,7 @@ span.honorific > code.literal {
 
 a[href^="#"] {
   text-decoration: none;
-  color: black;
-  background-color: green;
-  background: url(term.png) no-repeat bottom right;
+  color: blue;
 }
 
 a[href^="#"]:hover,
