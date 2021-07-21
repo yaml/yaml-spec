@@ -4829,6 +4829,7 @@ separates two non-[space] characters.
 **Example #. Folded Lines**
 ```
 >
+
 ·folded↓
 ·line↓
 ↓
@@ -4858,8 +4859,8 @@ separates two non-[space] characters.
       last line\n"
 ```
 **Legend:**
-* [s-nb-folded-text(n)] <!-- 3:1,7 4:1,5 6 7:1,4 13:1,5 14:1,5 -->
-* [l-nb-folded-lines(n)] <!-- 3 4 6 7 13 14 -->
+* [l-nb-folded-lines(n)] <!-- 3:1,7 4:1,5 6 7:1,5 13:1,5 14:1,5 -->
+* [s-nb-folded-text(n)] <!-- 3 4 6 7:1,5 13 14:1,5 -->
 
 (The following three examples duplicate this example, each highlighting
 different productions.)
