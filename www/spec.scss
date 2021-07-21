@@ -38,19 +38,19 @@ div.legend > *, pre {
   code {
     &.legend-1 {
       background-color: #F8F8E0;
-      border: 1px solid #666;
+      box-shadow: 0 0 0 1px #666 inset;
     }
     &.legend-2 {
       background-color: #E0E0F8;
-      border: 1px solid #666;
+      box-shadow: 0 0 0 1px #666 inset;
     }
     &.legend-3 {
       background-color: #F8E0F8;
-      border: 1px solid #666;
+      box-shadow: 0 0 0 1px #666 inset;
     }
     &.legend-4 {
       background-color: #E0F8F8;
-      border: 1px solid #666;
+      box-shadow: 0 0 0 1px #666 inset;
     }
   }
 }
