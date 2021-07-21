@@ -2,23 +2,16 @@ DOCKER_TOOL := html-to-markydown
 include ../tool/make/init.mk
 
 
-WORK := $(ROOT)/work
-INPUT_HTML := $(WORK)/spec-1.2.html
-LEGEND := $(ROOT)/spec/legend.yaml
-
 ALL := \
-    spec.md \
+    errata.md \
 
 build: $(ALL)
 
-force: $(INPUT_HTML)
-	touch $<
+%.md: $(SPEC12)/%.html
+	html-to-markydown $< > $@
 
-spec.md: $(INPUT_HTML) $(LEGEND)
-	html-to-markydown $^ > $@
+$(SPEC12)/%.html: $(SPEC12)/spec.html $(SPEC12)/%.dbk
+	make -C $(SPEC12) $(@:$(SPEC12)/%=%) YAML_SPEC_DIR=
 
-$(INPUT_HTML): $(WORK)
-	touch $@
-
-$(WORK):
-	make -C $(ROOT) work
+$(SPEC12)/spec.html:
+	make -C $(SPEC12) spec.html YAML_SPEC_DIR=

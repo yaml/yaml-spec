@@ -28,7 +28,6 @@ RFC := $(ROOT)/rfc
 STORY := $(ROOT)/story
 TOOL := $(ROOT)/tool
 WWW := $(ROOT)/www
-WORK := $(ROOT)/work
 
 export PATH := $(TOOL)/docker/bin:$(TOOL)/bin:$(PATH)
 

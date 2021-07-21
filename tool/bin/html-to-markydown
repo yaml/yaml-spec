@@ -15,9 +15,7 @@ r = (re)-> HtmlToMarkdown.re[re].toString()[1...-1]
 
 
 class HtmlToMarkdown
-  constructor: (legend_file)->
-    HtmlToMarkdown.legend = yaml.parse file_read legend_file
-
+  constructor: ->
     @turndown = new Turndown
       headingStyle: 'atx'
       preformattedCode: true
@@ -162,56 +160,6 @@ class HtmlToMarkdown
           #{num} #{lhs} #{op}#{rhs}
           ```\n\n
           """
-
-    example:
-      filter: tag_and_class 'div', 'example'
-      replacement: (m, n, o)=>
-        text = m
-
-        RegExp.$1 = ''
-
-        re = /^(\*\*(?:[\s\S](?!```))*\*\*)\n/
-        if text.match re
-          text = text.replace re, ''
-          title = RegExp.$1 or
-            XXX ['no title', m]
-
-        legend = ''
-        re = /```\n\s*Legend:\n([\s\S]+?)\n```\n\n/
-        if text.match re
-          text = text.replace re, ''
-          legend = @fmt_legend RegExp.$1
-
-        re = /```\n([\s\S]+?)\n```\n\n/
-        if text.match re
-          text = text.replace re, ''
-          yaml1 = @fmt_pre RegExp.$1 or
-            XXX ['no yaml1', text, m]
-
-        yaml2 = ''
-        if text.match re
-          text = text.replace re, ''
-          yaml2 = @fmt_pre RegExp.$1
-
-        if text.match /\S/
-          XXX
-            _: 'Bad Example'
-            input: m
-            title: title
-            yaml1: yaml1
-            yaml2: yaml2
-            legend: legend
-
-        out = "#{title}\n#{yaml1}"
-        out += yaml2 if yaml2
-        out += legend if legend
-        out += "\n"
-
-        return out
-
-    example_break:
-      filter: tag_and_class 'br', 'example-break'
-      replacement: (m, n, o)-> ''
 
     node_comparison:
       filter: (n, o)->
@@ -397,8 +345,8 @@ class HtmlToMarkdown
       """
 
 
-main = (spec, links, legend)->
-  to_markdown = new HtmlToMarkdown links, legend
+main = (spec)->
+  to_markdown = new HtmlToMarkdown
 
   html = file_read spec
 

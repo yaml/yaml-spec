@@ -11,11 +11,7 @@ build site serve stage publish force:
 	make -C www $@
 
 clean:
-	rm -fr work
 	git worktree prune
+	make -C 1.2 $@
 	make -C www $@
 	make -C tool/docker clean-all
-
-work:
-	-git branch --track $@ origin/$@
-	git worktree add -f $@ $@

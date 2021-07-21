@@ -139,14 +139,10 @@ endif
 
 # Remove generated files to force rebuild:
 force:
-	$(call clean,$(GH_PAGES))
 	rm -fr $(SITE)
+	$(call clean,$(GH_PAGES))
 
-# Also touch the original spec-1.2 html:
-force-all: force
-	make -C $(SPEC) force
-
-clean: force
+clean:
 	rm -fr $(SITE) $(GH_PAGES)
 	make -C _ext clean
 
