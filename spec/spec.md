@@ -3786,8 +3786,10 @@ These characters would cause ambiguity with [flow collection] structures.
 ]
 ```
 **Legend:**
-* [ns-plain-first(c)] Not ns-plain-first(c)
-* [ns-plain-char(c)] Not ns-plain-char(c)
+* [ns-plain-first(c)] <!-- 2:3 5:3 8:5 11:3 -->
+* [ns-plain-char(c)] <!-- 2:4 4:5 6:7 6:25 8:6 12:7 12:25 -->
+* Not ns-plain-first(c) <!-- 3:4 9:4 -->
+* Not ns-plain-char(c) <!-- 10:6 -->
 
 Plain scalars are further restricted to a single line when contained inside an
 [implicit key].
