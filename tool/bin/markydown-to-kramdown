@@ -220,6 +220,7 @@ sub fmt_example {
   else {
     $yaml1 = format_pre($yaml1);
   }
+  $yaml1 =~ s{_eof_}{<i>eof</i>}g;
 
   if ($yaml2) {
     $yaml2 = format_pre($yaml2);

@@ -2591,8 +2591,8 @@ key:····# Comment↓
 ```
 **Legend:**
 * [c-nb-comment-text] <!-- 1:9,9 -->
-* [b-comment] <!-- ↓ eof -->
-* [s-b-comment] <!-- 1:5, 2:8,3 -->
+* [b-comment] <!-- ↓ 2:8,5 -->
+* [s-b-comment] <!-- 1:5, 2:8,5 -->
 
 Outside [scalar content], comments may appear on a line of their own,
 independent of the [indentation] level.
