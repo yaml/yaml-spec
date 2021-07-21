@@ -5542,8 +5542,8 @@ Document
 ```
 **Legend:**
 * [c-directives-end] <!-- 2 -->
-* [c-document-end] <!-- 4 -->
-* [l-document-suffix] <!-- 4:1,3 -->
+* [l-document-suffix] <!-- 4 -->
+* [c-document-end] <!-- 4:1,3 -->
 
 ### #. Bare Documents
 
