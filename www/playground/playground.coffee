@@ -92,7 +92,11 @@ class window.Playground
     console.dir('Error calling localhost sandbox:')
     console.dir(resp)
 
-    help = loc.replace(/(\/playground\/).*/, "$1")
+    help = loc.replace(
+      /(\/playground\/).*/,
+      "$1#setting-up-a-local-sandbox",
+    )
+
     return mark: """
       This pane requires a localhost sandbox server.
 

@@ -58,20 +58,29 @@ but it's pretty simple to work around them for this.
 
 You'll need to open this URL one time:
 
-* https://spec.yaml.io:31337/
+* <https://localhost:31337/>
 
 and authorize the untrusted SSL certificate for it.
+Note: You should see the word `Hello` on the page if it works.
 
 The other thing you need to do is allow JavaScript to "allow invalid
 certificates for resources loaded from localhost".
-So far, we only have figured out how to do this on the Google Chrome browser.
+So far, we have figured out how to do this on the Google Chrome and Firefox
+browsers.
 
-* Google Chrome
+* Google Chrome (also works for Chromium)
   * Type `chrome://flags` into the browser URL location
   * Search for `#allow-insecure-localhost` in the "Search flags" box
   * Enable the "Allow invalid certificates for resources loaded from localhost"
     flag
   * Click the "Relaunch" button
+
+* Firefox
+  * Type `about:config` into the browser URL location
+  * Search for `security.fileuri.strict_origin_policy` in the "Search
+    preference name" box
+  * Change value from `true` to `false`
+  * Restart Firefox
 
 That's everything.
 You should be all set to use all the playground things that need to
