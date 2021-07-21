@@ -4888,6 +4888,7 @@ Lines starting with [white space] characters (_more-indented_ lines) are not
 **Example #. More Indented Lines**
 ```
 >
+
  folded
  line
 
@@ -4917,8 +4918,8 @@ Lines starting with [white space] characters (_more-indented_ lines) are not
       last line\n"
 ```
 **Legend:**
-* [s-nb-spaced-text(n)] <!-- 8:1,11 10:1,9 11:1,10 -->
 * [l-nb-spaced-lines(n)] <!-- 8 9 10 11:1,10 -->
+* [s-nb-spaced-text(n)] <!-- 8:1,11 10:1,9 11:1,10 -->
 
 [Line breaks] and [empty lines] separating folded and more-indented lines are
 also not [folded].
