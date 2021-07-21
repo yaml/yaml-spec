@@ -2169,10 +2169,10 @@ Any escaped character:
 
 **Example #. Escaped Characters**
 ```
-"Fun with \
+"Fun with \\
 \" \a \b \e \f \↓
 \n \r \t \v \0 \↓
-\  _ \N \L \P \↓
+\  \_ \N \L \P \↓
 \x41 \u0041 \U00000041"
 ```
 ```
@@ -2185,7 +2185,7 @@ Any escaped character:
 A A A"
 ```
 **Legend:**
-* [c-ns-esc-char] <!-- \\ \" \a \b \e \f \↓ \n \r \t \v \0 4:1,2 \N \L \P \x41 \u0041 \U00000041 -->
+* [c-ns-esc-char] <!-- \\ \" \a \b \e \f \↓ \n \r \t \v \0 4:1,2 4:4,2 \N \L \P \x41 \u0041 \U00000041 -->
 
 **Example #. Invalid Escaped Characters**
 ```
