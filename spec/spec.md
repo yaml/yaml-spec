@@ -2546,7 +2546,7 @@ Folding does distinguish between these cases in the following way:
 ```
 **Legend:**
 * [s-flow-folded(n)] <!-- 1:2 2:1,2 2:6,2 3:1,2 4:1,4 4:8 5:1 6:1,2 6:6 -->
-* Non-content spaces
+* Non-content spaces <!-- 2:1,2 2:6 3:1 4:1,4 6:1,2 -->
 
 ## #. Comments
 
