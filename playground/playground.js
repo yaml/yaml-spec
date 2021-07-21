@@ -127,7 +127,7 @@
       }
       console.dir('Error calling localhost sandbox:');
       console.dir(resp);
-      help = loc.replace(/(\/playground\/).*/, "$1#setting-up-a-local-sandbox");
+      help = loc.replace(/(\/playground\/).*/, "$1");
       return {
         mark: "This pane requires a localhost sandbox server.\n\nSimply run:\n\n```\n$ docker run --rm -p " + port + ":" + port + " \\\n    yamlio/playground-sandbox:0.0.3 " + scheme + "\n```\n\n\non the same computer as your web browser.\n\nSee " + help + "  \nfor more instructions."
       };
