@@ -4291,8 +4291,9 @@ been impossible to implement.
 ```
 **Legend:**
 * [ns-s-implicit-yaml-key] <!-- YAML· -->
+* [e-node] <!-- ° -->
 * [c-s-implicit-json-key] <!-- {JSON:_like} -->
-* [e-node] Value
+* Value <!-- :_separate :_empty_key_entry :adjacent -->
 
 **Example #. Invalid Implicit Keys**
 ```
