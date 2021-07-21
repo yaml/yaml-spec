@@ -5118,10 +5118,10 @@ Note that it is not possible to specify [node properties] for such a
 ]
 ```
 **Legend:**
-* Empty
-* [s-l+block-node(n,c)] <!-- 1:2, -->
-* [ns-l-compact-sequence(n)]
-* [ns-l-compact-mapping(n)]
+* Empty <!-- °_#_Empty -->
+* [s-l+block-node(n,c)] <!-- 2:2, block_node -->
+* [ns-l-compact-sequence(n)] <!-- ·-_one_#_Compact ··-_two_#_sequence -->
+* [ns-l-compact-mapping(n)] <!-- _one:_two_#_Compact_mapping -->
 
 ### #. Block Mappings
 
