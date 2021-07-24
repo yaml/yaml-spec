@@ -2170,10 +2170,10 @@ Any escaped character:
 
 <code>**Example #. Escaped Characters**</code>
 ```
-"Fun with \\
+"Fun with \
 \" \a \b \e \f \↓
 \n \r \t \v \0 \↓
-\  \_ \N \L \P \↓
+\  _ \N \L \P \↓
 \x41 \u0041 \U00000041"
 ```
 ```
@@ -2186,7 +2186,7 @@ Any escaped character:
 A A A"
 ```
 **Legend:**
-* [c-ns-esc-char] &lt;!-- \\ \" \a \b \e \f \↓ \n \r \t \v \0 4:1,2 4:4,2 \N \L \P \x41 \u0041 \U00000041 --&gt;
+* [c-ns-esc-char] &lt;!-- \\ \" \a \b \e \f \↓ \n \r \t \v \0 4:1,2 \N \L \P \x41 \u0041 \U00000041 --&gt;
 
 <code>**Example #. Invalid Escaped Characters**</code>
 ```
@@ -2275,8 +2275,8 @@ Not indented:
 ```
 **Legend:**
 * [s-indent(n)] &lt;!-- 5:1 6:1,4 7:1,4 8:1 9:1,2 10:1,2 11:1,2 12:1,2 --&gt;
-* Content &lt;!-- 7:5,2 --&gt;
-* Neither content nor indentation &lt;!-- 1:1,2 2:1,3 3 9:3 12:3,2 --&gt;
+* Content
+* Neither content nor indentation
 
 The ["**`-`**"], ["**`?`**"] and ["**`:`**"] characters used to denote [block
 collection] entries are perceived by people to be part of the indentation.
@@ -2301,9 +2301,9 @@ This is handled on a case-by-case basis by the relevant productions.
 }
 ```
 **Legend:**
-* Total Indentation &lt;!-- 1:1 2:1,3 3:1,6 4:1,6 --&gt;
-* [s-indent(n)] &lt;!-- 2:2 3:1,2 3:4,2 4:1,5 --&gt;
-* Indicator as indentation &lt;!-- 1:1 2:1 2:3 3:3 3:6 4:6 --&gt;
+* Total Indentation
+* [s-indent(n)] &lt;!-- 1:1 2:1,3 3:1,6 4:1,6 --&gt;
+* Indicator as indentation
 
 <code>## #. Separation Spaces</code>
 
@@ -2507,8 +2507,7 @@ Folding does distinguish between these cases in the following way:
 ```
 **Legend:**
 * [b-l-folded(n,c)] &lt;!-- 2:7 3:1,2 4:8 5:1 --&gt;
-* Non-content spaces &lt;!-- 2:1,2 4:1,2 6:1,2 --&gt;
-* Content spaces &lt;!-- 2:6 4:3,2 --&gt;
+* Non-content spaces Content spaces
 
 <code>##### Flow Folding</code>
 
@@ -2547,7 +2546,7 @@ Folding does distinguish between these cases in the following way:
 ```
 **Legend:**
 * [s-flow-folded(n)] &lt;!-- 1:2 2:1,2 2:6,2 3:1,2 4:1,4 4:8 5:1 6:1,2 6:6 --&gt;
-* Non-content spaces &lt;!-- 2:1,2 2:6 3:1 4:1,4 6:1,2 --&gt;
+* Non-content spaces
 
 <code>## #. Comments</code>
 
@@ -2592,8 +2591,8 @@ key:····# Comment↓
 ```
 **Legend:**
 * [c-nb-comment-text] &lt;!-- 1:9,9 --&gt;
-* [b-comment] &lt;!-- ↓ 2:8,5 --&gt;
-* [s-b-comment] &lt;!-- 1:5, 2:8,5 --&gt;
+* [b-comment] &lt;!-- ↓ eof --&gt;
+* [s-b-comment] &lt;!-- 1:5, 2:8,3 --&gt;
 
 Outside [scalar content], comments may appear on a line of their own,
 independent of the [indentation] level.
@@ -3493,8 +3492,8 @@ Double-quoted scalars are restricted to a single line when contained inside an
 }
 ```
 **Legend:**
-* [nb-double-one-line] &lt;!-- 1:2,18 2:4,17 --&gt;
-* [c-double-quoted(n,c)] &lt;!-- 1:1,20 2:3,19 --&gt;
+* [nb-double-one-line] &lt;!-- 1:2,19 2:4,18 --&gt;
+* [c-double-quoted(n,c)] &lt;!-- 1:1,21 2:3,20 --&gt;
 
 In a multi-line double-quoted scalar, [line breaks] are are subject to [flow
 line folding], which discards any trailing [white space] characters.
@@ -3787,10 +3786,8 @@ These characters would cause ambiguity with [flow collection] structures.
 ]
 ```
 **Legend:**
-* [ns-plain-first(c)] &lt;!-- 2:3 5:3 8:5 11:3 --&gt;
-* [ns-plain-char(c)] &lt;!-- 2:4 4:5 6:7 6:25 8:6 12:7 12:25 --&gt;
-* Not ns-plain-first(c) &lt;!-- 3:4 9:4 --&gt;
-* Not ns-plain-char(c) &lt;!-- 10:6 --&gt;
+* [ns-plain-first(c)] Not ns-plain-first(c)
+* [ns-plain-char(c)] Not ns-plain-char(c)
 
 Plain scalars are further restricted to a single line when contained inside an
 [implicit key].
@@ -4292,9 +4289,8 @@ been impossible to implement.
 ```
 **Legend:**
 * [ns-s-implicit-yaml-key] &lt;!-- YAML· --&gt;
-* [e-node] &lt;!-- ° --&gt;
 * [c-s-implicit-json-key] &lt;!-- {JSON:_like} --&gt;
-* Value &lt;!-- :_separate :_empty_key_entry :adjacent --&gt;
+* [e-node] Value
 
 <code>**Example #. Invalid Implicit Keys**</code>
 ```
@@ -4830,7 +4826,6 @@ separates two non-[space] characters.
 <code>**Example #. Folded Lines**</code>
 ```
 &gt;
-
 ·folded↓
 ·line↓
 ↓
@@ -4860,8 +4855,8 @@ separates two non-[space] characters.
       last line\n"
 ```
 **Legend:**
-* [l-nb-folded-lines(n)] &lt;!-- 3:1,7 4:1,5 6 7:1,5 13:1,5 14:1,5 --&gt;
-* [s-nb-folded-text(n)] &lt;!-- 3 4 6 7:1,5 13 14:1,5 --&gt;
+* [s-nb-folded-text(n)] &lt;!-- 3:1,7 4:1,5 6 7:1,4 13:1,5 14:1,5 --&gt;
+* [l-nb-folded-lines(n)] &lt;!-- 3 4 6 7 13 14 --&gt;
 
 (The following three examples duplicate this example, each highlighting
 different productions.)
@@ -4889,7 +4884,6 @@ Lines starting with [white space] characters (_more-indented_ lines) are not
 <code>**Example #. More Indented Lines**</code>
 ```
 &gt;
-
  folded
  line
 
@@ -4919,8 +4913,8 @@ Lines starting with [white space] characters (_more-indented_ lines) are not
       last line\n"
 ```
 **Legend:**
-* [l-nb-spaced-lines(n)] &lt;!-- 8 9 10 11:1,10 --&gt;
 * [s-nb-spaced-text(n)] &lt;!-- 8:1,11 10:1,9 11:1,10 --&gt;
+* [l-nb-spaced-lines(n)] &lt;!-- 8 9 10 11:1,10 --&gt;
 
 [Line breaks] and [empty lines] separating folded and more-indented lines are
 also not [folded].
@@ -5119,10 +5113,10 @@ Note that it is not possible to specify [node properties] for such a
 ]
 ```
 **Legend:**
-* Empty &lt;!-- °_#_Empty --&gt;
-* [s-l+block-node(n,c)] &lt;!-- 2:2, block_node --&gt;
-* [ns-l-compact-sequence(n)] &lt;!-- ·-_one_#_Compact ··-_two_#_sequence --&gt;
-* [ns-l-compact-mapping(n)] &lt;!-- _one:_two_#_Compact_mapping --&gt;
+* Empty
+* [s-l+block-node(n,c)] &lt;!-- 1:2, --&gt;
+* [ns-l-compact-sequence(n)]
+* [ns-l-compact-mapping(n)]
 
 <code>### #. Block Mappings</code>
 
@@ -5439,9 +5433,9 @@ mapping: !!map
 }
 ```
 **Legend:**
-* [s-l+block-collection(n,c)] &lt;!-- 1:10, 2 3 4 5:9, 6 --&gt;
 * [l+block-sequence(n)] &lt;!-- 2 3 4 --&gt;
 * [l+block-mapping(n)] &lt;!-- 6 --&gt;
+* [s-l+block-collection(n,c)] &lt;!-- 1:10, 2 3 4 5:9, 6 --&gt;
 
 <code># Chapter #. YAML Character Stream</code>
 
@@ -5543,8 +5537,8 @@ Document
 ```
 **Legend:**
 * [c-directives-end] &lt;!-- 2 --&gt;
-* [l-document-suffix] &lt;!-- 4 --&gt;
-* [c-document-end] &lt;!-- 4:1,3 --&gt;
+* [c-document-end] &lt;!-- 4 --&gt;
+* [l-document-suffix] &lt;!-- 4:1,3 --&gt;
 
 <code>### #. Bare Documents</code>
 
