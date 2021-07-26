@@ -2833,11 +2833,14 @@ document, even if both occurrences give the same version number.
 %YAML 1.1
 foo
 ```
+<!-- 2:2,4 -->
+
 ```
 ERROR:
 The YAML directive must only be
 given at most once per document.
 ```
+<!-- 2:5,4 -->
 
 ### #. "**`TAG`**" Directives
 
