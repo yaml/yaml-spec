@@ -2199,11 +2199,16 @@ Bad escapes:
   "\c
   \xq-"
 ```
+<!-- 2:5 -->
+<!-- 3:5,2 -->
+
 ```
 ERROR:
 - c is an invalid escaped character.
 - q and - are invalid hex digits.
 ```
+<!-- 2:3 -->
+<!-- 3:3 3:9 -->
 
 # Chapter #. Basic Structures
 
