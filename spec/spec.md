@@ -4554,6 +4554,10 @@ indicator for cases where detection will fail.
 - |2
 ·text
 ```
+<!-- 2:2 -->
+<!-- 6:1 -->
+<!-- 8:1 -->
+
 ```
 ERROR:
 - A leading all-space line must
@@ -4563,6 +4567,9 @@ ERROR:
 - The text is less indented
   than the indicated level.
 ```
+<!-- spaces -->
+<!-- 5:10,13 -->
+<!-- 6:15,13 -->
 
 #### #. Block Chomping Indicator
 
