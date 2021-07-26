@@ -1,7 +1,7 @@
 pre.rule { background-color: #E0F8F8; border: none; }
 
 div.example > * td.side-by-side { vertical-align: top; border: none; width: 10%; }
-div.example > * pre { background-color: #E0F8E0; border: none; }
+div.example > * pre { background-color: #E0F8E0; border: none; margin-bottom: 0px; }
 
 pre.error { background-color: #F8E0E0 !important; }
 
@@ -15,3 +15,9 @@ div.legend > * code.legend-1, pre code.legend-1 { background-color: #F8F8E0; box
 div.legend > * code.legend-2, pre code.legend-2 { background-color: #E0E0F8; box-shadow: 0 0 0 1px #666 inset; }
 div.legend > * code.legend-3, pre code.legend-3 { background-color: #F8E0F8; box-shadow: 0 0 0 1px #666 inset; }
 div.legend > * code.legend-4, pre code.legend-4 { background-color: #E0F8F8; box-shadow: 0 0 0 1px #666 inset; }
+
+div.legend { margin-left: 1rem; }
+div.legend p { margin: 0px; margin-top: 5px; }
+div.legend p strong { font-weight: normal; }
+div.legend ul { padding-inline-start: 20px; margin-block-start: 0px; }
+div.legend ul li { display: inline; white-space: nowrap; }
