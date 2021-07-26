@@ -13,6 +13,7 @@ div.example > * {
   pre {
     background-color: #E0F8E0;
     border: none;
+    margin-bottom: 0px;
   }
 }
 
@@ -51,6 +52,29 @@ div.legend > *, pre {
     &.legend-4 {
       background-color: #E0F8F8;
       box-shadow: 0 0 0 1px #666 inset;
+    }
+  }
+}
+
+div.legend {
+  margin-left: 1rem;
+
+  p {
+    margin: 0px;
+    margin-top: 5px;
+
+    strong {
+      font-weight: normal;
+    }
+  }
+
+  ul {
+    padding-inline-start: 20px;
+    margin-block-start: 0px;
+
+    li {
+      display: inline;
+      white-space: nowrap;
     }
   }
 }
