@@ -3157,9 +3157,12 @@ A tag is denoted by the _"**`!`**" indicator_.
 
 **Example #. Invalid Verbatim Tags**
 ```
-- !<!\> foo
-- !<$:?\> bar
+- !<!> foo
+- !<$:?> bar
 ```
+<!-- 1:5 -->
+<!-- 2:5,3 -->
+
 ```
 ERROR:
 - Verbatim tags aren't resolved,
@@ -3168,6 +3171,8 @@ ERROR:
   URI tag nor a local tag starting
   with "!".
 ```
+<!-- 3:6 -->
+<!-- 4:7,3 -->
 
 ##### Tag Shorthands
 
