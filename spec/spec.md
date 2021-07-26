@@ -1773,13 +1773,16 @@ grave accent) are _reserved_ for future use.
 **Example #. Invalid use of Reserved Indicators**
 ```
 commercial-at: @text
-grave-accent: text
+grave-accent: `text
 ```
+<!-- @ ` -->
+
 ```
 ERROR:
  Reserved indicators can't
  start a plain scalar.
 ```
+<!-- Reserved_indicators -->
 
 Any indicator character:
 
