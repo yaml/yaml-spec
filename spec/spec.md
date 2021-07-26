@@ -1502,11 +1502,14 @@ In the examples, byte order mark characters are displayed as "**`⇔`**".
 ⇔
 - Inside a document.
 ```
+<!-- ⇔ -->
+
 ```
 ERROR:
  A BOM must not appear
  inside a document.
 ```
+<!-- BOM -->
 
 ## #. Indicator Characters
 
