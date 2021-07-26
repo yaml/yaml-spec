@@ -3232,11 +3232,16 @@ ERROR:
 - !e! foo
 - !h!bar baz
 ```
+<!-- 3:3,3 -->
+<!-- 4:3,3 -->
+
 ```
 ERROR:
 - The !o! handle has no suffix.
 - The !h! handle wasn't declared.
 ```
+<!-- 2:7,3 -->
+<!-- 3:7,3 -->
 
 ##### Non-Specific Tags
 
