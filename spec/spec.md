@@ -2881,12 +2881,15 @@ It is an error to specify more than one "**`TAG`**" directive for the same
 %TAG ! !foo
 bar
 ```
+<!-- 2:6 -->
+
 ```
 ERROR:
 The TAG directive must only
 be given at most once per
 handle in the same document.
 ```
+<!-- 4:1,6 -->
 
 #### #. Tag Handles
 
