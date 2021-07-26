@@ -27,19 +27,32 @@ sub main {
     push @sections, $_;
   }
 
-  print "$front";
+  print $front;
   print join "\n", @sections;
 }
 
 #------------------------------------------------------------------------------
+my $x = '(?s:.)';
+my $s = '\ ';
+my $line = '(?:.*\n)';
+my $comment = '(?s:<!--.*?-->\n)';
+my $li = '(?:\*\ \S.*\n)';
+my $b = '\*\*';
+my $code = '```\n';
+my $html = '<((?:[a-z]+)).*?>\n';
+my $ial = '(?:\{:.+?\}\n)';
+
 my $re_pre = qr/
-  ```\n
-  (?:.*\n)+?
-  ```\n
+  $code
+  $line+?
+  $code
+  $comment*
+  \n*
 /x;
+
 my $re_legend = qr/
-  \*\*Legend:\*\*\n
-  (?:\*\ .*\n)+
+  ${b}Legend:$b\n
+  $li+
 /x;
 
 sub parse_sections {
@@ -47,73 +60,92 @@ sub parse_sections {
 
   my @s;
   while ($_) {
-    # HTML block:
-    if (/\A<([a-z]+)[^>]*>\n/) {
-      my $tag = $1;
-      s{\A(<$tag.*\n(?:.*\n)*?</$tag>\n+)}{}
-        and push @s, {html_block => $1} and next;
-    }
-
-    # Headings:
-    s/\A(\S.*\n)===+\n\n+//
-      and push @s, {heading => "# $1"} and next;
-
-    s/\A(#{1,5} .*\n)\n+//
-      and push @s, {heading => $1} and next;
-
     # Example section:
-    s/\A
-      (\*\*Example\ \# [\s\S]*?\*\*)\n
+    s<\A
+      (${b}Example$s\# $x*?$b)\n
       ($re_pre)
       ($re_pre)?
       ($re_legend)?
       \n+
-    //x
+    ><>x
       and push @s, {example => [$1, $2, $3, $4]} and next;
 
+    # HTML block:
+    if (/\A$html/) {
+      my $tag = $1;
+      s{\A
+        (
+          $html
+          $line*?
+          </$tag>
+          \n*
+        )
+      }{}x and push @s, {html_block => $1} and next;
+    }
+
+    # Headings:
+    s{\A
+      (\S$line)
+      ===+ \n
+      \n+
+    }{}x and push @s, {heading => "# $1"} and next;
+
+    s/\A(#{1,5} .*\n)\n+//
+      and push @s, {heading => $1} and next;
+
+    # Unordered list:
     s/\A
       (
-        (::.*\n)?
+        (::$line)?
         (?:
-          (?:\*\ \S.*\n)
+          (?:$li)
           (?:
             (?:
               \n
-              (\ \ \S.*\n)+
+              ($s$s\S$line)+
             )+
             \n?
           )?
-          (?:\ \ \*\ .*\n)*
+          (?:$s$s\*$s$line)*
         )+
-        (?:\{:\.\S+\}\n)?
+        $ial*
       )
       \n+
     //x
       and push @s, {ul => $1} and next;
 
+    # Regular paragraph:
     s/\A
       (
         (?:
-          (?:\*\*|-1\ |\[[\w\"\*]|[\w\"\(])
+          (?:$b|-1$s|\[[\w\"\*]|[\w\"\(])
           .*\n
         )+
       )
       (?:
-        (?=```) |
+        (?= $code) |
         \z |
         \n+
       )
     //x
       and push @s, {p => $1} and next;
 
+    # Indented block:
+    s{\A
+      (
+        > $s+ $line
+        (?:
+          \S $line
+        )*
+      )
+      \n+
+    }{}x and push @s, {indent => $1} and next;
+
     s/\A(----\n)\n+//
       and push @s, {hr => $1} and next;
 
     s/\A\::toc\n\n+//
       and push @s, {toc => 1} and next;
-
-    s/\A((?:>.*\n)+)\n+//
-      and push @s, {indent => $1} and next;
 
     s/\A((?s:```.+?\n```\n))\n+//
       and push @s, {pre => $1} and next;
@@ -130,16 +162,25 @@ sub parse_sections {
     s/\A((?:\| .*\n)+)\n+//
       and push @s, {table => $1} and next;
 
-    s/\A((?:\* .*\n)(?:  .*\n|\n(?=  ))+)\n+//
+    s{\A
+      (
+        $li
+        (?:
+          $s$s$line |
+          \n(?=$s$s)
+        )+
+      )
+      \n+
+    }{}x
       and push @s, {ul => $1} and next;
 
-    s/\A(<!--(?:.*\n)+?-->\n)\n*//
+    s/\A($comment)\n*//
       and push @s, {comment => $1} and next;
 
     s/\n+\z// and next;
 
-    s/((?:.*\n){20})(?s:.*)/$1/;
     WWW(\@s);
+    s/(${line}{20})$x*/$1/;
     die "*** ERROR ***\nParse failed at this point:\n$_\n*** EOF ***\n";
   }
 
@@ -212,14 +253,20 @@ sub fmt_example {
   my $out = set_example_level($title) . "\n\n";
 
   if ($legend) {
-    $yaml1 = apply_legend($yaml1, $legend);
+    $yaml1 = apply_highlights($yaml1, $legend);
   }
   else {
-    $yaml1 = format_pre($yaml1);
+    if ($yaml1 =~ s/($comment+)\n*\z//) {
+      $yaml1 = apply_highlights($yaml1, $1);
+    }
   }
+  $yaml1 = format_pre($yaml1);
   $yaml1 =~ s{_eof_}{<i>eof</i>}g;
 
   if ($yaml2) {
+    if ($yaml2 =~ s/($comment+)\n*\z//) {
+      $yaml2 = apply_highlights($yaml2, $1);
+    }
     $yaml2 = format_pre($yaml2);
     if ($yaml2 =~ /ERROR:/) {
       $yaml1 =~ s/<pre(\ ?)/<pre class="error"$1/;
@@ -448,9 +495,9 @@ sub set_example_level {
   return $title;
 }
 
-sub apply_legend {
-  my ($yaml, $legend) = @_;
-  my @lines = split /\n/, $legend;
+sub apply_highlights {
+  my ($yaml, $highlights) = @_;
+  my @lines = split /\n/, $highlights;
   my @rules;
   for my $line (@lines) {
     if ($line =~ /<!--/) {
@@ -512,27 +559,21 @@ sub apply_legend {
     $yaml =~ s{$re}{[%code class="legend-$i"%]${1}[%/code%]}g;
   }
 
-  $yaml =~ s/&/&amp;/g;
-  $yaml =~ s/</&lt;/g;
-  $yaml =~ s/>/&gt;/g;
-  $yaml =~ s/\[%/</g;
-  $yaml =~ s/%\]/>/g;
-
-  return <<"...";
-<pre>
-$yaml
-</pre>
-...
+  return $yaml;
 }
 
 sub format_pre {
   $_ = $_[0];
+  s/\n+\z/\n/;
 
   s/\A```\n//;
   s/\n```\n\z//;
   s/&/&amp;/g;
   s/</&lt;/g;
   s/>/&gt;/g;
+
+  s/\[%/</g;
+  s/%\]/>/g;
 
   return <<"...";
 <pre>
@@ -555,7 +596,6 @@ sub format_legend {
   }
   $_ = join "\n", @lines;
   s{\[([^\]]+)\]}{<a href="#rule-$1">$1</a>}g;
-  s/^/> /mg;
   return $_;
 }
 
