@@ -6178,5 +6178,3 @@ The yaml-core mailing list at
 [http://lists.sourceforge.net/lists/listinfo/yaml-core](http://lists.sourceforg
 e.net/lists/listinfo/yaml-core) is the preferred method for such submissions,
 as well as raising any questions regarding this draft.
-
-::index

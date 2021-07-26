@@ -112,9 +112,6 @@ sub parse_sections {
     s/\A\::toc\n\n+//
       and push @s, {toc => 1} and next;
 
-    s/\A\::index\n//
-      and push @s, {index => 1} and next;
-
     s/\A((?:>.*\n)+)\n+//
       and push @s, {indent => $1} and next;
 
