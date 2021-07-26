@@ -142,6 +142,9 @@ force:
 	rm -fr $(SITE)
 	$(call clean,$(GH_PAGES))
 
+diff: build
+	(cd _gh-pages; git diff)
+
 clean:
 	rm -fr $(SITE) $(GH_PAGES)
 	make -C _ext clean
