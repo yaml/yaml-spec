@@ -43,12 +43,12 @@ jobs:
     - name: Make spec/index.md from 1.2/spec.html
       run:
         source .rc &&
-        make -C spec force build
+        make -C spec build
 
     - name: Make web content
       run:
         source .rc &&
-        make -C www force-all build
+        make -C www force build
 
     - name: Check output files
       run:
