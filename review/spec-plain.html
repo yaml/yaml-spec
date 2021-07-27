@@ -3060,16 +3060,16 @@ A A A"
 <td class="side-by-side">
 <pre class="error">
 Bad escapes:
-  "\c
-  \xq-"
+  "\<code class="legend-1">c</code>
+  \x<code class="legend-2">q-</code>"
 </pre>
 
 </td>
 <td class="side-by-side">
 <pre class="error">
 ERROR:
-- c is an invalid escaped character.
-- q and - are invalid hex digits.
+- <code class="legend-1">c</code> is an invalid escaped character.
+- <code class="legend-2">q</code> and <code class="legend-2">-</code> are invalid hex digits.
 </pre>
 
 </td>
@@ -3979,7 +3979,7 @@ document, even if both occurrences give the same version number.</p>
 <td class="side-by-side">
 <pre class="error">
 %YAML 1.2
-%YAML 1.1
+%<code class="legend-1">YAML</code> 1.1
 foo
 </pre>
 
@@ -3987,7 +3987,7 @@ foo
 <td class="side-by-side">
 <pre class="error">
 ERROR:
-The YAML directive must only be
+The <code class="legend-1">YAML</code> directive must only be
 given at most once per document.
 </pre>
 
@@ -4056,7 +4056,7 @@ This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 <td class="side-by-side">
 <pre class="error">
 %TAG ! !foo
-%TAG ! !foo
+%TAG <code class="legend-1">!</code> !foo
 bar
 </pre>
 
@@ -4066,7 +4066,7 @@ bar
 ERROR:
 The TAG directive must only
 be given at most once per
-handle in the same document.
+<code class="legend-1">handle</code> in the same document.
 </pre>
 
 </td>
@@ -4490,8 +4490,8 @@ valid URI (a <del><a href="#undefined">global tag</a></del>).</p>
 <tr>
 <td class="side-by-side">
 <pre class="error">
-- !&lt;!\&gt; foo
-- !&lt;$:?\&gt; bar
+- !&lt;<code class="legend-1">!</code>&gt; foo
+- !&lt;<code class="legend-2">$:?</code>&gt; bar
 </pre>
 
 </td>
@@ -4499,8 +4499,8 @@ valid URI (a <del><a href="#undefined">global tag</a></del>).</p>
 <pre class="error">
 ERROR:
 - Verbatim tags aren't resolved,
-  so ! is invalid.
-- The $:? tag is neither a global
+  so <code class="legend-1">!</code> is invalid.
+- The <code class="legend-2">$:?</code> tag is neither a global
   URI tag nor a local tag starting
   with "!".
 </pre>
@@ -4590,16 +4590,16 @@ This behavior is consistent with the URI character escaping rules
 <pre class="error">
 %TAG !e! tag:example,2000:app/
 ---
-- !e! foo
-- !h!bar baz
+- <code class="legend-1">!e!</code> foo
+- <code class="legend-2">!h!</code>bar baz
 </pre>
 
 </td>
 <td class="side-by-side">
 <pre class="error">
 ERROR:
-- The !o! handle has no suffix.
-- The !h! handle wasn't declared.
+- The <code class="legend-1">!o!</code> handle has no suffix.
+- The <code class="legend-2">!h!</code> handle wasn't declared.
 </pre>
 
 </td>
@@ -6153,17 +6153,17 @@ been impossible to implement.</p>
 <tr>
 <td class="side-by-side">
 <pre class="error">
-[ foo
- bar: invalid,
- "foo_...&gt;1K characters..._bar": invalid ]
+[ <code class="legend-1">foo</code>
+<code class="legend-1"> bar</code>: invalid,
+ <code class="legend-2">"foo_...&gt;1K characters..._bar"</code>: invalid ]
 </pre>
 
 </td>
 <td class="side-by-side">
 <pre class="error">
 ERROR:
-- The foo bar key spans multiple lines
-- The foo...bar key is too long
+- The <code class="legend-1">foo bar</code> key spans multiple lines
+- The <code class="legend-2">foo...bar</code> key is too long
 </pre>
 
 </td>
@@ -6464,13 +6464,13 @@ indicator for cases where detection will fail.</p>
 <td class="side-by-side">
 <pre class="error">
 - |
-··
+·<code class="legend-1">·</code>
 ·text
 - &gt;
 ··text
-·text
+<code class="legend-2">·</code>text
 - |2
-·text
+<code class="legend-3">·</code>text
 </pre>
 
 </td>
@@ -6478,10 +6478,10 @@ indicator for cases where detection will fail.</p>
 <pre class="error">
 ERROR:
 - A leading all-space line must
-  not have too many spaces.
+  not have too many <code class="legend-1">spaces</code>.
 - A following text line must
-  not be less indented.
-- The text is less indented
+  not be <code class="legend-2">less indented</code>.
+- The text is <code class="legend-3">less indented</code>
   than the indicated level.
 </pre>
 
