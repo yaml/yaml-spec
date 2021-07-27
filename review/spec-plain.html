@@ -386,7 +386,7 @@ needed to develop <a href="#processing-yaml-information">applications</a> for pr
 immensely.
 YAML was designed from the start to be useful and friendly to people working
 with data.
-It uses Unicode <a href="#character-set">printable</a> characters, <del><a href="#undefined">some</a></del> of which provide structural
+It uses Unicode <a href="#character-set">printable</a> characters, <a href="#indicator-characters">some</a> of which provide structural
 information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful way.
@@ -490,7 +490,7 @@ structures</a> through an <a href="#anchors-and-aliases">aliasing</a> mechanism.
 Also like SOAP, YAML provides for <a href="#processing-yaml-information">application</a>-defined <a href="#tags">types</a>.
 This allows YAML to <a href="#representation-graph">represent</a> rich data structures required for modern
 distributed computing.
-YAML provides globally unique <del><a href="#undefined">type names</a></del> using a namespace mechanism inspired
+YAML provides globally unique <a href="#tags">type names</a> using a namespace mechanism inspired
 by Java’s DNS-based package naming convention and XML’s URI-based namespaces.
 In addition, YAML allows for private <a href="#tags">types</a> specific to a single
 <a href="#processing-yaml-information">application</a>.</p>
@@ -929,12 +929,12 @@ quoted: "So does this
 <div id="tags"></div>
 <h2 id="24-tags">2.4. Tags</h2>
 
-<p>In YAML, <del><a href="#undefined">untagged nodes</a></del> are given a type depending on the <a href="#processing-yaml-information">application</a>.
+<p>In YAML, <a href="#resolved-tags">untagged nodes</a> are given a type depending on the <a href="#processing-yaml-information">application</a>.
 The examples in this specification generally use the <strong><code class="language-plaintext highlighter-rouge">seq</code></strong>, <strong><code class="language-plaintext highlighter-rouge">map</code></strong>
 and <strong><code class="language-plaintext highlighter-rouge">str</code></strong> types from the <a href="#failsafe-schema">fail safe schema</a>.
 A few examples also use the <strong><code class="language-plaintext highlighter-rouge">int</code></strong>, <strong><code class="language-plaintext highlighter-rouge">float</code></strong>, and <strong><code class="language-plaintext highlighter-rouge">null</code></strong> types
 from the <a href="#json-schema">JSON schema</a>.
-The <del><a href="#undefined">repository</a></del> includes additional types such as
+The <a href="#other-schemas">repository</a> includes additional types such as
 <a href="/type/binary.html"><strong><code class="language-plaintext highlighter-rouge">binary</code></strong></a>, <a href="/type/omap.html"><strong><code class="language-plaintext highlighter-rouge">omap</code></strong></a>,
 <a href="/type/set.html"><strong><code class="language-plaintext highlighter-rouge">set</code></strong></a> and others.</p>
 
@@ -1226,7 +1226,7 @@ language.</p>
 <a href="#representation-graph">representation</a> must be <em>serialized</em> to an ordered tree.
 Since in a YAML <a href="#representation-graph">representation</a>, <a href="#nodes">mapping keys</a> are unordered and <a href="#nodes">nodes</a> may
 be referenced more than once (have more than one incoming “arrow”), the
-serialization process is required to impose an <del><a href="#undefined">ordering</a></del> on the <a href="#nodes">mapping keys</a>
+serialization process is required to impose an <a href="#keys-order">ordering</a> on the <a href="#nodes">mapping keys</a>
 and to replace the second and subsequent references to a given <a href="#nodes">node</a> with
 place holders called <a href="#anchors-and-aliases">aliases</a>.
 YAML does not specify how these <em>serialization details</em> are chosen.
@@ -1601,7 +1601,7 @@ Directives are instructions to the YAML <a href="#processing-yaml-information">p
 <a href="#presenting-the-serialization-tree">presentation details</a> are not reflected in the YAML <a href="#serialization-tree">serialization tree</a> or
 <a href="#representation-graph">representation graph</a>.
 This version of YAML defines a two directives, “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”.
-All other directives are <del><a href="#undefined">reserved</a></del> for future versions of YAML.</p>
+All other directives are <a href="#directives">reserved</a> for future versions of YAML.</p>
 
 <div id="loading-failure-points"></div>
 <h2 id="33-loading-failure-points">3.3. Loading Failure Points</h2>
@@ -1630,7 +1630,7 @@ structures</a>.</p>
 <div id="well-formed-streams-and-identified-aliases"></div>
 <h3 id="331-well-formed-streams-and-identified-aliases">3.3.1. Well-Formed Streams and Identified Aliases</h3>
 
-<p>A <del><a href="#undefined">well-formed</a></del> character <a href="#streams">stream</a> must match the BNF productions specified in
+<p>A <a href="#example-stream">well-formed</a> character <a href="#streams">stream</a> must match the BNF productions specified in
 the following chapters.
 Successful loading also requires that each <a href="#anchors-and-aliases">alias</a> shall refer to a previous
 <a href="#nodes">node</a> <a href="#anchors-and-aliases">identified</a> by the <a href="#anchors-and-aliases">anchor</a>.
@@ -1678,7 +1678,7 @@ as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,20
 “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>” depending on their <a href="#nodes">kind</a>.
 This <em>tag resolution convention</em> allows the author of a YAML character <a href="#streams">stream</a>
 to effectively “disable” the tag resolution process.
-By explicitly specifying a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific <del><a href="#undefined">tag property</a></del>, the <a href="#nodes">node</a>
+By explicitly specifying a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific <a href="#node-tags">tag property</a>, the <a href="#nodes">node</a>
 would then be resolved to a “vanilla” <a href="#sequence">sequence</a>, <a href="#mapping">mapping</a>, or string,
 according to its <a href="#nodes">kind</a>.</p>
 
@@ -1706,7 +1706,7 @@ based on each <a href="#nodes">node’s kind</a> and allowing for non-specific t
 <p>To be <em>valid</em>, a <a href="#nodes">node</a> must have a <a href="#tags">tag</a> which is <em>recognized</em> by the YAML
 <a href="#processing-yaml-information">processor</a> and its <a href="#nodes">content</a> must satisfy the constraints imposed by this
 <a href="#tags">tag</a>.
-If a <a href="#document">document</a> contains a <del><a href="#undefined">scalar node</a></del> with an <em>unrecognized tag</em> or <em>invalid
+If a <a href="#document">document</a> contains a <a href="#nodes">scalar node</a> with an <em>unrecognized tag</em> or <em>invalid
 content</em>, only a <a href="#loading-point-failures">partial representation</a> may be <a href="#composing-the-representation-graph">composed</a>.
 In contrast, a YAML <a href="#processing-yaml-information">processor</a> can always <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete
 representation</a> for an unrecognized or an invalid <a href="#collections">collection</a>, since
@@ -2316,8 +2316,8 @@ denotes a <a href="#comments">comment</a>.</p>
 
 <p>The “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x21</code></strong>, exclamation) is heavily overloaded for specifying
 <a href="#node-tags">node tags</a>.
-It is used to denote <a href="#tag-handles">tag handles</a> used in <a href="#tag-directives">tag directives</a> and <del><a href="#undefined">tag
-properties</a></del>; to denote <a href="#tags">local tags</a>; and as the <a href="#resolved-tags">non-specific tag</a> for
+It is used to denote <a href="#tag-handles">tag handles</a> used in <a href="#tag-directives">tag directives</a> and <a href="#node-tags">tag
+properties</a>; to denote <a href="#tags">local tags</a>; and as the <a href="#resolved-tags">non-specific tag</a> for
 non-<a href="#plain-style">plain scalars</a>.</p>
 
 <div id="rule-c-tag"></div>
@@ -3476,8 +3476,8 @@ a single <a href="#white-space-characters">space</a> (<strong><code class="langu
   </div>
 </div>
 
-<p>The above rules are common to both the <a href="#block-folding">folded block style</a> and the <del><a href="#undefined">scalar
-flow styles</a></del>.
+<p>The above rules are common to both the <a href="#block-folding">folded block style</a> and the <a href="#flow-scalar-styles">scalar
+flow styles</a>.
 Folding does distinguish between these cases in the following way:</p>
 
 <h5 id="block-folding">Block Folding</h5>
@@ -3926,7 +3926,7 @@ Note that version 1.2 is mostly a superset of version 1.1, defined for the
 purpose of ensuring <em>JSON compatibility</em>.
 Hence a version 1.2 <a href="#processing-yaml-information">processor</a> should process version 1.1 <a href="#documents">documents</a> as if
 they were version 1.2, giving a warning on points of incompatibility (handling
-of <del><a href="#undefined">non-ASCII line breaks</a></del>, as described <a href="#line-break-characters">above</a>).</p>
+of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a href="#line-break-characters">above</a>).</p>
 
 <div id="rule-ns-yaml-directive"></div>
 <pre class="rule">
@@ -4160,7 +4160,7 @@ tags</a>, by the simple addition of a single “<strong><code class="language-pl
 This allows using a compact notation for a single “secondary” name space.
 By default, the prefix associated with this handle is
 “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:</code></strong>”.
-This prefix is used by the <del><a href="#undefined">YAML tag repository</a></del>.</p>
+This prefix is used by the <a href="#other-schemas">YAML tag repository</a>.</p>
 
   <p>It is possible to override this default behavior by providing an explicit
 “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive associating a different prefix for this handle.</p>
@@ -4617,7 +4617,7 @@ ERROR:
 
 <blockquote>
   <p>If a <a href="#nodes">node</a> has no tag property, it is assigned a <a href="#resolved-tags">non-specific tag</a> that
-needs to be <a href="#resolved-tags">resolved</a> to a <del><a href="#undefined">specific</a></del> one.
+needs to be <a href="#resolved-tags">resolved</a> to a <a href="#resolved-tags">specific</a> one.
 This <a href="#resolved-tags">non-specific tag</a> is “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” for non-<a href="#plain-style">plain scalars</a> and
 “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” for all other <a href="#nodes">nodes</a>.
 This is the only case where the <a href="#node-styles">node style</a> has any effect on the <a href="#nodes">content</a>
@@ -4752,7 +4752,7 @@ Second occurrence: *<code class="legend-2">anchor</code>
 <h1 id="chapter-7-flow-styles">Chapter 7. Flow Styles</h1>
 
 <p>YAML’s <em>flow styles</em> can be thought of as the natural extension of JSON to
-cover <a href="#line-folding">folding</a> long content lines for readability, <del><a href="#undefined">tagging</a></del> nodes to control
+cover <a href="#line-folding">folding</a> long content lines for readability, <a href="#tags">tagging</a> nodes to control
 <a href="#constructing-native-data-structures">construction</a> of <a href="#representing-native-data-structures">native data structures</a>, and using <a href="#anchors-and-aliases">anchors</a> and <a href="#anchors-and-aliases">aliases</a>
 to reuse <a href="#constructing-native-data-structures">constructed</a> object instances.</p>
 
@@ -4770,7 +4770,7 @@ It is an error for an alias node to use an <a href="#anchors-and-aliases">anchor
 occur in the <a href="#document">document</a>.
 It is not an error to specify an <a href="#anchors-and-aliases">anchor</a> that is not used by any alias node.</p>
 
-<p>Note that an alias node must not specify any <del><a href="#undefined">properties</a></del> or <a href="#nodes">content</a>, as
+<p>Note that an alias node must not specify any <a href="#node-properties">properties</a> or <a href="#nodes">content</a>, as
 these were already specified at the first occurrence of the <a href="#nodes">node</a>.</p>
 
 <div id="rule-c-ns-alias-node"></div>
@@ -4923,7 +4923,7 @@ for their existence.</p>
 <h2 id="73-flow-scalar-styles">7.3. Flow Scalar Styles</h2>
 
 <p>YAML provides three <em>flow scalar styles</em>: <a href="#double-quoted-style">double-quoted</a>, <a href="#single-quoted-style">single-quoted</a> and
-<del><a href="#undefined">plain</a></del> (unquoted).
+<a href="#plain-style">plain</a> (unquoted).
 Each provides a different trade-off between readability and expressive power.</p>
 
 <p>The <a href="#node-styles">scalar style</a> is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to convey
@@ -5907,7 +5907,7 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 This causes no ambiguity, as all <a href="#flow-nodes">JSON-like</a> <a href="#nodes">keys</a> are surrounded by
 <a href="#indicator-characters">indicators</a>.
 However, as this greatly reduces readability, YAML <a href="#processing-yaml-information">processors</a> should
-<del><a href="#undefined">separate</a></del> the <a href="#nodes">value</a> from the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” on output, even in this case.</p>
+<a href="#separation-spaces">separate</a> the <a href="#nodes">value</a> from the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” on output, even in this case.</p>
 
 <div id="rule-c-ns-flow-map-json-key-entry(n,c)"></div>
 <pre class="rule">
@@ -6786,7 +6786,7 @@ It is the simplest, most restricted, and most readable <a href="#node-styles">sc
 
 <p>Inside literal scalars, all (<a href="#indentation-spaces">indented</a>) characters are considered to be
 <a href="#nodes">content</a>, including <a href="#white-space-characters">white space</a> characters.
-Note that all <a href="#line-break-characters">line break</a> characters are <del><a href="#undefined">normalized</a></del>.
+Note that all <a href="#line-break-characters">line break</a> characters are <a href="#line-break-characters">normalized</a>.
 In addition, <a href="#empty-lines">empty lines</a> are not <a href="#line-folding">folded</a>, though final <a href="#line-break-characters">line breaks</a> and
 trailing <a href="#empty-lines">empty lines</a> are <a href="#block-chomping-indicator">chomped</a>.</p>
 
