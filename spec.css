@@ -7,7 +7,7 @@ pre.error { background-color: #F8E0E0 !important; }
 
 pre.example { background-color: #E1F8E0; border: none; }
 
-.main-content blockquote { color: #000; }
+.main-content blockquote { color: #000; margin-right: 0px; }
 
 code.container { padding-top: 3px !important; padding-bottom: 3px !important; }
 

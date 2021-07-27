@@ -242,7 +242,8 @@ portable JSON files are those with unique keys, which are therefore valid YAML
 files.
 
 It may be useful to define a intermediate format between YAML and JSON.
-Such a format would be trivial to parse (but not very human readable), like JSON.
+Such a format would be trivial to parse (but not very human readable), like
+JSON.
 At the same time, it would allow for [serializing] arbitrary [native data
 structures], like YAML.
 Such a format might also serve as YAML’s "canonical format".
@@ -281,19 +282,19 @@ In particular, the following words are used to describe the actions of a YAML
 <code>##### May</code>
 
 &gt; The word _may_, or the adjective _optional_, mean that conforming YAML
-&gt; [processors] are permitted to, but _need not_ behave as described.
+[processors] are permitted to, but _need not_ behave as described.
 
 <code>##### Should</code>
 
 &gt; The word _should_, or the adjective _recommended_, mean that there could be
-&gt; reasons for a YAML [processor] to deviate from the behavior described, but that
-&gt; such deviation could hurt interoperability and should therefore be advertised
-&gt; with appropriate notice.
+reasons for a YAML [processor] to deviate from the behavior described, but that
+such deviation could hurt interoperability and should therefore be advertised
+with appropriate notice.
 
 <code>##### Must</code>
 
 &gt; The word _must_, or the term _required_ or _shall_, mean that the behavior
-&gt; described is an absolute requirement of the specification.
+described is an absolute requirement of the specification.
 
 The rest of this document is arranged as follows.
 Chapter [2] provides a short preview of the main YAML features.
@@ -772,55 +773,55 @@ following three stages:
 <code>##### Representing Native Data Structures</code>
 
 &gt; YAML _represents_ any _native data structure_ using three [node kinds]:
-&gt; [sequence] - an ordered series of entries; [mapping] - an unordered
-&gt; association of [unique] [keys] to [values]; and [scalar] - any datum with
-&gt; opaque structure presentable as a series of Unicode characters.
-&gt; Combined, these primitives generate directed graph structures.
-&gt; These primitives were chosen because they are both powerful and familiar: the
-&gt; [sequence] corresponds to a Perl array and a Python list, the [mapping]
-&gt; corresponds to a Perl hash table and a Python dictionary.
-&gt; The [scalar] represents strings, integers, dates, and other atomic data
-&gt; types.
+[sequence] - an ordered series of entries; [mapping] - an unordered
+association of [unique] [keys] to [values]; and [scalar] - any datum with
+opaque structure presentable as a series of Unicode characters.
+Combined, these primitives generate directed graph structures.
+These primitives were chosen because they are both powerful and familiar: the
+[sequence] corresponds to a Perl array and a Python list, the [mapping]
+corresponds to a Perl hash table and a Python dictionary.
+The [scalar] represents strings, integers, dates, and other atomic data
+types.
 &gt;
 &gt; Each YAML [node] requires, in addition to its [kind] and [content], a [tag]
-&gt; specifying its data type.
-&gt; Type specifiers are either [global] URIs, or are [local] in scope to a single
-&gt; [application].
-&gt; For example, an integer is represented in YAML with a [scalar] plus the
-&gt; [global tag] "**`tag:yaml.org,2002:int`**".
-&gt; Similarly, an invoice object, particular to a given organization, could be
-&gt; represented as a [mapping] together with the [local tag] "**`!invoice`**".
-&gt; This simple model can represent any data structure independent of programming
-&gt; language.
+specifying its data type.
+Type specifiers are either [global] URIs, or are [local] in scope to a single
+[application].
+For example, an integer is represented in YAML with a [scalar] plus the
+[global tag] "**`tag:yaml.org,2002:int`**".
+Similarly, an invoice object, particular to a given organization, could be
+represented as a [mapping] together with the [local tag] "**`!invoice`**".
+This simple model can represent any data structure independent of programming
+language.
 
 <code>##### Serializing the Representation Graph</code>
 
 &gt; For sequential access mediums, such as an event callback API, a YAML
-&gt; [representation] must be _serialized_ to an ordered tree.
-&gt; Since in a YAML [representation], [mapping keys] are unordered and [nodes] may
-&gt; be referenced more than once (have more than one incoming "arrow"), the
-&gt; serialization process is required to impose an [ordering] on the [mapping keys]
-&gt; and to replace the second and subsequent references to a given [node] with
-&gt; place holders called [aliases].
-&gt; YAML does not specify how these _serialization details_ are chosen.
-&gt; It is up to the YAML [processor] to come up with human-friendly [key order] and
-&gt; [anchor] names, possibly with the help of the [application].
-&gt; The result of this process, a YAML [serialization tree], can then be traversed
-&gt; to produce a series of event calls for one-pass processing of YAML data.
+[representation] must be _serialized_ to an ordered tree.
+Since in a YAML [representation], [mapping keys] are unordered and [nodes] may
+be referenced more than once (have more than one incoming "arrow"), the
+serialization process is required to impose an [ordering] on the [mapping keys]
+and to replace the second and subsequent references to a given [node] with
+place holders called [aliases].
+YAML does not specify how these _serialization details_ are chosen.
+It is up to the YAML [processor] to come up with human-friendly [key order] and
+[anchor] names, possibly with the help of the [application].
+The result of this process, a YAML [serialization tree], can then be traversed
+to produce a series of event calls for one-pass processing of YAML data.
 
 <code>##### Presenting the Serialization Tree</code>
 
 &gt; The final output process is _presenting_ the YAML [serializations] as a
-&gt; character [stream] in a human-friendly manner.
-&gt; To maximize human readability, YAML offers a rich set of stylistic options
-&gt; which go far beyond the minimal functional needs of simple data storage.
-&gt; Therefore the YAML [processor] is required to introduce various _presentation
-&gt; details_ when creating the [stream], such as the choice of [node styles], how
-&gt; to [format scalar content], the amount of [indentation], which [tag handles] to
-&gt; use, the [node tags] to leave [unspecified], the set of [directives] to provide
-&gt; and possibly even what [comments] to add.
-&gt; While some of this can be done with the help of the [application], in general
-&gt; this process should be guided by the preferences of the user.
+character [stream] in a human-friendly manner.
+To maximize human readability, YAML offers a rich set of stylistic options
+which go far beyond the minimal functional needs of simple data storage.
+Therefore the YAML [processor] is required to introduce various _presentation
+details_ when creating the [stream], such as the choice of [node styles], how
+to [format scalar content], the amount of [indentation], which [tag handles] to
+use, the [node tags] to leave [unspecified], the set of [directives] to provide
+and possibly even what [comments] to add.
+While some of this can be done with the help of the [application], in general
+this process should be guided by the preferences of the user.
 
 <code>### #. Load</code>
 
@@ -830,29 +831,29 @@ following three stages:
 <code>##### Parsing the Presentation Stream</code>
 
 &gt; _Parsing_ is the inverse process of [presentation], it takes a [stream] of
-&gt; characters and produces a series of events.
-&gt; Parsing discards all the [details] introduced in the [presentation] process,
-&gt; reporting only the [serialization] events.
-&gt; Parsing can fail due to [ill-formed] input.
+characters and produces a series of events.
+Parsing discards all the [details] introduced in the [presentation] process,
+reporting only the [serialization] events.
+Parsing can fail due to [ill-formed] input.
 
 <code>##### Composing the Representation Graph</code>
 
 &gt; _Composing_ takes a series of [serialization] events and produces a
-&gt; [representation graph].
-&gt; Composing discards all the [details] introduced in the [serialization] process,
-&gt; producing only the [representation graph].
-&gt; Composing can fail due to any of several reasons, detailed [below].
+[representation graph].
+Composing discards all the [details] introduced in the [serialization] process,
+producing only the [representation graph].
+Composing can fail due to any of several reasons, detailed [below].
 
 <code>##### Constructing Native Data Structures</code>
 
 &gt; The final input process is _constructing_ [native data structures] from the
-&gt; YAML [representation].
-&gt; Construction must be based only on the information available in the
-&gt; [representation], and not on additional [serialization] or [presentation
-&gt; details] such as [comments], [directives], [mapping key order], [node styles],
-&gt; [scalar content format], [indentation] levels etc.
-&gt; Construction can fail due to the [unavailability] of the required [native data
-&gt; types].
+YAML [representation].
+Construction must be based only on the information available in the
+[representation], and not on additional [serialization] or [presentation
+details] such as [comments], [directives], [mapping key order], [node styles],
+[scalar content format], [indentation] levels etc.
+Construction can fail due to the [unavailability] of the required [native data
+types].
 
 <code>## #. Information Models</code>
 
@@ -911,22 +912,22 @@ values the content can have.
 <code>##### Scalar</code>
 
 &gt; The content of a _scalar_ node is an opaque datum that can be [presented] as a
-&gt; series of zero or more Unicode characters.
+series of zero or more Unicode characters.
 
 <code>##### Sequence</code>
 
 &gt; The content of a _sequence_ node is an ordered series of zero or more nodes.
-&gt; In particular, a sequence may contain the same node more than once.
-&gt; It could even contain itself (directly or indirectly).
+In particular, a sequence may contain the same node more than once.
+It could even contain itself (directly or indirectly).
 
 <code>##### Mapping</code>
 
 &gt; The content of a _mapping_ node is an unordered set of _key:_ _value_ node
-&gt; _pairs_, with the restriction that each of the keys is [unique].
-&gt; YAML places no further restrictions on the nodes.
-&gt; In particular, keys may be arbitrary nodes, the same node may be used as the
-&gt; value of several key: value pairs, and a mapping could even contain itself as a
-&gt; key or a value (directly or indirectly).
+_pairs_, with the restriction that each of the keys is [unique].
+YAML places no further restrictions on the nodes.
+In particular, keys may be arbitrary nodes, the same node may be used as the
+value of several key: value pairs, and a mapping could even contain itself as a
+key or a value (directly or indirectly).
 
 When appropriate, it is convenient to consider sequences and mappings together,
 as _collections_.
@@ -1058,7 +1059,8 @@ YAML provides convenient [compact notation] for this case.
 
 <code>#### #. Anchors and Aliases</code>
 
-In the [representation graph], a [node] may appear in more than one [collection].
+In the [representation graph], a [node] may appear in more than one
+[collection].
 When [serializing] such data, the first occurrence of the [node] is
 _identified_ by an _anchor_.
 Each subsequent occurrence is [serialized] as an [alias node] which refers back
@@ -1175,7 +1177,8 @@ A [well-formed] character [stream] must match the BNF productions specified in
 the following chapters.
 Successful loading also requires that each [alias] shall refer to a previous
 [node] [identified] by the [anchor].
-A YAML [processor] should reject _ill-formed streams_ and _unidentified aliases_.
+A YAML [processor] should reject _ill-formed streams_ and _unidentified
+aliases_.
 A YAML [processor] may recover from syntax errors, possibly by ignoring certain
 parts of the input, but it must provide a mechanism for reporting such errors.
 
@@ -1242,7 +1245,8 @@ based on each [node’s kind] and allowing for non-specific tags.
 <code>### #. Recognized and Valid Tags</code>
 
 To be _valid_, a [node] must have a [tag] which is _recognized_ by the YAML
-[processor] and its [content] must satisfy the constraints imposed by this [tag].
+[processor] and its [content] must satisfy the constraints imposed by this
+[tag].
 If a [document] contains a [scalar node] with an _unrecognized tag_ or _invalid
 content_, only a [partial representation] may be [composed].
 In contrast, a YAML [processor] can always [compose] a [complete
@@ -1306,38 +1310,38 @@ Productions use any of the following parameters:
 <code>##### Indentation: `n` or `m`</code>
 
 &gt; Many productions use an explicit [indentation] level parameter.
-&gt; This is less elegant than Python’s "indent" and "undent" conceptual tokens.
-&gt; However it is required to formally express YAML’s indentation rules.
+This is less elegant than Python’s "indent" and "undent" conceptual tokens.
+However it is required to formally express YAML’s indentation rules.
 
 <code>##### Context: `c`</code>
 
 &gt; This parameter allows productions to tweak their behavior according to their
-&gt; surrounding.
-&gt; YAML supports two groups of _contexts_, distinguishing between [block styles]
-&gt; and [flow styles].
+surrounding.
+YAML supports two groups of _contexts_, distinguishing between [block styles]
+and [flow styles].
 &gt;
 &gt; In [block styles], [indentation] is used to delineate structure.
-&gt; To capture human perception of [indentation] the rules require special
-&gt; treatment of the ["**`-`**"] character, used in [block sequences].
-&gt; Hence in some cases productions need to behave differently inside [block
-&gt; sequences] (_block-in context_) and outside them (_block-out context_).
+To capture human perception of [indentation] the rules require special
+treatment of the ["**`-`**"] character, used in [block sequences].
+Hence in some cases productions need to behave differently inside [block
+sequences] (_block-in context_) and outside them (_block-out context_).
 &gt;
 &gt; In [flow styles], explicit [indicators] are used to delineate structure.
-&gt; These styles can be viewed as the natural extension of JSON to cover
-&gt; [tagged], [single-quoted] and [plain scalars].
-&gt; Since the latter have no delineating [indicators], they are subject to some
-&gt; restrictions to avoid ambiguities.
-&gt; These restrictions depend on where they appear: as implicit keys directly
-&gt; inside a [block mapping] (_block-key_); as implicit keys inside a [flow
-&gt; mapping] (_flow-key_); as values inside a [flow collection] (_flow-in_); or
-&gt; as values outside one (_flow-out_).
+These styles can be viewed as the natural extension of JSON to cover
+[tagged], [single-quoted] and [plain scalars].
+Since the latter have no delineating [indicators], they are subject to some
+restrictions to avoid ambiguities.
+These restrictions depend on where they appear: as implicit keys directly
+inside a [block mapping] (_block-key_); as implicit keys inside a [flow
+mapping] (_flow-key_); as values inside a [flow collection] (_flow-in_); or
+as values outside one (_flow-out_).
 
 <code>##### (Block) Chomping: `t`</code>
 
-&gt; Block scalars offer three possible mechanisms for [chomping] any trailing [line
-&gt; breaks]: [strip], [clip] and [keep].
-&gt; Unlike the previous parameters, this only controls interpretation; the [line
-&gt; breaks] are valid in all cases.
+&gt; Block scalars offer three possible mechanisms for [chomping] any trailing
+[line breaks]: [strip], [clip] and [keep].
+Unlike the previous parameters, this only controls interpretation; the [line
+breaks] are valid in all cases.
 
 <code>## #. Production Naming Conventions</code>
 
@@ -1376,8 +1380,9 @@ ends with.
 
 `X`**`-`**`Y`**`-`**
 
-&gt; A production starting with an `X`**`-`** character and ending with a `Y`**`-`**
-&gt; character, where `X`**`-`** and `Y`**`-`** are any of the above prefixes.
+&gt; A production starting with an `X`**`-`** character and ending with a
+`Y`**`-`** character, where `X`**`-`** and `Y`**`-`** are any of the above
+prefixes.
 
 `X`**`+`**, `X`**`-`**`Y`**`+`**
 
@@ -1853,7 +1858,8 @@ widely used formats.
   | b-line-feed                       /* UNIX, MacOS X */
 ```
 
-Line breaks inside [scalar content] must be _normalized_ by the YAML [processor].
+Line breaks inside [scalar content] must be _normalized_ by the YAML
+[processor].
 Each such line break must be [parsed] into a single line feed character.
 The original line break format is a [presentation detail] and must not be used
 to convey [content] information.
@@ -2492,15 +2498,15 @@ Folding does distinguish between these cases in the following way:
 <code>##### Block Folding</code>
 
 &gt; In the [folded block style], the final [line break] and trailing [empty
-&gt; lines] are subject to [chomping], and are never folded.
-&gt; In addition, folding does not apply to [line breaks] surrounding text lines
-&gt; that contain leading [white space].
-&gt; Note that such a [more-indented] line may consist only of such leading [white
-&gt; space].
+lines] are subject to [chomping], and are never folded.
+In addition, folding does not apply to [line breaks] surrounding text lines
+that contain leading [white space].
+Note that such a [more-indented] line may consist only of such leading [white
+space].
 &gt;
 &gt; The combined effect of the _block line folding_ rules is that each
-&gt; "paragraph" is interpreted as a line, [empty lines] are interpreted as a line
-&gt; feed, and the formatting of [more-indented] lines is preserved.
+"paragraph" is interpreted as a line, [empty lines] are interpreted as a line
+feed, and the formatting of [more-indented] lines is preserved.
 
 <code>**Example #. Block Folding**</code>
 ```
@@ -2524,17 +2530,17 @@ Folding does distinguish between these cases in the following way:
 <code>##### Flow Folding</code>
 
 &gt; Folding in [flow styles] provides more relaxed semantics. [Flow styles]
-&gt; typically depend on explicit [indicators] rather than [indentation] to convey
-&gt; structure.
-&gt; Hence spaces preceding or following the text in a line are a [presentation
-&gt; detail] and must not be used to convey [content] information.
-&gt; Once all such spaces have been discarded, all [line breaks] are folded,
-&gt; without exception.
+typically depend on explicit [indicators] rather than [indentation] to convey
+structure.
+Hence spaces preceding or following the text in a line are a [presentation
+detail] and must not be used to convey [content] information.
+Once all such spaces have been discarded, all [line breaks] are folded,
+without exception.
 &gt;
 &gt; The combined effect of the _flow line folding_ rules is that each "paragraph"
-&gt; is interpreted as a line, [empty lines] are interpreted as line feeds, and
-&gt; text can be freely [more-indented] without affecting the [content]
-&gt; information.
+is interpreted as a line, [empty lines] are interpreted as line feeds, and
+text can be freely [more-indented] without affecting the [content]
+information.
 
 ```
 [#] s-flow-folded(n) ::=
@@ -2907,16 +2913,16 @@ There are three tag handle variants:
 <code>##### Primary Handle</code>
 
 &gt; The _primary tag handle_ is a single _"**`!`**"_ character.
-&gt; This allows using the most compact possible notation for a single "primary"
-&gt; name space.
-&gt; By default, the prefix associated with this handle is ["**`!`**"].
-&gt; Thus, by default, [shorthands] using this handle are interpreted as [local
-&gt; tags].
+This allows using the most compact possible notation for a single "primary"
+name space.
+By default, the prefix associated with this handle is ["**`!`**"].
+Thus, by default, [shorthands] using this handle are interpreted as [local
+tags].
 &gt;
 &gt; It is possible to override the default behavior by providing an explicit
-&gt; "**`TAG`**" directive, associating a different prefix for this handle.
-&gt; This provides smooth migration from using [local tags] to using [global
-&gt; tags], by the simple addition of a single "**`TAG`**" directive.
+"**`TAG`**" directive, associating a different prefix for this handle.
+This provides smooth migration from using [local tags] to using [global
+tags], by the simple addition of a single "**`TAG`**" directive.
 
 ```
 [#] c-primary-tag-handle ::= "!"
@@ -2946,13 +2952,13 @@ There are three tag handle variants:
 <code>##### Secondary Handle</code>
 
 &gt; The _secondary tag handle_ is written as _"**`!!`**"_.
-&gt; This allows using a compact notation for a single "secondary" name space.
-&gt; By default, the prefix associated with this handle is
-&gt; "**`tag:yaml.org,2002:`**".
-&gt; This prefix is used by the [YAML tag repository].
+This allows using a compact notation for a single "secondary" name space.
+By default, the prefix associated with this handle is
+"**`tag:yaml.org,2002:`**".
+This prefix is used by the [YAML tag repository].
 &gt;
 &gt; It is possible to override this default behavior by providing an explicit
-&gt; "**`TAG`**" directive associating a different prefix for this handle.
+"**`TAG`**" directive associating a different prefix for this handle.
 
 ```
 [#] c-secondary-tag-handle ::=
@@ -2976,13 +2982,13 @@ There are three tag handle variants:
 <code>##### Named Handles</code>
 
 &gt; A _named tag handle_ surrounds a non-empty name with _"**`!`**"_ characters.
-&gt; A handle name must not be used in a [tag shorthand] unless an explicit
-&gt; "**`TAG`**" directive has associated some prefix with it.
+A handle name must not be used in a [tag shorthand] unless an explicit
+"**`TAG`**" directive has associated some prefix with it.
 &gt;
 &gt; The name of the handle is a [presentation detail] and must not be used to
-&gt; convey [content] information.
-&gt; In particular, the YAML [processor] need not preserve the handle name once
-&gt; [parsing] is completed.
+convey [content] information.
+In particular, the YAML [processor] need not preserve the handle name once
+[parsing] is completed.
 
 ```
 [#] c-named-tag-handle ::=
@@ -3015,11 +3021,11 @@ There are two _tag prefix_ variants:
 <code>##### Local Tag Prefix</code>
 
 &gt; If the prefix begins with a ["**`!`**"] character, [shorthands] using the
-&gt; [handle] are expanded to a [local tag].
-&gt; Note that such a [tag] is intentionally not a valid URI, and its semantics are
-&gt; specific to the [application].
-&gt; In particular, two [documents] in the same [stream] may assign different
-&gt; semantics to the same [local tag].
+[handle] are expanded to a [local tag].
+Note that such a [tag] is intentionally not a valid URI, and its semantics are
+specific to the [application].
+In particular, two [documents] in the same [stream] may assign different
+semantics to the same [local tag].
 
 ```
 [#] c-ns-local-tag-prefix ::=
@@ -3051,11 +3057,11 @@ There are two _tag prefix_ variants:
 <code>##### Global Tag Prefix</code>
 
 &gt; If the prefix begins with a character other than ["**`!`**"], it must to be a
-&gt; valid URI prefix, and should contain at least the scheme and the authority.
-&gt; [Shorthands] using the associated [handle] are expanded to globally unique URI
-&gt; tags, and their semantics is consistent across [applications].
-&gt; In particular, every [documents] in every [stream] must assign the same
-&gt; semantics to the same [global tag].
+valid URI prefix, and should contain at least the scheme and the authority.
+[Shorthands] using the associated [handle] are expanded to globally unique URI
+tags, and their semantics is consistent across [applications].
+In particular, every [documents] in every [stream] must assign the same
+semantics to the same [global tag].
 
 ```
 [#] ns-global-tag-prefix ::=
@@ -3128,12 +3134,12 @@ A tag is denoted by the _"**`!`**" indicator_.
 <code>##### Verbatim Tags</code>
 
 &gt; A tag may be written _verbatim_ by surrounding it with the _"**`&lt;`**" and
-&gt; "**`&gt;`**"_ characters.
-&gt; In this case, the YAML [processor] must deliver the verbatim tag as-is to the
-&gt; [application].
-&gt; In particular, verbatim tags are not subject to [tag resolution].
-&gt; A verbatim tag must either begin with a ["**`!`**"] (a [local tag]) or be a
-&gt; valid URI (a [global tag]).
+"**`&gt;`**"_ characters.
+In this case, the YAML [processor] must deliver the verbatim tag as-is to the
+[application].
+In particular, verbatim tags are not subject to [tag resolution].
+A verbatim tag must either begin with a ["**`!`**"] (a [local tag]) or be a
+valid URI (a [global tag]).
 
 ```
 [#] c-verbatim-tag ::=
@@ -3178,28 +3184,28 @@ ERROR:
 <code>##### Tag Shorthands</code>
 
 &gt; A _tag shorthand_ consists of a valid [tag handle] followed by a non-empty
-&gt; suffix.
-&gt; The [tag handle] must be associated with a [prefix], either by default or by
-&gt; using a ["**`TAG`**" directive].
-&gt; The resulting [parsed] [tag] is the concatenation of the [prefix] and the
-&gt; suffix, and must either begin with ["**`!`**"] (a [local tag]) or be a valid
-&gt; URI (a [global tag]).
+suffix.
+The [tag handle] must be associated with a [prefix], either by default or by
+using a ["**`TAG`**" directive].
+The resulting [parsed] [tag] is the concatenation of the [prefix] and the
+suffix, and must either begin with ["**`!`**"] (a [local tag]) or be a valid
+URI (a [global tag]).
 &gt;
 &gt; The choice of [tag handle] is a [presentation detail] and must not be used to
-&gt; convey [content] information.
-&gt; In particular, the [tag handle] may be discarded once [parsing] is completed.
+convey [content] information.
+In particular, the [tag handle] may be discarded once [parsing] is completed.
 &gt;
 &gt; The suffix must not contain any ["**`!`**"] character.
-&gt; This would cause the tag shorthand to be interpreted as having a [named tag
-&gt; handle].
-&gt; In addition, the suffix must not contain the ["**`[`**"], ["**`]`**"],
-&gt; ["**`{`**"], ["**`}`**"] and ["**`,`**"] characters.
-&gt; These characters would cause ambiguity with [flow collection] structures.
-&gt; If the suffix needs to specify any of the above restricted characters, they
-&gt; must be [escaped] using the ["**`%`**"] character.
-&gt; This behavior is consistent with the URI character escaping rules
-&gt; (specifically, section 2.3 of
-&gt; [RFC2396](http://www.ietf.org/rfc/rfc2396.txt)).
+This would cause the tag shorthand to be interpreted as having a [named tag
+handle].
+In addition, the suffix must not contain the ["**`[`**"], ["**`]`**"],
+["**`{`**"], ["**`}`**"] and ["**`,`**"] characters.
+These characters would cause ambiguity with [flow collection] structures.
+If the suffix needs to specify any of the above restricted characters, they
+must be [escaped] using the ["**`%`**"] character.
+This behavior is consistent with the URI character escaping rules
+(specifically, section 2.3 of
+[RFC2396](http://www.ietf.org/rfc/rfc2396.txt)).
 
 ```
 [#] c-ns-shorthand-tag ::=
@@ -3247,20 +3253,20 @@ ERROR:
 <code>##### Non-Specific Tags</code>
 
 &gt; If a [node] has no tag property, it is assigned a [non-specific tag] that
-&gt; needs to be [resolved] to a [specific] one.
-&gt; This [non-specific tag] is ["**`!`**"] for non-[plain scalars] and
-&gt; ["**`?`**"] for all other [nodes].
-&gt; This is the only case where the [node style] has any effect on the [content]
-&gt; information.
+needs to be [resolved] to a [specific] one.
+This [non-specific tag] is ["**`!`**"] for non-[plain scalars] and
+["**`?`**"] for all other [nodes].
+This is the only case where the [node style] has any effect on the [content]
+information.
 &gt;
 &gt; It is possible for the tag property to be explicitly set to the ["**`!`**"
-&gt; non-specific tag].
-&gt; By [convention], this "disables" [tag resolution], forcing the [node] to be
-&gt; interpreted as "**`tag:yaml.org,2002:seq`**", "**`tag:yaml.org,2002:map`**",
-&gt; or "**`tag:yaml.org,2002:str`**", according to its [kind].
+non-specific tag].
+By [convention], this "disables" [tag resolution], forcing the [node] to be
+interpreted as "**`tag:yaml.org,2002:seq`**", "**`tag:yaml.org,2002:map`**",
+or "**`tag:yaml.org,2002:str`**", according to its [kind].
 &gt;
 &gt; There is no way to explicitly specify the ["**`?`**" non-specific] tag.
-&gt; This is intentional.
+This is intentional.
 
 ```
 [#] c-non-specific-tag ::= "!"
@@ -3563,7 +3569,8 @@ to a line feed, or·→\↓
 
 All leading and trailing [white space] characters are excluded from the
 [content].
-Each continuation line must therefore contain at least one non-[space] character.
+Each continuation line must therefore contain at least one non-[space]
+character.
 Empty lines, if any, are consumed as part of the [line folding].
 
 ```
@@ -3684,7 +3691,8 @@ Single-quoted scalars are restricted to a single line when contained inside a
 
 All leading and trailing [white space] characters are excluded from the
 [content].
-Each continuation line must therefore contain at least one non-[space] character.
+Each continuation line must therefore contain at least one non-[space]
+character.
 Empty lines, if any, are consumed as part of the [line folding].
 
 ```
@@ -3864,7 +3872,8 @@ implicit block key : [
 
 All leading and trailing [white space] characters are excluded from the
 [content].
-Each continuation line must therefore contain at least one non-[space] character.
+Each continuation line must therefore contain at least one non-[space]
+character.
 Empty lines, if any, are consumed as part of the [line folding].
 
 ```
@@ -4452,7 +4461,8 @@ Each provides a different trade-off between readability and expressive power.
 
 [Block scalars] are controlled by a few [indicators] given in a _header_
 preceding the [content] itself.
-This header is followed by a non-content [line break] with an optional [comment].
+This header is followed by a non-content [line break] with an optional
+[comment].
 This is the only case where a [comment] must not be followed by additional
 [comment] lines.
 
@@ -4581,23 +4591,23 @@ YAML provides three chomping methods:
 <code>##### Strip</code>
 
 &gt; _Stripping_ is specified by the _"**`-`**" chomping indicator_.
-&gt; In this case, the final [line break] and any trailing [empty lines] are
-&gt; excluded from the [scalar’s content].
+In this case, the final [line break] and any trailing [empty lines] are
+excluded from the [scalar’s content].
 
 <code>##### Clip</code>
 
 &gt; _Clipping_ is the default behavior used if no explicit chomping indicator is
-&gt; specified.
-&gt; In this case, the final [line break] character is preserved in the [scalar’s
-&gt; content].
-&gt; However, any trailing [empty lines] are excluded from the [scalar’s content].
+specified.
+In this case, the final [line break] character is preserved in the [scalar’s
+content].
+However, any trailing [empty lines] are excluded from the [scalar’s content].
 
 <code>##### Keep</code>
 
 &gt; _Keeping_ is specified by the _"**`+`**" chomping indicator_.
-&gt; In this case, the final [line break] and any trailing [empty lines] are
-&gt; considered to be part of the [scalar’s content].
-&gt; These additional lines are not subject to [folding].
+In this case, the final [line break] and any trailing [empty lines] are
+considered to be part of the [scalar’s content].
+These additional lines are not subject to [folding].
 
 The chomping method used is a [presentation detail] and must not be used to
 convey [content] information.
@@ -5588,7 +5598,8 @@ Document
 <code>### #. Bare Documents</code>
 
 A _bare document_ does not begin with any [directives] or [marker] lines.
-Such documents are very "clean" as they contain nothing other than the [content].
+Such documents are very "clean" as they contain nothing other than the
+[content].
 In this case, the first non-comment line may not start with a ["**`%`**"] first
 character.
 
@@ -5758,31 +5769,31 @@ Some common use case that can take advantage of the YAML stream structure are:
 <code>##### Appending to Streams</code>
 
 &gt; Allowing multiple [documents] in a single stream makes YAML suitable for log
-&gt; files and similar [applications].
-&gt; Note that each [document] is independent of the rest, allowing for
-&gt; heterogeneous log file entries.
+files and similar [applications].
+Note that each [document] is independent of the rest, allowing for
+heterogeneous log file entries.
 
 <code>##### Concatenating Streams</code>
 
 &gt; Concatenating two YAML streams requires both to use the same [character
-&gt; encoding].
-&gt; In addition, it is necessary to separate the last [document] of the first
-&gt; stream and the first [document] of the second stream.
-&gt; This is easily ensured by inserting a [document end marker] between the two
-&gt; streams.
-&gt; Note that this is safe regardless of the content of either stream.
-&gt; In particular, either or both may be empty, and the first stream may or may
-&gt; not already contain such a marker.
+encoding].
+In addition, it is necessary to separate the last [document] of the first
+stream and the first [document] of the second stream.
+This is easily ensured by inserting a [document end marker] between the two
+streams.
+Note that this is safe regardless of the content of either stream.
+In particular, either or both may be empty, and the first stream may or may
+not already contain such a marker.
 
 <code>##### Communication Streams</code>
 
 &gt; The [document end marker] allows signaling the end of a [document] without
-&gt; closing the stream or starting the next [document].
-&gt; This allows the receiver to complete processing a [document] without having
-&gt; to wait for the next one to arrive.
-&gt; The sender may also transmit "keep-alive" messages in the form of [comment]
-&gt; lines or repeated [document end markers] without signalling the start of the
-&gt; next [document].
+closing the stream or starting the next [document].
+This allows the receiver to complete processing a [document] without having
+to wait for the next one to arrive.
+The sender may also transmit "keep-alive" messages in the form of [comment]
+lines or repeated [document end markers] without signalling the start of the
+next [document].
 
 <code># Chapter #. Recommended Schemas</code>
 
@@ -5811,11 +5822,11 @@ option.
 <code>##### Definition:</code>
 
 &gt; [Represents] an associative container, where each [key] is unique in the
-&gt; association and mapped to exactly one [value].
-&gt; YAML places no restrictions on the type of [keys]; in particular, they are
-&gt; not restricted to being [scalars].
-&gt; Example [bindings] to [native] types include Perl’s hash, Python’s
-&gt; dictionary, and Java’s Hashtable.
+association and mapped to exactly one [value].
+YAML places no restrictions on the type of [keys]; in particular, they are
+not restricted to being [scalars].
+Example [bindings] to [native] types include Perl’s hash, Python’s
+dictionary, and Java’s Hashtable.
 
 <code>**Example #. `!!map` Examples**</code>
 ```
@@ -5840,8 +5851,8 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 <code>##### Definition:</code>
 
 &gt; [Represents] a collection indexed by sequential integers starting with zero.
-&gt; Example [bindings] to [native] types include Perl’s array, Python’s list or
-&gt; tuple, and Java’s array or Vector.
+Example [bindings] to [native] types include Perl’s array, Python’s list or
+tuple, and Java’s array or Vector.
 
 <code>**Example #. `!!seq` Examples**</code>
 ```
@@ -5866,8 +5877,8 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 <code>##### Definition:</code>
 
 &gt; [Represents] a Unicode string, a sequence of zero or more Unicode characters.
-&gt; This type is usually [bound] to the [native] language’s string type, or, for
-&gt; languages lacking one (such as C), to a character array.
+This type is usually [bound] to the [native] language’s string type, or, for
+languages lacking one (such as C), to a character array.
 
 <code>##### Canonical Form:</code>
 
@@ -5895,7 +5906,8 @@ This constrains the [application] to deal with a [partial representation].
 
 The _JSON schema_ is the lowest common denominator of most modern computer
 languages, and allows [parsing] JSON files.
-A YAML [processor] should therefore support this [schema], at least as an option.
+A YAML [processor] should therefore support this [schema], at least as an
+option.
 It is also strongly recommended that other [schemas] should be based on it.
 
 <code>### #. Tags</code>
@@ -5916,11 +5928,11 @@ The JSON [schema] uses the following [tags] in addition to those defined by the
 <code>##### Definition:</code>
 
 &gt; [Represents] the lack of a value.
-&gt; This is typically [bound] to a [native] null-like value (e.g., **`undef`** in
-&gt; Perl, **`None`** in Python).
-&gt; Note that a null is different from an empty string.
-&gt; Also, a [mapping] entry with some [key] and a null [value] is valid, and
-&gt; different from not having that [key] in the [mapping].
+This is typically [bound] to a [native] null-like value (e.g., **`undef`** in
+Perl, **`None`** in Python).
+Note that a null is different from an empty string.
+Also, a [mapping] entry with some [key] and a null [value] is valid, and
+different from not having that [key] in the [mapping].
 
 <code>##### Canonical Form:</code>
 
@@ -5945,8 +5957,8 @@ key with null value: !!null null
 <code>##### Definition:</code>
 
 &gt; [Represents] a true/false value.
-&gt; In languages without a [native] Boolean type (such as C), is usually [bound]
-&gt; to a native integer type, using one for true and zero for false.
+In languages without a [native] Boolean type (such as C), is usually [bound]
+to a native integer type, using one for true and zero for false.
 
 <code>##### Canonical Form:</code>
 
@@ -5971,25 +5983,25 @@ Pluto is a planet: !!bool false
 <code>##### Definition:</code>
 
 &gt; [Represents] arbitrary sized finite mathematical integers.
-&gt; Scalars of this type should be [bound] to a [native] integer data type, if
-&gt; possible.
+Scalars of this type should be [bound] to a [native] integer data type, if
+possible.
 &gt;
 &gt; Some languages (such as Perl) provide only a "number" type that allows for
-&gt; both integer and floating-point values.
-&gt; A YAML [processor] may use such a type for integers, as long as they
-&gt; round-trip properly.
+both integer and floating-point values.
+A YAML [processor] may use such a type for integers, as long as they
+round-trip properly.
 &gt;
 &gt; In some languages (such as C), an integer may overflow the [native] type’s
-&gt; storage capability.
-&gt; A YAML [processor] may reject such a value as an error, truncate it with a
-&gt; warning, or find some other manner to round-trip it.
-&gt; In general, integers representable using 32 binary digits should safely
-&gt; round-trip through most systems.
+storage capability.
+A YAML [processor] may reject such a value as an error, truncate it with a
+warning, or find some other manner to round-trip it.
+In general, integers representable using 32 binary digits should safely
+round-trip through most systems.
 
 <code>##### Canonical Form:</code>
 
 &gt; Decimal integer notation, with a leading "**`-`**" character for negative
-&gt; values, matching the regular expression **`0 | -? [1-9] [0-9]*`**
+values, matching the regular expression **`0 | -? [1-9] [0-9]*`**
 
 <code>**Example #. `!!int` Examples**</code>
 ```
@@ -6011,25 +6023,26 @@ positive: !!int 34
 <code>##### Definition:</code>
 
 &gt; [Represents] an approximation to real numbers, including three special values
-&gt; (positive and negative infinity, and "not a number").
+(positive and negative infinity, and "not a number").
 &gt;
 &gt; Some languages (such as Perl) provide only a "number" type that allows for
-&gt; both integer and floating-point values.
-&gt; A YAML [processor] may use such a type for floating-point numbers, as long as
-&gt; they round-trip properly.
+both integer and floating-point values.
+A YAML [processor] may use such a type for floating-point numbers, as long as
+they round-trip properly.
 &gt;
-&gt; Not all floating-point values can be stored exactly in any given [native] type.
-&gt; Hence a float value may change by "a small amount" when round-tripped.
-&gt; The supported range and accuracy depends on the implementation, though 32 bit
-&gt; IEEE floats should be safe.
-&gt; Since YAML does not specify a particular accuracy, using floating-point
-&gt; [mapping keys] requires great care and is not recommended.
+&gt; Not all floating-point values can be stored exactly in any given [native]
+type.
+Hence a float value may change by "a small amount" when round-tripped.
+The supported range and accuracy depends on the implementation, though 32 bit
+IEEE floats should be safe.
+Since YAML does not specify a particular accuracy, using floating-point
+[mapping keys] requires great care and is not recommended.
 
 <code>##### Canonical Form:</code>
 
 &gt; Either **`0`**, **`.inf`**, **`-.inf`**, **`.nan`**, or scientific notation
-&gt; matching the regular expression
-&gt; **`-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?`**.
+matching the regular expression
+**`-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?`**.
 
 <code>**Example #. `!!float` Examples**</code>
 ```
