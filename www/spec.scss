@@ -1,3 +1,21 @@
+a[href^="#"] {
+  color: inherit;
+  text-decoration: underline solid #606c71;
+
+  &:hover {
+    color: blue;
+    text-decoration: underline solid blue;
+  }
+}
+
+table {
+  width: 100%;
+
+  th, tr {
+    width: 100%;
+  }
+}
+
 pre.rule {
   background-color: #E0F8F8;
   border: none;
@@ -28,6 +46,7 @@ pre.example {
 
 .main-content blockquote {
   color: #000;
+  margin-right: 0px;
 }
 
 code.container {
