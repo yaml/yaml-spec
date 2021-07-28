@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 use v5.18;
-# use utf8;
+use utf8;
 
 use YAML::PP;
 use XXX;
@@ -114,11 +114,23 @@ sub parse_sections {
     //x
       and push @s, {ul => $1} and next;
 
+    # Unordered list:
+    s{\A
+      (
+        $li
+        (?:
+          $s$s$line |
+          \n(?=$s$s)
+        )+
+      )
+      \n+
+    }{}x and push @s, {ul => $1} and next;
+
     # Regular paragraph:
     s/\A
       (
         (?:
-          (?:$b|-1$s|\[[\w\"\*]|[\w\"\(])
+          (?:$b|-1$s|\[[\w\"\*]|<http|[\w\"\(])
           .*\n
         )+
       )
@@ -161,18 +173,6 @@ sub parse_sections {
 
     s/\A((?:\| .*\n)+)\n+//
       and push @s, {table => $1} and next;
-
-    s{\A
-      (
-        $li
-        (?:
-          $s$s$line |
-          \n(?=$s$s)
-        )+
-      )
-      \n+
-    }{}x
-      and push @s, {ul => $1} and next;
 
     s/\A($comment)\n*//
       and push @s, {comment => $1} and next;
@@ -301,8 +301,6 @@ $_
 
   chomp $out;
 
-#   die $out if $out =~ /<code/;
-
   $_ = <<"...";
 <div id="$id" class="example">
 $out
@@ -334,13 +332,24 @@ sub fmt_indent {
 my $num = 0;
 sub fmt_pre {
   my $pre = format_pre($_);
-  if (/(\S+)\s+::=/) {
+  if ($pre =~ s/(\S+)(\s+::=)/%%%/) {
     my $rule = $1;
+    my $sep = $2;
     $num++;
     $pre =~ s/\[\#\]/[$num]/;
     $pre =~ s/<pre>/<pre class="rule">/;
-    # $pre =~ s/(\b(?:ns|nb|s|l)-\S*)/<a href="rule-$1">$1<\/a>/g;
+    $pre =~
+      s{
+        \ (
+          (?:b|c|e|l|s|in|nb|ns)[-+]
+          .*?
+        )
+        (?=[\(\+\*\?]|\s|\z)
+      }
+      {' ' . rule_link($1)}gex;
+    $pre =~ s/%%%/$rule$sep/;
     chomp $pre;
+    $rule =~ s/\(.*//;
     $pre = <<"...";
 <div id="rule-$rule" />
 $pre
@@ -416,7 +425,7 @@ sub set_vars {
 sub make_link_index {
   my ($parsed, $overrides) = @_;
   for my $section (@$parsed) {
-    my $from = $section->{hx};
+    my $from = $section->{heading};
     my $text = lc($from);
     chomp $text;
     $text =~ /^#+\s+.*#\.\s/ or next;
@@ -428,7 +437,16 @@ sub make_link_index {
     $links->{$text} = $slug;
   }
   for my $k (keys %$overrides) {
-    $links->{$k} = $overrides->{$k};
+    my $v = $overrides->{$k} || [$k];
+    for my $t (@$v) {
+      $links->{$t} = $k;
+    }
+  }
+  for my $k (keys %$overrides) {
+    my $v = $overrides->{$k} || [$k];
+    for my $t (@$v) {
+      $links->{"${t}s"} ||= $k;
+    }
   }
 }
 
@@ -446,14 +464,29 @@ sub slugify {
   return $slug;
 }
 
+sub rule_link {
+  my ($text) = @_;
+  my $rule = $text;
+  $rule =~ s/\(.*//;
+  return qq{<a href="#rule-$rule">$text<\/a>};
+}
+
 sub get_link {
   my ($link) = @_;
-  if (my $anchor = $links->{lc($link)}) {
+  my $text = lc($link);
+  $text =~ s/\s+/ /g;
+  $text =~ s/’/'/g;
+  my $anchor;
+  if ($text =~ /\*\*/) {
+    return "$link";
+  }
+  if ($anchor = $links->{$text}) {
     return "[$link](#$anchor)";
   }
-  else {
-    return "~~[$link](#undefined)~~";
+  if ($anchor = $links->{"${text}s"}) {
+    return "[$link](#$anchor)";
   }
+  return "~~[$link](#undefined)~~";
 }
 
 sub undefined_links {
@@ -595,7 +628,7 @@ sub format_legend {
     }
   }
   $_ = join "\n", @lines;
-  s{\[([^\]]+)\]}{<a href="#rule-$1">$1</a>}g;
+  s{\[([^\]]+)\]}{rule_link($1)}ge;
   return $_;
 }
 
