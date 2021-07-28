@@ -1,3 +1,9 @@
+a[href^="#"] { color: inherit; text-decoration: underline solid #606c71; }
+a[href^="#"]:hover { color: blue; text-decoration: underline solid blue; }
+
+table { width: 100%; }
+table th, table tr { width: 100%; }
+
 pre.rule { background-color: #E0F8F8; border: none; }
 
 div.example > * td.side-by-side { vertical-align: top; border: none; width: 10%; }
