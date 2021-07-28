@@ -27,3 +27,5 @@ div.legend p { margin: 0px; margin-top: 5px; }
 div.legend p strong { font-weight: normal; }
 div.legend ul { padding-inline-start: 20px; margin-block-start: 0px; }
 div.legend ul li { display: inline; white-space: nowrap; }
+
+ul.authorgroup, ul.releaseinfo, #markdown-toc, #markdown-toc ul { list-style: none; }

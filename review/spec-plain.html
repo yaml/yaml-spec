@@ -2754,9 +2754,7 @@ block:<code class="legend-2">→</code>|
 <p>The YAML syntax productions make use of the following additional character
 classes:</p>
 
-<ul>
-  <li>A decimal digit for numbers:</li>
-</ul>
+<p>A decimal digit for numbers:</p>
 
 <div id="rule-ns-dec-digit"></div>
 <pre class="rule">
@@ -2764,9 +2762,7 @@ classes:</p>
   [#x30-#x39] /* 0-9 */
 </pre>
 
-<ul>
-  <li>A hexadecimal digit for <a href="#escaped-characters">escape sequences</a>:</li>
-</ul>
+<p>A hexadecimal digit for <a href="#escaped-characters">escape sequences</a>:</p>
 
 <div id="rule-ns-hex-digit"></div>
 <pre class="rule">
@@ -2775,9 +2771,7 @@ classes:</p>
   | [#x41-#x46] /* A-F */ | [#x61-#x66] /* a-f */
 </pre>
 
-<ul>
-  <li>ASCII letter (alphabetic) characters:</li>
-</ul>
+<p>ASCII letter (alphabetic) characters:</p>
 
 <div id="rule-ns-ascii-letter"></div>
 <pre class="rule">
@@ -2785,9 +2779,7 @@ classes:</p>
   [#x41-#x5A] /* A-Z */ | [#x61-#x7A] /* a-z */
 </pre>
 
-<ul>
-  <li>Word (alphanumeric) characters for identifiers:</li>
-</ul>
+<p>Word (alphanumeric) characters for identifiers:</p>
 
 <div id="rule-ns-word-char"></div>
 <pre class="rule">
@@ -2795,21 +2787,16 @@ classes:</p>
   <a href="#rule-ns-dec-digit">ns-dec-digit</a> | <a href="#rule-ns-ascii-letter">ns-ascii-letter</a> | "-"
 </pre>
 
-<ul>
-  <li>
-    <p>URI characters for <a href="#tags">tags</a>, as specified in
+<p>URI characters for <a href="#tags">tags</a>, as specified in
 <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a>, with the addition of the
 “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">]</code></strong>” for presenting IPv6 addresses as proposed in
 <a href="http://www.ietf.org/rfc/rfc2732.txt">RFC2732</a>.</p>
 
-    <p>By convention, any URI characters other than the allowed printable ASCII
-characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em>
-using the <em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>“</em> character.
-The YAML <a href="#processing-yaml-information">processor</a> must not expand such escaped characters. <a href="#tags">Tag</a>
-characters must be preserved and compared exactly as <a href="#presenting-the-serialization-tree">presented</a> in the YAML
-<a href="#streams">stream</a>, without any processing.</p>
-  </li>
-</ul>
+<p>By convention, any URI characters other than the allowed printable ASCII
+characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em> using
+the <em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>“</em> character.  The YAML <a href="#processing-yaml-information">processor</a> must not expand such escaped
+characters. <a href="#tags">Tag</a> characters must be preserved and compared exactly as
+<a href="#presenting-the-serialization-tree">presented</a> in the YAML <a href="#streams">stream</a>, without any processing.</p>
 
 <div id="rule-ns-uri-char"></div>
 <pre class="rule">
@@ -2819,13 +2806,11 @@ characters must be preserved and compared exactly as <a href="#presenting-the-se
   | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")" | "[" | "]"
 </pre>
 
-<ul>
-  <li>The “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” character is used to indicate the end of a <a href="#tag-handles">named tag
-handle</a>; hence its use in <a href="#tag-shorthands">tag shorthands</a> is restricted.
-In addition, such <a href="#tag-shorthands">shorthands</a> must not contain the “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”],
-“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” characters.
-These characters would cause ambiguity with <a href="#flow-collection-styles">flow collection</a> structures.</li>
-</ul>
+<p>The “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” character is used to indicate the end of a <a href="#tag-handles">named tag handle</a>;
+hence its use in <a href="#tag-shorthands">tag shorthands</a> is restricted.  In addition, such
+<a href="#tag-shorthands">shorthands</a> must not contain the “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”], “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”,
+“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” characters.  These characters would cause ambiguity
+with <a href="#flow-collection-styles">flow collection</a> structures.</p>
 
 <div id="rule-ns-tag-char"></div>
 <pre class="rule">
