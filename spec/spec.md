@@ -6075,11 +6075,11 @@ Hence the YAML [processor] should consider them to be an error.
 
 | Regular expression | Resolved to tag
 | -- | --
-| null | tag:yaml.org,2002:null
-| true | false | tag:yaml.org,2002:bool
-| -? ( 0 | [1-9] [0-9]* ) | tag:yaml.org,2002:int
-| -? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )? | tag:yaml.org,2002:float
-| * | Error
+| `null` | tag:yaml.org,2002:null
+| `true | false` | tag:yaml.org,2002:bool
+| `-? ( 0 | [1-9] [0-9]* )` | tag:yaml.org,2002:int
+| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float
+| `*` | Error
 
 **Example #. JSON Tag Resolution**
 ```
@@ -6147,16 +6147,16 @@ string).
 
 | Regular expression | Resolved to tag
 | -- | --
-| null | Null | NULL | ~ | tag:yaml.org,2002:null
-| /* Empty */ | tag:yaml.org,2002:null
-| true | True | TRUE | false | False | FALSE | tag:yaml.org,2002:bool
-| [-+]? [0-9]+ | tag:yaml.org,2002:int (Base 10)
-| 0o [0-7]+ | tag:yaml.org,2002:int (Base 8)
-| 0x [0-9a-fA-F]+ | tag:yaml.org,2002:int (Base 16)
-| [-+]? ( \. [0-9]+ | [0-9]+ ( \. [0-9]* )? ) ( [eE] [-+]? [0-9]+ )? | tag:yaml.org,2002:float (Number)
-| [-+]? ( \.inf | \.Inf | \.INF ) | tag:yaml.org,2002:float (Infinity)
-| \.nan | \.NaN | \.NAN | tag:yaml.org,2002:float (Not a number)
-| * | tag:yaml.org,2002:str (Default)
+| `null | Null | NULL | ~` | tag:yaml.org,2002:null
+| `/* Empty */` | tag:yaml.org,2002:null
+| `true | True | TRUE | false | False | FALSE` | tag:yaml.org,2002:bool
+| `[-+]? [0-9]+` | tag:yaml.org,2002:int (Base 10)
+| `0o [0-7]+` | tag:yaml.org,2002:int (Base 8)
+| `0x [0-9a-fA-F]+` | tag:yaml.org,2002:int (Base 16)
+| `[-+]? ( \. [0-9]+ | [0-9]+ ( \. [0-9]* )? ) ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float (Number)
+| `[-+]? ( \.inf | \.Inf | \.INF )` | tag:yaml.org,2002:float (Infinity)
+| `\.nan | \.NaN | \.NAN` | tag:yaml.org,2002:float (Not a number)
+| `*` | tag:yaml.org,2002:str (Default)
 
 **Example #. Core Tag Resolution**
 ```
