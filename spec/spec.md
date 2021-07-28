@@ -1956,14 +1956,14 @@ block:→|
 The YAML syntax productions make use of the following additional character
 classes:
 
-* A decimal digit for numbers:
+A decimal digit for numbers:
 
 ```
 [#] ns-dec-digit ::=
   [#x30-#x39] /* 0-9 */
 ```
 
-* A hexadecimal digit for [escape sequences]:
+A hexadecimal digit for [escape sequences]:
 
 ```
 [#] ns-hex-digit ::=
@@ -1971,31 +1971,30 @@ classes:
   | [#x41-#x46] /* A-F */ | [#x61-#x66] /* a-f */
 ```
 
-* ASCII letter (alphabetic) characters:
+ASCII letter (alphabetic) characters:
 
 ```
 [#] ns-ascii-letter ::=
   [#x41-#x5A] /* A-Z */ | [#x61-#x7A] /* a-z */
 ```
 
-* Word (alphanumeric) characters for identifiers:
+Word (alphanumeric) characters for identifiers:
 
 ```
 [#] ns-word-char ::=
   ns-dec-digit | ns-ascii-letter | "-"
 ```
 
-* URI characters for [tags], as specified in
-  [RFC2396](http://www.ietf.org/rfc/rfc2396.txt), with the addition of the
-  "**`[`**" and "**`]`**" for presenting IPv6 addresses as proposed in
-  [RFC2732](http://www.ietf.org/rfc/rfc2732.txt).
+URI characters for [tags], as specified in
+[RFC2396](http://www.ietf.org/rfc/rfc2396.txt), with the addition of the
+"**`[`**" and "**`]`**" for presenting IPv6 addresses as proposed in
+[RFC2732](http://www.ietf.org/rfc/rfc2732.txt).
 
-  By convention, any URI characters other than the allowed printable ASCII
-  characters are first _encoded_ in UTF-8, and then each byte is _escaped_
-  using the _"**`%`**"_ character.
-  The YAML [processor] must not expand such escaped characters. [Tag]
-  characters must be preserved and compared exactly as [presented] in the YAML
-  [stream], without any processing.
+By convention, any URI characters other than the allowed printable ASCII
+characters are first _encoded_ in UTF-8, and then each byte is _escaped_ using
+the _"**`%`**"_ character.  The YAML [processor] must not expand such escaped
+characters. [Tag] characters must be preserved and compared exactly as
+[presented] in the YAML [stream], without any processing.
 
 ```
 [#] ns-uri-char ::=
@@ -2004,11 +2003,11 @@ classes:
   | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")" | "[" | "]"
 ```
 
-* The ["**`!`**"] character is used to indicate the end of a [named tag
-  handle]; hence its use in [tag shorthands] is restricted.
-  In addition, such [shorthands] must not contain the ["**`[`**"], ["**`]`**"],
-  ["**`{`**"], ["**`}`**"] and ["**`,`**"] characters.
-  These characters would cause ambiguity with [flow collection] structures.
+The ["**`!`**"] character is used to indicate the end of a [named tag handle];
+hence its use in [tag shorthands] is restricted.  In addition, such
+[shorthands] must not contain the ["**`[`**"], ["**`]`**"], ["**`{`**"],
+["**`}`**"] and ["**`,`**"] characters.  These characters would cause ambiguity
+with [flow collection] structures.
 
 ```
 [#] ns-tag-char ::=
