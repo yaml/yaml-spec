@@ -150,48 +150,49 @@ clean:
 	make -C _ext clean
 
 #------------------------------------------------------------------------------
-$(SITE)/%: % $$(dir $$@)
+$(SITE)/%: %
+	@mkdir -p $(dir $@)
 	cp -r $< $@
-$(SITE)/%: _% $$(dir $$@)
+$(SITE)/%: _%
+	@mkdir -p $(dir $@)
 	cp -r $< $@
 
-$(SITE)/%.coffee: %.coffee $$(dir $$@)
+$(SITE)/%.coffee: %.coffee
+	@mkdir -p $(dir $@)
 	(echo '---'; echo '---'; cat $<) > $@
-$(SITE)/%.coffee: _%.coffee $$(dir $$@)
-	(echo '---'; echo '---'; cat $<) > $@
-
-$(SITE)/%.scss: %.scss $$(dir $$@)
-	(echo '---'; echo '---'; cat $<) > $@
-$(SITE)/%.scss: _%.scss $$(dir $$@)
+$(SITE)/%.coffee: _%.coffee
+	@mkdir -p $(dir $@)
 	(echo '---'; echo '---'; cat $<) > $@
 
-$(SITE)/%: _jekyll/% $$(dir $$@)
+$(SITE)/%.scss: %.scss
+	@mkdir -p $(dir $@)
+	(echo '---'; echo '---'; cat $<) > $@
+$(SITE)/%.scss: _%.scss
+	@mkdir -p $(dir $@)
+	(echo '---'; echo '---'; cat $<) > $@
+
+$(SITE)/%: _jekyll/%
+	@mkdir -p $(dir $@)
 	cp -r $< $@
 
 $(SITE)/%.md: %.md
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
 $(SITE)/%.md: $(SPEC)/%.md $(SPEC_LINKS)
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
 $(SITE)/doc/%.md: $(DOC)/%.md
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
 $(SITE)/story/%.md: $(STORY)/%.md
-	mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
 $(SITE)/img: $(SPEC)/img
 	cp -r $< $@
-
-$(SITE)/:
-	mkdir -p $@
-
-$(SITE)/%/:
-	mkdir -p $@
 
 $(SITE)/review/spec-12.html: _ext/yaml-spec-12.html
 	cp $< $@
