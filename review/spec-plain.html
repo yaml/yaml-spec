@@ -8576,34 +8576,28 @@ Hence the YAML <a href="#processing-yaml-information">processor</a> should consi
     <tr>
       <th>Regular expression</th>
       <th>Resolved to tag</th>
-      <th> </th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>null</td>
+      <td><code class="language-plaintext highlighter-rouge">null</code></td>
       <td>tag:yaml.org,2002:null</td>
-      <td> </td>
     </tr>
     <tr>
-      <td>true</td>
-      <td>false</td>
+      <td><code class="language-plaintext highlighter-rouge">true | false</code></td>
       <td>tag:yaml.org,2002:bool</td>
     </tr>
     <tr>
-      <td>-? ( 0</td>
-      <td>[1-9] [0-9]* )</td>
+      <td><code class="language-plaintext highlighter-rouge">-? ( 0 | [1-9] [0-9]* )</code></td>
       <td>tag:yaml.org,2002:int</td>
     </tr>
     <tr>
-      <td>-? ( 0</td>
-      <td>[1-9] [0-9]* ) ( . [0-9]* )? ( [eE] [-+]? [0-9]+ )?</td>
+      <td><code class="language-plaintext highlighter-rouge">-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )?</code></td>
       <td>tag:yaml.org,2002:float</td>
     </tr>
     <tr>
-      <td>*</td>
+      <td><code class="language-plaintext highlighter-rouge">*</code></td>
       <td>Error</td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
