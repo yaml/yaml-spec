@@ -8693,103 +8693,48 @@ string).</p>
     <tr>
       <th>Regular expression</th>
       <th>Resolved to tag</th>
-      <th> </th>
-      <th> </th>
-      <th> </th>
-      <th> </th>
-      <th> </th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td>null</td>
-      <td>Null</td>
-      <td>NULL</td>
-      <td>~</td>
+      <td><code class="language-plaintext highlighter-rouge">null | Null | NULL | ~</code></td>
       <td>tag:yaml.org,2002:null</td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
-      <td>/* Empty */</td>
+      <td><code class="language-plaintext highlighter-rouge">/* Empty */</code></td>
       <td>tag:yaml.org,2002:null</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
-      <td>true</td>
-      <td>True</td>
-      <td>TRUE</td>
-      <td>false</td>
-      <td>False</td>
-      <td>FALSE</td>
+      <td><code class="language-plaintext highlighter-rouge">true | True | TRUE | false | False | FALSE</code></td>
       <td>tag:yaml.org,2002:bool</td>
     </tr>
     <tr>
-      <td>[-+]? [0-9]+</td>
+      <td><code class="language-plaintext highlighter-rouge">[-+]? [0-9]+</code></td>
       <td>tag:yaml.org,2002:int (Base 10)</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
-      <td>0o [0-7]+</td>
+      <td><code class="language-plaintext highlighter-rouge">0o [0-7]+</code></td>
       <td>tag:yaml.org,2002:int (Base 8)</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
-      <td>0x [0-9a-fA-F]+</td>
+      <td><code class="language-plaintext highlighter-rouge">0x [0-9a-fA-F]+</code></td>
       <td>tag:yaml.org,2002:int (Base 16)</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
-      <td>[-+]? ( . [0-9]+</td>
-      <td>[0-9]+ ( . [0-9]* )? ) ( [eE] [-+]? [0-9]+ )?</td>
+      <td><code class="language-plaintext highlighter-rouge">[-+]? ( \. [0-9]+ | [0-9]+ ( \. [0-9]* )? ) ( [eE] [-+]? [0-9]+ )?</code></td>
       <td>tag:yaml.org,2002:float (Number)</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
-      <td>[-+]? ( .inf</td>
-      <td>.Inf</td>
-      <td>.INF )</td>
+      <td><code class="language-plaintext highlighter-rouge">[-+]? ( \.inf | \.Inf | \.INF )</code></td>
       <td>tag:yaml.org,2002:float (Infinity)</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
-      <td>.nan</td>
-      <td>.NaN</td>
-      <td>.NAN</td>
+      <td><code class="language-plaintext highlighter-rouge">\.nan | \.NaN | \.NAN</code></td>
       <td>tag:yaml.org,2002:float (Not a number)</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
     <tr>
-      <td>*</td>
+      <td><code class="language-plaintext highlighter-rouge">*</code></td>
       <td>tag:yaml.org,2002:str (Default)</td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
-      <td> </td>
     </tr>
   </tbody>
 </table>
