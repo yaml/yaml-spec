@@ -1210,7 +1210,9 @@ These primitives were chosen because they are both powerful and familiar: the
 corresponds to a Perl hash table and a Python dictionary.
 The <a href="#scalar">scalar</a> represents strings, integers, dates, and other atomic data
 types.</p>
+</blockquote>
 
+<blockquote>
   <p>Each YAML <a href="#nodes">node</a> requires, in addition to its <a href="#nodes">kind</a> and <a href="#nodes">content</a>, a <a href="#tags">tag</a>
 specifying its data type.
 Type specifiers are either <a href="#tags">global</a> URIs, or are <a href="#tags">local</a> in scope to a single
@@ -1437,17 +1439,20 @@ duplicate <a href="#nodes">key</a> as an error.</p>
 
 <h5 id="canonical-form">Canonical Form</h5>
 
-<p>YAML supports the need for <a href="#scalar">scalar</a> equality by requiring that every
+<blockquote>
+  <p>YAML supports the need for <a href="#scalar">scalar</a> equality by requiring that every
 <a href="#scalar">scalar</a> <a href="#tags">tag</a> must specify a mechanism for producing the <em>canonical form</em> of
 any <a href="#scalar-formats">formatted content</a>.
 This form is a Unicode character string which also <a href="#presenting-the-serialization-tree">presents</a> the same
 <a href="#nodes">content</a>, and can be used for equality testing.
 While this requirement is stronger than a well defined equality operator, it
 has other uses, such as the production of digital signatures.</p>
+</blockquote>
 
 <h5 id="equality">Equality</h5>
 
-<p>Two <a href="#nodes">nodes</a> must have the same <a href="#tags">tag</a> and <a href="#nodes">content</a> to be <em>equal</em>.
+<blockquote>
+  <p>Two <a href="#nodes">nodes</a> must have the same <a href="#tags">tag</a> and <a href="#nodes">content</a> to be <em>equal</em>.
 Since each <a href="#tags">tag</a> applies to exactly one <a href="#nodes">kind</a>, this implies that the two
 <a href="#nodes">nodes</a> must have the same <a href="#nodes">kind</a> to be equal.
 Two <a href="#scalars">scalars</a> are equal only when their <a href="#tags">tags</a> and canonical forms are equal
@@ -1459,8 +1464,10 @@ other <a href="#sequence">sequence</a>.
 Two <a href="#mapping">mappings</a> are equal only when they have the same <a href="#tags">tag</a> and an equal set
 of <a href="#nodes">keys</a>, and each <a href="#nodes">key</a> in this set is associated with equal <a href="#nodes">values</a> in
 both <a href="#mapping">mappings</a>.</p>
+</blockquote>
 
-<p>Different URI schemes may define different rules for testing the equality of
+<blockquote>
+  <p>Different URI schemes may define different rules for testing the equality of
 URIs.
 Since a YAML <a href="#processing-yaml-information">processor</a> cannot be reasonably expected to be aware of them
 all, it must resort to a simple character-by-character comparison of <a href="#tags">tags</a>
@@ -1468,10 +1475,12 @@ to ensure consistency.
 This also happens to be the comparison method defined by the “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI
 scheme. <a href="#tags">Tags</a> in a YAML stream must therefore be <a href="#presenting-the-serialization-tree">presented</a> in a canonical
 way so that such comparison would yield the correct results.</p>
+</blockquote>
 
 <h5 id="identity">Identity</h5>
 
-<p>Two <a href="#nodes">nodes</a> are <em>identical</em> only when they <a href="#representation-graph">represent</a> the same <a href="#representing-native-data-structures">native data
+<blockquote>
+  <p>Two <a href="#nodes">nodes</a> are <em>identical</em> only when they <a href="#representation-graph">represent</a> the same <a href="#representing-native-data-structures">native data
 structure</a>.
 Typically, this corresponds to a single memory address.
 Identity should not be confused with equality; two equal <a href="#nodes">nodes</a> need not have
@@ -1479,6 +1488,7 @@ the same identity.
 A YAML <a href="#processing-yaml-information">processor</a> may treat equal <a href="#scalars">scalars</a> as if they were identical.
 In contrast, the separate identity of two distinct but equal <a href="#collections">collections</a> must
 be preserved.</p>
+</blockquote>
 
 <div id="serialization-tree"></div>
 <h3 id="322-serialization-tree">3.2.2. Serialization Tree</h3>
@@ -1788,13 +1798,17 @@ However it is required to formally express YAML’s indentation rules.</p>
 surrounding.
 YAML supports two groups of <em>contexts</em>, distinguishing between <a href="#block-styles">block styles</a>
 and <a href="#flow-styles">flow styles</a>.</p>
+</blockquote>
 
+<blockquote>
   <p>In <a href="#block-styles">block styles</a>, <a href="#indentation-spaces">indentation</a> is used to delineate structure.
 To capture human perception of <a href="#indentation-spaces">indentation</a> the rules require special
 treatment of the “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” character, used in <a href="#block-sequences">block sequences</a>.
 Hence in some cases productions need to behave differently inside <a href="#block-sequences">block
 sequences</a> (<em>block-in context</em>) and outside them (<em>block-out context</em>).</p>
+</blockquote>
 
+<blockquote>
   <p>In <a href="#flow-styles">flow styles</a>, explicit <a href="#indicator-characters">indicators</a> are used to delineate structure.
 These styles can be viewed as the natural extension of JSON to cover
 <a href="#tags">tagged</a>, <a href="#single-quoted-style">single-quoted</a> and <a href="#plain-style">plain scalars</a>.
@@ -3478,7 +3492,9 @@ In addition, folding does not apply to <a href="#line-break-characters">line bre
 that contain leading <a href="#white-space-characters">white space</a>.
 Note that such a <a href="#example-more-indented-lines">more-indented</a> line may consist only of such leading <a href="#white-space-characters">white
 space</a>.</p>
+</blockquote>
 
+<blockquote>
   <p>The combined effect of the <em>block line folding</em> rules is that each
 “paragraph” is interpreted as a line, <a href="#empty-lines">empty lines</a> are interpreted as a line
 feed, and the formatting of <a href="#example-more-indented-lines">more-indented</a> lines is preserved.</p>
@@ -3530,7 +3546,9 @@ Hence spaces preceding or following the text in a line are a <a href="#presentin
 detail</a> and must not be used to convey <a href="#nodes">content</a> information.
 Once all such spaces have been discarded, all <a href="#line-break-characters">line breaks</a> are folded,
 without exception.</p>
+</blockquote>
 
+<blockquote>
   <p>The combined effect of the <em>flow line folding</em> rules is that each “paragraph”
 is interpreted as a line, <a href="#empty-lines">empty lines</a> are interpreted as line feeds, and
 text can be freely <a href="#example-more-indented-lines">more-indented</a> without affecting the <a href="#nodes">content</a>
@@ -4092,7 +4110,9 @@ name space.
 By default, the prefix associated with this handle is “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”.
 Thus, by default, <a href="#tag-shorthands">shorthands</a> using this handle are interpreted as <a href="#tags">local
 tags</a>.</p>
+</blockquote>
 
+<blockquote>
   <p>It is possible to override the default behavior by providing an explicit
 “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive, associating a different prefix for this handle.
 This provides smooth migration from using <a href="#tags">local tags</a> to using <a href="#tags">global
@@ -4150,7 +4170,9 @@ This allows using a compact notation for a single “secondary” name space.
 By default, the prefix associated with this handle is
 “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:</code></strong>”.
 This prefix is used by the <a href="#other-schemas">YAML tag repository</a>.</p>
+</blockquote>
 
+<blockquote>
   <p>It is possible to override this default behavior by providing an explicit
 “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive associating a different prefix for this handle.</p>
 </blockquote>
@@ -4198,7 +4220,9 @@ This prefix is used by the <a href="#other-schemas">YAML tag repository</a>.</p>
   <p>A <em>named tag handle</em> surrounds a non-empty name with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em> characters.
 A handle name must not be used in a <a href="#tag-shorthands">tag shorthand</a> unless an explicit
 “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive has associated some prefix with it.</p>
+</blockquote>
 
+<blockquote>
   <p>The name of the handle is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to
 convey <a href="#nodes">content</a> information.
 In particular, the YAML <a href="#processing-yaml-information">processor</a> need not preserve the handle name once
@@ -4515,11 +4539,15 @@ using a “<strong><code class="language-plaintext highlighter-rouge">TAG</code>
 The resulting <a href="#parsing-the-presentation-stream">parsed</a> <a href="#tags">tag</a> is the concatenation of the <a href="#tag-prefixes">prefix</a> and the
 suffix, and must either begin with “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” (a <a href="#tags">local tag</a>) or be a valid
 URI (a <a href="#tags">global tag</a>).</p>
+</blockquote>
 
+<blockquote>
   <p>The choice of <a href="#tag-handles">tag handle</a> is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to
 convey <a href="#nodes">content</a> information.
 In particular, the <a href="#tag-handles">tag handle</a> may be discarded once <a href="#parsing-the-presentation-stream">parsing</a> is completed.</p>
+</blockquote>
 
+<blockquote>
   <p>The suffix must not contain any “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” character.
 This would cause the tag shorthand to be interpreted as having a <a href="#tag-handles">named tag
 handle</a>.
@@ -4611,13 +4639,17 @@ This <a href="#resolved-tags">non-specific tag</a> is “<strong><code class="la
 “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” for all other <a href="#nodes">nodes</a>.
 This is the only case where the <a href="#node-styles">node style</a> has any effect on the <a href="#nodes">content</a>
 information.</p>
+</blockquote>
 
+<blockquote>
   <p>It is possible for the tag property to be explicitly set to the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”
 non-specific tag.
 By <a href="#resolved-tags">convention</a>, this “disables” <a href="#tag-resolution">tag resolution</a>, forcing the <a href="#nodes">node</a> to be
 interpreted as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>”,
 or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to its <a href="#nodes">kind</a>.</p>
+</blockquote>
 
+<blockquote>
   <p>There is no way to explicitly specify the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag.
 This is intentional.</p>
 </blockquote>
@@ -8465,12 +8497,16 @@ Pluto is a planet: !!bool false
   <p><a href="#representation-graph">Represents</a> arbitrary sized finite mathematical integers.
 Scalars of this type should be <a href="#representing-native-data-structures">bound</a> to a <a href="#representing-native-data-structures">native</a> integer data type, if
 possible.</p>
+</blockquote>
 
+<blockquote>
   <p>Some languages (such as Perl) provide only a “number” type that allows for
 both integer and floating-point values.
 A YAML <a href="#processing-yaml-information">processor</a> may use such a type for integers, as long as they
 round-trip properly.</p>
+</blockquote>
 
+<blockquote>
   <p>In some languages (such as C), an integer may overflow the <a href="#representing-native-data-structures">native</a> type’s
 storage capability.
 A YAML <a href="#processing-yaml-information">processor</a> may reject such a value as an error, truncate it with a
@@ -8517,12 +8553,16 @@ positive: !!int 34
 <blockquote>
   <p><a href="#representation-graph">Represents</a> an approximation to real numbers, including three special values
 (positive and negative infinity, and “not a number”).</p>
+</blockquote>
 
+<blockquote>
   <p>Some languages (such as Perl) provide only a “number” type that allows for
 both integer and floating-point values.
 A YAML <a href="#processing-yaml-information">processor</a> may use such a type for floating-point numbers, as long as
 they round-trip properly.</p>
+</blockquote>
 
+<blockquote>
   <p>Not all floating-point values can be stored exactly in any given <a href="#representing-native-data-structures">native</a>
 type.
 Hence a float value may change by “a small amount” when round-tripped.
