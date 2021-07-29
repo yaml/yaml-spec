@@ -781,7 +781,7 @@ These primitives were chosen because they are both powerful and familiar: the
 corresponds to a Perl hash table and a Python dictionary.
 The [scalar] represents strings, integers, dates, and other atomic data
 types.
->
+
 > Each YAML [node] requires, in addition to its [kind] and [content], a [tag]
 specifying its data type.
 Type specifiers are either [global] URIs, or are [local] in scope to a single
@@ -985,7 +985,7 @@ duplicate [key] as an error.
 
 ##### Canonical Form
 
-YAML supports the need for [scalar] equality by requiring that every
+> YAML supports the need for [scalar] equality by requiring that every
 [scalar] [tag] must specify a mechanism for producing the _canonical form_ of
 any [formatted content].
 This form is a Unicode character string which also [presents] the same
@@ -995,7 +995,7 @@ has other uses, such as the production of digital signatures.
 
 ##### Equality
 
-Two [nodes] must have the same [tag] and [content] to be _equal_.
+> Two [nodes] must have the same [tag] and [content] to be _equal_.
 Since each [tag] applies to exactly one [kind], this implies that the two
 [nodes] must have the same [kind] to be equal.
 Two [scalars] are equal only when their [tags] and canonical forms are equal
@@ -1008,7 +1008,7 @@ Two [mappings] are equal only when they have the same [tag] and an equal set
 of [keys], and each [key] in this set is associated with equal [values] in
 both [mappings].
 
-Different URI schemes may define different rules for testing the equality of
+> Different URI schemes may define different rules for testing the equality of
 URIs.
 Since a YAML [processor] cannot be reasonably expected to be aware of them
 all, it must resort to a simple character-by-character comparison of [tags]
@@ -1019,7 +1019,7 @@ way so that such comparison would yield the correct results.
 
 ##### Identity
 
-Two [nodes] are _identical_ only when they [represent] the same [native data
+> Two [nodes] are _identical_ only when they [represent] the same [native data
 structure].
 Typically, this corresponds to a single memory address.
 Identity should not be confused with equality; two equal [nodes] need not have
@@ -1319,13 +1319,13 @@ However it is required to formally express YAML’s indentation rules.
 surrounding.
 YAML supports two groups of _contexts_, distinguishing between [block styles]
 and [flow styles].
->
+
 > In [block styles], [indentation] is used to delineate structure.
 To capture human perception of [indentation] the rules require special
 treatment of the ["**`-`**"] character, used in [block sequences].
 Hence in some cases productions need to behave differently inside [block
 sequences] (_block-in context_) and outside them (_block-out context_).
->
+
 > In [flow styles], explicit [indicators] are used to delineate structure.
 These styles can be viewed as the natural extension of JSON to cover
 [tagged], [single-quoted] and [plain scalars].
@@ -2502,7 +2502,7 @@ In addition, folding does not apply to [line breaks] surrounding text lines
 that contain leading [white space].
 Note that such a [more-indented] line may consist only of such leading [white
 space].
->
+
 > The combined effect of the _block line folding_ rules is that each
 "paragraph" is interpreted as a line, [empty lines] are interpreted as a line
 feed, and the formatting of [more-indented] lines is preserved.
@@ -2535,7 +2535,7 @@ Hence spaces preceding or following the text in a line are a [presentation
 detail] and must not be used to convey [content] information.
 Once all such spaces have been discarded, all [line breaks] are folded,
 without exception.
->
+
 > The combined effect of the _flow line folding_ rules is that each "paragraph"
 is interpreted as a line, [empty lines] are interpreted as line feeds, and
 text can be freely [more-indented] without affecting the [content]
@@ -2917,7 +2917,7 @@ name space.
 By default, the prefix associated with this handle is ["**`!`**"].
 Thus, by default, [shorthands] using this handle are interpreted as [local
 tags].
->
+
 > It is possible to override the default behavior by providing an explicit
 "**`TAG`**" directive, associating a different prefix for this handle.
 This provides smooth migration from using [local tags] to using [global
@@ -2955,7 +2955,7 @@ This allows using a compact notation for a single "secondary" name space.
 By default, the prefix associated with this handle is
 "**`tag:yaml.org,2002:`**".
 This prefix is used by the [YAML tag repository].
->
+
 > It is possible to override this default behavior by providing an explicit
 "**`TAG`**" directive associating a different prefix for this handle.
 
@@ -2983,7 +2983,7 @@ This prefix is used by the [YAML tag repository].
 > A _named tag handle_ surrounds a non-empty name with _"**`!`**"_ characters.
 A handle name must not be used in a [tag shorthand] unless an explicit
 "**`TAG`**" directive has associated some prefix with it.
->
+
 > The name of the handle is a [presentation detail] and must not be used to
 convey [content] information.
 In particular, the YAML [processor] need not preserve the handle name once
@@ -3189,11 +3189,11 @@ using a ["**`TAG`**" directive].
 The resulting [parsed] [tag] is the concatenation of the [prefix] and the
 suffix, and must either begin with ["**`!`**"] (a [local tag]) or be a valid
 URI (a [global tag]).
->
+
 > The choice of [tag handle] is a [presentation detail] and must not be used to
 convey [content] information.
 In particular, the [tag handle] may be discarded once [parsing] is completed.
->
+
 > The suffix must not contain any ["**`!`**"] character.
 This would cause the tag shorthand to be interpreted as having a [named tag
 handle].
@@ -3257,13 +3257,13 @@ This [non-specific tag] is ["**`!`**"] for non-[plain scalars] and
 ["**`?`**"] for all other [nodes].
 This is the only case where the [node style] has any effect on the [content]
 information.
->
+
 > It is possible for the tag property to be explicitly set to the ["**`!`**"
 non-specific tag].
 By [convention], this "disables" [tag resolution], forcing the [node] to be
 interpreted as "**`tag:yaml.org,2002:seq`**", "**`tag:yaml.org,2002:map`**",
 or "**`tag:yaml.org,2002:str`**", according to its [kind].
->
+
 > There is no way to explicitly specify the ["**`?`**" non-specific] tag.
 This is intentional.
 
@@ -5984,12 +5984,12 @@ Pluto is a planet: !!bool false
 > [Represents] arbitrary sized finite mathematical integers.
 Scalars of this type should be [bound] to a [native] integer data type, if
 possible.
->
+
 > Some languages (such as Perl) provide only a "number" type that allows for
 both integer and floating-point values.
 A YAML [processor] may use such a type for integers, as long as they
 round-trip properly.
->
+
 > In some languages (such as C), an integer may overflow the [native] type’s
 storage capability.
 A YAML [processor] may reject such a value as an error, truncate it with a
@@ -6023,12 +6023,12 @@ positive: !!int 34
 
 > [Represents] an approximation to real numbers, including three special values
 (positive and negative infinity, and "not a number").
->
+
 > Some languages (such as Perl) provide only a "number" type that allows for
 both integer and floating-point values.
 A YAML [processor] may use such a type for floating-point numbers, as long as
 they round-trip properly.
->
+
 > Not all floating-point values can be stored exactly in any given [native]
 type.
 Hence a float value may change by "a small amount" when round-tripped.
