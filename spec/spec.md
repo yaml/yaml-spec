@@ -1,27 +1,9 @@
 # YAML Ain’t Markup Language (YAML™) Version 1.2
 
+**YAML Specification Version 1.2.1 -- Released YYYY-MM-DD**
 
-**3rd Edition, Patched at 2009-10-01**
-
-{:.author-group}
-* **Oren Ben-Kiki <[oren@ben-kiki.org](mailto:oren@ben-kiki.org)>**
-* **Clark Evans <[cce@clarkevans.com](mailto:cce@clarkevans.com)>**
-* **Ingy döt Net <[ingy@ingy.net](mailto:ingy@ingy.net)>**
-
-
-**Latest (patched) version:**
-
-{:.release-info}
-* HTML: [https://yaml.org/spec/1.2/spec.html](/spec/1.2/spec.html)
-* PDF: [https://yaml.org/spec/1.2/spec.pdf](/spec/1.2/spec.pdf)
-* PS: [https://yaml.org/spec/1.2/spec.ps](/spec/1.2/spec.ps)
-* Errata: [https://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html)
-
-
-**Previous (original) version:**
-[https://yaml.org/spec/1.2/2009-07-21/spec.html](/spec/1.2/2009-07-21/spec.html)
-
-Copyright © 2001-2009 Oren Ben-Kiki, Clark Evans, Ingy döt Net
+Copyright presently by [The YAML Language Development Team^]  
+Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net
 
 This document may be freely copied, provided it is not modified.
 
@@ -7005,6 +6987,9 @@ regarding this draft.
 * XML
   * [Extensible Markup Language (XML)](
     https://www.w3.org/TR/REC-xml.html)
+* The YAML Language Development Team
+  * [GitHub YAML Orgranization - Core Team](
+    https://github.com/orgs/yaml/teams/core)
 * yaml-core mailing list
   * [Mailing List: yaml-core](
     https://lists.sourceforge.net/lists/listinfo/yaml-core)
