@@ -30,6 +30,8 @@ div.legend ul li { display: inline; white-space: nowrap; }
 
 ul.authorgroup, ul.releaseinfo, #markdown-toc, #markdown-toc ul { list-style: none; }
 
+.main-content ol p { margin-bottom: 0px; }
+
 div.bottom { height: 1000px; }
 div.bottom::after { content: "THIS SPACE INTENTIONALLY LEFT BLANK"; }
 
