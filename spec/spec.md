@@ -105,7 +105,8 @@ with data.
 It uses Unicode [printable] characters, [some] of which provide structural
 information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
-characters and allowing the data to show itself in a natural and meaningful way.
+characters and allowing the data to show itself in a natural and meaningful
+way.
 For example, [indentation] may be used for structure, [colons] separate
 [key: value pairs], and [dashes] are used to create "bullet" [lists].
 
@@ -264,7 +265,8 @@ there is no direct correlation between them.
 YAML is primarily a data serialization language.
 XML was designed to be backwards compatible with the Standard Generalized
 Markup Language (SGML), which was designed to support structured documentation.
-XML therefore had many design constraints placed on it that YAML does not share.
+XML therefore had many design constraints placed on it that YAML does not
+share.
 XML is a pioneer in many domains, YAML is the result of lessons learned from
 XML and other technologies.
 
@@ -827,7 +829,8 @@ data model, as shown in the following diagram:
 
 ![Processing Overview](img/overview2.png)
 
-A YAML processor need not expose the [serialization] or [representation] stages.
+A YAML processor need not expose the [serialization] or [representation]
+stages.
 It may translate directly between [native data structures] and a character
 [stream] ([dump] and [load] in the diagram above).
 However, such a direct translation should take place so that the [native data
@@ -937,10 +940,12 @@ types].
 
 ## #. Information Models
 
-This section specifies the formal details of the results of the above processes.
+This section specifies the formal details of the results of the above
+processes.
 To maximize data portability between programming languages and implementations,
 users of YAML should be mindful of the distinction between [serialization] or
-[presentation] properties and those which are part of the YAML [representation].
+[presentation] properties and those which are part of the YAML
+[representation].
 Thus, while imposing a [order] on [mapping keys] is necessary for flattening
 YAML [representations] to a sequential access medium, this [serialization
 detail] must not be used to convey [application] level information.
@@ -989,15 +994,16 @@ be [unique].
 #### #. Nodes
 
 A YAML _node_ [represents] a single [native data structure].
-Such nodes have _content_ of one of three _kinds_: scalar, sequence, or mapping.
+Such nodes have _content_ of one of three _kinds_: scalar, sequence, or
+mapping.
 In addition, each node has a [tag] which serves to restrict the set of possible
 values the content can have.
 
 
 ##### Scalar
 
-> The content of a _scalar_ node is an opaque datum that can be [presented] as a
-series of zero or more Unicode characters.
+> The content of a _scalar_ node is an opaque datum that can be [presented] as
+a series of zero or more Unicode characters.
 
 
 ##### Sequence
@@ -1246,7 +1252,8 @@ A directive has a name and an optional sequence of parameters.
 Directives are instructions to the YAML [processor], and like all other
 [presentation details] are not reflected in the YAML [serialization tree] or
 [representation graph].
-This version of YAML defines a two directives, ["**`YAML`**"] and ["**`TAG`**"].
+This version of YAML defines a two directives, ["**`YAML`**"] and
+["**`TAG`**"].
 All other directives are [reserved] for future versions of YAML.
 
 
@@ -6916,7 +6923,8 @@ possible of the the _YAML tag repository_ at [https://yaml.org/type/](/type/).
 This repository provides recommended [global tags] for increasing the
 portability of YAML [documents] between different [applications].
 
-The tag repository is intentionally left out of the scope of this specification.
+The tag repository is intentionally left out of the scope of this
+specification.
 This allows it to evolve to better support YAML [applications].
 Hence, developers are encouraged to submit new "universal" types to the
 repository.
