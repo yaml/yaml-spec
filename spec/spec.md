@@ -146,27 +146,20 @@ The design goals for YAML are, in decreasing priority:
 ## #. Prior Art
 
 YAML’s initial direction was set by the data serialization and markup language
-discussions among [SML-DEV members](http://www.docuverse.com/smldev/).
+discussions among [SML-DEV members^].
 Later on, it directly incorporated experience from Ingy döt Net’s Perl module
-[Data::Denter](http://search.cpan.org/dist/Data-Denter/).
+[Data::Denter^].
 Since then, YAML has matured through ideas and support from its user community.
 
-YAML integrates and builds upon concepts described by
-[C](http://cm.bell-labs.com/cm/cs/cbook/index.html),
-[Java](http://java.sun.com/), [Perl](http://www.perl.org/),
-[Python](http://www.python.org/), [Ruby](http://www.ruby-lang.org/),
-[RFC0822](http://www.ietf.org/rfc/rfc0822.txt) (MAIL),
-[RFC1866](http://www.ics.uci.edu/pub/ietf/html/rfc1866.txt) (HTML),
-[RFC2045](http://www.ietf.org/rfc/rfc2045.txt) (MIME),
-[RFC2396](http://www.ietf.org/rfc/rfc2396.txt) (URI),
-[XML](http://www.w3.org/TR/REC-xml.html), [SAX](http://www.saxproject.org/),
-[SOAP](http://www.w3.org/TR/SOAP), and [JSON](http://www.json.org/).
+YAML integrates and builds upon concepts described by [C^], [Java^], [Perl^],
+[Python^], [Ruby^], [Email^], [HTML^], [MIME^], [URIs^], [XML^], [SAX^],
+[SOAP^] and [JSON^].
 
-The syntax of YAML was motivated by Internet Mail (RFC0822) and remains
+The syntax of YAML was motivated by Internet Mail (Email) and remains
 partially compatible with that standard.
-Further, borrowing from MIME (RFC2045), YAML’s top-level production is a
-[stream] of independent [documents], ideal for message-based distributed
-processing systems.
+Further, borrowing from MIME, YAML’s top-level production is a [stream] of
+independent [documents], ideal for message-based distributed processing
+systems.
 
 YAML’s [indentation]\-based scoping is similar to Python’s (without the
 ambiguities caused by [tabs]). [Indented blocks] facilitate easy inspection of
@@ -241,8 +234,8 @@ This is also the case in practice; every JSON file is also a valid YAML file.
 This makes it easy to migrate from JSON to YAML if/when the additional features
 are required.
 
-JSON's [RFC4627](http://www.ietf.org/rfc/rfc4627.txt) requires that [mappings]
-[keys] merely "SHOULD" be [unique], while YAML insists they "MUST" be.
+[JSON's RFC^] requires that [mappings] [keys] merely "SHOULD" be [unique],
+while YAML insists they "MUST" be.
 Technically, YAML therefore complies with the JSON spec, choosing to treat
 duplicates as an error.
 In practice, since JSON is silent on the semantics of such duplicates, the only
@@ -284,8 +277,8 @@ For more information on using both XML and YAML, please visit
 
 ## #. Terminology
 
-This specification uses key words based on
-[RFC2119](http://www.ietf.org/rfc/rfc2119.txt) to indicate requirement level.
+This specification uses key words based on the [RFC format^] to indicate
+requirement level.
 In particular, the following words are used to describe the actions of a YAML
 [processor]:
 
@@ -975,8 +968,8 @@ A single "**`+`**" denotes [serialization] details, a double "**`++`**" denotes
 YAML’s _representation_ of [native data structure] is a rooted, connected,
 directed graph of [tagged] [nodes].
 By "directed graph" we mean a set of [nodes] and directed edges ("arrows"),
-where each edge connects one [node] to another (see [a formal
-definition](http://www.nist.gov/dads/HTML/directedGraph.html)).
+where each edge connects one [node] to another (see a formal [directed graph
+definition^]).
 All the [nodes] must be reachable from the _root node_ via such edges.
 Note that the YAML graph may include cycles, and a [node] may have more than
 one incoming edge.
@@ -1035,11 +1028,9 @@ This strategy is also used by the Javascript programming language.
 #### #. Tags
 
 YAML [represents] type information of [native data structures] with a simple
-identifier, called a _tag_. _Global tags_ are
-[URIs](http://www.ietf.org/rfc/rfc2396.txt) and hence globally unique across
-all [applications].
-The "**`tag:`**" [URI scheme](http://www.faqs.org/rfcs/rfc4151.html) is
-recommended for all global YAML tags.
+identifier, called a _tag_.
+_Global tags_ are URIs and hence globally unique across all [applications].
+The "**`tag:`**" [URI scheme^] is recommended for all global YAML tags.
 In contrast, _local tags_ are specific to a single [application].
 Local tags start with _"**`!`**"_, are not URIs and are not expected to be
 globally unique.
@@ -1403,11 +1394,9 @@ This format uses only [flow collections], [double-quoted scalars], and explicit
 [tags] for each [node].
 
 A reference implementation using the productions is available as the
-[YamlReference](
-http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Yaml%20Reference)
-Haskell package.
+[YamlReference^] Haskell package.
 This reference implementation is also available as an interactive web
-application at [http://dev.yaml.org/ypaste](http://dev.yaml.org/ypaste).
+application called [ypaste^].
 
 
 ## #. Production Parameters
@@ -1609,8 +1598,7 @@ If another encoding is used, it is recommended that an explicit byte order mark
 be used, even if the first [stream] character is ASCII.
 
 For more information about the byte order mark and the Unicode character
-encoding schemes see the [Unicode
-FAQ](http://www.unicode.org/unicode/faq/utf_bom.html).
+encoding schemes see the [Unicode FAQ^].
 
 ```
 [#] c-byte-order-mark ::= #xFEFF
@@ -2192,11 +2180,9 @@ Word (alphanumeric) characters for identifiers:
   ns-dec-digit | ns-ascii-letter | "-"
 ```
 
-
-URI characters for [tags], as specified in
-[RFC2396](http://www.ietf.org/rfc/rfc2396.txt), with the addition of the
-"**`[`**" and "**`]`**" for presenting IPv6 addresses as proposed in
-[RFC2732](http://www.ietf.org/rfc/rfc2732.txt).
+URI characters for [tags], as specified in [URI RFC^], with the addition of the
+"**`[`**" and "**`]`**" for presenting IPv6 addresses as proposed in the [IPv6
+RFC^].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8, and then each byte is _escaped_ using
@@ -3567,8 +3553,7 @@ These characters would cause ambiguity with [flow collection] structures.
 If the suffix needs to specify any of the above restricted characters, they
 must be [escaped] using the ["**`%`**"] character.
 This behavior is consistent with the URI character escaping rules
-(specifically, section 2.3 of
-[RFC2396](http://www.ietf.org/rfc/rfc2396.txt)).
+(specifically, section 2.3 of URI RFC).
 
 ```
 [#] c-ns-shorthand-tag ::=
@@ -6936,10 +6921,88 @@ This allows it to evolve to better support YAML [applications].
 Hence, developers are encouraged to submit new "universal" types to the
 repository.
 The yaml-core mailing list at
-<http://lists.sourceforge.net/lists/listinfo/yaml-core>
+<https://lists.sourceforge.net/lists/listinfo/yaml-core>
 is the preferred method for such submissions, as well as raising any questions
 regarding this draft.
 
 # Reference Links
 
 {:.footnote-links}
+* C
+  * [Wikipedia - C (programming language)](
+    https://en.wikipedia.org/wiki/C_%28programming_language%29)
+* Data::Denter
+  * [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](
+    https://metacpan.org/dist/Data-Denter/view/Denter.pod)
+* directed graph definition
+  * [directed graph](
+    https://xlinux.nist.gov/dads/HTML/directedGraph.html)
+* Email
+  * [Standard for ARPA Internet Text Messages](
+    https://tools.ietf.org/html/rfc0822)
+* HTML
+  * [Hypertext Markup Language - 2.0](
+    https://tools.ietf.org/html/rfc1866)
+* IPv6 RFC
+  * [Format for Literal IPv6 Addresses in URL's](
+    https://tools.ietf.org/html/rfc2732)
+* Java
+  * [Wikipedia - Java (programming language)](
+    https://en.wikipedia.org/wiki/Java_%28programming_language%29)
+* JSON
+  * [Introducing JSON](
+    http://www.json.org/)
+* JSON's RFC
+  * [The application/json Media Type for JavaScript Object Notation (JSON)](
+    https://tools.ietf.org/html/rfc4627)
+* MIME
+  * [Multipurpose Internet Mail Extensions (MIME)](
+    https://tools.ietf.org/html/rfc2045)
+* Perl
+  * [The Perl Programming Language](
+    https://www.perl.org/)
+* Python
+  * [The Python Programming Language](
+    https://www.python.org/)
+* RFC format
+  * [Request for Comments Summary](
+    https://tools.ietf.org/html/rfc2199)
+* Ruby
+  * [Ruby Programming Language](
+    https://www.ruby-lang.org/)
+* SAX
+  * [Wikipedia - Simple API for XML](
+    https://en.wikipedia.org/wiki/Simple_API_for_XML)
+* SML-DEV members
+  * [SML-DEV Mailing List Archive](
+    https://github.com/yaml/sml-dev-archive)
+* SOAP
+  * [SOAP](
+    https://en.wikipedia.org/wiki/SOAP)
+* Unicode FAQ
+  * [UTF-8, UTF-16, UTF-32 & BOM](
+    https://www.unicode.org/faq/utf_bom.html)
+* Unicode standard for characters
+  * [Unicode – The World Standard for Text and Emoji](
+    https://www.unicode.org/)
+* URI RFC
+  * [Uniform Resource Identifiers (URI)](
+    https://tools.ietf.org/html/rfc2396)
+* URIs
+  * [Uniform Resource Identifiers (URI)](
+    https://tools.ietf.org/html/rfc2396)
+* URI scheme
+  * [Uniform Resource Identifiers (URI)](
+    https://tools.ietf.org/html/rfc2396)
+* XML
+  * [Extensible Markup Language (XML)](
+    https://www.w3.org/TR/REC-xml.html)
+* yaml-core mailing list
+  * [Mailing List: yaml-core](
+    https://lists.sourceforge.net/lists/listinfo/yaml-core)
+* YamlReference
+  * [YamlReference: YAML reference implementation](
+    https://hackage.haskell.org/package/YamlReference)
+* ypaste
+  * [YEAST2HTML](
+    http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl)
