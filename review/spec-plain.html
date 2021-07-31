@@ -29,14 +29,14 @@
 <p><strong>Latest (patched) version:</strong></p>
 
 <ul class="release-info">
-  <li>HTML: <a href="/spec/1.2/spec.html">https://yaml.org/spec/1.2/spec.html</a></li>
-  <li>PDF: <a href="/spec/1.2/spec.pdf">https://yaml.org/spec/1.2/spec.pdf</a></li>
-  <li>PS: <a href="/spec/1.2/spec.ps">https://yaml.org/spec/1.2/spec.ps</a></li>
-  <li>Errata: <a href="/spec/1.2/errata.html">https://yaml.org/spec/1.2/errata.html</a></li>
+  <li>HTML: <a href="/spec/1.2/spec.html">http://yaml.org/spec/1.2/spec.html</a></li>
+  <li>PDF: <a href="/spec/1.2/spec.pdf">http://yaml.org/spec/1.2/spec.pdf</a></li>
+  <li>PS: <a href="/spec/1.2/spec.ps">http://yaml.org/spec/1.2/spec.ps</a></li>
+  <li>Errata: <a href="/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a></li>
 </ul>
 
 <p><strong>Previous (original) version:</strong>
-<a href="/spec/1.2/2009-07-21/spec.html">https://yaml.org/spec/1.2/2009-07-21/spec.html</a></p>
+<a href="/spec/1.2/2009-07-21/spec.html">http://yaml.org/spec/1.2/2009-07-21/spec.html</a></p>
 
 <p>Copyright © 2001-2009 Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 
@@ -77,7 +77,7 @@ Therefore, there are several incompatibilities between syck and this revision
 as well.</p>
 
 <p>The list of known errors in this specification is available at
-<a href="/spec/1.2/errata.html">https://yaml.org/spec/1.2/errata.html</a>.
+<a href="/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a>.
 Please report errors in this document to the yaml-core mailing list.
 This revision contains fixes for all errors known as of 2009-10-01.</p>
 
@@ -432,20 +432,27 @@ When data is easy to view and understand, programming becomes a simpler task.</p
 <h2 id="12-prior-art">1.2. Prior Art</h2>
 
 <p>YAML’s initial direction was set by the data serialization and markup language
-discussions among <span class="footnote-link">SML-DEV members<sup id="fnl3"><a href="#fn3">3</a></sup></span>.
+discussions among <a href="http://www.docuverse.com/smldev/">SML-DEV members</a>.
 Later on, it directly incorporated experience from Ingy döt Net’s Perl module
-<span class="footnote-link">Data::Denter<sup id="fnl4"><a href="#fn4">4</a></sup></span>.
+<a href="http://search.cpan.org/dist/Data-Denter/">Data::Denter</a>.
 Since then, YAML has matured through ideas and support from its user community.</p>
 
-<p>YAML integrates and builds upon concepts described by <span class="footnote-link">C<sup id="fnl5"><a href="#fn5">5</a></sup></span>, <span class="footnote-link">Java<sup id="fnl6"><a href="#fn6">6</a></sup></span>, <span class="footnote-link">Perl<sup id="fnl7"><a href="#fn7">7</a></sup></span>,
-<span class="footnote-link">Python<sup id="fnl8"><a href="#fn8">8</a></sup></span>, <span class="footnote-link">Ruby<sup id="fnl9"><a href="#fn9">9</a></sup></span>, <span class="footnote-link">Email<sup id="fnl10"><a href="#fn10">10</a></sup></span>, <span class="footnote-link">HTML<sup id="fnl11"><a href="#fn11">11</a></sup></span>, <span class="footnote-link">MIME<sup id="fnl12"><a href="#fn12">12</a></sup></span>, <span class="footnote-link">URIs<sup id="fnl13"><a href="#fn13">13</a></sup></span>, <span class="footnote-link">XML<sup id="fnl14"><a href="#fn14">14</a></sup></span>, <span class="footnote-link">SAX<sup id="fnl15"><a href="#fn15">15</a></sup></span>,
-<span class="footnote-link">SOAP<sup id="fnl16"><a href="#fn16">16</a></sup></span> and <span class="footnote-link">JSON<sup id="fnl17"><a href="#fn17">17</a></sup></span>.</p>
+<p>YAML integrates and builds upon concepts described by
+<a href="http://cm.bell-labs.com/cm/cs/cbook/index.html">C</a>,
+<a href="http://java.sun.com/">Java</a>, <a href="http://www.perl.org/">Perl</a>,
+<a href="http://www.python.org/">Python</a>, <a href="http://www.ruby-lang.org/">Ruby</a>,
+<a href="http://www.ietf.org/rfc/rfc0822.txt">RFC0822</a> (MAIL),
+<a href="http://www.ics.uci.edu/pub/ietf/html/rfc1866.txt">RFC1866</a> (HTML),
+<a href="http://www.ietf.org/rfc/rfc2045.txt">RFC2045</a> (MIME),
+<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a> (URI),
+<a href="http://www.w3.org/TR/REC-xml.html">XML</a>, <a href="http://www.saxproject.org/">SAX</a>,
+<a href="http://www.w3.org/TR/SOAP">SOAP</a>, and <a href="http://www.json.org/">JSON</a>.</p>
 
-<p>The syntax of YAML was motivated by Internet Mail (Email) and remains
+<p>The syntax of YAML was motivated by Internet Mail (RFC0822) and remains
 partially compatible with that standard.
-Further, borrowing from MIME, YAML’s top-level production is a <a href="#streams">stream</a> of
-independent <a href="#documents">documents</a>, ideal for message-based distributed processing
-systems.</p>
+Further, borrowing from MIME (RFC2045), YAML’s top-level production is a
+<a href="#streams">stream</a> of independent <a href="#documents">documents</a>, ideal for message-based distributed
+processing systems.</p>
 
 <p>YAML’s <a href="#indentation-spaces">indentation</a>-based scoping is similar to Python’s (without the
 ambiguities caused by <a href="#white-space-characters">tabs</a>). <a href="#block-styles">Indented blocks</a> facilitate easy inspection of
@@ -520,8 +527,8 @@ This is also the case in practice; every JSON file is also a valid YAML file.
 This makes it easy to migrate from JSON to YAML if/when the additional features
 are required.</p>
 
-<p><span class="footnote-link">JSON’s RFC<sup id="fnl18"><a href="#fn18">18</a></sup></span> requires that <a href="#mapping">mappings</a> <a href="#nodes">keys</a> merely “SHOULD” be <a href="#node-comparison">unique</a>,
-while YAML insists they “MUST” be.
+<p>JSON’s <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC4627</a> requires that <a href="#mapping">mappings</a>
+<a href="#nodes">keys</a> merely “SHOULD” be <a href="#node-comparison">unique</a>, while YAML insists they “MUST” be.
 Technically, YAML therefore complies with the JSON spec, choosing to treat
 duplicates as an error.
 In practice, since JSON is silent on the semantics of such duplicates, the only
@@ -558,13 +565,13 @@ XML and other technologies.</p>
 XML/YAML mappings.
 This generally requires that a subset of each language be used.
 For more information on using both XML and YAML, please visit
-<a href="/xml">https://yaml.org/xml</a>.</p>
+<a href="/xml">http://yaml.org/xml</a>.</p>
 
 <div id="terminology"></div>
 <h2 id="15-terminology">1.5. Terminology</h2>
 
-<p>This specification uses key words based on the <span class="footnote-link">RFC format<sup id="fnl19"><a href="#fn19">19</a></sup></span> to indicate
-requirement level.
+<p>This specification uses key words based on
+<a href="http://www.ietf.org/rfc/rfc2119.txt">RFC2119</a> to indicate requirement level.
 In particular, the following words are used to describe the actions of a YAML
 <a href="#processing-yaml-information">processor</a>:</p>
 
@@ -1319,7 +1326,8 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 <p>YAML’s <em>representation</em> of <a href="#representing-native-data-structures">native data structure</a> is a rooted, connected,
 directed graph of <a href="#tags">tagged</a> <a href="#nodes">nodes</a>.
 By “directed graph” we mean a set of <a href="#nodes">nodes</a> and directed edges (“arrows”),
-where each edge connects one <a href="#nodes">node</a> to another (see a formal <span class="footnote-link">directed graph definition<sup id="fnl20"><a href="#fn20">20</a></sup></span>).
+where each edge connects one <a href="#nodes">node</a> to another (see <a href="http://www.nist.gov/dads/HTML/directedGraph.html">a formal
+definition</a>).
 All the <a href="#nodes">nodes</a> must be reachable from the <em>root node</em> via such edges.
 Note that the YAML graph may include cycles, and a <a href="#nodes">node</a> may have more than
 one incoming edge.</p>
@@ -1380,9 +1388,11 @@ This strategy is also used by the Javascript programming language.</p>
 <h4 id="3212-tags">3.2.1.2. Tags</h4>
 
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
-identifier, called a <em>tag</em>.
-<em>Global tags</em> are URIs and hence globally unique across all <a href="#processing-yaml-information">applications</a>.
-The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” <span class="footnote-link">URI scheme<sup id="fnl21"><a href="#fn21">21</a></sup></span> is recommended for all global YAML tags.
+identifier, called a <em>tag</em>. <em>Global tags</em> are
+<a href="http://www.ietf.org/rfc/rfc2396.txt">URIs</a> and hence globally unique across
+all <a href="#processing-yaml-information">applications</a>.
+The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” <a href="http://www.faqs.org/rfcs/rfc4151.html">URI scheme</a> is
+recommended for all global YAML tags.
 In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
 Local tags start with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em>, are not URIs and are not expected to be
 globally unique.
@@ -1747,9 +1757,10 @@ This format uses only <a href="#flow-collection-styles">flow collections</a>, <a
 <a href="#tags">tags</a> for each <a href="#nodes">node</a>.</p>
 
 <p>A reference implementation using the productions is available as the
-<span class="footnote-link">YamlReference<sup id="fnl22"><a href="#fn22">22</a></sup></span> Haskell package.
+<a href="http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Yaml%20Reference">YamlReference</a>
+Haskell package.
 This reference implementation is also available as an interactive web
-application called <span class="footnote-link">ypaste<sup id="fnl23"><a href="#fn23">23</a></sup></span>.</p>
+application at <a href="http://dev.yaml.org/ypaste">http://dev.yaml.org/ypaste</a>.</p>
 
 <div id="production-parameters"></div>
 <h2 id="41-production-parameters">4.1. Production Parameters</h2>
@@ -1887,21 +1898,25 @@ prefixes.</p>
 
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
-The allowed character range explicitly excludes the C0 control block
+The allowed character range explicitly excludes the <span class="footnote-link">C0 control block<sup id="fnl3"><a href="#fn3">3</a></sup></span>
 <strong><code class="language-plaintext highlighter-rouge">#x0-#x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">#xA</code></strong>, and CR <strong><code class="language-plaintext highlighter-rouge">#xD</code></strong> which
 are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">#x7F</code></strong>, the C1 control block <strong><code class="language-plaintext highlighter-rouge">#x80-#x9F</code></strong> (except for
-NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the surrogate block <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
-<strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong>, and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
+NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the <span class="footnote-link">surrogate block<sup id="fnl4"><a href="#fn4">4</a></sup></span> <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
+<strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong> and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
 
-<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all Unicode characters except those
-explicitly excluded above.</p>
+<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
+subset.</p>
 
-<p>On output, a YAML <a href="#processing-yaml-information">processor</a> must only produce acceptable characters.
-Any excluded characters must be <a href="#presenting-the-serialization-tree">presented</a> using <a href="#escaped-characters">escape</a> sequences.
+<p>On output, a YAML <a href="#processing-yaml-information">processor</a> must only produce only characters in this
+printable subset.
+Characters outside this set must be <a href="#presenting-the-serialization-tree">presented</a> using <a href="#escaped-characters">escape</a> sequences.
 In addition, any allowed characters known to be non-printable should also be
-<a href="#escaped-characters">escaped</a>.
-This isn’t mandatory since a full implementation would require extensive
-character property tables.</p>
+<a href="#escaped-characters">escaped</a>.</p>
+
+<blockquote>
+  <p>Note: This isn’t mandatory since a full implementation would require
+extensive character property tables.</p>
+</blockquote>
 
 <div id="rule-c-printable"></div>
 <pre class="rule">
@@ -1911,18 +1926,24 @@ character property tables.</p>
   | [#x10000-#x10FFFF]                     /* 32 bit */
 </pre>
 
-<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> must allow all non-control
-characters inside <a href="#double-quoted-style">quoted scalars</a>.
+<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> <span class="footnote-link">must allow all non-C0 characters<sup id="fnl5"><a href="#fn5">5</a></sup></span> inside <a href="#double-quoted-style">quoted scalars</a>.
 To ensure readability, non-printable characters should be <a href="#escaped-characters">escaped</a> on output,
-even inside such <a href="#scalars">scalars</a>.
-Note that JSON <a href="#double-quoted-style">quoted scalars</a> cannot span multiple lines or contain <a href="#white-space-characters">tabs</a>,
+even inside such <a href="#scalars">scalars</a>.</p>
+
+<blockquote>
+  <p>Note: JSON <a href="#double-quoted-style">quoted scalars</a> cannot span multiple lines or contain <a href="#white-space-characters">tabs</a>,
 but YAML <a href="#double-quoted-style">quoted scalars</a> can.</p>
+</blockquote>
 
 <div id="rule-nb-json"></div>
 <pre class="rule">
 [2] nb-json ::=
   #x9 | [#x20-#x10FFFF]
 </pre>
+
+<blockquote>
+  <p>Note: The rule name <code class="language-plaintext highlighter-rouge">nb-json</code> means “non-break JSON compatible” here.</p>
+</blockquote>
 
 <div id="character-encodings"></div>
 <h2 id="52-character-encodings">5.2. Character Encodings</h2>
@@ -1941,7 +1962,7 @@ encodings.
 For <a href="#yaml-directives">JSON compatibility</a>, the UTF-32 encodings must also be supported.</p>
 
 <p>If a character <a href="#streams">stream</a> begins with a <em>byte order mark</em>, the character encoding
-will be taken to be as as indicated by the byte order mark.
+will be taken to be as indicated by the byte order mark.
 Otherwise, the <a href="#streams">stream</a> must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (<strong><code class="language-plaintext highlighter-rouge">#x00</code></strong>)
 characters.</p>
@@ -2058,7 +2079,8 @@ If another encoding is used, it is recommended that an explicit byte order mark
 be used, even if the first <a href="#streams">stream</a> character is ASCII.</p>
 
 <p>For more information about the byte order mark and the Unicode character
-encoding schemes see the <span class="footnote-link">Unicode FAQ<sup id="fnl24"><a href="#fn24">24</a></sup></span>.</p>
+encoding schemes see the <a href="http://www.unicode.org/unicode/faq/utf_bom.html">Unicode
+FAQ</a>.</p>
 
 <div id="rule-c-byte-order-mark"></div>
 <pre class="rule">
@@ -2789,8 +2811,10 @@ classes:</p>
   <a href="#rule-ns-dec-digit">ns-dec-digit</a> | <a href="#rule-ns-ascii-letter">ns-ascii-letter</a> | "-"
 </pre>
 
-<p>URI characters for <a href="#tags">tags</a>, as specified in <span class="footnote-link">URI RFC<sup id="fnl25"><a href="#fn25">25</a></sup></span>, with the addition of the
-“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">]</code></strong>” for presenting IPv6 addresses as proposed in the <span class="footnote-link">IPv6 RFC<sup id="fnl26"><a href="#fn26">26</a></sup></span>.</p>
+<p>URI characters for <a href="#tags">tags</a>, as specified in
+<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a>, with the addition of the
+“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">]</code></strong>” for presenting IPv6 addresses as proposed in
+<a href="http://www.ietf.org/rfc/rfc2732.txt">RFC2732</a>.</p>
 
 <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em> using
@@ -4539,7 +4563,8 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 If the suffix needs to specify any of the above restricted characters, they
 must be <a href="#escaped-characters">escaped</a> using the “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” character.
 This behavior is consistent with the URI character escaping rules
-(specifically, section 2.3 of URI RFC).</p>
+(specifically, section 2.3 of
+<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a>).</p>
 </blockquote>
 
 <div id="rule-c-ns-shorthand-tag"></div>
@@ -5393,13 +5418,13 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 - "<code class="legend-3">:</code> - ()"
 - Up<code class="legend-2">,</code> up, and away!
 - <code class="legend-1">-</code>123
-- http<code class="legend-2">s</code>://example.com/fo<code class="legend-2">o</code>#bar
+- http<code class="legend-2">:</code>//example.com/foo<code class="legend-2">#</code>bar
 # Inside flow collection:
 - [ <code class="legend-1">:</code><code class="legend-2">:</code>vector,
   "<code class="legend-3">:</code> - ()",
   "Up<code class="legend-4">,</code> up and away!",
   <code class="legend-1">-</code>123,
-  http<code class="legend-2">s</code>://example.com/fo<code class="legend-2">o</code>#bar ]
+  http<code class="legend-2">:</code>//example.com/foo<code class="legend-2">#</code>bar ]
 </pre>
 
 </td>
@@ -5412,13 +5437,13 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
   !!str ": - ()",
   !!str "Up, up, and away!",
   !!int "-123",
-  !!str "https://example.com/foo#bar",
+  !!str "http://example.com/foo#bar",
   !!seq [
     !!str "::vector",
     !!str ": - ()",
     !!str "Up, up, and away!",
     !!int "-123",
-    !!str "https://example.com/foo#bar",
+    !!str "http://example.com/foo#bar",
   ],
 ]
 </pre>
@@ -5871,7 +5896,7 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 <pre>
 {
 <code class="legend-1">unquoted</code>·<code class="legend-2">:·"separate"</code>,
-<code class="legend-1">https://foo.com</code>,
+<code class="legend-1">http://foo.com</code>,
 <code class="legend-1">omitted value</code><code class="legend-2">:<code class="legend-3">°</code></code>,
 <code class="legend-3">°</code><code class="legend-2">:·omitted key</code>,
 }
@@ -5884,7 +5909,7 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 ---
 !!map {
   ? !!str "unquoted" : !!str "separate",
-  ? !!str "https://foo.com" : !!null "",
+  ? !!str "http://foo.com" : !!null "",
   ? !!str "omitted value" : !!null "",
   ? !!null "" : !!str "omitted key",
 }
@@ -8832,7 +8857,7 @@ This allows interoperable <a href="#recommended-schemas">schemas</a> to use <a h
 <p>It is strongly recommended that such <a href="#recommended-schemas">schemas</a> be based on the <a href="#core-schema">core schema</a>
 defined above.
 In addition, it is strongly recommended that such <a href="#recommended-schemas">schemas</a> make as much use as
-possible of the the <em>YAML tag repository</em> at <a href="/type/">https://yaml.org/type/</a>.
+possible of the the <em>YAML tag repository</em> at <a href="/type/">http://yaml.org/type/</a>.
 This repository provides recommended <a href="#tags">global tags</a> for increasing the
 portability of YAML <a href="#documents">documents</a> between different <a href="#processing-yaml-information">applications</a>.</p>
 
@@ -8841,7 +8866,7 @@ This allows it to evolve to better support YAML <a href="#processing-yaml-inform
 Hence, developers are encouraged to submit new “universal” types to the
 repository.
 The yaml-core mailing list at
-<a href="https://lists.sourceforge.net/lists/listinfo/yaml-core">https://lists.sourceforge.net/lists/listinfo/yaml-core</a>
+<a href="http://lists.sourceforge.net/lists/listinfo/yaml-core">http://lists.sourceforge.net/lists/listinfo/yaml-core</a>
 is the preferred method for such submissions, as well as raising any questions
 regarding this draft.</p>
 
@@ -8849,82 +8874,19 @@ regarding this draft.</p>
 
 <ol class="footnote-links">
 <li id="fn1">
-    <p><a href="https://lists.sourceforge.net/lists/listinfo/yaml-core" target="_blank">“Mailing List: yaml-core”</a> <a href="#fnl1">↩</a></p>
+    <p><a href="http://lists.sourceforge.net/lists/listinfo/yaml-core" target="_blank">“Mailing List: yaml-core”</a> <a href="#fnl1">↩</a></p>
   </li>
 <li id="fn2">
-    <p><a href="https://www.unicode.org/" target="_blank">“Unicode – The World Standard for Text and Emoji”</a> <a href="#fnl2">↩</a></p>
+    <p><a href="http://www.unicode.org/" target="_blank">“Unicode - The World Standard for Text and Emoji”</a> <a href="#fnl2">↩</a></p>
   </li>
 <li id="fn3">
-    <p><a href="https://github.com/yaml/sml-dev-archive" target="_blank">“SML-DEV Mailing List Archive”</a> <a href="#fnl3">↩</a></p>
+    <p><a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes" target="_blank">“Wikipedia - C0 and C1 control codes”</a> <a href="#fnl3">↩</a></p>
   </li>
 <li id="fn4">
-    <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod" target="_blank">“Data::Denter - An (deprecated) alternative to Data::Dumper and Storable”</a> <a href="#fnl4">↩</a></p>
+    <p><a href="https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates" target="_blank">“Wikipedia - Universal Character Set characters #Surrogates”</a> <a href="#fnl4">↩</a></p>
   </li>
 <li id="fn5">
-    <p><a href="https://en.wikipedia.org/wiki/C_%28programming_language%29" target="_blank">“Wikipedia - C (programming language)”</a> <a href="#fnl5">↩</a></p>
-  </li>
-<li id="fn6">
-    <p><a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29" target="_blank">“Wikipedia - Java (programming language)”</a> <a href="#fnl6">↩</a></p>
-  </li>
-<li id="fn7">
-    <p><a href="https://www.perl.org/" target="_blank">“The Perl Programming Language”</a> <a href="#fnl7">↩</a></p>
-  </li>
-<li id="fn8">
-    <p><a href="https://www.python.org/" target="_blank">“The Python Programming Language”</a> <a href="#fnl8">↩</a></p>
-  </li>
-<li id="fn9">
-    <p><a href="https://www.ruby-lang.org/" target="_blank">“Ruby Programming Language”</a> <a href="#fnl9">↩</a></p>
-  </li>
-<li id="fn10">
-    <p><a href="https://tools.ietf.org/html/rfc0822" target="_blank">“Standard for ARPA Internet Text Messages”</a> <a href="#fnl10">↩</a></p>
-  </li>
-<li id="fn11">
-    <p><a href="https://tools.ietf.org/html/rfc1866" target="_blank">“Hypertext Markup Language - 2.0”</a> <a href="#fnl11">↩</a></p>
-  </li>
-<li id="fn12">
-    <p><a href="https://tools.ietf.org/html/rfc2045" target="_blank">“Multipurpose Internet Mail Extensions (MIME)”</a> <a href="#fnl12">↩</a></p>
-  </li>
-<li id="fn13">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl13">↩</a></p>
-  </li>
-<li id="fn14">
-    <p><a href="https://www.w3.org/TR/REC-xml.html" target="_blank">“Extensible Markup Language (XML)”</a> <a href="#fnl14">↩</a></p>
-  </li>
-<li id="fn15">
-    <p><a href="https://en.wikipedia.org/wiki/Simple_API_for_XML" target="_blank">“Wikipedia - Simple API for XML”</a> <a href="#fnl15">↩</a></p>
-  </li>
-<li id="fn16">
-    <p><a href="https://en.wikipedia.org/wiki/SOAP" target="_blank">“SOAP”</a> <a href="#fnl16">↩</a></p>
-  </li>
-<li id="fn17">
-    <p><a href="https://www.json.org/" target="_blank">“Introducing JSON”</a> <a href="#fnl17">↩</a></p>
-  </li>
-<li id="fn18">
-    <p><a href="https://tools.ietf.org/html/rfc4627" target="_blank">“The application/json Media Type for JavaScript Object Notation (JSON)”</a> <a href="#fnl18">↩</a></p>
-  </li>
-<li id="fn19">
-    <p><a href="https://tools.ietf.org/html/rfc2199" target="_blank">“Request for Comments Summary”</a> <a href="#fnl19">↩</a></p>
-  </li>
-<li id="fn20">
-    <p><a href="https://xlinux.nist.gov/dads/HTML/directedGraph.html" target="_blank">“directed graph”</a> <a href="#fnl20">↩</a></p>
-  </li>
-<li id="fn21">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl21">↩</a></p>
-  </li>
-<li id="fn22">
-    <p><a href="https://hackage.haskell.org/package/YamlReference" target="_blank">“YamlReference: YAML reference implementation”</a> <a href="#fnl22">↩</a></p>
-  </li>
-<li id="fn23">
-    <p><a href="http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl" target="_blank">“YEAST2HTML”</a> <a href="#fnl23">↩</a></p>
-  </li>
-<li id="fn24">
-    <p><a href="https://www.unicode.org/faq/utf_bom.html" target="_blank">“UTF-8, UTF-16, UTF-32 &amp; BOM”</a> <a href="#fnl24">↩</a></p>
-  </li>
-<li id="fn25">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl25">↩</a></p>
-  </li>
-<li id="fn26">
-    <p><a href="https://tools.ietf.org/html/rfc2732" target="_blank">“Format for Literal IPv6 Addresses in URL’s”</a> <a href="#fnl26">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc7159#section-7" target="_blank">“rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings”</a> <a href="#fnl5">↩</a></p>
   </li>
 </ol>
 <div class="footnote-links-after"></div>
