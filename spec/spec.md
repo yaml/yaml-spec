@@ -12,14 +12,14 @@
 **Latest (patched) version:**
 
 {:.release-info}
-* HTML: [http://yaml.org/spec/1.2/spec.html](/spec/1.2/spec.html)
-* PDF: [http://yaml.org/spec/1.2/spec.pdf](/spec/1.2/spec.pdf)
-* PS: [http://yaml.org/spec/1.2/spec.ps](/spec/1.2/spec.ps)
-* Errata: [http://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html)
+* HTML: [https://yaml.org/spec/1.2/spec.html](/spec/1.2/spec.html)
+* PDF: [https://yaml.org/spec/1.2/spec.pdf](/spec/1.2/spec.pdf)
+* PS: [https://yaml.org/spec/1.2/spec.ps](/spec/1.2/spec.ps)
+* Errata: [https://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html)
 
 
 **Previous (original) version:**
-[http://yaml.org/spec/1.2/2009-07-21/spec.html](/spec/1.2/2009-07-21/spec.html)
+[https://yaml.org/spec/1.2/2009-07-21/spec.html](/spec/1.2/2009-07-21/spec.html)
 
 Copyright © 2001-2009 Oren Ben-Kiki, Clark Evans, Ingy döt Net
 
@@ -62,7 +62,7 @@ Therefore, there are several incompatibilities between syck and this revision
 as well.
 
 The list of known errors in this specification is available at
-[http://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html).
+[https://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html).
 Please report errors in this document to the yaml-core mailing list.
 This revision contains fixes for all errors known as of 2009-10-01.
 
@@ -272,7 +272,7 @@ It should be mentioned that there are ongoing efforts to define standard
 XML/YAML mappings.
 This generally requires that a subset of each language be used.
 For more information on using both XML and YAML, please visit
-[http://yaml.org/xml](/xml).
+[https://yaml.org/xml](/xml).
 
 
 ## #. Terminology
@@ -4213,13 +4213,13 @@ These characters would cause ambiguity with [flow collection] structures.
 - ": - ()"
 - Up, up, and away!
 - -123
-- http://example.com/foo#bar
+- https://example.com/foo#bar
 # Inside flow collection:
 - [ ::vector,
   ": - ()",
   "Up, up and away!",
   -123,
-  http://example.com/foo#bar ]
+  https://example.com/foo#bar ]
 ```
 
 ```
@@ -4230,13 +4230,13 @@ These characters would cause ambiguity with [flow collection] structures.
   !!str ": - ()",
   !!str "Up, up, and away!",
   !!int "-123",
-  !!str "http://example.com/foo#bar",
+  !!str "https://example.com/foo#bar",
   !!seq [
     !!str "::vector",
     !!str ": - ()",
     !!str "Up, up, and away!",
     !!int "-123",
-    !!str "http://example.com/foo#bar",
+    !!str "https://example.com/foo#bar",
   ],
 ]
 ```
@@ -4590,7 +4590,7 @@ indicated by the "**`:`**".
 ```
 {
 unquoted·:·"separate",
-http://foo.com,
+https://foo.com,
 omitted value:°,
 °:·omitted key,
 }
@@ -4601,14 +4601,14 @@ omitted value:°,
 ---
 !!map {
   ? !!str "unquoted" : !!str "separate",
-  ? !!str "http://foo.com" : !!null "",
+  ? !!str "https://foo.com" : !!null "",
   ? !!str "omitted value" : !!null "",
   ? !!null "" : !!str "omitted key",
 }
 ```
 
 **Legend:**
-* [ns-flow-yaml-node(n,c)] <!-- unquoted http://foo.com omitted_value -->
+* [ns-flow-yaml-node(n,c)] <!-- unquoted https://foo.com omitted_value -->
 * [e-node] <!-- :·"separate" 4:14,2 :·omitted_key -->
 * [c-ns-flow-map-separate-value(n,c)] <!-- 4:15 5:1 -->
 
@@ -6912,7 +6912,7 @@ This allows interoperable [schemas] to use [untagged] [nodes].
 It is strongly recommended that such [schemas] be based on the [core schema]
 defined above.
 In addition, it is strongly recommended that such [schemas] make as much use as
-possible of the the _YAML tag repository_ at [http://yaml.org/type/](/type/).
+possible of the the _YAML tag repository_ at [https://yaml.org/type/](/type/).
 This repository provides recommended [global tags] for increasing the
 portability of YAML [documents] between different [applications].
 
@@ -6951,7 +6951,7 @@ regarding this draft.
     https://en.wikipedia.org/wiki/Java_%28programming_language%29)
 * JSON
   * [Introducing JSON](
-    http://www.json.org/)
+    https://www.json.org/)
 * JSON's RFC
   * [The application/json Media Type for JavaScript Object Notation (JSON)](
     https://tools.ietf.org/html/rfc4627)
