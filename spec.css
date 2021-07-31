@@ -33,5 +33,6 @@ ul.author-group, ul.release-info, #markdown-toc, #markdown-toc ul { list-style: 
 span.footnote-link { text-decoration: underline solid #606c71; }
 span.footnote-link sup a { color: blue; text-decoration: none; }
 
-.footnote-links { height: 1000px; }
 .footnote-links p { margin-bottom: 0px; }
+
+.footnote-links-after { height: 1000px; }
