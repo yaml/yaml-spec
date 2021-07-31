@@ -1550,7 +1550,7 @@ encodings.
 For [JSON compatibility], the UTF-32 encodings must also be supported.
 
 If a character [stream] begins with a _byte order mark_, the character encoding
-will be taken to be as as indicated by the byte order mark.
+will be taken to be as indicated by the byte order mark.
 Otherwise, the [stream] must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (**`#x00`**)
 characters.
