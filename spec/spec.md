@@ -1497,21 +1497,23 @@ prefixes.
 
 To ensure readability, YAML [streams] use only the _printable_ subset of the
 Unicode character set.
-The allowed character range explicitly excludes the C0 control block
+The allowed character range explicitly excludes the [C0 control block^]
 **`#x0-#x1F`** (except for TAB **`#x9`**, LF **`#xA`**, and CR **`#xD`** which
 are allowed), DEL **`#x7F`**, the C1 control block **`#x80-#x9F`** (except for
-NEL **`#x85`** which is allowed), the surrogate block **`#xD800-#xDFFF`**,
-**`#xFFFE`**, and **`#xFFFF`**.
+NEL **`#x85`** which is allowed), the [surrogate block^] **`#xD800-#xDFFF`**,
+**`#xFFFE`** and **`#xFFFF`**.
 
-On input, a YAML [processor] must accept all Unicode characters except those
-explicitly excluded above.
+On input, a YAML [processor] must accept all characters in this printable
+subset.
 
-On output, a YAML [processor] must only produce acceptable characters.
-Any excluded characters must be [presented] using [escape] sequences.
+On output, a YAML [processor] must only produce only characters in this
+printable subset.
+Characters outside this set must be [presented] using [escape] sequences.
 In addition, any allowed characters known to be non-printable should also be
 [escaped].
-This isn’t mandatory since a full implementation would require extensive
-character property tables.
+
+> Note: This isn’t mandatory since a full implementation would require
+extensive character property tables.
 
 ```
 [#] c-printable ::=
@@ -1521,11 +1523,12 @@ character property tables.
 ```
 
 
-To ensure [JSON compatibility], YAML [processors] must allow all non-control
-characters inside [quoted scalars].
+To ensure [JSON compatibility], YAML [processors] [must allow all non-C0
+characters^] inside [quoted scalars].
 To ensure readability, non-printable characters should be [escaped] on output,
 even inside such [scalars].
-Note that JSON [quoted scalars] cannot span multiple lines or contain [tabs],
+
+> Note: JSON [quoted scalars] cannot span multiple lines or contain [tabs],
 but YAML [quoted scalars] can.
 
 ```
@@ -1533,6 +1536,7 @@ but YAML [quoted scalars] can.
   #x9 | [#x20-#x10FFFF]
 ```
 
+> Note: The rule name `nb-json` means "non-break JSON compatible" here.
 
 ## #. Character Encodings
 
@@ -6918,6 +6922,7 @@ regarding this draft.
 # Reference Links
 
 {:.footnote-links}
+<<<<<<< HEAD
 * C
   * [Wikipedia - C (programming language)](
     https://en.wikipedia.org/wiki/C_%28programming_language%29)
@@ -6948,6 +6953,9 @@ regarding this draft.
 * MIME
   * [Multipurpose Internet Mail Extensions (MIME)](
     https://tools.ietf.org/html/rfc2045)
+* must allow all non-C0 characters
+  * [rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings](
+    https://tools.ietf.org/html/rfc7159#section-7)
 * Perl
   * [The Perl Programming Language](
     https://www.perl.org/)
@@ -6969,6 +6977,9 @@ regarding this draft.
 * SOAP
   * [SOAP](
     https://en.wikipedia.org/wiki/SOAP)
+* surrogate block
+  * [Wikipedia - Universal Character Set characters #Surrogates](
+    https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
 * Unicode FAQ
   * [UTF-8, UTF-16, UTF-32 & BOM](
     https://www.unicode.org/faq/utf_bom.html)
