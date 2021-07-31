@@ -2,18 +2,18 @@
 
 **3rd Edition, Patched at 2009-10-01**
 
+{:.author-group}
 * **Oren Ben-Kiki <[oren@ben-kiki.org](mailto:oren@ben-kiki.org)>**
 * **Clark Evans <[cce@clarkevans.com](mailto:cce@clarkevans.com)>**
 * **Ingy döt Net <[ingy@ingy.net](mailto:ingy@ingy.net)>**
-{:.authorgroup}
 
 **Latest (patched) version:**
 
+{:.release-info}
 * HTML: [http://yaml.org/spec/1.2/spec.html](/spec/1.2/spec.html)
 * PDF: [http://yaml.org/spec/1.2/spec.pdf](/spec/1.2/spec.pdf)
 * PS: [http://yaml.org/spec/1.2/spec.ps](/spec/1.2/spec.ps)
 * Errata: [http://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html)
-{:.releaseinfo}
 
 **Previous (original) version:**
 [http://yaml.org/spec/1.2/2009-07-21/spec.html](/spec/1.2/2009-07-21/spec.html)
@@ -81,7 +81,8 @@ Version 1.2 and to create programs that process YAML information.
 
 **Contents**
 
-::toc
+{:toc}
+* TOC
 
 # Chapter #. Introduction
 
@@ -6230,3 +6231,7 @@ The yaml-core mailing list at
 <http://lists.sourceforge.net/lists/listinfo/yaml-core>
 is the preferred method for such submissions, as well as raising any questions
 regarding this draft.
+
+# Reference Links
+
+{:.footnote-links}

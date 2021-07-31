@@ -1,6 +1,8 @@
+$theme-color: #606c71;
+
 a[href^="#"] {
   color: inherit;
-  text-decoration: underline solid #606c71;
+  text-decoration: underline solid $theme-color;
 
   &:hover {
     color: blue;
@@ -45,7 +47,6 @@ pre.example {
 }
 
 .main-content blockquote {
-  color: #000;
   margin-right: 0px;
   border-left: none;
 }
@@ -99,9 +100,28 @@ div.legend {
   }
 }
 
-ul.authorgroup,
-ul.releaseinfo,
+ul.author-group,
+ul.release-info,
 #markdown-toc,
 #markdown-toc ul {
   list-style: none;
+}
+
+span.footnote-link {
+  text-decoration: underline solid $theme-color;
+
+  sup a {
+    color: blue;
+    text-decoration: none;
+  }
+}
+
+.footnote-links {
+  p {
+    margin-bottom: 0px;
+  }
+}
+
+.footnote-links-after {
+  height: 1000px;
 }

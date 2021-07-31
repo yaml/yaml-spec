@@ -9,6 +9,7 @@ use XXX;
 my ($YYYY, $MM, $DD);
 my (@lvl) = (0, 0, 0, 0);
 my $links = {};
+my @footnote_links;
 
 sub main {
   my ($front, $markdown, $link_map) = read_files(@_);
@@ -35,6 +36,7 @@ sub main {
 my $x = '(?s:.)';
 my $s = '\ ';
 my $line = '(?:.*\n)';
+my $line_not_blank = '(?:(?:.*\S.*\n)|\n(?=\ \ ))';
 my $comment = '(?s:<!--.*?-->\n)';
 my $li = '(?:\*\ \S.*\n)';
 my $b = '\*\*';
@@ -96,23 +98,13 @@ sub parse_sections {
     # Unordered list:
     s/\A
       (
-        (::$line)?
-        (?:
-          (?:$li)
-          (?:
-            (?:
-              \n
-              ($s$s\S$line)+
-            )+
-            \n?
-          )?
-          (?:$s$s\*$s$line)*
-        )+
+        $ial*
+        $li
+        $line_not_blank*
         $ial*
       )
       \n+
-    //x
-      and push @s, {ul => $1} and next;
+    //x and push @s, {ul => $1} and next;
 
     # Unordered list:
     s{\A
@@ -156,9 +148,6 @@ sub parse_sections {
     s/\A(----\n)\n+//
       and push @s, {hr => $1} and next;
 
-    s/\A\::toc\n\n+//
-      and push @s, {toc => 1} and next;
-
     s/\A((?s:```.+?\n```\n))\n+//
       and push @s, {pre => $1} and next;
 
@@ -176,6 +165,8 @@ sub parse_sections {
 
     s/\A($comment)\n*//
       and push @s, {comment => $1} and next;
+
+    s/\A$ial// and next;
 
     s/\n+\z// and next;
 
@@ -309,13 +300,16 @@ $out
 }
 
 sub fmt_ul {
-  undefined_links();
+  format_links();
+  if (/^\{:\.footnote-links\}$/m) {
+    format_footnotes();
+  }
 }
 
 my $figure = 0;
 sub fmt_p {
   set_dates();
-  undefined_links();
+  format_links();
   if (/^\*\*Figure #\./m) {
     my $chapter = $lvl[0];
     $figure++;
@@ -326,7 +320,7 @@ sub fmt_p {
 sub fmt_hr {}
 
 sub fmt_indent {
-  undefined_links();
+  format_links();
 }
 
 my $num = 0;
@@ -363,19 +357,6 @@ sub fmt_comment {}
 sub fmt_img {}
 
 sub fmt_table {}
-
-sub fmt_toc {
-  $_ = <<'...';
-* TOC
-{:toc}
-...
-}
-
-sub fmt_index {
-  $_ = <<'...';
-# Index
-...
-}
 
 #------------------------------------------------------------------------------
 sub read_files {
@@ -471,7 +452,25 @@ sub rule_link {
   return qq{<a href="#rule-$rule">$text<\/a>};
 }
 
-sub get_link {
+sub format_links {
+  s{
+    \[
+      ( [^\]]*? ) \^
+    \]
+  }{format_footnote_link($1)}gex;
+
+  s{
+    \[
+      (
+        [^-0-9\`\]]
+        [^\]]*?
+      )
+    \]
+    (?= [^\(\`] )
+  }{format_internal_link($1)}gex;
+}
+
+sub format_internal_link {
   my ($link) = @_;
   my $text = lc($link);
   $text =~ s/\s+/ /g;
@@ -489,8 +488,14 @@ sub get_link {
   return "~~[$link](#undefined)~~";
 }
 
-sub undefined_links {
-  s/\[([^-0-9\`\]][^\]]*?)\](?=[^\(\`])/get_link($1)/sge;
+sub format_footnote_link {
+  my ($text) = @_;
+  $text =~ s/\s+/ /g;
+  die "Duplicate external link text not supported yet '$text'"
+    if grep { $_ eq $text } @footnote_links;
+  push @footnote_links, $text;
+  my $i = @footnote_links;
+  return qq{<span class="footnote-link">$text<sup id="fnl$i">[$i](#fn$i)</sup></span>};
 }
 
 sub set_dates {
@@ -630,6 +635,47 @@ sub format_legend {
   $_ = join "\n", @lines;
   s{\[([^\]]+)\]}{rule_link($1)}ge;
   return $_;
+}
+
+sub format_footnotes {
+  my $footnote_map = parse_footnote_section();
+
+  $_ = qq{<ol class="footnote-links">\n};
+
+  my $i = 1;
+  for my $footnote_link (@footnote_links) {
+    my $entry = $footnote_map->{$footnote_link} or
+      die "No footnote-links entry for '$footnote_link'";
+    my ($text, $link) = @$entry;
+    $_ .= qq{<li id="fn$i" markdown="1">\n};
+    $_ .= qq{<a href="$link" target="_blank">"$text"</a> [↩](#fnl$i)\n};
+    $_ .= qq{</li>\n};
+    $i++;
+  }
+
+  $_ .= qq{</ol>\n};
+  $_ .= qq{<div class="footnote-links-after" />\n};
+}
+
+sub parse_footnote_section {
+  my $footnote_map = {};
+  while ($_) {
+    s/\{.*\}\n// and next;
+    s/\A\*\ (.*)\n// or die $_;
+    my $label = $1;
+    s/\A
+      \ \ \*\ \[
+        ( [^\]]* )
+      \]
+      \(
+        (?:\n?\ +)?
+        ( [^\)]* )
+      \)
+      \n
+    //x or die $_;
+    $footnote_map->{$label} = [ $1, $2 ];
+  }
+  return $footnote_map;
 }
 
 main @ARGV;
