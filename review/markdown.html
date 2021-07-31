@@ -1,19 +1,70 @@
 <pre style="overflow:hidden">
 <code># YAML Ain’t Markup Language (YAML™) Version 1.2</code>
 
-<code>**YAML Specification Version 1.2.1 -- Released YYYY-MM-DD**</code>
+<code>**3rd Edition, Patched at 2009-10-01**</code>
 
-<code>**[The YAML Language Development Team^](
-https://github.com/orgs/yaml/teams/core)**</code>
+{:.author-group}
+* **Oren Ben-Kiki &lt;[oren@ben-kiki.org](mailto:oren@ben-kiki.org)&gt;**
+* **Clark Evans &lt;[cce@clarkevans.com](mailto:cce@clarkevans.com)&gt;**
+* **Ingy döt Net &lt;[ingy@ingy.net](mailto:ingy@ingy.net)&gt;**
 
-Copyright presently by The YAML Language Development Team  
-Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net
+<code>**Latest (patched) version:**</code>
+
+{:.release-info}
+* HTML: [http://yaml.org/spec/1.2/spec.html](/spec/1.2/spec.html)
+* PDF: [http://yaml.org/spec/1.2/spec.pdf](/spec/1.2/spec.pdf)
+* PS: [http://yaml.org/spec/1.2/spec.ps](/spec/1.2/spec.ps)
+* Errata: [http://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html)
+
+<code>**Previous (original) version:**</code>
+[http://yaml.org/spec/1.2/2009-07-21/spec.html](/spec/1.2/2009-07-21/spec.html)
+
+Copyright © 2001-2009 Oren Ben-Kiki, Clark Evans, Ingy döt Net
 
 This document may be freely copied, provided it is not modified.
 
 <code>**Status of this Document**</code>
 
-&gt; &gt; &gt; **TO BE REWRITTEN**{:.TODO}
+This document reflects the third version of YAML data serialization language.
+The content of the specification was arrived at by consensus of its authors and
+through user feedback on the [yaml-core mailing list^].
+We encourage implementers to please update their software with support for this
+version.
+
+The primary objective of this revision is to bring YAML into compliance with
+JSON as an official subset.
+YAML 1.2 is compatible with 1.1 for most practical applications - this is a
+minor revision.
+An expected source of incompatibility with prior versions of YAML, especially
+the syck implementation, is the change in implicit typing rules.
+We have removed unique implicit typing rules and have updated these rules to
+align them with JSON's productions.
+In this version of YAML, boolean values may be serialized as "**`true`**" or
+"**`false`**"; the empty scalar as "**`null`**".
+Unquoted numeric values are a superset of JSON's numeric production.
+Other changes in the specification were the removal of the Unicode line breaks
+and production bug fixes.
+We also define 3 built-in implicit typing rule sets: untyped, strict JSON, and
+a more flexible YAML rule set that extends JSON typing.
+
+The difference between late 1.0 drafts which syck 0.55 implements and the 1.1
+revision of this specification is much more extensive.
+We fixed usability issues with the tagging syntax.
+In particular, the single exclamation was re-defined for private types and a
+simple prefixing mechanism was introduced.
+This revision also fixed many production edge cases and introduced a type
+repository.
+Therefore, there are several incompatibilities between syck and this revision
+as well.
+
+The list of known errors in this specification is available at
+[http://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html).
+Please report errors in this document to the yaml-core mailing list.
+This revision contains fixes for all errors known as of 2009-10-01.
+
+We wish to thank implementers who have tirelessly tracked earlier versions of
+this specification, and our fabulous user community whose feedback has both
+validated and clarified our direction.
 
 <code>**Abstract**</code>
 
@@ -22,15 +73,16 @@ data serialization language designed around the common native data types of
 agile programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 Internet messaging to object persistence to data auditing.
-Together with the [Unicode standard for characters^](http://www.unicode.org/),
-this specification provides all the information necessary to understand YAML
-Version 1.2 and to create programs that process YAML information.
+Together with the [Unicode standard for characters^], this specification
+provides all the information necessary to understand YAML Version 1.2 and to
+create programs that process YAML information.
 
 ----
 
 <code>**Contents**</code>
 
-::toc::
+{:toc}
+* TOC
 
 <code># Chapter #. Introduction</code>
 
@@ -48,8 +100,7 @@ with data.
 It uses Unicode [printable] characters, [some] of which provide structural
 information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
-characters and allowing the data to show itself in a natural and meaningful
-way.
+characters and allowing the data to show itself in a natural and meaningful way.
 For example, [indentation] may be used for structure, [colons] separate
 [key: value pairs], and [dashes] are used to create "bullet" [lists].
 
@@ -88,26 +139,21 @@ The design goals for YAML are, in decreasing priority:
 <code>## #. Prior Art</code>
 
 YAML’s initial direction was set by the data serialization and markup language
-discussions among [SML-DEV members^](
-https://yaml.com/blog/2020-12/in-the-beginning/).
+discussions among [SML-DEV members](http://www.docuverse.com/smldev/).
 Later on, it directly incorporated experience from Ingy döt Net’s Perl module
-[Data::Denter^](https://metacpan.org/dist/Data-Denter/view/Denter.pod).
+[Data::Denter](http://search.cpan.org/dist/Data-Denter/).
 Since then, YAML has matured through ideas and support from its user community.
 
 YAML integrates and builds upon concepts described by
-[C^](http://cm.bell-labs.com/cm/cs/cbook/index.html),
-[Java^](http://java.sun.com/),
-[Perl^](http://www.perl.org/),
-[Python^](http://www.python.org/),
-[Ruby^](http://www.ruby-lang.org/),
-[RFC0822^](http://www.ietf.org/rfc/rfc0822.txt) (MAIL),
-[RFC1866^](http://www.ics.uci.edu/pub/ietf/html/rfc1866.txt) (HTML),
-[RFC2045^](http://www.ietf.org/rfc/rfc2045.txt) (MIME),
-[RFC2396^](http://www.ietf.org/rfc/rfc2396.txt) (URI),
-[XML^](http://www.w3.org/TR/REC-xml.html),
-[SAX^](http://www.saxproject.org/),
-[SOAP^](http://www.w3.org/TR/SOAP), and
-[JSON^](http://www.json.org/).
+[C](http://cm.bell-labs.com/cm/cs/cbook/index.html),
+[Java](http://java.sun.com/), [Perl](http://www.perl.org/),
+[Python](http://www.python.org/), [Ruby](http://www.ruby-lang.org/),
+[RFC0822](http://www.ietf.org/rfc/rfc0822.txt) (MAIL),
+[RFC1866](http://www.ics.uci.edu/pub/ietf/html/rfc1866.txt) (HTML),
+[RFC2045](http://www.ietf.org/rfc/rfc2045.txt) (MIME),
+[RFC2396](http://www.ietf.org/rfc/rfc2396.txt) (URI),
+[XML](http://www.w3.org/TR/REC-xml.html), [SAX](http://www.saxproject.org/),
+[SOAP](http://www.w3.org/TR/SOAP), and [JSON](http://www.json.org/).
 
 The syntax of YAML was motivated by Internet Mail (RFC0822) and remains
 partially compatible with that standard.
@@ -187,7 +233,7 @@ This is also the case in practice; every JSON file is also a valid YAML file.
 This makes it easy to migrate from JSON to YAML if/when the additional features
 are required.
 
-JSON's [RFC4627^](http://www.ietf.org/rfc/rfc4627.txt) requires that [mappings]
+JSON's [RFC4627](http://www.ietf.org/rfc/rfc4627.txt) requires that [mappings]
 [keys] merely "SHOULD" be [unique], while YAML insists they "MUST" be.
 Technically, YAML therefore complies with the JSON spec, choosing to treat
 duplicates as an error.
@@ -216,8 +262,7 @@ there is no direct correlation between them.
 YAML is primarily a data serialization language.
 XML was designed to be backwards compatible with the Standard Generalized
 Markup Language (SGML), which was designed to support structured documentation.
-XML therefore had many design constraints placed on it that YAML does not
-share.
+XML therefore had many design constraints placed on it that YAML does not share.
 XML is a pioneer in many domains, YAML is the result of lessons learned from
 XML and other technologies.
 
@@ -230,7 +275,7 @@ For more information on using both XML and YAML, please visit
 <code>## #. Terminology</code>
 
 This specification uses key words based on
-[RFC2119^](http://www.ietf.org/rfc/rfc2119.txt) to indicate requirement level.
+[RFC2119](http://www.ietf.org/rfc/rfc2119.txt) to indicate requirement level.
 In particular, the following words are used to describe the actions of a YAML
 [processor]:
 
@@ -711,8 +756,7 @@ data model, as shown in the following diagram:
 
 ![Processing Overview](img/overview2.png)
 
-A YAML processor need not expose the [serialization] or [representation]
-stages.
+A YAML processor need not expose the [serialization] or [representation] stages.
 It may translate directly between [native data structures] and a character
 [stream] ([dump] and [load] in the diagram above).
 However, such a direct translation should take place so that the [native data
@@ -813,12 +857,10 @@ types].
 
 <code>## #. Information Models</code>
 
-This section specifies the formal details of the results of the above
-processes.
+This section specifies the formal details of the results of the above processes.
 To maximize data portability between programming languages and implementations,
 users of YAML should be mindful of the distinction between [serialization] or
-[presentation] properties and those which are part of the YAML
-[representation].
+[presentation] properties and those which are part of the YAML [representation].
 Thus, while imposing a [order] on [mapping keys] is necessary for flattening
 YAML [representations] to a sequential access medium, this [serialization
 detail] must not be used to convey [application] level information.
@@ -845,7 +887,7 @@ YAML’s _representation_ of [native data structure] is a rooted, connected,
 directed graph of [tagged] [nodes].
 By "directed graph" we mean a set of [nodes] and directed edges ("arrows"),
 where each edge connects one [node] to another (see [a formal
-definition^](http://www.nist.gov/dads/HTML/directedGraph.html)).
+definition](http://www.nist.gov/dads/HTML/directedGraph.html)).
 All the [nodes] must be reachable from the _root node_ via such edges.
 Note that the YAML graph may include cycles, and a [node] may have more than
 one incoming edge.
@@ -863,15 +905,14 @@ be [unique].
 <code>#### #. Nodes</code>
 
 A YAML _node_ [represents] a single [native data structure].
-Such nodes have _content_ of one of three _kinds_: scalar, sequence, or
-mapping.
+Such nodes have _content_ of one of three _kinds_: scalar, sequence, or mapping.
 In addition, each node has a [tag] which serves to restrict the set of possible
 values the content can have.
 
 <code>##### Scalar</code>
 
-&gt; The content of a _scalar_ node is an opaque datum that can be [presented] as
-a series of zero or more Unicode characters.
+&gt; The content of a _scalar_ node is an opaque datum that can be [presented] as a
+series of zero or more Unicode characters.
 
 <code>##### Sequence</code>
 
@@ -900,9 +941,9 @@ This strategy is also used by the Javascript programming language.
 
 YAML [represents] type information of [native data structures] with a simple
 identifier, called a _tag_. _Global tags_ are
-[URIs^](http://www.ietf.org/rfc/rfc2396.txt) and hence globally unique across
+[URIs](http://www.ietf.org/rfc/rfc2396.txt) and hence globally unique across
 all [applications].
-The "**`tag:`**" [URI scheme^](http://www.faqs.org/rfcs/rfc4151.html) is
+The "**`tag:`**" [URI scheme](http://www.faqs.org/rfcs/rfc4151.html) is
 recommended for all global YAML tags.
 In contrast, _local tags_ are specific to a single [application].
 Local tags start with _"**`!`**"_, are not URIs and are not expected to be
@@ -1104,8 +1145,7 @@ A directive has a name and an optional sequence of parameters.
 Directives are instructions to the YAML [processor], and like all other
 [presentation details] are not reflected in the YAML [serialization tree] or
 [representation graph].
-This version of YAML defines a two directives, ["**`YAML`**"] and
-["**`TAG`**"].
+This version of YAML defines a two directives, ["**`YAML`**"] and ["**`TAG`**"].
 All other directives are [reserved] for future versions of YAML.
 
 <code>## #. Loading Failure Points</code>
@@ -1246,11 +1286,11 @@ This format uses only [flow collections], [double-quoted scalars], and explicit
 [tags] for each [node].
 
 A reference implementation using the productions is available as the
-[YamlReference^](
+[YamlReference](
 http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Yaml%20Reference)
 Haskell package.
 This reference implementation is also available as an interactive web
-application at [http://dev.yaml.org/ypaste^](http://dev.yaml.org/ypaste).
+application at [http://dev.yaml.org/ypaste](http://dev.yaml.org/ypaste).
 
 <code>## #. Production Parameters</code>
 
@@ -1356,21 +1396,23 @@ prefixes.
 
 To ensure readability, YAML [streams] use only the _printable_ subset of the
 Unicode character set.
-The allowed character range explicitly excludes the C0 control block
+The allowed character range explicitly excludes the [C0 control block^]
 **`#x0-#x1F`** (except for TAB **`#x9`**, LF **`#xA`**, and CR **`#xD`** which
 are allowed), DEL **`#x7F`**, the C1 control block **`#x80-#x9F`** (except for
-NEL **`#x85`** which is allowed), the surrogate block **`#xD800-#xDFFF`**,
-**`#xFFFE`**, and **`#xFFFF`**.
+NEL **`#x85`** which is allowed), the [surrogate block^] **`#xD800-#xDFFF`**,
+**`#xFFFE`** and **`#xFFFF`**.
 
-On input, a YAML [processor] must accept all Unicode characters except those
-explicitly excluded above.
+On input, a YAML [processor] must accept all characters in this printable
+subset.
 
-On output, a YAML [processor] must only produce acceptable characters.
-Any excluded characters must be [presented] using [escape] sequences.
+On output, a YAML [processor] must only produce only characters in this
+printable subset.
+Characters outside this set must be [presented] using [escape] sequences.
 In addition, any allowed characters known to be non-printable should also be
 [escaped].
-This isn’t mandatory since a full implementation would require extensive
-character property tables.
+
+&gt; Note: This isn’t mandatory since a full implementation would require
+extensive character property tables.
 
 ```
 [#] c-printable ::=
@@ -1379,17 +1421,20 @@ character property tables.
   | [#x10000-#x10FFFF]                     /* 32 bit */
 ```
 
-To ensure [JSON compatibility], YAML [processors] must allow all non-control
-characters inside [quoted scalars].
+To ensure [JSON compatibility], YAML [processors] [must allow all non-C0
+characters^] inside [quoted scalars].
 To ensure readability, non-printable characters should be [escaped] on output,
 even inside such [scalars].
-Note that JSON [quoted scalars] cannot span multiple lines or contain [tabs],
+
+&gt; Note: JSON [quoted scalars] cannot span multiple lines or contain [tabs],
 but YAML [quoted scalars] can.
 
 ```
 [#] nb-json ::=
   #x9 | [#x20-#x10FFFF]
 ```
+
+&gt; Note: The rule name `nb-json` means "non-break JSON compatible" here.
 
 <code>## #. Character Encodings</code>
 
@@ -1407,7 +1452,7 @@ encodings.
 For [JSON compatibility], the UTF-32 encodings must also be supported.
 
 If a character [stream] begins with a _byte order mark_, the character encoding
-will be taken to be as as indicated by the byte order mark.
+will be taken to be as indicated by the byte order mark.
 Otherwise, the [stream] must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (**`#x00`**)
 characters.
@@ -1443,7 +1488,7 @@ be used, even if the first [stream] character is ASCII.
 
 For more information about the byte order mark and the Unicode character
 encoding schemes see the [Unicode
-FAQ^](http://www.unicode.org/unicode/faq/utf_bom.html).
+FAQ](http://www.unicode.org/unicode/faq/utf_bom.html).
 
 ```
 [#] c-byte-order-mark ::= #xFEFF
@@ -1947,9 +1992,9 @@ Word (alphanumeric) characters for identifiers:
 ```
 
 URI characters for [tags], as specified in
-[RFC2396^](http://www.ietf.org/rfc/rfc2396.txt), with the addition of the
+[RFC2396](http://www.ietf.org/rfc/rfc2396.txt), with the addition of the
 "**`[`**" and "**`]`**" for presenting IPv6 addresses as proposed in
-[RFC2732^](http://www.ietf.org/rfc/rfc2732.txt).
+[RFC2732](http://www.ietf.org/rfc/rfc2732.txt).
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8, and then each byte is _escaped_ using
@@ -3165,7 +3210,7 @@ If the suffix needs to specify any of the above restricted characters, they
 must be [escaped] using the ["**`%`**"] character.
 This behavior is consistent with the URI character escaping rules
 (specifically, section 2.3 of
-[RFC2396^](http://www.ietf.org/rfc/rfc2396.txt)).
+[RFC2396](http://www.ietf.org/rfc/rfc2396.txt)).
 
 ```
 [#] c-ns-shorthand-tag ::=
@@ -6183,8 +6228,7 @@ possible of the the _YAML tag repository_ at [http://yaml.org/type/](/type/).
 This repository provides recommended [global tags] for increasing the
 portability of YAML [documents] between different [applications].
 
-The tag repository is intentionally left out of the scope of this
-specification.
+The tag repository is intentionally left out of the scope of this specification.
 This allows it to evolve to better support YAML [applications].
 Hence, developers are encouraged to submit new "universal" types to the
 repository.
@@ -6193,9 +6237,21 @@ The yaml-core mailing list at
 is the preferred method for such submissions, as well as raising any questions
 regarding this draft.
 
-<code># External Links</code>
+<code># Reference Links</code>
 
-::footnotes::
-
-::bottom::
+{:.footnote-links}
+* yaml-core mailing list
+  * [Mailing List: yaml-core](
+    http://lists.sourceforge.net/lists/listinfo/yaml-core)
+* Unicode standard for characters
+  * [Unicode - The World Standard for Text and Emoji](http://www.unicode.org/)
+* C0 control block
+  * [Wikipedia - C0 and C1 control codes](
+    https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
+* surrogate block
+  * [Wikipedia - Universal Character Set characters #Surrogates](
+    https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
+* must allow all non-C0 characters
+  * [rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings](
+    https://tools.ietf.org/html/rfc7159#section-7)
 </pre>
