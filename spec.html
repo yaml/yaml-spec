@@ -24,7 +24,7 @@
 
 <p><strong>3rd Edition, Patched at 2009-10-01</strong></p>
 
-<ul class="author-group">
+<ul class="authorgroup">
   <li><strong>Oren Ben-Kiki &lt;<a href="mailto:oren@ben-kiki.org">oren@ben-kiki.org</a>&gt;</strong></li>
   <li><strong>Clark Evans &lt;<a href="mailto:cce@clarkevans.com">cce@clarkevans.com</a>&gt;</strong></li>
   <li><strong>Ingy döt Net &lt;<a href="mailto:ingy@ingy.net">ingy@ingy.net</a>&gt;</strong></li>
@@ -32,7 +32,7 @@
 
 <p><strong>Latest (patched) version:</strong></p>
 
-<ul class="release-info">
+<ul class="releaseinfo">
   <li>HTML: <a href="/spec/1.2/spec.html">http://yaml.org/spec/1.2/spec.html</a></li>
   <li>PDF: <a href="/spec/1.2/spec.pdf">http://yaml.org/spec/1.2/spec.pdf</a></li>
   <li>PS: <a href="/spec/1.2/spec.ps">http://yaml.org/spec/1.2/spec.ps</a></li>
@@ -50,7 +50,8 @@
 
 <p>This document reflects the third version of YAML data serialization language.
 The content of the specification was arrived at by consensus of its authors and
-through user feedback on the <span class="footnote-link">yaml-core mailing list<sup id="fnl1"><a href="#fn1">1</a></sup></span>.
+through user feedback on the
+<a href="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core</a> mailing list.
 We encourage implementers to please update their software with support for this
 version.</p>
 
@@ -96,9 +97,9 @@ data serialization language designed around the common native data types of
 agile programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 Internet messaging to object persistence to data auditing.
-Together with the <span class="footnote-link">Unicode standard for characters<sup id="fnl2"><a href="#fn2">2</a></sup></span>, this specification
-provides all the information necessary to understand YAML Version 1.2 and to
-create programs that process YAML information.</p>
+Together with the <a href="http://www.unicode.org/">Unicode standard for characters</a>,
+this specification provides all the information necessary to understand YAML
+Version 1.2 and to create programs that process YAML information.</p>
 
 <hr />
 
@@ -373,7 +374,6 @@ create programs that process YAML information.</p>
       <li><a href="#104-other-schemas" id="markdown-toc-104-other-schemas">10.4. Other Schemas</a></li>
     </ul>
   </li>
-  <li><a href="#reference-links" id="markdown-toc-reference-links">Reference Links</a></li>
 </ul>
 
 <div id="introduction"></div>
@@ -1902,25 +1902,21 @@ prefixes.</p>
 
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
-The allowed character range explicitly excludes the <span class="footnote-link">C0 control block<sup id="fnl3"><a href="#fn3">3</a></sup></span>
+The allowed character range explicitly excludes the C0 control block
 <strong><code class="language-plaintext highlighter-rouge">#x0-#x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">#xA</code></strong>, and CR <strong><code class="language-plaintext highlighter-rouge">#xD</code></strong> which
 are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">#x7F</code></strong>, the C1 control block <strong><code class="language-plaintext highlighter-rouge">#x80-#x9F</code></strong> (except for
-NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the <span class="footnote-link">surrogate block<sup id="fnl4"><a href="#fn4">4</a></sup></span> <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
-<strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong> and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
+NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the surrogate block <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
+<strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong>, and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
 
-<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
-subset.</p>
+<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all Unicode characters except those
+explicitly excluded above.</p>
 
-<p>On output, a YAML <a href="#processing-yaml-information">processor</a> must only produce only characters in this
-printable subset.
-Characters outside this set must be <a href="#presenting-the-serialization-tree">presented</a> using <a href="#escaped-characters">escape</a> sequences.
+<p>On output, a YAML <a href="#processing-yaml-information">processor</a> must only produce acceptable characters.
+Any excluded characters must be <a href="#presenting-the-serialization-tree">presented</a> using <a href="#escaped-characters">escape</a> sequences.
 In addition, any allowed characters known to be non-printable should also be
-<a href="#escaped-characters">escaped</a>.</p>
-
-<blockquote>
-  <p>Note: This isn’t mandatory since a full implementation would require
-extensive character property tables.</p>
-</blockquote>
+<a href="#escaped-characters">escaped</a>.
+This isn’t mandatory since a full implementation would require extensive
+character property tables.</p>
 
 <div id="rule-c-printable"></div>
 <pre class="rule">
@@ -1930,24 +1926,18 @@ extensive character property tables.</p>
   | [#x10000-#x10FFFF]                     /* 32 bit */
 </pre>
 
-<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> <span class="footnote-link">must allow all non-C0 characters<sup id="fnl5"><a href="#fn5">5</a></sup></span> inside <a href="#double-quoted-style">quoted scalars</a>.
+<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> must allow all non-control
+characters inside <a href="#double-quoted-style">quoted scalars</a>.
 To ensure readability, non-printable characters should be <a href="#escaped-characters">escaped</a> on output,
-even inside such <a href="#scalars">scalars</a>.</p>
-
-<blockquote>
-  <p>Note: JSON <a href="#double-quoted-style">quoted scalars</a> cannot span multiple lines or contain <a href="#white-space-characters">tabs</a>,
+even inside such <a href="#scalars">scalars</a>.
+Note that JSON <a href="#double-quoted-style">quoted scalars</a> cannot span multiple lines or contain <a href="#white-space-characters">tabs</a>,
 but YAML <a href="#double-quoted-style">quoted scalars</a> can.</p>
-</blockquote>
 
 <div id="rule-nb-json"></div>
 <pre class="rule">
 [2] nb-json ::=
   #x9 | [#x20-#x10FFFF]
 </pre>
-
-<blockquote>
-  <p>Note: The rule name <code class="language-plaintext highlighter-rouge">nb-json</code> means “non-break JSON compatible” here.</p>
-</blockquote>
 
 <div id="character-encodings"></div>
 <h2 id="52-character-encodings">5.2. Character Encodings</h2>
@@ -1966,7 +1956,7 @@ encodings.
 For <a href="#yaml-directives">JSON compatibility</a>, the UTF-32 encodings must also be supported.</p>
 
 <p>If a character <a href="#streams">stream</a> begins with a <em>byte order mark</em>, the character encoding
-will be taken to be as indicated by the byte order mark.
+will be taken to be as as indicated by the byte order mark.
 Otherwise, the <a href="#streams">stream</a> must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (<strong><code class="language-plaintext highlighter-rouge">#x00</code></strong>)
 characters.</p>
@@ -8873,27 +8863,6 @@ The yaml-core mailing list at
 <a href="http://lists.sourceforge.net/lists/listinfo/yaml-core">http://lists.sourceforge.net/lists/listinfo/yaml-core</a>
 is the preferred method for such submissions, as well as raising any questions
 regarding this draft.</p>
-
-<h1 id="reference-links">Reference Links</h1>
-
-<ol class="footnote-links">
-<li id="fn1">
-    <p><a href="http://lists.sourceforge.net/lists/listinfo/yaml-core" target="_blank">“Mailing List: yaml-core”</a> <a href="#fnl1">↩</a></p>
-  </li>
-<li id="fn2">
-    <p><a href="http://www.unicode.org/" target="_blank">“Unicode - The World Standard for Text and Emoji”</a> <a href="#fnl2">↩</a></p>
-  </li>
-<li id="fn3">
-    <p><a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes" target="_blank">“Wikipedia - C0 and C1 control codes”</a> <a href="#fnl3">↩</a></p>
-  </li>
-<li id="fn4">
-    <p><a href="https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates" target="_blank">“Wikipedia - Universal Character Set characters #Surrogates”</a> <a href="#fnl4">↩</a></p>
-  </li>
-<li id="fn5">
-    <p><a href="https://tools.ietf.org/html/rfc7159#section-7" target="_blank">“rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings”</a> <a href="#fnl5">↩</a></p>
-  </li>
-</ol>
-<div class="footnote-links-after"></div>
 
 
 </section>

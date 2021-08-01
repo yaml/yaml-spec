@@ -3,18 +3,18 @@
 
 <code>**3rd Edition, Patched at 2009-10-01**</code>
 
-{:.author-group}
 * **Oren Ben-Kiki &lt;[oren@ben-kiki.org](mailto:oren@ben-kiki.org)&gt;**
 * **Clark Evans &lt;[cce@clarkevans.com](mailto:cce@clarkevans.com)&gt;**
 * **Ingy döt Net &lt;[ingy@ingy.net](mailto:ingy@ingy.net)&gt;**
+{:.authorgroup}
 
 <code>**Latest (patched) version:**</code>
 
-{:.release-info}
 * HTML: [http://yaml.org/spec/1.2/spec.html](/spec/1.2/spec.html)
 * PDF: [http://yaml.org/spec/1.2/spec.pdf](/spec/1.2/spec.pdf)
 * PS: [http://yaml.org/spec/1.2/spec.ps](/spec/1.2/spec.ps)
 * Errata: [http://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html)
+{:.releaseinfo}
 
 <code>**Previous (original) version:**</code>
 [http://yaml.org/spec/1.2/2009-07-21/spec.html](/spec/1.2/2009-07-21/spec.html)
@@ -27,7 +27,8 @@ This document may be freely copied, provided it is not modified.
 
 This document reflects the third version of YAML data serialization language.
 The content of the specification was arrived at by consensus of its authors and
-through user feedback on the [yaml-core mailing list^].
+through user feedback on the
+[yaml-core](http://lists.sourceforge.net/lists/listinfo/yaml-core) mailing list.
 We encourage implementers to please update their software with support for this
 version.
 
@@ -73,16 +74,15 @@ data serialization language designed around the common native data types of
 agile programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 Internet messaging to object persistence to data auditing.
-Together with the [Unicode standard for characters^], this specification
-provides all the information necessary to understand YAML Version 1.2 and to
-create programs that process YAML information.
+Together with the [Unicode standard for characters](http://www.unicode.org/),
+this specification provides all the information necessary to understand YAML
+Version 1.2 and to create programs that process YAML information.
 
 ----
 
 <code>**Contents**</code>
 
-{:toc}
-* TOC
+::toc
 
 <code># Chapter #. Introduction</code>
 
@@ -1396,23 +1396,21 @@ prefixes.
 
 To ensure readability, YAML [streams] use only the _printable_ subset of the
 Unicode character set.
-The allowed character range explicitly excludes the [C0 control block^]
+The allowed character range explicitly excludes the C0 control block
 **`#x0-#x1F`** (except for TAB **`#x9`**, LF **`#xA`**, and CR **`#xD`** which
 are allowed), DEL **`#x7F`**, the C1 control block **`#x80-#x9F`** (except for
-NEL **`#x85`** which is allowed), the [surrogate block^] **`#xD800-#xDFFF`**,
-**`#xFFFE`** and **`#xFFFF`**.
+NEL **`#x85`** which is allowed), the surrogate block **`#xD800-#xDFFF`**,
+**`#xFFFE`**, and **`#xFFFF`**.
 
-On input, a YAML [processor] must accept all characters in this printable
-subset.
+On input, a YAML [processor] must accept all Unicode characters except those
+explicitly excluded above.
 
-On output, a YAML [processor] must only produce only characters in this
-printable subset.
-Characters outside this set must be [presented] using [escape] sequences.
+On output, a YAML [processor] must only produce acceptable characters.
+Any excluded characters must be [presented] using [escape] sequences.
 In addition, any allowed characters known to be non-printable should also be
 [escaped].
-
-&gt; Note: This isn’t mandatory since a full implementation would require
-extensive character property tables.
+This isn’t mandatory since a full implementation would require extensive
+character property tables.
 
 ```
 [#] c-printable ::=
@@ -1421,20 +1419,17 @@ extensive character property tables.
   | [#x10000-#x10FFFF]                     /* 32 bit */
 ```
 
-To ensure [JSON compatibility], YAML [processors] [must allow all non-C0
-characters^] inside [quoted scalars].
+To ensure [JSON compatibility], YAML [processors] must allow all non-control
+characters inside [quoted scalars].
 To ensure readability, non-printable characters should be [escaped] on output,
 even inside such [scalars].
-
-&gt; Note: JSON [quoted scalars] cannot span multiple lines or contain [tabs],
+Note that JSON [quoted scalars] cannot span multiple lines or contain [tabs],
 but YAML [quoted scalars] can.
 
 ```
 [#] nb-json ::=
   #x9 | [#x20-#x10FFFF]
 ```
-
-&gt; Note: The rule name `nb-json` means "non-break JSON compatible" here.
 
 <code>## #. Character Encodings</code>
 
@@ -1452,7 +1447,7 @@ encodings.
 For [JSON compatibility], the UTF-32 encodings must also be supported.
 
 If a character [stream] begins with a _byte order mark_, the character encoding
-will be taken to be as indicated by the byte order mark.
+will be taken to be as as indicated by the byte order mark.
 Otherwise, the [stream] must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (**`#x00`**)
 characters.
@@ -6236,22 +6231,4 @@ The yaml-core mailing list at
 &lt;http://lists.sourceforge.net/lists/listinfo/yaml-core&gt;
 is the preferred method for such submissions, as well as raising any questions
 regarding this draft.
-
-<code># Reference Links</code>
-
-{:.footnote-links}
-* yaml-core mailing list
-  * [Mailing List: yaml-core](
-    http://lists.sourceforge.net/lists/listinfo/yaml-core)
-* Unicode standard for characters
-  * [Unicode - The World Standard for Text and Emoji](http://www.unicode.org/)
-* C0 control block
-  * [Wikipedia - C0 and C1 control codes](
-    https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
-* surrogate block
-  * [Wikipedia - Universal Character Set characters #Surrogates](
-    https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
-* must allow all non-C0 characters
-  * [rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings](
-    https://tools.ietf.org/html/rfc7159#section-7)
 </pre>
