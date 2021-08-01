@@ -4,4 +4,4 @@ remote=$(git config remote.fork.url) || exit 0
 [[ $remote == git@github.com:*/yaml-spec* ]] || exit 0
 remote=${remote#git@github.com:}
 remote=${remote%/*}
-echo $remote
+echo "$remote"

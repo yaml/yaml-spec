@@ -6,8 +6,16 @@ PUBLISH_CNAME := spec.yaml.io
 JEKYLL_BUILD := jekyll build --trace
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 FORK_USER_ID := $(shell $(ROOT)/tool/bin/get-fork-id)
+REPO_NAME := $(shell $(ROOT)/tool/bin/get-repo-name)
 SITE := _site
 GH_PAGES := _gh-pages
+BASEURL ?=
+
+#------------------------------------------------------------------------------
+serve : BASEURL :=
+
+stage : PUBLISH_CNAME :=
+stage : BASEURL := /$(REPO_NAME)
 
 #------------------------------------------------------------------------------
 DOCKER_BUILD_OPTS := \
@@ -93,7 +101,9 @@ site: $(EXT) $(SITE_FILES) $(GH_PAGES)
 build: site
 	$(eval override export YAML_SPEC_DIR := www/$(SITE))
 	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
+ifneq ($(PUBLISH_CNAME),)
 	echo $(PUBLISH_CNAME) > $(GH_PAGES)/CNAME
+endif
 
 serve: site
 	$(eval override export YAML_SPEC_DIR := www/$(SITE))
@@ -112,13 +122,13 @@ ifeq ($(FORK_USER_ID),)
 endif
 	( \
 	    cd $(GH_PAGES) && \
-	    perl -pi -e "s/spec/$(FORK_USER_ID)-spec/" CNAME && \
+	    rm -f CNAME && \
 	    git add -A . && \
 	    git commit -m 'Stage' && \
 	    git push -f fork gh-pages \
 	) || true
 	@echo
-	@echo "Staged: http://$(FORK_USER_ID)-$(PUBLISH_CNAME)"
+	@echo "Staged: https://$(FORK_USER_ID).github.io/$(REPO_NAME)"
 	@echo
 
 publish: build
@@ -134,7 +144,7 @@ endif
 	    git push -f \
 	) || true
 	@echo
-	@echo "Published: https://$(PUBLISH_CNAME)"
+	@echo "Published: https://$(PUBLISH_CNAME)/"
 	@echo
 
 # Remove generated files to force rebuild:
@@ -174,6 +184,13 @@ $(SITE)/%.scss: _%.scss
 $(SITE)/%: _jekyll/%
 	@mkdir -p $(dir $@)
 	cp -r $< $@
+
+$(SITE)/_config.yml: _jekyll/_config.yml
+	@mkdir -p $(dir $@)
+	cp -r $< $@
+	echo >> $@
+	echo '# Added by build system:' >> $@
+	echo "baseurl: '$(BASEURL)'" >> $@
 
 $(SITE)/%.md: %.md
 	@mkdir -p $(dir $@)

@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+remote=$(git config remote.origin.url) || exit 0
+[[ $remote == git@github.com:*/yaml-spec* ]] || exit 0
+remote=${remote##*/}
+remote=${remote%.git}
+echo "$remote"
