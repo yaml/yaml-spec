@@ -163,8 +163,8 @@
 ></script>
 
   <script type="module">
-import { parse } from '/ext/npm-yaml/browser/dist/index.js';
-import { testEvents } from '/ext/npm-yaml/browser/dist/test-events.js';
+import { parse } from '/yaml-spec/ext/npm-yaml/browser/dist/index.js';
+import { testEvents } from '/yaml-spec/ext/npm-yaml/browser/dist/test-events.js';
 window.npmYAML = {
   'parse': parse,
   'events': testEvents,
@@ -172,15 +172,15 @@ window.npmYAML = {
 </script>
 
 <script type="module">
-import { YAML } from '/ext/npm-yaml/v1/browser/dist/index.js';
-import { testEvents } from '/ext/npm-yaml/v1/browser/dist/test-events.js';
+import { YAML } from '/yaml-spec/ext/npm-yaml/v1/browser/dist/index.js';
+import { testEvents } from '/yaml-spec/ext/npm-yaml/v1/browser/dist/test-events.js';
 YAML.events = testEvents;
 window.npmYAML1 = YAML;
 </script>
 
 <script type="module">
-import { parse } from '/ext/npm-yaml/v2/browser/dist/index.js';
-import { testEvents } from '/ext/npm-yaml/v2/browser/dist/test-events.js';
+import { parse } from '/yaml-spec/ext/npm-yaml/v2/browser/dist/index.js';
+import { testEvents } from '/yaml-spec/ext/npm-yaml/v2/browser/dist/test-events.js';
 window.npmYAML2 = {
   'parse': parse,
   'events': testEvents,

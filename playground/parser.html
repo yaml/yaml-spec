@@ -163,8 +163,8 @@
 ></script>
 
   <script type="module">
-import { parse } from '/ext/npm-yaml/browser/dist/index.js';
-import { testEvents } from '/ext/npm-yaml/browser/dist/test-events.js';
+import { parse } from '/yaml-spec/ext/npm-yaml/browser/dist/index.js';
+import { testEvents } from '/yaml-spec/ext/npm-yaml/browser/dist/test-events.js';
 window.npmYAML = {
   'parse': parse,
   'events': testEvents,
@@ -172,15 +172,15 @@ window.npmYAML = {
 </script>
 
 <script type="module">
-import { YAML } from '/ext/npm-yaml/v1/browser/dist/index.js';
-import { testEvents } from '/ext/npm-yaml/v1/browser/dist/test-events.js';
+import { YAML } from '/yaml-spec/ext/npm-yaml/v1/browser/dist/index.js';
+import { testEvents } from '/yaml-spec/ext/npm-yaml/v1/browser/dist/test-events.js';
 YAML.events = testEvents;
 window.npmYAML1 = YAML;
 </script>
 
 <script type="module">
-import { parse } from '/ext/npm-yaml/v2/browser/dist/index.js';
-import { testEvents } from '/ext/npm-yaml/v2/browser/dist/test-events.js';
+import { parse } from '/yaml-spec/ext/npm-yaml/v2/browser/dist/index.js';
+import { testEvents } from '/yaml-spec/ext/npm-yaml/v2/browser/dist/test-events.js';
 window.npmYAML2 = {
   'parse': parse,
   'events': testEvents,
@@ -228,61 +228,7 @@ baz:
   <script type="text/javascript">
     $(document).ready(()=> {
 
-      var conf = npmYAML.parse(`
-slug: playground-parser-events
-cols: 4
-html: <div class="container-fluid row">
-
-pane:
-- name: Menu of Examples
-  slug: menu
-  mark: |
-    * foo
-    * bar
-
-- name: YAML Input
-  slug: yaml-input
-  type: input
-  colx: 1
-
-- name: YAML Reference Parser
-  slug: refparser
-  call: [refparser-events, yaml-input]
-  colx: 1
-
-- name: libfyaml (C)
-  slug: libfyaml
-  call: [libfyaml-events, yaml-input]
-  colx: 2
-
-- name: libyaml (C)
-  slug: libyaml
-  call: [libyaml-events, yaml-input]
-  colx: 2
-
-- name: YAML::PP (Perl)
-  slug: yamlpp
-  call: [yamlpp-events, yaml-input]
-  colx: 3
-
-- name: PyYAML (Python)
-  slug: pyyaml
-  call: [pyyaml-events, yaml-input]
-  colx: 3
-
-- name: NPM yaml.js v1.10.2 (JS)
-  slug: npmyaml1
-  type: text
-  call: [npmyaml1-event, yaml-input]
-  colx: 4
-
-- name: NPM yaml.js master (JS)
-  slug: npmyamlmaster
-  type: text
-  call: [npmyamlmaster-event, yaml-input]
-  colx: 4
-
-      `);
+      var conf = {"slug":"playground-parser-events","cols":4,"html":"<div class=\"container-fluid row\">","pane":[{"name":"Menu of Examples","slug":"menu","mark":"* foo\n* bar\n"},{"name":"YAML Input","slug":"yaml-input","type":"input","colx":1},{"name":"YAML Reference Parser","slug":"refparser","call":["refparser-events","yaml-input"],"colx":1},{"name":"libfyaml (C)","slug":"libfyaml","call":["libfyaml-events","yaml-input"],"colx":2},{"name":"libyaml (C)","slug":"libyaml","call":["libyaml-events","yaml-input"],"colx":2},{"name":"YAML::PP (Perl)","slug":"yamlpp","call":["yamlpp-events","yaml-input"],"colx":3},{"name":"PyYAML (Python)","slug":"pyyaml","call":["pyyaml-events","yaml-input"],"colx":3},{"name":"NPM yaml.js v1.10.2 (JS)","slug":"npmyaml1","type":"text","call":["npmyaml1-event","yaml-input"],"colx":4},{"name":"NPM yaml.js master (JS)","slug":"npmyamlmaster","type":"text","call":["npmyamlmaster-event","yaml-input"],"colx":4}]};
 
       var conf_name = EatMe.conf(conf);
       EatMe.init({
