@@ -55,6 +55,7 @@ my $re_pre = qr/
 my $re_legend = qr/
   ${b}Legend:$b\n
   $li+
+  \n*
 /x;
 
 sub parse_sections {
@@ -64,7 +65,7 @@ sub parse_sections {
   while ($_) {
     # Example section:
     s<\A
-      (${b}Example$s\# $x*?$b)\n
+      (${b}Example$s\# $x*?$b)\n+
       ($re_pre)
       ($re_pre)?
       ($re_legend)?
