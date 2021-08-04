@@ -125,3 +125,28 @@ span.footnote-link {
 .footnote-links-after {
   height: 1000px;
 }
+
+.language-json
+.highlight {
+  .nl {
+    font-weight: normal;
+    color: blue;
+  }
+  .s2 {
+    color: darkgreen;
+  }
+  .kc {
+    color: #567482;
+    font-weight: bold;
+  }
+  .se {
+    color: darkblue;
+    font-weight: bold;
+  }
+  .err,
+  .err + .mi,
+  .err + .p + .mi {
+    color: #567482;
+    background-color: inherit;
+  }
+}

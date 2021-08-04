@@ -48,6 +48,7 @@ my $re_pre = qr/
   $code
   $line+?
   $code
+  $ial*
   $comment*
   \n*
 /x;
@@ -255,11 +256,18 @@ sub fmt_example {
   $yaml1 = format_pre($yaml1);
   $yaml1 =~ s{_eof_}{<i>eof</i>}g;
 
+  my $inner_markdown = 0;
   if ($yaml2) {
     if ($yaml2 =~ s/($comment+)\n*\z//) {
       $yaml2 = apply_highlights($yaml2, $1);
     }
-    $yaml2 = format_pre($yaml2);
+    if ($yaml2 =~ /\A```\n(?:[\{\[]\ |"|!)/) {
+      $yaml2 = format_pre_json($yaml2);
+      $inner_markdown = 1;
+    }
+    else {
+      $yaml2 = format_pre($yaml2);
+    }
     if ($yaml2 =~ /ERROR:/) {
       $yaml1 =~ s/<pre(\ ?)/<pre class="error"$1/;
       $yaml2 =~ s/<pre(\ ?)/<pre class="error"$1/;
@@ -270,7 +278,7 @@ sub fmt_example {
 <td class="side-by-side">
 $yaml1
 </td>
-<td class="side-by-side">
+<td class="side-by-side" markdown="$inner_markdown">
 $yaml2
 </td>
 </tr>
@@ -606,7 +614,7 @@ sub format_pre {
   s/\n+\z/\n/;
 
   s/\A```\n//;
-  s/\n```\n\z//;
+  s/\n```\n*\z//;
   s/&/&amp;/g;
   s/</&lt;/g;
   s/>/&gt;/g;
@@ -619,6 +627,13 @@ sub format_pre {
 $_
 </pre>
 ...
+}
+
+sub format_pre_json {
+  $_ = $_[0];
+  s/\n+\z/\n/;
+  s/\A```\n/```json\n/;
+  return $_;
 }
 
 sub format_legend {
