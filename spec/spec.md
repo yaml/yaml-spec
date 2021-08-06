@@ -6078,7 +6078,7 @@ Hence the YAML [processor] should consider them to be an error.
 | `null` | tag:yaml.org,2002:null
 | `true | false` | tag:yaml.org,2002:bool
 | `-? ( 0 | [1-9] [0-9]* )` | tag:yaml.org,2002:int
-| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float
+| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]+ )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float
 | `*` | Error
 
 **Example #. JSON Tag Resolution**
