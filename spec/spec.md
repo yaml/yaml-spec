@@ -6398,7 +6398,7 @@ matches %: 20
 
 **Legend:**
 * [l-any-document] <!-- 1 2 3 -->
-* [l-document-suffix] <!--  -->
+* [l-document-suffix] <!-- 4 -->
 * [l-explicit-document] <!-- 5 6 7 -->
 
 
