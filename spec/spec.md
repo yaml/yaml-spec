@@ -5683,7 +5683,7 @@ block sequence:
 
 **Legend:**
 * [c-l-block-seq-entry(n)] <!-- 2:3, 3:3, -->
-* auto-detected [s-indent(n)]
+* auto-detected [s-indent(n)] <!-- 2:1,2 -->
 
 
 The entry [node] may be either [completely empty], be a nested [block node], or
