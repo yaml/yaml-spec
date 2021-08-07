@@ -8,11 +8,11 @@
 
 <link rel="stylesheet"
       type="text/css"
-      href="/yaml-spec/assets/css/style.css" />
+      href="/assets/css/style.css" />
 
 <link rel="stylesheet"
       type="text/css"
-      href="/yaml-spec/spec.css" />
+      href="/spec.css" />
 </head>
 
 <body>
@@ -22,29 +22,73 @@
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>YAML Specification Version 1.2.1 – Released 2021-08-06</strong></p>
+<p><strong>3rd Edition, Patched at 2009-10-01</strong></p>
 
-<p><strong><span class="footnote-link">The YAML Language Development Team<sup id="fnl1"><a href="#fn1">1</a></sup></span></strong></p>
+<ul class="authorgroup">
+  <li><strong>Oren Ben-Kiki &lt;<a href="mailto:oren@ben-kiki.org">oren@ben-kiki.org</a>&gt;</strong></li>
+  <li><strong>Clark Evans &lt;<a href="mailto:cce@clarkevans.com">cce@clarkevans.com</a>&gt;</strong></li>
+  <li><strong>Ingy döt Net &lt;<a href="mailto:ingy@ingy.net">ingy@ingy.net</a>&gt;</strong></li>
+</ul>
 
-<p>Copyright presently by The YAML Language Development Team<br />
-Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
+<p><strong>Latest (patched) version:</strong></p>
+
+<ul class="releaseinfo">
+  <li>HTML: <a href="/spec/1.2/spec.html">http://yaml.org/spec/1.2/spec.html</a></li>
+  <li>PDF: <a href="/spec/1.2/spec.pdf">http://yaml.org/spec/1.2/spec.pdf</a></li>
+  <li>PS: <a href="/spec/1.2/spec.ps">http://yaml.org/spec/1.2/spec.ps</a></li>
+  <li>Errata: <a href="/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a></li>
+</ul>
+
+<p><strong>Previous (original) version:</strong>
+<a href="/spec/1.2/2009-07-21/spec.html">http://yaml.org/spec/1.2/2009-07-21/spec.html</a></p>
+
+<p>Copyright © 2001-2009 Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 
 <p>This document may be freely copied, provided it is not modified.</p>
 
 <p><strong>Status of this Document</strong></p>
 
-<p>This is version <strong>1.2.1</strong> of the YAML 1.2 specification.
-It defines the YAML 1.2 data language, with no changes to YAML from the
-previous specification.</p>
+<p>This document reflects the third version of YAML data serialization language.
+The content of the specification was arrived at by consensus of its authors and
+through user feedback on the
+<a href="http://lists.sourceforge.net/lists/listinfo/yaml-core">yaml-core</a> mailing list.
+We encourage implementers to please update their software with support for this
+version.</p>
 
-<ul>
-  <li>Changed the source format from DocBook to Markdown</li>
-  <li>Corrected known errata from the previous specification</li>
-  <li>Clarified wording and examples</li>
-  <li>Fixed known bugs in the grammar productions</li>
-</ul>
+<p>The primary objective of this revision is to bring YAML into compliance with
+JSON as an official subset.
+YAML 1.2 is compatible with 1.1 for most practical applications - this is a
+minor revision.
+An expected source of incompatibility with prior versions of YAML, especially
+the syck implementation, is the change in implicit typing rules.
+We have removed unique implicit typing rules and have updated these rules to
+align them with JSON’s productions.
+In this version of YAML, boolean values may be serialized as “<strong><code class="language-plaintext highlighter-rouge">true</code></strong>” or
+“<strong><code class="language-plaintext highlighter-rouge">false</code></strong>”; the empty scalar as “<strong><code class="language-plaintext highlighter-rouge">null</code></strong>”.
+Unquoted numeric values are a superset of JSON’s numeric production.
+Other changes in the specification were the removal of the Unicode line breaks
+and production bug fixes.
+We also define 3 built-in implicit typing rule sets: untyped, strict JSON, and
+a more flexible YAML rule set that extends JSON typing.</p>
 
-<p>See the <a href="#changes-in-yaml-specification-v121">Changes</a> section below for more details.</p>
+<p>The difference between late 1.0 drafts which syck 0.55 implements and the 1.1
+revision of this specification is much more extensive.
+We fixed usability issues with the tagging syntax.
+In particular, the single exclamation was re-defined for private types and a
+simple prefixing mechanism was introduced.
+This revision also fixed many production edge cases and introduced a type
+repository.
+Therefore, there are several incompatibilities between syck and this revision
+as well.</p>
+
+<p>The list of known errors in this specification is available at
+<a href="/spec/1.2/errata.html">http://yaml.org/spec/1.2/errata.html</a>.
+Please report errors in this document to the yaml-core mailing list.
+This revision contains fixes for all errors known as of 2009-10-01.</p>
+
+<p>We wish to thank implementers who have tirelessly tracked earlier versions of
+this specification, and our fabulous user community whose feedback has both
+validated and clarified our direction.</p>
 
 <p><strong>Abstract</strong></p>
 
@@ -56,6 +100,8 @@ Internet messaging to object persistence to data auditing.
 Together with the <a href="http://www.unicode.org/">Unicode standard for characters</a>,
 this specification provides all the information necessary to understand YAML
 Version 1.2 and to create programs that process YAML information.</p>
+
+<hr />
 
 <p><strong>Contents</strong></p>
 
@@ -328,8 +374,6 @@ Version 1.2 and to create programs that process YAML information.</p>
       <li><a href="#104-other-schemas" id="markdown-toc-104-other-schemas">10.4. Other Schemas</a></li>
     </ul>
   </li>
-  <li><a href="#changes-in-yaml-specification-v121" id="markdown-toc-changes-in-yaml-specification-v121">Changes in YAML Specification v1.2.1</a></li>
-  <li><a href="#reference-links" id="markdown-toc-reference-links">Reference Links</a></li>
 </ul>
 
 <div id="introduction"></div>
@@ -349,8 +393,7 @@ with data.
 It uses Unicode <a href="#character-set">printable</a> characters, <a href="#indicator-characters">some</a> of which provide structural
 information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
-characters and allowing the data to show itself in a natural and meaningful
-way.
+characters and allowing the data to show itself in a natural and meaningful way.
 For example, <a href="#indentation-spaces">indentation</a> may be used for structure, <a href="#flow-mappings">colons</a> separate
 <a href="#mapping">key: value pairs</a>, and <a href="#block-sequences">dashes</a> are used to create “bullet” <a href="#sequence">lists</a>.</p>
 
@@ -393,20 +436,27 @@ When data is easy to view and understand, programming becomes a simpler task.</p
 <h2 id="12-prior-art">1.2. Prior Art</h2>
 
 <p>YAML’s initial direction was set by the data serialization and markup language
-discussions among <span class="footnote-link">SML-DEV members<sup id="fnl2"><a href="#fn2">2</a></sup></span>.
+discussions among <a href="http://www.docuverse.com/smldev/">SML-DEV members</a>.
 Later on, it directly incorporated experience from Ingy döt Net’s Perl module
-<span class="footnote-link">Data::Denter<sup id="fnl3"><a href="#fn3">3</a></sup></span>.
+<a href="http://search.cpan.org/dist/Data-Denter/">Data::Denter</a>.
 Since then, YAML has matured through ideas and support from its user community.</p>
 
-<p>YAML integrates and builds upon concepts described by <span class="footnote-link">C<sup id="fnl4"><a href="#fn4">4</a></sup></span>, <span class="footnote-link">Java<sup id="fnl5"><a href="#fn5">5</a></sup></span>, <span class="footnote-link">Perl<sup id="fnl6"><a href="#fn6">6</a></sup></span>,
-<span class="footnote-link">Python<sup id="fnl7"><a href="#fn7">7</a></sup></span>, <span class="footnote-link">Ruby<sup id="fnl8"><a href="#fn8">8</a></sup></span>, <span class="footnote-link">Email<sup id="fnl9"><a href="#fn9">9</a></sup></span>, <span class="footnote-link">HTML<sup id="fnl10"><a href="#fn10">10</a></sup></span>, <span class="footnote-link">MIME<sup id="fnl11"><a href="#fn11">11</a></sup></span>, <span class="footnote-link">URIs<sup id="fnl12"><a href="#fn12">12</a></sup></span>, <span class="footnote-link">XML<sup id="fnl13"><a href="#fn13">13</a></sup></span>, <span class="footnote-link">SAX<sup id="fnl14"><a href="#fn14">14</a></sup></span>,
-<span class="footnote-link">SOAP<sup id="fnl15"><a href="#fn15">15</a></sup></span> and <span class="footnote-link">JSON<sup id="fnl16"><a href="#fn16">16</a></sup></span>.</p>
+<p>YAML integrates and builds upon concepts described by
+<a href="http://cm.bell-labs.com/cm/cs/cbook/index.html">C</a>,
+<a href="http://java.sun.com/">Java</a>, <a href="http://www.perl.org/">Perl</a>,
+<a href="http://www.python.org/">Python</a>, <a href="http://www.ruby-lang.org/">Ruby</a>,
+<a href="http://www.ietf.org/rfc/rfc0822.txt">RFC0822</a> (MAIL),
+<a href="http://www.ics.uci.edu/pub/ietf/html/rfc1866.txt">RFC1866</a> (HTML),
+<a href="http://www.ietf.org/rfc/rfc2045.txt">RFC2045</a> (MIME),
+<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a> (URI),
+<a href="http://www.w3.org/TR/REC-xml.html">XML</a>, <a href="http://www.saxproject.org/">SAX</a>,
+<a href="http://www.w3.org/TR/SOAP">SOAP</a>, and <a href="http://www.json.org/">JSON</a>.</p>
 
-<p>The syntax of YAML was motivated by Internet Mail (Email) and remains
+<p>The syntax of YAML was motivated by Internet Mail (RFC0822) and remains
 partially compatible with that standard.
-Further, borrowing from MIME, YAML’s top-level production is a <a href="#streams">stream</a> of
-independent <a href="#documents">documents</a>, ideal for message-based distributed processing
-systems.</p>
+Further, borrowing from MIME (RFC2045), YAML’s top-level production is a
+<a href="#streams">stream</a> of independent <a href="#documents">documents</a>, ideal for message-based distributed
+processing systems.</p>
 
 <p>YAML’s <a href="#indentation-spaces">indentation</a>-based scoping is similar to Python’s (without the
 ambiguities caused by <a href="#white-space-characters">tabs</a>). <a href="#block-styles">Indented blocks</a> facilitate easy inspection of
@@ -481,8 +531,8 @@ This is also the case in practice; every JSON file is also a valid YAML file.
 This makes it easy to migrate from JSON to YAML if/when the additional features
 are required.</p>
 
-<p><span class="footnote-link">JSON’s RFC<sup id="fnl17"><a href="#fn17">17</a></sup></span> requires that <a href="#mapping">mappings</a> <a href="#nodes">keys</a> merely “SHOULD” be <a href="#node-comparison">unique</a>,
-while YAML insists they “MUST” be.
+<p>JSON’s <a href="http://www.ietf.org/rfc/rfc4627.txt">RFC4627</a> requires that <a href="#mapping">mappings</a>
+<a href="#nodes">keys</a> merely “SHOULD” be <a href="#node-comparison">unique</a>, while YAML insists they “MUST” be.
 Technically, YAML therefore complies with the JSON spec, choosing to treat
 duplicates as an error.
 In practice, since JSON is silent on the semantics of such duplicates, the only
@@ -511,8 +561,7 @@ there is no direct correlation between them.</p>
 <p>YAML is primarily a data serialization language.
 XML was designed to be backwards compatible with the Standard Generalized
 Markup Language (SGML), which was designed to support structured documentation.
-XML therefore had many design constraints placed on it that YAML does not
-share.
+XML therefore had many design constraints placed on it that YAML does not share.
 XML is a pioneer in many domains, YAML is the result of lessons learned from
 XML and other technologies.</p>
 
@@ -520,13 +569,13 @@ XML and other technologies.</p>
 XML/YAML mappings.
 This generally requires that a subset of each language be used.
 For more information on using both XML and YAML, please visit
-<a href="/xml">https://yaml.org/xml</a>.</p>
+<a href="/xml">http://yaml.org/xml</a>.</p>
 
 <div id="terminology"></div>
 <h2 id="15-terminology">1.5. Terminology</h2>
 
-<p>This specification uses key words based on the <span class="footnote-link">RFC format<sup id="fnl18"><a href="#fn18">18</a></sup></span> to indicate
-requirement level.
+<p>This specification uses key words based on
+<a href="http://www.ietf.org/rfc/rfc2119.txt">RFC2119</a> to indicate requirement level.
 In particular, the following words are used to describe the actions of a YAML
 <a href="#processing-yaml-information">processor</a>:</p>
 
@@ -1131,10 +1180,9 @@ data model, as shown in the following diagram:</p>
 
 <p><strong>Figure 3.1. Processing Overview</strong></p>
 
-<p><img src="/yaml-spec/img/overview2.png" alt="Processing Overview" /></p>
+<p><img src="/img/overview2.png" alt="Processing Overview" /></p>
 
-<p>A YAML processor need not expose the <a href="#serialization-tree">serialization</a> or <a href="#representation-graph">representation</a>
-stages.
+<p>A YAML processor need not expose the <a href="#serialization-tree">serialization</a> or <a href="#representation-graph">representation</a> stages.
 It may translate directly between <a href="#representing-native-data-structures">native data structures</a> and a character
 <a href="#streams">stream</a> (<a href="#dump">dump</a> and <a href="#load">load</a> in the diagram above).
 However, such a direct translation should take place so that the <a href="#representing-native-data-structures">native data
@@ -1252,12 +1300,10 @@ types</a>.</p>
 <div id="information-models"></div>
 <h2 id="32-information-models">3.2. Information Models</h2>
 
-<p>This section specifies the formal details of the results of the above
-processes.
+<p>This section specifies the formal details of the results of the above processes.
 To maximize data portability between programming languages and implementations,
 users of YAML should be mindful of the distinction between <a href="#serialization-tree">serialization</a> or
-<a href="#presentation-stream">presentation</a> properties and those which are part of the YAML
-<a href="#representation-graph">representation</a>.
+<a href="#presentation-stream">presentation</a> properties and those which are part of the YAML <a href="#representation-graph">representation</a>.
 Thus, while imposing a <a href="#keys-order">order</a> on <a href="#nodes">mapping keys</a> is necessary for flattening
 YAML <a href="#representation-graph">representations</a> to a sequential access medium, this <a href="#serializing-the-representation-graph">serialization
 detail</a> must not be used to convey <a href="#processing-yaml-information">application</a> level information.
@@ -1276,7 +1322,7 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 
 <p><strong>Figure 3.2. Information Models</strong></p>
 
-<p><img src="/yaml-spec/img/model2.png" alt="Information Models" /></p>
+<p><img src="/img/model2.png" alt="Information Models" /></p>
 
 <div id="representation-graph"></div>
 <h3 id="321-representation-graph">3.2.1. Representation Graph</h3>
@@ -1284,7 +1330,8 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 <p>YAML’s <em>representation</em> of <a href="#representing-native-data-structures">native data structure</a> is a rooted, connected,
 directed graph of <a href="#tags">tagged</a> <a href="#nodes">nodes</a>.
 By “directed graph” we mean a set of <a href="#nodes">nodes</a> and directed edges (“arrows”),
-where each edge connects one <a href="#nodes">node</a> to another (see a formal <span class="footnote-link">directed graph definition<sup id="fnl19"><a href="#fn19">19</a></sup></span>).
+where each edge connects one <a href="#nodes">node</a> to another (see <a href="http://www.nist.gov/dads/HTML/directedGraph.html">a formal
+definition</a>).
 All the <a href="#nodes">nodes</a> must be reachable from the <em>root node</em> via such edges.
 Note that the YAML graph may include cycles, and a <a href="#nodes">node</a> may have more than
 one incoming edge.</p>
@@ -1297,22 +1344,21 @@ be <a href="#node-comparison">unique</a>.</p>
 
 <p><strong>Figure 3.3. Representation Model</strong></p>
 
-<p><img src="/yaml-spec/img/represent2.png" alt="Representation Model" /></p>
+<p><img src="/img/represent2.png" alt="Representation Model" /></p>
 
 <div id="nodes"></div>
 <h4 id="3211-nodes">3.2.1.1. Nodes</h4>
 
 <p>A YAML <em>node</em> <a href="#representation-graph">represents</a> a single <a href="#representing-native-data-structures">native data structure</a>.
-Such nodes have <em>content</em> of one of three <em>kinds</em>: scalar, sequence, or
-mapping.
+Such nodes have <em>content</em> of one of three <em>kinds</em>: scalar, sequence, or mapping.
 In addition, each node has a <a href="#tags">tag</a> which serves to restrict the set of possible
 values the content can have.</p>
 
 <h5 id="scalar">Scalar</h5>
 
 <blockquote>
-  <p>The content of a <em>scalar</em> node is an opaque datum that can be <a href="#presenting-the-serialization-tree">presented</a> as
-a series of zero or more Unicode characters.</p>
+  <p>The content of a <em>scalar</em> node is an opaque datum that can be <a href="#presenting-the-serialization-tree">presented</a> as a
+series of zero or more Unicode characters.</p>
 </blockquote>
 
 <h5 id="sequence">Sequence</h5>
@@ -1346,9 +1392,11 @@ This strategy is also used by the Javascript programming language.</p>
 <h4 id="3212-tags">3.2.1.2. Tags</h4>
 
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
-identifier, called a <em>tag</em>.
-<em>Global tags</em> are URIs and hence globally unique across all <a href="#processing-yaml-information">applications</a>.
-The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” <span class="footnote-link">URI scheme<sup id="fnl20"><a href="#fn20">20</a></sup></span> is recommended for all global YAML tags.
+identifier, called a <em>tag</em>. <em>Global tags</em> are
+<a href="http://www.ietf.org/rfc/rfc2396.txt">URIs</a> and hence globally unique across
+all <a href="#processing-yaml-information">applications</a>.
+The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” <a href="http://www.faqs.org/rfcs/rfc4151.html">URI scheme</a> is
+recommended for all global YAML tags.
 In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
 Local tags start with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em>, are not URIs and are not expected to be
 globally unique.
@@ -1456,7 +1504,7 @@ or <a href="#anchors-and-aliases">anchor names</a> for the preservation of <a hr
 
 <p><strong>Figure 3.4. Serialization Model</strong></p>
 
-<p><img src="/yaml-spec/img/serialize2.png" alt="Serialization Model" /></p>
+<p><img src="/img/serialize2.png" alt="Serialization Model" /></p>
 
 <div id="keys-order"></div>
 <h4 id="3221-keys-order">3.2.2.1. Keys Order</h4>
@@ -1507,7 +1555,7 @@ not appear in more than one <a href="#serialization-tree">serialization tree</a>
 
 <p><strong>Figure 3.5. Presentation Model</strong></p>
 
-<p><img src="/yaml-spec/img/present2.png" alt="Presentation Model" /></p>
+<p><img src="/img/present2.png" alt="Presentation Model" /></p>
 
 <div id="node-styles"></div>
 <h4 id="3231-node-styles">3.2.3.1. Node Styles</h4>
@@ -1534,7 +1582,7 @@ These allow for a natural “ordered mapping” notation.</p>
 
 <p><strong>Figure 3.6. Kind/Style Combinations</strong></p>
 
-<p><img src="/yaml-spec/img/styles2.png" alt="Kind/Style Combinations" /></p>
+<p><img src="/img/styles2.png" alt="Kind/Style Combinations" /></p>
 
 <div id="scalar-formats"></div>
 <h4 id="3232-scalar-formats">3.2.3.2. Scalar Formats</h4>
@@ -1566,8 +1614,7 @@ A directive has a name and an optional sequence of parameters.
 Directives are instructions to the YAML <a href="#processing-yaml-information">processor</a>, and like all other
 <a href="#presenting-the-serialization-tree">presentation details</a> are not reflected in the YAML <a href="#serialization-tree">serialization tree</a> or
 <a href="#representation-graph">representation graph</a>.
-This version of YAML defines a two directives, “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” and
-“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”.
+This version of YAML defines a two directives, “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”.
 All other directives are <a href="#directives">reserved</a> for future versions of YAML.</p>
 
 <div id="loading-failure-points"></div>
@@ -1592,7 +1639,7 @@ structures</a>.</p>
 
 <p><strong>Figure 3.7. Loading Failure Points</strong></p>
 
-<p><img src="/yaml-spec/img/validity2.png" alt="Loading Failure Points" /></p>
+<p><img src="/img/validity2.png" alt="Loading Failure Points" /></p>
 
 <div id="well-formed-streams-and-identified-aliases"></div>
 <h3 id="331-well-formed-streams-and-identified-aliases">3.3.1. Well-Formed Streams and Identified Aliases</h3>
@@ -1710,15 +1757,14 @@ are always expected to match as much of the input as possible.</p>
 
 <p>The productions are accompanied by examples, which are given side-by-side next
 to equivalent YAML text in an explanatory format.
-The right side format is JSON when possible.
-Otherwise it is YAML using <a href="#flow-collection-styles">flow collections</a>, <a href="#double-quoted-style">double-quoted scalars</a>, and
-tags for non-string scalars.
-When YAML is used on the right side, the first line is <code class="language-plaintext highlighter-rouge">---</code>.</p>
+This format uses only <a href="#flow-collection-styles">flow collections</a>, <a href="#double-quoted-style">double-quoted scalars</a>, and explicit
+<a href="#tags">tags</a> for each <a href="#nodes">node</a>.</p>
 
 <p>A reference implementation using the productions is available as the
-<span class="footnote-link">YamlReference<sup id="fnl21"><a href="#fn21">21</a></sup></span> Haskell package.
+<a href="http://hackage.haskell.org/cgi-bin/hackage-scripts/package/Yaml%20Reference">YamlReference</a>
+Haskell package.
 This reference implementation is also available as an interactive web
-application called <span class="footnote-link">ypaste<sup id="fnl22"><a href="#fn22">22</a></sup></span>.</p>
+application at <a href="http://dev.yaml.org/ypaste">http://dev.yaml.org/ypaste</a>.</p>
 
 <div id="production-parameters"></div>
 <h2 id="41-production-parameters">4.1. Production Parameters</h2>
@@ -1856,25 +1902,21 @@ prefixes.</p>
 
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
-The allowed character range explicitly excludes the <span class="footnote-link">C0 control block<sup id="fnl23"><a href="#fn23">23</a></sup></span>
+The allowed character range explicitly excludes the C0 control block
 <strong><code class="language-plaintext highlighter-rouge">#x0-#x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">#xA</code></strong>, and CR <strong><code class="language-plaintext highlighter-rouge">#xD</code></strong> which
 are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">#x7F</code></strong>, the C1 control block <strong><code class="language-plaintext highlighter-rouge">#x80-#x9F</code></strong> (except for
-NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the <span class="footnote-link">surrogate block<sup id="fnl24"><a href="#fn24">24</a></sup></span> <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
-<strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong> and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
+NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the surrogate block <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
+<strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong>, and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
 
-<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
-subset.</p>
+<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all Unicode characters except those
+explicitly excluded above.</p>
 
-<p>On output, a YAML <a href="#processing-yaml-information">processor</a> must only produce only characters in this
-printable subset.
-Characters outside this set must be <a href="#presenting-the-serialization-tree">presented</a> using <a href="#escaped-characters">escape</a> sequences.
+<p>On output, a YAML <a href="#processing-yaml-information">processor</a> must only produce acceptable characters.
+Any excluded characters must be <a href="#presenting-the-serialization-tree">presented</a> using <a href="#escaped-characters">escape</a> sequences.
 In addition, any allowed characters known to be non-printable should also be
-<a href="#escaped-characters">escaped</a>.</p>
-
-<blockquote>
-  <p>Note: This isn’t mandatory since a full implementation would require
-extensive character property tables.</p>
-</blockquote>
+<a href="#escaped-characters">escaped</a>.
+This isn’t mandatory since a full implementation would require extensive
+character property tables.</p>
 
 <div id="rule-c-printable"></div>
 <pre class="rule">
@@ -1884,24 +1926,18 @@ extensive character property tables.</p>
   | [#x10000-#x10FFFF]                     /* 32 bit */
 </pre>
 
-<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> <span class="footnote-link">must allow all non-C0 characters<sup id="fnl25"><a href="#fn25">25</a></sup></span> inside <a href="#double-quoted-style">quoted scalars</a>.
+<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> must allow all non-control
+characters inside <a href="#double-quoted-style">quoted scalars</a>.
 To ensure readability, non-printable characters should be <a href="#escaped-characters">escaped</a> on output,
-even inside such <a href="#scalars">scalars</a>.</p>
-
-<blockquote>
-  <p>Note: JSON <a href="#double-quoted-style">quoted scalars</a> cannot span multiple lines or contain <a href="#white-space-characters">tabs</a>,
+even inside such <a href="#scalars">scalars</a>.
+Note that JSON <a href="#double-quoted-style">quoted scalars</a> cannot span multiple lines or contain <a href="#white-space-characters">tabs</a>,
 but YAML <a href="#double-quoted-style">quoted scalars</a> can.</p>
-</blockquote>
 
 <div id="rule-nb-json"></div>
 <pre class="rule">
 [2] nb-json ::=
   #x9 | [#x20-#x10FFFF]
 </pre>
-
-<blockquote>
-  <p>Note: The rule name <code class="language-plaintext highlighter-rouge">nb-json</code> means “non-break JSON compatible” here.</p>
-</blockquote>
 
 <div id="character-encodings"></div>
 <h2 id="52-character-encodings">5.2. Character Encodings</h2>
@@ -1920,7 +1956,7 @@ encodings.
 For <a href="#yaml-directives">JSON compatibility</a>, the UTF-32 encodings must also be supported.</p>
 
 <p>If a character <a href="#streams">stream</a> begins with a <em>byte order mark</em>, the character encoding
-will be taken to be as indicated by the byte order mark.
+will be taken to be as as indicated by the byte order mark.
 Otherwise, the <a href="#streams">stream</a> must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (<strong><code class="language-plaintext highlighter-rouge">#x00</code></strong>)
 characters.</p>
@@ -2037,7 +2073,8 @@ If another encoding is used, it is recommended that an explicit byte order mark
 be used, even if the first <a href="#streams">stream</a> character is ASCII.</p>
 
 <p>For more information about the byte order mark and the Unicode character
-encoding schemes see the <span class="footnote-link">Unicode FAQ<sup id="fnl26"><a href="#fn26">26</a></sup></span>.</p>
+encoding schemes see the <a href="http://www.unicode.org/unicode/faq/utf_bom.html">Unicode
+FAQ</a>.</p>
 
 <div id="rule-c-byte-order-mark"></div>
 <pre class="rule">
@@ -2054,7 +2091,6 @@ encoding schemes see the <span class="footnote-link">Unicode FAQ<sup id="fnl26">
 <td class="side-by-side">
 <pre>
 <code class="legend-1">⇔</code># Comment only.
-
 </pre>
 
 </td>
@@ -2144,15 +2180,21 @@ mapping<code class="legend-3">:</code>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"one"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"two"</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"sky"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"sea"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "sequence"
+  : !!seq [ !!str "one", !!str "two" ],
+  ? !!str "mapping"
+  : !!map {
+    ? !!str "sky" : !!str "blue",
+    ? !!str "sea" : !!str "green",
+  },
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -2213,11 +2255,21 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"one"</span><span class="p">,</span><span class="w"> </span><span class="s2">"two"</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"sky"</span><span class="p">:</span><span class="w"> </span><span class="s2">"blue"</span><span class="p">,</span><span class="w"> </span><span class="nl">"sea"</span><span class="p">:</span><span class="w"> </span><span class="s2">"green"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "sequence"
+  : !!seq [ !!str "one", !!str "two" ],
+  ? !!str "mapping"
+  : !!map {
+    ? !!str "sky" : !!str "blue",
+    ? !!str "sea" : !!str "green",
+  },
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -2230,8 +2282,8 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
   </div>
 </div>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x23</code></strong>, octothorpe, hash, sharp, pound, number sign) denotes
-a <a href="#comments">comment</a>.</p>
+<p>An “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x23</code></strong>, octothorpe, hash, sharp, pound, number sign)
+denotes a <a href="#comments">comment</a>.</p>
 
 <div id="rule-c-comment"></div>
 <pre class="rule">
@@ -2246,7 +2298,6 @@ a <a href="#comments">comment</a>.</p>
 <td class="side-by-side">
 <pre>
 <code class="legend-1">#</code> Comment only.
-
 </pre>
 
 </td>
@@ -2267,14 +2318,14 @@ a <a href="#comments">comment</a>.</p>
   </div>
 </div>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x26</code></strong>, ampersand) denotes a <a href="#anchors-and-aliases">node’s anchor property</a>.</p>
+<p>An “<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x26</code></strong>, ampersand) denotes a <a href="#anchors-and-aliases">node’s anchor property</a>.</p>
 
 <div id="rule-c-anchor"></div>
 <pre class="rule">
 [13] c-anchor ::= "&amp;"
 </pre>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2A</code></strong>, asterisk) denotes an <a href="#alias-nodes">alias node</a>.</p>
+<p>An “<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2A</code></strong>, asterisk) denotes an <a href="#alias-nodes">alias node</a>.</p>
 
 <div id="rule-c-alias"></div>
 <pre class="rule">
@@ -2306,9 +2357,14 @@ alias: <code class="legend-3">*</code>anchor
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "anchored": !local &amp;A1 "value",
-  "alias": *A1 }
+!!map {
+  ? !!str "anchored"
+  : !local &amp;A1 "value",
+  ? !!str "alias"
+  : *A1,
+}
 </pre>
 
 </td>
@@ -2355,11 +2411,18 @@ folded: <code class="legend-2">&gt;</code>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"literal"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some</span><span class="se">\n</span><span class="s2">text</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"folded"</span><span class="p">:</span><span class="w"> </span><span class="s2">"some text</span><span class="se">\n</span><span class="s2">"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "literal"
+  : !!str "some\ntext\n",
+  ? !!str "folded"
+  : !!str "some text\n",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -2371,8 +2434,8 @@ folded: <code class="legend-2">&gt;</code>
   </div>
 </div>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">'</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x27</code></strong>, apostrophe, single quote) surrounds a <a href="#single-quoted-style">single-quoted
-flow scalar</a>.</p>
+<p>An “<strong><code class="language-plaintext highlighter-rouge">'</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x27</code></strong>, apostrophe, single quote) surrounds a
+<a href="#single-quoted-style">single-quoted flow scalar</a>.</p>
 
 <div id="rule-c-single-quote"></div>
 <pre class="rule">
@@ -2400,11 +2463,18 @@ double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"single"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"double"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "single"
+  : !!str "text",
+  ? !!str "double"
+  : !!str "text",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -2436,10 +2506,13 @@ double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"text"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "text"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -2598,10 +2671,14 @@ for clarity.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"Line break (no glyph)</span><span class="se">\n</span><span class="s2">Line break (glyphed)</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "line break (no glyph)\n\
+      line break (glyphed)\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -2664,11 +2741,20 @@ block:<code class="legend-2">→</code>|
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"quoted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Quoted </span><span class="se">\t</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"block"</span><span class="p">:</span><span class="w"> </span><span class="s2">"void main() {</span><span class="se">\n\t</span><span class="s2">printf(</span><span class="se">\"</span><span class="s2">Hello, world!</span><span class="se">\\</span><span class="s2">n</span><span class="se">\"</span><span class="s2">);</span><span class="se">\n</span><span class="s2">}</span><span class="se">\n</span><span class="s2">"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "quoted"
+  : "Quoted \t",
+  ? !!str "block"
+  : "void main() {\n\
+    \tprintf(\"Hello, world!\\n\");\n\
+    }\n",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -2719,8 +2805,10 @@ classes:</p>
   <a href="#rule-ns-dec-digit">ns-dec-digit</a> | <a href="#rule-ns-ascii-letter">ns-ascii-letter</a> | "-"
 </pre>
 
-<p>URI characters for <a href="#tags">tags</a>, as specified in <span class="footnote-link">URI RFC<sup id="fnl27"><a href="#fn27">27</a></sup></span>, with the addition of the
-“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">]</code></strong>” for presenting IPv6 addresses as proposed in the <span class="footnote-link">IPv6 RFC<sup id="fnl28"><a href="#fn28">28</a></sup></span>.</p>
+<p>URI characters for <a href="#tags">tags</a>, as specified in
+<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a>, with the addition of the
+“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">]</code></strong>” for presenting IPv6 addresses as proposed in
+<a href="http://www.ietf.org/rfc/rfc2732.txt">RFC2732</a>.</p>
 
 <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em> using
@@ -2943,22 +3031,26 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- "Fun with <code class="legend-1">\\</code>"
-- "<code class="legend-1">\"</code> <code class="legend-1">\a</code> <code class="legend-1">\b</code> <code class="legend-1">\e</code> <code class="legend-1">\f</code>"
-- "<code class="legend-1">\n</code> <code class="legend-1">\r</code> <code class="legend-1">\t</code> <code class="legend-1">\v</code> <code class="legend-1">\0</code>"
-- "<code class="legend-1">\ </code> <code class="legend-1">\_</code> <code class="legend-1">\N</code> <code class="legend-1">\L</code> <code class="legend-1">\P</code> \
-  <code class="legend-1">\x41</code> <code class="legend-1">\u0041</code> <code class="legend-1">\U00000041</code>"
+"Fun with <code class="legend-1">\\</code>
+<code class="legend-1">\"</code> <code class="legend-1">\a</code> <code class="legend-1">\b</code> <code class="legend-1">\e</code> <code class="legend-1">\f</code> <code class="legend-1">\↓</code>
+<code class="legend-1">\n</code> <code class="legend-1">\r</code> <code class="legend-1">\t</code> <code class="legend-1">\v</code> <code class="legend-1">\0</code> <code class="legend-1">\↓</code>
+<code class="legend-1">\ </code> <code class="legend-1">\_</code> <code class="legend-1">\N</code> <code class="legend-1">\L</code> <code class="legend-1">\P</code> <code class="legend-1">\↓</code>
+<code class="legend-1">\x41</code> <code class="legend-1">\u0041</code> <code class="legend-1">\U00000041</code>"
 </pre>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="s2">"Fun with </span><span class="se">\\</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"</span><span class="se">\"</span><span class="s2"> </span><span class="se">\u</span><span class="s2">0007 </span><span class="se">\b</span><span class="s2"> </span><span class="se">\u</span><span class="s2">001b </span><span class="se">\f</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"</span><span class="se">\n</span><span class="s2"> </span><span class="se">\r</span><span class="s2"> </span><span class="se">\t</span><span class="s2"> </span><span class="se">\u</span><span class="s2">000b </span><span class="se">\u</span><span class="s2">0000"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"</span><span class="se">\u</span><span class="s2">0020 </span><span class="se">\u</span><span class="s2">00a0 </span><span class="se">\u</span><span class="s2">0085 </span><span class="se">\u</span><span class="s2">2028 </span><span class="se">\u</span><span class="s2">2029 A A A"</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+"Fun with \x5C
+\x22 \x07 \x08 \x1B \x0C
+\x0A \x0D \x09 \x0B \x00
+\x20 \xA0 \x85 \u2028 \u2029
+A A A"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3063,15 +3155,25 @@ Not indented:
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"Not indented"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"By one space"</span><span class="p">:</span><span class="w"> </span><span class="s2">"By four</span><span class="se">\n</span><span class="s2">  spaces</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"Flow style"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="s2">"By two"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Also by two"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"Still by two"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+- - -
+!!map {
+  ? !!str "Not indented"
+  : !!map {
+      ? !!str "By one space"
+      : !!str "By four\n  spaces\n",
+      ? !!str "Flow style"
+      : !!seq [
+          !!str "By two",
+          !!str "Also by two",
+          !!str "Still by two",
+        ]
+    }
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3103,13 +3205,19 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"a"</span><span class="p">:</span><span class="w">
-  </span><span class="p">[</span><span class="w"> </span><span class="s2">"b"</span><span class="p">,</span><span class="w">
-    </span><span class="p">[</span><span class="w"> </span><span class="s2">"c"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"d"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "a"
+  : !!seq [
+    !!str "b",
+    !!seq [ !!str "c", !!str "d" ]
+  ],
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3152,12 +3260,18 @@ Note that such <a href="#white-space-characters">white space</a> may safely incl
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w"> </span><span class="p">},</span><span class="w">
-  </span><span class="p">[</span><span class="w"> </span><span class="s2">"baz"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"baz"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!map {
+    ? !!str "foo" : !!str "bar",
+  },
+  !!seq [ !!str "baz", !!str "baz" ],
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3217,12 +3331,20 @@ block: |
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"plain"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text lines"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"quoted"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text lines"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"block"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text</span><span class="se">\n</span><span class="s2"> </span><span class="se">\t</span><span class="s2">lines</span><span class="se">\n</span><span class="s2">"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "plain"
+  : !!str "text lines",
+  ? !!str "quoted"
+  : !!str "text lines",
+  ? !!str "block"
+  : !!str "text\n·→lines\n",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3269,11 +3391,18 @@ Chomping: |
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"Folding"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Empty line</span><span class="se">\n</span><span class="s2">as a line feed"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Chomping"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Clipped empty lines</span><span class="se">\n</span><span class="s2">"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "Folding"
+  : !!str "Empty line\nas a line feed",
+  ? !!str "Chomping"
+  : !!str "Clipped empty lines\n",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3332,10 +3461,13 @@ a single <a href="#white-space-characters">space</a> (<strong><code class="langu
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"trimmed</span><span class="se">\n\n\n</span><span class="s2">as space"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "trimmed\n\n\nas space"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3385,10 +3517,13 @@ feed, and the formatting of <a href="#example-more-indented-lines">more-indented
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"foo </span><span class="se">\n\n\t</span><span class="s2"> bar</span><span class="se">\n\n</span><span class="s2">baz</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+--- !!str
+"foo \n\n\t bar\n\nbaz\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3444,10 +3579,13 @@ information.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">" foo</span><span class="se">\n</span><span class="s2">bar</span><span class="se">\n</span><span class="s2">baz "</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+--- !!str
+" foo\nbar\nbaz "
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3504,10 +3642,16 @@ key:<code class="legend-3">····<code class="legend-1"># Comment</code><code 
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "key"
+  : !!str "value",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3588,10 +3732,16 @@ key:<code class="legend-1"><code class="legend-3">····# Comment↓</code></c
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "key"
+  : !!str "value",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3651,11 +3801,22 @@ empty) <a href="#comments">comments</a>.</p>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ { "first": "Sammy",
-    "last": "Sosa" }: {
-    "hr": 65,
-    "avg": 0.278 } }
+!!map {
+  ? !!map {
+    ? !!str "first"
+    : !!str "Sammy",
+    ? !!str "last"
+    : !!str "Sosa",
+  }
+  : !!map {
+    ? !!str "hr"
+    : !!int "65",
+    ? !!str "avg"
+    : !!float "0.278",
+  },
+}
 </pre>
 
 </td>
@@ -3730,10 +3891,13 @@ warning.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"foo"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+--- !!str
+"foo"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3799,10 +3963,13 @@ of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a h
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"foo"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "foo"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3872,10 +4039,13 @@ This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"foo"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "foo"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -3973,8 +4143,12 @@ tags</a>, by the simple addition of a single “<strong><code class="language-pl
 </td>
 <td class="side-by-side">
 <pre>
---- !&lt;!foo&gt; "bar"
---- !&lt;tag:example.com,2000:app/foo&gt; "bar"
+%YAML 1.2
+---
+!&lt;!foo&gt; "bar"
+...
+---
+!&lt;tag:example.com,2000:app/foo&gt; "bar"
 </pre>
 
 </td>
@@ -4024,7 +4198,9 @@ This prefix is used by the <a href="#other-schemas">YAML tag repository</a>.</p>
 </td>
 <td class="side-by-side">
 <pre>
---- !&lt;tag:example.com,2000:app/int&gt; "1 - 3"
+%YAML 1.2
+---
+!&lt;tag:example.com,2000:app/int&gt; "1 - 3"
 </pre>
 
 </td>
@@ -4074,7 +4250,9 @@ In particular, the YAML <a href="#processing-yaml-information">processor</a> nee
 </td>
 <td class="side-by-side">
 <pre>
---- !&lt;tag:example.com,2000:app/foo&gt; "bar"
+%YAML 1.2
+---
+!&lt;tag:example.com,2000:app/foo&gt; "bar"
 </pre>
 
 </td>
@@ -4135,8 +4313,13 @@ semantics to the same <a href="#tags">local tag</a>.</p>
 </td>
 <td class="side-by-side">
 <pre>
---- !&lt;!my-light&gt; "fluorescent"
---- !&lt;!my-light&gt; "green"
+%YAML 1.2
+---
+!&lt;!my-light&gt; "fluorescent"
+...
+%YAML 1.2
+---
+!&lt;!my-light&gt; "green"
 </pre>
 
 </td>
@@ -4182,7 +4365,9 @@ semantics to the same <a href="#tags">global tag</a>.</p>
 </td>
 <td class="side-by-side">
 <pre>
---- !&lt;tag:example.com,2000:app/foo&gt; "bar"
+%YAML 1.2
+---
+!&lt;tag:example.com,2000:app/foo&gt; "bar"
 </pre>
 
 </td>
@@ -4228,9 +4413,14 @@ Either or both may be omitted.</p>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ &amp;B1 "foo": "bar",
-  "baz": *B1 }
+!!map {
+  ? &amp;B1 !!str "foo"
+  : !!str "bar",
+  ? !!str "baz"
+  : *B1,
+}
 </pre>
 
 </td>
@@ -4293,8 +4483,12 @@ valid URI (a <a href="#tags">global tag</a>).</p>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "foo": !&lt;!bar&gt; "baz" }
+!!map {
+  ? !&lt;tag:yaml.org,2002:str&gt; "foo"
+  : !&lt;!bar&gt; "baz",
+}
 </pre>
 
 </td>
@@ -4363,7 +4557,8 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 If the suffix needs to specify any of the above restricted characters, they
 must be <a href="#escaped-characters">escaped</a> using the “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” character.
 This behavior is consistent with the URI character escaping rules
-(specifically, section 2.3 of URI RFC).</p>
+(specifically, section 2.3 of
+<a href="http://www.ietf.org/rfc/rfc2396.txt">RFC2396</a>).</p>
 </blockquote>
 
 <div id="rule-c-ns-shorthand-tag"></div>
@@ -4389,10 +4584,13 @@ This behavior is consistent with the URI character escaping rules
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-[ !&lt;!local&gt; "foo",
+!!seq [
+  !&lt;!local&gt; "foo",
   !&lt;tag:yaml.org,2002:str&gt; "bar",
-  !&lt;tag:example.com,2000:app/tag!&gt; "baz" ]
+  !&lt;tag:example.com,2000:app/tag!&gt; "baz"
+]
 </pre>
 
 </td>
@@ -4476,12 +4674,17 @@ This is intentional.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="s2">"12"</span><span class="p">,</span><span class="w">
-  </span><span class="mi">12</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"12"</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !&lt;tag:yaml.org,2002:str&gt; "12",
+  !&lt;tag:yaml.org,2002:int&gt; "12",
+  !&lt;tag:yaml.org,2002:str&gt; "12",
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -4544,9 +4747,14 @@ Second occurrence: *<code class="legend-2">anchor</code>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "First occurrence": &amp;A "Value",
-  "Second occurrence": *A }
+!!map {
+  ? !!str "First occurrence"
+  : &amp;A !!str "Value",
+  ? !!str "Second occurrence"
+  : *A,
+}
 </pre>
 
 </td>
@@ -4608,11 +4816,18 @@ Reuse anchor: <code class="legend-1">*<code class="legend-2">anchor</code></code
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "First occurrence": &amp;A "Foo",
-  "Override anchor": &amp;B "Bar",
-  "Second occurrence": *A,
-  "Reuse anchor": *B }
+!!map {
+  ? !!str "First occurrence"
+  : &amp;A !!str "Foo",
+  ? !!str "Override anchor"
+  : &amp;B !!str "Bar",
+  ? !!str "Second occurrence"
+  : *A,
+  ? !!str "Reuse anchor"
+  : *B,
+}
 </pre>
 
 </td>
@@ -4660,11 +4875,16 @@ rather than to an actual character.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">""</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "foo" : !!str "",
+  ? !!str ""    : !!str "bar",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -4701,9 +4921,12 @@ for their existence.</p>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "foo": null,
-  null : "bar" }
+!!map {
+  ? !!str "foo" : !!null "",
+  ? !!null ""   : !!str "bar",
+}
 </pre>
 
 </td>
@@ -4787,9 +5010,17 @@ characters.</p>
 </td>
 <td class="side-by-side">
 <pre>
-
-{ "implicit block key":
-  [ { "implicit flow key": "value" } ] }
+%YAML 1.2
+---
+!!map {
+  ? !!str "implicit block key"
+  : !!seq [
+    !!map {
+      ? !!str "implicit flow key"
+      : !!str "value",
+    }
+  ]
+}
 </pre>
 
 </td>
@@ -4841,10 +5072,15 @@ to a line feed, or<code class="legend-2">·→\↓</code>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"folded to a space,</span><span class="se">\n</span><span class="s2">to a line feed, or </span><span class="se">\t</span><span class="s2"> </span><span class="se">\t</span><span class="s2">non-content"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "folded to a space,\n\
+      to a line feed, \
+      or \t \tnon-content"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -4898,10 +5134,15 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">" 1st non-empty</span><span class="se">\n</span><span class="s2">2nd non-empty 3rd non-empty "</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str " 1st non-empty\n\
+      2nd non-empty \
+      3rd non-empty "
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -4954,10 +5195,13 @@ In addition, it is only possible to break a long single-quoted line where a
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"here's to </span><span class="se">\"</span><span class="s2">quotes</span><span class="se">\"</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "here's to \"quotes\""
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5005,11 +5249,21 @@ In addition, it is only possible to break a long single-quoted line where a
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"implicit block key"</span><span class="p">:</span><span class="w">
-  </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"implicit flow key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "implicit block key"
+  : !!seq [
+    !!map {
+      ? !!str "implicit flow key"
+      : !!str "value",
+    }
+  ]
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5063,10 +5317,15 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">" 1st non-empty</span><span class="se">\n</span><span class="s2">2nd non-empty 3rd non-empty "</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str " 1st non-empty\n\
+      2nd non-empty \
+      3rd non-empty "
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5153,30 +5412,37 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 - "<code class="legend-3">:</code> - ()"
 - Up<code class="legend-2">,</code> up, and away!
 - <code class="legend-1">-</code>123
-- http<code class="legend-2">s</code>://example.com/fo<code class="legend-2">o</code>#bar
+- http<code class="legend-2">:</code>//example.com/foo<code class="legend-2">#</code>bar
 # Inside flow collection:
 - [ <code class="legend-1">:</code><code class="legend-2">:</code>vector,
   "<code class="legend-3">:</code> - ()",
   "Up<code class="legend-4">,</code> up and away!",
   <code class="legend-1">-</code>123,
-  http<code class="legend-2">s</code>://example.com/fo<code class="legend-2">o</code>#bar ]
+  http<code class="legend-2">:</code>//example.com/foo<code class="legend-2">#</code>bar ]
 </pre>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="s2">"::vector"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">": - ()"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Up, up, and away!"</span><span class="p">,</span><span class="w">
-  </span><span class="mi">-123</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"http://example.com/foo#bar"</span><span class="p">,</span><span class="w">
-  </span><span class="p">[</span><span class="w"> </span><span class="s2">"::vector"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">": - ()"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"Up, up, and away!"</span><span class="p">,</span><span class="w">
-    </span><span class="mi">-123</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"http://example.com/foo#bar"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!str "::vector",
+  !!str ": - ()",
+  !!str "Up, up, and away!",
+  !!int "-123",
+  !!str "http://example.com/foo#bar",
+  !!seq [
+    !!str "::vector",
+    !!str ": - ()",
+    !!str "Up, up, and away!",
+    !!int "-123",
+    !!str "http://example.com/foo#bar",
+  ],
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5228,11 +5494,21 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"implicit block key"</span><span class="p">:</span><span class="w">
-  </span><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"implicit flow key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "implicit block key"
+  : !!seq [
+    !!map {
+      ? !!str "implicit flow key"
+      : !!str "value",
+    }
+  ]
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5278,10 +5554,15 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"1st non-empty</span><span class="se">\n</span><span class="s2">2nd non-empty 3rd non-empty"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "1st non-empty\n\
+      2nd non-empty \
+      3rd non-empty"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5350,13 +5631,22 @@ characters.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"one"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"two"</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="p">[</span><span class="w"> </span><span class="s2">"three"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"four"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!seq [
+    !!str "one",
+    !!str "two",
+  ],
+  !!seq [
+    !!str "three",
+    !!str "four",
+  ],
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5397,14 +5687,24 @@ sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">sin
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="s2">"double quoted"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"single quoted"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"plain text"</span><span class="p">,</span><span class="w">
-  </span><span class="p">[</span><span class="w"> </span><span class="s2">"nested"</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="p">{</span><span class="w"> </span><span class="nl">"single"</span><span class="p">:</span><span class="w"> </span><span class="s2">"pair"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!str "double quoted",
+  !!str "single quoted",
+  !!str "plain text",
+  !!seq [
+    !!str "nested",
+  ],
+  !!map {
+    ? !!str "single"
+    : !!str "pair",
+  },
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5452,13 +5752,22 @@ characters.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"one"</span><span class="p">:</span><span class="w"> </span><span class="s2">"two"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"three"</span><span class="p">:</span><span class="w"> </span><span class="s2">"four"</span><span class="w"> </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w"> </span><span class="nl">"five"</span><span class="p">:</span><span class="w"> </span><span class="s2">"six"</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"seven"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eight"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!map {
+    ? !!str "one"   : !!str "two",
+    ? !!str "three" : !!str "four",
+  },
+  !!map {
+    ? !!str "five"  : !!str "six",
+    ? !!str "seven" : !!str "eight",
+  },
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5506,10 +5815,13 @@ entry may be <a href="#example-empty-content">completely empty</a>.</p>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "explicit": "entry",
-  "implicit": "entry",
-  null: null }
+!!map {
+  ? !!str "explicit" : !!str "entry",
+  ? !!str "implicit" : !!str "entry",
+  ? !!null "" : !!null "",
+}
 </pre>
 
 </td>
@@ -5578,7 +5890,7 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 <pre>
 {
 <code class="legend-1">unquoted</code>·<code class="legend-2">:·"separate"</code>,
-<code class="legend-1">https://foo.com</code>,
+<code class="legend-1">http://foo.com</code>,
 <code class="legend-1">omitted value</code><code class="legend-2">:<code class="legend-3">°</code></code>,
 <code class="legend-3">°</code><code class="legend-2">:·omitted key</code>,
 }
@@ -5587,11 +5899,14 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "unquoted": "separate",
-  "http://foo.com": null,
-  "omitted value": null,
-  null: "omitted key" }
+!!map {
+  ? !!str "unquoted" : !!str "separate",
+  ? !!str "http://foo.com" : !!null "",
+  ? !!str "omitted value" : !!null "",
+  ? !!null "" : !!str "omitted key",
+}
 </pre>
 
 </td>
@@ -5648,12 +5963,17 @@ However, as this greatly reduces readability, YAML <a href="#processing-yaml-inf
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"adjacent"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"readable"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"empty"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "adjacent" : !!str "value",
+  ? !!str "readable" : !!str "value",
+  ? !!str "empty"    : !!null "",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5687,10 +6007,15 @@ in this case.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!map { ? !!str "foo" : !!str "bar" }
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5727,10 +6052,18 @@ and the syntax is identical to the general case.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"foo bar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"baz"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!map {
+    ? !!str "foo bar"
+    : !!str "baz",
+  },
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5803,10 +6136,30 @@ been impossible to implement.</p>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-[ [ { "YAML": "separate" } ],
-  [ { null: "empty key entry" } ],
-  [ { { "JSON": "like" }: "adjacent" } ] ]
+!!seq [
+  !!seq [
+    !!map {
+      ? !!str "YAML"
+      : !!str "separate"
+    },
+  ],
+  !!seq [
+    !!map {
+      ? !!null ""
+      : !!str "empty key entry"
+    },
+  ],
+  !!seq [
+    !!map {
+      ? !!map {
+        ? !!str "JSON"
+        : !!str "like"
+      } : "adjacent",
+    },
+  ],
+]
 </pre>
 
 </td>
@@ -5890,14 +6243,19 @@ Even the <a href="#double-quoted-style">double-quoted style</a> is a superset of
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span><span class="w"> </span><span class="s2">"b"</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="p">{</span><span class="w"> </span><span class="nl">"a"</span><span class="p">:</span><span class="w"> </span><span class="s2">"b"</span><span class="w"> </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"a"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"b"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"c"</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!seq [ !!str "a", !!str "b" ],
+  !!map { ? !!str "a" : !!str "b" },
+  !!str "a",
+  !!str "b",
+  !!str "c",
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -5957,14 +6315,19 @@ nodes</a> which refer to the <a href="#anchors-and-aliases">anchored</a> <a href
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="s2">"a"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"b"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"c"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"c"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">""</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!str "a",
+  !!str "b",
+  &amp;A !!str "c",
+  *A,
+  !!str "",
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6029,13 +6392,18 @@ This is the only case where a <a href="#comments">comment</a> must not be follow
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="s2">"literal</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">" folded</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"keep</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">" strip"</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!str "literal\n",
+  !!str "·folded\n",
+  !!str "keep\n\n",
+  !!str "·strip",
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6096,13 +6464,18 @@ indicator for cases where detection will fail.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="s2">"detected</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"</span><span class="se">\n\n</span><span class="s2"># detected</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"·explicit</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"</span><span class="se">\t</span><span class="s2">·detected</span><span class="se">\n</span><span class="s2">"</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!str "detected\n",
+  !!str "\n\n# detected\n",
+  !!str "·explicit\n",
+  !!str "\t·detected\n",
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6221,12 +6594,20 @@ keep: |+
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"strip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"keep"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text</span><span class="se">\n</span><span class="s2">"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "strip"
+  : !!str "text",
+  ? !!str "clip"
+  : !!str "text\n",
+  ? !!str "keep"
+  : !!str "text\n",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6308,12 +6689,20 @@ keep: |+
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"strip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"# text"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"# text</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"keep"</span><span class="p">:</span><span class="w"> </span><span class="s2">"# text</span><span class="se">\n</span><span class="s2">"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "strip"
+  : !!str "# text",
+  ? !!str "clip"
+  : !!str "# text\n",
+  ? !!str "keep"
+  : !!str "# text\n",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6346,12 +6735,20 @@ keep: |+
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"strip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"clip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"keep"</span><span class="p">:</span><span class="w"> </span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "strip"
+  : !!str "",
+  ? !!str "clip"
+  : !!str "",
+  ? !!str "keep"
+  : !!str "\n",
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6391,10 +6788,13 @@ It is the simplest, most restricted, and most readable <a href="#node-styles">sc
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"literal</span><span class="se">\n\t</span><span class="s2">text</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "literal\n\ttext\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6457,10 +6857,13 @@ In addition, there is no way to break a long literal line.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"</span><span class="se">\n\n</span><span class="s2">literal</span><span class="se">\n</span><span class="s2">·</span><span class="se">\n\n</span><span class="s2">text</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "\n\nliteral\n·\n\ntext\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6503,10 +6906,13 @@ It is similar to the <a href="#literal-style">literal style</a>; however, folded
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"folded text</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "folded text\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6560,10 +6966,21 @@ separates two non-<a href="#white-space-characters">space</a> characters.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"</span><span class="se">\n</span><span class="s2">folded line</span><span class="se">\n</span><span class="s2">next line</span><span class="se">\n</span><span class="s2">  * bullet</span><span class="se">\n</span><span class="s2"> </span><span class="se">\n</span><span class="s2">  * list</span><span class="se">\n</span><span class="s2">  * lines</span><span class="se">\n\n</span><span class="s2">last line</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "\n\
+      folded line\n\
+      next line\n\
+      \  * bullet\n
+      \n\
+      \  * list\n\
+      \  * lines\n\
+      \n\
+      last line\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6628,10 +7045,21 @@ different productions.)</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"</span><span class="se">\n</span><span class="s2">folded line</span><span class="se">\n</span><span class="s2">next line</span><span class="se">\n</span><span class="s2">  * bullet</span><span class="se">\n</span><span class="s2"> </span><span class="se">\n</span><span class="s2">  * list</span><span class="se">\n</span><span class="s2">  * lines</span><span class="se">\n\n</span><span class="s2">last line</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "\n\
+      folded line\n\
+      next line\n\
+      \  * bullet\n
+      \n\
+      \  * list\n\
+      \  * lines\n\
+      \n\
+      last line\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6687,10 +7115,21 @@ also not <a href="#line-folding">folded</a>.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"</span><span class="se">\n</span><span class="s2">folded line</span><span class="se">\n</span><span class="s2">next line</span><span class="se">\n</span><span class="s2">  * bullet</span><span class="se">\n</span><span class="s2"> </span><span class="se">\n</span><span class="s2">  * list</span><span class="se">\n</span><span class="s2">  * lines</span><span class="se">\n\n</span><span class="s2">last line</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "\n\
+      folded line\n\
+      next line\n\
+      \  * bullet\n
+      \n\
+      \  * list\n\
+      \  * lines\n\
+      \n\
+      last line\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6739,10 +7178,21 @@ also not <a href="#line-folding">folded</a>.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"</span><span class="se">\n</span><span class="s2">folded line</span><span class="se">\n</span><span class="s2">next line</span><span class="se">\n</span><span class="s2">  * bullet</span><span class="se">\n</span><span class="s2"> </span><span class="se">\n</span><span class="s2">  * list</span><span class="se">\n</span><span class="s2">  * lines</span><span class="se">\n\n</span><span class="s2">last line</span><span class="se">\n</span><span class="s2">"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "\n\
+      folded line\n\
+      next line\n\
+      \  * bullet\n
+      \n\
+      \  * list\n\
+      \  * lines\n\
+      \n\
+      last line\n"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6799,12 +7249,22 @@ block sequence:
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"block sequence"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"one"</span><span class="p">,</span><span class="w">
-    </span><span class="p">{</span><span class="w"> </span><span class="nl">"two"</span><span class="p">:</span><span class="w"> </span><span class="s2">"three"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "block sequence"
+  : !!seq [
+    !!str "one",
+    !!map {
+      ? !!str "two"
+      : !!str "three"
+    },
+  ],
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6859,13 +7319,24 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"block node</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="p">[</span><span class="w"> </span><span class="s2">"one"</span><span class="p">,</span><span class="w"> </span><span class="s2">"two"</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="p">{</span><span class="w"> </span><span class="nl">"one"</span><span class="p">:</span><span class="w"> </span><span class="s2">"two"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!null "",
+  !!str "block node\n",
+  !!seq [
+    !!str "one"
+    !!str "two",
+  ],
+  !!map {
+    ? !!str "one"
+    : !!str "two",
+  },
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6905,11 +7376,19 @@ block mapping:
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"block mapping"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"value"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "block mapping"
+  : !!map {
+    ? !!str "key"
+    : !!str "value",
+  },
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6970,13 +7449,21 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"explicit key"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"block key\n"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"one"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"two"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "explicit key"
+  : !!str "",
+  ? !!str "block key\n"
+  : !!seq [
+    !!str "one",
+    !!str "two",
+  ],
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -6988,8 +7475,6 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
     </ul>
   </div>
 </div>
-
-<!-- REVIEW ^^ -->
 
 <p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is omitted, <a href="#parsing-the-presentation-stream">parsing</a> needs to see past the
 <a href="#example-single-pair-explicit-entry">implicit key</a>, in the same way as in the <a href="#mapping">single key: value pair</a> <a href="#flow-mappings">flow
@@ -7046,10 +7531,16 @@ This prevents a potential ambiguity with multi-line <a href="#plain-style">plain
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "plain key": "in-line value",
-  null: null,
-  "quoted key": [ "entry" ] }
+!!map {
+  ? !!str "plain key"
+  : !!str "in-line value",
+  ? !!null ""
+  : !!null "",
+  ? !!str "quoted key"
+  : !!seq [ !!str "entry" ],
+}
 </pre>
 
 </td>
@@ -7092,10 +7583,23 @@ mapping.</p>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-[ { "sun": "yellow" },
-  { { "earth": "blue" }:
-      { "moon": "white" } } ]
+!!seq [
+  !!map {
+     !!str "sun" : !!str "yellow",
+  },
+  !!map {
+    ? !!map {
+      ? !!str "earth"
+      : !!str "blue"
+    },
+    : !!map {
+      ? !!str "moon"
+      : !!str "white"
+    },
+  }
+]
 </pre>
 
 </td>
@@ -7150,12 +7654,20 @@ scalar</a> and an <a href="#example-single-pair-explicit-entry">implicit key</a>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="w"> </span><span class="s2">"flow in block"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Block scalar</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span><span class="w">
-  </span><span class="p">{</span><span class="w"> </span><span class="nl">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">]</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!seq [
+  !!str "flow in block",
+  !!str "Block scalar\n",
+  !!map {
+    ? !!str "foo"
+    : !!str "bar",
+  },
+]
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -7204,9 +7716,14 @@ folded:<code class="legend-2">↓</code>
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "literal": "value",
-  "folded": !&lt;!foo&gt; "value" }
+!!map {
+  ? !!str "literal"
+  : !!str "value",
+  ? !!str "folded"
+  : !&lt;!foo&gt; "value",
+}
 </pre>
 
 </td>
@@ -7259,13 +7776,23 @@ mapping:<code class="legend-1"> !!map</code>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"sequence"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="s2">"entry"</span><span class="p">,</span><span class="w">
-    </span><span class="p">[</span><span class="w"> </span><span class="s2">"nested"</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">],</span><span class="w">
-  </span><span class="nl">"mapping"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nl">"foo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bar"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  ? !!str "sequence"
+  : !!seq [
+    !!str "entry",
+    !!seq [ !!str "nested" ],
+  ],
+  ? !!str "mapping"
+  : !!map {
+    ? !!str "foo" : !!str "bar",
+  },
+}
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -7320,10 +7847,13 @@ Document
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"Document"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "Document"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -7402,10 +7932,13 @@ Document
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"Document"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!str "Document"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -7458,8 +7991,12 @@ document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">inden
 </td>
 <td class="side-by-side">
 <pre>
---- "Bare document"
---- "%!PS-Adobe-2.0\n"
+%YAML 1.2
+---
+!!str "Bare document"
+%YAML 1.2
+---
+!!str "%!PS-Adobe-2.0\n"
 </pre>
 
 </td>
@@ -7508,9 +8045,15 @@ Since the existence of the <a href="#document">document</a> is indicated by this
 </td>
 <td class="side-by-side">
 <pre>
+%YAML 1.2
 ---
-{ "matches %": 20 }
---- null
+!!map {
+  !!str "matches %": !!int "20"
+}
+...
+%YAML 1.2
+---
+!!null ""
 </pre>
 
 </td>
@@ -7557,8 +8100,13 @@ Since the existence of the <a href="#document">document</a> is indicated by this
 </td>
 <td class="side-by-side">
 <pre>
---- "%!PS-Adobe-2.0\n"
---- null
+%YAML 1.2
+---
+!!str "%!PS-Adobe-2.0\n"
+...
+%YAML 1.2
+---
+!!null ""
 </pre>
 
 </td>
@@ -7618,10 +8166,19 @@ such as stream concatenation.</p>
 </td>
 <td class="side-by-side">
 <pre>
---- "Document"
---- null
+%YAML 1.2
 ---
-{ "matches %": 20 }
+!!str "Document"
+...
+%YAML 1.2
+---
+!!null ""
+...
+%YAML 1.2
+---
+!!map {
+  !!str "matches %": !!int "20"
+}
 </pre>
 
 </td>
@@ -8105,15 +8662,31 @@ Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"A null"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Booleans: [ true, false ],
-  "</span><span class="err">Integers</span><span class="s2">": [ 0, 0, 3, -19 ],
-  "</span><span class="err">Floats</span><span class="s2">": [ 0.0, -0.0, 12000, -200000 ],
-  "</span><span class="err">Invalid</span><span class="s2">": "</span><span class="err">True</span><span class="s2">", "</span><span class="err">Null</span><span class="s2">", "</span><span class="mi">0</span><span class="err">o</span><span class="mi">7</span><span class="s2">", "</span><span class="mi">0</span><span class="err">x</span><span class="mi">3</span><span class="err">A</span><span class="s2">", "</span><span class="err">+</span><span class="mf">12.3</span><span class="s2">" ] }
+<pre>
+%YAML 1.2
+---
+!!map {
+  !!str "A null" : !!null "null",
+  !!str "Booleans: !!seq [
+    !!bool "true", !!bool "false"
+  ],
+  !!str "Integers": !!seq [
+    !!int "0", !!int "-0",
+    !!int "3", !!int "-19"
+  ],
+  !!str "Floats": !!seq [
+    !!float "0.", !!float "-0.0",
+    !!float "12e03", !!float "-2E+05"
+  ],
+  !!str "Invalid": !!seq [
+    # Rejected by the schema
+    True, Null, 0o7, 0x3A, +12.3,
+  ],
+}
 ...
-</span></code></pre></div>        </div>
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
 </div>
@@ -8222,16 +8795,34 @@ Also floats: [ .inf, -.Inf, +.INF, .NAN ]
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w"> </span><span class="nl">"A null"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Also a null"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Not a null"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"Booleans: [ true, true, false, false ],
-  "</span><span class="err">Integers</span><span class="s2">": [ 0, 7, 58, -19 ],
-  "</span><span class="err">Floats</span><span class="s2">": [ 0.0, -0.0, 0.5"</span><span class="p">,</span><span class="w"> </span><span class="mi">12000</span><span class="p">,</span><span class="w"> </span><span class="mi">-200000</span><span class="w"> </span><span class="err">]</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"Also floats"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="err">Infinity</span><span class="p">,</span><span class="w"> </span><span class="err">-Infinity</span><span class="p">,</span><span class="w"> </span><span class="err">Infinity</span><span class="p">,</span><span class="w"> </span><span class="err">NaN</span><span class="w"> </span><span class="p">]</span><span class="w"> </span><span class="p">}</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+%YAML 1.2
+---
+!!map {
+  !!str "A null" : !!null "null",
+  !!str "Also a null" : !!null "",
+  !!str "Not a null" : !!str "",
+  !!str "Booleans: !!seq [
+    !!bool "true", !!bool "True",
+    !!bool "false", !!bool "FALSE",
+  ],
+  !!str "Integers": !!seq [
+    !!int "0", !!int "0o7",
+    !!int "0x3A", !!int "-19",
+  ],
+  !!str "Floats": !!seq [
+    !!float "0.", !!float "-0.0", !!float ".5",
+    !!float "+12e03", !!float "-2E+05"
+  ],
+  !!str "Also floats": !!seq [
+    !!float ".inf", !!float "-.Inf",
+    !!float "+.INF", !!float ".NAN",
+  ],
+}
+...
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
 </div>
@@ -8260,116 +8851,18 @@ This allows interoperable <a href="#recommended-schemas">schemas</a> to use <a h
 <p>It is strongly recommended that such <a href="#recommended-schemas">schemas</a> be based on the <a href="#core-schema">core schema</a>
 defined above.
 In addition, it is strongly recommended that such <a href="#recommended-schemas">schemas</a> make as much use as
-possible of the the <em>YAML tag repository</em> at <a href="/type/">https://yaml.org/type/</a>.
+possible of the the <em>YAML tag repository</em> at <a href="/type/">http://yaml.org/type/</a>.
 This repository provides recommended <a href="#tags">global tags</a> for increasing the
 portability of YAML <a href="#documents">documents</a> between different <a href="#processing-yaml-information">applications</a>.</p>
 
-<p>The tag repository is intentionally left out of the scope of this
-specification.
+<p>The tag repository is intentionally left out of the scope of this specification.
 This allows it to evolve to better support YAML <a href="#processing-yaml-information">applications</a>.
 Hence, developers are encouraged to submit new “universal” types to the
 repository.
 The yaml-core mailing list at
-<a href="https://lists.sourceforge.net/lists/listinfo/yaml-core">https://lists.sourceforge.net/lists/listinfo/yaml-core</a>
+<a href="http://lists.sourceforge.net/lists/listinfo/yaml-core">http://lists.sourceforge.net/lists/listinfo/yaml-core</a>
 is the preferred method for such submissions, as well as raising any questions
 regarding this draft.</p>
-
-<h1 id="changes-in-yaml-specification-v121">Changes in YAML Specification v1.2.1</h1>
-
-<ul>
-  <li>wip</li>
-  <li>wip</li>
-</ul>
-
-<h1 id="reference-links">Reference Links</h1>
-
-<ol class="footnote-links">
-<li id="fn1">
-    <p><a href="https://github.com/orgs/yaml/teams/core" target="_blank">“GitHub YAML Orgranization - Core Team”</a> <a href="#fnl1">↩</a></p>
-  </li>
-<li id="fn2">
-    <p><a href="https://github.com/yaml/sml-dev-archive" target="_blank">“SML-DEV Mailing List Archive”</a> <a href="#fnl2">↩</a></p>
-  </li>
-<li id="fn3">
-    <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod" target="_blank">“Data::Denter - An (deprecated) alternative to Data::Dumper and Storable”</a> <a href="#fnl3">↩</a></p>
-  </li>
-<li id="fn4">
-    <p><a href="https://en.wikipedia.org/wiki/C_%28programming_language%29" target="_blank">“Wikipedia - C (programming language)”</a> <a href="#fnl4">↩</a></p>
-  </li>
-<li id="fn5">
-    <p><a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29" target="_blank">“Wikipedia - Java (programming language)”</a> <a href="#fnl5">↩</a></p>
-  </li>
-<li id="fn6">
-    <p><a href="https://www.perl.org/" target="_blank">“The Perl Programming Language”</a> <a href="#fnl6">↩</a></p>
-  </li>
-<li id="fn7">
-    <p><a href="https://www.python.org/" target="_blank">“The Python Programming Language”</a> <a href="#fnl7">↩</a></p>
-  </li>
-<li id="fn8">
-    <p><a href="https://www.ruby-lang.org/" target="_blank">“Ruby Programming Language”</a> <a href="#fnl8">↩</a></p>
-  </li>
-<li id="fn9">
-    <p><a href="https://tools.ietf.org/html/rfc0822" target="_blank">“Standard for ARPA Internet Text Messages”</a> <a href="#fnl9">↩</a></p>
-  </li>
-<li id="fn10">
-    <p><a href="https://tools.ietf.org/html/rfc1866" target="_blank">“Hypertext Markup Language - 2.0”</a> <a href="#fnl10">↩</a></p>
-  </li>
-<li id="fn11">
-    <p><a href="https://tools.ietf.org/html/rfc2045" target="_blank">“Multipurpose Internet Mail Extensions (MIME)”</a> <a href="#fnl11">↩</a></p>
-  </li>
-<li id="fn12">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl12">↩</a></p>
-  </li>
-<li id="fn13">
-    <p><a href="https://www.w3.org/TR/REC-xml.html" target="_blank">“Extensible Markup Language (XML)”</a> <a href="#fnl13">↩</a></p>
-  </li>
-<li id="fn14">
-    <p><a href="https://en.wikipedia.org/wiki/Simple_API_for_XML" target="_blank">“Wikipedia - Simple API for XML”</a> <a href="#fnl14">↩</a></p>
-  </li>
-<li id="fn15">
-    <p><a href="https://en.wikipedia.org/wiki/SOAP" target="_blank">“SOAP”</a> <a href="#fnl15">↩</a></p>
-  </li>
-<li id="fn16">
-    <p><a href="https://www.json.org/" target="_blank">“Introducing JSON”</a> <a href="#fnl16">↩</a></p>
-  </li>
-<li id="fn17">
-    <p><a href="https://tools.ietf.org/html/rfc4627" target="_blank">“The application/json Media Type for JavaScript Object Notation (JSON)”</a> <a href="#fnl17">↩</a></p>
-  </li>
-<li id="fn18">
-    <p><a href="https://tools.ietf.org/html/rfc2199" target="_blank">“Request for Comments Summary”</a> <a href="#fnl18">↩</a></p>
-  </li>
-<li id="fn19">
-    <p><a href="https://xlinux.nist.gov/dads/HTML/directedGraph.html" target="_blank">“directed graph”</a> <a href="#fnl19">↩</a></p>
-  </li>
-<li id="fn20">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl20">↩</a></p>
-  </li>
-<li id="fn21">
-    <p><a href="https://hackage.haskell.org/package/YamlReference" target="_blank">“YamlReference: YAML reference implementation”</a> <a href="#fnl21">↩</a></p>
-  </li>
-<li id="fn22">
-    <p><a href="http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl" target="_blank">“YEAST2HTML”</a> <a href="#fnl22">↩</a></p>
-  </li>
-<li id="fn23">
-    <p><a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes" target="_blank">“Wikipedia - C0 and C1 control codes”</a> <a href="#fnl23">↩</a></p>
-  </li>
-<li id="fn24">
-    <p><a href="https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates" target="_blank">“Wikipedia - Universal Character Set characters #Surrogates”</a> <a href="#fnl24">↩</a></p>
-  </li>
-<li id="fn25">
-    <p><a href="https://tools.ietf.org/html/rfc7159#section-7" target="_blank">“rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings”</a> <a href="#fnl25">↩</a></p>
-  </li>
-<li id="fn26">
-    <p><a href="https://www.unicode.org/faq/utf_bom.html" target="_blank">“UTF-8, UTF-16, UTF-32 &amp; BOM”</a> <a href="#fnl26">↩</a></p>
-  </li>
-<li id="fn27">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl27">↩</a></p>
-  </li>
-<li id="fn28">
-    <p><a href="https://tools.ietf.org/html/rfc2732" target="_blank">“Format for Literal IPv6 Addresses in URL’s”</a> <a href="#fnl28">↩</a></p>
-  </li>
-</ol>
-<div class="footnote-links-after"></div>
 
 
 </section>
