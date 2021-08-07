@@ -163,9 +163,12 @@ clean:
 $(SITE)/%: %
 	@mkdir -p $(dir $@)
 	cp -r $< $@
-$(SITE)/%: _%
+$(site)/%: _%
 	@mkdir -p $(dir $@)
 	cp -r $< $@
+$(SITE)/%/: _%
+	mkdir -p $(dir $@)
+	cp -r $< $(dir $(@:%/=%))
 
 $(SITE)/%.coffee: %.coffee
 	@mkdir -p $(dir $@)
