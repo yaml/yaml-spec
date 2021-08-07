@@ -5594,6 +5594,7 @@ The final [line break], and trailing [empty lines] if any, are subject to
 
 ```
 >
+
  folded
  line
 
@@ -5625,8 +5626,8 @@ The final [line break], and trailing [empty lines] if any, are subject to
 ```
 
 **Legend:**
-* [b-chomped-last(t)] <!-- 13:6 -->
-* [l-chomped-empty(n,t)] <!-- 14 15 -->
+* [b-chomped-last(t)] <!-- 14:6 -->
+* [l-chomped-empty(n,t)] <!-- 15 16 -->
 
 
 ## #. Block Collection Styles
