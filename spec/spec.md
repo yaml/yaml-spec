@@ -4959,6 +4959,9 @@ This header is followed by a non-content [line break] with an optional
 This is the only case where a [comment] must not be followed by additional
 [comment] lines.
 
+> Note: See [Production Parameters] for definitions of the `m` and `t`
+variables.
+
 ```
 [#] c-b-block-header(m,t) ::=
   ( ( c-indentation-indicator(m)

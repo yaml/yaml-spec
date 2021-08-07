@@ -196,6 +196,8 @@ presenting-the-serialization-tree:
 processing-yaml-information:
 - application
 - processor
+production-parameters:
+- production parameters
 recognized-and-valid-tags:
 - invalid
 - unrecognized
