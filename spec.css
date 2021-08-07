@@ -13,7 +13,7 @@ pre.error { background-color: #F8E0E0 !important; }
 
 pre.example { background-color: #E1F8E0; border: none; }
 
-.main-content blockquote { color: #000; margin-right: 0px; border-left: none; }
+.main-content blockquote { margin-right: 0px; border-left: none; }
 
 code.container { padding-top: 3px !important; padding-bottom: 3px !important; }
 
@@ -28,4 +28,11 @@ div.legend p strong { font-weight: normal; }
 div.legend ul { padding-inline-start: 20px; margin-block-start: 0px; }
 div.legend ul li { display: inline; white-space: nowrap; }
 
-ul.authorgroup, ul.releaseinfo, #markdown-toc, #markdown-toc ul { list-style: none; }
+ul.author-group, ul.release-info, #markdown-toc, #markdown-toc ul { list-style: none; }
+
+span.footnote-link { text-decoration: underline solid #606c71; }
+span.footnote-link sup a { color: blue; text-decoration: none; }
+
+.footnote-links p { margin-bottom: 0px; }
+
+.footnote-links-after { height: 1000px; }
