@@ -3918,8 +3918,8 @@ Double-quoted scalars are restricted to a single line when contained inside an
 * [c-double-quoted(n,c)] <!-- 1:1,20 2:3,19 -->
 
 
-In a multi-line double-quoted scalar, [line breaks] are are subject to [flow
-line folding], which discards any trailing [white space] characters.
+In a multi-line double-quoted scalar, [line breaks] are subject to [flow line
+folding], which discards any trailing [white space] characters.
 It is also possible to _escape_ the [line break] character.
 In this case, the [line break] is excluded from the [content], and the trailing
 [white space] characters are preserved.
