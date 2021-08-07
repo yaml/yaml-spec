@@ -1160,7 +1160,7 @@ It is therefore possible to provide an anchor for all [nodes] in
 
 ### #. Presentation Stream
 
-A YAML _presentation_ is a [stream] of Unicode characters making use of of
+A YAML _presentation_ is a [stream] of Unicode characters making use of
 [styles], [scalar content formats], [comments], [directives] and other
 [presentation details] to [present] a YAML [serialization] in a human readable
 way.
