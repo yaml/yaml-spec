@@ -12,8 +12,7 @@ This document may be freely copied, provided it is not modified.
 
 This document reflects the third version of YAML data serialization language.
 The content of the specification was arrived at by consensus of its authors and
-through user feedback on the
-[yaml-core](http://lists.sourceforge.net/lists/listinfo/yaml-core) mailing list.
+through user feedback on the [yaml-core mailing list^].
 We encourage implementers to please update their software with support for this
 version.
 
@@ -60,9 +59,9 @@ data serialization language designed around the common native data types of
 agile programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 Internet messaging to object persistence to data auditing.
-Together with the [Unicode standard for characters](http://www.unicode.org/),
-this specification provides all the information necessary to understand YAML
-Version 1.2 and to create programs that process YAML information.
+Together with the [Unicode standard for characters^], this specification
+provides all the information necessary to understand YAML Version 1.2 and to
+create programs that process YAML information.
 
 
 **Contents**
@@ -6927,10 +6926,8 @@ specification.
 This allows it to evolve to better support YAML [applications].
 Hence, developers are encouraged to submit new "universal" types to the
 repository.
-The yaml-core mailing list at
-<https://lists.sourceforge.net/lists/listinfo/yaml-core>
-is the preferred method for such submissions, as well as raising any questions
-regarding this draft.
+The yaml-core mailing list is the preferred method for such submissions, as
+well as raising any questions regarding this draft.
 
 # Reference Links
 
@@ -6938,6 +6935,8 @@ regarding this draft.
 * C
   * [Wikipedia - C (programming language)](
     https://en.wikipedia.org/wiki/C_%28programming_language%29)
+* C0 control block
+  * [Wikipedia - C0 and C1 control codes](https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
 * Data::Denter
   * [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](
     https://metacpan.org/dist/Data-Denter/view/Denter.pod)
