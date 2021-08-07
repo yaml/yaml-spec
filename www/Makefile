@@ -14,8 +14,8 @@ BASEURL ?=
 #------------------------------------------------------------------------------
 serve : BASEURL :=
 
-stage : PUBLISH_CNAME :=
-stage : BASEURL := /$(REPO_NAME)
+publish-fork : PUBLISH_CNAME :=
+publish-fork : BASEURL := /$(REPO_NAME)
 
 #------------------------------------------------------------------------------
 DOCKER_BUILD_OPTS := \
@@ -113,7 +113,7 @@ shell: site
 	$(eval override export YAML_SPEC_DIR := www/$(SITE))
 	$(call docker-run,run $(DOCKER_SHELL_CMD),$(DOCKER_SHELL_OPTS))
 
-stage: build
+publish-fork: force build
 ifeq ($(FORK_USER_ID),)
 	@echo '*** ERROR'
 	@echo "No git remote called 'fork' found"
@@ -124,11 +124,11 @@ endif
 	    cd $(GH_PAGES) && \
 	    rm -f CNAME && \
 	    git add -A . && \
-	    git commit -m 'Stage' && \
+	    git commit -m "'Publish fork '$(FORK_USER_ID)'" && \
 	    git push -f fork gh-pages \
 	) || true
 	@echo
-	@echo "Staged: https://$(FORK_USER_ID).github.io/$(REPO_NAME)"
+	@echo "Published: https://$(FORK_USER_ID).github.io/$(REPO_NAME)"
 	@echo
 
 publish: build
