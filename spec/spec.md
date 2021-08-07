@@ -1188,7 +1188,7 @@ The node style is a [presentation detail] and is not reflected in the
 [serialization tree] or [representation graph].
 There are two groups of styles.
 [Block styles] use [indentation] to denote structure.
-In contrast, [flow styles] styles rely on explicit [indicators].
+In contrast, [flow styles] rely on explicit [indicators].
 
 YAML provides a rich set of _scalar styles_.
 [Block scalar] styles include the [literal style] and the [folded style].
