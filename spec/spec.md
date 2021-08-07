@@ -145,8 +145,8 @@ independent [documents], ideal for message-based distributed processing
 systems.
 
 YAML’s [indentation]\-based scoping is similar to Python’s (without the
-ambiguities caused by [tabs]). [Indented blocks] facilitate easy inspection of
-the data’s structure.
+ambiguities caused by [tabs]).
+[Indented blocks] facilitate easy inspection of the data’s structure.
 YAML’s [literal style] leverages this by enabling formatted text to be cleanly
 mixed within an [indented] structure without troublesome [escaping].
 YAML also allows the use of traditional [indicator]\-based scoping similar to
@@ -306,10 +306,11 @@ specification.
 ## #. Collections
 
 YAML’s [block collections] use [indentation] for scope and begin each entry on
-its own line. [Block sequences] indicate each entry with a dash and space (
-["**`-`** "]). [Mappings] use a colon and space (["**`:`** "]) to mark each
-[key: value pair]. [Comments] begin with an octothorpe (also called a "hash",
-"sharp", "pound", or "number sign" - ["**`#`**"]).
+its own line.
+[Block sequences] indicate each entry with a dash and space (["**`-`** "]).
+[Mappings] use a colon and space (["**`:`** "]) to mark each [key: value pair].
+[Comments] begin with an octothorpe (also called a "hash", "sharp", "pound", or
+"number sign" - ["**`#`**"]).
 
 
 **Example #. Sequence of Scalars (ball players)**
@@ -631,9 +632,10 @@ date: 2002-12-14
 ```
 
 Explicit typing is denoted with a [tag] using the exclamation point
-(["**`!`**"]) symbol. [Global tags] are URIs and may be specified in a [tag
-shorthand] notation using a [handle]. [Application]\-specific [local tags] may
-also be used.
+(["**`!`**"]) symbol.
+[Global tags] are URIs and may be specified in a [tag shorthand] notation using
+a [handle].
+[Application]\-specific [local tags] may also be used.
 
 
 **Example #. Various Explicit Tags**
@@ -792,12 +794,13 @@ YAML information is used in two ways: for machine processing, and for human
 consumption.
 The challenge of reconciling these two perspectives is best done in three
 distinct translation stages: [representation], [serialization], and
-[presentation]. [Representation] addresses how YAML views [native data
-structures] to achieve portability between programming environments.
+[presentation].
+[Representation] addresses how YAML views [native data structures] to achieve
+portability between programming environments.
 [Serialization] concerns itself with turning a YAML [representation] into a
-serial form, that is, a form with sequential access constraints. [Presentation]
-deals with the formatting of a YAML [serialization] as a series of characters
-in a human-friendly manner.
+serial form, that is, a form with sequential access constraints.
+[Presentation] deals with the formatting of a YAML [serialization] as a series
+of characters in a human-friendly manner.
 
 
 ## #. Processes
@@ -1040,9 +1043,9 @@ Java tags may use "**`.`**", etc.
 
 YAML tags are used to associate meta information with each [node].
 In particular, each tag must specify the expected [node kind] ([scalar],
-[sequence], or [mapping]). [Scalar] tags must also provide a mechanism for
-converting [formatted content] to a [canonical form] for supporting [equality]
-testing.
+[sequence], or [mapping]).
+[Scalar] tags must also provide a mechanism for converting [formatted content]
+to a [canonical form] for supporting [equality] testing.
 Furthermore, a tag may provide additional information such as the set of
 allowed [content] values for validation, a mechanism for [tag resolution], or
 any other data that is applicable to all of the tag’s [nodes].
@@ -1092,8 +1095,9 @@ Since a YAML [processor] cannot be reasonably expected to be aware of them
 all, it must resort to a simple character-by-character comparison of [tags]
 to ensure consistency.
 This also happens to be the comparison method defined by the "**`tag:`**" URI
-scheme. [Tags] in a YAML stream must therefore be [presented] in a canonical
-way so that such comparison would yield the correct results.
+scheme.
+[Tags] in a YAML stream must therefore be [presented] in a canonical way so
+that such comparison would yield the correct results.
 
 
 ##### Identity
@@ -1115,9 +1119,9 @@ impose an [order] on [mapping keys] and employ [alias nodes] to indicate a
 subsequent occurrence of a previously encountered [node].
 The result of this process is a _serialization tree_, where each [node] has an
 ordered set of children.
-This tree can be traversed for a serial event-based API. [Construction] of
-[native data structures] from the serial interface should not use [key order]
-or [anchor names] for the preservation of [application] data.
+This tree can be traversed for a serial event-based API.
+[Construction] of [native data structures] from the serial interface should not
+use [key order] or [anchor names] for the preservation of [application] data.
 
 
 **Figure #. Serialization Model**
@@ -1282,9 +1286,9 @@ parts of the input, but it must provide a mechanism for reporting such errors.
 Typically, most [tags] are not explicitly specified in the character [stream].
 During [parsing], [nodes] lacking an explicit [tag] are given a _non-specific
 tag_: _"**`!`**"_ for non-[plain scalars], and _"**`?`**"_ for all other
-[nodes]. [Composing] a [complete representation] requires each such
-non-specific tag to be _resolved_ to a _specific tag_, be it a [global tag] or
-a [local tag].
+[nodes].
+[Composing] a [complete representation] requires each such non-specific tag to
+be _resolved_ to a _specific tag_, be it a [global tag] or a [local tag].
 
 Resolving the [tag] of a [node] must only depend on the following three
 parameters: (1) the non-specific tag of the [node], (2) the path leading from
@@ -2180,9 +2184,10 @@ RFC^].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8, and then each byte is _escaped_ using
-the _"**`%`**"_ character.  The YAML [processor] must not expand such escaped
-characters. [Tag] characters must be preserved and compared exactly as
-[presented] in the YAML [stream], without any processing.
+the _"**`%`**"_ character.
+The YAML [processor] must not expand such escaped characters.
+[Tag] characters must be preserved and compared exactly as [presented] in the
+YAML [stream], without any processing.
 
 ```
 [#] ns-uri-char ::=
@@ -2193,10 +2198,10 @@ characters. [Tag] characters must be preserved and compared exactly as
 
 
 The ["**`!`**"] character is used to indicate the end of a [named tag handle];
-hence its use in [tag shorthands] is restricted.  In addition, such
-[shorthands] must not contain the ["**`[`**"], ["**`]`**"], ["**`{`**"],
-["**`}`**"] and ["**`,`**"] characters.  These characters would cause ambiguity
-with [flow collection] structures.
+hence its use in [tag shorthands] is restricted.
+In addition, such [shorthands] must not contain the ["**`[`**"], ["**`]`**"],
+["**`{`**"], ["**`}`**"] and ["**`,`**"] characters.
+These characters would cause ambiguity with [flow collection] structures.
 
 ```
 [#] ns-tag-char ::=
@@ -2786,9 +2791,9 @@ feed, and the formatting of [more-indented] lines is preserved.
 
 ##### Flow Folding
 
-> Folding in [flow styles] provides more relaxed semantics. [Flow styles]
-typically depend on explicit [indicators] rather than [indentation] to convey
-structure.
+> Folding in [flow styles] provides more relaxed semantics.
+[Flow styles] typically depend on explicit [indicators] rather than
+[indentation] to convey structure.
 Hence spaces preceding or following the text in a line are a [presentation
 detail] and must not be used to convey [content] information.
 Once all such spaces have been discarded, all [line breaks] are folded,
@@ -3765,8 +3770,9 @@ Reuse anchor: *anchor
 
 ## #. Empty Nodes
 
-YAML allows the [node content] to be omitted in many cases. [Nodes] with empty
-[content] are interpreted as if they were [plain scalars] with an empty value.
+YAML allows the [node content] to be omitted in many cases.
+[Nodes] with empty [content] are interpreted as if they were [plain scalars]
+with an empty value.
 Such [nodes] are commonly resolved to a ["**`null`**"] value.
 
 ```
@@ -4999,8 +5005,8 @@ It is an error for any of the leading [empty lines] to contain more [spaces]
 than the first non-[empty line].
 
 Detection fails when the first non-[empty line] contains leading content
-[space] characters. [Content] may safely start with a [tab] or a ["**`#`**"]
-character.
+[space] characters.
+[Content] may safely start with a [tab] or a ["**`#`**"] character.
 
 When detection would fail, YAML requires that the [indentation] level for the
 [content] be given using an explicit _indentation indicator_.
@@ -5945,8 +5951,9 @@ mapping.
 ### #. Block Nodes
 
 YAML allows [flow nodes] to be embedded inside [block collections] (but not
-vice-versa). [Flow nodes] must be [indented] by at least one more [space] than
-the parent [block collection].
+vice-versa).
+[Flow nodes] must be [indented] by at least one more [space] than the parent
+[block collection].
 Note that [flow nodes] may begin on a following line.
 
 It is at this point that [parsing] needs to distinguish between a [plain
@@ -6041,7 +6048,7 @@ folded:↓
 Since people perceive the ["**`-`**" indicator] as [indentation], nested [block
 sequences] may be [indented] by one less [space] to compensate, except, of
 course, if nested inside another [block sequence] ([**`block-out`** context]
-vs. [**`block-in`** context]).
+versus [**`block-in`** context]).
 
 ```
 [#] s-l+block-collection(n,c) ::=
@@ -6923,7 +6930,6 @@ regarding this draft.
 # Reference Links
 
 {:.footnote-links}
-<<<<<<< HEAD
 * C
   * [Wikipedia - C (programming language)](
     https://en.wikipedia.org/wiki/C_%28programming_language%29)
