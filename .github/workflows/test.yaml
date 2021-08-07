@@ -31,9 +31,9 @@ jobs:
             turndown-plugin-gfm
             smartwrap
 
-    - name: Fetch the work branch
+    - name: Fetch the gh-pages branch
       run:
-        git fetch origin work gh-pages
+        git fetch origin gh-pages
 
     - name: Make the 1.2 spec.html from docbook
       run:
