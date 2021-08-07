@@ -1415,6 +1415,8 @@ Productions use any of the following parameters:
 This is less elegant than Python’s "indent" and "undent" conceptual tokens.
 However it is required to formally express YAML’s indentation rules.
 
+> A value of `n/a` means "not applicable".
+
 
 ##### Context: `c`
 
