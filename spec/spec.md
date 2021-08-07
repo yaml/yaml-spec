@@ -1182,13 +1182,14 @@ not appear in more than one [serialization tree] or [representation graph].
 Each [node] is presented in some _style_, depending on its [kind].
 The node style is a [presentation detail] and is not reflected in the
 [serialization tree] or [representation graph].
-There are two groups of styles. [Block styles] use [indentation] to denote
-structure; In contrast, [flow styles] styles rely on explicit [indicators].
+There are two groups of styles.
+[Block styles] use [indentation] to denote structure.
+In contrast, [flow styles] styles rely on explicit [indicators].
 
-YAML provides a rich set of _scalar styles_. [Block scalar] styles include the
-[literal style] and the [folded style]. [Flow scalar] styles include the [plain
-style] and two quoted styles, the [single-quoted style] and the [double-quoted
-style].
+YAML provides a rich set of _scalar styles_.
+[Block scalar] styles include the [literal style] and the [folded style].
+[Flow scalar] styles include the [plain style] and two quoted styles, the
+[single-quoted style] and the [double-quoted style].
 These styles offer a range of trade-offs between expressive power and
 readability.
 
