@@ -3386,7 +3386,7 @@ semantics to the same [local tag].
 
 ##### Global Tag Prefix
 
-> If the prefix begins with a character other than ["**`!`**"], it must to be a
+> If the prefix begins with a character other than ["**`!`**"], it must be a
 valid URI prefix, and should contain at least the scheme and the authority.
 [Shorthands] using the associated [handle] are expanded to globally unique URI
 tags, and their semantics is consistent across [applications].
