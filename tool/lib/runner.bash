@@ -8,7 +8,7 @@ declare -a docker_run_options
 run-local-or-docker() (
   name=$(basename "${BASH_SOURCE[1]}")
 
-  if (set -x; check); then
+  if check; then
     run-local "$@"
   else
     run-docker "$@"
