@@ -13,8 +13,7 @@ This document may be freely copied, provided it is not modified.
 
 This document reflects the third version of YAML data serialization language.
 The content of the specification was arrived at by consensus of its authors and
-through user feedback on the
-[yaml-core](http://lists.sourceforge.net/lists/listinfo/yaml-core) mailing list.
+through user feedback on the [yaml-core mailing list^].
 We encourage implementers to please update their software with support for this
 version.
 
@@ -61,9 +60,9 @@ data serialization language designed around the common native data types of
 agile programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 Internet messaging to object persistence to data auditing.
-Together with the [Unicode standard for characters](http://www.unicode.org/),
-this specification provides all the information necessary to understand YAML
-Version 1.2 and to create programs that process YAML information.
+Together with the [Unicode standard for characters^], this specification
+provides all the information necessary to understand YAML Version 1.2 and to
+create programs that process YAML information.
 
 
 <code>**Contents**</code>
@@ -146,8 +145,8 @@ independent [documents], ideal for message-based distributed processing
 systems.
 
 YAML’s [indentation]\-based scoping is similar to Python’s (without the
-ambiguities caused by [tabs]). [Indented blocks] facilitate easy inspection of
-the data’s structure.
+ambiguities caused by [tabs]).
+[Indented blocks] facilitate easy inspection of the data’s structure.
 YAML’s [literal style] leverages this by enabling formatted text to be cleanly
 mixed within an [indented] structure without troublesome [escaping].
 YAML also allows the use of traditional [indicator]\-based scoping similar to
@@ -307,10 +306,11 @@ specification.
 <code>## #. Collections</code>
 
 YAML’s [block collections] use [indentation] for scope and begin each entry on
-its own line. [Block sequences] indicate each entry with a dash and space (
-["**`-`** "]). [Mappings] use a colon and space (["**`:`** "]) to mark each
-[key: value pair]. [Comments] begin with an octothorpe (also called a "hash",
-"sharp", "pound", or "number sign" - ["**`#`**"]).
+its own line.
+[Block sequences] indicate each entry with a dash and space (["**`-`** "]).
+[Mappings] use a colon and space (["**`:`** "]) to mark each [key: value pair].
+[Comments] begin with an octothorpe (also called a "hash", "sharp", "pound", or
+"number sign" - ["**`#`**"]).
 
 
 <code>**Example #. Sequence of Scalars (ball players)**</code>
@@ -632,9 +632,10 @@ date: 2002-12-14
 ```
 
 Explicit typing is denoted with a [tag] using the exclamation point
-(["**`!`**"]) symbol. [Global tags] are URIs and may be specified in a [tag
-shorthand] notation using a [handle]. [Application]\-specific [local tags] may
-also be used.
+(["**`!`**"]) symbol.
+[Global tags] are URIs and may be specified in a [tag shorthand] notation using
+a [handle].
+[Application]\-specific [local tags] may also be used.
 
 
 <code>**Example #. Various Explicit Tags**</code>
@@ -793,12 +794,13 @@ YAML information is used in two ways: for machine processing, and for human
 consumption.
 The challenge of reconciling these two perspectives is best done in three
 distinct translation stages: [representation], [serialization], and
-[presentation]. [Representation] addresses how YAML views [native data
-structures] to achieve portability between programming environments.
+[presentation].
+[Representation] addresses how YAML views [native data structures] to achieve
+portability between programming environments.
 [Serialization] concerns itself with turning a YAML [representation] into a
-serial form, that is, a form with sequential access constraints. [Presentation]
-deals with the formatting of a YAML [serialization] as a series of characters
-in a human-friendly manner.
+serial form, that is, a form with sequential access constraints.
+[Presentation] deals with the formatting of a YAML [serialization] as a series
+of characters in a human-friendly manner.
 
 
 <code>## #. Processes</code>
@@ -1041,9 +1043,9 @@ Java tags may use "**`.`**", etc.
 
 YAML tags are used to associate meta information with each [node].
 In particular, each tag must specify the expected [node kind] ([scalar],
-[sequence], or [mapping]). [Scalar] tags must also provide a mechanism for
-converting [formatted content] to a [canonical form] for supporting [equality]
-testing.
+[sequence], or [mapping]).
+[Scalar] tags must also provide a mechanism for converting [formatted content]
+to a [canonical form] for supporting [equality] testing.
 Furthermore, a tag may provide additional information such as the set of
 allowed [content] values for validation, a mechanism for [tag resolution], or
 any other data that is applicable to all of the tag’s [nodes].
@@ -1093,8 +1095,9 @@ Since a YAML [processor] cannot be reasonably expected to be aware of them
 all, it must resort to a simple character-by-character comparison of [tags]
 to ensure consistency.
 This also happens to be the comparison method defined by the "**`tag:`**" URI
-scheme. [Tags] in a YAML stream must therefore be [presented] in a canonical
-way so that such comparison would yield the correct results.
+scheme.
+[Tags] in a YAML stream must therefore be [presented] in a canonical way so
+that such comparison would yield the correct results.
 
 
 <code>##### Identity</code>
@@ -1116,9 +1119,9 @@ impose an [order] on [mapping keys] and employ [alias nodes] to indicate a
 subsequent occurrence of a previously encountered [node].
 The result of this process is a _serialization tree_, where each [node] has an
 ordered set of children.
-This tree can be traversed for a serial event-based API. [Construction] of
-[native data structures] from the serial interface should not use [key order]
-or [anchor names] for the preservation of [application] data.
+This tree can be traversed for a serial event-based API.
+[Construction] of [native data structures] from the serial interface should not
+use [key order] or [anchor names] for the preservation of [application] data.
 
 
 <code>**Figure #. Serialization Model**</code>
@@ -1161,7 +1164,7 @@ It is therefore possible to provide an anchor for all [nodes] in
 
 <code>### #. Presentation Stream</code>
 
-A YAML _presentation_ is a [stream] of Unicode characters making use of of
+A YAML _presentation_ is a [stream] of Unicode characters making use of
 [styles], [scalar content formats], [comments], [directives] and other
 [presentation details] to [present] a YAML [serialization] in a human readable
 way.
@@ -1183,13 +1186,14 @@ not appear in more than one [serialization tree] or [representation graph].
 Each [node] is presented in some _style_, depending on its [kind].
 The node style is a [presentation detail] and is not reflected in the
 [serialization tree] or [representation graph].
-There are two groups of styles. [Block styles] use [indentation] to denote
-structure; In contrast, [flow styles] styles rely on explicit [indicators].
+There are two groups of styles.
+[Block styles] use [indentation] to denote structure.
+In contrast, [flow styles] rely on explicit [indicators].
 
-YAML provides a rich set of _scalar styles_. [Block scalar] styles include the
-[literal style] and the [folded style]. [Flow scalar] styles include the [plain
-style] and two quoted styles, the [single-quoted style] and the [double-quoted
-style].
+YAML provides a rich set of _scalar styles_.
+[Block scalar] styles include the [literal style] and the [folded style].
+[Flow scalar] styles include the [plain style] and two quoted styles, the
+[single-quoted style] and the [double-quoted style].
 These styles offer a range of trade-offs between expressive power and
 readability.
 
@@ -1235,8 +1239,7 @@ A directive has a name and an optional sequence of parameters.
 Directives are instructions to the YAML [processor], and like all other
 [presentation details] are not reflected in the YAML [serialization tree] or
 [representation graph].
-This version of YAML defines a two directives, ["**`YAML`**"] and
-["**`TAG`**"].
+This version of YAML defines two directives, ["**`YAML`**"] and ["**`TAG`**"].
 All other directives are [reserved] for future versions of YAML.
 
 
@@ -1282,9 +1285,9 @@ parts of the input, but it must provide a mechanism for reporting such errors.
 Typically, most [tags] are not explicitly specified in the character [stream].
 During [parsing], [nodes] lacking an explicit [tag] are given a _non-specific
 tag_: _"**`!`**"_ for non-[plain scalars], and _"**`?`**"_ for all other
-[nodes]. [Composing] a [complete representation] requires each such
-non-specific tag to be _resolved_ to a _specific tag_, be it a [global tag] or
-a [local tag].
+[nodes].
+[Composing] a [complete representation] requires each such non-specific tag to
+be _resolved_ to a _specific tag_, be it a [global tag] or a [local tag].
 
 Resolving the [tag] of a [node] must only depend on the following three
 parameters: (1) the non-specific tag of the [node], (2) the path leading from
@@ -1378,10 +1381,12 @@ In addition, production matching is expected to be greedy.
 Optional (**`?`**), zero-or-more (**`*`**) and one-or-more (**`+`**) patterns
 are always expected to match as much of the input as possible.
 
-The productions are accompanied by examples, which are given side-by-side next
-to equivalent YAML text in an explanatory format.
-This format uses only [flow collections], [double-quoted scalars], and explicit
-[tags] for each [node].
+The productions are accompanied by examples which are presented in a two-pane
+side-by-side format.
+The left-hand side is the YAML example and the right-hand side is an alternate
+YAML view of the example.
+The alternate view uses double-quotes for string scalars, flow style for
+collections, and JSON plain style for numbers, booleans and null values.
 
 A reference implementation using the productions is available as the
 [YamlReference^] Haskell package.
@@ -1411,6 +1416,8 @@ Productions use any of the following parameters:
 &gt; Many productions use an explicit [indentation] level parameter.
 This is less elegant than Python’s "indent" and "undent" conceptual tokens.
 However it is required to formally express YAML’s indentation rules.
+
+&gt; A value of `n/a` means "not applicable".
 
 
 <code>##### Context: `c`</code>
@@ -1498,21 +1505,23 @@ prefixes.
 
 To ensure readability, YAML [streams] use only the _printable_ subset of the
 Unicode character set.
-The allowed character range explicitly excludes the C0 control block
+The allowed character range explicitly excludes the [C0 control block^]
 **`#x0-#x1F`** (except for TAB **`#x9`**, LF **`#xA`**, and CR **`#xD`** which
 are allowed), DEL **`#x7F`**, the C1 control block **`#x80-#x9F`** (except for
-NEL **`#x85`** which is allowed), the surrogate block **`#xD800-#xDFFF`**,
-**`#xFFFE`**, and **`#xFFFF`**.
+NEL **`#x85`** which is allowed), the [surrogate block^] **`#xD800-#xDFFF`**,
+**`#xFFFE`** and **`#xFFFF`**.
 
-On input, a YAML [processor] must accept all Unicode characters except those
-explicitly excluded above.
+On input, a YAML [processor] must accept all characters in this printable
+subset.
 
-On output, a YAML [processor] must only produce acceptable characters.
-Any excluded characters must be [presented] using [escape] sequences.
+On output, a YAML [processor] must only produce only characters in this
+printable subset.
+Characters outside this set must be [presented] using [escape] sequences.
 In addition, any allowed characters known to be non-printable should also be
 [escaped].
-This isn’t mandatory since a full implementation would require extensive
-character property tables.
+
+&gt; Note: This isn’t mandatory since a full implementation would require
+extensive character property tables.
 
 ```
 [#] c-printable ::=
@@ -1522,11 +1531,12 @@ character property tables.
 ```
 
 
-To ensure [JSON compatibility], YAML [processors] must allow all non-control
-characters inside [quoted scalars].
+To ensure [JSON compatibility], YAML [processors] [must allow all non-C0
+characters^] inside [quoted scalars].
 To ensure readability, non-printable characters should be [escaped] on output,
 even inside such [scalars].
-Note that JSON [quoted scalars] cannot span multiple lines or contain [tabs],
+
+&gt; Note: JSON [quoted scalars] cannot span multiple lines or contain [tabs],
 but YAML [quoted scalars] can.
 
 ```
@@ -1534,6 +1544,7 @@ but YAML [quoted scalars] can.
   #x9 | [#x20-#x10FFFF]
 ```
 
+&gt; Note: The rule name `nb-json` means "non-break JSON compatible" here.
 
 <code>## #. Character Encodings</code>
 
@@ -1551,7 +1562,7 @@ encodings.
 For [JSON compatibility], the UTF-32 encodings must also be supported.
 
 If a character [stream] begins with a _byte order mark_, the character encoding
-will be taken to be as as indicated by the byte order mark.
+will be taken to be as indicated by the byte order mark.
 Otherwise, the [stream] must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (**`#x00`**)
 characters.
@@ -1669,17 +1680,12 @@ mapping:
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "sequence"
-  : !!seq [ !!str "one", !!str "two" ],
-  ? !!str "mapping"
-  : !!map {
-    ? !!str "sky" : !!str "blue",
-    ? !!str "sea" : !!str "green",
-  },
-}
+{ "sequence": [
+    "one",
+    "two" ],
+  "mapping": {
+    "sky": "blue",
+    "sea": "green" } }
 ```
 
 **Legend:**
@@ -1731,17 +1737,9 @@ mapping: { sky: blue, sea: green }
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "sequence"
-  : !!seq [ !!str "one", !!str "two" ],
-  ? !!str "mapping"
-  : !!map {
-    ? !!str "sky" : !!str "blue",
-    ? !!str "sea" : !!str "green",
-  },
-}
+{ "sequence": [ "one", "two" ],
+  "mapping":
+    { "sky": "blue", "sea": "green" } }
 ```
 
 **Legend:**
@@ -1807,14 +1805,8 @@ alias: *anchor
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "anchored"
-  : !local &amp;A1 "value",
-  ? !!str "alias"
-  : *A1,
-}
+{ "anchored": !local &amp;A1 "value",
+  "alias": *A1 }
 ```
 
 **Legend:**
@@ -1849,14 +1841,8 @@ folded: &gt;
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "literal"
-  : !!str "some\ntext\n",
-  ? !!str "folded"
-  : !!str "some text\n",
-}
+{ "literal": "some\ntext\n",
+  "folded": "some text\n" }
 ```
 
 **Legend:**
@@ -1888,14 +1874,8 @@ double: "text"
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "single"
-  : !!str "text",
-  ? !!str "double"
-  : !!str "text",
-}
+{ "single": "text",
+  "double": "text" }
 ```
 
 **Legend:**
@@ -1918,9 +1898,7 @@ A ["**`%`**"] (**`#x25`**, percent) denotes a [directive] line.
 ```
 
 ```
-%YAML 1.2
----
-!!str "text"
+"text"
 ```
 
 **Legend:**
@@ -2061,10 +2039,7 @@ for clarity.
 ```
 
 ```
-%YAML 1.2
----
-!!str "line break (no glyph)\n\
-      line break (glyphed)\n"
+"Line break (no glyph)\nLine break (glyphed)\n"
 ```
 
 **Legend:**
@@ -2116,16 +2091,9 @@ block:→|
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "quoted"
-  : "Quoted \t",
-  ? !!str "block"
-  : "void main() {\n\
-    \tprintf(\"Hello, world!\\n\");\n\
-    }\n",
-}
+{ "quoted": "Quoted \t",
+  "block": "void main()
+    {\n\tprintf(\"Hello, world!\\n\");\n}\n" }
 ```
 
 **Legend:**
@@ -2176,9 +2144,10 @@ RFC^].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8, and then each byte is _escaped_ using
-the _"**`%`**"_ character.  The YAML [processor] must not expand such escaped
-characters. [Tag] characters must be preserved and compared exactly as
-[presented] in the YAML [stream], without any processing.
+the _"**`%`**"_ character.
+The YAML [processor] must not expand such escaped characters.
+[Tag] characters must be preserved and compared exactly as [presented] in the
+YAML [stream], without any processing.
 
 ```
 [#] ns-uri-char ::=
@@ -2189,10 +2158,10 @@ characters. [Tag] characters must be preserved and compared exactly as
 
 
 The ["**`!`**"] character is used to indicate the end of a [named tag handle];
-hence its use in [tag shorthands] is restricted.  In addition, such
-[shorthands] must not contain the ["**`[`**"], ["**`]`**"], ["**`{`**"],
-["**`}`**"] and ["**`,`**"] characters.  These characters would cause ambiguity
-with [flow collection] structures.
+hence its use in [tag shorthands] is restricted.
+In addition, such [shorthands] must not contain the ["**`[`**"], ["**`]`**"],
+["**`{`**"], ["**`}`**"] and ["**`,`**"] characters.
+These characters would cause ambiguity with [flow collection] structures.
 
 ```
 [#] ns-tag-char ::=
@@ -2390,25 +2359,22 @@ Any escaped character:
 <code>**Example #. Escaped Characters**</code>
 
 ```
-"Fun with \\
-\" \a \b \e \f \↓
-\n \r \t \v \0 \↓
-\  \_ \N \L \P \↓
-\x41 \u0041 \U00000041"
+- "Fun with \\"
+- "\" \a \b \e \f"
+- "\n \r \t \v \0"
+- "\  \_ \N \L \P \
+  \x41 \u0041 \U00000041"
 ```
 
 ```
-%YAML 1.2
----
-"Fun with \x5C
-\x22 \x07 \x08 \x1B \x0C
-\x0A \x0D \x09 \x0B \x00
-\x20 \xA0 \x85 \u2028 \u2029
-A A A"
+[ "Fun with \\",
+  "\" \u0007 \b \u001b \f",
+  "\n \r \t \u000b \u0000",
+  "\u0020 \u00a0 \u0085 \u2028 \u2029 A A A" ]
 ```
 
 **Legend:**
-* [c-ns-esc-char] &lt;!-- \\ \" \a \b \e \f \↓ \n \r \t \v \0 4:1,2 4:4,2 \N \L \P \x41 \u0041 \U00000041 --&gt;
+* [c-ns-esc-char] &lt;!-- \\ \" \a \b \e \f \↓ \n \r \t \v \0 4:4,2 4:7,2 \N \L \P \x41 \u0041 \U00000041 --&gt;
 
 
 <code>**Example #. Invalid Escaped Characters**</code>
@@ -2492,21 +2458,12 @@ Not indented:
 ```
 
 ```
-%YAML 1.2
-- - -
-!!map {
-  ? !!str "Not indented"
-  : !!map {
-      ? !!str "By one space"
-      : !!str "By four\n  spaces\n",
-      ? !!str "Flow style"
-      : !!seq [
-          !!str "By two",
-          !!str "Also by two",
-          !!str "Still by two",
-        ]
-    }
-}
+{ "Not indented": {
+    "By one space": "By four\n  spaces\n",
+    "Flow style": [
+      "By two",
+      "Also by two",
+      "Still by two" ] } }
 ```
 
 **Legend:**
@@ -2530,15 +2487,10 @@ This is handled on a case-by-case basis by the relevant productions.
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "a"
-  : !!seq [
-    !!str "b",
-    !!seq [ !!str "c", !!str "d" ]
-  ],
-}
+{ "a":
+  [ "b",
+    [ "c",
+      "d" ] ] }
 ```
 
 **Legend:**
@@ -2571,14 +2523,9 @@ Separation spaces are a [presentation detail] and must not be used to convey
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!map {
-    ? !!str "foo" : !!str "bar",
-  },
-  !!seq [ !!str "baz", !!str "baz" ],
-]
+[ { "foo": "bar" },
+  [ "baz",
+    "baz" ] ]
 ```
 
 **Legend:**
@@ -2626,16 +2573,9 @@ block: |
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "plain"
-  : !!str "text lines",
-  ? !!str "quoted"
-  : !!str "text lines",
-  ? !!str "block"
-  : !!str "text\n·→lines\n",
-}
+{ "plain": "text lines",
+  "quoted": "text lines",
+  "block": "text\n \tlines\n" }
 ```
 
 **Legend:**
@@ -2672,14 +2612,8 @@ Chomping: |
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "Folding"
-  : !!str "Empty line\nas a line feed",
-  ? !!str "Chomping"
-  : !!str "Clipped empty lines\n",
-}
+{ "Folding": "Empty line\nas a line feed",
+  "Chomping": "Clipped empty lines\n" }
 ```
 
 **Legend:**
@@ -2728,9 +2662,7 @@ A folded non-[empty line] may end with either of the above [line breaks].
 ```
 
 ```
-%YAML 1.2
----
-!!str "trimmed\n\n\nas space"
+"trimmed\n\n\nas space"
 ```
 
 **Legend:**
@@ -2769,8 +2701,6 @@ feed, and the formatting of [more-indented] lines is preserved.
 ```
 
 ```
-%YAML 1.2
---- !!str
 "foo \n\n\t bar\n\nbaz\n"
 ```
 
@@ -2782,9 +2712,9 @@ feed, and the formatting of [more-indented] lines is preserved.
 
 <code>##### Flow Folding</code>
 
-&gt; Folding in [flow styles] provides more relaxed semantics. [Flow styles]
-typically depend on explicit [indicators] rather than [indentation] to convey
-structure.
+&gt; Folding in [flow styles] provides more relaxed semantics.
+[Flow styles] typically depend on explicit [indicators] rather than
+[indentation] to convey structure.
 Hence spaces preceding or following the text in a line are a [presentation
 detail] and must not be used to convey [content] information.
 Once all such spaces have been discarded, all [line breaks] are folded,
@@ -2814,8 +2744,6 @@ information.
 ```
 
 ```
-%YAML 1.2
---- !!str
 " foo\nbar\nbaz "
 ```
 
@@ -2861,12 +2789,7 @@ key:····# Comment↓
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "key"
-  : !!str "value",
-}
+{ "key": "value" }
 ```
 
 **Legend:**
@@ -2925,12 +2848,7 @@ key:····# Comment↓
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "key"
-  : !!str "value",
-}
+{ "key": "value" }
 ```
 
 **Legend:**
@@ -2978,22 +2896,10 @@ Note that structures following multi-line comment separation must be properly
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!map {
-    ? !!str "first"
-    : !!str "Sammy",
-    ? !!str "last"
-    : !!str "Sosa",
-  }
-  : !!map {
-    ? !!str "hr"
-    : !!int "65",
-    ? !!str "avg"
-    : !!float "0.278",
-  },
-}
+{ { "first": "Sammy",
+    "last": "Sosa" }: {
+    "hr": 65,
+    "avg": 0.278 } }
 ```
 
 **Legend:**
@@ -3053,8 +2959,6 @@ warning.
 ```
 
 ```
-%YAML 1.2
---- !!str
 "foo"
 ```
 
@@ -3110,9 +3014,7 @@ of [non-ASCII line breaks], as described [above]).
 ```
 
 ```
-%YAML 1.2
----
-!!str "foo"
+"foo"
 ```
 
 **Legend:**
@@ -3165,9 +3067,7 @@ This allows for compact and readable [tag] notation.
 ```
 
 ```
-%YAML 1.2
----
-!!str "foo"
+"foo"
 ```
 
 **Legend:**
@@ -3243,10 +3143,7 @@ tags], by the simple addition of a single "**`TAG`**" directive.
 ```
 
 ```
-%YAML 1.2
----
 !&lt;!foo&gt; "bar"
-...
 ---
 !&lt;tag:example.com,2000:app/foo&gt; "bar"
 ```
@@ -3281,8 +3178,6 @@ This prefix is used by the [YAML tag repository].
 ```
 
 ```
-%YAML 1.2
----
 !&lt;tag:example.com,2000:app/int&gt; "1 - 3"
 ```
 
@@ -3316,8 +3211,6 @@ In particular, the YAML [processor] need not preserve the handle name once
 ```
 
 ```
-%YAML 1.2
----
 !&lt;tag:example.com,2000:app/foo&gt; "bar"
 ```
 
@@ -3363,11 +3256,7 @@ semantics to the same [local tag].
 ```
 
 ```
-%YAML 1.2
----
 !&lt;!my-light&gt; "fluorescent"
-...
-%YAML 1.2
 ---
 !&lt;!my-light&gt; "green"
 ```
@@ -3378,7 +3267,7 @@ semantics to the same [local tag].
 
 <code>##### Global Tag Prefix</code>
 
-&gt; If the prefix begins with a character other than ["**`!`**"], it must to be a
+&gt; If the prefix begins with a character other than ["**`!`**"], it must be a
 valid URI prefix, and should contain at least the scheme and the authority.
 [Shorthands] using the associated [handle] are expanded to globally unique URI
 tags, and their semantics is consistent across [applications].
@@ -3400,8 +3289,6 @@ semantics to the same [global tag].
 ```
 
 ```
-%YAML 1.2
----
 !&lt;tag:example.com,2000:app/foo&gt; "bar"
 ```
 
@@ -3434,14 +3321,8 @@ Either or both may be omitted.
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? &amp;B1 !!str "foo"
-  : !!str "bar",
-  ? !!str "baz"
-  : *B1,
-}
+{ &amp;B1 "foo": "bar",
+  "baz": *B1 }
 ```
 
 **Legend:**
@@ -3487,12 +3368,7 @@ valid URI (a [global tag]).
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !&lt;tag:yaml.org,2002:str&gt; "foo"
-  : !&lt;!bar&gt; "baz",
-}
+{ "foo": !&lt;!bar&gt; "baz" }
 ```
 
 **Legend:**
@@ -3562,13 +3438,9 @@ This behavior is consistent with the URI character escaping rules
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !&lt;!local&gt; "foo",
+[ !&lt;!local&gt; "foo",
   !&lt;tag:yaml.org,2002:str&gt; "bar",
-  !&lt;tag:example.com,2000:app/tag!&gt; "baz"
-]
+  !&lt;tag:example.com,2000:app/tag!&gt; "baz" ]
 ```
 
 **Legend:**
@@ -3628,13 +3500,9 @@ This is intentional.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !&lt;tag:yaml.org,2002:str&gt; "12",
-  !&lt;tag:yaml.org,2002:int&gt; "12",
-  !&lt;tag:yaml.org,2002:str&gt; "12",
-]
+[ "12",
+  12,
+  "12" ]
 ```
 
 **Legend:**
@@ -3685,14 +3553,8 @@ Second occurrence: *anchor
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "First occurrence"
-  : &amp;A !!str "Value",
-  ? !!str "Second occurrence"
-  : *A,
-}
+{ "First occurrence": &amp;A "Value",
+  "Second occurrence": *A }
 ```
 
 **Legend:**
@@ -3740,18 +3602,10 @@ Reuse anchor: *anchor
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "First occurrence"
-  : &amp;A !!str "Foo",
-  ? !!str "Override anchor"
-  : &amp;B !!str "Bar",
-  ? !!str "Second occurrence"
-  : *A,
-  ? !!str "Reuse anchor"
-  : *B,
-}
+{ "First occurrence": &amp;A "Foo",
+  "Override anchor": &amp;B "Bar",
+  "Second occurrence": *A,
+  "Reuse anchor": *B }
 ```
 
 **Legend:**
@@ -3761,8 +3615,9 @@ Reuse anchor: *anchor
 
 <code>## #. Empty Nodes</code>
 
-YAML allows the [node content] to be omitted in many cases. [Nodes] with empty
-[content] are interpreted as if they were [plain scalars] with an empty value.
+YAML allows the [node content] to be omitted in many cases.
+[Nodes] with empty [content] are interpreted as if they were [plain scalars]
+with an empty value.
 Such [nodes] are commonly resolved to a ["**`null`**"] value.
 
 ```
@@ -3787,12 +3642,8 @@ rather than to an actual character.
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "foo" : !!str "",
-  ? !!str ""    : !!str "bar",
-}
+{ "foo": "",
+  "": "bar" }
 ```
 
 **Legend:**
@@ -3819,12 +3670,8 @@ for their existence.
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "foo" : !!null "",
-  ? !!null ""   : !!str "bar",
-}
+{ "foo": null,
+  null : "bar" }
 ```
 
 **Legend:**
@@ -3891,26 +3738,17 @@ Double-quoted scalars are restricted to a single line when contained inside an
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "implicit block key"
-  : !!seq [
-    !!map {
-      ? !!str "implicit flow key"
-      : !!str "value",
-    }
-  ]
-}
-
+{ "implicit block key":
+  [ { "implicit flow key": "value" } ] }
 ```
+
 **Legend:**
 * [nb-double-one-line] &lt;!-- 1:2,18 2:4,17 --&gt;
 * [c-double-quoted(n,c)] &lt;!-- 1:1,20 2:3,19 --&gt;
 
 
-In a multi-line double-quoted scalar, [line breaks] are are subject to [flow
-line folding], which discards any trailing [white space] characters.
+In a multi-line double-quoted scalar, [line breaks] are subject to [flow line
+folding], which discards any trailing [white space] characters.
 It is also possible to _escape_ the [line break] character.
 In this case, the [line break] is excluded from the [content], and the trailing
 [white space] characters are preserved.
@@ -3940,11 +3778,7 @@ to a line feed, or·→\↓
 ```
 
 ```
-%YAML 1.2
----
-!!str "folded to a space,\n\
-      to a line feed, \
-      or \t \tnon-content"
+"folded to a space,\nto a line feed, or \t \tnon-content"
 ```
 
 **Legend:**
@@ -3987,11 +3821,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 ```
 
 ```
-%YAML 1.2
----
-!!str " 1st non-empty\n\
-      2nd non-empty \
-      3rd non-empty "
+" 1st non-empty\n2nd non-empty 3rd non-empty "
 ```
 
 **Legend:**
@@ -4032,9 +3862,7 @@ In addition, it is only possible to break a long single-quoted line where a
 ```
 
 ```
-%YAML 1.2
----
-!!str "here's to \"quotes\""
+"here's to \"quotes\""
 ```
 
 **Legend:**
@@ -4071,17 +3899,8 @@ Single-quoted scalars are restricted to a single line when contained inside a
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "implicit block key"
-  : !!seq [
-    !!map {
-      ? !!str "implicit flow key"
-      : !!str "value",
-    }
-  ]
-}
+{ "implicit block key":
+  [ { "implicit flow key": "value" } ] }
 ```
 
 **Legend:**
@@ -4124,11 +3943,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 ```
 
 ```
-%YAML 1.2
----
-!!str " 1st non-empty\n\
-      2nd non-empty \
-      3rd non-empty "
+" 1st non-empty\n2nd non-empty 3rd non-empty "
 ```
 
 **Legend:**
@@ -4213,22 +4028,16 @@ These characters would cause ambiguity with [flow collection] structures.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!str "::vector",
-  !!str ": - ()",
-  !!str "Up, up, and away!",
-  !!int "-123",
-  !!str "https://example.com/foo#bar",
-  !!seq [
-    !!str "::vector",
-    !!str ": - ()",
-    !!str "Up, up, and away!",
-    !!int "-123",
-    !!str "https://example.com/foo#bar",
-  ],
-]
+[ "::vector",
+  ": - ()",
+  "Up, up, and away!",
+  -123,
+  "http://example.com/foo#bar",
+  [ "::vector",
+    ": - ()",
+    "Up, up, and away!",
+    -123,
+    "http://example.com/foo#bar" ] ]
 ```
 
 **Legend:**
@@ -4269,17 +4078,8 @@ implicit block key : [
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "implicit block key"
-  : !!seq [
-    !!map {
-      ? !!str "implicit flow key"
-      : !!str "value",
-    }
-  ]
-}
+{ "implicit block key":
+  [ { "implicit flow key": "value" } ] }
 ```
 
 **Legend:**
@@ -4315,11 +4115,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 ```
 
 ```
-%YAML 1.2
----
-!!str "1st non-empty\n\
-      2nd non-empty \
-      3rd non-empty"
+"1st non-empty\n2nd non-empty 3rd non-empty"
 ```
 
 **Legend:**
@@ -4377,18 +4173,10 @@ Sequence entries are separated by a ["**`,`**"] character.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!seq [
-    !!str "one",
-    !!str "two",
-  ],
-  !!seq [
-    !!str "three",
-    !!str "four",
-  ],
-]
+[ [ "one",
+    "two" ],
+  [ "three",
+    "four" ] ]
 ```
 
 **Legend:**
@@ -4420,20 +4208,11 @@ single: pair,
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!str "double quoted",
-  !!str "single quoted",
-  !!str "plain text",
-  !!seq [
-    !!str "nested",
-  ],
-  !!map {
-    ? !!str "single"
-    : !!str "pair",
-  },
-]
+[ "double quoted",
+  "single quoted",
+  "plain text",
+  [ "nested" ],
+  { "single": "pair" } ]
 ```
 
 **Legend:**
@@ -4471,18 +4250,10 @@ Mapping entries are separated by a ["**`,`**"] character.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!map {
-    ? !!str "one"   : !!str "two",
-    ? !!str "three" : !!str "four",
-  },
-  !!map {
-    ? !!str "five"  : !!str "six",
-    ? !!str "seven" : !!str "eight",
-  },
-]
+[ { "one": "two",
+    "three": "four" },
+  { "five": "six",
+    "seven": "eight" } ]
 ```
 
 **Legend:**
@@ -4519,18 +4290,14 @@ implicit: entry,
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "explicit" : !!str "entry",
-  ? !!str "implicit" : !!str "entry",
-  ? !!null "" : !!null "",
-}
+{ "explicit": "entry",
+  "implicit": "entry",
+  null: null }
 ```
 
 **Legend:**
-* [ns-flow-map-explicit-entry(n,c)] &lt;!-- implicit:_entry --&gt;
-* [ns-flow-map-implicit-entry(n,c)] &lt;!-- explicit:_entry --&gt;
+* [ns-flow-map-explicit-entry(n,c)] &lt;!-- explicit:_entry --&gt;
+* [ns-flow-map-implicit-entry(n,c)] &lt;!-- implicit:_entry --&gt;
 * [e-node] &lt;!-- ° --&gt;
 
 
@@ -4587,14 +4354,10 @@ omitted value:°,
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "unquoted" : !!str "separate",
-  ? !!str "https://foo.com" : !!null "",
-  ? !!str "omitted value" : !!null "",
-  ? !!null "" : !!str "omitted key",
-}
+{ "unquoted": "separate",
+  "http://foo.com": null,
+  "omitted value": null,
+  null: "omitted key" }
 ```
 
 **Legend:**
@@ -4638,13 +4401,9 @@ However, as this greatly reduces readability, YAML [processors] should
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "adjacent" : !!str "value",
-  ? !!str "readable" : !!str "value",
-  ? !!str "empty"    : !!null "",
-}
+{ "adjacent": "value",
+  "readable": "value",
+  "empty": null }
 ```
 
 **Legend:**
@@ -4670,11 +4429,7 @@ foo: bar
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!map { ? !!str "foo" : !!str "bar" }
-]
+[ { "foo": "bar" } ]
 ```
 
 **Legend:**
@@ -4702,14 +4457,7 @@ and the syntax is identical to the general case.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!map {
-    ? !!str "foo bar"
-    : !!str "baz",
-  },
-]
+[ { "foo bar": "baz" } ]
 ```
 
 **Legend:**
@@ -4768,30 +4516,9 @@ been impossible to implement.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!seq [
-    !!map {
-      ? !!str "YAML"
-      : !!str "separate"
-    },
-  ],
-  !!seq [
-    !!map {
-      ? !!null ""
-      : !!str "empty key entry"
-    },
-  ],
-  !!seq [
-    !!map {
-      ? !!map {
-        ? !!str "JSON"
-        : !!str "like"
-      } : "adjacent",
-    },
-  ],
-]
+[ [ { "YAML": "separate" } ],
+  [ { null: "empty key entry" } ],
+  [ { { "JSON": "like" }: "adjacent" } ] ]
 ```
 
 **Legend:**
@@ -4854,15 +4581,11 @@ Even the [double-quoted style] is a superset of the JSON string format.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!seq [ !!str "a", !!str "b" ],
-  !!map { ? !!str "a" : !!str "b" },
-  !!str "a",
-  !!str "b",
-  !!str "c",
-]
+[ [ "a", "b" ],
+  { "a": "b" },
+  "a",
+  "b",
+  "c" ]
 ```
 
 **Legend:**
@@ -4910,15 +4633,11 @@ nodes] which refer to the [anchored] [node properties].
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!str "a",
-  !!str "b",
-  &amp;A !!str "c",
-  *A,
-  !!str "",
-]
+[ "a",
+  "b",
+  "c",
+  "c",
+  "" ]
 ```
 
 **Legend:**
@@ -4948,6 +4667,9 @@ This header is followed by a non-content [line break] with an optional
 This is the only case where a [comment] must not be followed by additional
 [comment] lines.
 
+&gt; Note: See [Production Parameters] for definitions of the `m` and `t`
+variables.
+
 ```
 [#] c-b-block-header(m,t) ::=
   ( ( c-indentation-indicator(m)
@@ -4973,14 +4695,10 @@ This is the only case where a [comment] must not be followed by additional
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!str "literal\n",
-  !!str "·folded\n",
-  !!str "keep\n\n",
-  !!str "·strip",
-]
+[ "literal\n",
+  " folded\n",
+  "keep\n\n",
+  " strip" ]
 ```
 
 **Legend:**
@@ -4995,8 +4713,8 @@ It is an error for any of the leading [empty lines] to contain more [spaces]
 than the first non-[empty line].
 
 Detection fails when the first non-[empty line] contains leading content
-[space] characters. [Content] may safely start with a [tab] or a ["**`#`**"]
-character.
+[space] characters.
+[Content] may safely start with a [tab] or a ["**`#`**"] character.
 
 When detection would fail, YAML requires that the [indentation] level for the
 [content] be given using an explicit _indentation indicator_.
@@ -5031,14 +4749,10 @@ indicator for cases where detection will fail.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!str "detected\n",
-  !!str "\n\n# detected\n",
-  !!str "·explicit\n",
-  !!str "\t·detected\n",
-]
+[ "detected\n",
+  "\n\n# detected\n",
+  " explicit\n",
+  "\t detected\n" ]
 ```
 
 **Legend:**
@@ -5140,16 +4854,9 @@ keep: |+
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "strip"
-  : !!str "text",
-  ? !!str "clip"
-  : !!str "text\n",
-  ? !!str "keep"
-  : !!str "text\n",
-}
+{ "strip": "text",
+  "clip": "text\n",
+  "keep": "text\n" }
 ```
 
 **Legend:**
@@ -5220,16 +4927,9 @@ keep: |+
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "strip"
-  : !!str "# text",
-  ? !!str "clip"
-  : !!str "# text\n",
-  ? !!str "keep"
-  : !!str "# text\n",
-}
+{ "strip": "# text",
+  "clip": "# text\n",
+  "keep": "# text\n" }
 ```
 
 **Legend:**
@@ -5253,16 +4953,9 @@ keep: |+
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "strip"
-  : !!str "",
-  ? !!str "clip"
-  : !!str "",
-  ? !!str "keep"
-  : !!str "\n",
-}
+{ "strip": "",
+  "clip": "",
+  "keep": "\n" }
 ```
 
 **Legend:**
@@ -5292,9 +4985,7 @@ It is the simplest, most restricted, and most readable [scalar style].
 ```
 
 ```
-%YAML 1.2
----
-!!str "literal\n\ttext\n"
+"literal\n\ttext\n"
 ```
 
 **Legend:**
@@ -5346,9 +5037,7 @@ In addition, there is no way to break a long literal line.
 ```
 
 ```
-%YAML 1.2
----
-!!str "\n\nliteral\n·\n\ntext\n"
+"\n\nliteral\n·\n\ntext\n"
 ```
 
 **Legend:**
@@ -5381,9 +5070,7 @@ It is similar to the [literal style]; however, folded scalars are subject to
 ```
 
 ```
-%YAML 1.2
----
-!!str "folded text\n"
+"folded text\n"
 ```
 
 **Legend:**
@@ -5427,17 +5114,9 @@ separates two non-[space] characters.
 ```
 
 ```
-%YAML 1.2
----
-!!str "\n\
-      folded line\n\
-      next line\n\
-      \  * bullet\n
-      \n\
-      \  * list\n\
-      \  * lines\n\
-      \n\
-      last line\n"
+"\nfolded line\nnext line\n  \
+* bullet\n \n  * list\n  \
+* lines\n\nlast line\n"
 ```
 
 **Legend:**
@@ -5491,17 +5170,9 @@ Lines starting with [white space] characters (_more-indented_ lines) are not
 ```
 
 ```
-%YAML 1.2
----
-!!str "\n\
-      folded line\n\
-      next line\n\
-      \  * bullet\n
-      \n\
-      \  * list\n\
-      \  * lines\n\
-      \n\
-      last line\n"
+"\nfolded line\nnext line\n  \
+* bullet\n \n  * list\n  \
+* lines\n\nlast line\n"
 ```
 
 **Legend:**
@@ -5547,17 +5218,9 @@ also not [folded].
 ```
 
 ```
-%YAML 1.2
----
-!!str "\n\
-      folded line\n\
-      next line\n\
-      \  * bullet\n
-      \n\
-      \  * list\n\
-      \  * lines\n\
-      \n\
-      last line\n"
+"\nfolded line\nnext line\n  \
+* bullet\n \n  * list\n  \
+* lines\n\nlast line\n"
 ```
 
 **Legend:**
@@ -5580,6 +5243,7 @@ The final [line break], and trailing [empty lines] if any, are subject to
 
 ```
 &gt;
+
  folded
  line
 
@@ -5597,22 +5261,14 @@ The final [line break], and trailing [empty lines] if any, are subject to
 ```
 
 ```
-%YAML 1.2
----
-!!str "\n\
-      folded line\n\
-      next line\n\
-      \  * bullet\n
-      \n\
-      \  * list\n\
-      \  * lines\n\
-      \n\
-      last line\n"
+"\nfolded line\nnext line\n  \
+* bullet\n \n  * list\n  \
+* lines\n\nlast line\n"
 ```
 
 **Legend:**
-* [b-chomped-last(t)] &lt;!-- 13:6 --&gt;
-* [l-chomped-empty(n,t)] &lt;!-- 14 15 --&gt;
+* [b-chomped-last(t)] &lt;!-- 14:6 --&gt;
+* [l-chomped-empty(n,t)] &lt;!-- 15 16 --&gt;
 
 
 <code>## #. Block Collection Styles</code>
@@ -5653,23 +5309,14 @@ block sequence:
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "block sequence"
-  : !!seq [
-    !!str "one",
-    !!map {
-      ? !!str "two"
-      : !!str "three"
-    },
-  ],
-}
+{ "block sequence": [
+    "one",
+    { "two": "three" } ] }
 ```
 
 **Legend:**
 * [c-l-block-seq-entry(n)] &lt;!-- 2:3, 3:3, --&gt;
-* auto-detected [s-indent(n)]
+* auto-detected [s-indent(n)] &lt;!-- 2:1,2 --&gt;
 
 
 The entry [node] may be either [completely empty], be a nested [block node], or
@@ -5709,20 +5356,10 @@ Note that it is not possible to specify [node properties] for such a
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!null "",
-  !!str "block node\n",
-  !!seq [
-    !!str "one"
-    !!str "two",
-  ],
-  !!map {
-    ? !!str "one"
-    : !!str "two",
-  },
-]
+[ null,
+  "block node\n",
+  [ "one", "two" ],
+  { "one": "two" } ]
 ```
 
 **Legend:**
@@ -5752,15 +5389,8 @@ block mapping:
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "block mapping"
-  : !!map {
-    ? !!str "key"
-    : !!str "value",
-  },
-}
+{ "block mapping": {
+    "key": "value" } }
 ```
 
 **Legend:**
@@ -5809,17 +5439,10 @@ for [block sequence] entries.
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "explicit key"
-  : !!str "",
-  ? !!str "block key\n"
-  : !!seq [
-    !!str "one",
-    !!str "two",
-  ],
-}
+{ "explicit key": null,
+  "block key\n": [
+    "one",
+    "two" ] }
 ```
 
 **Legend:**
@@ -5827,6 +5450,7 @@ for [block sequence] entries.
 * [l-block-map-explicit-value(n)] &lt;!-- 4 5 --&gt;
 * [e-node] &lt;!-- 1:30 --&gt;
 
+&lt;!-- REVIEW value should be null above --&gt;
 
 If the "**`?`**" indicator is omitted, [parsing] needs to see past the
 [implicit key], in the same way as in the [single key: value pair] [flow
@@ -5876,16 +5500,9 @@ plain key: in-line value
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "plain key"
-  : !!str "in-line value",
-  ? !!null ""
-  : !!null "",
-  ? !!str "quoted key"
-  : !!seq [ !!str "entry" ],
-}
+{ "plain key": "in-line value",
+  null: null,
+  "quoted key": [ "entry" ] }
 ```
 
 **Legend:**
@@ -5915,23 +5532,9 @@ mapping.
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!map {
-     !!str "sun" : !!str "yellow",
-  },
-  !!map {
-    ? !!map {
-      ? !!str "earth"
-      : !!str "blue"
-    },
-    : !!map {
-      ? !!str "moon"
-      : !!str "white"
-    },
-  }
-]
+[ { "sun": "yellow" },
+  { { "earth": "blue" }:
+      { "moon": "white" } } ]
 ```
 
 **Legend:**
@@ -5941,8 +5544,9 @@ mapping.
 <code>### #. Block Nodes</code>
 
 YAML allows [flow nodes] to be embedded inside [block collections] (but not
-vice-versa). [Flow nodes] must be [indented] by at least one more [space] than
-the parent [block collection].
+vice-versa).
+[Flow nodes] must be [indented] by at least one more [space] than the parent
+[block collection].
 Note that [flow nodes] may begin on a following line.
 
 It is at this point that [parsing] needs to distinguish between a [plain
@@ -5972,16 +5576,9 @@ scalar] and an [implicit key] starting a nested [block mapping].
 ```
 
 ```
-%YAML 1.2
----
-!!seq [
-  !!str "flow in block",
-  !!str "Block scalar\n",
-  !!map {
-    ? !!str "foo"
-    : !!str "bar",
-  },
-]
+[ "flow in block",
+  "Block scalar\n",
+  { "foo": "bar" } ]
 ```
 
 **Legend:**
@@ -6019,14 +5616,8 @@ folded:↓
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "literal"
-  : !!str "value",
-  ? !!str "folded"
-  : !&lt;!foo&gt; "value",
-}
+{ "literal": "value",
+  "folded": !&lt;!foo&gt; "value" }
 ```
 
 **Legend:**
@@ -6037,7 +5628,7 @@ folded:↓
 Since people perceive the ["**`-`**" indicator] as [indentation], nested [block
 sequences] may be [indented] by one less [space] to compensate, except, of
 course, if nested inside another [block sequence] ([**`block-out`** context]
-vs. [**`block-in`** context]).
+versus [**`block-in`** context]).
 
 ```
 [#] s-l+block-collection(n,c) ::=
@@ -6066,19 +5657,10 @@ mapping: !!map
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  ? !!str "sequence"
-  : !!seq [
-    !!str "entry",
-    !!seq [ !!str "nested" ],
-  ],
-  ? !!str "mapping"
-  : !!map {
-    ? !!str "foo" : !!str "bar",
-  },
-}
+{ "sequence": [
+    "entry",
+    [ "nested" ] ],
+  "mapping": { "foo": "bar" } }
 ```
 
 **Legend:**
@@ -6122,9 +5704,7 @@ Document
 ```
 
 ```
-%YAML 1.2
----
-!!str "Document"
+"Document"
 ```
 
 **Legend:**
@@ -6190,9 +5770,7 @@ Document
 ```
 
 ```
-%YAML 1.2
----
-!!str "Document"
+"Document"
 ```
 
 **Legend:**
@@ -6234,12 +5812,9 @@ document
 ```
 
 ```
-%YAML 1.2
+"Bare document"
 ---
-!!str "Bare document"
-%YAML 1.2
----
-!!str "%!PS-Adobe-2.0\n"
+"%!PS-Adobe-2.0\n"
 ```
 
 **Legend:**
@@ -6274,15 +5849,9 @@ Since the existence of the [document] is indicated by this [marker], the
 ```
 
 ```
-%YAML 1.2
+{ "matches %": 20 }
 ---
-!!map {
-  !!str "matches %": !!int "20"
-}
-...
-%YAML 1.2
----
-!!null ""
+null
 ```
 
 **Legend:**
@@ -6315,13 +5884,9 @@ A _directives document_ begins with some [directives] followed by an explicit
 ```
 
 ```
-%YAML 1.2
+"%!PS-Adobe-2.0\n"
 ---
-!!str "%!PS-Adobe-2.0\n"
-...
-%YAML 1.2
----
-!!null ""
+null
 ```
 
 **Legend:**
@@ -6366,24 +5931,16 @@ matches %: 20
 ```
 
 ```
-%YAML 1.2
+"Document"
 ---
-!!str "Document"
-...
-%YAML 1.2
+null
 ---
-!!null ""
-...
-%YAML 1.2
----
-!!map {
-  !!str "matches %": !!int "20"
-}
+{ "matches %": 20 }
 ```
 
 **Legend:**
 * [l-any-document] &lt;!-- 1 2 3 --&gt;
-* [l-document-suffix] &lt;!--  --&gt;
+* [l-document-suffix] &lt;!-- 4 --&gt;
 * [l-explicit-document] &lt;!-- 5 6 7 --&gt;
 
 
@@ -6711,7 +6268,7 @@ Since YAML does not specify a particular accuracy, using floating-point
 <code>##### Canonical Form:</code>
 
 &gt; Either **`0`**, **`.inf`**, **`-.inf`**, **`.nan`**, or scientific notation
-matching the regular expression
+matching the regular expression  
 **`-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?`**.
 
 
@@ -6764,31 +6321,17 @@ A null: null
 Booleans: [ true, false ]
 Integers: [ 0, -0, 3, -19 ]
 Floats: [ 0., -0.0, 12e03, -2E+05 ]
-Invalid: [ True, Null, 0o7, 0x3A, +12.3 ]
+Invalid: [ True, Null,
+  0o7, 0x3A, +12.3 ]
 ```
 
 ```
-%YAML 1.2
----
-!!map {
-  !!str "A null" : !!null "null",
-  !!str "Booleans: !!seq [
-    !!bool "true", !!bool "false"
-  ],
-  !!str "Integers": !!seq [
-    !!int "0", !!int "-0",
-    !!int "3", !!int "-19"
-  ],
-  !!str "Floats": !!seq [
-    !!float "0.", !!float "-0.0",
-    !!float "12e03", !!float "-2E+05"
-  ],
-  !!str "Invalid": !!seq [
-    # Rejected by the schema
-    True, Null, 0o7, 0x3A, +12.3,
-  ],
-}
-...
+{ "A null": null,
+  "Booleans": [ true, false ],
+  "Integers": [ 0, 0, 3, -19 ],
+  "Floats": [ 0.0, -0.0, 12000, -200000 ],
+  "Invalid": [ "True", "Null",
+    "0o7", "0x3A", "+12.3" ] }
 ```
 
 
@@ -6848,34 +6391,21 @@ Also a null: # Empty
 Not a null: ""
 Booleans: [ true, True, false, FALSE ]
 Integers: [ 0, 0o7, 0x3A, -19 ]
-Floats: [ 0., -0.0, .5, +12e03, -2E+05 ]
-Also floats: [ .inf, -.Inf, +.INF, .NAN ]
+Floats: [
+  0., -0.0, .5, +12e03, -2E+05 ]
+Also floats: [
+  .inf, -.Inf, +.INF, .NAN ]
 ```
 ```
-%YAML 1.2
----
-!!map {
-  !!str "A null" : !!null "null",
-  !!str "Also a null" : !!null "",
-  !!str "Not a null" : !!str "",
-  !!str "Booleans: !!seq [
-    !!bool "true", !!bool "True",
-    !!bool "false", !!bool "FALSE",
-  ],
-  !!str "Integers": !!seq [
-    !!int "0", !!int "0o7",
-    !!int "0x3A", !!int "-19",
-  ],
-  !!str "Floats": !!seq [
-    !!float "0.", !!float "-0.0", !!float ".5",
-    !!float "+12e03", !!float "-2E+05"
-  ],
-  !!str "Also floats": !!seq [
-    !!float ".inf", !!float "-.Inf",
-    !!float "+.INF", !!float ".NAN",
-  ],
-}
-...
+{ "A null": null,
+  "Also a null": null,
+  "Not a null": "",
+  "Booleans": [ true, true, false, false ],
+  "Integers": [ 0, 7, 58, -19 ],
+  "Floats": [
+    0.0, -0.0, 0.5, 12000, -200000 ],
+  "Also floats": [
+    Infinity, -Infinity, Infinity, NaN ] }
 ```
 
 
@@ -6911,10 +6441,8 @@ specification.
 This allows it to evolve to better support YAML [applications].
 Hence, developers are encouraged to submit new "universal" types to the
 repository.
-The yaml-core mailing list at
-&lt;https://lists.sourceforge.net/lists/listinfo/yaml-core&gt;
-is the preferred method for such submissions, as well as raising any questions
-regarding this draft.
+The yaml-core mailing list is the preferred method for such submissions, as
+well as raising any questions regarding this draft.
 
 <code># Reference Links</code>
 
@@ -6922,6 +6450,8 @@ regarding this draft.
 * C
   * [Wikipedia - C (programming language)](
     https://en.wikipedia.org/wiki/C_%28programming_language%29)
+* C0 control block
+  * [Wikipedia - C0 and C1 control codes](https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
 * Data::Denter
   * [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](
     https://metacpan.org/dist/Data-Denter/view/Denter.pod)
@@ -6949,6 +6479,9 @@ regarding this draft.
 * MIME
   * [Multipurpose Internet Mail Extensions (MIME)](
     https://tools.ietf.org/html/rfc2045)
+* must allow all non-C0 characters
+  * [rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings](
+    https://tools.ietf.org/html/rfc7159#section-7)
 * Perl
   * [The Perl Programming Language](
     https://www.perl.org/)
@@ -6970,6 +6503,9 @@ regarding this draft.
 * SOAP
   * [SOAP](
     https://en.wikipedia.org/wiki/SOAP)
+* surrogate block
+  * [Wikipedia - Universal Character Set characters #Surrogates](
+    https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
 * Unicode FAQ
   * [UTF-8, UTF-16, UTF-32 &amp; BOM](
     https://www.unicode.org/faq/utf_bom.html)
@@ -6998,6 +6534,6 @@ regarding this draft.
   * [YamlReference: YAML reference implementation](
     https://hackage.haskell.org/package/YamlReference)
 * ypaste
-  * [YEAST2HTML](
+  * [ypaste / YEAST2HTML](
     http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl)
 </pre>
