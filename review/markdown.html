@@ -1154,12 +1154,12 @@ to this anchor.
 Otherwise, anchor names are a [serialization detail] and are discarded once
 [composing] is completed.
 When [composing] a [representation graph] from [serialized] events, an alias
-node refers to the most recent [node] in the [serialization] having the
+event refers to the most recent event in the [serialization] having the
 specified anchor.
 Therefore, anchors need not be unique within a [serialization].
 In addition, an anchor need not have an alias node referring to it.
-It is therefore possible to provide an anchor for all [nodes] in
-[serialization].
+It is therefore possible to provide an anchor for every [node] event created by
+a serializer.
 
 
 <code>### #. Presentation Stream</code>

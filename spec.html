@@ -22,7 +22,7 @@
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>YAML Specification Version 1.2.1 – Released 2021-08-07</strong></p>
+<p><strong>YAML Specification Version 1.2.1 – Released 2021-08-08</strong></p>
 
 <p>Copyright presently by <span class="footnote-link">The YAML Language Development Team<sup id="fnl1"><a href="#fn1">1</a></sup></span><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -1513,12 +1513,12 @@ to this anchor.
 Otherwise, anchor names are a <a href="#serializing-the-representation-graph">serialization detail</a> and are discarded once
 <a href="#composing-the-representation-graph">composing</a> is completed.
 When <a href="#composing-the-representation-graph">composing</a> a <a href="#representation-graph">representation graph</a> from <a href="#serializing-the-representation-graph">serialized</a> events, an alias
-node refers to the most recent <a href="#nodes">node</a> in the <a href="#serialization-tree">serialization</a> having the
+event refers to the most recent event in the <a href="#serialization-tree">serialization</a> having the
 specified anchor.
 Therefore, anchors need not be unique within a <a href="#serialization-tree">serialization</a>.
 In addition, an anchor need not have an alias node referring to it.
-It is therefore possible to provide an anchor for all <a href="#nodes">nodes</a> in
-<a href="#serialization-tree">serialization</a>.</p>
+It is therefore possible to provide an anchor for every <a href="#nodes">node</a> event created by
+a serializer.</p>
 
 <div id="presentation-stream"></div>
 <h3 id="323-presentation-stream">3.2.3. Presentation Stream</h3>
