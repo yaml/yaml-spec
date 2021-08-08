@@ -7,7 +7,7 @@ default:
 docker-build-all docker-push-all:
 	make -C tool/docker $@
 
-build site serve stage publish force diff:
+build site serve publish publish-fork force diff:
 	make -C www $@
 
 clean:

@@ -15,11 +15,12 @@ The Makefile supports:
   Build and publish the content to <https://spec.yaml.io/>.
   This can only be run in `main` branch.
 
-* `make stage`
+* `make publish-fork`
 
   Build and publish the content to
-  `https://<your-github-username>-spec.yaml.io/`.
+  https://<your-github-username>.github.io/yaml-spec/`.
   This can only be run in a non `main` branch.
+  It pushes to your GitHub fork of the yaml-spec repo.
 
 * `make serve`
 
