@@ -334,13 +334,13 @@ rbi: 147   # Runs Batted In
 
 ```
 american:
-  - Boston Red Sox
-  - Detroit Tigers
-  - New York Yankees
+- Boston Red Sox
+- Detroit Tigers
+- New York Yankees
 national:
-  - New York Mets
-  - Chicago Cubs
-  - Atlanta Braves
+- New York Mets
+- Chicago Cubs
+- Atlanta Braves
 ```
 
 
@@ -435,12 +435,12 @@ asterisk - ["**`*`**"]) thereafter.
 ```
 ---
 hr: # 1998 hr ranking
-  - Mark McGwire
-  - Sammy Sosa
+- Mark McGwire
+- Sammy Sosa
+# 1998 rbi ranking
 rbi:
-  # 1998 rbi ranking
-  - Sammy Sosa
-  - Ken Griffey
+- Sammy Sosa
+- Ken Griffey
 ```
 
 
@@ -449,12 +449,12 @@ rbi:
 ```
 ---
 hr:
-  - Mark McGwire
-  # Following node labeled SS
-  - &SS Sammy Sosa
+- Mark McGwire
+# Following node labeled SS
+- &SS Sammy Sosa
 rbi:
-  - *SS # Subsequent occurrence
-  - Ken Griffey
+- *SS # Subsequent occurrence
+- Ken Griffey
 ```
 
 A question mark and space (["**`?`** "]) indicate a complex [mapping] [key].
@@ -467,8 +467,7 @@ the [dash], [colon], or [question mark].
 ```
 ? - Detroit Tigers
   - Chicago cubs
-:
-  - 2001-07-23
+: - 2001-07-23
 
 ? [ New York Yankees,
     Atlanta Braves ]
@@ -524,7 +523,7 @@ Alternatively, they can be written with the [folded style] [(denoted by
 lines**
 
 ```
->
+--- >
  Sammy Sosa completed another
  fine season with great stats.
 
@@ -608,7 +607,7 @@ canonical: 1.23015e+3
 exponential: 12.3015e+02
 fixed: 1230.15
 negative infinity: -.inf
-not a number: .NaN
+not a number: .nan
 ```
 
 
@@ -685,7 +684,7 @@ application specific tag: !something |
 --- !!set
 ? Mark McGwire
 ? Sammy Sosa
-? Ken Griff
+? Ken Griffey
 ```
 
 
@@ -698,7 +697,7 @@ application specific tag: !something |
 --- !!omap
 - Mark McGwire: 65
 - Sammy Sosa: 63
-- Ken Griffy: 58
+- Ken Griffey: 58
 ```
 
 
@@ -715,31 +714,31 @@ On the left is a sample invoice; on the right is a sample log file.
 invoice: 34843
 date   : 2001-01-23
 bill-to: &id001
-    given  : Chris
-    family : Dumars
-    address:
-        lines: |
-            458 Walkman Dr.
-            Suite #292
-        city    : Royal Oak
-        state   : MI
-        postal  : 48046
+  given  : Chris
+  family : Dumars
+  address:
+    lines: |
+      458 Walkman Dr.
+      Suite #292
+    city    : Royal Oak
+    state   : MI
+    postal  : 48046
 ship-to: *id001
 product:
-    - sku         : BL394D
-      quantity    : 4
-      description : Basketball
-      price       : 450.00
-    - sku         : BL4438H
-      quantity    : 1
-      description : Super Hoop
-      price       : 2392.00
+- sku         : BL394D
+  quantity    : 4
+  description : Basketball
+  price       : 450.00
+- sku         : BL4438H
+  quantity    : 1
+  description : Super Hoop
+  price       : 2392.00
 tax  : 251.42
 total: 4443.52
 comments:
-    Late afternoon is best.
-    Backup contact is Nancy
-    Billsmer @ 338-4338.
+  Late afternoon is best.
+  Backup contact is Nancy
+  Billsmer @ 338-4338.
 ```
 
 
@@ -764,14 +763,14 @@ User: ed
 Fatal:
   Unknown variable "bar"
 Stack:
-  - file: TopClass.py
-    line: 23
-    code: |
-      x = MoreObject("345\n")
-  - file: MoreClass.py
-    line: 58
-    code: |-
-      foo = bar
+- file: TopClass.py
+  line: 23
+  code: |
+    x = MoreObject("345\n")
+- file: MoreClass.py
+  line: 58
+  code: |-
+    foo = bar
 ```
 
 
