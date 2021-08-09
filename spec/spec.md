@@ -225,17 +225,6 @@ In practice, since JSON is silent on the semantics of such duplicates, the only
 portable JSON files are those with unique keys, which are therefore valid YAML
 files.
 
-It may be useful to define a intermediate format between YAML and JSON.
-Such a format would be trivial to parse (but not very human readable), like
-JSON.
-At the same time, it would allow for [serializing] arbitrary [native data
-structures], like YAML.
-Such a format might also serve as YAML’s "canonical format".
-Defining such a "YSON" format (YSON is a Serialized Object Notation) can be
-done either by enhancing the JSON specification or by restricting the YAML
-specification.
-Such a definition is beyond the scope of this specification.
-
 
 ## #. Relation to XML
 
