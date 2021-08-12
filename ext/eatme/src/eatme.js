@@ -67,7 +67,7 @@
       this.code = code1;
       this.make_root();
       this.make_cols();
-      this.start();
+      $(this.from).replaceWith(this.root);
     }
 
     EatMe.prototype.make_root = function() {
@@ -104,12 +104,6 @@
           return self.make_empty_pane().appendTo($col);
         }
       });
-    };
-
-    EatMe.prototype.start = function() {
-      var $from;
-      $from = $(this.from);
-      return $from.replaceWith(this.root);
     };
 
     EatMe.prototype.make_resizable = function() {
@@ -202,8 +196,12 @@
           cm.on('change', $.debounce(400, do_calls));
           return setTimeout(function() {
             do_calls();
-            return say(cm.getValue());
-          }, 500);
+            cm.focus();
+            return cm.setCursor({
+              line: 0,
+              ch: 0
+            });
+          }, 200);
         }, 100);
       }
     };
