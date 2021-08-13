@@ -613,17 +613,26 @@ sub format_pre {
   $_ = $_[0];
   s/\n+\z/\n/;
 
-  s/\A```\n//;
-  s/\n```\n*\z//;
-  s/&/&amp;/g;
-  s/</&lt;/g;
-  s/>/&gt;/g;
+  s/\A```(.*)\n//;
+  my $lang = $1 || '';
+  s/\n```\n\z//;
 
-  s/\[%/</g;
-  s/%\]/>/g;
+  if ($lang ne 'mermaid') {
+    s/&/&amp;/g;
+    s/</&lt;/g;
+    s/>/&gt;/g;
+
+    s/\[%/</g;
+    s/%\]/>/g;
+  }
+
+  my $pre = '<pre>';
+  if ($lang) {
+    $pre =~ s/>/ class="$lang">/;
+  }
 
   return <<"...";
-<pre>
+$pre
 $_
 </pre>
 ...
