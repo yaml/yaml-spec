@@ -810,7 +810,19 @@ data model, as shown in the following diagram:
 
 **Figure #. Processing Overview**
 
-![Processing Overview](img/overview2.png)
+```mermaid
+graph LR
+    CS[Character<br>Stream]
+    ET[Event<br>Tree]
+    DG[DOM<br>Graph]
+    NG[Native<br>Graph]
+    CS-->|Parse| ET
+    ET-->|Compose|DG
+    DG-->|Construct|NG
+    NG-->|Represent|DG
+    DG-->|Serialize|ET
+    ET-->|Emit| CS
+```
 
 A YAML processor need not expose the [serialization] or [representation]
 stages.
