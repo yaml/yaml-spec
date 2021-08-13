@@ -5,7 +5,7 @@
   <meta http-equiv="Content-Type"
       content="text/html; charset=UTF-8" />
 
-<title>YAML Playground Playground</title>
+<title>Load Stack Playground</title>
 
 
   <script
@@ -228,7 +228,7 @@ baz:
   <script type="text/javascript">
     $(document).ready(()=> {
 
-      var conf = {"slug":"playground-devel","cols":4,"html":"<div class=\"container-fluid row\">","pane":[{"name":"Playground Menu","slug":"menu","type":"menu","load":"/main-menu.html"},{"name":"YAML Text Input","slug":"text","type":"input","colx":1},{"name":"YAML Reference Parser Events","slug":"events","call":["refparser-events","text"],"colx":2},{"name":"YAML::PP Events","slug":"yamlpp","type":"text"},{"name":"NPM yaml.js 1.10.2 Parse to Event","slug":"npmyaml","type":"text","call":["npmyaml1-event","text"],"colx":3},{"name":"NPM yaml.js 2.0.0 Parse to Event","slug":"npmyaml2","type":"text","call":["npmyaml2-event","text"],"colx":4},{"name":"DOM State","type":"text","slug":"dom"},{"name":"Native Data Structure","slug":"native","type":"text"},{"name":"JavaScript","slug":"javascript","type":"text"},{"name":"Parser Grammar","slug":"grammar","type":"input","load":"/grammar.yaml"},{"name":"EatMe Settings","slug":"settings","type":"settings"}]};
+      var conf = {"slug":"playground-devel","cols":4,"html":"<div class=\"container-fluid row\">","pane":[{"name":"YAML Text Input","slug":"text","type":"input","colx":1},{"name":"YAML Reference Parser Events","slug":"events","call":["refparser-events","text"],"colx":1},{"name":"NPM yaml.js master Parse to Events","slug":"npmyamlmasterevent","type":"text","call":["npmyamlmaster-event","text"],"colx":2},{"name":"NPM yaml.js master Load to JSON","slug":"npmyamlmasterjson","type":"text","call":["npmyamlmaster-json","text"],"colx":2},{"name":"NPM yaml.js v2.0.0.6 Parse to Events","slug":"npmyaml2event","type":"text","call":["npmyaml2-event","text"],"colx":3},{"name":"NPM yaml.js v2.0.0.6 Load to JSON","slug":"npmyaml2","type":"text","call":["npmyaml2-json","text"],"colx":3},{"name":"NPM yaml.js v1.10.2 Parse to Events","slug":"npmyaml1event","type":"text","call":["npmyaml1-event","text"],"colx":4},{"name":"NPM yaml.js v1.10.2 Load to JSON","slug":"npmyaml1","type":"text","call":["npmyaml1-json","text"],"colx":4}]};
 
       var conf_name = EatMe.conf(conf);
       EatMe.init({
