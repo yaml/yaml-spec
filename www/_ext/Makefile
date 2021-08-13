@@ -4,8 +4,8 @@ EATME := eatme
 REF_PARSER := ref-parser
 NPM_YAML := npm-yaml
 
-EATME_REPO := https://github.com/eatme-dev/eatme
-REF_PARSER_REPO := https://github.com/yaml/yaml-reference-parser
+EATME_REPO ?= https://github.com/eatme-dev/eatme
+REF_PARSER_REPO ?= https://github.com/yaml/yaml-reference-parser
 NPM_YAML_REPO := https://github.com/eemeli/yaml
 
 SPEC_12_HTML := yaml-spec-12.html
@@ -27,10 +27,18 @@ clean:
 	rm -fr $(ALL)
 
 $(EATME):
+ifeq (,$(EATME_REPO:/%=))
+	ln -s $(EATME_REPO) $@
+else
 	git clone $(EATME_REPO) --branch=devel $@
+endif
 
 $(REF_PARSER):
+ifeq (,$(REF_PARSER_REPO:/%=))
+	ln -s $(REF_PARSER_REPO) $@
+else
 	git clone $(REF_PARSER_REPO) $@
+endif
 
 $(NPM_YAML):
 ifneq ($(wildcard $(TMPEXT)),)
