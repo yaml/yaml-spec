@@ -11,46 +11,12 @@ This document may be freely copied, provided it is not modified.
 
 <code>**Status of this Document**</code>
 
-This document reflects the third version of YAML data serialization language.
-The content of the specification was arrived at by consensus of its authors and
-through user feedback on the [yaml-core mailing list^].
-We encourage implementers to please update their software with support for this
-version.
+This is version **1.2.1** of the YAML 1.2 specification.
+It defines the YAML 1.2 data language, with no changes to YAML from the
+previous specification.
+The primary objectives of this version are to correct errors and add clarity.
 
-The primary objective of this revision is to bring YAML into compliance with
-JSON as an official subset.
-YAML 1.2 is compatible with 1.1 for most practical applications - this is a
-minor revision.
-An expected source of incompatibility with prior versions of YAML, especially
-the syck implementation, is the change in implicit typing rules.
-We have removed unique implicit typing rules and have updated these rules to
-align them with JSON's productions.
-In this version of YAML, boolean values may be serialized as "**`true`**" or
-"**`false`**"; the empty scalar as "**`null`**".
-Unquoted numeric values are a superset of JSON's numeric production.
-Other changes in the specification were the removal of the Unicode line breaks
-and production bug fixes.
-We also define 3 built-in implicit typing rule sets: untyped, strict JSON, and
-a more flexible YAML rule set that extends JSON typing.
-
-The difference between late 1.0 drafts which syck 0.55 implements and the 1.1
-revision of this specification is much more extensive.
-We fixed usability issues with the tagging syntax.
-In particular, the single exclamation was re-defined for private types and a
-simple prefixing mechanism was introduced.
-This revision also fixed many production edge cases and introduced a type
-repository.
-Therefore, there are several incompatibilities between syck and this revision
-as well.
-
-The list of known errors in this specification is available at
-[https://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html).
-Please report errors in this document to the yaml-core mailing list.
-This revision contains fixes for all errors known as of 2009-10-01.
-
-We wish to thank implementers who have tirelessly tracked earlier versions of
-this specification, and our fabulous user community whose feedback has both
-validated and clarified our direction.
+See the [Changes] section below for details.
 
 
 <code>**Abstract**</code>
@@ -225,17 +191,6 @@ In practice, since JSON is silent on the semantics of such duplicates, the only
 portable JSON files are those with unique keys, which are therefore valid YAML
 files.
 
-It may be useful to define a intermediate format between YAML and JSON.
-Such a format would be trivial to parse (but not very human readable), like
-JSON.
-At the same time, it would allow for [serializing] arbitrary [native data
-structures], like YAML.
-Such a format might also serve as YAML’s "canonical format".
-Defining such a "YSON" format (YSON is a Serialized Object Notation) can be
-done either by enhancing the JSON specification or by restricting the YAML
-specification.
-Such a definition is beyond the scope of this specification.
-
 
 <code>## #. Relation to XML</code>
 
@@ -335,13 +290,13 @@ rbi: 147   # Runs Batted In
 
 ```
 american:
-  - Boston Red Sox
-  - Detroit Tigers
-  - New York Yankees
+- Boston Red Sox
+- Detroit Tigers
+- New York Yankees
 national:
-  - New York Mets
-  - Chicago Cubs
-  - Atlanta Braves
+- New York Mets
+- Chicago Cubs
+- Atlanta Braves
 ```
 
 
@@ -436,12 +391,12 @@ asterisk - ["**`*`**"]) thereafter.
 ```
 ---
 hr: # 1998 hr ranking
-  - Mark McGwire
-  - Sammy Sosa
+- Mark McGwire
+- Sammy Sosa
+<code># 1998 rbi ranking</code>
 rbi:
-  # 1998 rbi ranking
-  - Sammy Sosa
-  - Ken Griffey
+- Sammy Sosa
+- Ken Griffey
 ```
 
 
@@ -450,12 +405,12 @@ rbi:
 ```
 ---
 hr:
-  - Mark McGwire
-  # Following node labeled SS
-  - &amp;SS Sammy Sosa
+- Mark McGwire
+<code># Following node labeled SS</code>
+- &amp;SS Sammy Sosa
 rbi:
-  - *SS # Subsequent occurrence
-  - Ken Griffey
+- *SS # Subsequent occurrence
+- Ken Griffey
 ```
 
 A question mark and space (["**`?`** "]) indicate a complex [mapping] [key].
@@ -468,8 +423,7 @@ the [dash], [colon], or [question mark].
 ```
 ? - Detroit Tigers
   - Chicago cubs
-:
-  - 2001-07-23
+: - 2001-07-23
 
 ? [ New York Yankees,
     Atlanta Braves ]
@@ -525,7 +479,7 @@ Alternatively, they can be written with the [folded style] [(denoted by
 lines**</code>
 
 ```
-&gt;
+--- &gt;
  Sammy Sosa completed another
  fine season with great stats.
 
@@ -609,7 +563,7 @@ canonical: 1.23015e+3
 exponential: 12.3015e+02
 fixed: 1230.15
 negative infinity: -.inf
-not a number: .NaN
+not a number: .nan
 ```
 
 
@@ -686,7 +640,7 @@ application specific tag: !something |
 --- !!set
 ? Mark McGwire
 ? Sammy Sosa
-? Ken Griff
+? Ken Griffey
 ```
 
 
@@ -699,7 +653,7 @@ application specific tag: !something |
 --- !!omap
 - Mark McGwire: 65
 - Sammy Sosa: 63
-- Ken Griffy: 58
+- Ken Griffey: 58
 ```
 
 
@@ -716,31 +670,31 @@ On the left is a sample invoice; on the right is a sample log file.
 invoice: 34843
 date   : 2001-01-23
 bill-to: &amp;id001
-    given  : Chris
-    family : Dumars
-    address:
-        lines: |
-            458 Walkman Dr.
-            Suite #292
-        city    : Royal Oak
-        state   : MI
-        postal  : 48046
+  given  : Chris
+  family : Dumars
+  address:
+    lines: |
+      458 Walkman Dr.
+      Suite #292
+    city    : Royal Oak
+    state   : MI
+    postal  : 48046
 ship-to: *id001
 product:
-    - sku         : BL394D
-      quantity    : 4
-      description : Basketball
-      price       : 450.00
-    - sku         : BL4438H
-      quantity    : 1
-      description : Super Hoop
-      price       : 2392.00
+- sku         : BL394D
+  quantity    : 4
+  description : Basketball
+  price       : 450.00
+- sku         : BL4438H
+  quantity    : 1
+  description : Super Hoop
+  price       : 2392.00
 tax  : 251.42
 total: 4443.52
 comments:
-    Late afternoon is best.
-    Backup contact is Nancy
-    Billsmer @ 338-4338.
+  Late afternoon is best.
+  Backup contact is Nancy
+  Billsmer @ 338-4338.
 ```
 
 
@@ -765,14 +719,14 @@ User: ed
 Fatal:
   Unknown variable "bar"
 Stack:
-  - file: TopClass.py
-    line: 23
-    code: |
-      x = MoreObject("345\n")
-  - file: MoreClass.py
-    line: 58
-    code: |-
-      foo = bar
+- file: TopClass.py
+  line: 23
+  code: |
+    x = MoreObject("345\n")
+- file: MoreClass.py
+  line: 58
+  code: |-
+    foo = bar
 ```
 
 
@@ -812,7 +766,19 @@ data model, as shown in the following diagram:
 
 <code>**Figure #. Processing Overview**</code>
 
-![Processing Overview](img/overview2.png)
+```mermaid
+graph LR
+    CS[Character&lt;br&gt;Stream]
+    ET[Event&lt;br&gt;Tree]
+    DG[DOM&lt;br&gt;Graph]
+    NG[Native&lt;br&gt;Graph]
+    CS--&gt;|Parse| ET
+    ET--&gt;|Compose|DG
+    DG--&gt;|Construct|NG
+    NG--&gt;|Represent|DG
+    DG--&gt;|Serialize|ET
+    ET--&gt;|Emit| CS
+```
 
 A YAML processor need not expose the [serialization] or [representation]
 stages.
@@ -1154,12 +1120,10 @@ to this anchor.
 Otherwise, anchor names are a [serialization detail] and are discarded once
 [composing] is completed.
 When [composing] a [representation graph] from [serialized] events, an alias
-node refers to the most recent [node] in the [serialization] having the
+event refers to the most recent event in the [serialization] having the
 specified anchor.
 Therefore, anchors need not be unique within a [serialization].
 In addition, an anchor need not have an alias node referring to it.
-It is therefore possible to provide an anchor for all [nodes] in
-[serialization].
 
 
 <code>### #. Presentation Stream</code>
@@ -1646,21 +1610,21 @@ ERROR:
 
 _Indicators_ are characters that have special semantics.
 
-A ["**`-`**"] (**`#x2D`**, hyphen) denotes a [block sequence] entry.
+["**`-`**"] (**`#x2D`**, hyphen) denotes a [block sequence] entry.
 
 ```
 [#] c-sequence-entry ::= "-"
 ```
 
 
-A ["**`?`**"] (**`#x3F`**, question mark) denotes a [mapping key].
+["**`?`**"] (**`#x3F`**, question mark) denotes a [mapping key].
 
 ```
 [#] c-mapping-key ::= "?"
 ```
 
 
-A ["**`:`**"] (**`#x3A`**, colon) denotes a [mapping value].
+["**`:`**"] (**`#x3A`**, colon) denotes a [mapping value].
 
 ```
 [#] c-mapping-value ::= ":"
@@ -1694,35 +1658,35 @@ mapping:
 * [c-mapping-value] &lt;!-- : --&gt;
 
 
-A ["**`,`**"] (**`#x2C`**, comma) ends a [flow collection] entry.
+["**`,`**"] (**`#x2C`**, comma) ends a [flow collection] entry.
 
 ```
 [#] c-collect-entry ::= ","
 ```
 
 
-A ["**`[`**"] (**`#x5B`**, left bracket) starts a [flow sequence].
+["**`[`**"] (**`#x5B`**, left bracket) starts a [flow sequence].
 
 ```
 [#] c-sequence-start ::= "["
 ```
 
 
-A ["**`]`**"] (**`#x5D`**, right bracket) ends a [flow sequence].
+["**`]`**"] (**`#x5D`**, right bracket) ends a [flow sequence].
 
 ```
 [#] c-sequence-end ::= "]"
 ```
 
 
-A ["**`{`**"] (**`#x7B`**, left brace) starts a [flow mapping].
+["**`{`**"] (**`#x7B`**, left brace) starts a [flow mapping].
 
 ```
 [#] c-mapping-start ::= "{"
 ```
 
 
-A ["**`}`**"] (**`#x7D`**, right brace) ends a [flow mapping].
+["**`}`**"] (**`#x7D`**, right brace) ends a [flow mapping].
 
 ```
 [#] c-mapping-end ::= "}"
@@ -1748,8 +1712,8 @@ mapping: { sky: blue, sea: green }
 * [c-collect-entry] &lt;!-- , --&gt;
 
 
-An ["**`#`**"] (**`#x23`**, octothorpe, hash, sharp, pound, number sign)
-denotes a [comment].
+["**`#`**"] (**`#x23`**, octothorpe, hash, sharp, pound, number sign) denotes a
+[comment].
 
 ```
 [#] c-comment ::= "#"
@@ -1772,13 +1736,13 @@ denotes a [comment].
 * [c-comment] &lt;!-- # --&gt;
 
 
-An ["**`&amp;`**"] (**`#x26`**, ampersand) denotes a [node’s anchor property].
+["**`&amp;`**"] (**`#x26`**, ampersand) denotes a [node’s anchor property].
 
 ```
 [#] c-anchor ::= "&amp;"
 ```
 
-An ["**`*`**"] (**`#x2A`**, asterisk) denotes an [alias node].
+["**`*`**"] (**`#x2A`**, asterisk) denotes an [alias node].
 
 
 ```
@@ -1815,14 +1779,14 @@ alias: *anchor
 * [c-alias] &lt;!-- * --&gt;
 
 
-A ["**`|`**"] (**`7C`**, vertical bar) denotes a [literal block scalar].
+["**`|`**"] (**`7C`**, vertical bar) denotes a [literal block scalar].
 
 ```
 [#] c-literal ::= "|"
 ```
 
 
-A ["**`&gt;`**"] (**`#x3E`**, greater than) denotes a [folded block scalar].
+["**`&gt;`**"] (**`#x3E`**, greater than) denotes a [folded block scalar].
 
 ```
 [#] c-folded ::= "&gt;"
@@ -1849,8 +1813,8 @@ folded: &gt;
 * [c-literal] &lt;!-- | --&gt;
 * [c-folded] &lt;!-- &gt; --&gt;
 
-An ["**`'`**"] (**`#x27`**, apostrophe, single quote) surrounds a
-[single-quoted flow scalar].
+["**`'`**"] (**`#x27`**, apostrophe, single quote) surrounds a [single-quoted
+flow scalar].
 
 
 ```
@@ -1858,7 +1822,7 @@ An ["**`'`**"] (**`#x27`**, apostrophe, single quote) surrounds a
 ```
 
 
-A ["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow
+["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow
 scalar].
 
 ```
@@ -1883,7 +1847,7 @@ double: "text"
 * [c-double-quote] &lt;!-- 2:9 2:14 --&gt;
 
 
-A ["**`%`**"] (**`#x25`**, percent) denotes a [directive] line.
+["**`%`**"] (**`#x25`**, percent) denotes a [directive] line.
 
 ```
 [#] c-directive ::= "%"
@@ -6444,6 +6408,18 @@ repository.
 The yaml-core mailing list is the preferred method for such submissions, as
 well as raising any questions regarding this draft.
 
+
+<code># Changes in YAML Specification v1.2.1</code>
+
+* Host the YAML specification sources in a [public repository^]
+* Change the source format from DocBook to Markdown
+* Correct known errata from the previous specification
+* Address many [reported issues^]
+* Clarify wording and examples
+* Removed sentences that are no longer relevant in 2021
+* Fixed known bugs in the grammar productions
+
+
 <code># Reference Links</code>
 
 {:.footnote-links}
@@ -6485,9 +6461,15 @@ well as raising any questions regarding this draft.
 * Perl
   * [The Perl Programming Language](
     https://www.perl.org/)
+* public repository
+  * [GitHub - yaml/yaml-spec - YAML Specification](
+    https://github.com/yaml/yaml-spec)
 * Python
   * [The Python Programming Language](
     https://www.python.org/)
+* reported issues
+  * [GitHub - issues - yaml/yaml-spec](
+    https://github.com/yaml/yaml-spec/issues)
 * RFC format
   * [Request for Comments Summary](
     https://tools.ietf.org/html/rfc2199)
