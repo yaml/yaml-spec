@@ -36,3 +36,9 @@ span.footnote-link sup a { color: blue; text-decoration: none; }
 .footnote-links p { margin-bottom: 0px; }
 
 .footnote-links-after { height: 1000px; }
+
+.language-json .highlight .nl { font-weight: normal; color: blue; }
+.language-json .highlight .s2 { color: darkgreen; }
+.language-json .highlight .kc { color: #567482; font-weight: bold; }
+.language-json .highlight .se { color: darkblue; font-weight: bold; }
+.language-json .highlight .err, .language-json .highlight .err + .mi, .language-json .highlight .err + .p + .mi { color: #567482; background-color: inherit; }
