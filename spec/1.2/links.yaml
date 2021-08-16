@@ -1,0 +1,290 @@
+# Keys are HTML IDs to link to.
+# Values are link texts that resolve to the ID.
+# An 's' is added to each value for plurals.
+# Empty values use the key as the value.
+
+anchors-and-aliases:
+- alias
+- aliased
+- aliases
+- aliasing
+- anchor
+- anchor name
+- anchored
+- identified
+- node's anchor property
+available-tags:
+- unavailable
+- unavailability
+block-chomping-indicator:
+- chomped
+- chomping
+block-collection-styles:
+- block collection
+block-folding:
+- folded block scalar
+- folded block style
+block-scalar-styles:
+- block scalar
+- block scalar content
+block-sequences:
+- dash
+- dashes
+- sequence entry
+block-styles:
+- indented blocks
+canonical-form:
+- canonical form
+character-encodings:
+- byte order mark
+- encoding
+character-set:
+- printable
+clip:
+composing-the-representation-graph:
+- compose
+- composed
+- composing
+- composition
+constructing-native-data-structures:
+- bindings
+- construct
+- constructed
+- construction
+context-c:
+- context
+directives:
+- reserved
+document:
+document-markers:
+- directives end marker
+- document end marker
+- marker
+double-quoted-style:
+- double-quoted
+- double-quoted flow scalar
+- double-quoted scalars
+- double-quoted style
+- quoted scalars
+dump:
+- data structures
+empty-lines:
+- empty
+equality:
+escaped-characters:
+- escape
+- escape sequences
+- escaped
+- escaping
+example-block-sequence:
+- compact in-line notation
+example-empty-content:
+- completely empty
+example-flow-mapping-adjacent-values:
+- compact notation
+example-single-pair-explicit-entry:
+- implicit key
+example-more-indented-lines:
+- more-indented
+example-stream:
+- well-formed
+failsafe-schema:
+- fail safe schema
+- failsafe
+flow-collection-styles:
+- comma
+- flow collection
+flow-folding:
+- flow line folding
+flow-mappings:
+- braces
+- colon
+- curly
+- question mark
+flow-nodes:
+- json-like
+flow-scalar-styles:
+- flow scalar
+- scalar flow styles
+flow-sequences:
+- brackets
+- square
+flow-styles:
+- flow
+- flow content
+indentation-spaces:
+- indentation
+- indented
+indicator-characters:
+- indicator
+- some
+keep:
+keys-order:
+- key order
+- order
+- ordering
+line-break-characters:
+- above
+- break
+- line break
+- non-ascii line breaks
+- normalized
+line-folding:
+- folded
+- folding
+literal-style:
+- literal
+- literal block scalar
+load:
+- loading
+loading-point-failures:
+- below
+- complete representation
+- partial representation
+mapping:
+- collection node
+- collection's
+- 'key: value pair'
+- key node
+- mapping
+- mapping key order
+- mapping node
+- mapping value
+- 'single key: value pair'
+node-comparison:
+- unique
+nodes:
+- content
+- key
+- kind
+- mapping key
+- node
+- node content
+- node kind
+- node's content
+- node's kind
+- scalar node
+- value
+- value node
+node-properties:
+- node's properties
+- properties
+node-styles:
+- scalar style
+- style
+node-tags:
+- tag property
+- tag properties
+other-schemas:
+- yaml tag repository
+- repository
+parsing-the-presentation-stream:
+- parsed
+- parser
+- parsing
+plain-style:
+- plain
+- plain scalar
+presentation-stream:
+- presentation
+presenting-the-serialization-tree:
+- details
+- present
+- presented
+- presenting
+- presentation detail
+processing-yaml-information:
+- application
+- processor
+recognized-and-valid-tags:
+- invalid
+- unrecognized
+- valid
+recommended-schemas:
+- schema
+representation-graph:
+- represent
+- represented
+- representation
+- representation graph
+- root
+representing-native-data-structures:
+- bound
+- native
+- native data structure
+- native data types
+resolved-tags:
+- convention
+- non-specific tag
+- resolve
+- resolved
+- resolving
+- specific
+- unresolvable
+- unresolved
+- unspecified
+- unspecified tags
+- untagged
+- untagged nodes
+scalar:
+- scalar
+- scalar content
+- scalar's content
+scalar-formats:
+- format scalar content
+- formats
+- formatted content
+- formatted scalar content
+- scalar content format
+scalars:
+- block
+separation-spaces:
+- separate
+- separated
+sequence:
+- lists
+- sequence
+- sequence node
+serialization-tree:
+- serialization
+- serialization tree
+serializing-the-representation-graph:
+- serialization detail
+- serialize
+- serialized
+- serializing
+single-quoted-style:
+- single-quoted
+- single-quoted flow scalar
+streams:
+strip:
+tags:
+- global
+- global tag
+- local
+- local tag
+- node's tag
+- tag
+- tagged
+- tagging
+- type names
+- types
+tag-handles:
+- handle
+- named tag handle
+tag-prefixes:
+- prefix
+tag-shorthands:
+- shorthands
+- tag shorthand
+well-formed-streams-and-identified-aliases:
+- ill-formed
+- unidentified
+white-space-characters:
+- space
+- tab
+- white space
+yaml-directives:
+- json compatibility
+- version 1.1
+- yaml version 1.1
