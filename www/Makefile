@@ -125,7 +125,7 @@ endif
 	    cd $(GH_PAGES) && \
 	    rm -f CNAME && \
 	    git add -A . && \
-	    ( git commit -m "'Publish fork '$(FORK_USER_ID)'" || true ) && \
+	    git commit --allow-empty -m "'Publish fork '$(FORK_USER_ID)'" && \
 	    git push -f git@github.com:$(FORK_USER_ID)/$(REPO_NAME) gh-pages \
 	)
 	@echo
@@ -142,7 +142,7 @@ endif
 	    set -x ; \
 	    cd $(GH_PAGES) && \
 	    git add -A . && \
-	    ( git commit -m 'Publish' || true ) && \
+	    git commit --allow-empty -m 'Publish' && \
 	    git push -f \
 	)
 	@echo
