@@ -1116,9 +1116,6 @@ Two [mappings] are equal only when they have the same [tag] and an equal set
 of [keys], and each [key] in this set is associated with equal [values] in
 both [mappings].
 
-If a node has itself as a descendant (via an alias), then equality of that node
-is implementation-defined.
-
 > Different URI schemes may define different rules for testing the equality of
 URIs.
 Since a YAML [processor] cannot be reasonably expected to be aware of them
@@ -1128,6 +1125,9 @@ This also happens to be the comparison method defined by the "**`tag:`**" URI
 scheme.
 [Tags] in a YAML stream must therefore be [presented] in a canonical way so
 that such comparison would yield the correct results.
+
+> If a node has itself as a descendant (via an alias), then equality of that node
+is implementation-defined.
 
 
 ##### Identity
