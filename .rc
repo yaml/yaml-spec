@@ -1,10 +1,1 @@
-[[ ${ZSH_VERSION-} ]] &&
-  YAML_SPEC_ROOT=$0 ||
-  YAML_SPEC_ROOT=${BASH_SOURCE[0]}
-
-YAML_SPEC_ROOT=$(cd "$(dirname "$YAML_SPEC_ROOT")" && pwd) ||
-  return $?
-
-export YAML_SPEC_ROOT
-
-# vim: set ft=sh:
+export YAML_SPEC_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)
