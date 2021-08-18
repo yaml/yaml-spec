@@ -10,6 +10,11 @@ docker-build-all docker-push-all:
 build site serve publish publish-fork force diff:
 	make -C www $@
 
+_:
+	git worktree prune
+	git worktree add $@ $@
+	make -C $@ all
+
 clean:
 	git worktree prune
 	make -C 1.2 $@
