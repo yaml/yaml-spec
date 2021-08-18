@@ -13,13 +13,6 @@
 <link rel="stylesheet"
       type="text/css"
       href="/yaml-spec/spec.css" />
-<script
-  type="text/javascript"
-  src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-<script>
-mermaid.initialize({startOnLoad:true});
-</script>
-
 </head>
 
 <body>
@@ -29,7 +22,7 @@ mermaid.initialize({startOnLoad:true});
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>YAML Specification Version 1.2.1 – Released 2021-08-15</strong></p>
+<p><strong>YAML Specification Version 1.2.1 – Released 2021-08-18</strong></p>
 
 <p>Copyright presently by <span class="footnote-link">The YAML Language Development Team<sup id="fnl1"><a href="#fn1">1</a></sup></span><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -38,12 +31,46 @@ Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 
 <p><strong>Status of this Document</strong></p>
 
-<p>This is version <strong>1.2.1</strong> of the YAML 1.2 specification.
-It defines the YAML 1.2 data language, with no changes to YAML from the
-previous specification.
-The primary objectives of this version are to correct errors and add clarity.</p>
+<p>This document reflects the third version of YAML data serialization language.
+The content of the specification was arrived at by consensus of its authors and
+through user feedback on the <span class="footnote-link">yaml-core mailing list<sup id="fnl2"><a href="#fn2">2</a></sup></span>.
+We encourage implementers to please update their software with support for this
+version.</p>
 
-<p>See the <a href="#changes-in-yaml-specification-v121">Changes</a> section below for details.</p>
+<p>The primary objective of this revision is to bring YAML into compliance with
+JSON as an official subset.
+YAML 1.2 is compatible with 1.1 for most practical applications - this is a
+minor revision.
+An expected source of incompatibility with prior versions of YAML, especially
+the syck implementation, is the change in implicit typing rules.
+We have removed unique implicit typing rules and have updated these rules to
+align them with JSON’s productions.
+In this version of YAML, boolean values may be serialized as “<strong><code class="language-plaintext highlighter-rouge">true</code></strong>” or
+“<strong><code class="language-plaintext highlighter-rouge">false</code></strong>”; the empty scalar as “<strong><code class="language-plaintext highlighter-rouge">null</code></strong>”.
+Unquoted numeric values are a superset of JSON’s numeric production.
+Other changes in the specification were the removal of the Unicode line breaks
+and production bug fixes.
+We also define 3 built-in implicit typing rule sets: untyped, strict JSON, and
+a more flexible YAML rule set that extends JSON typing.</p>
+
+<p>The difference between late 1.0 drafts which syck 0.55 implements and the 1.1
+revision of this specification is much more extensive.
+We fixed usability issues with the tagging syntax.
+In particular, the single exclamation was re-defined for private types and a
+simple prefixing mechanism was introduced.
+This revision also fixed many production edge cases and introduced a type
+repository.
+Therefore, there are several incompatibilities between syck and this revision
+as well.</p>
+
+<p>The list of known errors in this specification is available at
+<a href="/spec/1.2/errata.html">https://yaml.org/spec/1.2/errata.html</a>.
+Please report errors in this document to the yaml-core mailing list.
+This revision contains fixes for all errors known as of 2009-10-01.</p>
+
+<p>We wish to thank implementers who have tirelessly tracked earlier versions of
+this specification, and our fabulous user community whose feedback has both
+validated and clarified our direction.</p>
 
 <p><strong>Abstract</strong></p>
 
@@ -52,7 +79,7 @@ data serialization language designed around the common native data types of
 agile programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 Internet messaging to object persistence to data auditing.
-Together with the <span class="footnote-link">Unicode standard for characters<sup id="fnl2"><a href="#fn2">2</a></sup></span>, this specification
+Together with the <span class="footnote-link">Unicode standard for characters<sup id="fnl3"><a href="#fn3">3</a></sup></span>, this specification
 provides all the information necessary to understand YAML Version 1.2 and to
 create programs that process YAML information.</p>
 
@@ -327,7 +354,6 @@ create programs that process YAML information.</p>
       <li><a href="#104-other-schemas" id="markdown-toc-104-other-schemas">10.4. Other Schemas</a></li>
     </ul>
   </li>
-  <li><a href="#changes-in-yaml-specification-v121" id="markdown-toc-changes-in-yaml-specification-v121">Changes in YAML Specification v1.2.1</a></li>
   <li><a href="#reference-links" id="markdown-toc-reference-links">Reference Links</a></li>
 </ul>
 
@@ -392,14 +418,14 @@ When data is easy to view and understand, programming becomes a simpler task.</p
 <h2 id="12-prior-art">1.2. Prior Art</h2>
 
 <p>YAML’s initial direction was set by the data serialization and markup language
-discussions among <span class="footnote-link">SML-DEV members<sup id="fnl3"><a href="#fn3">3</a></sup></span>.
+discussions among <span class="footnote-link">SML-DEV members<sup id="fnl4"><a href="#fn4">4</a></sup></span>.
 Later on, it directly incorporated experience from Ingy döt Net’s Perl module
-<span class="footnote-link">Data::Denter<sup id="fnl4"><a href="#fn4">4</a></sup></span>.
+<span class="footnote-link">Data::Denter<sup id="fnl5"><a href="#fn5">5</a></sup></span>.
 Since then, YAML has matured through ideas and support from its user community.</p>
 
-<p>YAML integrates and builds upon concepts described by <span class="footnote-link">C<sup id="fnl5"><a href="#fn5">5</a></sup></span>, <span class="footnote-link">Java<sup id="fnl6"><a href="#fn6">6</a></sup></span>, <span class="footnote-link">Perl<sup id="fnl7"><a href="#fn7">7</a></sup></span>,
-<span class="footnote-link">Python<sup id="fnl8"><a href="#fn8">8</a></sup></span>, <span class="footnote-link">Ruby<sup id="fnl9"><a href="#fn9">9</a></sup></span>, <span class="footnote-link">Email<sup id="fnl10"><a href="#fn10">10</a></sup></span>, <span class="footnote-link">HTML<sup id="fnl11"><a href="#fn11">11</a></sup></span>, <span class="footnote-link">MIME<sup id="fnl12"><a href="#fn12">12</a></sup></span>, <span class="footnote-link">URIs<sup id="fnl13"><a href="#fn13">13</a></sup></span>, <span class="footnote-link">XML<sup id="fnl14"><a href="#fn14">14</a></sup></span>, <span class="footnote-link">SAX<sup id="fnl15"><a href="#fn15">15</a></sup></span>,
-<span class="footnote-link">SOAP<sup id="fnl16"><a href="#fn16">16</a></sup></span> and <span class="footnote-link">JSON<sup id="fnl17"><a href="#fn17">17</a></sup></span>.</p>
+<p>YAML integrates and builds upon concepts described by <span class="footnote-link">C<sup id="fnl6"><a href="#fn6">6</a></sup></span>, <span class="footnote-link">Java<sup id="fnl7"><a href="#fn7">7</a></sup></span>, <span class="footnote-link">Perl<sup id="fnl8"><a href="#fn8">8</a></sup></span>,
+<span class="footnote-link">Python<sup id="fnl9"><a href="#fn9">9</a></sup></span>, <span class="footnote-link">Ruby<sup id="fnl10"><a href="#fn10">10</a></sup></span>, <span class="footnote-link">Email<sup id="fnl11"><a href="#fn11">11</a></sup></span>, <span class="footnote-link">HTML<sup id="fnl12"><a href="#fn12">12</a></sup></span>, <span class="footnote-link">MIME<sup id="fnl13"><a href="#fn13">13</a></sup></span>, <span class="footnote-link">URIs<sup id="fnl14"><a href="#fn14">14</a></sup></span>, <span class="footnote-link">XML<sup id="fnl15"><a href="#fn15">15</a></sup></span>, <span class="footnote-link">SAX<sup id="fnl16"><a href="#fn16">16</a></sup></span>,
+<span class="footnote-link">SOAP<sup id="fnl17"><a href="#fn17">17</a></sup></span> and <span class="footnote-link">JSON<sup id="fnl18"><a href="#fn18">18</a></sup></span>.</p>
 
 <p>The syntax of YAML was motivated by Internet Mail (Email) and remains
 partially compatible with that standard.
@@ -480,13 +506,24 @@ This is also the case in practice; every JSON file is also a valid YAML file.
 This makes it easy to migrate from JSON to YAML if/when the additional features
 are required.</p>
 
-<p><span class="footnote-link">JSON’s RFC<sup id="fnl18"><a href="#fn18">18</a></sup></span> requires that <a href="#mapping">mappings</a> <a href="#nodes">keys</a> merely “SHOULD” be <a href="#node-comparison">unique</a>,
+<p><span class="footnote-link">JSON’s RFC<sup id="fnl19"><a href="#fn19">19</a></sup></span> requires that <a href="#mapping">mappings</a> <a href="#nodes">keys</a> merely “SHOULD” be <a href="#node-comparison">unique</a>,
 while YAML insists they “MUST” be.
 Technically, YAML therefore complies with the JSON spec, choosing to treat
 duplicates as an error.
 In practice, since JSON is silent on the semantics of such duplicates, the only
 portable JSON files are those with unique keys, which are therefore valid YAML
 files.</p>
+
+<p>It may be useful to define a intermediate format between YAML and JSON.
+Such a format would be trivial to parse (but not very human readable), like
+JSON.
+At the same time, it would allow for <a href="#serializing-the-representation-graph">serializing</a> arbitrary <a href="#representing-native-data-structures">native data
+structures</a>, like YAML.
+Such a format might also serve as YAML’s “canonical format”.
+Defining such a “YSON” format (YSON is a Serialized Object Notation) can be
+done either by enhancing the JSON specification or by restricting the YAML
+specification.
+Such a definition is beyond the scope of this specification.</p>
 
 <div id="relation-to-xml"></div>
 <h2 id="14-relation-to-xml">1.4. Relation to XML</h2>
@@ -513,7 +550,7 @@ For more information on using both XML and YAML, please visit
 <div id="terminology"></div>
 <h2 id="15-terminology">1.5. Terminology</h2>
 
-<p>This specification uses key words based on the <span class="footnote-link">RFC format<sup id="fnl19"><a href="#fn19">19</a></sup></span> to indicate
+<p>This specification uses key words based on the <span class="footnote-link">RFC format<sup id="fnl20"><a href="#fn20">20</a></sup></span> to indicate
 requirement level.
 In particular, the following words are used to describe the actions of a YAML
 <a href="#processing-yaml-information">processor</a>:</p>
@@ -594,13 +631,13 @@ rbi: 147   # Runs Batted In
 
   <pre class="example">
 american:
-- Boston Red Sox
-- Detroit Tigers
-- New York Yankees
+  - Boston Red Sox
+  - Detroit Tigers
+  - New York Yankees
 national:
-- New York Mets
-- Chicago Cubs
-- Atlanta Braves
+  - New York Mets
+  - Chicago Cubs
+  - Atlanta Braves
 </pre>
 
 </div>
@@ -707,12 +744,12 @@ asterisk - “<strong><code class="language-plaintext highlighter-rouge">*</code
   <pre class="example">
 ---
 hr: # 1998 hr ranking
-- Mark McGwire
-- Sammy Sosa
-# 1998 rbi ranking
+  - Mark McGwire
+  - Sammy Sosa
 rbi:
-- Sammy Sosa
-- Ken Griffey
+  # 1998 rbi ranking
+  - Sammy Sosa
+  - Ken Griffey
 </pre>
 
 </div>
@@ -723,12 +760,12 @@ rbi:
   <pre class="example">
 ---
 hr:
-- Mark McGwire
-# Following node labeled SS
-- &amp;SS Sammy Sosa
+  - Mark McGwire
+  # Following node labeled SS
+  - &amp;SS Sammy Sosa
 rbi:
-- *SS # Subsequent occurrence
-- Ken Griffey
+  - *SS # Subsequent occurrence
+  - Ken Griffey
 </pre>
 
 </div>
@@ -743,7 +780,8 @@ the <a href="#block-sequences">dash</a>, <a href="#flow-mappings">colon</a>, or 
   <pre class="example">
 ? - Detroit Tigers
   - Chicago cubs
-: - 2001-07-23
+:
+  - 2001-07-23
 
 ? [ New York Yankees,
     Atlanta Braves ]
@@ -807,7 +845,7 @@ Alternatively, they can be written with the <a href="#folded-style">folded style
 lines</strong></p>
 
   <pre class="example">
---- &gt;
+&gt;
  Sammy Sosa completed another
  fine season with great stats.
 
@@ -901,7 +939,7 @@ canonical: 1.23015e+3
 exponential: 12.3015e+02
 fixed: 1230.15
 negative infinity: -.inf
-not a number: .nan
+not a number: .NaN
 </pre>
 
 </div>
@@ -988,7 +1026,7 @@ application specific tag: !something |
 --- !!set
 ? Mark McGwire
 ? Sammy Sosa
-? Ken Griffey
+? Ken Griff
 </pre>
 
 </div>
@@ -1003,7 +1041,7 @@ application specific tag: !something |
 --- !!omap
 - Mark McGwire: 65
 - Sammy Sosa: 63
-- Ken Griffey: 58
+- Ken Griffy: 58
 </pre>
 
 </div>
@@ -1022,31 +1060,31 @@ On the left is a sample invoice; on the right is a sample log file.</p>
 invoice: 34843
 date   : 2001-01-23
 bill-to: &amp;id001
-  given  : Chris
-  family : Dumars
-  address:
-    lines: |
-      458 Walkman Dr.
-      Suite #292
-    city    : Royal Oak
-    state   : MI
-    postal  : 48046
+    given  : Chris
+    family : Dumars
+    address:
+        lines: |
+            458 Walkman Dr.
+            Suite #292
+        city    : Royal Oak
+        state   : MI
+        postal  : 48046
 ship-to: *id001
 product:
-- sku         : BL394D
-  quantity    : 4
-  description : Basketball
-  price       : 450.00
-- sku         : BL4438H
-  quantity    : 1
-  description : Super Hoop
-  price       : 2392.00
+    - sku         : BL394D
+      quantity    : 4
+      description : Basketball
+      price       : 450.00
+    - sku         : BL4438H
+      quantity    : 1
+      description : Super Hoop
+      price       : 2392.00
 tax  : 251.42
 total: 4443.52
 comments:
-  Late afternoon is best.
-  Backup contact is Nancy
-  Billsmer @ 338-4338.
+    Late afternoon is best.
+    Backup contact is Nancy
+    Billsmer @ 338-4338.
 </pre>
 
 </div>
@@ -1073,14 +1111,14 @@ User: ed
 Fatal:
   Unknown variable "bar"
 Stack:
-- file: TopClass.py
-  line: 23
-  code: |
-    x = MoreObject("345\n")
-- file: MoreClass.py
-  line: 58
-  code: |-
-    foo = bar
+  - file: TopClass.py
+    line: 23
+    code: |
+      x = MoreObject("345\n")
+  - file: MoreClass.py
+    line: 58
+    code: |-
+      foo = bar
 </pre>
 
 </div>
@@ -1121,19 +1159,7 @@ data model, as shown in the following diagram:</p>
 
 <p><strong>Figure 3.1. Processing Overview</strong></p>
 
-<pre class="mermaid">
-graph LR
-    CS[Character<br />Stream]
-    ET[Event<br />Tree]
-    DG[DOM<br />Graph]
-    NG[Native<br />Graph]
-    CS--&gt;|Parse| ET
-    ET--&gt;|Compose|DG
-    DG--&gt;|Construct|NG
-    NG--&gt;|Represent|DG
-    DG--&gt;|Serialize|ET
-    ET--&gt;|Emit| CS
-</pre>
+<p><img src="/yaml-spec/img/overview2.png" alt="Processing Overview" /></p>
 
 <p>A YAML processor need not expose the <a href="#serialization-tree">serialization</a> or <a href="#representation-graph">representation</a>
 stages.
@@ -1286,7 +1312,7 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 <p>YAML’s <em>representation</em> of <a href="#representing-native-data-structures">native data structure</a> is a rooted, connected,
 directed graph of <a href="#tags">tagged</a> <a href="#nodes">nodes</a>.
 By “directed graph” we mean a set of <a href="#nodes">nodes</a> and directed edges (“arrows”),
-where each edge connects one <a href="#nodes">node</a> to another (see a formal <span class="footnote-link">directed graph definition<sup id="fnl20"><a href="#fn20">20</a></sup></span>).
+where each edge connects one <a href="#nodes">node</a> to another (see a formal <span class="footnote-link">directed graph definition<sup id="fnl21"><a href="#fn21">21</a></sup></span>).
 All the <a href="#nodes">nodes</a> must be reachable from the <em>root node</em> via such edges.
 Note that the YAML graph may include cycles, and a <a href="#nodes">node</a> may have more than
 one incoming edge.</p>
@@ -1350,7 +1376,7 @@ This strategy is also used by the Javascript programming language.</p>
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
 identifier, called a <em>tag</em>.
 <em>Global tags</em> are URIs and hence globally unique across all <a href="#processing-yaml-information">applications</a>.
-The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” <span class="footnote-link">URI scheme<sup id="fnl21"><a href="#fn21">21</a></sup></span> is recommended for all global YAML tags.
+The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” <span class="footnote-link">URI scheme<sup id="fnl22"><a href="#fn22">22</a></sup></span> is recommended for all global YAML tags.
 In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
 Local tags start with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em>, are not URIs and are not expected to be
 globally unique.
@@ -1487,10 +1513,12 @@ to this anchor.
 Otherwise, anchor names are a <a href="#serializing-the-representation-graph">serialization detail</a> and are discarded once
 <a href="#composing-the-representation-graph">composing</a> is completed.
 When <a href="#composing-the-representation-graph">composing</a> a <a href="#representation-graph">representation graph</a> from <a href="#serializing-the-representation-graph">serialized</a> events, an alias
-event refers to the most recent event in the <a href="#serialization-tree">serialization</a> having the
+node refers to the most recent <a href="#nodes">node</a> in the <a href="#serialization-tree">serialization</a> having the
 specified anchor.
 Therefore, anchors need not be unique within a <a href="#serialization-tree">serialization</a>.
-In addition, an anchor need not have an alias node referring to it.</p>
+In addition, an anchor need not have an alias node referring to it.
+It is therefore possible to provide an anchor for all <a href="#nodes">nodes</a> in
+<a href="#serialization-tree">serialization</a>.</p>
 
 <div id="presentation-stream"></div>
 <h3 id="323-presentation-stream">3.2.3. Presentation Stream</h3>
@@ -1717,9 +1745,9 @@ The alternate view uses double-quotes for string scalars, flow style for
 collections, and JSON plain style for numbers, booleans and null values.</p>
 
 <p>A reference implementation using the productions is available as the
-<span class="footnote-link">YamlReference<sup id="fnl22"><a href="#fn22">22</a></sup></span> Haskell package.
+<span class="footnote-link">YamlReference<sup id="fnl23"><a href="#fn23">23</a></sup></span> Haskell package.
 This reference implementation is also available as an interactive web
-application called <span class="footnote-link">ypaste<sup id="fnl23"><a href="#fn23">23</a></sup></span>.</p>
+application called <span class="footnote-link">ypaste<sup id="fnl24"><a href="#fn24">24</a></sup></span>.</p>
 
 <div id="production-parameters"></div>
 <h2 id="41-production-parameters">4.1. Production Parameters</h2>
@@ -1861,10 +1889,10 @@ prefixes.</p>
 
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
-The allowed character range explicitly excludes the <span class="footnote-link">C0 control block<sup id="fnl24"><a href="#fn24">24</a></sup></span>
+The allowed character range explicitly excludes the <span class="footnote-link">C0 control block<sup id="fnl25"><a href="#fn25">25</a></sup></span>
 <strong><code class="language-plaintext highlighter-rouge">#x0-#x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">#xA</code></strong>, and CR <strong><code class="language-plaintext highlighter-rouge">#xD</code></strong> which
 are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">#x7F</code></strong>, the C1 control block <strong><code class="language-plaintext highlighter-rouge">#x80-#x9F</code></strong> (except for
-NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the <span class="footnote-link">surrogate block<sup id="fnl25"><a href="#fn25">25</a></sup></span> <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
+NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the <span class="footnote-link">surrogate block<sup id="fnl26"><a href="#fn26">26</a></sup></span> <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
 <strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong> and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
 
 <p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
@@ -1889,7 +1917,7 @@ extensive character property tables.</p>
   | [#x10000-#x10FFFF]                     /* 32 bit */
 </pre>
 
-<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> <span class="footnote-link">must allow all non-C0 characters<sup id="fnl26"><a href="#fn26">26</a></sup></span> inside <a href="#double-quoted-style">quoted scalars</a>.
+<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> <span class="footnote-link">must allow all non-C0 characters<sup id="fnl27"><a href="#fn27">27</a></sup></span> inside <a href="#double-quoted-style">quoted scalars</a>.
 To ensure readability, non-printable characters should be <a href="#escaped-characters">escaped</a> on output,
 even inside such <a href="#scalars">scalars</a>.</p>
 
@@ -2042,7 +2070,7 @@ If another encoding is used, it is recommended that an explicit byte order mark
 be used, even if the first <a href="#streams">stream</a> character is ASCII.</p>
 
 <p>For more information about the byte order mark and the Unicode character
-encoding schemes see the <span class="footnote-link">Unicode FAQ<sup id="fnl27"><a href="#fn27">27</a></sup></span>.</p>
+encoding schemes see the <span class="footnote-link">Unicode FAQ<sup id="fnl28"><a href="#fn28">28</a></sup></span>.</p>
 
 <div id="rule-c-byte-order-mark"></div>
 <pre class="rule">
@@ -2060,7 +2088,6 @@ encoding schemes see the <span class="footnote-link">Unicode FAQ<sup id="fnl27">
 <pre>
 <code class="legend-1">⇔</code># Comment only.
 
-```
 </pre>
 
 </td>
@@ -2095,8 +2122,7 @@ encoding schemes see the <span class="footnote-link">Unicode FAQ<sup id="fnl27">
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- BOM --&gt;
-">
+<pre class="error">
 ERROR:
  A <code class="legend-1">BOM</code> must not appear
  inside a document.
@@ -2112,21 +2138,21 @@ ERROR:
 
 <p><em>Indicators</em> are characters that have special semantics.</p>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2D</code></strong>, hyphen) denotes a <a href="#block-sequences">block sequence</a> entry.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2D</code></strong>, hyphen) denotes a <a href="#block-sequences">block sequence</a> entry.</p>
 
 <div id="rule-c-sequence-entry"></div>
 <pre class="rule">
 [4] c-sequence-entry ::= "-"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3F</code></strong>, question mark) denotes a <a href="#nodes">mapping key</a>.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3F</code></strong>, question mark) denotes a <a href="#nodes">mapping key</a>.</p>
 
 <div id="rule-c-mapping-key"></div>
 <pre class="rule">
 [5] c-mapping-key ::= "?"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3A</code></strong>, colon) denotes a <a href="#mapping">mapping value</a>.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3A</code></strong>, colon) denotes a <a href="#mapping">mapping value</a>.</p>
 
 <div id="rule-c-mapping-value"></div>
 <pre class="rule">
@@ -2147,7 +2173,6 @@ mapping<code class="legend-3">:</code>
   <code class="legend-2">?</code> sky
   <code class="legend-3">:</code> blue
   sea <code class="legend-3">:</code> green
-```
 </pre>
 
 </td>
@@ -2173,35 +2198,35 @@ mapping<code class="legend-3">:</code>
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2C</code></strong>, comma) ends a <a href="#flow-collection-styles">flow collection</a> entry.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2C</code></strong>, comma) ends a <a href="#flow-collection-styles">flow collection</a> entry.</p>
 
 <div id="rule-c-collect-entry"></div>
 <pre class="rule">
 [7] c-collect-entry ::= ","
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x5B</code></strong>, left bracket) starts a <a href="#flow-sequences">flow sequence</a>.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x5B</code></strong>, left bracket) starts a <a href="#flow-sequences">flow sequence</a>.</p>
 
 <div id="rule-c-sequence-start"></div>
 <pre class="rule">
 [8] c-sequence-start ::= "["
 </pre>
 
-<p>[“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”] (<strong><code class="language-plaintext highlighter-rouge">#x5D</code></strong>, right bracket) ends a <a href="#flow-sequences">flow sequence</a>.</p>
+<p>A [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”] (<strong><code class="language-plaintext highlighter-rouge">#x5D</code></strong>, right bracket) ends a <a href="#flow-sequences">flow sequence</a>.</p>
 
 <div id="rule-c-sequence-end"></div>
 <pre class="rule">
 [9] c-sequence-end ::= "]"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x7B</code></strong>, left brace) starts a <a href="#flow-mappings">flow mapping</a>.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x7B</code></strong>, left brace) starts a <a href="#flow-mappings">flow mapping</a>.</p>
 
 <div id="rule-c-mapping-start"></div>
 <pre class="rule">
 [10] c-mapping-start ::= "{"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x7D</code></strong>, right brace) ends a <a href="#flow-mappings">flow mapping</a>.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x7D</code></strong>, right brace) ends a <a href="#flow-mappings">flow mapping</a>.</p>
 
 <div id="rule-c-mapping-end"></div>
 <pre class="rule">
@@ -2217,7 +2242,6 @@ mapping<code class="legend-3">:</code>
 <pre>
 sequence: <code class="legend-1">[</code> one<code class="legend-3">,</code> two<code class="legend-3">,</code> <code class="legend-1">]</code>
 mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code> sea: green <code class="legend-2">}</code>
-```
 </pre>
 
 </td>
@@ -2240,8 +2264,8 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x23</code></strong>, octothorpe, hash, sharp, pound, number sign) denotes a
-<a href="#comments">comment</a>.</p>
+<p>An “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x23</code></strong>, octothorpe, hash, sharp, pound, number sign)
+denotes a <a href="#comments">comment</a>.</p>
 
 <div id="rule-c-comment"></div>
 <pre class="rule">
@@ -2257,7 +2281,6 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
 <pre>
 <code class="legend-1">#</code> Comment only.
 
-```
 </pre>
 
 </td>
@@ -2278,14 +2301,14 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x26</code></strong>, ampersand) denotes a <a href="#anchors-and-aliases">node’s anchor property</a>.</p>
+<p>An “<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x26</code></strong>, ampersand) denotes a <a href="#anchors-and-aliases">node’s anchor property</a>.</p>
 
 <div id="rule-c-anchor"></div>
 <pre class="rule">
 [13] c-anchor ::= "&amp;"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2A</code></strong>, asterisk) denotes an <a href="#alias-nodes">alias node</a>.</p>
+<p>An “<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2A</code></strong>, asterisk) denotes an <a href="#alias-nodes">alias node</a>.</p>
 
 <div id="rule-c-alias"></div>
 <pre class="rule">
@@ -2312,7 +2335,6 @@ non-<a href="#plain-style">plain scalars</a>.</p>
 <pre>
 anchored: <code class="legend-1">!</code>local <code class="legend-2">&amp;</code>anchor value
 alias: <code class="legend-3">*</code>anchor
-```
 </pre>
 
 </td>
@@ -2334,14 +2356,14 @@ alias: <code class="legend-3">*</code>anchor
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">7C</code></strong>, vertical bar) denotes a <a href="#literal-style">literal block scalar</a>.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">|</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">7C</code></strong>, vertical bar) denotes a <a href="#literal-style">literal block scalar</a>.</p>
 
 <div id="rule-c-literal"></div>
 <pre class="rule">
 [16] c-literal ::= "|"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3E</code></strong>, greater than) denotes a <a href="#block-folding">folded block scalar</a>.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3E</code></strong>, greater than) denotes a <a href="#block-folding">folded block scalar</a>.</p>
 
 <div id="rule-c-folded"></div>
 <pre class="rule">
@@ -2361,7 +2383,6 @@ literal: <code class="legend-1">|</code>
 folded: <code class="legend-2">&gt;</code>
   some
   text
-```
 </pre>
 
 </td>
@@ -2382,15 +2403,15 @@ folded: <code class="legend-2">&gt;</code>
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">'</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x27</code></strong>, apostrophe, single quote) surrounds a <a href="#single-quoted-style">single-quoted
-flow scalar</a>.</p>
+<p>An “<strong><code class="language-plaintext highlighter-rouge">'</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x27</code></strong>, apostrophe, single quote) surrounds a
+<a href="#single-quoted-style">single-quoted flow scalar</a>.</p>
 
 <div id="rule-c-single-quote"></div>
 <pre class="rule">
 [18] c-single-quote ::= "'"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x22</code></strong>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow
+<p>A “<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x22</code></strong>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow
 scalar</a>.</p>
 
 <div id="rule-c-double-quote"></div>
@@ -2407,7 +2428,6 @@ scalar</a>.</p>
 <pre>
 single: <code class="legend-1">'</code>text<code class="legend-1">'</code>
 double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
-```
 </pre>
 
 </td>
@@ -2428,7 +2448,7 @@ double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x25</code></strong>, percent) denotes a <a href="#directives">directive</a> line.</p>
+<p>A “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x25</code></strong>, percent) denotes a <a href="#directives">directive</a> line.</p>
 
 <div id="rule-c-directive"></div>
 <pre class="rule">
@@ -2444,7 +2464,6 @@ double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
 <pre>
 <code class="legend-1">%</code>YAML 1.2
 --- text
-```
 </pre>
 
 </td>
@@ -2485,8 +2504,7 @@ grave-accent: <code class="legend-1">`</code>text
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- Reserved_indicators --&gt;
-">
+<pre class="error">
 ERROR:
  <code class="legend-1">Reserved indicators</code> can't
  start a plain scalar.
@@ -2608,7 +2626,6 @@ for clarity.</p>
 |
   Line break (no glyph)
   Line break (glyphed)<code class="legend-1">↓</code>
-```
 </pre>
 
 </td>
@@ -2675,7 +2692,6 @@ block:<code class="legend-2">→</code>|
 <code class="legend-1">··</code>void main() {
 <code class="legend-1">··</code><code class="legend-2">→</code>printf("Hello, world!\n");
 <code class="legend-1">··</code>}
-```
 </pre>
 
 </td>
@@ -2736,8 +2752,8 @@ classes:</p>
   <a href="#rule-ns-dec-digit">ns-dec-digit</a> | <a href="#rule-ns-ascii-letter">ns-ascii-letter</a> | "-"
 </pre>
 
-<p>URI characters for <a href="#tags">tags</a>, as specified in <span class="footnote-link">URI RFC<sup id="fnl28"><a href="#fn28">28</a></sup></span>, with the addition of the
-“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">]</code></strong>” for presenting IPv6 addresses as proposed in the <span class="footnote-link">IPv6 RFC<sup id="fnl29"><a href="#fn29">29</a></sup></span>.</p>
+<p>URI characters for <a href="#tags">tags</a>, as specified in <span class="footnote-link">URI RFC<sup id="fnl29"><a href="#fn29">29</a></sup></span>, with the addition of the
+“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">]</code></strong>” for presenting IPv6 addresses as proposed in the <span class="footnote-link">IPv6 RFC<sup id="fnl30"><a href="#fn30">30</a></sup></span>.</p>
 
 <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em> using
@@ -2966,7 +2982,6 @@ space to become part of the <a href="#nodes">content</a>.</p>
 - "<code class="legend-1">\n</code> <code class="legend-1">\r</code> <code class="legend-1">\t</code> <code class="legend-1">\v</code> <code class="legend-1">\0</code>"
 - "<code class="legend-1">\ </code> <code class="legend-1">\_</code> <code class="legend-1">\N</code> <code class="legend-1">\L</code> <code class="legend-1">\P</code> \
   <code class="legend-1">\x41</code> <code class="legend-1">\u0041</code> <code class="legend-1">\U00000041</code>"
-```
 </pre>
 
 </td>
@@ -3002,9 +3017,7 @@ Bad escapes:
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- 2:3 --&gt;
-&lt;!-- 3:3 3:9 --&gt;
-">
+<pre class="error">
 ERROR:
 - <code class="legend-1">c</code> is an invalid escaped character.
 - <code class="legend-2">q</code> and <code class="legend-2">-</code> are invalid hex digits.
@@ -3080,7 +3093,6 @@ Not indented:
 <code class="legend-1">··</code>Also by two,    # are neither
 <code class="legend-1">··</code>→Still by two   # content nor
 <code class="legend-1">··</code><code class="legend-3">··</code>]             # indentation.
-```
 </pre>
 
 </td>
@@ -3121,7 +3133,6 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 <code class="legend-1"><code class="legend-3">:</code><code class="legend-2">·</code><code class="legend-3">-</code></code>→b
 <code class="legend-1"><code class="legend-2">··</code><code class="legend-3">-</code><code class="legend-2">··</code><code class="legend-3">-</code></code>→c
 <code class="legend-1"><code class="legend-2">·····</code><code class="legend-3">-</code></code>·d
-```
 </pre>
 
 </td>
@@ -3171,7 +3182,6 @@ Note that such <a href="#white-space-characters">white space</a> may safely incl
 -<code class="legend-1">·</code>foo:<code class="legend-1">→·</code>bar
 - -<code class="legend-1">·</code>baz
   -<code class="legend-1">→</code>baz
-```
 </pre>
 
 </td>
@@ -3237,7 +3247,6 @@ quoted: "text
 block: |
 <code class="legend-2"><code class="legend-3">··</code></code>text
 <code class="legend-2"><code class="legend-3">··</code></code>·→lines
-```
 </pre>
 
 </td>
@@ -3290,7 +3299,6 @@ Folding:
 Chomping: |
   Clipped empty lines
 <code class="legend-1">·</code>
-```
 </pre>
 
 </td>
@@ -3354,7 +3362,6 @@ a single <a href="#white-space-characters">space</a> (<strong><code class="langu
 <code class="legend-1">↓</code>
   as<code class="legend-2">↓</code>
   space
-```
 </pre>
 
 </td>
@@ -3408,7 +3415,6 @@ feed, and the formatting of <a href="#example-more-indented-lines">more-indented
 <code class="legend-2">··</code><code class="legend-3">→·</code>bar<code class="legend-1">↓</code>
 <code class="legend-1">↓</code>
 <code class="legend-2">··</code>baz↓
-```
 </pre>
 
 </td>
@@ -3468,7 +3474,6 @@ information.</p>
 <code class="legend-1"><code class="legend-2">··→·</code></code>bar<code class="legend-1">↓</code>
 <code class="legend-1">↓</code>
 <code class="legend-1"><code class="legend-2">··</code></code>baz<code class="legend-1">↓</code> "
-```
 </pre>
 
 </td>
@@ -3529,7 +3534,6 @@ However, as this confuses many tools, YAML <a href="#processing-yaml-information
 <pre>
 key:<code class="legend-3">····<code class="legend-1"># Comment</code><code class="legend-2">↓</code></code>
   value<code class="legend-2"><code class="legend-3"><i>eof</i></code></code>
-```
 </pre>
 
 </td>
@@ -3571,7 +3575,6 @@ characters is taken to be a comment line.</p>
 <code class="legend-2">··<code class="legend-1"># Comment↓</code></code>
 <code class="legend-2">···<code class="legend-1">↓</code></code>
 <code class="legend-1"><code class="legend-2">↓</code></code>
-```
 </pre>
 
 </td>
@@ -3615,7 +3618,6 @@ key:<code class="legend-1"><code class="legend-3">····# Comment↓</code></c
 <code class="legend-2"><code class="legend-3">········# lines↓</code></code>
   value<code class="legend-1"><code class="legend-3">↓</code></code>
 <code class="legend-2"><code class="legend-3">↓</code></code>
-```
 </pre>
 
 </td>
@@ -3678,7 +3680,6 @@ empty) <a href="#comments">comments</a>.</p>
 <code class="legend-2"><code class="legend-3">···</code>··</code>65
 <code class="legend-3">··</code>avg:<code class="legend-2">·# Average</code>
 <code class="legend-2"><code class="legend-3">···</code></code>0.278
-```
 </pre>
 
 </td>
@@ -3757,7 +3758,6 @@ warning.</p>
 %<code class="legend-1"><code class="legend-2">FOO</code>  <code class="legend-3">bar</code> <code class="legend-3">baz</code></code> # Should be ignored
                # with a warning.
 --- "foo"
-```
 </pre>
 
 </td>
@@ -3827,7 +3827,6 @@ of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a h
            # with a warning
 ---
 "foo"
-```
 </pre>
 
 </td>
@@ -3864,8 +3863,7 @@ foo
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- 2:5,4 --&gt;
-">
+<pre class="error">
 ERROR:
 The <code class="legend-1">YAML</code> directive must only be
 given at most once per document.
@@ -3902,7 +3900,6 @@ This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 %<code class="legend-1">TAG <code class="legend-2">!yaml!</code> <code class="legend-3">tag:yaml.org,2002:</code></code>
 ---
 !yaml!str "foo"
-```
 </pre>
 
 </td>
@@ -3940,8 +3937,7 @@ bar
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- 4:1,6 --&gt;
-">
+<pre class="error">
 ERROR:
 The TAG directive must only
 be given at most once per
@@ -4004,7 +4000,6 @@ tags</a>, by the simple addition of a single “<strong><code class="language-pl
 %TAG <code class="legend-1">!</code> tag:example.com,2000:app/
 ---
 <code class="legend-1">!</code>foo "bar"
-```
 </pre>
 
 </td>
@@ -4056,7 +4051,6 @@ This prefix is used by the <a href="#other-schemas">YAML tag repository</a>.</p>
 %TAG <code class="legend-1">!!</code> tag:example.com,2000:app/
 ---
 <code class="legend-1">!!</code>int 1 - 3 # Interval, not integer
-```
 </pre>
 
 </td>
@@ -4106,7 +4100,6 @@ In particular, the YAML <a href="#processing-yaml-information">processor</a> nee
 %TAG <code class="legend-1">!e!</code> tag:example.com,2000:app/
 ---
 <code class="legend-1">!e!</code>foo "bar"
-```
 </pre>
 
 </td>
@@ -4167,7 +4160,6 @@ semantics to the same <a href="#tags">local tag</a>.</p>
 %TAG !m! <code class="legend-1">!my-</code>
 --- # Color here
 !m!light green
-```
 </pre>
 
 </td>
@@ -4215,7 +4207,6 @@ semantics to the same <a href="#tags">global tag</a>.</p>
 %TAG !e! <code class="legend-1">tag:example.com,2000:app/</code>
 ---
 - !e!foo "bar"
-```
 </pre>
 
 </td>
@@ -4261,7 +4252,6 @@ Either or both may be omitted.</p>
 <code class="legend-1"><code class="legend-3">!!str</code> <code class="legend-2">&amp;a1</code></code> "foo":
   <code class="legend-1"><code class="legend-3">!!str</code></code> bar
 <code class="legend-1"><code class="legend-2">&amp;a2</code></code> baz : *a1
-```
 </pre>
 
 </td>
@@ -4325,7 +4315,6 @@ valid URI (a <a href="#tags">global tag</a>).</p>
 <pre>
 <code class="legend-1">!&lt;tag:yaml.org,2002:str&gt;</code> foo :
   <code class="legend-1">!&lt;!bar&gt;</code> baz
-```
 </pre>
 
 </td>
@@ -4357,9 +4346,7 @@ valid URI (a <a href="#tags">global tag</a>).</p>
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- 3:6 --&gt;
-&lt;!-- 4:7,3 --&gt;
-">
+<pre class="error">
 ERROR:
 - Verbatim tags aren't resolved,
   so <code class="legend-1">!</code> is invalid.
@@ -4422,7 +4409,6 @@ This behavior is consistent with the URI character escaping rules
 - <code class="legend-1">!local</code> foo
 - <code class="legend-1">!!str</code> bar
 - <code class="legend-1">!e!tag%21</code> baz
-```
 </pre>
 
 </td>
@@ -4458,9 +4444,7 @@ This behavior is consistent with the URI character escaping rules
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- 2:7,3 --&gt;
-&lt;!-- 3:7,3 --&gt;
-">
+<pre class="error">
 ERROR:
 - The <code class="legend-1">!o!</code> handle has no suffix.
 - The <code class="legend-2">!h!</code> handle wasn't declared.
@@ -4511,7 +4495,6 @@ This is intentional.</p>
 - "12"
 - 12
 - <code class="legend-1">!</code> 12
-```
 </pre>
 
 </td>
@@ -4579,7 +4562,6 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 <pre>
 First occurrence: <code class="legend-1">&amp;<code class="legend-2">anchor</code></code> Value
 Second occurrence: *<code class="legend-2">anchor</code>
-```
 </pre>
 
 </td>
@@ -4642,7 +4624,6 @@ First occurrence: &amp;<code class="legend-2">anchor</code> Foo
 Second occurrence: <code class="legend-1">*<code class="legend-2">anchor</code></code>
 Override anchor: &amp;<code class="legend-2">anchor</code> Bar
 Reuse anchor: <code class="legend-1">*<code class="legend-2">anchor</code></code>
-```
 </pre>
 
 </td>
@@ -4695,7 +4676,6 @@ rather than to an actual character.</p>
   foo : !!str<code class="legend-1">°</code>,
   !!str<code class="legend-1">°</code> : bar,
 }
-```
 </pre>
 
 </td>
@@ -4736,7 +4716,6 @@ for their existence.</p>
   ? foo :<code class="legend-1">°</code>,
   <code class="legend-1">°</code>: bar,
 }
-```
 </pre>
 
 </td>
@@ -4821,7 +4800,6 @@ characters.</p>
 <code class="legend-2">"<code class="legend-1">implicit block key</code>"</code> : [
   <code class="legend-2">"<code class="legend-1">implicit flow key</code>"</code> : value,
  ]
-```
 </pre>
 
 </td>
@@ -4875,7 +4853,6 @@ to a space,<code class="legend-1">→↓</code>
 <code class="legend-1">·↓</code>
 to a line feed, or<code class="legend-2">·→\↓</code>
 <code class="legend-2">·</code>\·→non-content"
-```
 </pre>
 
 </td>
@@ -4933,7 +4910,6 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <code class="legend-2">↓</code>
 <code class="legend-2">·<code class="legend-1">2nd non-empty</code>·</code>
 <code class="legend-2">→<code class="legend-1">3rd non-empty</code></code>·"
-```
 </pre>
 
 </td>
@@ -4990,7 +4966,6 @@ In addition, it is only possible to break a long single-quoted line where a
 <td class="side-by-side">
 <pre>
 'here<code class="legend-1">''</code>s to "quotes"'
-```
 </pre>
 
 </td>
@@ -5042,7 +5017,6 @@ In addition, it is only possible to break a long single-quoted line where a
 <code class="legend-2">'<code class="legend-1">implicit block key</code>'</code> : [
   <code class="legend-2">'<code class="legend-1">implicit flow key</code>'</code> : value,
  ]
-```
 </pre>
 
 </td>
@@ -5101,7 +5075,6 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <code class="legend-2">↓</code>
 <code class="legend-2">·<code class="legend-1">2nd non-empty</code>·</code>
 <code class="legend-2">→<code class="legend-1">3rd non-empty</code></code>·'
-```
 </pre>
 
 </td>
@@ -5203,7 +5176,6 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
   "Up<code class="legend-4">,</code> up and away!",
   <code class="legend-1">-</code>123,
   http<code class="legend-2">s</code>://example.com/fo<code class="legend-2">o</code>#bar ]
-```
 </pre>
 
 </td>
@@ -5268,7 +5240,6 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 <code class="legend-1">implicit block key</code> : [
   <code class="legend-1">implicit flow key</code> : value,
  ]
-```
 </pre>
 
 </td>
@@ -5319,7 +5290,6 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <code class="legend-2">↓</code>
 <code class="legend-2">·<code class="legend-1">2nd non-empty</code>·</code>
 <code class="legend-2">→<code class="legend-1">3rd non-empty</code></code>
-```
 </pre>
 
 </td>
@@ -5392,7 +5362,6 @@ characters.</p>
 <pre>
 - <code class="legend-1">[</code> <code class="legend-2">one</code>, <code class="legend-2">two</code>, <code class="legend-1">]</code>
 - <code class="legend-1">[</code><code class="legend-2">three</code> ,<code class="legend-2">four</code><code class="legend-1">]</code>
-```
 </pre>
 
 </td>
@@ -5440,7 +5409,6 @@ sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">sin
 <code class="legend-1"> text</code>, <code class="legend-1">[ nested ]</code>,
 <code class="legend-2">single: pair</code>,
 ]
-```
 </pre>
 
 </td>
@@ -5496,7 +5464,6 @@ characters.</p>
 <pre>
 - <code class="legend-1">{</code> <code class="legend-2">one : two</code> , <code class="legend-2">three: four</code> , <code class="legend-1">}</code>
 - <code class="legend-1">{</code><code class="legend-2">five: six</code>,<code class="legend-2">seven : eight</code><code class="legend-1">}</code>
-```
 </pre>
 
 </td>
@@ -5550,7 +5517,6 @@ entry may be <a href="#example-empty-content">completely empty</a>.</p>
 <code class="legend-2">implicit: entry</code>,
 ?<code class="legend-3">°</code><code class="legend-3">°</code>
 }
-```
 </pre>
 
 </td>
@@ -5630,7 +5596,6 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 <code class="legend-1">omitted value</code><code class="legend-2">:<code class="legend-3">°</code></code>,
 <code class="legend-3">°</code><code class="legend-2">:·omitted key</code>,
 }
-```
 </pre>
 
 </td>
@@ -5691,7 +5656,6 @@ However, as this greatly reduces readability, YAML <a href="#processing-yaml-inf
 <code class="legend-1">"readable"</code>:·<code class="legend-3">value</code>,
 <code class="legend-1">"empty"</code>:<code class="legend-2">°</code>
 }
-```
 </pre>
 
 </td>
@@ -5731,7 +5695,6 @@ in this case.</p>
 [
 <code class="legend-1">foo: bar</code>
 ]
-```
 </pre>
 
 </td>
@@ -5772,7 +5735,6 @@ and the syntax is identical to the general case.</p>
 ? <code class="legend-1">foo</code>
  <code class="legend-1">bar : baz</code>
 ]
-```
 </pre>
 
 </td>
@@ -5848,7 +5810,6 @@ been impossible to implement.</p>
 - [ <code class="legend-1">YAML·</code><code class="legend-4">: separate</code> ]
 - [ <code class="legend-2">°</code><code class="legend-4">: empty key entry</code> ]
 - [ <code class="legend-3">{JSON: like}</code><code class="legend-4">:adjacent</code> ]
-```
 </pre>
 
 </td>
@@ -5886,9 +5847,7 @@ been impossible to implement.</p>
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- 2:7,7 --&gt;
-&lt;!-- 3:7,9 --&gt;
-">
+<pre class="error">
 ERROR:
 - The <code class="legend-1">foo bar</code> key spans multiple lines
 - The <code class="legend-2">foo...bar</code> key is too long
@@ -5937,7 +5896,6 @@ Even the <a href="#double-quoted-style">double-quoted style</a> is a superset of
 - <code class="legend-1">"a"</code>
 - <code class="legend-1">'b'</code>
 - <code class="legend-2">c</code>
-```
 </pre>
 
 </td>
@@ -6005,7 +5963,6 @@ nodes</a> which refer to the <a href="#anchors-and-aliases">anchored</a> <a href
 - <code class="legend-1">&amp;anchor "c"</code>
 - <code class="legend-2">*anchor</code>
 - <code class="legend-2">!!str°</code>
-```
 </pre>
 
 </td>
@@ -6083,7 +6040,6 @@ variables.</p>
 
 - &gt;<code class="legend-1">1- # Both indicators↓</code>
  ·strip
-```
 </pre>
 
 </td>
@@ -6151,7 +6107,6 @@ indicator for cases where detection will fail.</p>
 - &gt;<code class="legend-1">°</code>
 <code class="legend-2">·</code>→
 <code class="legend-2">·</code>detected
-```
 </pre>
 
 </td>
@@ -6193,10 +6148,7 @@ indicator for cases where detection will fail.</p>
 
 </td>
 <td class="side-by-side">
-<pre class="&lt;!-- spaces --&gt;
-&lt;!-- 5:10,13 --&gt;
-&lt;!-- 6:15,13 --&gt;
-">
+<pre class="error">
 ERROR:
 - A leading all-space line must
   not have too many <code class="legend-1">spaces</code>.
@@ -6280,7 +6232,6 @@ clip: |
   text<code class="legend-2">↓</code>
 keep: |+
   text<code class="legend-2">↓</code>
-```
 </pre>
 
 </td>
@@ -6368,7 +6319,6 @@ keep: |+
 <code class="legend-2">↓</code>
 <code class="legend-2"><code class="legend-3">·# Trail</code></code>
 <code class="legend-2"><code class="legend-3">··# comments.</code></code>
-```
 </pre>
 
 </td>
@@ -6407,7 +6357,6 @@ clip: &gt;
 <code class="legend-1">↓</code>
 keep: |+
 <code class="legend-2">↓</code>
-```
 </pre>
 
 </td>
@@ -6453,7 +6402,6 @@ It is the simplest, most restricted, and most readable <a href="#node-styles">sc
 <code class="legend-1">·literal↓</code>
 <code class="legend-1">·→text↓</code>
 <code class="legend-1">↓</code>
-```
 </pre>
 
 </td>
@@ -6520,7 +6468,6 @@ In addition, there is no way to break a long literal line.</p>
 <code class="legend-1"><code class="legend-2">··text</code></code><code class="legend-3">↓</code>
 ↓
 <code class="legend-4">·# Comment</code>
-```
 </pre>
 
 </td>
@@ -6567,7 +6514,6 @@ It is similar to the <a href="#literal-style">literal style</a>; however, folded
 <code class="legend-1">·folded↓</code>
 <code class="legend-1">·text↓</code>
 <code class="legend-1">↓</code>
-```
 </pre>
 
 </td>
@@ -6625,7 +6571,6 @@ separates two non-<a href="#white-space-characters">space</a> characters.</p>
 <code class="legend-1"><code class="legend-2">·line</code></code>↓
 
 # Comment
-```
 </pre>
 
 </td>
@@ -6696,7 +6641,6 @@ different productions.)</p>
  line
 
 # Comment
-```
 </pre>
 
 </td>
@@ -6758,7 +6702,6 @@ also not <a href="#line-folding">folded</a>.</p>
  line
 
 # Comment
-```
 </pre>
 
 </td>
@@ -6814,7 +6757,6 @@ also not <a href="#line-folding">folded</a>.</p>
  line<code class="legend-1">↓</code>
 <code class="legend-2">↓</code>
 <code class="legend-2"># Comment</code>
-```
 </pre>
 
 </td>
@@ -6877,7 +6819,6 @@ followed by a non-space character (e.g. “<strong><code class="language-plainte
 block sequence:
 <code class="legend-2">··</code><code class="legend-1">- one↓</code>
   <code class="legend-1">- two : three↓</code>
-```
 </pre>
 
 </td>
@@ -6938,7 +6879,6 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 -<code class="legend-3">·- one # Compact</code>
 <code class="legend-3">··- two # sequence</code>
 -<code class="legend-4"> one: two # Compact mapping</code>
-```
 </pre>
 
 </td>
@@ -6985,7 +6925,6 @@ pair</a>.</p>
 <pre>
 block mapping:
 <code class="legend-2">·</code><code class="legend-1">key: value↓</code>
-```
 </pre>
 
 </td>
@@ -7051,7 +6990,6 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 <code class="legend-1">  block key↓</code>
 <code class="legend-2">:·- one # Explicit compact</code>
 <code class="legend-2">··- two # block value↓</code>
-```
 </pre>
 
 </td>
@@ -7127,7 +7065,6 @@ This prevents a potential ambiguity with multi-line <a href="#plain-style">plain
 <code class="legend-1">°</code><code class="legend-2">:° # Both empty</code>
 <code class="legend-1">"quoted key"</code><code class="legend-2">:</code>
 <code class="legend-2">- entry</code>
-```
 </pre>
 
 </td>
@@ -7172,7 +7109,6 @@ mapping.</p>
 - <code class="legend-1">sun: yellow↓</code>
 - <code class="legend-1">? earth: blue↓</code>
 <code class="legend-1">  : moon: white↓</code>
-```
 </pre>
 
 </td>
@@ -7231,7 +7167,6 @@ scalar</a> and an <a href="#example-single-pair-explicit-entry">implicit key</a>
 <code class="legend-2"> Block scalar↓</code>
 -·<code class="legend-2">!!map # Block collection</code>
 <code class="legend-2">  foo : bar↓</code>
-```
 </pre>
 
 </td>
@@ -7285,7 +7220,6 @@ folded:<code class="legend-2">↓</code>
 <code class="legend-2">···!foo</code>
 <code class="legend-2">··&gt;1</code>
 <code class="legend-2">·value</code>
-```
 </pre>
 
 </td>
@@ -7340,7 +7274,6 @@ sequence:<code class="legend-1"> !!seq</code>
 <code class="legend-1"><code class="legend-2"> - nested</code></code>
 mapping:<code class="legend-1"> !!map</code>
 <code class="legend-1"><code class="legend-3"> foo: bar</code></code>
-```
 </pre>
 
 </td>
@@ -7402,7 +7335,6 @@ existence of an actual <a href="#document">document</a>.</p>
 <code class="legend-1">⇔# Comment</code>
 <code class="legend-1"># lines</code>
 Document
-```
 </pre>
 
 </td>
@@ -7485,7 +7417,6 @@ either of these markers.</p>
 <code class="legend-1">---</code>
 Document
 <code class="legend-2"><code class="legend-3">...</code> # Suffix</code>
-```
 </pre>
 
 </td>
@@ -7541,7 +7472,6 @@ document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">inden
 ...
 <code class="legend-1">|</code>
 <code class="legend-1">%!PS-Adobe-2.0 # Not the first line</code>
-```
 </pre>
 
 </td>
@@ -7592,7 +7522,6 @@ Since the existence of the <a href="#document">document</a> is indicated by this
 <code class="legend-1">---</code>
 <code class="legend-1"># Empty</code>
 ...
-```
 </pre>
 
 </td>
@@ -7641,7 +7570,6 @@ Since the existence of the <a href="#document">document</a> is indicated by this
 <code class="legend-1">---</code>
 <code class="legend-1"># Empty</code>
 ...
-```
 </pre>
 
 </td>
@@ -7703,7 +7631,6 @@ such as stream concatenation.</p>
 <code class="legend-3">%YAML 1.2</code>
 <code class="legend-3">---</code>
 <code class="legend-3">matches %: 20</code>
-```
 </pre>
 
 </td>
@@ -8368,18 +8295,6 @@ repository.
 The yaml-core mailing list is the preferred method for such submissions, as
 well as raising any questions regarding this draft.</p>
 
-<h1 id="changes-in-yaml-specification-v121">Changes in YAML Specification v1.2.1</h1>
-
-<ul>
-  <li>Host the YAML specification sources in a <span class="footnote-link">public repository<sup id="fnl30"><a href="#fn30">30</a></sup></span></li>
-  <li>Change the source format from DocBook to Markdown</li>
-  <li>Correct known errata from the previous specification</li>
-  <li>Address many <span class="footnote-link">reported issues<sup id="fnl31"><a href="#fn31">31</a></sup></span></li>
-  <li>Clarify wording and examples</li>
-  <li>Removed sentences that are no longer relevant in 2021</li>
-  <li>Fixed known bugs in the grammar productions</li>
-</ul>
-
 <h1 id="reference-links">Reference Links</h1>
 
 <ol class="footnote-links">
@@ -8387,94 +8302,91 @@ well as raising any questions regarding this draft.</p>
     <p><a href="https://github.com/orgs/yaml/teams/core" target="_blank">“GitHub YAML Orgranization - Core Team”</a> <a href="#fnl1">↩</a></p>
   </li>
 <li id="fn2">
-    <p><a href="https://www.unicode.org/" target="_blank">“Unicode – The World Standard for Text and Emoji”</a> <a href="#fnl2">↩</a></p>
+    <p><a href="https://lists.sourceforge.net/lists/listinfo/yaml-core" target="_blank">“Mailing List: yaml-core”</a> <a href="#fnl2">↩</a></p>
   </li>
 <li id="fn3">
-    <p><a href="https://github.com/yaml/sml-dev-archive" target="_blank">“SML-DEV Mailing List Archive”</a> <a href="#fnl3">↩</a></p>
+    <p><a href="https://www.unicode.org/" target="_blank">“Unicode – The World Standard for Text and Emoji”</a> <a href="#fnl3">↩</a></p>
   </li>
 <li id="fn4">
-    <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod" target="_blank">“Data::Denter - An (deprecated) alternative to Data::Dumper and Storable”</a> <a href="#fnl4">↩</a></p>
+    <p><a href="https://github.com/yaml/sml-dev-archive" target="_blank">“SML-DEV Mailing List Archive”</a> <a href="#fnl4">↩</a></p>
   </li>
 <li id="fn5">
-    <p><a href="https://en.wikipedia.org/wiki/C_%28programming_language%29" target="_blank">“Wikipedia - C (programming language)”</a> <a href="#fnl5">↩</a></p>
+    <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod" target="_blank">“Data::Denter - An (deprecated) alternative to Data::Dumper and Storable”</a> <a href="#fnl5">↩</a></p>
   </li>
 <li id="fn6">
-    <p><a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29" target="_blank">“Wikipedia - Java (programming language)”</a> <a href="#fnl6">↩</a></p>
+    <p><a href="https://en.wikipedia.org/wiki/C_%28programming_language%29" target="_blank">“Wikipedia - C (programming language)”</a> <a href="#fnl6">↩</a></p>
   </li>
 <li id="fn7">
-    <p><a href="https://www.perl.org/" target="_blank">“The Perl Programming Language”</a> <a href="#fnl7">↩</a></p>
+    <p><a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29" target="_blank">“Wikipedia - Java (programming language)”</a> <a href="#fnl7">↩</a></p>
   </li>
 <li id="fn8">
-    <p><a href="https://www.python.org/" target="_blank">“The Python Programming Language”</a> <a href="#fnl8">↩</a></p>
+    <p><a href="https://www.perl.org/" target="_blank">“The Perl Programming Language”</a> <a href="#fnl8">↩</a></p>
   </li>
 <li id="fn9">
-    <p><a href="https://www.ruby-lang.org/" target="_blank">“Ruby Programming Language”</a> <a href="#fnl9">↩</a></p>
+    <p><a href="https://www.python.org/" target="_blank">“The Python Programming Language”</a> <a href="#fnl9">↩</a></p>
   </li>
 <li id="fn10">
-    <p><a href="https://tools.ietf.org/html/rfc0822" target="_blank">“Standard for ARPA Internet Text Messages”</a> <a href="#fnl10">↩</a></p>
+    <p><a href="https://www.ruby-lang.org/" target="_blank">“Ruby Programming Language”</a> <a href="#fnl10">↩</a></p>
   </li>
 <li id="fn11">
-    <p><a href="https://tools.ietf.org/html/rfc1866" target="_blank">“Hypertext Markup Language - 2.0”</a> <a href="#fnl11">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc0822" target="_blank">“Standard for ARPA Internet Text Messages”</a> <a href="#fnl11">↩</a></p>
   </li>
 <li id="fn12">
-    <p><a href="https://tools.ietf.org/html/rfc2045" target="_blank">“Multipurpose Internet Mail Extensions (MIME)”</a> <a href="#fnl12">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc1866" target="_blank">“Hypertext Markup Language - 2.0”</a> <a href="#fnl12">↩</a></p>
   </li>
 <li id="fn13">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl13">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc2045" target="_blank">“Multipurpose Internet Mail Extensions (MIME)”</a> <a href="#fnl13">↩</a></p>
   </li>
 <li id="fn14">
-    <p><a href="https://www.w3.org/TR/REC-xml.html" target="_blank">“Extensible Markup Language (XML)”</a> <a href="#fnl14">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl14">↩</a></p>
   </li>
 <li id="fn15">
-    <p><a href="https://en.wikipedia.org/wiki/Simple_API_for_XML" target="_blank">“Wikipedia - Simple API for XML”</a> <a href="#fnl15">↩</a></p>
+    <p><a href="https://www.w3.org/TR/REC-xml.html" target="_blank">“Extensible Markup Language (XML)”</a> <a href="#fnl15">↩</a></p>
   </li>
 <li id="fn16">
-    <p><a href="https://en.wikipedia.org/wiki/SOAP" target="_blank">“SOAP”</a> <a href="#fnl16">↩</a></p>
+    <p><a href="https://en.wikipedia.org/wiki/Simple_API_for_XML" target="_blank">“Wikipedia - Simple API for XML”</a> <a href="#fnl16">↩</a></p>
   </li>
 <li id="fn17">
-    <p><a href="https://www.json.org/" target="_blank">“Introducing JSON”</a> <a href="#fnl17">↩</a></p>
+    <p><a href="https://en.wikipedia.org/wiki/SOAP" target="_blank">“SOAP”</a> <a href="#fnl17">↩</a></p>
   </li>
 <li id="fn18">
-    <p><a href="https://tools.ietf.org/html/rfc4627" target="_blank">“The application/json Media Type for JavaScript Object Notation (JSON)”</a> <a href="#fnl18">↩</a></p>
+    <p><a href="https://www.json.org/" target="_blank">“Introducing JSON”</a> <a href="#fnl18">↩</a></p>
   </li>
 <li id="fn19">
-    <p><a href="https://tools.ietf.org/html/rfc2199" target="_blank">“Request for Comments Summary”</a> <a href="#fnl19">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc4627" target="_blank">“The application/json Media Type for JavaScript Object Notation (JSON)”</a> <a href="#fnl19">↩</a></p>
   </li>
 <li id="fn20">
-    <p><a href="https://xlinux.nist.gov/dads/HTML/directedGraph.html" target="_blank">“directed graph”</a> <a href="#fnl20">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc2199" target="_blank">“Request for Comments Summary”</a> <a href="#fnl20">↩</a></p>
   </li>
 <li id="fn21">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl21">↩</a></p>
+    <p><a href="https://xlinux.nist.gov/dads/HTML/directedGraph.html" target="_blank">“directed graph”</a> <a href="#fnl21">↩</a></p>
   </li>
 <li id="fn22">
-    <p><a href="https://hackage.haskell.org/package/YamlReference" target="_blank">“YamlReference: YAML reference implementation”</a> <a href="#fnl22">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl22">↩</a></p>
   </li>
 <li id="fn23">
-    <p><a href="http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl" target="_blank">“ypaste / YEAST2HTML”</a> <a href="#fnl23">↩</a></p>
+    <p><a href="https://hackage.haskell.org/package/YamlReference" target="_blank">“YamlReference: YAML reference implementation”</a> <a href="#fnl23">↩</a></p>
   </li>
 <li id="fn24">
-    <p><a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes" target="_blank">“Wikipedia - C0 and C1 control codes”</a> <a href="#fnl24">↩</a></p>
+    <p><a href="http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl" target="_blank">“ypaste / YEAST2HTML”</a> <a href="#fnl24">↩</a></p>
   </li>
 <li id="fn25">
-    <p><a href="https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates" target="_blank">“Wikipedia - Universal Character Set characters #Surrogates”</a> <a href="#fnl25">↩</a></p>
+    <p><a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes" target="_blank">“Wikipedia - C0 and C1 control codes”</a> <a href="#fnl25">↩</a></p>
   </li>
 <li id="fn26">
-    <p><a href="https://tools.ietf.org/html/rfc7159#section-7" target="_blank">“rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings”</a> <a href="#fnl26">↩</a></p>
+    <p><a href="https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates" target="_blank">“Wikipedia - Universal Character Set characters #Surrogates”</a> <a href="#fnl26">↩</a></p>
   </li>
 <li id="fn27">
-    <p><a href="https://www.unicode.org/faq/utf_bom.html" target="_blank">“UTF-8, UTF-16, UTF-32 &amp; BOM”</a> <a href="#fnl27">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc7159#section-7" target="_blank">“rfc7159 - The JavaScript Object Notation (JSON) Data Interchange Format #Strings”</a> <a href="#fnl27">↩</a></p>
   </li>
 <li id="fn28">
-    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl28">↩</a></p>
+    <p><a href="https://www.unicode.org/faq/utf_bom.html" target="_blank">“UTF-8, UTF-16, UTF-32 &amp; BOM”</a> <a href="#fnl28">↩</a></p>
   </li>
 <li id="fn29">
-    <p><a href="https://tools.ietf.org/html/rfc2732" target="_blank">“Format for Literal IPv6 Addresses in URL’s”</a> <a href="#fnl29">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc2396" target="_blank">“Uniform Resource Identifiers (URI)”</a> <a href="#fnl29">↩</a></p>
   </li>
 <li id="fn30">
-    <p><a href="https://github.com/yaml/yaml-spec" target="_blank">“GitHub - yaml/yaml-spec - YAML Specification”</a> <a href="#fnl30">↩</a></p>
-  </li>
-<li id="fn31">
-    <p><a href="https://github.com/yaml/yaml-spec/issues" target="_blank">“GitHub - issues - yaml/yaml-spec”</a> <a href="#fnl31">↩</a></p>
+    <p><a href="https://tools.ietf.org/html/rfc2732" target="_blank">“Format for Literal IPv6 Addresses in URL’s”</a> <a href="#fnl30">↩</a></p>
   </li>
 </ol>
 <div class="footnote-links-after"></div>
