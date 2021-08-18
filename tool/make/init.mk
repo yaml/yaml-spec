@@ -11,11 +11,7 @@ endif
 ifdef IN_DOCKER
     export YAML_SPEC_ROOT := /host
 else
-ifndef YAML_SPEC_ROOT
-    $(info YAML_SPEC_ROOT is not set)
-    $(info Run 'source .rc' before using 'make' commands)
-    $(error Environment error)
-endif
+    export YAML_SPEC_ROOT := $(shell git rev-parse --show-toplevel)
 endif
 
 ROOT := $(YAML_SPEC_ROOT)

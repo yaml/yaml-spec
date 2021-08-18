@@ -10,15 +10,12 @@ This directory contains the source materials and build files for the
 
 ## Build Process
 
-To turn these files into HTML, run (from the top level directory):
+To turn these files into HTML, run:
 ```
-source .rc
-make -C 1.2 html
+make html
 ```
 
 The build system requires:
 
 * make
 * docker
-* python3
-  * pyyaml
