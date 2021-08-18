@@ -379,8 +379,8 @@ In a similar manner, the [flow mapping] uses [curly] [braces].
 Mark McGwire: {hr: 65, avg: 0.278}
 Sammy Sosa: {
     hr: 63,
-    avg: 0.288
-  }
+    avg: 0.288,
+ }
 ```
 
 
