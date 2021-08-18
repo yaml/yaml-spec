@@ -1,6 +1,6 @@
 SHELL := bash
 
-BRANCHES := $(shell git branch | cut -c3- | grep -Ev '^(main|gh-pages|_)$$')
+BRANCHES := $(shell git branch -a | cut -c3- | grep ^remotes/ | grep -Ev '/(HEAD|_|main|gh-pages)' | sed 's/remotes\/origin\///')
 
 default:
 
@@ -24,5 +24,6 @@ list:
 	@printf "%s\n" $(BRANCHES)
 
 $(BRANCHES):
+	@git branch --track $@ origin/$@ 2>/dev/null || true
 	@git worktree prune
 	git worktree add $@ $@
