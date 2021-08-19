@@ -1,6 +1,12 @@
 SHELL := bash
 
-BRANCHES := $(shell git branch -a | cut -c3- | grep ^remotes/ | grep -Ev '/(HEAD|_|main|gh-pages)' | sed 's/remotes\/origin\///')
+BRANCHES := $(shell \
+    git branch -a | \
+    cut -c3- | \
+    grep ^remotes/ | \
+    grep -Ev '/(RFC|HEAD|_|main|gh-pages|work)' | \
+    sed 's/remotes\/origin\///' \
+)
 
 default:
 
