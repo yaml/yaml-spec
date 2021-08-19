@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+source "$YAML_SPEC_ROOT/tool/lib/runner.bash"
+
+check() (
+  [[ ${USE_DOCKER-} ]] && return 1
+  command -v pdflatex >/dev/null || return 1
+  command -v pdftoppm >/dev/null || return 1
+)
+
+run-local-or-docker "$@"
+
