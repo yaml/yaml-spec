@@ -1,0 +1,11 @@
+\documentclass[12pt]{standalone}
+\usepackage{tikz}
+\begin{document}
+
+\begin{tikzpicture}[node distance=2.0cm]
+\node(a)[rectangle, draw=black] {$a$};
+\node(b)[rectangle, draw=red, right of=a] {$b$};
+\draw[->] (a) -- (b);
+\end{tikzpicture}
+
+\end{document}
