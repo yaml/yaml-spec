@@ -44,6 +44,10 @@ run-docker() (
 
   [[ -t 0 ]] && flags=('-i') || flags=()
 
+  if [[ ${TEX_LOG-} ]]; then
+    docker_run_options+=(--env "TEX_LOG='$TEX_LOG'")
+  fi
+
   set -x
   docker run "${flags[@]}" --rm \
     --volume "$YAML_SPEC_ROOT":/host \

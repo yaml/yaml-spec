@@ -6,8 +6,15 @@ main() (
   input=$1 output=$2
   tmp=/tmp/$(basename "${input%.tex}.pdf")
 
+  ( set -x; pdflatex -halt-on-error -output-directory /tmp "$input" ) |
+  (
+    if [[ ${TEX_LOG-} ]]; then
+      cat
+    else
+      cat >/dev/null
+    fi
+  )
   set -x
-  pdflatex -halt-on-error -output-directory /tmp "$input" >/dev/null
   pdftoppm -png -r 750 "$tmp" tmp
   mv tmp-1.png "$output"
 )

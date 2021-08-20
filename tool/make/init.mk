@@ -14,6 +14,10 @@ else
     export YAML_SPEC_ROOT := $(shell git rev-parse --show-toplevel)
 endif
 
+ifdef TEX_LOG
+    export TEX_LOG
+endif
+
 ROOT := $(YAML_SPEC_ROOT)
 
 SPEC12 := $(ROOT)/1.2
