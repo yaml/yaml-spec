@@ -8,7 +8,9 @@ declare -a docker_run_options
 run-local-or-docker() (
   name=$(basename "${BASH_SOURCE[1]}")
 
-  if check; then
+  if [[ ${YAML_SPEC_USE_DOCKER-} ]]; then
+    run-docker "$@"
+  elif check; then
     run-local "$@"
   else
     run-docker "$@"
@@ -41,6 +43,10 @@ run-docker() (
   image=yamlio/$image:$version
 
   [[ -t 0 ]] && flags=('-i') || flags=()
+
+  if [[ ${TEX_LOG-} ]]; then
+    docker_run_options+=(--env "TEX_LOG='$TEX_LOG'")
+  fi
 
   set -x
   docker run "${flags[@]}" --rm \
