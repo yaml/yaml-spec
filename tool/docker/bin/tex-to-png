@@ -3,7 +3,7 @@
 source "$YAML_SPEC_ROOT/tool/lib/runner.bash"
 
 check() (
-  [[ ${USE_DOCKER-} ]] && return 1
+  [[ ${TEX_USE_DOCKER-} ]] && return 1
   command -v pdflatex >/dev/null || return 1
   command -v pdftoppm >/dev/null || return 1
 )

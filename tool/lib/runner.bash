@@ -8,7 +8,9 @@ declare -a docker_run_options
 run-local-or-docker() (
   name=$(basename "${BASH_SOURCE[1]}")
 
-  if check; then
+  if [[ ${YAML_SPEC_USE_DOCKER-} ]]; then
+    run-docker "$@"
+  elif check; then
     run-local "$@"
   else
     run-docker "$@"
