@@ -4,55 +4,97 @@
 \begin{document}
 
 \begin{tikzpicture}[
-    entity/.style = {draw=black, rectangle, anchor=north},
-    entityAttrs/.style = {draw=black, rectangle split, rectangle split parts=2, anchor=north},
-    onArrow/.style = {fill=white, text centered},
-    inherits/.style = {-{Latex[open]}},
-    node distance=3cm and 1cm,
-    auto
+    entity/.style = {
+        draw,
+        rectangle,
+        % anchor=north,
+        minimum width=3cm,
+    },
+    entityAttrs/.style = {
+        entity,
+        rectangle split,
+        rectangle split parts=2,
+    },
+    parallellogram/.style = {
+        draw,
+        trapezium,
+        trapezium left angle=75,
+        trapezium right angle=105,
+    },
+    onArrow/.style = {
+        fill=white,
+        align=center,
+    },
+    has/.style = {
+        -{Latex[length=3mm]},
+    },
+    inherits/.style = {
+        -{Latex[open, length=3mm]},
+    },
+    node distance=2cm and 1cm,
 ]
-\node(Node)[entityAttrs] {
-    \textbf {Node}
-    \nodepart{second} tag: string
-};
 
-\node(Scalar)[entityAttrs, below of=Node] {
-    \textbf {Scalar Node}
-    \nodepart{second} content: string
-};
-\draw[inherits] (Scalar) -- (Node);
+\newcommand{\entity}[3][]{
+    \node(#2)[
+        \ifstrempty{#3}{entity}{entityAttrs},
+        #1
+    ] {
+        \textbf {#2}
+        \ifstrempty{#3}{}{
+            \nodepart[align=left]{second} #3
+        }
+    };
+}
 
-\node(Sequence)[entity, left=of Scalar] {
-    \textbf {Sequence Node}
-};
-\draw[inherits] (Sequence) -- ++(0,+10mm) -| (Node);
+\entity{Node}{};
 
-\draw[->] (Sequence.west) -| ++(-5mm, 0) |- (Node)
-    node[at start, below] {*}
-    node[pos=0.25, above, fill=white] {Ordered \linebreak Content};
+\entity[above=of Node]{Tag}{Name\\Kind};
+\draw[has] (Node) -- (Tag)
+    node[near start, right]{1}
+    node[near end, right]{*};
 
-\node(Mapping)[entity, right=of Scalar] {
-    \textbf {Mapping Node}
-};
-\draw[inherits] (Mapping) -- ++(0,+10mm) -| (Node);
+\entity[right=of Tag]{Scalar Tag}{Canonical Format};
+\draw[inherits] (Scalar Tag) -- (Tag);
 
-\node(KeyValue)[entity, right=of Node] {
-    \textbf {Key/Value Pair}
-};
+\entity[below=of Node]{Scalar Node}{};
+\draw[inherits] (Scalar Node) -- (Node);
 
-\draw[->] (Mapping.east) -| ++(+5mm, 0) |- (KeyValue)
-    node[at start, below] {*}
-    node[onArrow, pos=0.25, above] {Unordered \linebreak Content}
-    ;
+\node[parallellogram, below=of Scalar Node](Canonical Content) {String};
+\draw[has] (Scalar Node) -- (Canonical Content)
+    node[onArrow, midway] {Canonical\\Content};
 
-\draw[->] (KeyValue.north)
-    -- ++(0,+5mm)
-    -| (Node.north east)
-    node[pos=0.25, above] {Key}
-;
+\entity[left=of Scalar Node]{Sequence Node}{};
+\draw[inherits] (Sequence Node) -- ++(0,+10mm) -| (Node);
 
-\draw[->] (KeyValue.south) -- ++(0,-5mm) -| (Node.south east)
-    node[pos=0.25, below] {Value};
+\draw[has] (Sequence Node.west)
+    -- ++(-5mm, 0) node[near start, below] {*}
+    |- (Node) node[onArrow, pos=0.25] {Ordered\\Content}
+    node[at end, above left] {*};
+
+\entity[right=of Scalar Node]{Mapping Node}{};
+\draw[inherits] (Mapping Node) -- ++(0,+10mm) -| (Node);
+
+\entity[right=of Node]{Key/Value Pair}{};
+
+\draw[has]
+    (Mapping Node.east)
+    -- ++(5mm, 0) node[near start, below] {*} 
+    |- (Key/Value Pair) node[onArrow, pos=0.25] {Unordered\\Content}
+    node[at end, above right] {*};
+
+\draw[has] (Key/Value Pair.north)
+    |- ($(Node.north)+(0.5,0.5)$)
+    node[at start, above right] {1}
+    node[pos=0.75, onArrow] {Key}
+    -- ($(Node.north)+(0.5,0)$)
+    node[at start, above right] {*};
+
+\draw[has] (Key/Value Pair.south)
+    |- ($(Node.south)+(0.5,-0.5)$)
+    node[at start, below right] {1}
+    node[pos=0.75, onArrow] {Value}
+    -- ($(Node.south)+(0.5,0)$)
+    node[at start, below right] {*};
 
 \end{tikzpicture}
 
