@@ -20,7 +20,7 @@
 \entity[right=of Tag]{Scalar Tag}{Canonical Format};
 \draw[inherits] (Scalar Tag) -- (Tag);
 
-\entity[above right=of Tag]{++ Non-Specific Tag}{Canonical Format};
+\entity[above right=of Tag]{++ Non-Specific Tag}{};
 \draw[inherits] (++ Non-Specific Tag) -| (Tag);
 
 \entity[below=of Node]{Scalar Node}{};
@@ -54,7 +54,7 @@
 
 \draw[has]
     (Mapping Node.east)
-    -- ++(10mm, 0) node[near start, below] {*} 
+    -- ++(10mm, 0) node[near start, below] {*}
     |- (Key/Value Pair) node[onArrow, pos=0.25] {Unordered\\/ + Ordered\\Content}
     node[at end, above right] {*};
 
