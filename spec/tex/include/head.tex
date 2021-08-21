@@ -4,6 +4,49 @@
 % Sanserif font:
 \renewcommand{\familydefault}{\sfdefault}
 
+\newcommand{\entity}[3][]{
+    \node(#2)[
+        \ifstrempty{#3}{entity}{entityAttrs},
+        #1
+    ] {
+        \textbf {#2}
+        \ifstrempty{#3}{}{
+            \nodepart[align=left]{second} #3
+        }
+    };
+}
+
+\tikzset{
+    entity/.style = {
+        draw,
+        rectangle,
+        % anchor=north,
+        minimum width=3cm,
+    },
+    entityAttrs/.style = {
+        entity,
+        rectangle split,
+        rectangle split parts=2,
+    },
+    parallellogram/.style = {
+        draw,
+        trapezium,
+        trapezium left angle=75,
+        trapezium right angle=105,
+    },
+    onArrow/.style = {
+        fill=white,
+        align=center,
+    },
+    has/.style = {
+        -{Latex[length=3mm]},
+    },
+    inherits/.style = {
+        -{Latex[open, length=3mm]},
+    },
+    node distance=2cm and 1cm,
+}
+
 % Attempt to get a little border padding
 % \usepackage[
 %     left=0.20in,
