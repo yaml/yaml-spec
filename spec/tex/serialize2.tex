@@ -7,9 +7,7 @@
 \begin{tikzpicture}
 
 \entity{Node}{
-    +Anchor\\
-    ++Style, Spacing,\\
-    Line Wrapping…
+    +Anchor
 };
 
 \entity[above=of Node]{Tag}{Name\\Kind};
@@ -20,15 +18,12 @@
 \entity[right=of Tag]{Scalar Tag}{Canonical Format};
 \draw[inherits] (Scalar Tag) -- (Tag);
 
-\entity[above right=of Tag]{++ Non-Specific Tag}{};
-\draw[inherits] (++ Non-Specific Tag) -| (Tag);
-
 \entity[below=of Node]{Scalar Node}{};
 \draw[inherits] (Scalar Node) -- (Node);
 
 \node[parallellogram, below=of Scalar Node](Canonical Content) {String};
 \draw[has] (Scalar Node) -- (Canonical Content)
-    node[onArrow, midway] {Canonical\\/ ++ Formatted\\Content};
+    node[onArrow, midway] {Canonical\\Content};
 
 \entity[left=of Scalar Node]{Sequence Node}{};
 \draw[inherits] (Sequence Node) -- ++(0,+10mm) -| (Node);
@@ -55,7 +50,7 @@
 \draw[has]
     (Mapping Node.east)
     -- ++(10mm, 0) node[near start, below] {*}
-    |- (Key/Value Pair) node[onArrow, pos=0.25] {Unordered\\/ + Ordered\\Content}
+    |- (Key/Value Pair) node[onArrow, pos=0.25] {Ordered\\Content}
     node[at end, above right] {*};
 
 \draw[has] (Key/Value Pair.north)
@@ -72,14 +67,9 @@
     -- ($(Node.south)+(0.5,0)$)
     node[at start, below right] {*};
 
-\entity[below=of Mapping Node]{++ Comment}{}
-
-\entity[above left=of Node]{++ Directive}{Name\\Parameters}
-
-\entity[above left=of Tag]{Legend}{
+\entity[left=of Tag]{Legend}{
     YAML Representation\\
-    + YAML Serialization\\
-    ++ YAML Presentation
+    \textbf {+ YAML Serialization}
 }
 
 \end{tikzpicture}
