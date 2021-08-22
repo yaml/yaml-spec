@@ -11,12 +11,46 @@ This document may be freely copied, provided it is not modified.
 
 <code>**Status of this Document**</code>
 
-This is version **1.2.1** of the YAML 1.2 specification.
-It defines the YAML 1.2 data language, with no changes to YAML from the
-previous specification.
-The primary objectives of this version are to correct errors and add clarity.
+This document reflects the third version of YAML data serialization language.
+The content of the specification was arrived at by consensus of its authors and
+through user feedback on the [yaml-core mailing list^].
+We encourage implementers to please update their software with support for this
+version.
 
-See the [Changes] section below for details.
+The primary objective of this revision is to bring YAML into compliance with
+JSON as an official subset.
+YAML 1.2 is compatible with 1.1 for most practical applications - this is a
+minor revision.
+An expected source of incompatibility with prior versions of YAML, especially
+the syck implementation, is the change in implicit typing rules.
+We have removed unique implicit typing rules and have updated these rules to
+align them with JSON's productions.
+In this version of YAML, boolean values may be serialized as "**`true`**" or
+"**`false`**"; the empty scalar as "**`null`**".
+Unquoted numeric values are a superset of JSON's numeric production.
+Other changes in the specification were the removal of the Unicode line breaks
+and production bug fixes.
+We also define 3 built-in implicit typing rule sets: untyped, strict JSON, and
+a more flexible YAML rule set that extends JSON typing.
+
+The difference between late 1.0 drafts which syck 0.55 implements and the 1.1
+revision of this specification is much more extensive.
+We fixed usability issues with the tagging syntax.
+In particular, the single exclamation was re-defined for private types and a
+simple prefixing mechanism was introduced.
+This revision also fixed many production edge cases and introduced a type
+repository.
+Therefore, there are several incompatibilities between syck and this revision
+as well.
+
+The list of known errors in this specification is available at
+[https://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html).
+Please report errors in this document to the yaml-core mailing list.
+This revision contains fixes for all errors known as of 2009-10-01.
+
+We wish to thank implementers who have tirelessly tracked earlier versions of
+this specification, and our fabulous user community whose feedback has both
+validated and clarified our direction.
 
 
 <code>**Abstract**</code>
@@ -190,6 +224,17 @@ duplicates as an error.
 In practice, since JSON is silent on the semantics of such duplicates, the only
 portable JSON files are those with unique keys, which are therefore valid YAML
 files.
+
+It may be useful to define a intermediate format between YAML and JSON.
+Such a format would be trivial to parse (but not very human readable), like
+JSON.
+At the same time, it would allow for [serializing] arbitrary [native data
+structures], like YAML.
+Such a format might also serve as YAML’s "canonical format".
+Defining such a "YSON" format (YSON is a Serialized Object Notation) can be
+done either by enhancing the JSON specification or by restricting the YAML
+specification.
+Such a definition is beyond the scope of this specification.
 
 
 <code>## #. Relation to XML</code>
@@ -1108,10 +1153,12 @@ to this anchor.
 Otherwise, anchor names are a [serialization detail] and are discarded once
 [composing] is completed.
 When [composing] a [representation graph] from [serialized] events, an alias
-event refers to the most recent event in the [serialization] having the
+node refers to the most recent [node] in the [serialization] having the
 specified anchor.
 Therefore, anchors need not be unique within a [serialization].
 In addition, an anchor need not have an alias node referring to it.
+It is therefore possible to provide an anchor for all [nodes] in
+[serialization].
 
 
 <code>### #. Presentation Stream</code>
@@ -1598,21 +1645,21 @@ ERROR:
 
 _Indicators_ are characters that have special semantics.
 
-["**`-`**"] (**`#x2D`**, hyphen) denotes a [block sequence] entry.
+A ["**`-`**"] (**`#x2D`**, hyphen) denotes a [block sequence] entry.
 
 ```
 [#] c-sequence-entry ::= "-"
 ```
 
 
-["**`?`**"] (**`#x3F`**, question mark) denotes a [mapping key].
+A ["**`?`**"] (**`#x3F`**, question mark) denotes a [mapping key].
 
 ```
 [#] c-mapping-key ::= "?"
 ```
 
 
-["**`:`**"] (**`#x3A`**, colon) denotes a [mapping value].
+A ["**`:`**"] (**`#x3A`**, colon) denotes a [mapping value].
 
 ```
 [#] c-mapping-value ::= ":"
@@ -1646,35 +1693,35 @@ mapping:
 * [c-mapping-value] &lt;!-- : --&gt;
 
 
-["**`,`**"] (**`#x2C`**, comma) ends a [flow collection] entry.
+A ["**`,`**"] (**`#x2C`**, comma) ends a [flow collection] entry.
 
 ```
 [#] c-collect-entry ::= ","
 ```
 
 
-["**`[`**"] (**`#x5B`**, left bracket) starts a [flow sequence].
+A ["**`[`**"] (**`#x5B`**, left bracket) starts a [flow sequence].
 
 ```
 [#] c-sequence-start ::= "["
 ```
 
 
-["**`]`**"] (**`#x5D`**, right bracket) ends a [flow sequence].
+A ["**`]`**"] (**`#x5D`**, right bracket) ends a [flow sequence].
 
 ```
 [#] c-sequence-end ::= "]"
 ```
 
 
-["**`{`**"] (**`#x7B`**, left brace) starts a [flow mapping].
+A ["**`{`**"] (**`#x7B`**, left brace) starts a [flow mapping].
 
 ```
 [#] c-mapping-start ::= "{"
 ```
 
 
-["**`}`**"] (**`#x7D`**, right brace) ends a [flow mapping].
+A ["**`}`**"] (**`#x7D`**, right brace) ends a [flow mapping].
 
 ```
 [#] c-mapping-end ::= "}"
@@ -1700,8 +1747,8 @@ mapping: { sky: blue, sea: green }
 * [c-collect-entry] &lt;!-- , --&gt;
 
 
-["**`#`**"] (**`#x23`**, octothorpe, hash, sharp, pound, number sign) denotes a
-[comment].
+An ["**`#`**"] (**`#x23`**, octothorpe, hash, sharp, pound, number sign)
+denotes a [comment].
 
 ```
 [#] c-comment ::= "#"
@@ -1724,13 +1771,13 @@ mapping: { sky: blue, sea: green }
 * [c-comment] &lt;!-- # --&gt;
 
 
-["**`&amp;`**"] (**`#x26`**, ampersand) denotes a [node’s anchor property].
+An ["**`&amp;`**"] (**`#x26`**, ampersand) denotes a [node’s anchor property].
 
 ```
 [#] c-anchor ::= "&amp;"
 ```
 
-["**`*`**"] (**`#x2A`**, asterisk) denotes an [alias node].
+An ["**`*`**"] (**`#x2A`**, asterisk) denotes an [alias node].
 
 
 ```
@@ -1767,14 +1814,14 @@ alias: *anchor
 * [c-alias] &lt;!-- * --&gt;
 
 
-["**`|`**"] (**`7C`**, vertical bar) denotes a [literal block scalar].
+A ["**`|`**"] (**`7C`**, vertical bar) denotes a [literal block scalar].
 
 ```
 [#] c-literal ::= "|"
 ```
 
 
-["**`&gt;`**"] (**`#x3E`**, greater than) denotes a [folded block scalar].
+A ["**`&gt;`**"] (**`#x3E`**, greater than) denotes a [folded block scalar].
 
 ```
 [#] c-folded ::= "&gt;"
@@ -1801,8 +1848,8 @@ folded: &gt;
 * [c-literal] &lt;!-- | --&gt;
 * [c-folded] &lt;!-- &gt; --&gt;
 
-["**`'`**"] (**`#x27`**, apostrophe, single quote) surrounds a [single-quoted
-flow scalar].
+An ["**`'`**"] (**`#x27`**, apostrophe, single quote) surrounds a
+[single-quoted flow scalar].
 
 
 ```
@@ -1810,7 +1857,7 @@ flow scalar].
 ```
 
 
-["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow
+A ["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow
 scalar].
 
 ```
@@ -1835,7 +1882,7 @@ double: "text"
 * [c-double-quote] &lt;!-- 2:9 2:14 --&gt;
 
 
-["**`%`**"] (**`#x25`**, percent) denotes a [directive] line.
+A ["**`%`**"] (**`#x25`**, percent) denotes a [directive] line.
 
 ```
 [#] c-directive ::= "%"
@@ -6396,18 +6443,6 @@ repository.
 The yaml-core mailing list is the preferred method for such submissions, as
 well as raising any questions regarding this draft.
 
-
-<code># Changes in YAML Specification v1.2.1</code>
-
-* Host the YAML specification sources in a [public repository^]
-* Change the source format from DocBook to Markdown
-* Correct known errata from the previous specification
-* Address many [reported issues^]
-* Clarify wording and examples
-* Removed sentences that are no longer relevant in 2021
-* Fixed known bugs in the grammar productions
-
-
 <code># Reference Links</code>
 
 {:.footnote-links}
@@ -6449,15 +6484,9 @@ well as raising any questions regarding this draft.
 * Perl
   * [The Perl Programming Language](
     https://www.perl.org/)
-* public repository
-  * [GitHub - yaml/yaml-spec - YAML Specification](
-    https://github.com/yaml/yaml-spec)
 * Python
   * [The Python Programming Language](
     https://www.python.org/)
-* reported issues
-  * [GitHub - issues - yaml/yaml-spec](
-    https://github.com/yaml/yaml-spec/issues)
 * RFC format
   * [Request for Comments Summary](
     https://tools.ietf.org/html/rfc2199)
