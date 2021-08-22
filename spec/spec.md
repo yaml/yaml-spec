@@ -76,7 +76,7 @@ create programs that process YAML information.
 language designed to be human-friendly and work well with modern programming
 languages for common everyday tasks.
 This specification is both an introduction to the YAML language and the
-concepts supporting it
+concepts supporting it.
 It is also a complete specification of the information needed to develop
 [applications] for processing YAML.
 
@@ -3118,7 +3118,7 @@ tags].
 
 > It is possible to override the default behavior by providing an explicit
 "**`TAG`**" directive, associating a different prefix for this handle.
-This provides smooth migration from using [local tags] to using [global tags],
+This provides smooth migration from using [local tags] to using [global tags]
 by the simple addition of a single "**`TAG`**" directive.
 
 ```
@@ -6167,8 +6167,8 @@ key with null value: !!null null
 ##### Definition:
 
 > [Represents] a true/false value.
-In languages without a [native] Boolean type (such as C), is usually [bound] to
-a native integer type, using one for true and zero for false.
+In languages without a [native] Boolean type (such as C), they are usually
+[bound] to a native integer type, using one for true and zero for false.
 
 
 ##### Canonical Form:
@@ -6204,7 +6204,7 @@ possible.
 
 > Some languages (such as Perl) provide only a "number" type that allows for
 both integer and floating-point values.
-A YAML [processor] may use such a type for integers, as long as they round-trip
+A YAML [processor] may use such a type for integers as long as they round-trip
 properly.
 
 > In some languages (such as C), an integer may overflow the [native] type’s
