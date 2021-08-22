@@ -1,11 +1,85 @@
 \documentclass[12pt]{standalone}
-\usepackage{tikz}
+
+\input{tex/include/head}
+
 \begin{document}
 
-\begin{tikzpicture}[node distance=2.0cm]
-\node(a)[rectangle, draw=black] {$a$};
-\node(b)[rectangle, draw=red, right of=a] {$b$};
-\draw[->] (a) -- (b);
+\begin{tikzpicture}[
+    process/.style = {
+        -{Latex[length=3mm]},
+        out=45,
+        in=135,
+        relative,
+        line width=.5mm,
+    },
+    bigArrow/.style = {
+        -{Latex[length=5mm]},
+        line width=1mm,
+    },
+    stage/.style = {
+        entityAttrs,
+        align=center,
+        minimum width=4cm,
+    },
+    node distance=2.0cm
+]
+\node(Native)[stage] {
+    \textbf {Native}\\\textbf {(Data Structures)}
+    \nodepart[align=center]{second}
+        opaque\\
+        program\\
+        data
+};
+
+\node(Representation)[stage, right=of Native] {
+    \textbf {Representation}\\\textbf {(Node Graph)}
+    \nodepart[align=center]{second}
+        tags,\\
+        mapping/sequence/scalar,\\
+        canonical string values
+};
+
+\node(Serialization)[stage, right=of Representation] {
+    \textbf {Serialization}\\\textbf {(Event Tree)}
+    \nodepart[align=center]{second}
+        anchors,\\
+        aliases,\\
+        key order
+};
+
+\node(Presentation)[stage, right=of Serialization] {
+    \textbf {Presentation}\\\textbf {(Character Stream)}
+    \nodepart[align=center]{second}
+        styles, comments,\\
+        directives, spacing,\\
+        formatted string values, …
+};
+
+\coordinate (Divider) at ($(Native.east)!.5!(Representation.west)$);
+
+\draw[dashed, overlay] let \p1 = (Divider) in (\x1,-10) -- (\x1,10);
+
+\draw
+let
+    \p1 = (Divider),
+    \p2 = (Native.north),
+    \p3 = ($(\x1,\y2)+(0,2.5)$),
+in
+node[left=.5cm] at (\p3) {\textbf {Application}}
+node[right=.5cm] at (\p3) {\textbf {YAML}};
+
+\draw[process] (Native) edge node[onArrow] {Represent} (Representation);
+\draw[process] (Representation) edge node[onArrow] {Construct} (Native);
+\draw[process] (Representation) edge node[onArrow] {Serialize} (Serialization);
+\draw[process] (Serialization) edge node[onArrow] {Compose} (Representation);
+\draw[process] (Serialization) edge node[onArrow] {Present} (Presentation);
+\draw[process] (Presentation) edge node[onArrow] {Parse} (Serialization);
+
+\draw[bigArrow] ($(Native.north)+(0,2)$)
+    -- node[onArrow] {\textbf {Dump}} ($(Presentation.north)+(0,2)$);
+\draw[bigArrow] ($(Presentation.south)+(0,-2)$)
+    -- node[onArrow] {\textbf {Load}} ($(Native.south)+(0,-2)$);
+
 \end{tikzpicture}
 
 \end{document}
