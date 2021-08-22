@@ -51,7 +51,14 @@ include _ext/ext.mk
 SPEC_LINKS := $(SPEC)/links.yaml
 SPEC_FILES := \
     spec.md \
-    img \
+    img/model2.png \
+    img/overview2.png \
+    img/present2.png \
+    img/represent2.png \
+    img/serialize2.png \
+    img/styles2.png \
+    img/term.png \
+    img/validity2.png \
 
 REVIEW_FILES := \
     review/markdown.html \
@@ -153,6 +160,7 @@ endif
 force:
 	rm -fr $(SITE)
 	$(call clean,$(GH_PAGES))
+	make -C $(SPEC) clean
 
 diff: build
 	(cd _gh-pages; git diff)
@@ -213,8 +221,12 @@ $(SITE)/story/%.md: $(STORY)/%.md
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-$(SITE)/img: $(SPEC)/img
+$(SITE)/img/%: $(SPEC)/img/%
+	@mkdir -p $(dir $@)
 	cp -r $< $@
+
+$(SPEC)/img/%:
+	make -C $(SPEC) build YAML_SPEC_DIR=
 
 $(SITE)/review/spec-12.html: _ext/yaml-spec-12.html
 	cp $< $@

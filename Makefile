@@ -18,5 +18,6 @@ _:
 clean:
 	git worktree prune
 	make -C 1.2 $@
+	make -C spec $@
 	make -C www $@
 	make -C tool/docker clean-all
