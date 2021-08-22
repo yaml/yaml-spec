@@ -833,9 +833,9 @@ following three stages:
 ##### Representing Native Data Structures
 
 > YAML _represents_ any _native data structure_ using three [node kinds]:
-[sequence] - an ordered series of entries; [mapping] - an unordered
-association of [unique] [keys] to [values]; and [scalar] - any datum with
-opaque structure presentable as a series of Unicode characters.
+[sequence] - an ordered series of entries; [mapping] - an unordered association
+of [unique] [keys] to [values]; and [scalar] - any datum with opaque structure
+presentable as a series of Unicode characters.
 Combined, these primitives generate directed graph structures.
 These primitives were chosen because they are both powerful and familiar: the
 [sequence] corresponds to a Perl array and a Python list, the [mapping]
@@ -1082,15 +1082,15 @@ Equality of [collections] is defined recursively.
 Two [sequences] are equal only when they have the same [tag] and length and
 each [node] in one [sequence] is equal to the corresponding [node] in the other
 [sequence].
-Two [mappings] are equal only when they have the same [tag] and an equal set
-of [keys] and each [key] in this set is associated with equal [values] in both
+Two [mappings] are equal only when they have the same [tag] and an equal set of
+[keys] and each [key] in this set is associated with equal [values] in both
 [mappings].
 
 > Different URI schemes may define different rules for testing the equality of
 URIs.
-Since a YAML [processor] cannot be reasonably expected to be aware of them
-all, it must resort to a simple character-by-character comparison of [tags]
-to ensure consistency.
+Since a YAML [processor] cannot be reasonably expected to be aware of them all,
+it must resort to a simple character-by-character comparison of [tags] to
+ensure consistency.
 This also happens to be the comparison method defined by the "**`tag:`**" URI
 scheme.
 [Tags] in a YAML stream must therefore be [presented] in a canonical way so
@@ -1431,14 +1431,14 @@ Hence in some cases productions need to behave differently inside [block
 sequences] (_block-in context_) and outside them (_block-out context_).
 
 > In [flow styles], explicit [indicators] are used to delineate structure.
-These styles can be viewed as the natural extension of JSON to cover
-[tagged], [single-quoted] and [plain scalars].
+These styles can be viewed as the natural extension of JSON to cover [tagged],
+[single-quoted] and [plain scalars].
 Since the latter have no delineating [indicators], they are subject to some
 restrictions to avoid ambiguities.
 These restrictions depend on where they appear: as implicit keys directly
 inside a [block mapping] (_block-key_); as implicit keys inside a [flow
-mapping] (_flow-key_); as values inside a [flow collection] (_flow-in_); or
-as values outside one (_flow-out_).
+mapping] (_flow-key_); as values inside a [flow collection] (_flow-in_); or as
+values outside one (_flow-out_).
 
 
 ##### (Block) Chomping: `t`
@@ -1493,7 +1493,7 @@ prefixes.
 `X`**`+`**, `X`**`-`**`Y`**`+`**
 
 > A production as above, with the additional property that the matched content
-> [indentation] level is greater than the specified `n` parameter.
+[indentation] level is greater than the specified `n` parameter.
 
 
 # Chapter #. Characters
@@ -2714,13 +2714,12 @@ feed and the formatting of [more-indented] lines is preserved.
 [indentation] to convey structure.
 Hence spaces preceding or following the text in a line are a [presentation
 detail] and must not be used to convey [content] information.
-Once all such spaces have been discarded, all [line breaks] are folded,
-without exception.
+Once all such spaces have been discarded, all [line breaks] are folded without
+exception.
 
 > The combined effect of the _flow line folding_ rules is that each "paragraph"
 is interpreted as a line, [empty lines] are interpreted as line feeds and text
-can be freely [more-indented] without affecting the [content]
-information.
+can be freely [more-indented] without affecting the [content] information.
 
 ```
 [#] s-flow-folded(n) ::=
@@ -3119,8 +3118,8 @@ tags].
 
 > It is possible to override the default behavior by providing an explicit
 "**`TAG`**" directive, associating a different prefix for this handle.
-This provides smooth migration from using [local tags] to using [global
-tags], by the simple addition of a single "**`TAG`**" directive.
+This provides smooth migration from using [local tags] to using [global tags],
+by the simple addition of a single "**`TAG`**" directive.
 
 ```
 [#] c-primary-tag-handle ::= "!"
@@ -3468,16 +3467,16 @@ ERROR:
 
 > If a [node] has no tag property, it is assigned a [non-specific tag] that
 needs to be [resolved] to a [specific] one.
-This [non-specific tag] is ["**`!`**"] for non-[plain scalars] and
-["**`?`**"] for all other [nodes].
+This [non-specific tag] is ["**`!`**"] for non-[plain scalars] and ["**`?`**"]
+for all other [nodes].
 This is the only case where the [node style] has any effect on the [content]
 information.
 
 > It is possible for the tag property to be explicitly set to the ["**`!`**"
 non-specific tag].
 By [convention], this "disables" [tag resolution], forcing the [node] to be
-interpreted as "**`tag:yaml.org,2002:seq`**", "**`tag:yaml.org,2002:map`**"
-or "**`tag:yaml.org,2002:str`**", according to its [kind].
+interpreted as "**`tag:yaml.org,2002:seq`**", "**`tag:yaml.org,2002:map`**" or
+"**`tag:yaml.org,2002:str`**", according to its [kind].
 
 > There is no way to explicitly specify the ["**`?`**" non-specific] tag.
 This is intentional.
@@ -5972,8 +5971,8 @@ already contain such a marker.
 
 > The [document end marker] allows signaling the end of a [document] without
 closing the stream or starting the next [document].
-This allows the receiver to complete processing a [document] without having
-to wait for the next one to arrive.
+This allows the receiver to complete processing a [document] without having to
+wait for the next one to arrive.
 The sender may also transmit "keep-alive" messages in the form of [comment]
 lines or repeated [document end markers] without signalling the start of the
 next [document].
@@ -6168,8 +6167,8 @@ key with null value: !!null null
 ##### Definition:
 
 > [Represents] a true/false value.
-In languages without a [native] Boolean type (such as C), is usually [bound]
-to a native integer type, using one for true and zero for false.
+In languages without a [native] Boolean type (such as C), is usually [bound] to
+a native integer type, using one for true and zero for false.
 
 
 ##### Canonical Form:
@@ -6205,8 +6204,8 @@ possible.
 
 > Some languages (such as Perl) provide only a "number" type that allows for
 both integer and floating-point values.
-A YAML [processor] may use such a type for integers, as long as they
-round-trip properly.
+A YAML [processor] may use such a type for integers, as long as they round-trip
+properly.
 
 > In some languages (such as C), an integer may overflow the [native] type’s
 storage capability.
