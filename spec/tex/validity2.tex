@@ -4,71 +4,71 @@
 \begin{document}
 
 \begin{tikzpicture}[
-    rect/.style = {
-        draw,
-        rectangle,
-        align=center,
-        minimum width=3.5cm,
-        minimum height=1.5cm,
-    },
-    hex/.style = {
-        rect,
-        signal,
-        signal to={west and east},
-        signal pointer angle=120,
-    },
-    rounded/.style = {
-        rect,
-        rounded rectangle,
-    },
-    decision/.style = {
-        draw,
-        circle,
-        node contents=?,
-    },
-    goes/.style = {
-        -{Latex[length=3mm]},
-    },
-    bigArrow/.style = {
-        -{Latex[length=5mm]},
-        line width=1mm,
-    },
+  rect/.style = {
+    draw,
+    rectangle,
+    align=center,
+    minimum width=3.5cm,
+    minimum height=1.5cm,
+  },
+  hex/.style = {
+    rect,
+    signal,
+    signal to={west and east},
+    signal pointer angle=120,
+  },
+  rounded/.style = {
+    rect,
+    rounded rectangle,
+  },
+  decision/.style = {
+    draw,
+    circle,
+    node contents=?,
+  },
+  goes/.style = {
+    -{Latex[length=3mm]},
+  },
+  bigArrow/.style = {
+    -{Latex[length=5mm]},
+    line width=1mm,
+  },
 ]
 
 \matrix[
-    row sep=.5cm,
-    column sep=.75cm,
+  row sep=.5cm,
+  column sep=.75cm,
 ] {
-    \node(Start) {
-        \begin{tikzpicture}[solid]
-        \draw (.5,0) arc (0:360:.5);
-        \foreach \angle in { 0, 45,..., 360 }{
-            \draw [rotate around={\angle:(0,0)}]
-                (.55,0) -- +(0,-.15) -- +(.3,0) -- +(0,.15) -- cycle;
-        };
-        \end{tikzpicture}
-    }; \\
+  \node(Start) {
+    \begin{tikzpicture}[solid]
+    \draw (.5,0) arc (0:360:.5);
+    \foreach \angle in { 0, 45,..., 360 }{
+      \draw [rotate around={\angle:(0,0)}]
+        (.55,0) -- +(0,-.15) -- +(.3,0) -- +(0,.15) -- cycle;
+    };
+    \end{tikzpicture}
+  }; \\
 
-    \node(Q1)[decision]; \\
-    \node(Well)[rect] {Well Formed\\and Identified}; &
-    \node(Ill)[hex] {Ill Formed\\or Unidentified}; &
-    \node(No)[rounded] {No\\Representation}; \\
+  \node(Q1)[decision]; \\
+  \node(Well)[rect] {Well Formed\\and Identified}; &
+  \node(Ill)[hex] {Ill Formed\\or Unidentified}; &
+  \node(No)[rounded] {No\\Representation}; \\
 
-    \node(Q2)[decision]; \\
-    \node(Resolved)[rect] {Resolved}; &
-    \node(Unresolved)[hex] {Unresolved}; &
-    \node(Partial)[rounded] {Partial\\Representation}; \\
+  \node(Q2)[decision]; \\
+  \node(Resolved)[rect] {Resolved}; &
+  \node(Unresolved)[hex] {Unresolved}; &
+  \node(Partial)[rounded] {Partial\\Representation}; \\
 
-    \node(Q3)[decision]; \\
-    \node(Recognized)[rect] {Recognized\\and Valid}; &
-    \node(Unrecognized)[hex] {Unrecognized\\or Invalid};\\
+  \node(Q3)[decision]; \\
+  \node(Recognized)[rect] {Recognized\\and Valid}; &
+  \node(Unrecognized)[hex] {Unrecognized\\or Invalid};\\
 
-    \node(Q4)[decision]; \\
-    \node(Available)[rect] {Available}; &
-    \node(Unavailable)[hex] {Unavailable}; &
-    \node(Complete)[rounded] {Complete\\Representation}; \\[1cm]
+  \node(Q4)[decision]; \\
+  \node(Available)[rect] {Available}; &
+  \node(Unavailable)[hex] {Unavailable}; &
+  \node(Complete)[rounded] {Complete\\Representation}; \\[1cm]
 
-    & & \node(Native)[rounded] {Construct\\Native Data}; \\
+  & & \node(Native)[rounded] {Construct\\Native Data}; \\
 };
 
 \draw[goes] (Start) -- (Q1);
@@ -94,15 +94,15 @@
 \draw[goes] (Available) |- (Native);
 
 \draw let
-    \p1 = (Start),
-    \p2 = ($(Well.west)+(-1,0)$),
-    \p3 = (Q4),
-    \p4 = (Native),
+  \p1 = (Start),
+  \p2 = ($(Well.west)+(-1,0)$),
+  \p3 = (Q4),
+  \p4 = (Native),
 in
-    coordinate(C1) at (\x2,\y1)
-    coordinate(C2) at (\x2,\y2)
-    coordinate(C3) at (\x2,\y3)
-    coordinate(C4) at (\x2,\y4)
+  coordinate(C1) at (\x2,\y1)
+  coordinate(C2) at (\x2,\y2)
+  coordinate(C3) at (\x2,\y3)
+  coordinate(C4) at (\x2,\y4)
 ;
 
 \draw[bigArrow] (C1) -- node[onArrow, font=\bfseries] {Parse} ($(C2)+(0,0.25)$);
