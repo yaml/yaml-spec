@@ -39,14 +39,12 @@
   row sep=.5cm,
   column sep=.75cm,
 ] {
-  \node(Start) {
-    \begin{tikzpicture}[solid]
-    \draw (.5,0) arc (0:360:.5);
-    \foreach \angle in { 0, 45,..., 360 }{
-      \draw [rotate around={\angle:(0,0)}]
-        (.55,0) -- +(0,-.15) -- +(.3,0) -- +(0,.15) -- cycle;
-    };
-    \end{tikzpicture}
+
+  \node[circle, minimum size=1.75cm](Start) {};
+  \draw node[draw, circle, minimum size=1cm] at (Start) {};
+  \foreach \angle in { 45, 90,..., 360 }{
+    \draw [rotate around={\angle:(Start)}]
+      (.55,0) -- +(0,-.15) -- +(.3,0) -- +(0,.15) -- cycle;
   }; \\
 
   \node(Q1)[decision]; \\
