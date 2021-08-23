@@ -18,6 +18,9 @@ docker-shell: docker-build
 docker-push: docker-build
 	docker push $(DOCKER_IMAGE)
 
+docker-pull:
+	docker pull $(DOCKER_IMAGE)
+
 clean:
 	rm -f $(DOCKER_BIN)
 

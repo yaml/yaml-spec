@@ -4,7 +4,7 @@ SHELL := bash
 
 default:
 
-docker-build-all docker-push-all:
+docker-build-all docker-push-all docker-pull-all:
 	make -C tool/docker $@
 
 build site serve publish publish-fork force diff:
