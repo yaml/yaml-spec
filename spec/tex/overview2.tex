@@ -5,54 +5,54 @@
 \begin{document}
 
 \begin{tikzpicture}[
-    process/.style = {
-        -{Latex[length=3mm]},
-        out=45,
-        in=135,
-        relative,
-        line width=.5mm,
-    },
-    bigArrow/.style = {
-        -{Latex[length=5mm]},
-        line width=1mm,
-    },
-    stage/.style = {
-        entityAttrs,
-        align=center,
-        minimum width=4cm,
-    },
-    node distance=2.0cm
+  process/.style = {
+    -{Latex[length=3mm]},
+    out=45,
+    in=135,
+    relative,
+    line width=.5mm,
+  },
+  bigArrow/.style = {
+    -{Latex[length=5mm]},
+    line width=1mm,
+  },
+  stage/.style = {
+    entityAttrs,
+    align=center,
+    minimum width=4cm,
+  },
+  node distance=2.0cm
 ]
 \node(Native)[stage] {
-    \textbf {Native}\\\textbf {(Data Structures)}
-    \nodepart[align=center]{second}
-        opaque\\
-        program\\
-        data
+  \textbf {Native}\\\textbf {(Data Structures)}
+  \nodepart[align=center]{second}
+    opaque\\
+    program\\
+    data
 };
 
 \node(Representation)[stage, right=of Native] {
-    \textbf {Representation}\\\textbf {(Node Graph)}
-    \nodepart[align=center]{second}
-        tags,\\
-        mapping/sequence/scalar,\\
-        canonical string values
+  \textbf {Representation}\\\textbf {(Node Graph)}
+  \nodepart[align=center]{second}
+    tags,\\
+    mapping/sequence/scalar,\\
+    canonical string values
 };
 
 \node(Serialization)[stage, right=of Representation] {
-    \textbf {Serialization}\\\textbf {(Event Tree)}
-    \nodepart[align=center]{second}
-        anchors,\\
-        aliases,\\
-        key order
+  \textbf {Serialization}\\\textbf {(Event Tree)}
+  \nodepart[align=center]{second}
+    anchors,\\
+    aliases,\\
+    key order
 };
 
 \node(Presentation)[stage, right=of Serialization] {
-    \textbf {Presentation}\\\textbf {(Character Stream)}
-    \nodepart[align=center]{second}
-        styles, comments,\\
-        directives, spacing,\\
-        formatted string values, …
+  \textbf {Presentation}\\\textbf {(Character Stream)}
+  \nodepart[align=center]{second}
+    styles, comments,\\
+    directives, spacing,\\
+    formatted string values, …
 };
 
 \coordinate (Divider) at ($(Native.east)!.5!(Representation.west)$);
@@ -61,9 +61,9 @@
 
 \draw
 let
-    \p1 = (Divider),
-    \p2 = (Native.north),
-    \p3 = ($(\x1,\y2)+(0,2.5)$),
+  \p1 = (Divider),
+  \p2 = (Native.north),
+  \p3 = ($(\x1,\y2)+(0,2.5)$),
 in
 node[left=.5cm] at (\p3) {\textbf {Application}}
 node[right=.5cm] at (\p3) {\textbf {YAML}};
@@ -76,9 +76,9 @@ node[right=.5cm] at (\p3) {\textbf {YAML}};
 \draw[process] (Presentation) edge node[onArrow] {Parse} (Serialization);
 
 \draw[bigArrow] ($(Native.north)+(0,2)$)
-    -- node[onArrow] {\textbf {Dump}} ($(Presentation.north)+(0,2)$);
+  -- node[onArrow] {\textbf {Dump}} ($(Presentation.north)+(0,2)$);
 \draw[bigArrow] ($(Presentation.south)+(0,-2)$)
-    -- node[onArrow] {\textbf {Load}} ($(Native.south)+(0,-2)$);
+  -- node[onArrow] {\textbf {Load}} ($(Native.south)+(0,-2)$);
 
 \end{tikzpicture}
 

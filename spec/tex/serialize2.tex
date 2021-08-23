@@ -7,13 +7,13 @@
 \begin{tikzpicture}
 
 \entity{Node}{
-    +Anchor
+  +Anchor
 };
 
 \entity[above=of Node]{Tag}{Name\\Kind};
 \draw[has] (Node) -- (Tag)
-    node[near start, right]{1}
-    node[near end, right]{*};
+  node[near start, right]{1}
+  node[near end, right]{*};
 
 \entity[right=of Tag]{Scalar Tag}{Canonical Format};
 \draw[inherits] (Scalar Tag) -- (Tag);
@@ -23,23 +23,23 @@
 
 \node[parallellogram, below=of Scalar Node](Canonical Content) {String};
 \draw[has] (Scalar Node) -- (Canonical Content)
-    node[onArrow, midway] {Canonical\\Content};
+  node[onArrow, midway] {Canonical\\Content};
 
 \entity[left=of Scalar Node]{Sequence Node}{};
 \draw[inherits] (Sequence Node) -- ++(0,+10mm) -| (Node);
 
 \draw[has] (Sequence Node.west)
-    -- ++(-5mm, 0) node[near start, below] {*}
-    |- (Node) node[onArrow, pos=0.25] {Ordered\\Content}
-    node[at end, above left] {*};
+  -- ++(-5mm, 0) node[near start, below] {*}
+  |- (Node) node[onArrow, pos=0.25] {Ordered\\Content}
+  node[at end, above left] {*};
 
 \entity[below=of Sequence Node]{+ Alias Node}{};
 \draw[inherits]
-    let
-        \p1 = ($(+ Alias Node.east)+(5mm,0)$),
-        \p2 = ($(Sequence Node)+(0,10mm)$)
-    in
-    (+ Alias Node) -| (\x1,\y2) -| (Node)
+  let
+    \p1 = ($(+ Alias Node.east)+(5mm,0)$),
+    \p2 = ($(Sequence Node)+(0,10mm)$)
+  in
+  (+ Alias Node) -| (\x1,\y2) -| (Node)
 ;
 
 \entity[right=of Scalar Node]{Mapping Node}{};
@@ -48,28 +48,28 @@
 \entity[right=of Node]{Key/Value Pair}{};
 
 \draw[has]
-    (Mapping Node.east)
-    -- ++(10mm, 0) node[near start, below] {*}
-    |- (Key/Value Pair) node[onArrow, pos=0.25] {Ordered\\Content}
-    node[at end, above right] {*};
+  (Mapping Node.east)
+  -- ++(10mm, 0) node[near start, below] {*}
+  |- (Key/Value Pair) node[onArrow, pos=0.25] {Ordered\\Content}
+  node[at end, above right] {*};
 
 \draw[has] (Key/Value Pair.north)
-    |- ($(Node.north)+(0.5,0.5)$)
-    node[at start, above right] {1}
-    node[pos=0.75, onArrow] {Key}
-    -- ($(Node.north)+(0.5,0)$)
-    node[at start, above right] {*};
+  |- ($(Node.north)+(0.5,0.5)$)
+  node[at start, above right] {1}
+  node[pos=0.75, onArrow] {Key}
+  -- ($(Node.north)+(0.5,0)$)
+  node[at start, above right] {*};
 
 \draw[has] (Key/Value Pair.south)
-    |- ($(Node.south)+(0.5,-0.5)$)
-    node[at start, below right] {1}
-    node[pos=0.75, onArrow] {Value}
-    -- ($(Node.south)+(0.5,0)$)
-    node[at start, below right] {*};
+  |- ($(Node.south)+(0.5,-0.5)$)
+  node[at start, below right] {1}
+  node[pos=0.75, onArrow] {Value}
+  -- ($(Node.south)+(0.5,0)$)
+  node[at start, below right] {*};
 
 \entity[left=of Tag]{Legend}{
-    YAML Representation\\
-    \textbf {+ YAML Serialization}
+  YAML Representation\\
+  \textbf {+ YAML Serialization}
 }
 
 \end{tikzpicture}

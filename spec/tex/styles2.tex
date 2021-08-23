@@ -4,9 +4,9 @@
 \input{tex/include/head}
 
 \newcommand{\dotbox}[1]{
-    \begin{tikzpicture}[solid]
-    #1
-    \end{tikzpicture}
+  \begin{tikzpicture}[solid]
+  #1
+  \end{tikzpicture}
 }
 
 \begin{document}
@@ -39,7 +39,6 @@
   },
   column 1/.style = {nodes={minimum width=4cm}},
 ] {
-
   \dotbox{
     \node(Double)[rounded] at (0,0) {Double};
     \node(Single)[rounded] at (2,0) {Single};
