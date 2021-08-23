@@ -3,9 +3,17 @@
 set -e -u -o pipefail
 
 main() (
-  input=$1 output=$2
-  tmp=/tmp/$(basename "${input%.tex}.pdf")
+  outdir=$1; shift
 
+  for input; do
+    output=${input%.tex}.png
+    output=${outdir%/}/${output#tex/}
+    tmp=/tmp/$(basename "${input%.tex}.pdf")
+    make-png
+  done
+)
+
+make-png() (
   ( set -x; pdflatex -halt-on-error -output-directory /tmp "$input" ) |
   (
     if [[ ${TEX_LOG-} ]]; then

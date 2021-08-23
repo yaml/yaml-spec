@@ -16,4 +16,4 @@ clean:
 	rm -f $(ALL_PNG)
 
 img/%.png: tex/%.tex
-	tex-to-png $< $@
+	tex-to-png img/ $(ALL_TEX)
