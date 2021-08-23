@@ -32,6 +32,7 @@
   bigArrow/.style = {
     -{Latex[length=5mm]},
     line width=1mm,
+    font=\bfseries,
   },
 ]
 
@@ -39,14 +40,12 @@
   row sep=.5cm,
   column sep=.75cm,
 ] {
-  \node(Start) {
-    \begin{tikzpicture}[solid]
-    \draw (.5,0) arc (0:360:.5);
-    \foreach \angle in { 0, 45,..., 360 }{
-      \draw [rotate around={\angle:(0,0)}]
-        (.55,0) -- +(0,-.15) -- +(.3,0) -- +(0,.15) -- cycle;
-    };
-    \end{tikzpicture}
+
+  \node[circle, minimum size=1.75cm](Start) {};
+  \draw node[draw, circle, minimum size=1cm] at (Start) {};
+  \foreach \angle in { 45, 90,..., 360 }{
+    \draw [rotate around={\angle:(Start)}]
+      (.55,0) -- +(0,-.15) -- +(.3,0) -- +(0,.15) -- cycle;
   }; \\
 
   \node(Q1)[decision]; \\
@@ -105,9 +104,9 @@ in
   coordinate(C4) at (\x2,\y4)
 ;
 
-\draw[bigArrow] (C1) -- node[onArrow, font=\bfseries] {Parse} ($(C2)+(0,0.25)$);
-\draw[bigArrow] ($(C2)-(0,.25)$) -- node[onArrow, pos=.6, font=\bfseries] {Compose} ($(C3)+(0,0.25)$);
-\draw[bigArrow] ($(C3)-(0,.25)$) -- node[onArrow, pos=.6, font=\bfseries] {Construct} (C4);
+\draw[bigArrow] (C1) -- node[onArrow] {Parse} ($(C2)+(0,0.25)$);
+\draw[bigArrow] ($(C2)-(0,.25)$) -- node[onArrow, pos=.6] {Compose} ($(C3)+(0,0.25)$);
+\draw[bigArrow] ($(C3)-(0,.25)$) -- node[onArrow, pos=.6] {Construct} (C4);
 
 \draw ($(C2)-(.25,0)$) -- ($(C2)+(.25,0)$);
 \draw ($(C3)-(.25,0)$) -- ($(C3)+(.25,0)$);
