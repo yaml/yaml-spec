@@ -4,4 +4,4 @@ set -x
 
 "$@"
 
-chown -R --reference=/host/ReadMe.md /host
+# chown -R --reference=/host/ReadMe.md /host
