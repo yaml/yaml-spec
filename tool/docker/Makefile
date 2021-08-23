@@ -17,13 +17,13 @@ docker-pull-all: $(ALL_PULL)
 clean-all: $(ALL_CLEAN)
 
 %-BUILD:
-	make -C $(@:%-BUILD=%) docker-build
+	$(MAKE) -C $(@:%-BUILD=%) docker-build
 
 %-PUSH:
-	make -C $(@:%-PUSH=%) docker-push
+	$(MAKE) -C $(@:%-PUSH=%) docker-push
 
 %-PULL:
-	make -C $(@:%-PULL=%) docker-pull
+	$(MAKE) -C $(@:%-PULL=%) docker-pull
 
 %-CLEAN:
-	make -C $(@:%-CLEAN=%) clean
+	$(MAKE) -C $(@:%-CLEAN=%) clean

@@ -197,7 +197,7 @@ $(PAGES_DIR):
 publish: gh-pages clean
 	git stash
 	git checkout gh-pages
-	make
+	$(MAKE)
 	git commit -a -m 'Publishing latest spec changes'
 	git push
 	git checkout master

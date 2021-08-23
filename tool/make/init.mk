@@ -59,7 +59,7 @@ include $(ROOT)/tool/docker/$(DOCKER_TOOL)/docker.mk
 include $(ROOT)/tool/make/docker-run.mk
 
 docker-build:
-	make -C $(ROOT)/tool/docker/$(DOCKER_TOOL) $@
+	$(MAKE) -C $(ROOT)/tool/docker/$(DOCKER_TOOL) $@
 
 else
 ifdef DOCKER_IMAGE_NAME

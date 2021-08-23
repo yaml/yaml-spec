@@ -160,14 +160,14 @@ endif
 force:
 	rm -fr $(SITE)
 	$(call clean,$(GH_PAGES))
-	make -C $(SPEC) clean
+	$(MAKE) -C $(SPEC) clean
 
 diff: build
 	(cd _gh-pages; git diff)
 
 clean:
 	rm -fr $(SITE) $(GH_PAGES)
-	make -C _ext clean
+	$(MAKE) -C _ext clean
 
 #------------------------------------------------------------------------------
 $(SITE)/%: %
@@ -226,7 +226,7 @@ $(SITE)/img/%: $(SPEC)/img/%
 	cp -r $< $@
 
 $(SPEC)/img/%:
-	make -C $(SPEC) build YAML_SPEC_DIR=
+	$(MAKE) -C $(SPEC) build YAML_SPEC_DIR=
 
 $(SITE)/review/spec-12.html: _ext/yaml-spec-12.html
 	cp $< $@
@@ -254,7 +254,7 @@ $(SITE)/review/spec-plain.md: $(SITE)/spec.md
 
 #------------------------------------------------------------------------------
 $(EXT):
-	make -C _ext build
+	$(MAKE) -C _ext build
 
 $(GH_PAGES):
 	-git branch --track gh-pages origin/gh-pages
