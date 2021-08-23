@@ -6,27 +6,23 @@
 
 \newcommand{\entity}[3][]{
   \node(#2)[
-    \ifstrempty{#3}{entity}{entityAttrs},
+    entity,
     #1
   ] {
-    \textbf {#2}
-    \ifstrempty{#3}{}{
-      \nodepart[align=left]{second} #3
-    }
+    \nodepart[font=\bfseries]{one} #2
+    \nodepart{two} #3
   };
 }
 
 \tikzset{
   entity/.style = {
     draw,
-    rectangle,
-    % anchor=north,
-    minimum width=3cm,
-  },
-  entityAttrs/.style = {
-    entity,
+    align=left,
     rectangle split,
     rectangle split parts=2,
+    rectangle split ignore empty parts,
+    rectangle split part align={center, left},
+    minimum width=3cm,
   },
   parallellogram/.style = {
     draw,
@@ -43,6 +39,11 @@
   },
   inherits/.style = {
     -{Latex[open, length=3mm]},
+  },
+  bigArrow/.style = {
+    -{Latex[length=5mm]},
+    line width=1mm,
+    font=\bfseries,
   },
   node distance=2cm and 1cm,
 }
