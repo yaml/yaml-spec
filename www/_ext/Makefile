@@ -42,7 +42,7 @@ endif
 
 $(NPM_YAML):
 ifneq ($(wildcard $(TMPEXT)),)
-	cp -r $(TMPEXT)/$@ $@
+	ln -s $(TMPEXT)/$@ $@
 else ifneq ($(shell command -v npm),)
 	git clone $(NPM_YAML_REPO) $@
 	git -C $(NPM_YAML) worktree add -f v2 v2.0.0-6
@@ -54,7 +54,8 @@ else ifneq ($(shell command -v npm),)
 	patch $@/v2/config/rollup.browser-config.js < npm-yaml-rollup-v2.patch
 	(cd $@/v2 && npm install . && npm run build)
 	mkdir -p $(TMPEXT)
-	cp -r $@ $(TMPEXT)/
+	mv $@ $(TMPEXT)/
+	ln -s $(TMPEXT)/$@ $@
 else
 	@echo "*** NOTICE: 'npm' not available."
 	@echo "*** Can't build NodeJS variants for 'yaml.js'."
