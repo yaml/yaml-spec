@@ -16,7 +16,7 @@ build: $(ALL) build-img
 clean:
 	rm -f $(ALL_PNG)
 
-img/%.png: tex/%.tex
+img/%.png: tex/%.tex tex/include/*
 ifeq ($(MAKECMDGOALS),build)
 	$(eval override BUILD_TEX += $<)
 else
