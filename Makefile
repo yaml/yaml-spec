@@ -19,6 +19,26 @@ status:
 	    if [[ $$s ]]; then git -C $$b status; echo ...; fi; \
 	done
 
+create-branch:
+ifndef NAME
+	$(error Set NAME=branch-name-to-create)
+endif
+	git branch $(NAME) main
+	git push origin -u $(NAME):$(NAME)
+	$(MAKE) $(NAME)
+
+delete-branch:
+ifndef NAME
+	$(error Set NAME=branch-name-to-delete)
+endif
+ifeq ($(wildcard $(NAME)/),)
+	$(error No '$(NAME)' directory here)
+endif
+	rm -fr $(NAME)
+	git worktree prune
+	git branch -D $(NAME)
+	git push origin :$(NAME)
+
 clean:
 	@for b in $(BRANCHES); do \
 	    [[ -d $$b ]] || continue; \
