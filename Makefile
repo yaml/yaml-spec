@@ -4,7 +4,7 @@ BRANCHES := $(shell \
     git branch -a | \
     cut -c3- | \
     grep ^remotes/ | \
-    grep -Ev '/(RFC|HEAD|_|main|gh-pages|work)' | \
+    grep -Ev '/(RFC|HEAD|PR|_|main|gh-pages|work)' | \
     sed 's/remotes\/origin\///' \
 )
 
