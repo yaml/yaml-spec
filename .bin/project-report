@@ -1,0 +1,110 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+main() (
+  config=~/.git-hub/config
+  [[ -f $config ]] || {
+    echo "Requires '$config' file"
+    exit 1
+  }
+
+  repo=yaml/yaml-spec
+  user=$(git config -f ~/.git-hub/config git-hub.login)
+  token=${TOKEN:-$(git config -f ~/.git-hub/config git-hub.api-token)}
+
+  project_json=$( get "repos/$repo/projects" )
+  project_id=$( jq -r '.[].id' <<<"$project_json" )
+  columns_url=$( jq -r '.[].columns_url' <<<"$project_json" )
+
+  columns_json=$( get "$columns_url" )
+  column_ids=( $( jq -r '.[].id' <<<"$columns_json" ) )
+
+  current_column=''
+  for column_id in "${column_ids[@]}"; do
+    column_json=$( get "projects/columns/$column_id" )
+    column_name=$( jq -r '.name' <<<"$column_json" )
+    cards_url=$( jq -r '.cards_url' <<<"$column_json" )
+    cards_json=$( get "$cards_url" )
+    cards_num=$(grep -E '^  \{' <<<"$cards_json" | wc -l)
+    for (( i = 0; i < cards_num; i++ )); do
+      card_note=$( jq -r ".[$i].note" <<<"$cards_json" )
+      if [[ $card_note && $card_note != null ]]; then
+        card_note=${card_note//"'"/"''"}
+      elif
+        content_url=$( jq -r ".[$i].content_url" <<<"$cards_json" )
+        [[ $content_url && $content_url != null ]]
+      then
+        issue_url=${content_url/api./}
+        issue_url=${issue_url/repos\//}
+        content_json=$( get "$content_url" )
+        issue_title=$( jq -r '.title' <<<"$content_json" )
+        issue_title=${issue_title//"'"/"''"}
+      else
+        echo "No 'note' or 'content_url' in card json"
+        jq ".[$i]" <<<"$cards_json"
+        exit 1
+      fi
+      # print-tsv
+      print-data
+    done
+  done
+)
+
+print-data() {
+  if [[ $current_column != $column_name ]]; then
+    [[ $current_column ]] && echo
+    echo "*** $column_name ***"
+    current_column=$column_name
+  fi
+
+  task=${note:-$issue_title}
+  url=${issue_url-}
+
+  echo "* $task"
+  if [[ $url ]]; then
+    echo "  * $url"
+  fi
+}
+
+print-tsv() (
+  case "$column_name" in
+    *To*Do*)    status="—";;
+    *Progress*) status="'=";;
+    *Review*)   status="'+";;
+    *Complete*) status="√";;
+    *Abandon*)  status="X";;
+    *) die "Bad column name '$column_name'"
+  esac
+
+  task=${note:-$issue_title}
+  url=${issue_url-}
+
+  printf "%s\t%s\t%s\n" "$status" "$task" "$url"
+)
+
+get() (
+  path=$1
+  if [[ $path == http* ]]; then
+    url=$path
+  else
+    url=https://api.github.com/$path
+  fi
+
+  opts=()
+  if [[ ${DEBUG-} ]]; then
+    opts+=(-D /dev/stderr)
+  fi
+
+  set +x
+  curl -s "${opts[@]}" \
+    -u "$user:${TOKEN-}" \
+    -H "Accept: application/vnd.github.inertia-preview+json" \
+    "$url"
+)
+
+die() ( warn "$@"; exit 1 )
+warn() ( echo ">>$*<<" >&2 )
+xxx() ( jq . <<<"$*" >&2; exit 1 )
+
+main "$@"

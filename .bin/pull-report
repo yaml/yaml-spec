@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+main() (
+  want=" $* "
+
+  config=~/.git-hub/config
+  [[ -f $config ]] || {
+    echo "Requires '$config' file"
+    exit 1
+  }
+
+  token=${TOKEN:-$(git config -f ~/.git-hub/config git-hub.api-token)}
+
+  pulls=( $(git hub pr-list -r | awk '{print $2}') )
+
+  for pull in "${pulls[@]}"; do
+
+    json=$(
+      curl --request GET "https://api.github.com/repos/yaml/yaml-spec/pulls/$pull" \
+        --header "Authorization: token $token" \
+        --stderr /dev/null \
+        --silent --show-error
+    )
+
+    branch=$(jq -r .head.ref <<<"$json")
+    [[ $want == *" $branch "* ]] || continue
+    # jq '.[].state' <<<"$json" | less; break
+
+    title=$(jq -r .title <<<"$json")
+    url=$(jq -r .url <<<"$json")
+
+    echo "- pull:   $url"
+    echo "  branch: $branch"
+    echo "  title:  $title"
+
+    json=$(
+      curl --request GET "https://api.github.com/repos/yaml/yaml-spec/pulls/$pull/reviews" \
+        --header "Authorization: token $token" \
+        --stderr /dev/null \
+        --silent --show-error
+    )
+    # jq '.[].state' <<<"$json" | less; break
+
+    if [[ $(jq -r '.[].state' <<<"$json") ]]; then
+      state=($(jq -r '.[].state' <<<"$json"))
+      user=($(jq -r '.[].user.login' <<<"$json"))
+      echo '  reviews:'
+      for ((i = 0; i < ${#state[*]}; i++)); do
+        printf "  - %-18s %s\n" "${state[$i]}" "${user[$i]}"
+      done
+    fi
+  done
+)
+
+main "$@"

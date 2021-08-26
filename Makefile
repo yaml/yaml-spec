@@ -13,6 +13,7 @@ BRANCHES_NOT_121 := \
     eatme-full-support \
     grammar \
     mermaid \
+    playground \
     rfc-publish \
     stack-playground \
     story-ideas \
@@ -36,6 +37,15 @@ shell-all:
 
 shell-121:
 	@.bin/shell-dirs $(BRANCHES_121)
+
+pull-report-all:
+	@.bin/pull-report $(BRANCHES)
+
+pull-report-121:
+	@.bin/pull-report $(BRANCHES_121)
+
+project-report:
+	@.bin/project-report
 
 status:
 	@for b in $(BRANCHES); do \
