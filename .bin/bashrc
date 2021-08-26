@@ -1,0 +1,8 @@
+set +u
+source ~/.bashrc
+(
+  set -x
+  git status --ignored
+  git log --graph --decorate --pretty=oneline --abbrev-commit -3
+)
+PS1="($branch) $PS1"

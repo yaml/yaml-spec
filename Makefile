@@ -8,9 +8,34 @@ BRANCHES := $(shell \
     sed 's/remotes\/origin\///' \
 )
 
+BRANCHES_NOT_121 := \
+    annotate-1.3 \
+    eatme-full-support \
+    grammar \
+    mermaid \
+    rfc-publish \
+    stack-playground \
+    story-ideas \
+
+BRANCHES_121 := $(filter-out $(BRANCHES_NOT_121),$(BRANCHES))
+
 default:
 
 all: $(BRANCHES)
+
+121: $(BRANCHES_121)
+
+list-all:
+	@printf "%s\n" $(BRANCHES)
+
+list-121:
+	@printf "%s\n" $(BRANCHES_121)
+
+shell-all:
+	@.bin/shell-dirs $(BRANCHES)
+
+shell-121:
+	@.bin/shell-dirs $(BRANCHES_121)
 
 status:
 	@for b in $(BRANCHES); do \
@@ -46,8 +71,10 @@ clean:
 	    if [[ -z $$s ]]; then (set -x; rm -fr $$b); fi; \
 	done
 
-list:
-	@printf "%s\n" $(BRANCHES)
+rebase-main:
+	@for b in $(BRANCHES); do \
+	    .bin/rebase-main $$b || exit; \
+	done
 
 $(BRANCHES):
 	@git branch --track $@ origin/$@ 2>/dev/null || true

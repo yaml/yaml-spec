@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+main() (
+  rcfile=$(cd "$(dirname "$0")" && pwd)/bashrc
+
+  for branch; do
+    [[ -d $branch ]] || continue
+    export branch
+    (
+      cd "$branch"
+      rc=0
+      env bash --rcfile "$rcfile" -i || rc=$?
+      [[ $rc -ne 2 ]]
+    )
+  done
+)
+
+main "$@"
+

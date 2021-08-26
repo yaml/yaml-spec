@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+main() (
+  branch=$1
+
+  [[ -d $branch ]] || return 0
+
+  cd "$branch"
+
+  echo $branch
+
+  return 2
+
+  # git rebase main
+)
+
+main "$@"
