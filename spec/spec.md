@@ -883,15 +883,15 @@ following three stages:
 ##### Parsing the Presentation Stream
 
 > _Parsing_ is the inverse process of [presentation], it takes a [stream] of
-characters and produces a series of events.
+characters and produces a [serialization tree].
 Parsing discards all the [details] introduced in the [presentation] process,
-reporting only the [serialization] events.
+reporting only the [serialization tree].
 Parsing can fail due to [ill-formed] input.
 
 
 ##### Composing the Representation Graph
 
-> _Composing_ takes a series of [serialization] events and produces a
+> _Composing_ takes a [serialization tree] and produces a
 [representation graph].
 Composing discards all the [details] introduced in the [serialization] process,
 producing only the [representation graph].
