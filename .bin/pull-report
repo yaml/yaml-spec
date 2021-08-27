@@ -30,6 +30,9 @@ main() (
 
     title=$(jq -r .title <<<"$json")
     url=$(jq -r .url <<<"$json")
+    url=${url/api./}
+    url=${url/repos\//}
+    url=${url/pulls/pull}
 
     echo "- pull:   $url"
     echo "  branch: $branch"

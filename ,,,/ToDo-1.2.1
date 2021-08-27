@@ -1,0 +1,90 @@
+## YAML Spec 1.2.1
+
+* Release by 2021/09/30 (Thursday)
+* Plan announcement strategy
+
+*** Major Items
+
+* Full spec read-through and comment/annotate
+* Grammar fixes
+* Publish on yaml.org
+* Address all known issues and pull requests
+  * https://github.com/yaml/yaml-spec/issues
+  * https://github.com/yaml/yaml-spec/pulls
+* Research YAML critiques for ideas to address
+  * https://en.wikipedia.org/wiki/YAML
+
+
+*** Other Items
+
+* Review differences between 1.2 spec and 1.2/spec.dbk
+  * A few things weren't published
+  * Convert to md and diff?
+* spec/links.yaml - default to current text ([Foo Bar] -> #foo-bar)
+
+
+
+## Quickies
+
+* Fix links in pull-report
+  * https://api.github.com/repos/yaml/yaml-spec/pulls/102 -> https://github.com/yaml/yaml-spec/pull/102
+
+
+###############################################################################
+# Branches
+###############################################################################
+
+## spec.yaml.io
+
+* Add navbar to top of pages
+* Mark spec pages DRAFT
+* Publish content under /main/ dir
+  * One dir for each branch or commit published
+* Link to edit source
+
+## html-content-only
+
+* Review/merge #110 spec-versions if looks ok
+* Build system should be able to create content only html
+* spec.md and companions*.md
+* For publishing elsewhere (yaml.org, yaml.io, yaml.com)
+
+## grammar-fixes
+
+* https://github.com/yaml/yaml-reference-parser/blob/master/build/yaml-spec-1.2.patch
+
+## companions
+
+* spec/spec.md needs relative pages
+  * errata.md - for current version
+  * changes.md - continuous changelog
+  * references.md - Links to spec related resources
+  * maintainers.md - List of spec contributors
+
+## contributing
+
+* Contributing.md -> .github/contributing.md
+
+* funding.md
+* pull-request and issue templates
+* code of conduct
+
+## annotate-1.2.1
+
+* Team makes comments here:
+  https://docs.google.com/document/d/196qnECCE0pRPWpDc1vcBdOO5Y0SZo2NFs_L8f-42sco
+* After comments are reviewed and resolved, add unresolved ones to spec/spec.md
+  as html comments.
+
+## status-of-this-document
+
+* Add links to companion pages
+* Review/merge soon
+
+## license
+
+## spelling-grammar
+
+* Need tooling to check spelling and grammar
+* Need various lint tools in general
+* `make lint`

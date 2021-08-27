@@ -4,7 +4,7 @@ BRANCHES := $(shell \
     git branch -a | \
     cut -c3- | \
     grep ^remotes/ | \
-    grep -Ev '/(RFC|HEAD|PR|_|main|gh-pages|work)' | \
+    grep -Ev '/(RFC|HEAD|PR|_|gh-pages|work)' | \
     sed 's/remotes\/origin\///' \
 )
 
@@ -12,6 +12,7 @@ BRANCHES_NOT_121 := \
     annotate-1.3 \
     eatme-full-support \
     grammar \
+    main-wip \
     mermaid \
     playground \
     rfc-publish \
