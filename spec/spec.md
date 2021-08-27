@@ -11,36 +11,36 @@ This document may be freely copied, provided it is not modified.
 
 **Status of this Document**
 
-This is version **1.2.1** of the YAML 1.2 specification.
-It defines the YAML 1.2 data language, with no normative changes to YAML from
-the previous specification.
+This is the **YAML specification v1.2.1**.
+It defines the **YAML 1.2 data language**.
+There are no normative changes from the **YAML specification v1.2**.
 The primary objectives of this version are to correct errors and add clarity.
 
 This version also strives to make the YAML language development process more
-open, transparent and easier for people to contribute to.
+open, more transparent and easier for people to contribute to.
 The input format is now Markdown instead of DocBook, and the images are made
 from plain text LaTeX files rather than proprietary drawing software.
 All the source content for the specification is [publicly hosted^].
 
 The [previous YAML specification^] was published over 12 years ago.
 In that time span, YAML's popularity has grown significantly.
-Efforts are ongoing to improve the langauge and grow it to meet the needs and
+Efforts are ongoing to improve the language and grow it to meet the needs and
 expectations of its users.
 While this version of the specification makes no actual changes to YAML, it
 begins a process by which the language intends to evolve and stay modern.
 
-The YAML specification is often seen as overly complicated, for something which
+The YAML specification is often seen as overly complicated for something which
 appears to be so simple.
 Even though YAML often is used for software configuration, it has always been
 and will continue to be a complete serialization language.
 Future YAML plans are focused on making the language and ecosystem more
-powerful and reliable, while simultaneously simplifying the development process
+powerful and reliable while simultaneously simplifying the development process
 for implementers.
 
 While this version of the specification is limiting itself to informational
 changes only, there is companion documentation intended to guide YAML framework
 implementers and YAML language users.
-This documentation can continue to evolve and expand continually, between
+This documentation can continue to evolve and expand continually between
 published versions of this specification.
 
 See:
