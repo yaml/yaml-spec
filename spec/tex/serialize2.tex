@@ -21,9 +21,9 @@
 \entity[below=of Node]{Scalar Node}{};
 \draw[inherits] (Scalar Node) -- (Node);
 
-\node[parallellogram, below=of Scalar Node](Canonical Content) {String};
-\draw[has] (Scalar Node) -- (Canonical Content)
-  node[onArrow, midway] {Canonical\\Content};
+\node[parallellogram, below=of Scalar Node](Canonical Form) {String};
+\draw[has] (Scalar Node) -- (Canonical Form)
+  node[onArrow, midway] {Canonical\\Form};
 
 \entity[left=of Scalar Node]{Sequence Node}{};
 \draw[inherits] (Sequence Node) -- ++(0,+10mm) -| (Node);
