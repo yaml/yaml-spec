@@ -1233,7 +1233,8 @@ The process of [loading] [native data structures] from a YAML [stream] has
 several potential _failure points_.
 The character [stream] may be [ill-formed], [aliases] may be [unidentified],
 [unspecified tags] may be [unresolvable], [tags] may be [unrecognized], the
-[content] may be [invalid] and a native type may be [unavailable].
+[content] may be [invalid], [mapping] [keys] may not be [unique] and a native
+type may be [unavailable].
 Each of these failures results with an incomplete loading.
 
 A _partial representation_ need not [resolve] the [tag] of each [node] and the
