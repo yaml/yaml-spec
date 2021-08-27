@@ -35,6 +35,8 @@ block-styles:
 - indented blocks
 canonical-form:
 - canonical form
+changes-in-yaml-specification-v121:
+- changes
 character-encodings:
 - byte order mark
 - encoding

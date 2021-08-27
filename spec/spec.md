@@ -2,7 +2,8 @@
 
 **YAML Specification Version 1.2.1 -- Released YYYY-MM-DD**
 
-Copyright presently by [The YAML Language Development Team^]  
+Copyright presently by [The YAML Language Development Team](
+core-team)  
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net
 
 This document may be freely copied, provided it is not modified.
@@ -10,46 +11,45 @@ This document may be freely copied, provided it is not modified.
 
 **Status of this Document**
 
-This document reflects the third version of YAML data serialization language.
-The content of the specification was arrived at by consensus of its authors and
-through user feedback on the [yaml-core mailing list^].
-We encourage implementers to please update their software with support for this
-version.
+This is version **1.2.1** of the YAML 1.2 specification.
+It defines the YAML 1.2 data language, with no normative changes to YAML from
+the previous specification.
+The primary objectives of this version are to correct errors and add clarity.
 
-The primary objective of this revision is to bring YAML into compliance with
-JSON as an official subset.
-YAML 1.2 is compatible with 1.1 for most practical applications - this is a
-minor revision.
-An expected source of incompatibility with prior versions of YAML, especially
-the syck implementation, is the change in implicit typing rules.
-We have removed unique implicit typing rules and have updated these rules to
-align them with JSON's productions.
-In this version of YAML, boolean values may be serialized as "**`true`**" or
-"**`false`**"; the empty scalar as "**`null`**".
-Unquoted numeric values are a superset of JSON's numeric production.
-Other changes in the specification were the removal of the Unicode line breaks
-and production bug fixes.
-We also define 3 built-in implicit typing rule sets: untyped, strict JSON and a
-more flexible YAML rule set that extends JSON typing.
+This version also strives to make the YAML language development process more
+open, transparent and easier for people to contribute to.
+The input format is now Markdown instead of DocBook, and the images are made
+from plain text LaTeX files rather than proprietary drawing software.
+All the source content for the specification is [publicly hosted^].
 
-The difference between late 1.0 drafts which syck 0.55 implements and the 1.1
-revision of this specification is much more extensive.
-We fixed usability issues with the tagging syntax.
-In particular, the single exclamation was re-defined for private types and a
-simple prefixing mechanism was introduced.
-This revision also fixed many production edge cases and introduced a type
-repository.
-Therefore, there are several incompatibilities between syck and this revision
-as well.
+The [previous YAML specification^] was published over 12 years ago.
+In that time span, YAML's popularity has grown significantly.
+Efforts are ongoing to improve the langauge and grow it to meet the needs and
+expectations of its users.
+While this version of the specification makes no actual changes to YAML, it
+begins a process by which the language intends to evolve and stay modern.
 
-The list of known errors in this specification is available at
-[https://yaml.org/spec/1.2/errata.html](/spec/1.2/errata.html).
-Please report errors in this document to the yaml-core mailing list.
-This revision contains fixes for all errors known as of 2009-10-01.
+The YAML specification is often seen as overly complicated, for something which
+appears to be so simple.
+Even though YAML often is used for software configuration, it has always been
+and will continue to be a complete serialization language.
+Future YAML plans are focused on making the language and ecosystem more
+powerful and reliable, while simultaneously simplifying the development process
+for implementers.
 
-We wish to thank implementers who have tirelessly tracked earlier versions of
-this specification and our fabulous user community whose feedback has both
-validated and clarified our direction.
+While this version of the specification is limiting itself to informational
+changes only, there is companion documentation intended to guide YAML framework
+implementers and YAML language users.
+This documentation can continue to evolve and expand continually, between
+published versions of this specification.
+
+See:
+
+* [YAML Implementer's Reference Index](implementer-refs)
+* [YAML User's Reference Index](user-refs)
+* [YAML 1.2.1 Specification Errata](spec-errata)
+* [YAML 1.2.1 Specification Changes](spec-changes)
+* [YAML 1.2.1 Specification Authors](spec-authors)
 
 
 **Abstract**
@@ -219,8 +219,8 @@ are required.
 
 [JSON's RFC^] requires that [mappings] [keys] merely "SHOULD" be [unique],
 while YAML insists they "MUST" be.
-Technically, YAML therefore complies with the JSON spec, choosing to treat
-duplicates as an error.
+Technically, YAML therefore complies with the JSON specification, choosing to
+treat duplicates as an error.
 In practice, since JSON is silent on the semantics of such duplicates, the only
 portable JSON files are those with unique keys, which are therefore valid YAML
 files.
@@ -6427,6 +6427,7 @@ repository.
 The yaml-core mailing list is the preferred method for such submissions, as
 well as raising any questions regarding this draft.
 
+
 # Reference Links
 
 {:.footnote-links}
@@ -6468,6 +6469,12 @@ well as raising any questions regarding this draft.
 * Perl
   * [The Perl Programming Language](
     https://www.perl.org/)
+* previous YAML specification
+  * [The YAML 1.2 Specification](
+    https://yaml.org/spec/1.2/)
+* publicly hosted
+  * [GitHub - yaml/yaml-spec - YAML Specification](
+    https://github.com/yaml/yaml-spec)
 * Python
   * [The Python Programming Language](
     https://www.python.org/)
