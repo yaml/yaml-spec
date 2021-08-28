@@ -63,4 +63,4 @@ else
 endif
 
 $(SPEC_12_HTML):
-	curl https://yaml.org/spec/1.2/spec.html > $@
+	curl https://yaml.org/spec/1.2/index.html > $@

@@ -57,7 +57,6 @@ SPEC_FILES := \
     img/represent2.png \
     img/serialize2.png \
     img/styles2.png \
-    img/term.png \
     img/validity2.png \
 
 REVIEW_FILES := \
@@ -226,7 +225,7 @@ $(SITE)/img/%: $(SPEC)/img/%
 	cp -r $< $@
 
 $(SPEC)/img/%:
-	$(MAKE) -C $(SPEC) build YAML_SPEC_DIR=
+	$(MAKE) -C $(SPEC) build-img YAML_SPEC_DIR=
 
 $(SITE)/review/spec-12.html: _ext/yaml-spec-12.html
 	cp $< $@

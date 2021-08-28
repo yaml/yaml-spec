@@ -1,12 +1,8 @@
-yaml-spec
-=========
+YAML 1.2 Spec Sources from 2009 Version
+=======================================
 
-The YAML Specification
-
-## Overview
-
-This directory contains the source materials and build files for the
-[YAML 1.2 Specification](http://www.yaml.org/spec/1.2/spec.html).
+This directory contains the source files and build system that was used to
+create the YAML 1.2 spec published at http://www.yaml.org/spec/1.2/.
 
 ## Build Process
 

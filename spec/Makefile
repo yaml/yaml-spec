@@ -11,18 +11,19 @@ ALL := \
 default:
 	@printf '%s\n' $(ALL_PNG)
 
-build: $(ALL) build-img
+build-img: $(ALL) build-img-all
 
 clean:
 	rm -f $(ALL_PNG)
 
 img/%.png: tex/%.tex tex/include/*
+	@mkdir -p img
 ifeq ($(MAKECMDGOALS),build)
 	$(eval override BUILD_TEX += $<)
 else
 	tex-to-png img/ $<
 endif
 
-build-img:
+build-img-all:
 	@[[ -z '$(BUILD_TEX)' ]] || \
 	    (set -x; tex-to-png img/ $(BUILD_TEX))
