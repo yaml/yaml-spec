@@ -6,7 +6,7 @@ main() (
   rcfile=$(cd "$(dirname "$0")" && pwd)/bashrc
 
   for branch; do
-    [[ -d $branch ]] || continue
+    [[ -d $branch && -f $branch/.git ]] || continue
     export branch
     (
       cd "$branch"

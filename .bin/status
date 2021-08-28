@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+main() (
+  for branch; do
+    status=$(git -C "$branch" status -s --ignored)
+    if [[ $status ]]; then
+      echo
+      [[ ${more-} ]] && echo; more=1
+      (
+        set -x
+        git -C "$branch" status --ignored
+      )
+    fi
+  done
+)
+
+main "$@"
+

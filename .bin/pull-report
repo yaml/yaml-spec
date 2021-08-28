@@ -16,7 +16,6 @@ main() (
   pulls=( $(git hub pr-list -r | awk '{print $2}') )
 
   for pull in "${pulls[@]}"; do
-
     json=$(
       curl --request GET "https://api.github.com/repos/yaml/yaml-spec/pulls/$pull" \
         --header "Authorization: token $token" \
@@ -30,13 +29,6 @@ main() (
 
     title=$(jq -r .title <<<"$json")
     url=$(jq -r .url <<<"$json")
-    url=${url/api./}
-    url=${url/repos\//}
-    url=${url/pulls/pull}
-
-    echo "- pull:   $url"
-    echo "  branch: $branch"
-    echo "  title:  $title"
 
     json=$(
       curl --request GET "https://api.github.com/repos/yaml/yaml-spec/pulls/$pull/reviews" \
@@ -46,15 +38,31 @@ main() (
     )
     # jq '.[].state' <<<"$json" | less; break
 
-    if [[ $(jq -r '.[].state' <<<"$json") ]]; then
-      state=($(jq -r '.[].state' <<<"$json"))
-      user=($(jq -r '.[].user.login' <<<"$json"))
-      echo '  reviews:'
-      for ((i = 0; i < ${#state[*]}; i++)); do
-        printf "  - %-18s %s\n" "${state[$i]}" "${user[$i]}"
-      done
-    fi
+    state=($(jq -r '.[].state' <<<"$json"))
+    user=($(jq -r '.[].user.login' <<<"$json"))
+
+    print-pull
+    more=1
   done
+)
+
+print-pull() (
+  [[ ${more-} ]] && echo
+
+  url=${url/api./}
+  url=${url/repos\//}
+  url=${url/pulls/pull}
+
+  echo "- pull:   $url"
+  echo "  branch: $branch"
+  echo "  title:  $title"
+
+  if [[ ${state-} ]]; then
+    echo '  reviews:'
+    for ((i = 0; i < ${#state[*]}; i++)); do
+      printf "  - %-18s %s\n" "${state[$i]}" "${user[$i]}"
+    done
+  fi
 )
 
 main "$@"

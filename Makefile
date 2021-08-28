@@ -1,5 +1,11 @@
 SHELL := bash
 
+DIRS := $(shell \
+    printf "%s\n" */.git | \
+      sed 's/\/\.git//' \
+)
+DIRS := $(DIRS:*%=)
+
 BRANCHES := $(shell \
     git branch -a | \
     cut -c3- | \
@@ -22,6 +28,7 @@ BRANCHES_NOT_121 := \
 BRANCHES_121 := $(filter-out $(BRANCHES_NOT_121),$(BRANCHES))
 
 default:
+	@printf "%s\n" $(DIRS)
 
 all: $(BRANCHES)
 
@@ -33,27 +40,14 @@ list-all:
 list-121:
 	@printf "%s\n" $(BRANCHES_121)
 
-shell-all:
-	@.bin/shell-dirs $(BRANCHES)
-
-shell-121:
-	@.bin/shell-dirs $(BRANCHES_121)
-
-pull-report-all:
-	@.bin/pull-report $(BRANCHES)
-
-pull-report-121:
-	@.bin/pull-report $(BRANCHES_121)
+shell-dirs \
+rebase-main \
+status \
+pull-report:
+	@.bin/$@ $(DIRS)
 
 project-report:
 	@.bin/project-report
-
-status:
-	@for b in $(BRANCHES); do \
-	    [[ -d $$b ]] || continue; \
-	    s=$$(git -C $$b status -s); \
-	    if [[ $$s ]]; then git -C $$b status; echo ...; fi; \
-	done
 
 create-branch:
 ifndef NAME
@@ -80,11 +74,6 @@ clean:
 	    [[ -d $$b ]] || continue; \
 	    s=$$(git -C $$b status -s); \
 	    if [[ -z $$s ]]; then (set -x; rm -fr $$b); fi; \
-	done
-
-rebase-main:
-	@for b in $(BRANCHES); do \
-	    .bin/rebase-main $$b || exit; \
 	done
 
 $(BRANCHES):

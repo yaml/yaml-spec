@@ -1,19 +1,37 @@
 #!/usr/bin/env bash
 
+# shellcheck disable=2030,2031,2234
+
 set -e -u -o pipefail
 
 main() (
-  branch=$1
+  for branch; do
+    has main && continue
 
-  [[ -d $branch ]] || return 0
+    if ! clean; then
+      echo "* '$branch' is not clean"
+      continue
+    fi
 
-  cd "$branch"
+    commit=$(head)
+    (set -x; git -C "$branch" rebase main)
 
-  echo $branch
+    [[ $(head) == "$commit" ]] && continue
 
-  return 2
+    (set -x; git -C "$branch" push -f)
+  done
+)
 
-  # git rebase main
+head() (
+  git -C "$branch" rev-parse HEAD
+)
+
+has() (
+  git -C "$branch" merge-base --is-ancestor "$1" HEAD
+)
+
+clean() (
+  [[ -z $(git -C "$branch" status --untracked-files=no --porcelain) ]]
 )
 
 main "$@"
