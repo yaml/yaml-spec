@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+if git config remote.fork.url >/dev/null; then
+  echo fork
+elif git config remote.origin.url >/dev/null; then
+  echo origin
+else
+  exit 1
+fi

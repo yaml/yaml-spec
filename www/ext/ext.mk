@@ -1,4 +1,4 @@
-EXT := \
+EXT_DIRS := \
     _ext/eatme \
     _ext/ref-parser \
     _ext/npm-yaml \

@@ -8,13 +8,10 @@ EATME_REPO ?= https://github.com/eatme-dev/eatme
 REF_PARSER_REPO ?= https://github.com/yaml/yaml-reference-parser
 NPM_YAML_REPO := https://github.com/eemeli/yaml
 
-SPEC_12_HTML := yaml-spec-12.html
-
 ALL := \
     $(EATME) \
     $(REF_PARSER) \
     $(NPM_YAML) \
-    $(SPEC_12_HTML) \
 
 TMPEXT := /tmp/yaml-spec-ext
 
@@ -61,6 +58,3 @@ else
 	@echo "*** Can't build NodeJS variants for 'yaml.js'."
 	exit 1
 endif
-
-$(SPEC_12_HTML):
-	curl https://yaml.org/spec/1.2/index.html > $@

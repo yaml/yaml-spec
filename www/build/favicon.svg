@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg
+	xmlns="http://www.w3.org/2000/svg"
+	xmlns:cc="http://creativecommons.org/ns#"
+	xmlns:dc="http://purl.org/dc/elements/1.1/"
+	xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+	xmlns:svg="http://www.w3.org/2000/svg"
+	xmlns:xlink="http://www.w3.org/1999/xlink"
+	version="1.1"
+	width="160"
+	height="160"
+	id="YAML_Logo"
+	viewBox="0 0 512 470.647">
+	<title id="title-001">YAML logo</title>
+	<defs>
+		<style>.cls-1{fill:#cb171e;}</style>
+	</defs>
+	<polygon id="L" points="512 422.735 395.638 422.735 395.638 250.125 347.442 250.125 347.442 469.647 512 469.647 512 422.737 512 422.735" />
+	<polygon id="M" points="87.701 250.177 87.701 470.647 135.004 470.647 135.004 318.569 184.509 420.789 221.743 420.789 272.939 314.976 272.939 470.602 318.318 470.602 318.318 250.177 256.358 250.177 201.381 349.883 149.021 250.177 87.701 250.177 87.701 250.177" />
+	<path id="A" class="cls-1" d="M330.294,195.39H228.433l-20.717,50.024H162.61L257.99,20.465h46.137l91.51,224.949h-48.2L330.293,195.39Zm-16.92-44.911-31.226-82.55-34.837,82.55h66.063Z" transform="translate(0 -19.939)" />
+	<polygon id="Y" points="235.793 0 143.978 137.674 143.978 224.949 87.702 224.949 87.702 137.674 0 0 63.25 0 119.018 88.646 175.243 0 235.793 0 235.793 0" />
+</svg>

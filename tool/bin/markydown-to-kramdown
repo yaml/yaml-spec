@@ -371,29 +371,36 @@ sub fmt_table {}
 sub read_files {
   my ($root, $markdown_file, $links_file) = @_;
   my ($front, $markdown, $links);
+
   $markdown = read_file($markdown_file);
-  if ($markdown =~ s/\A(---\n.*?\n---\n)//s) {
+  if ($markdown =~ s/\A---\n(.*?\n)---\n//s) {
     $front = $1;
+    if ($front) {
+      if (my $source = YAML::PP::Load($front)->{source}) {
+        $markdown = read_file("$root/$source");
+      }
+    }
   }
-  else {
-    $front = "---\n---\n";
+
+  if (not defined $front) {
+    my $layout = 'default';
+    if ($markdown =~ /\A# YAML Ain.t Markup Language/) {
+      $layout = 'spec';
+    }
+    $front = <<"...";
+layout: $layout
+...
   }
+
   if ($links_file) {
     $links = YAML::PP::LoadFile($links_file);
   }
   else {
     $links = {};
   }
-  my $yaml = $front;
-  $yaml =~ s/\A---\n//;
-  $yaml =~ s/---\n\z//;
-  if ($yaml) {
-    my $data = YAML::PP::Load($yaml);
-    if (my $source = $data->{source}) {
-      $markdown = read_file("$root/$source");
-    }
-  }
+
   $markdown .= "\n";
+  $front = "---\n$front---\n";
   return ($front, $markdown, $links)
 }
 

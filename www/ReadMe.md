@@ -12,15 +12,7 @@ The Makefile supports:
 
 * `make publish`
 
-  Build and publish the content to <https://spec.yaml.io/>.
-  This can only be run in `main` branch.
-
-* `make publish-fork`
-
-  Build and publish the content to
-  https://<your-github-username>.github.io/yaml-spec/`.
-  This can only be run in a non `main` branch.
-  It pushes to your GitHub fork of the yaml-spec repo.
+  Build and publish the content to <https://spec.yaml.io/BRANCH>.
 
 * `make serve`
 
@@ -28,11 +20,11 @@ The Makefile supports:
 
 * `make build`
 
-  Build the site content into a finalized `./_gh-pages/` directory.
+  Build the site content into a finalized `./spec.yaml.io/` directory.
 
 * `make site`
 
-  Gather the site content into a `./_site/` Jekyll source directory.
+  Gather the site content into the `./build/` Jekyll source directory.
 
 * `make shell`
 
@@ -94,20 +86,21 @@ This system is made out of Markdown, YAML, SCSS and images.
 It is currently using Jekyll to build the final result.
 
 It gathers all the content in various directories throughout the repository and
-puts them into the `./_site/` directory in a standard Jekyll layout.
+puts them into the `./build/` directory in a standard Jekyll layout.
 
 The intent is to not tie things too close to Jekyll or any other build system.
 
 The Jekyll build system is captured in the `github-pages` Docker image.
 It is the same build process that GitHub Pages uses when you push Jekyll
 content to it.
-It builds the final HTML/CSS/JavaScript into the `./_gh-pages/` directory.
-The `_gh-pages` content is pushed directly to the `gh-pages` branch of the
-repository, and in turn served as <https://spec.yaml.io/>.
+It builds the final HTML/CSS/JavaScript into the `./spec.yaml.io/` directory,
+which is a worktree of the `gh-pages` branch.
+When `make publish` pushes the `gh-pages` branch the content is served as
+<https://spec.yaml.io/>.
 No further Jekyll processing happens on the GitHub side after pushing.
 
 The Markdown files in the repository get preprocessed into a more complicated
-but less readable Markdown form and put into `_site` directory.
+but less readable Markdown form and put into `build` directory.
 For instance the post-processed forms might have a lot more Markdown HTML in
 them.
 
