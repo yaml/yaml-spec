@@ -7,8 +7,15 @@
   content="text/html; charset=UTF-8"
 />
 
-<title></title>
+<title>YAML Ain’t Markup Language (YAML™) Version 1.2</title>
 
+
+  
+    <link
+  rel="stylesheet"
+  type="text/css"
+  href="/assets/css/style.css"
+/>
 
   
 
@@ -17,6 +24,13 @@
   type="text/css"
   href="spec.css"
 />
+
+
+  <style>
+body {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='200px' width='200px'><text transform='translate(20, 200) rotate(-45)' fill='rgb(245,245,245)' font-size='60'>DRAFT</text></svg>");
+}
+</style>
 
 
   <link
@@ -31,7 +45,6 @@
 <div class="wrapper">
 <section>
 
-<hr />
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
 <p><strong>YAML Specification Version 1.2.1 – Released 2021-08-29</strong></p>
@@ -1162,7 +1175,7 @@ data model, as shown in the following diagram:</p>
 
 <p><strong>Figure 3.1. Processing Overview</strong></p>
 
-<p><img src="/draft/img/overview2.png" alt="Processing Overview" /></p>
+<p><img src="/main/img/overview2.png" alt="Processing Overview" /></p>
 
 <p>A YAML processor need not expose the <a href="#serialization-tree">serialization</a> or <a href="#representation-graph">representation</a>
 stages.
@@ -1306,7 +1319,7 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 
 <p><strong>Figure 3.2. Information Models</strong></p>
 
-<p><img src="/draft/img/model2.png" alt="Information Models" /></p>
+<p><img src="/main/img/model2.png" alt="Information Models" /></p>
 
 <div id="representation-graph"></div>
 <h3 id="321-representation-graph">3.2.1. Representation Graph</h3>
@@ -1327,7 +1340,7 @@ be <a href="#node-comparison">unique</a>.</p>
 
 <p><strong>Figure 3.3. Representation Model</strong></p>
 
-<p><img src="/draft/img/represent2.png" alt="Representation Model" /></p>
+<p><img src="/main/img/represent2.png" alt="Representation Model" /></p>
 
 <div id="nodes"></div>
 <h4 id="3211-nodes">3.2.1.1. Nodes</h4>
@@ -1492,7 +1505,7 @@ use <a href="#keys-order">key order</a> or <a href="#anchors-and-aliases">anchor
 
 <p><strong>Figure 3.4. Serialization Model</strong></p>
 
-<p><img src="/draft/img/serialize2.png" alt="Serialization Model" /></p>
+<p><img src="/main/img/serialize2.png" alt="Serialization Model" /></p>
 
 <div id="keys-order"></div>
 <h4 id="3221-keys-order">3.2.2.1. Keys Order</h4>
@@ -1541,7 +1554,7 @@ not appear in more than one <a href="#serialization-tree">serialization tree</a>
 
 <p><strong>Figure 3.5. Presentation Model</strong></p>
 
-<p><img src="/draft/img/present2.png" alt="Presentation Model" /></p>
+<p><img src="/main/img/present2.png" alt="Presentation Model" /></p>
 
 <div id="node-styles"></div>
 <h4 id="3231-node-styles">3.2.3.1. Node Styles</h4>
@@ -1569,7 +1582,7 @@ These allow for a natural “ordered mapping” notation.</p>
 
 <p><strong>Figure 3.6. Kind/Style Combinations</strong></p>
 
-<p><img src="/draft/img/styles2.png" alt="Kind/Style Combinations" /></p>
+<p><img src="/main/img/styles2.png" alt="Kind/Style Combinations" /></p>
 
 <div id="scalar-formats"></div>
 <h4 id="3232-scalar-formats">3.2.3.2. Scalar Formats</h4>
@@ -1627,7 +1640,7 @@ structures</a>.</p>
 
 <p><strong>Figure 3.7. Loading Failure Points</strong></p>
 
-<p><img src="/draft/img/validity2.png" alt="Loading Failure Points" /></p>
+<p><img src="/main/img/validity2.png" alt="Loading Failure Points" /></p>
 
 <div id="well-formed-streams-and-identified-aliases"></div>
 <h3 id="331-well-formed-streams-and-identified-aliases">3.3.1. Well-Formed Streams and Identified Aliases</h3>
