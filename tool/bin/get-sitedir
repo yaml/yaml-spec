@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+sitedir=$(git rev-parse --abbrev-ref HEAD)
+
+if [[ -z $sitedir || $sitedir == HEAD ]]; then
+  sitedir=$(git rev-parse --short HEAD)
+fi
+
+[[ $sitedir ]] || {
+  echo "Can't determine SITEDIR"
+  exit 1
+}
+
+echo "$sitedir"

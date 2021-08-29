@@ -6,14 +6,19 @@ PUBLISH_CNAME := spec.yaml.io
 JEKYLL_BUILD := jekyll build --trace
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 
-WWW  := ..
+WWW := ..
+EXT := $(WWW)/ext
 SITE := $(WWW)/spec.yaml.io
-EXT  := $(WWW)/ext
+HTML := $(WWW)/html
+O := o
 
-BRANCH ?= $(shell git rev-parse --abbrev-ref HEAD)
-BRANCH ?= $(shell git rev-parse --short HEAD)
+SITEDIR ?= $(shell $(ROOT)/tool/bin/get-sitedir)
 
-BRANCH := main
+HTML_FILES := \
+    spec.html \
+
+STRIP_HTML := \
+    perl -p0e 's{.*<body>\n*}{}s; s{</body>.*}{}s; s{\n*<script.*?</script>\n*}{\n}sg'
 
 #------------------------------------------------------------------------------
 BASEURL ?=
@@ -85,17 +90,16 @@ FILES := \
     $(STORY_FILES) \
 
 FILES := $(FILES:%.swp=)
-FILES := $(FILES:%=o/%)
-
+FILES := $(FILES:%=$O/%)
 
 #------------------------------------------------------------------------------
 list-files:
 	@printf "%s\n" $(FILES)
 
-files: o $(EXT_DIRS) $(FILES)
-	rm -fr $(BRANCH)
-	mv src $(BRANCH)
-	rm -f o
+files: $O $(EXT_DIRS) $(FILES)
+	rm -fr $(SITEDIR)
+	mv src $(SITEDIR)
+	rm -f $O
 
 .PHONY: build
 build: files $(SITE)
@@ -111,76 +115,89 @@ shell: files
 	$(eval override export YAML_SPEC_DIR := www/build)
 	$(call docker-run,run $(DOCKER_SHELL_CMD),$(DOCKER_SHELL_OPTS))
 
+force:
+
+html: force
+	$(MAKE) force build SITEDIR=main
+	@mkdir -p $@
+	@for f in $(HTML_FILES); do \
+	    ( \
+		set -x; \
+		mkdir -p $$(dirname $(HTML)/$$f); \
+		$(STRIP_HTML) $(SITE)/main/$$f > $(HTML)/$$f; \
+	    ) \
+	done
+
 force: clean
 	rm -fr $(SITE)
 	$(MAKE) -C $(EXT) $<
 
 clean:
-	rm -fr $(FILES:o/%=%)
+	rm -fr $(FILES:$O/%=%)
 	while [[ $$( find . -type d -empty ) ]]; do \
 	    find . -type d -empty | xargs rm -fr; \
 	done
 	@for f in $$(shopt -s nullglob; echo */index.md); do \
 	    (set -x; rm -fr "$$(dirname "$$f")"); \
 	done
-	rm -f o
+	rm -f $O
 
 # XXX Nasty hack to make pattern matching work with ../
-o:
-	ln -s . o
+$O:
+	ln -s . $@
 
 #------------------------------------------------------------------------------
-o/_config.yml: o/config.yaml
+$O/_config.yml: $O/config.yaml
 	@mkdir -p $(dir $@)
 	cp $< $@
 	echo >> $@
 	echo '# Added by build system:' >> $@
 	echo "baseurl: '$(BASEURL)'" >> $@
 
-o/%: $(WWW)/%
+$O/%: $(WWW)/%
 	@mkdir -p $(dir $@)
 	cp $< $@
 
-o/%/: $(WWW)/%
+$O/%/: $(WWW)/%
 	mkdir -p $(shell dirname $@)
 	cp -r $< $(shell dirname $@)
 
-o/%.coffee: $(WWW)/%.coffee
+$O/%.coffee: $(WWW)/%.coffee
 	@mkdir -p $(dir $@)
 	(echo '---'; echo '---'; cat $<) > $@
 
-o/%.scss: $(WWW)/%.scss
+$O/%.scss: $(WWW)/%.scss
 	@mkdir -p $(dir $@)
 	(echo '---'; echo '---'; cat $<) > $@
 
-o/%.md: $(WWW)/%.md
+$O/%.md: $(WWW)/%.md
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-o/src/doc/%.md: $(DOC)/%.md
+$O/src/doc/%.md: $(DOC)/%.md
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-o/src/story/%.md: $(STORY)/%.md
+$O/src/story/%.md: $(STORY)/%.md
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-o/src/%.md: $(SPEC)/%.md $(SPEC_LINKS)
+$O/src/%.md: $(SPEC)/%.md $(SPEC_LINKS)
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-o/src/img/%: $(SPEC)/img/%
+$O/src/img/%: $(SPEC)/img/%
 	@mkdir -p $(dir $@)
 	cp -r $< $@
 
 $(SPEC)/img/%:
 	$(MAKE) -C $(SPEC) build-img YAML_SPEC_DIR=
 
-o/src/review/spec-12.html: $(EXT)/spec-2009/yaml-spec-12.html
+$O/src/review/spec-12.html: $(EXT)/spec-2009/yaml-spec-12.html
 	cp $< $@
 	perl -pi -e 's{"(.*?\.png)"}{"../img/$$1"}' $@
 
-o/src/review/markdown.html: $(SPEC)/spec.md
+$O/src/review/markdown.html: $(SPEC)/spec.md
 	( \
 	    echo '<pre style="overflow:hidden">'; \
 	    perl -Mstrict -p0 \
@@ -190,7 +207,7 @@ o/src/review/markdown.html: $(SPEC)/spec.md
 	    echo '</pre>' \
 	) > $@
 
-o/src/review/spec-plain.md: src/spec.md
+$O/src/review/spec-plain.md: src/spec.md
 	( \
 	    echo '---'; \
 	    echo 'layout: spec'; \
