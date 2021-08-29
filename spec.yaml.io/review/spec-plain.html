@@ -2,17 +2,28 @@
 <html lang="en-US">
 
 <head>
-<meta http-equiv="Content-Type"
-      content="text/html; charset=UTF-8" />
-<title>YAML™ Ain’t Markup Language — Version 1.x</title>
+  <meta
+  http-equiv="Content-Type"
+  content="text/html; charset=UTF-8"
+/>
 
-<link rel="stylesheet"
-      type="text/css"
-      href="/assets/css/style.css" />
+<title></title>
 
-<link rel="stylesheet"
-      type="text/css"
-      href="/spec.css" />
+
+  
+
+  <link
+  rel="stylesheet"
+  type="text/css"
+  href="spec.css"
+/>
+
+
+  <link
+  rel="icon"
+  href="/favicon.svg"
+/>
+
 </head>
 
 <body>
@@ -20,9 +31,10 @@
 <div class="wrapper">
 <section>
 
+<hr />
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>YAML Specification Version 1.2.1 – Released 2021-08-21</strong></p>
+<p><strong>YAML Specification Version 1.2.1 – Released 2021-08-29</strong></p>
 
 <p>Copyright presently by <span class="footnote-link">The YAML Language Development Team<sup id="fnl1"><a href="#fn1">1</a></sup></span><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -50,8 +62,8 @@ In this version of YAML, boolean values may be serialized as “<strong><code cl
 Unquoted numeric values are a superset of JSON’s numeric production.
 Other changes in the specification were the removal of the Unicode line breaks
 and production bug fixes.
-We also define 3 built-in implicit typing rule sets: untyped, strict JSON, and
-a more flexible YAML rule set that extends JSON typing.</p>
+We also define 3 built-in implicit typing rule sets: untyped, strict JSON and a
+more flexible YAML rule set that extends JSON typing.</p>
 
 <p>The difference between late 1.0 drafts which syck 0.55 implements and the 1.1
 revision of this specification is much more extensive.
@@ -69,7 +81,7 @@ Please report errors in this document to the yaml-core mailing list.
 This revision contains fixes for all errors known as of 2009-10-01.</p>
 
 <p>We wish to thank implementers who have tirelessly tracked earlier versions of
-this specification, and our fabulous user community whose feedback has both
+this specification and our fabulous user community whose feedback has both
 validated and clarified our direction.</p>
 
 <p><strong>Abstract</strong></p>
@@ -364,8 +376,9 @@ create programs that process YAML information.</p>
 language designed to be human-friendly and work well with modern programming
 languages for common everyday tasks.
 This specification is both an introduction to the YAML language and the
-concepts supporting it, and also a complete specification of the information
-needed to develop <a href="#processing-yaml-information">applications</a> for processing YAML.</p>
+concepts supporting it.
+It is also a complete specification of the information needed to develop
+<a href="#processing-yaml-information">applications</a> for processing YAML.</p>
 
 <p>Open, interoperable and readily understandable tools have advanced computing
 immensely.
@@ -377,25 +390,25 @@ YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful
 way.
 For example, <a href="#indentation-spaces">indentation</a> may be used for structure, <a href="#flow-mappings">colons</a> separate
-<a href="#mapping">key: value pairs</a>, and <a href="#block-sequences">dashes</a> are used to create “bullet” <a href="#sequence">lists</a>.</p>
+<a href="#mapping">key: value pairs</a> and <a href="#block-sequences">dashes</a> are used to create “bullet” <a href="#sequence">lists</a>.</p>
 
 <p>There are myriad flavors of <a href="#dump">data structures</a>, but they can all be adequately
 <a href="#representation-graph">represented</a> with three basic primitives: <a href="#mapping">mappings</a> (hashes/dictionaries),
 <a href="#sequence">sequences</a> (arrays/lists) and <a href="#scalars">scalars</a> (strings/numbers).
-YAML leverages these primitives, and adds a simple typing system and <a href="#anchors-and-aliases">aliasing</a>
+YAML leverages these primitives and adds a simple typing system and <a href="#anchors-and-aliases">aliasing</a>
 mechanism to form a complete language for <a href="#serializing-the-representation-graph">serializing</a> any <a href="#representing-native-data-structures">native data
 structure</a>.
 While most programming languages can use YAML for data serialization, YAML
 excels in working with those languages that are fundamentally built around the
 three basic primitives.
-These include the new wave of agile languages such as Perl, Python, PHP, Ruby,
+These include the new wave of agile languages such as Perl, Python, PHP, Ruby
 and Javascript.</p>
 
 <p>There are hundreds of different languages for programming, but only a handful
 of languages for storing and transferring data.
 Even though its potential is virtually boundless, YAML was specifically created
 to work well for common use cases such as: configuration files, log files,
-interprocess messaging, cross-language data sharing, object persistence, and
+interprocess messaging, cross-language data sharing, object persistence and
 debugging of complex data structures.
 When data is easy to view and understand, programming becomes a simpler task.</p>
 
@@ -457,7 +470,7 @@ This technique allows for paragraphs to be word-wrapped without affecting the
 <a href="#canonical-form">canonical form</a> of the <a href="#scalar">scalar content</a>.</p>
 
 <p>YAML’s core type system is based on the requirements of agile languages such as
-Perl, Python, and Ruby.
+Perl, Python and Ruby.
 YAML directly supports both <a href="#collections">collections</a> (<a href="#mapping">mappings</a>, <a href="#sequence">sequences</a>) and
 <a href="#scalars">scalars</a>.
 Support for these common types enables programmers to use their language’s
@@ -514,17 +527,6 @@ In practice, since JSON is silent on the semantics of such duplicates, the only
 portable JSON files are those with unique keys, which are therefore valid YAML
 files.</p>
 
-<p>It may be useful to define a intermediate format between YAML and JSON.
-Such a format would be trivial to parse (but not very human readable), like
-JSON.
-At the same time, it would allow for <a href="#serializing-the-representation-graph">serializing</a> arbitrary <a href="#representing-native-data-structures">native data
-structures</a>, like YAML.
-Such a format might also serve as YAML’s “canonical format”.
-Defining such a “YSON” format (YSON is a Serialized Object Notation) can be
-done either by enhancing the JSON specification or by restricting the YAML
-specification.
-Such a definition is beyond the scope of this specification.</p>
-
 <div id="relation-to-xml"></div>
 <h2 id="14-relation-to-xml">1.4. Relation to XML</h2>
 
@@ -558,14 +560,14 @@ In particular, the following words are used to describe the actions of a YAML
 <h5 id="may">May</h5>
 
 <blockquote>
-  <p>The word <em>may</em>, or the adjective <em>optional</em>, mean that conforming YAML
+  <p>The word <em>may</em> or the adjective <em>optional</em> mean that conforming YAML
 <a href="#processing-yaml-information">processors</a> are permitted to, but <em>need not</em> behave as described.</p>
 </blockquote>
 
 <h5 id="should">Should</h5>
 
 <blockquote>
-  <p>The word <em>should</em>, or the adjective <em>recommended</em>, mean that there could be
+  <p>The word <em>should</em> or the adjective <em>recommended</em> mean that there could be
 reasons for a YAML <a href="#processing-yaml-information">processor</a> to deviate from the behavior described, but that
 such deviation could hurt interoperability and should therefore be advertised
 with appropriate notice.</p>
@@ -574,13 +576,13 @@ with appropriate notice.</p>
 <h5 id="must">Must</h5>
 
 <blockquote>
-  <p>The word <em>must</em>, or the term <em>required</em> or <em>shall</em>, mean that the behavior
+  <p>The word <em>must</em> or the term <em>required</em> or <em>shall</em> mean that the behavior
 described is an absolute requirement of the specification.</p>
 </blockquote>
 
 <p>The rest of this document is arranged as follows.
 Chapter [2] provides a short preview of the main YAML features.
-Chapter [3] describes the YAML information model, and the processes for
+Chapter [3] describes the YAML information model and the processes for
 converting from and to this model and the YAML text format.
 The bulk of the document, chapters [4] through [9], formally define this text
 format.
@@ -601,7 +603,7 @@ specification.</p>
 its own line.
 <a href="#block-sequences">Block sequences</a> indicate each entry with a dash and space (“<strong><code class="language-plaintext highlighter-rouge">-</code></strong> “).
 <a href="#mapping">Mappings</a> use a colon and space (“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “) to mark each <a href="#mapping">key: value pair</a>.
-<a href="#comments">Comments</a> begin with an octothorpe (also called a “hash”, “sharp”, “pound”, or
+<a href="#comments">Comments</a> begin with an octothorpe (also called a “hash”, “sharp”, “pound” or
 “number sign” - “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”).</p>
 
 <div id="example-sequence-of-scalars" class="example">
@@ -735,7 +737,7 @@ action: grand slam
 </div>
 
 <p>Repeated <a href="#nodes">nodes</a> (objects) are first <a href="#anchors-and-aliases">identified</a> by an <a href="#anchors-and-aliases">anchor</a> (marked with
-the ampersand - “<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>”), and are then <a href="#anchors-and-aliases">aliased</a> (referenced with an
+the ampersand - “<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>”) and are then <a href="#anchors-and-aliases">aliased</a> (referenced with an
 asterisk - “<strong><code class="language-plaintext highlighter-rouge">*</code></strong>”) thereafter.</p>
 
 <div id="example-single-document-with-two-comments" class="example">
@@ -772,7 +774,7 @@ rbi:
 
 <p>A question mark and space (“<strong><code class="language-plaintext highlighter-rouge">?</code></strong> “) indicate a complex <a href="#mapping">mapping</a> <a href="#nodes">key</a>.
 Within a <a href="#block-collection-styles">block collection</a>, <a href="#mapping">key: value pairs</a> can start immediately following
-the <a href="#block-sequences">dash</a>, <a href="#flow-mappings">colon</a>, or <a href="#flow-mappings">question mark</a>.</p>
+the <a href="#block-sequences">dash</a>, <a href="#flow-mappings">colon</a> or <a href="#flow-mappings">question mark</a>.</p>
 
 <div id="example-mapping-between-sequences" class="example">
   <p><strong>Example 2.11 Mapping between Sequences</strong></p>
@@ -912,7 +914,7 @@ quoted: "So does this
 <p>In YAML, <a href="#resolved-tags">untagged nodes</a> are given a type depending on the <a href="#processing-yaml-information">application</a>.
 The examples in this specification generally use the <strong><code class="language-plaintext highlighter-rouge">seq</code></strong>, <strong><code class="language-plaintext highlighter-rouge">map</code></strong>
 and <strong><code class="language-plaintext highlighter-rouge">str</code></strong> types from the <a href="#failsafe-schema">fail safe schema</a>.
-A few examples also use the <strong><code class="language-plaintext highlighter-rouge">int</code></strong>, <strong><code class="language-plaintext highlighter-rouge">float</code></strong>, and <strong><code class="language-plaintext highlighter-rouge">null</code></strong> types
+A few examples also use the <strong><code class="language-plaintext highlighter-rouge">int</code></strong>, <strong><code class="language-plaintext highlighter-rouge">float</code></strong> and <strong><code class="language-plaintext highlighter-rouge">null</code></strong> types
 from the <a href="#json-schema">JSON schema</a>.
 The <a href="#other-schemas">repository</a> includes additional types such as
 <a href="/type/binary.html"><strong><code class="language-plaintext highlighter-rouge">binary</code></strong></a>, <a href="/type/omap.html"><strong><code class="language-plaintext highlighter-rouge">omap</code></strong></a>,
@@ -1128,7 +1130,7 @@ Stack:
 <p>YAML is both a text format and a method for <a href="#presenting-the-serialization-tree">presenting</a> any <a href="#representing-native-data-structures">native data
 structure</a> in this format.
 Therefore, this specification defines two concepts: a class of data objects
-called YAML <a href="#representation-graph">representations</a>, and a syntax for <a href="#presenting-the-serialization-tree">presenting</a> YAML
+called YAML <a href="#representation-graph">representations</a> and a syntax for <a href="#presenting-the-serialization-tree">presenting</a> YAML
 <a href="#representation-graph">representations</a> as a series of characters, called a YAML <a href="#streams">stream</a>.
 A YAML <em>processor</em> is a tool for converting information between these
 complementary views.
@@ -1137,10 +1139,10 @@ called an <em>application</em>.
 This chapter describes the information structures a YAML processor must provide
 to or obtain from the application.</p>
 
-<p>YAML information is used in two ways: for machine processing, and for human
+<p>YAML information is used in two ways: for machine processing and for human
 consumption.
 The challenge of reconciling these two perspectives is best done in three
-distinct translation stages: <a href="#representation-graph">representation</a>, <a href="#serialization-tree">serialization</a>, and
+distinct translation stages: <a href="#representation-graph">representation</a>, <a href="#serialization-tree">serialization</a> and
 <a href="#presentation-stream">presentation</a>.
 <a href="#representation-graph">Representation</a> addresses how YAML views <a href="#representing-native-data-structures">native data structures</a> to achieve
 portability between programming environments.
@@ -1158,7 +1160,7 @@ data model, as shown in the following diagram:</p>
 
 <p><strong>Figure 3.1. Processing Overview</strong></p>
 
-<p><img src="/img/overview2.png" alt="Processing Overview" /></p>
+<p><img src="/spec.yaml.io/img/overview2.png" alt="Processing Overview" /></p>
 
 <p>A YAML processor need not expose the <a href="#serialization-tree">serialization</a> or <a href="#representation-graph">representation</a>
 stages.
@@ -1167,7 +1169,7 @@ It may translate directly between <a href="#representing-native-data-structures"
 However, such a direct translation should take place so that the <a href="#representing-native-data-structures">native data
 structures</a> are <a href="#constructing-native-data-structures">constructed</a> only from information available in the
 <a href="#representation-graph">representation</a>.
-In particular, <a href="#mapping">mapping key order</a>, <a href="#comments">comments</a>, and <a href="#tag-handles">tag handles</a> should not be
+In particular, <a href="#mapping">mapping key order</a>, <a href="#comments">comments</a> and <a href="#tag-handles">tag handles</a> should not be
 referenced during <a href="#composing-the-representation-graph">composition</a>.</p>
 
 <div id="dump"></div>
@@ -1180,21 +1182,20 @@ following three stages:</p>
 
 <blockquote>
   <p>YAML <em>represents</em> any <em>native data structure</em> using three <a href="#nodes">node kinds</a>:
-<a href="#sequence">sequence</a> - an ordered series of entries; <a href="#mapping">mapping</a> - an unordered
-association of <a href="#node-comparison">unique</a> <a href="#nodes">keys</a> to <a href="#nodes">values</a>; and <a href="#scalar">scalar</a> - any datum with
-opaque structure presentable as a series of Unicode characters.
+<a href="#sequence">sequence</a> - an ordered series of entries; <a href="#mapping">mapping</a> - an unordered association
+of <a href="#node-comparison">unique</a> <a href="#nodes">keys</a> to <a href="#nodes">values</a>; and <a href="#scalar">scalar</a> - any datum with opaque structure
+presentable as a series of Unicode characters.
 Combined, these primitives generate directed graph structures.
 These primitives were chosen because they are both powerful and familiar: the
 <a href="#sequence">sequence</a> corresponds to a Perl array and a Python list, the <a href="#mapping">mapping</a>
 corresponds to a Perl hash table and a Python dictionary.
-The <a href="#scalar">scalar</a> represents strings, integers, dates, and other atomic data
-types.</p>
+The <a href="#scalar">scalar</a> represents strings, integers, dates and other atomic data types.</p>
 </blockquote>
 
 <blockquote>
   <p>Each YAML <a href="#nodes">node</a> requires, in addition to its <a href="#nodes">kind</a> and <a href="#nodes">content</a>, a <a href="#tags">tag</a>
 specifying its data type.
-Type specifiers are either <a href="#tags">global</a> URIs, or are <a href="#tags">local</a> in scope to a single
+Type specifiers are either <a href="#tags">global</a> URIs or are <a href="#tags">local</a> in scope to a single
 <a href="#processing-yaml-information">application</a>.
 For example, an integer is represented in YAML with a <a href="#scalar">scalar</a> plus the
 <a href="#tags">global tag</a> “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></strong>”.
@@ -1269,7 +1270,7 @@ Composing can fail due to any of several reasons, detailed <a href="#loading-poi
   <p>The final input process is <em>constructing</em> <a href="#representing-native-data-structures">native data structures</a> from the
 YAML <a href="#representation-graph">representation</a>.
 Construction must be based only on the information available in the
-<a href="#representation-graph">representation</a>, and not on additional <a href="#serialization-tree">serialization</a> or <a href="#presenting-the-serialization-tree">presentation
+<a href="#representation-graph">representation</a> and not on additional <a href="#serialization-tree">serialization</a> or <a href="#presenting-the-serialization-tree">presentation
 details</a> such as <a href="#comments">comments</a>, <a href="#directives">directives</a>, <a href="#mapping">mapping key order</a>, <a href="#node-styles">node styles</a>,
 <a href="#scalar-formats">scalar content format</a>, <a href="#indentation-spaces">indentation</a> levels etc.
 Construction can fail due to the <a href="#available-tags">unavailability</a> of the required <a href="#representing-native-data-structures">native data
@@ -1303,7 +1304,7 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 
 <p><strong>Figure 3.2. Information Models</strong></p>
 
-<p><img src="/img/model2.png" alt="Information Models" /></p>
+<p><img src="/spec.yaml.io/img/model2.png" alt="Information Models" /></p>
 
 <div id="representation-graph"></div>
 <h3 id="321-representation-graph">3.2.1. Representation Graph</h3>
@@ -1313,8 +1314,8 @@ directed graph of <a href="#tags">tagged</a> <a href="#nodes">nodes</a>.
 By “directed graph” we mean a set of <a href="#nodes">nodes</a> and directed edges (“arrows”),
 where each edge connects one <a href="#nodes">node</a> to another (see a formal <span class="footnote-link">directed graph definition<sup id="fnl21"><a href="#fn21">21</a></sup></span>).
 All the <a href="#nodes">nodes</a> must be reachable from the <em>root node</em> via such edges.
-Note that the YAML graph may include cycles, and a <a href="#nodes">node</a> may have more than
-one incoming edge.</p>
+Note that the YAML graph may include cycles and a <a href="#nodes">node</a> may have more than one
+incoming edge.</p>
 
 <p><a href="#nodes">Nodes</a> that are defined in terms of other <a href="#nodes">nodes</a> are <a href="#collections">collections</a>; <a href="#nodes">nodes</a>
 that are independent of any other <a href="#nodes">nodes</a> are <a href="#scalars">scalars</a>.
@@ -1324,14 +1325,13 @@ be <a href="#node-comparison">unique</a>.</p>
 
 <p><strong>Figure 3.3. Representation Model</strong></p>
 
-<p><img src="/img/represent2.png" alt="Representation Model" /></p>
+<p><img src="/spec.yaml.io/img/represent2.png" alt="Representation Model" /></p>
 
 <div id="nodes"></div>
 <h4 id="3211-nodes">3.2.1.1. Nodes</h4>
 
 <p>A YAML <em>node</em> <a href="#representation-graph">represents</a> a single <a href="#representing-native-data-structures">native data structure</a>.
-Such nodes have <em>content</em> of one of three <em>kinds</em>: scalar, sequence, or
-mapping.
+Such nodes have <em>content</em> of one of three <em>kinds</em>: scalar, sequence or mapping.
 In addition, each node has a <a href="#tags">tag</a> which serves to restrict the set of possible
 values the content can have.</p>
 
@@ -1357,7 +1357,7 @@ It could even contain itself (directly or indirectly).</p>
 <em>pairs</em>, with the restriction that each of the keys is <a href="#node-comparison">unique</a>.
 YAML places no further restrictions on the nodes.
 In particular, keys may be arbitrary nodes, the same node may be used as the
-value of several key: value pairs, and a mapping could even contain itself as a
+value of several key: value pairs and a mapping could even contain itself as a
 key or a value (directly or indirectly).</p>
 </blockquote>
 
@@ -1391,17 +1391,17 @@ that share the same base URI but differ in their fragment part are considered
 to be different, independent tags.
 By convention, fragments are used to identify different “variants” of a tag,
 while “<strong><code class="language-plaintext highlighter-rouge">/</code></strong>” is used to define nested tag “namespace” hierarchies.
-However, this is merely a convention, and each tag may employ its own rules.
+However, this is merely a convention and each tag may employ its own rules.
 For example, Perl tags may use “<strong><code class="language-plaintext highlighter-rouge">::</code></strong>” to express namespace hierarchies,
 Java tags may use “<strong><code class="language-plaintext highlighter-rouge">.</code></strong>”, etc.</p>
 
 <p>YAML tags are used to associate meta information with each <a href="#nodes">node</a>.
 In particular, each tag must specify the expected <a href="#nodes">node kind</a> (<a href="#scalar">scalar</a>,
-<a href="#sequence">sequence</a>, or <a href="#mapping">mapping</a>).
+<a href="#sequence">sequence</a> or <a href="#mapping">mapping</a>).
 <a href="#scalar">Scalar</a> tags must also provide a mechanism for converting <a href="#scalar-formats">formatted content</a>
 to a <a href="#canonical-form">canonical form</a> for supporting <a href="#equality">equality</a> testing.
 Furthermore, a tag may provide additional information such as the set of
-allowed <a href="#nodes">content</a> values for validation, a mechanism for <a href="#tag-resolution">tag resolution</a>, or
+allowed <a href="#nodes">content</a> values for validation, a mechanism for <a href="#tag-resolution">tag resolution</a> or
 any other data that is applicable to all of the tag’s <a href="#nodes">nodes</a>.</p>
 
 <div id="node-comparison"></div>
@@ -1423,7 +1423,7 @@ duplicate <a href="#nodes">key</a> as an error.</p>
 <a href="#scalar">scalar</a> <a href="#tags">tag</a> must specify a mechanism for producing the <em>canonical form</em> of
 any <a href="#scalar-formats">formatted content</a>.
 This form is a Unicode character string which also <a href="#presenting-the-serialization-tree">presents</a> the same
-<a href="#nodes">content</a>, and can be used for equality testing.
+<a href="#nodes">content</a> and can be used for equality testing.
 While this requirement is stronger than a well defined equality operator, it
 has other uses, such as the production of digital signatures.</p>
 </blockquote>
@@ -1437,20 +1437,20 @@ Since each <a href="#tags">tag</a> applies to exactly one <a href="#nodes">kind<
 Two <a href="#scalars">scalars</a> are equal only when their <a href="#tags">tags</a> and canonical forms are equal
 character-by-character.
 Equality of <a href="#collections">collections</a> is defined recursively.
-Two <a href="#sequence">sequences</a> are equal only when they have the same <a href="#tags">tag</a> and length, and
-each <a href="#nodes">node</a> in one <a href="#sequence">sequence</a> is equal to the corresponding <a href="#nodes">node</a> in the
-other <a href="#sequence">sequence</a>.
-Two <a href="#mapping">mappings</a> are equal only when they have the same <a href="#tags">tag</a> and an equal set
-of <a href="#nodes">keys</a>, and each <a href="#nodes">key</a> in this set is associated with equal <a href="#nodes">values</a> in
-both <a href="#mapping">mappings</a>.</p>
+Two <a href="#sequence">sequences</a> are equal only when they have the same <a href="#tags">tag</a> and length and
+each <a href="#nodes">node</a> in one <a href="#sequence">sequence</a> is equal to the corresponding <a href="#nodes">node</a> in the other
+<a href="#sequence">sequence</a>.
+Two <a href="#mapping">mappings</a> are equal only when they have the same <a href="#tags">tag</a> and an equal set of
+<a href="#nodes">keys</a> and each <a href="#nodes">key</a> in this set is associated with equal <a href="#nodes">values</a> in both
+<a href="#mapping">mappings</a>.</p>
 </blockquote>
 
 <blockquote>
   <p>Different URI schemes may define different rules for testing the equality of
 URIs.
-Since a YAML <a href="#processing-yaml-information">processor</a> cannot be reasonably expected to be aware of them
-all, it must resort to a simple character-by-character comparison of <a href="#tags">tags</a>
-to ensure consistency.
+Since a YAML <a href="#processing-yaml-information">processor</a> cannot be reasonably expected to be aware of them all,
+it must resort to a simple character-by-character comparison of <a href="#tags">tags</a> to
+ensure consistency.
 This also happens to be the comparison method defined by the “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI
 scheme.
 <a href="#tags">Tags</a> in a YAML stream must therefore be <a href="#presenting-the-serialization-tree">presented</a> in a canonical way so
@@ -1484,7 +1484,7 @@ use <a href="#keys-order">key order</a> or <a href="#anchors-and-aliases">anchor
 
 <p><strong>Figure 3.4. Serialization Model</strong></p>
 
-<p><img src="/img/serialize2.png" alt="Serialization Model" /></p>
+<p><img src="/spec.yaml.io/img/serialize2.png" alt="Serialization Model" /></p>
 
 <div id="keys-order"></div>
 <h4 id="3221-keys-order">3.2.2.1. Keys Order</h4>
@@ -1512,12 +1512,10 @@ to this anchor.
 Otherwise, anchor names are a <a href="#serializing-the-representation-graph">serialization detail</a> and are discarded once
 <a href="#composing-the-representation-graph">composing</a> is completed.
 When <a href="#composing-the-representation-graph">composing</a> a <a href="#representation-graph">representation graph</a> from <a href="#serializing-the-representation-graph">serialized</a> events, an alias
-node refers to the most recent <a href="#nodes">node</a> in the <a href="#serialization-tree">serialization</a> having the
+event refers to the most recent event in the <a href="#serialization-tree">serialization</a> having the
 specified anchor.
 Therefore, anchors need not be unique within a <a href="#serialization-tree">serialization</a>.
-In addition, an anchor need not have an alias node referring to it.
-It is therefore possible to provide an anchor for all <a href="#nodes">nodes</a> in
-<a href="#serialization-tree">serialization</a>.</p>
+In addition, an anchor need not have an alias node referring to it.</p>
 
 <div id="presentation-stream"></div>
 <h3 id="323-presentation-stream">3.2.3. Presentation Stream</h3>
@@ -1535,7 +1533,7 @@ not appear in more than one <a href="#serialization-tree">serialization tree</a>
 
 <p><strong>Figure 3.5. Presentation Model</strong></p>
 
-<p><img src="/img/present2.png" alt="Presentation Model" /></p>
+<p><img src="/spec.yaml.io/img/present2.png" alt="Presentation Model" /></p>
 
 <div id="node-styles"></div>
 <h4 id="3231-node-styles">3.2.3.1. Node Styles</h4>
@@ -1563,7 +1561,7 @@ These allow for a natural “ordered mapping” notation.</p>
 
 <p><strong>Figure 3.6. Kind/Style Combinations</strong></p>
 
-<p><img src="/img/styles2.png" alt="Kind/Style Combinations" /></p>
+<p><img src="/spec.yaml.io/img/styles2.png" alt="Kind/Style Combinations" /></p>
 
 <div id="scalar-formats"></div>
 <h4 id="3232-scalar-formats">3.2.3.2. Scalar Formats</h4>
@@ -1592,7 +1590,7 @@ Comments must not appear inside <a href="#scalars">scalars</a>, but may be inter
 
 <p>Each <a href="#document">document</a> may be associated with a set of <a href="#directives">directives</a>.
 A directive has a name and an optional sequence of parameters.
-Directives are instructions to the YAML <a href="#processing-yaml-information">processor</a>, and like all other
+Directives are instructions to the YAML <a href="#processing-yaml-information">processor</a> and like all other
 <a href="#presenting-the-serialization-tree">presentation details</a> are not reflected in the YAML <a href="#serialization-tree">serialization tree</a> or
 <a href="#representation-graph">representation graph</a>.
 This version of YAML defines two directives, “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”.
@@ -1605,22 +1603,22 @@ All other directives are <a href="#directives">reserved</a> for future versions 
 several potential <em>failure points</em>.
 The character <a href="#streams">stream</a> may be <a href="#well-formed-streams-and-identified-aliases">ill-formed</a>, <a href="#anchors-and-aliases">aliases</a> may be <a href="#well-formed-streams-and-identified-aliases">unidentified</a>,
 <a href="#resolved-tags">unspecified tags</a> may be <a href="#resolved-tags">unresolvable</a>, <a href="#tags">tags</a> may be <a href="#recognized-and-valid-tags">unrecognized</a>, the
-<a href="#nodes">content</a> may be <a href="#recognized-and-valid-tags">invalid</a>, and a native type may be <a href="#available-tags">unavailable</a>.
+<a href="#nodes">content</a> may be <a href="#recognized-and-valid-tags">invalid</a> and a native type may be <a href="#available-tags">unavailable</a>.
 Each of these failures results with an incomplete loading.</p>
 
-<p>A <em>partial representation</em> need not <a href="#resolved-tags">resolve</a> the <a href="#tags">tag</a> of each <a href="#nodes">node</a>, and the
+<p>A <em>partial representation</em> need not <a href="#resolved-tags">resolve</a> the <a href="#tags">tag</a> of each <a href="#nodes">node</a> and the
 <a href="#canonical-form">canonical form</a> of <a href="#scalar-formats">formatted scalar content</a> need not be available.
 This weaker representation is useful for cases of incomplete knowledge of the
 types used in the <a href="#document">document</a>.
-In contrast, a <em>complete representation</em> specifies the <a href="#tags">tag</a> of each <a href="#nodes">node</a>,
-and provides the <a href="#canonical-form">canonical form</a> of <a href="#scalar-formats">formatted scalar content</a>, allowing for
+In contrast, a <em>complete representation</em> specifies the <a href="#tags">tag</a> of each <a href="#nodes">node</a> and
+provides the <a href="#canonical-form">canonical form</a> of <a href="#scalar-formats">formatted scalar content</a>, allowing for
 <a href="#equality">equality</a> testing.
 A complete representation is required in order to <a href="#constructing-native-data-structures">construct</a> <a href="#representing-native-data-structures">native data
 structures</a>.</p>
 
 <p><strong>Figure 3.7. Loading Failure Points</strong></p>
 
-<p><img src="/img/validity2.png" alt="Loading Failure Points" /></p>
+<p><img src="/spec.yaml.io/img/validity2.png" alt="Loading Failure Points" /></p>
 
 <div id="well-formed-streams-and-identified-aliases"></div>
 <h3 id="331-well-formed-streams-and-identified-aliases">3.3.1. Well-Formed Streams and Identified Aliases</h3>
@@ -1639,14 +1637,14 @@ parts of the input, but it must provide a mechanism for reporting such errors.</
 
 <p>Typically, most <a href="#tags">tags</a> are not explicitly specified in the character <a href="#streams">stream</a>.
 During <a href="#parsing-the-presentation-stream">parsing</a>, <a href="#nodes">nodes</a> lacking an explicit <a href="#tags">tag</a> are given a <em>non-specific
-tag</em>: <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em> for non-<a href="#plain-style">plain scalars</a>, and <em>“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>“</em> for all other
+tag</em>: <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em> for non-<a href="#plain-style">plain scalars</a> and <em>“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>“</em> for all other
 <a href="#nodes">nodes</a>.
 <a href="#composing-the-representation-graph">Composing</a> a <a href="#loading-point-failures">complete representation</a> requires each such non-specific tag to
 be <em>resolved</em> to a <em>specific tag</em>, be it a <a href="#tags">global tag</a> or a <a href="#tags">local tag</a>.</p>
 
 <p>Resolving the <a href="#tags">tag</a> of a <a href="#nodes">node</a> must only depend on the following three
 parameters: (1) the non-specific tag of the <a href="#nodes">node</a>, (2) the path leading from
-the <a href="#representation-graph">root</a> to the <a href="#nodes">node</a>, and (3) the <a href="#nodes">content</a> (and hence the <a href="#nodes">kind</a>) of the
+the <a href="#representation-graph">root</a> to the <a href="#nodes">node</a> and (3) the <a href="#nodes">content</a> (and hence the <a href="#nodes">kind</a>) of the
 <a href="#nodes">node</a>.
 When a <a href="#nodes">node</a> has more than one occurrence (using <a href="#anchors-and-aliases">aliases</a>), tag resolution
 must depend only on the path to the first (<a href="#anchors-and-aliases">anchored</a>) occurrence of the
@@ -1658,7 +1656,7 @@ Also, resolution must not consider the <a href="#nodes">content</a> of any other
 for the <a href="#nodes">content</a> of the <a href="#mapping">key nodes</a> directly along the path leading from the
 <a href="#representation-graph">root</a> to the resolved <a href="#nodes">node</a>.
 Finally, resolution must not consider the <a href="#nodes">content</a> of a sibling <a href="#nodes">node</a> in a
-<a href="#collections">collection</a>, or the <a href="#nodes">content</a> of the <a href="#nodes">value node</a> associated with a <a href="#mapping">key node</a>
+<a href="#collections">collection</a> or the <a href="#nodes">content</a> of the <a href="#nodes">value node</a> associated with a <a href="#mapping">key node</a>
 being resolved.</p>
 
 <p>These rules ensure that tag resolution can be performed as soon as a <a href="#nodes">node</a> is
@@ -1674,16 +1672,16 @@ as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,20
 This <em>tag resolution convention</em> allows the author of a YAML character <a href="#streams">stream</a>
 to effectively “disable” the tag resolution process.
 By explicitly specifying a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific <a href="#node-tags">tag property</a>, the <a href="#nodes">node</a>
-would then be resolved to a “vanilla” <a href="#sequence">sequence</a>, <a href="#mapping">mapping</a>, or string,
+would then be resolved to a “vanilla” <a href="#sequence">sequence</a>, <a href="#mapping">mapping</a> or string,
 according to its <a href="#nodes">kind</a>.</p>
 
 <p><a href="#processing-yaml-information">Application</a> specific tag resolution rules should be restricted to resolving
 the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag, most commonly to resolving <a href="#plain-style">plain scalars</a>.
 These may be matched against a set of regular expressions to provide automatic
-resolution of integers, floats, timestamps, and similar types.
+resolution of integers, floats, timestamps and similar types.
 An <a href="#processing-yaml-information">application</a> may also match the <a href="#nodes">content</a> of <a href="#mapping">mapping nodes</a> against sets
-of expected <a href="#nodes">keys</a> to automatically resolve points, complex numbers, and
-similar types.
+of expected <a href="#nodes">keys</a> to automatically resolve points, complex numbers and similar
+types.
 Resolved <a href="#sequence">sequence node</a> types such as the “ordered mapping” are also possible.</p>
 
 <p>That said, tag resolution is specific to the <a href="#processing-yaml-information">application</a>.
@@ -1717,7 +1715,7 @@ However, such a <a href="#loading-point-failures">complete representation</a> ca
 corresponding to a given <a href="#tags">tag</a>.
 If a <a href="#tags">node’s tag</a> is <em>unavailable</em>, a YAML <a href="#processing-yaml-information">processor</a> will not be able to
 <a href="#constructing-native-data-structures">construct</a> a <a href="#representing-native-data-structures">native data structure</a> for it.
-In this case, a <a href="#loading-point-failures">complete representation</a> may still be <a href="#composing-the-representation-graph">composed</a>, and an
+In this case, a <a href="#loading-point-failures">complete representation</a> may still be <a href="#composing-the-representation-graph">composed</a> and an
 <a href="#processing-yaml-information">application</a> may wish to use this <a href="#representation-graph">representation</a> directly.</p>
 
 <div id="syntax-conventions"></div>
@@ -1741,7 +1739,7 @@ side-by-side format.
 The left-hand side is the YAML example and the right-hand side is an alternate
 YAML view of the example.
 The alternate view uses double-quotes for string scalars, flow style for
-collections, and JSON plain style for numbers, booleans and null values.</p>
+collections and JSON plain style for numbers, booleans and null values.</p>
 
 <p>A reference implementation using the productions is available as the
 <span class="footnote-link">YamlReference<sup id="fnl23"><a href="#fn23">23</a></sup></span> Haskell package.
@@ -1796,14 +1794,14 @@ sequences</a> (<em>block-in context</em>) and outside them (<em>block-out contex
 
 <blockquote>
   <p>In <a href="#flow-styles">flow styles</a>, explicit <a href="#indicator-characters">indicators</a> are used to delineate structure.
-These styles can be viewed as the natural extension of JSON to cover
-<a href="#tags">tagged</a>, <a href="#single-quoted-style">single-quoted</a> and <a href="#plain-style">plain scalars</a>.
+These styles can be viewed as the natural extension of JSON to cover <a href="#tags">tagged</a>,
+<a href="#single-quoted-style">single-quoted</a> and <a href="#plain-style">plain scalars</a>.
 Since the latter have no delineating <a href="#indicator-characters">indicators</a>, they are subject to some
 restrictions to avoid ambiguities.
 These restrictions depend on where they appear: as implicit keys directly
 inside a <a href="#block-mappings">block mapping</a> (<em>block-key</em>); as implicit keys inside a <a href="#flow-mappings">flow
-mapping</a> (<em>flow-key</em>); as values inside a <a href="#flow-collection-styles">flow collection</a> (<em>flow-in</em>); or
-as values outside one (<em>flow-out</em>).</p>
+mapping</a> (<em>flow-key</em>); as values inside a <a href="#flow-collection-styles">flow collection</a> (<em>flow-in</em>); or as
+values outside one (<em>flow-out</em>).</p>
 </blockquote>
 
 <h5 id="block-chomping-t">(Block) Chomping: <code class="language-plaintext highlighter-rouge">t</code></h5>
@@ -1889,7 +1887,7 @@ prefixes.</p>
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
 The allowed character range explicitly excludes the <span class="footnote-link">C0 control block<sup id="fnl25"><a href="#fn25">25</a></sup></span>
-<strong><code class="language-plaintext highlighter-rouge">#x0-#x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">#xA</code></strong>, and CR <strong><code class="language-plaintext highlighter-rouge">#xD</code></strong> which
+<strong><code class="language-plaintext highlighter-rouge">#x0-#x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">#xA</code></strong> and CR <strong><code class="language-plaintext highlighter-rouge">#xD</code></strong> which
 are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">#x7F</code></strong>, the C1 control block <strong><code class="language-plaintext highlighter-rouge">#x80-#x9F</code></strong> (except for
 NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the <span class="footnote-link">surrogate block<sup id="fnl26"><a href="#fn26">26</a></sup></span> <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>,
 <strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong> and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
@@ -2137,21 +2135,21 @@ ERROR:
 
 <p><em>Indicators</em> are characters that have special semantics.</p>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2D</code></strong>, hyphen) denotes a <a href="#block-sequences">block sequence</a> entry.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2D</code></strong>, hyphen) denotes a <a href="#block-sequences">block sequence</a> entry.</p>
 
 <div id="rule-c-sequence-entry"></div>
 <pre class="rule">
 [4] c-sequence-entry ::= "-"
 </pre>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3F</code></strong>, question mark) denotes a <a href="#nodes">mapping key</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3F</code></strong>, question mark) denotes a <a href="#nodes">mapping key</a>.</p>
 
 <div id="rule-c-mapping-key"></div>
 <pre class="rule">
 [5] c-mapping-key ::= "?"
 </pre>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3A</code></strong>, colon) denotes a <a href="#mapping">mapping value</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3A</code></strong>, colon) denotes a <a href="#mapping">mapping value</a>.</p>
 
 <div id="rule-c-mapping-value"></div>
 <pre class="rule">
@@ -2197,35 +2195,35 @@ mapping<code class="legend-3">:</code>
   </div>
 </div>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2C</code></strong>, comma) ends a <a href="#flow-collection-styles">flow collection</a> entry.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2C</code></strong>, comma) ends a <a href="#flow-collection-styles">flow collection</a> entry.</p>
 
 <div id="rule-c-collect-entry"></div>
 <pre class="rule">
 [7] c-collect-entry ::= ","
 </pre>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x5B</code></strong>, left bracket) starts a <a href="#flow-sequences">flow sequence</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x5B</code></strong>, left bracket) starts a <a href="#flow-sequences">flow sequence</a>.</p>
 
 <div id="rule-c-sequence-start"></div>
 <pre class="rule">
 [8] c-sequence-start ::= "["
 </pre>
 
-<p>A [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”] (<strong><code class="language-plaintext highlighter-rouge">#x5D</code></strong>, right bracket) ends a <a href="#flow-sequences">flow sequence</a>.</p>
+<p>[“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”] (<strong><code class="language-plaintext highlighter-rouge">#x5D</code></strong>, right bracket) ends a <a href="#flow-sequences">flow sequence</a>.</p>
 
 <div id="rule-c-sequence-end"></div>
 <pre class="rule">
 [9] c-sequence-end ::= "]"
 </pre>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x7B</code></strong>, left brace) starts a <a href="#flow-mappings">flow mapping</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x7B</code></strong>, left brace) starts a <a href="#flow-mappings">flow mapping</a>.</p>
 
 <div id="rule-c-mapping-start"></div>
 <pre class="rule">
 [10] c-mapping-start ::= "{"
 </pre>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x7D</code></strong>, right brace) ends a <a href="#flow-mappings">flow mapping</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x7D</code></strong>, right brace) ends a <a href="#flow-mappings">flow mapping</a>.</p>
 
 <div id="rule-c-mapping-end"></div>
 <pre class="rule">
@@ -2263,8 +2261,8 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
   </div>
 </div>
 
-<p>An “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x23</code></strong>, octothorpe, hash, sharp, pound, number sign)
-denotes a <a href="#comments">comment</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x23</code></strong>, octothorpe, hash, sharp, pound, number sign) denotes a
+<a href="#comments">comment</a>.</p>
 
 <div id="rule-c-comment"></div>
 <pre class="rule">
@@ -2300,14 +2298,14 @@ denotes a <a href="#comments">comment</a>.</p>
   </div>
 </div>
 
-<p>An “<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x26</code></strong>, ampersand) denotes a <a href="#anchors-and-aliases">node’s anchor property</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x26</code></strong>, ampersand) denotes a <a href="#anchors-and-aliases">node’s anchor property</a>.</p>
 
 <div id="rule-c-anchor"></div>
 <pre class="rule">
 [13] c-anchor ::= "&amp;"
 </pre>
 
-<p>An “<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2A</code></strong>, asterisk) denotes an <a href="#alias-nodes">alias node</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x2A</code></strong>, asterisk) denotes an <a href="#alias-nodes">alias node</a>.</p>
 
 <div id="rule-c-alias"></div>
 <pre class="rule">
@@ -2355,14 +2353,14 @@ alias: <code class="legend-3">*</code>anchor
   </div>
 </div>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">|</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">7C</code></strong>, vertical bar) denotes a <a href="#literal-style">literal block scalar</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">7C</code></strong>, vertical bar) denotes a <a href="#literal-style">literal block scalar</a>.</p>
 
 <div id="rule-c-literal"></div>
 <pre class="rule">
 [16] c-literal ::= "|"
 </pre>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3E</code></strong>, greater than) denotes a <a href="#block-folding">folded block scalar</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x3E</code></strong>, greater than) denotes a <a href="#block-folding">folded block scalar</a>.</p>
 
 <div id="rule-c-folded"></div>
 <pre class="rule">
@@ -2402,15 +2400,15 @@ folded: <code class="legend-2">&gt;</code>
   </div>
 </div>
 
-<p>An “<strong><code class="language-plaintext highlighter-rouge">'</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x27</code></strong>, apostrophe, single quote) surrounds a
-<a href="#single-quoted-style">single-quoted flow scalar</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">'</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x27</code></strong>, apostrophe, single quote) surrounds a <a href="#single-quoted-style">single-quoted
+flow scalar</a>.</p>
 
 <div id="rule-c-single-quote"></div>
 <pre class="rule">
 [18] c-single-quote ::= "'"
 </pre>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x22</code></strong>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow
+<p>“<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x22</code></strong>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow
 scalar</a>.</p>
 
 <div id="rule-c-double-quote"></div>
@@ -2447,7 +2445,7 @@ double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
   </div>
 </div>
 
-<p>A “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x25</code></strong>, percent) denotes a <a href="#directives">directive</a> line.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x25</code></strong>, percent) denotes a <a href="#directives">directive</a> line.</p>
 
 <div id="rule-c-directive"></div>
 <pre class="rule">
@@ -2579,7 +2577,7 @@ treat these line breaks as non-break characters, with an appropriate warning.</p
   <a href="#rule-c-printable">c-printable</a> - <a href="#rule-b-char">b-char</a> - <a href="#rule-c-byte-order-mark">c-byte-order-mark</a>
 </pre>
 
-<p>Line breaks are interpreted differently by different systems, and have several
+<p>Line breaks are interpreted differently by different systems and have several
 widely used formats.</p>
 
 <div id="rule-b-break"></div>
@@ -2755,7 +2753,7 @@ classes:</p>
 “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">]</code></strong>” for presenting IPv6 addresses as proposed in the <span class="footnote-link">IPv6 RFC<sup id="fnl30"><a href="#fn30">30</a></sup></span>.</p>
 
 <p>By convention, any URI characters other than the allowed printable ASCII
-characters are first <em>encoded</em> in UTF-8, and then each byte is <em>escaped</em> using
+characters are first <em>encoded</em> in UTF-8 and then each byte is <em>escaped</em> using
 the <em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>“</em> character.
 The YAML <a href="#processing-yaml-information">processor</a> must not expand such escaped characters.
 <a href="#tags">Tag</a> characters must be preserved and compared exactly as <a href="#presenting-the-serialization-tree">presented</a> in the
@@ -3388,7 +3386,7 @@ Folding does distinguish between these cases in the following way:</p>
 
 <blockquote>
   <p>In the <a href="#block-folding">folded block style</a>, the final <a href="#line-break-characters">line break</a> and trailing <a href="#empty-lines">empty
-lines</a> are subject to <a href="#block-chomping-indicator">chomping</a>, and are never folded.
+lines</a> are subject to <a href="#block-chomping-indicator">chomping</a> and are never folded.
 In addition, folding does not apply to <a href="#line-break-characters">line breaks</a> surrounding text lines
 that contain leading <a href="#white-space-characters">white space</a>.
 Note that such a <a href="#example-more-indented-lines">more-indented</a> line may consist only of such leading <a href="#white-space-characters">white
@@ -3398,7 +3396,7 @@ space</a>.</p>
 <blockquote>
   <p>The combined effect of the <em>block line folding</em> rules is that each
 “paragraph” is interpreted as a line, <a href="#empty-lines">empty lines</a> are interpreted as a line
-feed, and the formatting of <a href="#example-more-indented-lines">more-indented</a> lines is preserved.</p>
+feed and the formatting of <a href="#example-more-indented-lines">more-indented</a> lines is preserved.</p>
 </blockquote>
 
 <div id="example-block-folding" class="example">
@@ -3442,15 +3440,14 @@ feed, and the formatting of <a href="#example-more-indented-lines">more-indented
 <a href="#indentation-spaces">indentation</a> to convey structure.
 Hence spaces preceding or following the text in a line are a <a href="#presenting-the-serialization-tree">presentation
 detail</a> and must not be used to convey <a href="#nodes">content</a> information.
-Once all such spaces have been discarded, all <a href="#line-break-characters">line breaks</a> are folded,
-without exception.</p>
+Once all such spaces have been discarded, all <a href="#line-break-characters">line breaks</a> are folded without
+exception.</p>
 </blockquote>
 
 <blockquote>
   <p>The combined effect of the <em>flow line folding</em> rules is that each “paragraph”
-is interpreted as a line, <a href="#empty-lines">empty lines</a> are interpreted as line feeds, and
-text can be freely <a href="#example-more-indented-lines">more-indented</a> without affecting the <a href="#nodes">content</a>
-information.</p>
+is interpreted as a line, <a href="#empty-lines">empty lines</a> are interpreted as line feeds and text
+can be freely <a href="#example-more-indented-lines">more-indented</a> without affecting the <a href="#nodes">content</a> information.</p>
 </blockquote>
 
 <div id="rule-s-flow-folded"></div>
@@ -3976,8 +3973,8 @@ tags</a>.</p>
 <blockquote>
   <p>It is possible to override the default behavior by providing an explicit
 “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive, associating a different prefix for this handle.
-This provides smooth migration from using <a href="#tags">local tags</a> to using <a href="#tags">global
-tags</a>, by the simple addition of a single “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive.</p>
+This provides smooth migration from using <a href="#tags">local tags</a> to using <a href="#tags">global tags</a>
+by the simple addition of a single “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive.</p>
 </blockquote>
 
 <div id="rule-c-primary-tag-handle"></div>
@@ -4133,7 +4130,7 @@ In particular, the YAML <a href="#processing-yaml-information">processor</a> nee
 <blockquote>
   <p>If the prefix begins with a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” character, <a href="#tag-shorthands">shorthands</a> using the
 <a href="#tag-handles">handle</a> are expanded to a <a href="#tags">local tag</a>.
-Note that such a <a href="#tags">tag</a> is intentionally not a valid URI, and its semantics are
+Note that such a <a href="#tags">tag</a> is intentionally not a valid URI and its semantics are
 specific to the <a href="#processing-yaml-information">application</a>.
 In particular, two <a href="#documents">documents</a> in the same <a href="#streams">stream</a> may assign different
 semantics to the same <a href="#tags">local tag</a>.</p>
@@ -4183,9 +4180,9 @@ semantics to the same <a href="#tags">local tag</a>.</p>
 
 <blockquote>
   <p>If the prefix begins with a character other than “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”, it must be a
-valid URI prefix, and should contain at least the scheme and the authority.
+valid URI prefix and should contain at least the scheme and the authority.
 <a href="#tag-shorthands">Shorthands</a> using the associated <a href="#tag-handles">handle</a> are expanded to globally unique URI
-tags, and their semantics is consistent across <a href="#processing-yaml-information">applications</a>.
+tags and their semantics is consistent across <a href="#processing-yaml-information">applications</a>.
 In particular, every <a href="#documents">documents</a> in every <a href="#streams">stream</a> must assign the same
 semantics to the same <a href="#tags">global tag</a>.</p>
 </blockquote>
@@ -4367,8 +4364,8 @@ suffix.
 The <a href="#tag-handles">tag handle</a> must be associated with a <a href="#tag-prefixes">prefix</a>, either by default or by
 using a “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive.
 The resulting <a href="#parsing-the-presentation-stream">parsed</a> <a href="#tags">tag</a> is the concatenation of the <a href="#tag-prefixes">prefix</a> and the
-suffix, and must either begin with “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” (a <a href="#tags">local tag</a>) or be a valid
-URI (a <a href="#tags">global tag</a>).</p>
+suffix and must either begin with “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” (a <a href="#tags">local tag</a>) or be a valid URI
+(a <a href="#tags">global tag</a>).</p>
 </blockquote>
 
 <blockquote>
@@ -4459,8 +4456,8 @@ ERROR:
 <blockquote>
   <p>If a <a href="#nodes">node</a> has no tag property, it is assigned a <a href="#resolved-tags">non-specific tag</a> that
 needs to be <a href="#resolved-tags">resolved</a> to a <a href="#resolved-tags">specific</a> one.
-This <a href="#resolved-tags">non-specific tag</a> is “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” for non-<a href="#plain-style">plain scalars</a> and
-“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” for all other <a href="#nodes">nodes</a>.
+This <a href="#resolved-tags">non-specific tag</a> is “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” for non-<a href="#plain-style">plain scalars</a> and “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>”
+for all other <a href="#nodes">nodes</a>.
 This is the only case where the <a href="#node-styles">node style</a> has any effect on the <a href="#nodes">content</a>
 information.</p>
 </blockquote>
@@ -4469,8 +4466,8 @@ information.</p>
   <p>It is possible for the tag property to be explicitly set to the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”
 non-specific tag.
 By <a href="#resolved-tags">convention</a>, this “disables” <a href="#tag-resolution">tag resolution</a>, forcing the <a href="#nodes">node</a> to be
-interpreted as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>”,
-or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to its <a href="#nodes">kind</a>.</p>
+interpreted as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or
+“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to its <a href="#nodes">kind</a>.</p>
 </blockquote>
 
 <blockquote>
@@ -4586,7 +4583,7 @@ Second occurrence: *<code class="legend-2">anchor</code>
 
 <p>YAML’s <em>flow styles</em> can be thought of as the natural extension of JSON to
 cover <a href="#line-folding">folding</a> long content lines for readability, <a href="#tags">tagging</a> nodes to control
-<a href="#constructing-native-data-structures">construction</a> of <a href="#representing-native-data-structures">native data structures</a>, and using <a href="#anchors-and-aliases">anchors</a> and <a href="#anchors-and-aliases">aliases</a>
+<a href="#constructing-native-data-structures">construction</a> of <a href="#representing-native-data-structures">native data structures</a> and using <a href="#anchors-and-aliases">anchors</a> and <a href="#anchors-and-aliases">aliases</a>
 to reuse <a href="#constructing-native-data-structures">constructed</a> object instances.</p>
 
 <div id="alias-nodes"></div>
@@ -4822,7 +4819,7 @@ characters.</p>
 <p>In a multi-line double-quoted scalar, <a href="#line-break-characters">line breaks</a> are subject to <a href="#flow-folding">flow line
 folding</a>, which discards any trailing <a href="#white-space-characters">white space</a> characters.
 It is also possible to <em>escape</em> the <a href="#line-break-characters">line break</a> character.
-In this case, the <a href="#line-break-characters">line break</a> is excluded from the <a href="#nodes">content</a>, and the trailing
+In this case, the <a href="#line-break-characters">line break</a> is excluded from the <a href="#nodes">content</a> and the trailing
 <a href="#white-space-characters">white space</a> characters are preserved.
 Combined with the ability to <a href="#escaped-characters">escape</a> <a href="#white-space-characters">white space</a> characters, this allows
 double-quoted lines to be broken at arbitrary positions.</p>
@@ -5100,7 +5097,7 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 form of escaping.
 It is therefore the most readable, most limited and most <a href="#context-c">context</a> sensitive
 <a href="#node-styles">style</a>.
-In addition to a restricted character set, a plain scalar must not be empty, or
+In addition to a restricted character set, a plain scalar must not be empty or
 contain leading or trailing <a href="#white-space-characters">white space</a> characters.
 It is only possible to break a long plain line where a <a href="#white-space-characters">space</a> character is
 surrounded by non-<a href="#white-space-characters">spaces</a>.</p>
@@ -5312,7 +5309,7 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <h2 id="74-flow-collection-styles">7.4. Flow Collection Styles</h2>
 
 <p>A <em>flow collection</em> may be nested within a <a href="#block-collection-styles">block collection</a> (<strong><code class="language-plaintext highlighter-rouge">flow-out</code></strong>
-context), nested within another flow collection (<strong><code class="language-plaintext highlighter-rouge">flow-in</code></strong> context), or
+context), nested within another flow collection (<strong><code class="language-plaintext highlighter-rouge">flow-in</code></strong> context) or
 be a part of an <a href="#example-single-pair-explicit-entry">implicit key</a> (<strong><code class="language-plaintext highlighter-rouge">flow-key</code></strong> context or <strong><code class="language-plaintext highlighter-rouge">block-key</code></strong>
 context).
 Flow collection entries are terminated by the <em>“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” indicator</em>.
@@ -5712,7 +5709,7 @@ in this case.</p>
   </div>
 </div>
 
-<p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is explicitly specified, <a href="#parsing-the-presentation-stream">parsing</a> is unambiguous,
+<p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is explicitly specified, <a href="#parsing-the-presentation-stream">parsing</a> is unambiguous
 and the syntax is identical to the general case.</p>
 
 <div id="rule-ns-flow-pair"></div>
@@ -6381,7 +6378,7 @@ keep: |+
 <h3 id="812-literal-style">8.1.2. Literal Style</h3>
 
 <p>The <em>literal style</em> is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>” indicator</em>.
-It is the simplest, most restricted, and most readable <a href="#node-styles">scalar style</a>.</p>
+It is the simplest, most restricted and most readable <a href="#node-styles">scalar style</a>.</p>
 
 <div id="rule-c-l+literal"></div>
 <pre class="rule">
@@ -6723,7 +6720,7 @@ also not <a href="#line-folding">folded</a>.</p>
   </div>
 </div>
 
-<p>The final <a href="#line-break-characters">line break</a>, and trailing <a href="#empty-lines">empty lines</a> if any, are subject to
+<p>The final <a href="#line-break-characters">line break</a> and trailing <a href="#empty-lines">empty lines</a> if any, are subject to
 <a href="#block-chomping-indicator">chomping</a> and are never <a href="#line-folding">folded</a>.</p>
 
 <div id="rule-l-folded-content"></div>
@@ -6839,7 +6836,7 @@ block sequence:
   </div>
 </div>
 
-<p>The entry <a href="#nodes">node</a> may be either <a href="#example-empty-content">completely empty</a>, be a nested <a href="#block-nodes">block node</a>, or
+<p>The entry <a href="#nodes">node</a> may be either <a href="#example-empty-content">completely empty</a>, be a nested <a href="#block-nodes">block node</a> or
 use a <em>compact in-line notation</em>.
 The compact notation may be used when the entry is itself a nested <a href="#block-collection-styles">block
 collection</a>.
@@ -7308,7 +7305,7 @@ Each document is completely independent from the rest.</p>
 <div id="document-prefix"></div>
 <h3 id="911-document-prefix">9.1.1. Document Prefix</h3>
 
-<p>A document may be preceded by a <em>prefix</em> specifying the <a href="#character-encodings">character encoding</a>,
+<p>A document may be preceded by a <em>prefix</em> specifying the <a href="#character-encodings">character encoding</a>
 and optional <a href="#comments">comment</a> lines.
 Note that all <a href="#documents">documents</a> in a stream must use the same <a href="#character-encodings">character encoding</a>.
 However it is valid to re-specify the <a href="#character-encodings">encoding</a> using a <a href="#character-encodings">byte order mark</a> for
@@ -7678,8 +7675,8 @@ stream and the first <a href="#document">document</a> of the second stream.
 This is easily ensured by inserting a <a href="#document-markers">document end marker</a> between the two
 streams.
 Note that this is safe regardless of the content of either stream.
-In particular, either or both may be empty, and the first stream may or may
-not already contain such a marker.</p>
+In particular, either or both may be empty and the first stream may or may not
+already contain such a marker.</p>
 </blockquote>
 
 <h5 id="communication-streams">Communication Streams</h5>
@@ -7687,8 +7684,8 @@ not already contain such a marker.</p>
 <blockquote>
   <p>The <a href="#document-markers">document end marker</a> allows signaling the end of a <a href="#document">document</a> without
 closing the stream or starting the next <a href="#document">document</a>.
-This allows the receiver to complete processing a <a href="#document">document</a> without having
-to wait for the next one to arrive.
+This allows the receiver to complete processing a <a href="#document">document</a> without having to
+wait for the next one to arrive.
 The sender may also transmit “keep-alive” messages in the form of <a href="#comments">comment</a>
 lines or repeated <a href="#document-markers">document end markers</a> without signalling the start of the
 next <a href="#document">document</a>.</p>
@@ -7731,10 +7728,10 @@ option.</p>
 <blockquote>
   <p><a href="#representation-graph">Represents</a> an associative container, where each <a href="#nodes">key</a> is unique in the
 association and mapped to exactly one <a href="#nodes">value</a>.
-YAML places no restrictions on the type of <a href="#nodes">keys</a>; in particular, they are
-not restricted to being <a href="#scalars">scalars</a>.
-Example <a href="#constructing-native-data-structures">bindings</a> to <a href="#representing-native-data-structures">native</a> types include Perl’s hash, Python’s
-dictionary, and Java’s Hashtable.</p>
+YAML places no restrictions on the type of <a href="#nodes">keys</a>; in particular, they are not
+restricted to being <a href="#scalars">scalars</a>.
+Example <a href="#constructing-native-data-structures">bindings</a> to <a href="#representing-native-data-structures">native</a> types include Perl’s hash, Python’s dictionary
+and Java’s Hashtable.</p>
 </blockquote>
 
 <div id="example-map-examples" class="example">
@@ -7771,7 +7768,7 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 <blockquote>
   <p><a href="#representation-graph">Represents</a> a collection indexed by sequential integers starting with zero.
 Example <a href="#constructing-native-data-structures">bindings</a> to <a href="#representing-native-data-structures">native</a> types include Perl’s array, Python’s list or
-tuple, and Java’s array or Vector.</p>
+tuple and Java’s array or Vector.</p>
 </blockquote>
 
 <div id="example-seq-examples" class="example">
@@ -7807,7 +7804,7 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 
 <blockquote>
   <p><a href="#representation-graph">Represents</a> a Unicode string, a sequence of zero or more Unicode characters.
-This type is usually <a href="#representing-native-data-structures">bound</a> to the <a href="#representing-native-data-structures">native</a> language’s string type, or, for
+This type is usually <a href="#representing-native-data-structures">bound</a> to the <a href="#representing-native-data-structures">native</a> language’s string type or, for
 languages lacking one (such as C), to a character array.</p>
 </blockquote>
 
@@ -7834,7 +7831,7 @@ Flow style: !!str "String: just a theory."
 
 <p>All <a href="#nodes">nodes</a> with the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the
 standard <a href="#resolved-tags">convention</a>, to “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”,
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>”, or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
+“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
 their <a href="#nodes">kind</a>.</p>
 
 <p>All <a href="#nodes">nodes</a> with the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag are left <a href="#resolved-tags">unresolved</a>.
@@ -7844,7 +7841,7 @@ This constrains the <a href="#processing-yaml-information">application</a> to de
 <h2 id="102-json-schema">10.2. JSON Schema</h2>
 
 <p>The <em>JSON schema</em> is the lowest common denominator of most modern computer
-languages, and allows <a href="#parsing-the-presentation-stream">parsing</a> JSON files.
+languages and allows <a href="#parsing-the-presentation-stream">parsing</a> JSON files.
 A YAML <a href="#processing-yaml-information">processor</a> should therefore support this <a href="#recommended-schemas">schema</a>, at least as an
 option.
 It is also strongly recommended that other <a href="#recommended-schemas">schemas</a> should be based on it.</p>
@@ -7877,7 +7874,7 @@ It is also strongly recommended that other <a href="#recommended-schemas">schema
 This is typically <a href="#representing-native-data-structures">bound</a> to a <a href="#representing-native-data-structures">native</a> null-like value (e.g., <strong><code class="language-plaintext highlighter-rouge">undef</code></strong> in
 Perl, <strong><code class="language-plaintext highlighter-rouge">None</code></strong> in Python).
 Note that a null is different from an empty string.
-Also, a <a href="#mapping">mapping</a> entry with some <a href="#nodes">key</a> and a null <a href="#nodes">value</a> is valid, and
+Also, a <a href="#mapping">mapping</a> entry with some <a href="#nodes">key</a> and a null <a href="#nodes">value</a> is valid and
 different from not having that <a href="#nodes">key</a> in the <a href="#mapping">mapping</a>.</p>
 </blockquote>
 
@@ -7916,8 +7913,8 @@ key with null value: !!null null
 
 <blockquote>
   <p><a href="#representation-graph">Represents</a> a true/false value.
-In languages without a <a href="#representing-native-data-structures">native</a> Boolean type (such as C), is usually <a href="#representing-native-data-structures">bound</a>
-to a native integer type, using one for true and zero for false.</p>
+In languages without a <a href="#representing-native-data-structures">native</a> Boolean type (such as C), they are usually
+<a href="#representing-native-data-structures">bound</a> to a native integer type, using one for true and zero for false.</p>
 </blockquote>
 
 <h5 id="canonical-form-3">Canonical Form:</h5>
@@ -7962,15 +7959,15 @@ possible.</p>
 <blockquote>
   <p>Some languages (such as Perl) provide only a “number” type that allows for
 both integer and floating-point values.
-A YAML <a href="#processing-yaml-information">processor</a> may use such a type for integers, as long as they
-round-trip properly.</p>
+A YAML <a href="#processing-yaml-information">processor</a> may use such a type for integers as long as they round-trip
+properly.</p>
 </blockquote>
 
 <blockquote>
   <p>In some languages (such as C), an integer may overflow the <a href="#representing-native-data-structures">native</a> type’s
 storage capability.
 A YAML <a href="#processing-yaml-information">processor</a> may reject such a value as an error, truncate it with a
-warning, or find some other manner to round-trip it.
+warning or find some other manner to round-trip it.
 In general, integers representable using 32 binary digits should safely
 round-trip through most systems.</p>
 </blockquote>
@@ -8012,7 +8009,7 @@ positive: !!int 34
 
 <blockquote>
   <p><a href="#representation-graph">Represents</a> an approximation to real numbers, including three special values
-(positive and negative infinity, and “not a number”).</p>
+(positive and negative infinity and “not a number”).</p>
 </blockquote>
 
 <blockquote>
@@ -8035,7 +8032,7 @@ Since YAML does not specify a particular accuracy, using floating-point
 <h5 id="canonical-form-5">Canonical Form:</h5>
 
 <blockquote>
-  <p>Either <strong><code class="language-plaintext highlighter-rouge">0</code></strong>, <strong><code class="language-plaintext highlighter-rouge">.inf</code></strong>, <strong><code class="language-plaintext highlighter-rouge">-.inf</code></strong>, <strong><code class="language-plaintext highlighter-rouge">.nan</code></strong>, or scientific notation
+  <p>Either <strong><code class="language-plaintext highlighter-rouge">0</code></strong>, <strong><code class="language-plaintext highlighter-rouge">.inf</code></strong>, <strong><code class="language-plaintext highlighter-rouge">-.inf</code></strong>, <strong><code class="language-plaintext highlighter-rouge">.nan</code></strong> or scientific notation
 matching the regular expression<br />
 <strong><code class="language-plaintext highlighter-rouge">-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?</code></strong>.</p>
 </blockquote>
@@ -8061,7 +8058,7 @@ not a number: !!float .nan
 
 <p>All <a href="#nodes">nodes</a> with the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the
 standard <a href="#resolved-tags">convention</a>, to “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”,
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>”, or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
+“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
 their <a href="#nodes">kind</a>.</p>
 
 <p><a href="#collections">Collections</a> with the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag (that is, <a href="#resolved-tags">untagged</a>
@@ -8158,7 +8155,7 @@ resolution</a>.</p>
 
 <p>All <a href="#nodes">nodes</a> with the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the
 standard <a href="#resolved-tags">convention</a>, to “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”,
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>”, or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
+“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
 their <a href="#nodes">kind</a>.</p>
 
 <p><a href="#collections">Collections</a> with the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag (that is, <a href="#resolved-tags">untagged</a>
