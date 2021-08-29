@@ -1,3 +1,6 @@
+---
+layout: spec-draft
+---
 # YAML Ain't Markup Language (YAML™) Version 1.2
 
 **YAML Specification Version 1.2.1 -- Released YYYY-MM-DD**

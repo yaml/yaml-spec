@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  {% include head-init.html %}
+
+  {% unless page.plain %}
+    {% include head-theme.html %}
+  {% endunless %}
+
+  {% include head-spec.html %}
+
+  {% include head-draft.html %}
+
+  {% include head-favicon.html %}
+</head>
+
+<body>
+<main id="content" class="main-content" role="main">
+<div class="wrapper">
+<section>
+
+{{content}}
+
+</section>
+</div>
+</main>
+
+<script>
+for (const c of document.querySelectorAll('code > code')) {
+  c.parentElement.classList.add('container');
+}
+</script>
+
+</body>
+
+</html>
