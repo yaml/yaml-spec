@@ -105,6 +105,8 @@ files: $O $(EXT_DIRS) $(FILES)
 build: files $(SITE)
 	$(eval override export YAML_SPEC_DIR := www/build)
 	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
+	cd site && \
+	    find . | cpio -dump ../$(SITE)
 	echo $(PUBLISH_CNAME) > $(SITE)/CNAME
 
 serve: files
@@ -133,7 +135,7 @@ force: clean
 	$(MAKE) -C $(EXT) $<
 
 clean:
-	rm -fr $(FILES:$O/%=%)
+	rm -fr site $(FILES:$O/%=%)
 	while [[ $$( find . -type d -empty ) ]]; do \
 	    find . -type d -empty | xargs rm -fr; \
 	done
@@ -224,3 +226,4 @@ $(EXT_DIRS):
 $(SITE):
 	-git branch --track gh-pages origin/gh-pages
 	git worktree add -f $@ gh-pages
+	git -C $(SITE) reset --hard origin/gh-pages

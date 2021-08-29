@@ -33,7 +33,8 @@ publish: build
 # Remove generated files to force rebuild:
 force:
 	$(MAKE) -C $(BUILD) clean
-	rm -fr $(SITE)/$(SITEDIR)
+	$(MAKE) -C $(EXT) clean
+	rm -fr $(SITE)
 
 clean:
 	$(MAKE) -C $(BUILD) $@
