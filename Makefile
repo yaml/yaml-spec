@@ -7,7 +7,7 @@ default:
 docker-build-all docker-push-all docker-pull-all:
 	$(MAKE) -C tool/docker $@
 
-build site serve publish publish-fork force diff:
+build html site serve publish publish-fork force diff:
 	$(MAKE) -C www $@
 
 _:
