@@ -1086,6 +1086,11 @@ scheme.
 that such comparison would yield the correct results.
 
 
+##### Uniqueness
+
+> A [mapping's] [keys] are _unique_ if no two keys are equal to each other.
+
+
 ##### Identity
 
 > Two [nodes] are _identical_ only when they [represent] the same [native data
