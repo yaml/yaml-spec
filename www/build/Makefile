@@ -128,18 +128,18 @@ shell: files
 force:
 
 html: force
-	$(MAKE) force build SITEDIR=main
+	$(MAKE) force build SITEDIR=XXXHTMLXXX
 	@mkdir -p $(HTML)
 	cp -r \
-	    site/main/img \
-	    site/main/spec.css \
+	    site/XXXHTMLXXX/img \
+	    site/XXXHTMLXXX/spec.css \
 	    $(HTML)/
 
 	@for f in $(HTML_FILES); do \
 	    ( \
 		set -x; \
 		mkdir -p $$(dirname $(HTML)/$$f); \
-		$(STRIP_HTML) $(SITE)/main/$$f > $(HTML)/$$f; \
+		$(STRIP_HTML) $(SITE)/XXXHTMLXXX/$$f > $(HTML)/$$f; \
 	    ) \
 	done
 
