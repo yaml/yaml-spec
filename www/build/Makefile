@@ -18,7 +18,11 @@ HTML_FILES := \
     spec.html \
 
 STRIP_HTML := \
-    perl -p0e 's{.*<body>\n*}{}s; s{</body>.*}{}s; s{\n*<script.*?</script>\n*}{\n}sg'
+    perl -p0e ' \
+	s{.*<body>\n*}{}s; \
+	s{</body>.*}{}s; \
+	s{\n*<script.*?</script>\n*}{\n}sg; \
+    '
 
 #------------------------------------------------------------------------------
 BASEURL ?=
