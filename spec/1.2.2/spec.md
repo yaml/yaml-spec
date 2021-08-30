@@ -6421,7 +6421,6 @@ different from not having that [key] in the [mapping].
 
 : **`null`**.
 
-
 ? Valid Formatted Content
 
 : Any of the strings `null`, `Null`, `NULL`, or `~`, or the empty string.

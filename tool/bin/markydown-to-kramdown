@@ -400,11 +400,9 @@ sub fmt_img {}
 
 sub fmt_table {}
 
-
 sub fmt_footnote {}
 
 sub fmt_other {}
-
 
 #------------------------------------------------------------------------------
 sub read_files {
@@ -505,7 +503,9 @@ sub rule_link {
 
 sub format_links {
   s{
-    \[ (?!\^)
+    \[
+      (?!\^)
+      (?!eE\])
       (
         [^-0-9\`\]]
         [^\]]*?
