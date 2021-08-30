@@ -30,6 +30,8 @@ div.legend ul li { display: inline; white-space: nowrap; }
 
 ul.author-group, ul.release-info, #markdown-toc, #markdown-toc ul { list-style: none; }
 
+#markdown-toc ul ul ul ul { display: none; }
+
 span.footnote-link { text-decoration: underline solid #606c71; }
 span.footnote-link sup a { color: blue; text-decoration: none; }
 
