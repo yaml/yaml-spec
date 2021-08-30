@@ -12,7 +12,6 @@ specification version is **1.2.2**.
 * Clarify wording and examples
 * Removed sentences that are no longer relevant in 2021
 * Fixed known bugs in the grammar productions
-* More TODO
 
 ## Changes in v1.2.1 (2009-10-01)
 
@@ -97,8 +96,9 @@ Patches and error corrections:
 
 ## Changes in v1.2.0 (2009-07-21)
 
-The core data schema is introduced as the recommended default, replacing the
-YAML 1.1 type library:
+The most significant difference between YAML 1.1 and YAML 1.2 is the
+introduction of the core data schema as the recommended default, replacing the
+YAML 1.1 type library.
 
 * Only `true` and `false` strings are parsed as booleans (including `True` and
   `TRUE`); `y`, `yes`, `on`, and their negative counterparts are parsed as
@@ -138,7 +138,8 @@ Additionally there are some minor differences between the parsing rules:
 
 ## Changes in v1.1 (2005-01-18)
 
-A complete refactoring of the tag syntax:
+The most significant difference between these versions is the complete
+refactoring of the tag syntax.
 
 * The `%TAG` directive has been added, along with the `!foo!` tag prefix
   shorthand notation.
@@ -150,8 +151,9 @@ A complete refactoring of the tag syntax:
 * The formal `tag:domain,date/path` format for tag names has been dropped as a
   requirement.
 
-The formal description of the language describing the document structure was
-completely refactored, while not changing its intent.
+Additionally, the formal description of the language describing the document
+structure has been completely refactored between these versions, but the
+described intent has not changed.
 Other changes include:
 
 * A `\` escape has been added for the tab character, in addition to the
@@ -162,3 +164,4 @@ Other changes include:
 
 ## First published as v1.0 (2004-01-29)
 
+First release!
