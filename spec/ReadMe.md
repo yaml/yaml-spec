@@ -3,7 +3,7 @@ spec
 
 This directory contains the YAML spec sources currently under development.
 
-The top level `www/` directory uses the contents ofdirectory to build the spec
+The top level `www/` directory uses the contents of directory to build the spec
 web pages for https://spec.yaml.io.
 
 ## Directory Layout
@@ -60,5 +60,5 @@ markydown-to-kramdown) to convert from a very clean input to a full-power but
 messier markdown.
 The kramdown is then used by a Jekyll system to produce the final output.
 
-The toolchain required to do all this has been dockerized so that it will just
+The tool chain required to do all this has been dockerized so that it will just
 work as long as you have Docker installed.

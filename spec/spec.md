@@ -111,7 +111,7 @@ While most programming languages can use YAML for data serialization, YAML
 excels in working with those languages that are fundamentally built around the
 three basic primitives.
 These include the new wave of agile languages such as Perl, Python, PHP, Ruby
-and Javascript.
+and JavaScript.
 
 There are hundreds of different languages for programming, but only a handful
 of languages for storing and transferring data.
@@ -1008,7 +1008,7 @@ In this view, sequences are treated as mappings with integer keys starting at
 zero.
 Having a unified collections view for sequences and mappings is helpful both
 for theoretical analysis and for creating practical YAML tools and APIs.
-This strategy is also used by the Javascript programming language.
+This strategy is also used by the JavaScript programming language.
 
 
 #### #. Tags
@@ -1998,7 +1998,7 @@ widely used formats.
 ```
 [#] b-break ::=
     ( b-carriage-return b-line-feed ) /* DOS, Windows */
-  | b-carriage-return                 /* MacOS upto 9.x */
+  | b-carriage-return                 /* MacOS up to 9.x */
   | b-line-feed                       /* UNIX, MacOS X */
 ```
 
@@ -5976,7 +5976,7 @@ closing the stream or starting the next [document].
 This allows the receiver to complete processing a [document] without having to
 wait for the next one to arrive.
 The sender may also transmit "keep-alive" messages in the form of [comment]
-lines or repeated [document end markers] without signalling the start of the
+lines or repeated [document end markers] without signaling the start of the
 next [document].
 
 
@@ -6415,7 +6415,7 @@ Hence YAML [processors] for a particular programming language typically provide
 some form of [local tags] that map directly to the language's [native data
 structures] (e.g., **`!ruby/object:Set`**).
 
-While such [local tags] are useful for ad-hoc [applications], they do not
+While such [local tags] are useful for ad hoc [applications], they do not
 suffice for stable, interoperable cross-[application] or cross-platform data
 exchange.
 
@@ -6530,7 +6530,7 @@ well as raising any questions regarding this draft.
   * [Extensible Markup Language (XML)](
     https://www.w3.org/TR/REC-xml.html)
 * The YAML Language Development Team
-  * [GitHub YAML Orgranization - Core Team](
+  * [GitHub YAML Organization - Core Team](
     https://github.com/orgs/yaml/teams/core)
 * yaml-core mailing list
   * [Mailing List: yaml-core](
