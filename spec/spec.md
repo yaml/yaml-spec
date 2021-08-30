@@ -1,4 +1,4 @@
-# YAML Ain’t Markup Language (YAML™) Version 1.2
+# YAML Ain't Markup Language (YAML™) Version 1.2
 
 **YAML Specification Version 1.2.1 -- Released YYYY-MM-DD**
 
@@ -72,7 +72,7 @@ create programs that process YAML information.
 
 # Chapter #. Introduction
 
-"YAML Ain’t Markup Language" (abbreviated YAML) is a data serialization
+"YAML Ain't Markup Language" (abbreviated YAML) is a data serialization
 language designed to be human-friendly and work well with modern programming
 languages for common everyday tasks.
 This specification is both an introduction to the YAML language and the
@@ -128,9 +128,9 @@ The design goals for YAML are, in decreasing priority:
 
 ## #. Prior Art
 
-YAML’s initial direction was set by the data serialization and markup language
+YAML's initial direction was set by the data serialization and markup language
 discussions among [SML-DEV members^].
-Later on, it directly incorporated experience from Ingy döt Net’s Perl module
+Later on, it directly incorporated experience from Ingy döt Net's Perl module
 [Data::Denter^].
 Since then, YAML has matured through ideas and support from its user community.
 
@@ -140,48 +140,48 @@ YAML integrates and builds upon concepts described by [C^], [Java^], [Perl^],
 
 The syntax of YAML was motivated by Internet Mail (Email) and remains
 partially compatible with that standard.
-Further, borrowing from MIME, YAML’s top-level production is a [stream] of
+Further, borrowing from MIME, YAML's top-level production is a [stream] of
 independent [documents], ideal for message-based distributed processing
 systems.
 
-YAML’s [indentation]\-based scoping is similar to Python’s (without the
+YAML's [indentation]\-based scoping is similar to Python's (without the
 ambiguities caused by [tabs]).
-[Indented blocks] facilitate easy inspection of the data’s structure.
-YAML’s [literal style] leverages this by enabling formatted text to be cleanly
+[Indented blocks] facilitate easy inspection of the data's structure.
+YAML's [literal style] leverages this by enabling formatted text to be cleanly
 mixed within an [indented] structure without troublesome [escaping].
 YAML also allows the use of traditional [indicator]\-based scoping similar to
-JSON’s and Perl’s.
+JSON's and Perl's.
 Such [flow content] can be freely nested inside [indented blocks].
 
-YAML’s [double-quoted style] uses familiar C-style [escape sequences].
+YAML's [double-quoted style] uses familiar C-style [escape sequences].
 This enables ASCII encoding of non-[printable] or 8-bit (ISO 8859-1) characters
 such as ["**`\x3B`**"].
 Non-[printable] 16-bit Unicode and 32-bit (ISO/IEC 10646) characters are
 supported with [escape sequences] such as ["**`\u003B`**"] and
 ["**`\U0000003B`**"].
 
-Motivated by HTML’s end-of-line normalization, YAML’s [line folding] employs an
+Motivated by HTML's end-of-line normalization, YAML's [line folding] employs an
 intuitive method of handling [line breaks].
 A single [line break] is [folded] into a single [space], while [empty lines]
 are interpreted as [line break] characters.
 This technique allows for paragraphs to be word-wrapped without affecting the
 [canonical form] of the [scalar content].
 
-YAML’s core type system is based on the requirements of agile languages such as
+YAML's core type system is based on the requirements of agile languages such as
 Perl, Python and Ruby.
 YAML directly supports both [collections] ([mappings], [sequences]) and
 [scalars].
-Support for these common types enables programmers to use their language’s
+Support for these common types enables programmers to use their language's
 [native data structures] for YAML manipulation, instead of requiring a special
 document object model (DOM).
 
-Like XML’s SOAP, YAML supports [serializing] a graph of [native data
+Like XML's SOAP, YAML supports [serializing] a graph of [native data
 structures] through an [aliasing] mechanism.
 Also like SOAP, YAML provides for [application]\-defined [types].
 This allows YAML to [represent] rich data structures required for modern
 distributed computing.
 YAML provides globally unique [type names] using a namespace mechanism inspired
-by Java’s DNS-based package naming convention and XML’s URI-based namespaces.
+by Java's DNS-based package naming convention and XML's URI-based namespaces.
 In addition, YAML allows for private [types] specific to a single
 [application].
 
@@ -197,13 +197,13 @@ machine).
 
 Both JSON and YAML aim to be human readable data interchange formats.
 However, JSON and YAML have different priorities.
-JSON’s foremost design goal is simplicity and universality.
+JSON's foremost design goal is simplicity and universality.
 Thus, JSON is trivial to generate and parse, at the cost of reduced human
 readability.
 It also uses a lowest common denominator information model, ensuring any JSON
 data can be easily processed by every modern programming environment.
 
-In contrast, YAML’s foremost design goals are human readability and support for
+In contrast, YAML's foremost design goals are human readability and support for
 [serializing] arbitrary [native data structures].
 Thus, YAML allows for extremely readable files, but is more complex to generate
 and parse.
@@ -294,7 +294,7 @@ specification.
 
 ## #. Collections
 
-YAML’s [block collections] use [indentation] for scope and begin each entry on
+YAML's [block collections] use [indentation] for scope and begin each entry on
 its own line.
 [Block sequences] indicate each entry with a dash and space (["**`-`** "]).
 [Mappings] use a colon and space (["**`:`** "]) to mark each [key: value pair].
@@ -334,7 +334,7 @@ national:
 ```
 
 
-**Example #. Sequence of Mappings (players’ statistics)**
+**Example #. Sequence of Mappings (players' statistics)**
 
 ```
 -
@@ -536,7 +536,7 @@ stats: |
   0.278 Batting Average
 ```
 
-YAML’s [flow scalars] include the [plain style] (most examples thus far) and
+YAML's [flow scalars] include the [plain style] (most examples thus far) and
 two quoted styles.
 The [double-quoted style] provides [escape sequences].
 The [single-quoted style] is useful when [escaping] is not needed.
@@ -942,7 +942,7 @@ A single "**`+`**" denotes [serialization] details, a double "**`++`**" denotes
 
 ### #. Representation Graph
 
-YAML’s _representation_ of [native data structure] is a rooted, connected,
+YAML's _representation_ of [native data structure] is a rooted, connected,
 directed graph of [tagged] [nodes].
 By "directed graph" we mean a set of [nodes] and directed edges ("arrows"),
 where each edge connects one [node] to another (see a formal [directed graph
@@ -1034,7 +1034,7 @@ In particular, each tag must specify the expected [node kind] ([scalar],
 to a [canonical form] for supporting [equality] testing.
 Furthermore, a tag may provide additional information such as the set of
 allowed [content] values for validation, a mechanism for [tag resolution] or
-any other data that is applicable to all of the tag’s [nodes].
+any other data that is applicable to all of the tag's [nodes].
 
 
 #### #. Node Comparison
@@ -1328,7 +1328,7 @@ YAML [processors] should therefore provide a mechanism allowing the
 If a [document] contains _unresolved tags_, the YAML [processor] is unable to
 [compose] a [complete representation] graph.
 In such a case, the YAML [processor] may [compose] a [partial representation],
-based on each [node’s kind] and allowing for non-specific tags.
+based on each [node's kind] and allowing for non-specific tags.
 
 
 ### #. Recognized and Valid Tags
@@ -1340,7 +1340,7 @@ If a [document] contains a [scalar node] with an _unrecognized tag_ or _invalid
 content_, only a [partial representation] may be [composed].
 In contrast, a YAML [processor] can always [compose] a [complete
 representation] for an unrecognized or an invalid [collection], since
-[collection] [equality] does not depend upon knowledge of the [collection’s]
+[collection] [equality] does not depend upon knowledge of the [collection's]
 data type.
 However, such a [complete representation] cannot be used to [construct] a
 [native data structure].
@@ -1350,7 +1350,7 @@ However, such a [complete representation] cannot be used to [construct] a
 
 In a given processing environment, there need not be an _available_ native type
 corresponding to a given [tag].
-If a [node’s tag] is _unavailable_, a YAML [processor] will not be able to
+If a [node's tag] is _unavailable_, a YAML [processor] will not be able to
 [construct] a [native data structure] for it.
 In this case, a [complete representation] may still be [composed] and an
 [application] may wish to use this [representation] directly.
@@ -1386,7 +1386,7 @@ application called [ypaste^].
 
 ## #. Production Parameters
 
-YAML’s syntax is designed for maximal human readability.
+YAML's syntax is designed for maximal human readability.
 This requires [parsing] to depend on the surrounding text.
 For notational compactness, this dependency is expressed using parameterized
 BNF productions.
@@ -1395,7 +1395,7 @@ This context sensitivity is the cause of most of the complexity of the YAML
 syntax definition.
 It is further complicated by struggling with the human tendency to look ahead
 when interpreting text.
-These complications are of course the source of most of YAML’s power to
+These complications are of course the source of most of YAML's power to
 [present] data in a very human readable way.
 
 Productions use any of the following parameters:
@@ -1404,8 +1404,8 @@ Productions use any of the following parameters:
 ##### Indentation: `n` or `m`
 
 > Many productions use an explicit [indentation] level parameter.
-This is less elegant than Python’s "indent" and "undent" conceptual tokens.
-However it is required to formally express YAML’s indentation rules.
+This is less elegant than Python's "indent" and "undent" conceptual tokens.
+However it is required to formally express YAML's indentation rules.
 
 > A value of `n/a` means "not applicable".
 
@@ -1510,7 +1510,7 @@ Characters outside this set must be [presented] using [escape] sequences.
 In addition, any allowed characters known to be non-printable should also be
 [escaped].
 
-> Note: This isn’t mandatory since a full implementation would require
+> Note: This isn't mandatory since a full implementation would require
 extensive character property tables.
 
 ```
@@ -1762,7 +1762,7 @@ mapping: { sky: blue, sea: green }
 * [c-comment] <!-- # -->
 
 
-["**`&`**"] (**`#x26`**, ampersand) denotes a [node’s anchor property].
+["**`&`**"] (**`#x26`**, ampersand) denotes a [node's anchor property].
 
 ```
 [#] c-anchor ::= "&"
@@ -2177,7 +2177,7 @@ and non-[printable] characters are not available.
 ```
 
 
-YAML escape sequences are a superset of C’s escape sequences:
+YAML escape sequences are a superset of C's escape sequences:
 
 Escaped ASCII null (**`#x0`**) character.
 
@@ -3289,7 +3289,7 @@ semantics to the same [global tag].
 
 Each [node] may have two optional _properties_, [anchor] and [tag], in addition
 to its [content].
-Node properties may be specified in any order before the [node’s content].
+Node properties may be specified in any order before the [node's content].
 Either or both may be omitted.
 
 ```
@@ -3553,7 +3553,7 @@ Second occurrence: *anchor
 
 # Chapter #. Flow Styles
 
-YAML’s _flow styles_ can be thought of as the natural extension of JSON to
+YAML's _flow styles_ can be thought of as the natural extension of JSON to
 cover [folding] long content lines for readability, [tagging] nodes to control
 [construction] of [native data structures] and using [anchors] and [aliases]
 to reuse [constructed] object instances.
@@ -3639,7 +3639,7 @@ rather than to an actual character.
 * [e-scalar] <!-- ° -->
 
 
-Both the [node’s properties] and [node content] are optional.
+Both the [node's properties] and [node content] are optional.
 This allows for a _completely empty node_.
 Completely empty nodes are only valid when following some explicit indication
 for their existence.
@@ -4636,7 +4636,7 @@ nodes] which refer to the [anchored] [node properties].
 
 # Chapter #. Block Styles
 
-YAML’s _block styles_ employ [indentation] rather than [indicators] to denote
+YAML's _block styles_ employ [indentation] rather than [indicators] to denote
 structure.
 This results in a more human readable (though less compact) notation.
 
@@ -4790,23 +4790,23 @@ YAML provides three chomping methods:
 
 > _Stripping_ is specified by the _"**`-`**" chomping indicator_.
 In this case, the final [line break] and any trailing [empty lines] are
-excluded from the [scalar’s content].
+excluded from the [scalar's content].
 
 
 ##### Clip
 
 > _Clipping_ is the default behavior used if no explicit chomping indicator is
 specified.
-In this case, the final [line break] character is preserved in the [scalar’s
+In this case, the final [line break] character is preserved in the [scalar's
 content].
-However, any trailing [empty lines] are excluded from the [scalar’s content].
+However, any trailing [empty lines] are excluded from the [scalar's content].
 
 
 ##### Keep
 
 > _Keeping_ is specified by the _"**`+`**" chomping indicator_.
 In this case, the final [line break] and any trailing [empty lines] are
-considered to be part of the [scalar’s content].
+considered to be part of the [scalar's content].
 These additional lines are not subject to [folding].
 
 The chomping method used is a [presentation detail] and must not be used to
@@ -5575,7 +5575,7 @@ scalar] and an [implicit key] starting a nested [block mapping].
 * [s-l+block-in-block(n,c)] <!-- 3:3 4 5:3, 6 -->
 
 
-The block [node’s properties] may span across several lines.
+The block [node's properties] may span across several lines.
 In this case, they must be [indented] by at least one more [space] than the
 [block collection], regardless of the [indentation] of the [block collection]
 entries.
@@ -5779,7 +5779,7 @@ character.
 Document [nodes] are [indented] as if they have a parent [indented] at -1
 [spaces].
 Since a [node] must be more [indented] than its parent [node], this allows the
-document’s [node] to be [indented] at zero or more [spaces].
+document's [node] to be [indented] at zero or more [spaces].
 
 ```
 [#] l-bare-document ::=
@@ -6005,8 +6005,8 @@ option.
 association and mapped to exactly one [value].
 YAML places no restrictions on the type of [keys]; in particular, they are not
 restricted to being [scalars].
-Example [bindings] to [native] types include Perl’s hash, Python’s dictionary
-and Java’s Hashtable.
+Example [bindings] to [native] types include Perl's hash, Python's dictionary
+and Java's Hashtable.
 
 
 **Example #. `!!map` Examples**
@@ -6036,8 +6036,8 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 ##### Definition:
 
 > [Represents] a collection indexed by sequential integers starting with zero.
-Example [bindings] to [native] types include Perl’s array, Python’s list or
-tuple and Java’s array or Vector.
+Example [bindings] to [native] types include Perl's array, Python's list or
+tuple and Java's array or Vector.
 
 
 **Example #. `!!seq` Examples**
@@ -6066,7 +6066,7 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 ##### Definition:
 
 > [Represents] a Unicode string, a sequence of zero or more Unicode characters.
-This type is usually [bound] to the [native] language’s string type or, for
+This type is usually [bound] to the [native] language's string type or, for
 languages lacking one (such as C), to a character array.
 
 
@@ -6200,7 +6200,7 @@ both integer and floating-point values.
 A YAML [processor] may use such a type for integers as long as they round-trip
 properly.
 
-> In some languages (such as C), an integer may overflow the [native] type’s
+> In some languages (such as C), an integer may overflow the [native] type's
 storage capability.
 A YAML [processor] may reject such a value as an error, truncate it with a
 warning or find some other manner to round-trip it.
@@ -6403,7 +6403,7 @@ Also floats: [
 None of the above recommended [schemas] preclude the use of arbitrary explicit
 [tags].
 Hence YAML [processors] for a particular programming language typically provide
-some form of [local tags] that map directly to the language’s [native data
+some form of [local tags] that map directly to the language's [native data
 structures] (e.g., **`!ruby/object:Set`**).
 
 While such [local tags] are useful for ad-hoc [applications], they do not
