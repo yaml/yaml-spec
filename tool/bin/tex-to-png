@@ -23,7 +23,7 @@ make-png() (
     fi
   )
   set -x
-  pdftoppm -png -singlefile -r 750 "$tmp" tmp
+  pdftoppm -png -singlefile -r 125 "$tmp" tmp
   mv tmp.png "$output"
 )
 
