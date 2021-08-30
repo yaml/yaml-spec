@@ -5984,6 +5984,7 @@ next [document].
 
 A YAML _schema_ is a combination of a set of [tags] and a mechanism for
 [resolving] [non-specific tags].
+Implementations may [recognize] [tags] outside the specified schema.
 
 
 ## #. Failsafe Schema
