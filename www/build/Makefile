@@ -59,7 +59,6 @@ SPEC_LINKS := $(SPEC)/links.yaml
 
 SPEC_IMAGE := $(wildcard $(SPEC)/tex/*.tex)
 SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC)/tex/%.tex=img/%.png)
-.SECONDARY: $(SPEC_IMAGE:%=$(SPEC)/%)
 SPEC_IMAGE := $(SPEC_IMAGE:%=src/%)
 
 SPEC_FILES := \

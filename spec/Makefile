@@ -38,5 +38,3 @@ build-img-all:
 	    (set -x; tex-to-png img/ $(BUILD_TEX))
 
 .PHONY: build
-.SECONDARY: $(ALL_IMG)
-.PRECIOUS: $(ALL_IMG)

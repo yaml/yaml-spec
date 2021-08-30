@@ -106,6 +106,9 @@ ul.release-info,
 #markdown-toc ul {
   list-style: none;
 }
+#markdown-toc ul ul ul ul {
+  display: none;
+}
 
 span.footnote-link {
   text-decoration: underline solid $theme-color;
