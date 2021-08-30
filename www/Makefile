@@ -13,6 +13,9 @@ REMOTE_NAME ?= $(shell $(ROOT)/tool/bin/get-remote-name)
 REPO_NAME := $(shell $(ROOT)/tool/bin/get-repo-name)
 
 SITEDIR ?= $(shell $(ROOT)/tool/bin/get-sitedir)
+ifneq ($(shell git status -s --untracked-files --ignored),)
+SITEDIR=main
+endif
 
 #------------------------------------------------------------------------------
 .PHONY: build
@@ -34,7 +37,7 @@ publish: build
 force:
 	$(MAKE) -C $(BUILD) clean
 	$(MAKE) -C $(EXT) clean
-	rm -fr $(SITE)
+	rm -fr $(SITE) $(HTML)
 
 clean:
 	$(MAKE) -C $(BUILD) $@

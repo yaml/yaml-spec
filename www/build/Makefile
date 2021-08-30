@@ -14,8 +14,9 @@ O := o
 
 SITEDIR ?= $(shell $(ROOT)/tool/bin/get-sitedir)
 
-HTML_FILES := \
-    spec.html \
+HTML_FILES := $(wildcard $(SPEC)/*.md)
+HTML_FILES := $(HTML_FILES:$(SPEC)/%.md=%.html)
+HTML_FILES := $(HTML_FILES:ReadMe.html=)
 
 STRIP_HTML := \
     perl -p0e ' \
@@ -50,16 +51,19 @@ WWW_FILES := $(shell \
 
 include $(EXT)/ext.mk
 
+SPEC_MD := $(wildcard $(SPEC)/*.md)
+SPEC_MD := $(SPEC_MD:%/ReadMe.md=)
+SPEC_MD := $(SPEC_MD:$(SPEC)/%=src/%)
+
 SPEC_LINKS := $(SPEC)/links.yaml
-SPEC_IMAGE := $(shell cd $(SPEC) && echo tex/*.tex)
-SPEC_IMAGE := $(SPEC_IMAGE:%.tex=%.png)
 
+SPEC_IMAGE := $(wildcard $(SPEC)/tex/*.tex)
+SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC)/tex/%.tex=img/%.png)
 .SECONDARY: $(SPEC_IMAGE:%=$(SPEC)/%)
-
-SPEC_IMAGE := $(SPEC_IMAGE:tex/%=src/img/%)
+SPEC_IMAGE := $(SPEC_IMAGE:%=src/%)
 
 SPEC_FILES := \
-    src/spec.md \
+    $(SPEC_MD) \
     $(SPEC_IMAGE)
 
 REVIEW_FILES := \
@@ -125,7 +129,12 @@ force:
 
 html: force
 	$(MAKE) force build SITEDIR=main
-	@mkdir -p $@
+	@mkdir -p $(HTML)
+	cp -r \
+	    site/main/img \
+	    site/main/spec.css \
+	    $(HTML)/
+
 	@for f in $(HTML_FILES); do \
 	    ( \
 		set -x; \
@@ -188,7 +197,11 @@ $O/src/story/%.md: $(STORY)/%.md
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-$O/src/%.md: $(SPEC)/%.md $(SPEC_LINKS)
+$O/src/%.md: $(SPEC)/%.md
+	@mkdir -p $(dir $@)
+	(printf '---\n---\n'; cat $<) > $@
+
+$O/src/spec.md: $(SPEC)/spec.md $(SPEC_LINKS)
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
