@@ -50,7 +50,7 @@ jobs:
         bash -c '
           set -x;
           [[ -e spec/2009/spec.html ]] &&
-          [[ -e www/_gh-pages/spec.html ]] &&
+          [[ -e www/spec.yaml.io/main/spec.html ]] &&
           true
         '
 
