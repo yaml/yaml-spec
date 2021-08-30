@@ -6349,9 +6349,14 @@ This type is usually [bound] to the [native] language's string type or, for
 languages lacking one (such as C), to a character array.
 
 
+? Valid Formatted Content
+
+: Any string.
+
+
 ? Canonical Form:
 
-: The obvious.
+: The same as the formatted content.
 
 
 **Example #. `!!str` Examples**
@@ -6416,6 +6421,12 @@ different from not having that [key] in the [mapping].
 
 : **`null`**.
 
+
+? Valid Formatted Content
+
+: Any of the strings `null`, `Null`, `NULL`, or `~`, or the empty string.
+
+
 **Example #. `!!null` Examples**
 
 ```
@@ -6441,6 +6452,11 @@ key with null value: !!null null
 : [Represents] a true/false value.
 In languages without a [native] Boolean type (such as C), they are usually
 [bound] to a native integer type, using one for true and zero for false.
+
+
+? Valid Formatted Content:
+
+: Any of the strings `true`, `True`, `TRUE`, `false`, `False`, or `FALSE`.
 
 
 ? Canonical Form
@@ -6487,10 +6503,19 @@ In general, integers representable using 32 binary digits should safely
 round-trip through most systems.
 
 
+? Valid Formatted Content
+
+: A string matching any of the following regular expressions:
+
+  * **`[-+]? [0-9]+`**
+  * **`0o [0-7]+`**
+  * **`0x [0-9a-fA-F]+`**
+
+
 ? Canonical Form
 
 : Decimal integer notation, with a leading "**`-`**" character for negative
-values, matching the regular expression **`0 | -? [1-9] [0-9]*`**
+values, matching the regular expression **`0 | -? [1-9] [0-9]*`**.
 
 
 **Example #. `!!int` Examples**
@@ -6531,6 +6556,15 @@ The supported range and accuracy depends on the implementation, though 32 bit
 IEEE floats should be safe.
 Since YAML does not specify a particular accuracy, using floating-point
 [mapping keys] requires great care and is not recommended.
+
+
+? Valid Formatted Content
+
+: A string matching any of the following regular expressions:
+
+  * **`[-+]? ( \. [0-9]+ | [0-9]+ ( \. [0-9]* )? ) ( [eE] [-+]? [0-9]+ )?`**
+  * **`[-+]? ( \.inf | \.Inf | \.INF )`**
+  * **`\.nan | \.NaN | \.NAN`**
 
 
 ? Canonical Form

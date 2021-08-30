@@ -178,7 +178,7 @@ sub parse_sections {
     s/\A(!\[.*\.svg\)\n)\s+//
       and push @s, {img => $1} and next;
 
-    s/\A(\* .*\n(?:  \S.*\n|\n(?=  \S))+)\n+//
+    s/\A( *\* .*\n(?:  \S.*\n|\n(?=  \S))+)\n+//
       and push @s, {ul => $1} and next;
 
     s/\A(\`\w.*\n)\n+//
@@ -400,7 +400,11 @@ sub fmt_img {}
 
 sub fmt_table {}
 
+
 sub fmt_footnote {}
+
+sub fmt_other {}
+
 
 #------------------------------------------------------------------------------
 sub read_files {
