@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+main() (
+  file=$1
+
+  spell-check "$file"
+)
+
+spell-check() (
+  printf "* Spell checking '%s' " "$file"
+
+  file=$1
+
+  out=$(
+    aspell \
+      -p ./.aspell \
+      --encoding utf-8 \
+      --mode markdown \
+      list \
+    < "$file" 2>&1
+  ) || true
+
+  if [[ $out ]]; then
+    echo FAIL
+    echo "$out"
+    echo
+    return 1
+  fi
+
+  echo OK
+)
+
+main "$@"

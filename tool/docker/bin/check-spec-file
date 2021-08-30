@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+source "$YAML_SPEC_ROOT/tool/lib/runner.bash"
+
+check() (
+  command -v aspell >/dev/null || return 1
+)
+
+run-local-or-docker "$@"

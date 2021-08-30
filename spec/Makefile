@@ -1,7 +1,8 @@
 DOCKER_TOOL := html-to-markydown
 include ../tool/make/init.mk
 
-#------------------------------------------------------------------------------
+ALL_MD := $(wildcard *.md)
+ALL_CHECK := $(ALL_MD:%=check-%)
 ALL_TEX := $(wildcard tex/*.tex)
 ALL_IMG := $(ALL_TEX:tex/%.tex=img/%.png)
 BUILD_TEX :=
@@ -15,6 +16,11 @@ build: build-html build-img
 build-html: $(ALL_HTML)
 
 build-img: $(ALL_IMG) build-img-all
+
+check: $(ALL_CHECK)
+
+$(ALL_CHECK):
+	check-spec-file $(@:check-%=%)
 
 clean:
 	rm -fr img html build

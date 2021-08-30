@@ -10,6 +10,9 @@ docker-build-all docker-push-all docker-pull-all:
 build html site serve publish publish-fork force diff:
 	$(MAKE) -C www $@
 
+check:
+	$(MAKE) -C spec $@
+
 _:
 	git worktree prune
 	git worktree add $@ $@
