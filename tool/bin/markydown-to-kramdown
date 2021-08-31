@@ -97,6 +97,10 @@ sub parse_sections {
     s/\A(#{1,5} .*\n)\n+//
       and push @s, {heading => $1} and next;
 
+    # Definition term:
+    s/\A\? (.*)\n+//
+      and push @s, {dt => $1} and next;
+
     # Unordered list:
     s/\A
       (
@@ -146,6 +150,17 @@ sub parse_sections {
       )
       \n+
     }{}x and push @s, {indent => $1} and next;
+
+    # Definition definition:
+    s{\A
+      (
+        : $s+ $line
+        (?:
+          \S $line
+        )*
+      )
+      \n+
+    }{}x and push @s, {dd => $1} and next;
 
     s/\A(----\n)\n+//
       and push @s, {hr => $1} and next;
@@ -236,6 +251,15 @@ sub fmt_heading {
   $_ = qq{<div id="$slug" />\n$text\n};
 }
 
+sub fmt_dt {
+  set_dates();
+
+  my $text = $_;
+  my $slug = slugify($text);
+
+  $_ = qq{<div id="$slug" />\n\n$text\n};
+}
+
 sub fmt_example {
   my ($title, $yaml1, $yaml2, $legend) = @$_;
 
@@ -324,6 +348,10 @@ sub fmt_p {
     $figure++;
     s/^\*\*Figure #\./**Figure $chapter.$figure./;
   }
+}
+
+sub fmt_dd {
+  format_links();
 }
 
 sub fmt_hr {}
