@@ -202,7 +202,7 @@ $O/src/story/%.md: $(STORY)/%.md
 
 $O/src/%.md: $(SPEC)/%.md
 	@mkdir -p $(dir $@)
-	(printf '---\n---\n'; cat $<) > $@
+	(echo '---'; echo '---'; cat $<) > $@
 
 $O/src/spec.md: $(SPEC)/spec.md $(SPEC_LINKS)
 	@mkdir -p $(dir $@)
