@@ -116,13 +116,17 @@ build: files $(SITE)
 	    find . | cpio -dump ../$(SITE)
 	echo $(PUBLISH_CNAME) > $(SITE)/CNAME
 
-serve: files
+serve: main files
 	$(eval override export YAML_SPEC_DIR := www/build)
 	$(call docker-run,run $(JEKYLL_SERVE),$(DOCKER_SERVE_OPTS))
 
 shell: files
 	$(eval override export YAML_SPEC_DIR := www/build)
 	$(call docker-run,run $(DOCKER_SHELL_CMD),$(DOCKER_SHELL_OPTS))
+
+.PHONY: main
+main:
+	$(eval override export SITEDIR := main)
 
 force:
 
