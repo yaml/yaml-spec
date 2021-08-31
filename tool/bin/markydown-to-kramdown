@@ -384,6 +384,7 @@ sub read_files {
 
   if (not defined $front) {
     my $layout = 'default';
+    # XXX Find better way to determine this is layout=spec
     if ($markdown =~ /\A# YAML Ain.t Markup Language/) {
       $layout = 'spec';
     }
