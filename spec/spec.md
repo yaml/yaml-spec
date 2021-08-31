@@ -265,13 +265,13 @@ In particular, the following words are used to describe the actions of a YAML
 [processor]:
 
 
-May
+? May
 
 : The word _may_ or the adjective _optional_ mean that conforming YAML
 [processors] are permitted to, but _need not_ behave as described.
 
 
-Should
+? Should
 
 : The word _should_ or the adjective _recommended_ mean that there could be
 reasons for a YAML [processor] to deviate from the behavior described, but that
@@ -279,7 +279,7 @@ such deviation could hurt interoperability and should therefore be advertised
 with appropriate notice.
 
 
-Must
+? Must
 
 : The word _must_ or the term _required_ or _shall_ mean that the behavior
 described is an absolute requirement of the specification.
@@ -828,7 +828,7 @@ _Dumping_ native data structures to a character [stream] is done using the
 following three stages:
 
 
-Representing Native Data Structures
+? Representing Native Data Structures
 
 : YAML _represents_ any _native data structure_ using three [node kinds]:
 [sequence] - an ordered series of entries; [mapping] - an unordered association
@@ -853,7 +853,7 @@ This simple model can represent any data structure independent of programming
 language.
 
 
-Serializing the Representation Graph
+? Serializing the Representation Graph
 
 : For sequential access mediums, such as an event callback API, a YAML
 [representation] must be _serialized_ to an ordered tree.
@@ -869,7 +869,7 @@ The result of this process, a YAML [serialization tree], can then be traversed
 to produce a series of event calls for one-pass processing of YAML data.
 
 
-Presenting the Serialization Tree
+? Presenting the Serialization Tree
 
 : The final output process is _presenting_ the YAML [serializations] as a
 character [stream] in a human-friendly manner.
@@ -890,7 +890,7 @@ _Loading_ [native data structures] from a character [stream] is done using the
 following three stages:
 
 
-Parsing the Presentation Stream
+? Parsing the Presentation Stream
 
 : _Parsing_ is the inverse process of [presentation], it takes a [stream] of
 characters and produces a [serialization tree].
@@ -899,7 +899,7 @@ reporting only the [serialization tree].
 Parsing can fail due to [ill-formed] input.
 
 
-Composing the Representation Graph
+? Composing the Representation Graph
 
 : _Composing_ takes a [serialization tree] and produces a
 [representation graph].
@@ -908,7 +908,7 @@ producing only the [representation graph].
 Composing can fail due to any of several reasons, detailed [below].
 
 
-Constructing Native Data Structures
+? Constructing Native Data Structures
 
 : The final input process is _constructing_ [native data structures] from the
 YAML [representation].
@@ -1411,7 +1411,7 @@ These complications are of course the source of most of YAML's power to
 Productions use any of the following parameters:
 
 
-Indentation: `n` or `m`
+? Indentation: `n` or `m`
 
 : Many productions use an explicit [indentation] level parameter.
 This is less elegant than Python's "indent" and "undent" conceptual tokens.
@@ -1420,7 +1420,7 @@ However it is required to formally express YAML's indentation rules.
 : A value of `n/a` means "not applicable".
 
 
-Context: `c`
+? Context: `c`
 
 : This parameter allows productions to tweak their behavior according to their
 surrounding.
@@ -1444,7 +1444,7 @@ mapping] (_flow-key_); as values inside a [flow collection] (_flow-in_); or as
 values outside one (_flow-out_).
 
 
-(Block) Chomping: `t`
+? (Block) Chomping: `t`
 
 : Block scalars offer three possible mechanisms for [chomping] any trailing
 [line breaks]: [strip], [clip] and [keep].
@@ -1459,41 +1459,41 @@ Hungarian-style naming convention.
 Each production is given a prefix based on the type of characters it begins and
 ends with.
 
-**`e-`**
+? **`e-`**
 
 : A production matching no characters.
 
-**`c-`**
+? **`c-`**
 
 : A production starting and ending with a special character.
 
-**`b-`**
+? **`b-`**
 
 : A production matching a single [line break].
 
-**`nb-`**
+? **`nb-`**
 
 : A production starting and ending with a non-[break] character.
 
-**`s-`**
+? **`s-`**
 
 : A production starting and ending with a [white space] character.
 
-**`ns-`**
+? **`ns-`**
 
 : A production starting and ending with a non-[space] character.
 
-**`l-`**
+? **`l-`**
 
 : A production matching complete line(s).
 
-`X`**`-`**`Y`**`-`**
+? `X`**`-`**`Y`**`-`**
 
 : A production starting with an `X`**`-`** character and ending with a
 `Y`**`-`** character, where `X`**`-`** and `Y`**`-`** are any of the above
 prefixes.
 
-`X`**`+`**, `X`**`-`**`Y`**`+`**
+? `X`**`+`**, `X`**`-`**`Y`**`+`**
 
 : A production as above, with the additional property that the matched content
 [indentation] level is greater than the specified `n` parameter.
@@ -5949,7 +5949,7 @@ with the above **`l-yaml-stream`** production.
 Some common use case that can take advantage of the YAML stream structure are:
 
 
-Appending to Streams
+? Appending to Streams
 
 : Allowing multiple [documents] in a single stream makes YAML suitable for log
 files and similar [applications].
@@ -5957,7 +5957,7 @@ Note that each [document] is independent of the rest, allowing for
 heterogeneous log file entries.
 
 
-Concatenating Streams
+? Concatenating Streams
 
 : Concatenating two YAML streams requires both to use the same [character
 encoding].
@@ -5970,7 +5970,7 @@ In particular, either or both may be empty and the first stream may or may not
 already contain such a marker.
 
 
-Communication Streams
+? Communication Streams
 
 : The [document end marker] allows signaling the end of a [document] without
 closing the stream or starting the next [document].
@@ -5999,17 +5999,17 @@ option.
 
 #### #. Generic Mapping
 
-URI
+? URI
 
 : **`tag:yaml.org,2002:map`**
 
 
-Kind
+? Kind
 
 : [Mapping].
 
 
-Definition
+? Definition
 
 : [Represents] an associative container, where each [key] is unique in the
 association and mapped to exactly one [value].
@@ -6033,17 +6033,17 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 
 #### #. Generic Sequence
 
-URI
+? URI
 
 : **`tag:yaml.org,2002:seq`**
 
 
-Kind
+? Kind
 
 : [Sequence].
 
 
-Definition
+? Definition
 
 : [Represents] a collection indexed by sequential integers starting with zero.
 Example [bindings] to [native] types include Perl's array, Python's list or
@@ -6063,24 +6063,24 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 
 #### #. Generic String
 
-URI
+? URI
 
 : **`tag:yaml.org,2002:str`**
 
 
-Kind
+? Kind
 
 : [Scalar].
 
 
-Definition
+? Definition
 
 : [Represents] a Unicode string, a sequence of zero or more Unicode characters.
 This type is usually [bound] to the [native] language's string type or, for
 languages lacking one (such as C), to a character array.
 
 
-Canonical Form:
+? Canonical Form:
 
 : The obvious.
 
@@ -6123,17 +6123,17 @@ The JSON [schema] uses the following [tags] in addition to those defined by the
 
 #### #. Null
 
-URI
+? URI
 
 : **`tag:yaml.org,2002:null`**
 
 
-Kind
+? Kind
 
 : [Scalar].
 
 
-Definition
+? Definition
 
 : [Represents] the lack of a value.
 This is typically [bound] to a [native] null-like value (e.g., **`undef`** in
@@ -6143,7 +6143,7 @@ Also, a [mapping] entry with some [key] and a null [value] is valid and
 different from not having that [key] in the [mapping].
 
 
-Canonical Form
+? Canonical Form
 
 : **`null`**.
 
@@ -6157,24 +6157,24 @@ key with null value: !!null null
 
 #### #. Boolean
 
-URI
+? URI
 
 : **`tag:yaml.org,2002:bool`**
 
 
-Kind
+? Kind
 
 : [Scalar].
 
 
-Definition
+? Definition
 
 : [Represents] a true/false value.
 In languages without a [native] Boolean type (such as C), they are usually
 [bound] to a native integer type, using one for true and zero for false.
 
 
-Canonical Form
+? Canonical Form
 
 : Either **`true`** or **`false`**.
 
@@ -6189,17 +6189,17 @@ Pluto is a planet: !!bool false
 
 #### #. Integer
 
-URI
+? URI
 
 : **`tag:yaml.org,2002:int`**
 
 
-Kind
+? Kind
 
 : [Scalar].
 
 
-Definition
+? Definition
 
 : [Represents] arbitrary sized finite mathematical integers.
 Scalars of this type should be [bound] to a [native] integer data type, if
@@ -6218,7 +6218,7 @@ In general, integers representable using 32 binary digits should safely
 round-trip through most systems.
 
 
-Canonical Form
+? Canonical Form
 
 : Decimal integer notation, with a leading "**`-`**" character for negative
 values, matching the regular expression **`0 | -? [1-9] [0-9]*`**
@@ -6235,17 +6235,17 @@ positive: !!int 34
 
 #### #. Floating Point
 
-URI
+? URI
 
 : **`tag:yaml.org,2002:float`**
 
 
-Kind
+? Kind
 
 : [Scalar].
 
 
-Definition
+? Definition
 
 : [Represents] an approximation to real numbers, including three special values
 (positive and negative infinity and "not a number").
@@ -6264,7 +6264,7 @@ Since YAML does not specify a particular accuracy, using floating-point
 [mapping keys] requires great care and is not recommended.
 
 
-Canonical Form
+? Canonical Form
 
 : Either **`0`**, **`.inf`**, **`-.inf`**, **`.nan`** or scientific notation
 matching the regular expression  
