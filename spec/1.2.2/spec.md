@@ -6249,23 +6249,47 @@ lines or repeated [document end markers] without signaling the start of the
 next [document].
 
 
-# Chapter #. Recommended Schemas
+# Chapter #. Tag Repository
 
-A YAML _schema_ is a combination of a set of [tags] and a mechanism for
-[resolving] [non-specific tags].
+This specification defines a number of [tags] that [represent] common native data
+structures.
+Implementations should [recognize] these tags.
 
-
-## #. Failsafe Schema
-
-The _failsafe schema_ is guaranteed to work with any YAML [document].
-It is therefore the recommended [schema] for generic YAML tools.
-A YAML [processor] should therefore support this [schema], at least as an
-option.
+These tags are defined by the following characteristics:
 
 
-### #. Tags
+? URI
 
-#### #. Generic Mapping
+: The Uniform Resource Indicator of the tag.
+
+
+? Kind
+
+: The expected [kind] of [nodes] with the tag.
+[Content] of any another [kind] is [invalid].
+
+
+? Definition
+
+: The intended use and interpretation of the tag.
+
+
+[Scalar] [tags] also have the following characteristics:
+
+
+? Allowed Formatted Content
+
+: The set of strings that may be the [formatted content] of [nodes] with the tag.
+If the node's [formatted content] does not match,
+then the [node] is [invalid].
+
+
+? Canonical Form
+
+: The set of strings that may be the [canonical form] of a node with the tag.
+
+
+## #. Generic Mapping
 
 ? URI
 
@@ -6299,7 +6323,7 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 ```
 
 
-#### #. Generic Sequence
+## #. Generic Sequence
 
 ? URI
 
@@ -6330,7 +6354,7 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 ```
 
 
-#### #. Generic String
+## #. Generic String
 
 ? URI
 
@@ -6363,34 +6387,7 @@ Block style: !!str |-
 Flow style: !!str "String: just a theory."
 ```
 
-
-### #. Tag Resolution
-
-All [nodes] with the ["**`!`**" non-specific tag] are [resolved], by the
-standard [convention], to "**`tag:yaml.org,2002:seq`**",
-"**`tag:yaml.org,2002:map`**" or "**`tag:yaml.org,2002:str`**", according to
-their [kind].
-
-All [nodes] with the ["**`?`**" non-specific tag] are left [unresolved].
-This constrains the [application] to deal with a [partial representation].
-
-
-## #. JSON Schema
-
-The _JSON schema_ is the lowest common denominator of most modern computer
-languages and allows [parsing] JSON files.
-A YAML [processor] should therefore support this [schema], at least as an
-option.
-It is also strongly recommended that other [schemas] should be based on it.
-
-
-### #. Tags
-
-The JSON [schema] uses the following [tags] in addition to those defined by the
-[failsafe] schema:
-
-
-#### #. Null
+## #. Null
 
 ? URI
 
@@ -6424,7 +6421,7 @@ key with null value: !!null null
 ```
 
 
-#### #. Boolean
+## #. Boolean
 
 ? URI
 
@@ -6456,7 +6453,7 @@ Pluto is a planet: !!bool false
 ```
 
 
-#### #. Integer
+## #. Integer
 
 ? URI
 
@@ -6502,7 +6499,7 @@ positive: !!int 34
 ```
 
 
-#### #. Floating Point
+## #. Floating Point
 
 ? URI
 
@@ -6550,6 +6547,59 @@ infinity: !!float .inf
 not a number: !!float .nan
 ```
 
+
+# Chapter #. Recommended Schemas
+
+A YAML _schema_ is a combination of a set of [tags] and a mechanism for
+[resolving] [non-specific tags].
+
+
+## #. Failsafe Schema
+
+The _failsafe schema_ is guaranteed to work with any YAML [document].
+It is therefore the recommended [schema] for generic YAML tools.
+A YAML [processor] should therefore support this [schema], at least as an
+option.
+
+
+### #. Tags
+
+The failsafe schema uses the following tags:
+
+* [Generic Mapping]
+* [Generic Sequence]
+* [Generic String]
+
+
+### #. Tag Resolution
+
+All [nodes] with the ["**`!`**" non-specific tag] are [resolved], by the
+standard [convention], to "**`tag:yaml.org,2002:seq`**",
+"**`tag:yaml.org,2002:map`**" or "**`tag:yaml.org,2002:str`**", according to
+their [kind].
+
+All [nodes] with the ["**`?`**" non-specific tag] are left [unresolved].
+This constrains the [application] to deal with a [partial representation].
+
+
+## #. JSON Schema
+
+The _JSON schema_ is the lowest common denominator of most modern computer
+languages and allows [parsing] JSON files.
+A YAML [processor] should therefore support this [schema], at least as an
+option.
+It is also strongly recommended that other [schemas] should be based on it.
+
+
+### #. Tags
+
+The JSON [schema] uses the following [tags] in addition to those defined by the
+[failsafe] schema:
+
+* [Null]
+* [Boolean]
+* [Integer]
+* [Floating Point]
 
 ### #. Tag Resolution
 
