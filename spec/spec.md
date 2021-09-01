@@ -259,30 +259,10 @@ For more information on using both XML and YAML, please visit
 
 ## #. Terminology
 
-This specification uses key words based on the [RFC format^] to indicate
-requirement level.
-In particular, the following words are used to describe the actions of a YAML
-[processor]:
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
+"SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
+interpreted as described in [RFC 2119^].
 
-
-? May
-
-: The word _may_ or the adjective _optional_ mean that conforming YAML
-[processors] are permitted to, but _need not_ behave as described.
-
-
-? Should
-
-: The word _should_ or the adjective _recommended_ mean that there could be
-reasons for a YAML [processor] to deviate from the behavior described, but that
-such deviation could hurt interoperability and should therefore be advertised
-with appropriate notice.
-
-
-? Must
-
-: The word _must_ or the term _required_ or _shall_ mean that the behavior
-described is an absolute requirement of the specification.
 
 The rest of this document is arranged as follows.
 Chapter [2] provides a short preview of the main YAML features.
@@ -6494,9 +6474,9 @@ well as raising any questions regarding this draft.
 * Python
   * [The Python Programming Language](
     https://www.python.org/)
-* RFC format
-  * [Request for Comments Summary](
-    https://tools.ietf.org/html/rfc2199)
+* RFC 2119
+  * [RFC 2119: Key words for use in RFCs to Indicate Requirement Levels](
+    https://tools.ietf.org/html/rfc2119)
 * Ruby
   * [Ruby Programming Language](
     https://www.ruby-lang.org/)
