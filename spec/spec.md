@@ -6475,7 +6475,7 @@ well as raising any questions regarding this draft.
   * [The Python Programming Language](
     https://www.python.org/)
 * RFC 2119
-  * [RFC 2119: Key words for use in RFCs to Indicate Requirement Levels](
+  * [Key words for use in RFCs to Indicate Requirement Levels](
     https://tools.ietf.org/html/rfc2119)
 * Ruby
   * [Ruby Programming Language](
