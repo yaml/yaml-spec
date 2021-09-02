@@ -110,23 +110,12 @@ ul.release-info,
   display: none;
 }
 
-span.footnote-link {
-  text-decoration: underline solid $theme-color;
-
-  sup a {
-    color: blue;
-    text-decoration: none;
-  }
-}
-
-.footnote-links {
+.footnotes {
+  margin-bottom: 1000px;
   p {
     margin-bottom: 0px;
+    margin-block: 0px;
   }
-}
-
-.footnote-links-after {
-  height: 1000px;
 }
 
 .language-json
