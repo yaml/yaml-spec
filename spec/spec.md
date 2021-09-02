@@ -261,7 +261,7 @@ For more information on using both XML and YAML, please visit
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119^].
+interpreted as described in RFC 2119[^RFC-2119].
 
 
 The rest of this document is arranged as follows.
