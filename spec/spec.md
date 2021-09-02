@@ -140,7 +140,7 @@ The design goals for YAML are, in decreasing priority:
 YAML's initial direction was set by the data serialization and markup language
 discussions among SML-DEV members[^SML-DEV].
 Later on, it directly incorporated experience from Ingy döt Net's Perl module
-Data::Denter[^Data::Denter].
+Data::Denter[^Denter].
 Since then, YAML has matured through ideas and support from its user community.
 
 YAML integrates and builds upon concepts described by C[^C], Java[^Java],
@@ -226,8 +226,8 @@ This is also the case in practice; every JSON file is also a valid YAML file.
 This makes it easy to migrate from JSON to YAML if/when the additional features
 are required.
 
-JSON[^JSON] requires that [mappings] [keys] merely "SHOULD" be [unique],
-while YAML insists they "MUST" be.
+JSON[^JSON] requires that [mappings] [keys] merely "SHOULD" be [unique], while
+YAML insists they "MUST" be.
 Technically, YAML therefore complies with the JSON specification, choosing to
 treat duplicates as an error.
 In practice, since JSON is silent on the semantics of such duplicates, the only
@@ -1389,7 +1389,7 @@ The alternate view uses double-quotes for string scalars, flow style for
 collections and JSON plain style for numbers, booleans and null values.
 
 A reference implementation using the productions is available as the
-YamlReference Haskell package[^yaml-reference].
+YamlReference Haskell package[^yaml-ref].
 This reference implementation is also available as an interactive web
 application called ypaste[^ypaste].
 
@@ -1508,9 +1508,8 @@ Unicode character set.
 The allowed character range explicitly excludes the C0 control block[^c0-block]
 **`#x0-#x1F`** (except for TAB **`#x9`**, LF **`#xA`** and CR **`#xD`** which
 are allowed), DEL **`#x7F`**, the C1 control block **`#x80-#x9F`** (except for
-NEL **`#x85`** which is allowed),
-the surrogate block[^surrogate-block] **`#xD800-#xDFFF`**,
-**`#xFFFE`** and **`#xFFFF`**.
+NEL **`#x85`** which is allowed), the surrogate block[^surrogates]
+**`#xD800-#xDFFF`**, **`#xFFFE`** and **`#xFFFF`**.
 
 On input, a YAML [processor] must accept all characters in this printable
 subset.
@@ -1600,7 +1599,7 @@ If another encoding is used, it is recommended that an explicit byte order mark
 be used, even if the first [stream] character is ASCII.
 
 For more information about the byte order mark and the Unicode character
-encoding schemes see the Unicode FAQ[^unicode-faq].
+encoding schemes see the Unicode FAQ[^uni-faq].
 
 ```
 [#] c-byte-order-mark ::= #xFEFF
@@ -6457,7 +6456,7 @@ well as raising any questions regarding this draft.
 [^SML-DEV]: [SML-DEV Mailing List Archive](
   https://github.com/yaml/sml-dev-archive)
 
-[^Data::Denter]: [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](
+[^Denter]: [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](
   https://metacpan.org/dist/Data-Denter/view/Denter.pod)
 
 [^C]: [Wikipedia - C (programming language)](
@@ -6508,7 +6507,7 @@ well as raising any questions regarding this draft.
 [^tag-uri]: [The 'tag' URI Scheme](
   https://datatracker.ietf.org/doc/html/rfc4151)
 
-[^yaml-reference]: [YamlReference: YAML reference implementation](
+[^yaml-ref]: [YamlReference: YAML reference implementation](
   https://hackage.haskell.org/package/YamlReference)
 
 [^ypaste]: [ypaste / YEAST2HTML](
@@ -6517,8 +6516,8 @@ well as raising any questions regarding this draft.
 [^c0-block]: [Wikipedia - C0 and C1 control codes](
   https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
 
-[^surrogate-block]: [Wikipedia - Universal Character Set characters #Surrogates](
+[^surrogates]: [Wikipedia - Universal Character Set characters #Surrogates](
   https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
 
-[^unicode-faq]: [UTF-8, UTF-16, UTF-32 & BOM](
+[^uni-faq]: [UTF-8, UTF-16, UTF-32 & BOM](
   https://www.unicode.org/faq/utf_bom.html)
