@@ -31,7 +31,7 @@ The input format is now Markdown instead of DocBook, and the images are made
 from plain text LaTeX files rather than proprietary drawing software.
 All the source content for the specification is publicly hosted[^spec-repo].
 
-The previous YAML specification[^1.2-spec] was published over 12 years ago.
+The previous YAML specification[^1-2-spec] was published over 12 years ago.
 In that time span, YAML's popularity has grown significantly.
 Efforts are ongoing to improve the language and grow it to meet the needs and
 expectations of its users.
@@ -6447,7 +6447,7 @@ well as raising any questions regarding this draft.
 [^spec-repo]: [YAML Specification on GitHub](
   https://github.com/yaml/yaml-spec)
 
-[^1.2-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.2](
+[^1-2-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.2](
   https://yaml.org/spec/1.2)
 
 [^Unicode]: [Unicode – The World Standard for Text and Emoji](
