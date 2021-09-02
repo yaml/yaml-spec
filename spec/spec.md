@@ -6444,80 +6444,29 @@ well as raising any questions regarding this draft.
 
 # Reference Links
 
-[^spec-repo]: [YAML Specification on GitHub](
-  https://github.com/yaml/yaml-spec)
-
-[^1-2-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.2](
-  https://yaml.org/spec/1.2)
-
-[^Unicode]: [Unicode – The World Standard for Text and Emoji](
-  https://www.unicode.org)
-
-[^SML-DEV]: [SML-DEV Mailing List Archive](
-  https://github.com/yaml/sml-dev-archive)
-
-[^Denter]: [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](
-  https://metacpan.org/dist/Data-Denter/view/Denter.pod)
-
-[^C]: [Wikipedia - C (programming language)](
-  https://en.wikipedia.org/wiki/C_%28programming_language%29)
-
-[^Java]: [Wikipedia - Java (programming language)](
-  https://en.wikipedia.org/wiki/Java_%28programming_language%29)
-
-[^Perl]: [The Perl Programming Language](
-  https://www.perl.org/)
-
-[^Python]: [The Python Programming Language](
-  https://www.python.org/)
-
-[^Ruby]: [Ruby Programming Language](
-  https://www.ruby-lang.org/)
-
-[^Email]: [Internet Message Format](
-  https://tools.ietf.org/html/rfc5322)
-
-[^HTML]: [HTML Living Standard](
-  https://html.spec.whatwg.org/)
-
-[^MIME]: [Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies](
-  https://tools.ietf.org/html/rfc2045)
-
-[^URI]: [Uniform Resource Identifiers (URI)](
-  https://tools.ietf.org/html/rfc3986)
-
-[^XML]: [Extensible Markup Language (XML)](
-  https://www.w3.org/TR/REC-xml.html)
-
-[^SAX]: [Wikipedia - Simple API for XML](
-  https://en.wikipedia.org/wiki/Simple_API_for_XML)
-
-[^SOAP]: [SOAP](
-  https://en.wikipedia.org/wiki/SOAP)
-
-[^JSON]: [The JSON data interchange syntax](
-  https://www.ecma-international.org/publications-and-standards/standards/ecma-404/)
-
-[^RFC-2119]: [Request for Comments Summary](
-  https://tools.ietf.org/html/rfc2119)
-
-[^digraph]: [directed graph](
-  https://xlinux.nist.gov/dads/HTML/directedGraph.html)
-
-[^tag-uri]: [The 'tag' URI Scheme](
-  https://datatracker.ietf.org/doc/html/rfc4151)
-
-[^yaml-ref]: [YamlReference: YAML reference implementation](
-  https://hackage.haskell.org/package/YamlReference)
-
-[^ypaste]: [ypaste / YEAST2HTML](
-  http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl)
-
-[^c0-block]: [Wikipedia - C0 and C1 control codes](
-  https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
-
-[^surrogates]: [Wikipedia - Universal Character Set characters #Surrogates](
-  https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
-
-[^uni-faq]: [UTF-8, UTF-16, UTF-32 & BOM](
-  https://www.unicode.org/faq/utf_bom.html)
+[^spec-repo]: [YAML Specification on GitHub](https://github.com/yaml/yaml-spec)
+[^1-2-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.2](https://yaml.org/spec/1.2)
+[^Unicode]: [Unicode – The World Standard for Text and Emoji](https://www.unicode.org)
+[^SML-DEV]: [SML-DEV Mailing List Archive](https://github.com/yaml/sml-dev-archive)
+[^Denter]: [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](https://metacpan.org/dist/Data-Denter/view/Denter.pod)
+[^C]: [Wikipedia - C (programming language)](https://en.wikipedia.org/wiki/C_%28programming_language%29)
+[^Java]: [Wikipedia - Java (programming language)](https://en.wikipedia.org/wiki/Java_%28programming_language%29)
+[^Perl]: [The Perl Programming Language](https://www.perl.org/)
+[^Python]: [The Python Programming Language](https://www.python.org/)
+[^Ruby]: [Ruby Programming Language](https://www.ruby-lang.org/)
+[^Email]: [Internet Message Format](https://tools.ietf.org/html/rfc5322)
+[^HTML]: [HTML Living Standard](https://html.spec.whatwg.org/)
+[^MIME]: [Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies](https://tools.ietf.org/html/rfc2045)
+[^URI]: [Uniform Resource Identifiers (URI)](https://tools.ietf.org/html/rfc3986)
+[^XML]: [Extensible Markup Language (XML)](https://www.w3.org/TR/REC-xml.html)
+[^SAX]: [Wikipedia - Simple API for XML](https://en.wikipedia.org/wiki/Simple_API_for_XML)
+[^SOAP]: [SOAP](https://en.wikipedia.org/wiki/SOAP)
+[^JSON]: [The JSON data interchange syntax](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/)
+[^RFC-2119]: [Request for Comments Summary](https://tools.ietf.org/html/rfc2119)
+[^digraph]: [directed graph](https://xlinux.nist.gov/dads/HTML/directedGraph.html)
+[^tag-uri]: [The 'tag' URI Scheme](https://datatracker.ietf.org/doc/html/rfc4151)
+[^yaml-ref]: [YamlReference: YAML reference implementation](https://hackage.haskell.org/package/YamlReference)
+[^ypaste]: [ypaste / YEAST2HTML](http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl)
+[^c0-block]: [Wikipedia - C0 and C1 control codes](https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
+[^surrogates]: [Wikipedia - Universal Character Set characters #Surrogates](https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
+[^uni-faq]: [UTF-8, UTF-16, UTF-32 & BOM](https://www.unicode.org/faq/utf_bom.html)
