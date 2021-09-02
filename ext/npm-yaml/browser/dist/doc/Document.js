@@ -1,6 +1,6 @@
 import { Alias } from '../nodes/Alias.js';
 import { isEmptyPath, collectionFromPath } from '../nodes/Collection.js';
-import { NODE_TYPE, DOC, isCollection, isScalar } from '../nodes/Node.js';
+import { NODE_TYPE, DOC, isNode, isCollection, isScalar } from '../nodes/Node.js';
 import { Pair } from '../nodes/Pair.js';
 import { toJS } from '../nodes/toJS.js';
 import { defaultOptions } from '../options.js';
@@ -48,6 +48,29 @@ class Document {
             this.contents = this.createNode(value, _replacer, options);
         }
     }
+    /**
+     * Create a deep copy of this Document and its contents.
+     *
+     * Custom Node values that inherit from `Object` still refer to their original instances.
+     */
+    clone() {
+        const copy = Object.create(Document.prototype, {
+            [NODE_TYPE]: { value: DOC }
+        });
+        copy.commentBefore = this.commentBefore;
+        copy.comment = this.comment;
+        copy.errors = this.errors.slice();
+        copy.warnings = this.warnings.slice();
+        copy.options = Object.assign({}, this.options);
+        copy.directives = this.directives.clone();
+        copy.schema = this.schema.clone();
+        copy.contents = isNode(this.contents)
+            ? this.contents.clone(copy.schema)
+            : this.contents;
+        if (this.range)
+            copy.range = this.range.slice();
+        return copy;
+    }
     /** Adds a value to the document. */
     add(value) {
         if (assertCollection(this.contents))
@@ -92,9 +115,10 @@ class Document {
             options = replacer;
             replacer = undefined;
         }
-        const { anchorPrefix, flow, keepUndefined, onTagObj, tag } = options || {};
+        const { aliasDuplicateObjects, anchorPrefix, flow, keepUndefined, onTagObj, tag } = options || {};
         const { onAnchor, setAnchors, sourceObjects } = createNodeAnchors(this, anchorPrefix || 'a');
         const ctx = {
+            aliasDuplicateObjects: aliasDuplicateObjects !== null && aliasDuplicateObjects !== void 0 ? aliasDuplicateObjects : true,
             keepUndefined: keepUndefined !== null && keepUndefined !== void 0 ? keepUndefined : false,
             onAnchor,
             onTagObj,

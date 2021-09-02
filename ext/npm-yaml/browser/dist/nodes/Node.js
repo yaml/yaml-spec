@@ -36,6 +36,13 @@ class NodeBase {
     constructor(type) {
         Object.defineProperty(this, NODE_TYPE, { value: type });
     }
+    /** Create a copy of this node.  */
+    clone() {
+        const copy = Object.create(Object.getPrototypeOf(this), Object.getOwnPropertyDescriptors(this));
+        if (this.range)
+            copy.range = this.range.slice();
+        return copy;
+    }
 }
 
 export { ALIAS, DOC, MAP, NODE_TYPE, NodeBase, PAIR, SCALAR, SEQ, hasAnchor, isAlias, isCollection, isDocument, isMap, isNode, isPair, isScalar, isSeq };

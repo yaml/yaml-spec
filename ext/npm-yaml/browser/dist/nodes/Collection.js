@@ -1,5 +1,5 @@
 import { createNode } from '../doc/createNode.js';
-import { NodeBase, isCollection, isScalar, isPair } from './Node.js';
+import { NodeBase, isNode, isPair, isCollection, isScalar } from './Node.js';
 
 function collectionFromPath(schema, path, value) {
     let v = value;
@@ -11,19 +11,14 @@ function collectionFromPath(schema, path, value) {
             v = a;
         }
         else {
-            const o = {};
-            Object.defineProperty(o, typeof k === 'symbol' ? k : String(k), {
-                value: v,
-                writable: true,
-                enumerable: true,
-                configurable: true
-            });
-            v = o;
+            v = new Map([[k, v]]);
         }
     }
     return createNode(v, undefined, {
-        onAnchor() {
-            throw new Error('Repeated objects are not supported here');
+        aliasDuplicateObjects: false,
+        keepUndefined: false,
+        onAnchor: () => {
+            throw new Error('This should not happen, please report a bug.');
         },
         schema,
         sourceObjects: new Map()
@@ -41,6 +36,20 @@ class Collection extends NodeBase {
             enumerable: false,
             writable: true
         });
+    }
+    /**
+     * Create a copy of this collection.
+     *
+     * @param schema - If defined, overwrites the original's schema
+     */
+    clone(schema) {
+        const copy = Object.create(Object.getPrototypeOf(this), Object.getOwnPropertyDescriptors(this));
+        if (schema)
+            copy.schema = schema;
+        copy.items = copy.items.map(it => isNode(it) || isPair(it) ? it.clone(schema) : it);
+        if (this.range)
+            copy.range = this.range.slice();
+        return copy;
     }
     /**
      * Adds a value to the collection. For `!!map` and `!!omap` the value must

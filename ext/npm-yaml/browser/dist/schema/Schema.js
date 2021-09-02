@@ -18,6 +18,11 @@ class Schema {
         this.sortMapEntries =
             sortMapEntries === true ? sortMapEntriesByKey : sortMapEntries || null;
     }
+    clone() {
+        const copy = Object.create(Schema.prototype, Object.getOwnPropertyDescriptors(this));
+        copy.tags = this.tags.slice();
+        return copy;
+    }
 }
 
 export { Schema };

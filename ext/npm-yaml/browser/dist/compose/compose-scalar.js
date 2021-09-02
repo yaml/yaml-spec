@@ -19,7 +19,8 @@ function composeScalar(ctx, token, tagToken, onError) {
         scalar = isScalar(res) ? res : new Scalar(res);
     }
     catch (error) {
-        onError(tagToken || token, 'TAG_RESOLVE_FAILED', error.message);
+        const msg = error instanceof Error ? error.message : String(error);
+        onError(tagToken || token, 'TAG_RESOLVE_FAILED', msg);
         scalar = new Scalar(value);
     }
     scalar.range = range;

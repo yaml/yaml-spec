@@ -1,6 +1,6 @@
 import { warn } from '../log.js';
 import { createStringifyContext } from '../stringify/stringify.js';
-import { isScalar, isSeq, isAlias, isMap, isNode } from './Node.js';
+import { isSeq, isScalar, isAlias, isMap, isNode } from './Node.js';
 import { Scalar } from './Scalar.js';
 import { toJS } from './toJS.js';
 
