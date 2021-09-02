@@ -1,11 +1,9 @@
 ---
-layout: spec-draft
+layout: spec
+title: YAML Ain’t Markup Language (YAML™) Version 1.2
+status: draft
 ---
-<p style="color:#F44">
-This is a working draft of the upcoming YAML 1.2.1 specification. It is a work
-in progress and may be modified before final release. You should not rely on
-the content of this draft or cite it as an authority.
-</p>
+<!-- If I remove this comment the perl script fails. -->
 
 # YAML Ain't Markup Language (YAML™) Version 1.2
 

@@ -13,15 +13,20 @@
   {% include head-favicon.html %}
 </head>
 
-<body>
+<body class="status-{{ page.status }}">
+
 <main id="content" class="main-content" role="main">
-<div class="wrapper">
-<section>
+
+{% if page.status == "draft" %}
+<p class="status-header">
+This is a working draft of an upcoming specification. It is a work
+in progress and may be modified before final release. You should not rely on
+the content of this draft or cite it as an authority.
+</p>
+{% endif %}
 
 {{content}}
 
-</section>
-</div>
 </main>
 
 <!-- XXX What is this for? -->
