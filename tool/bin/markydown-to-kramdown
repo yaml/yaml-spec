@@ -162,6 +162,15 @@ sub parse_sections {
       \n+
     }{}x and push @s, {dd => $1} and next;
 
+    s{
+      \A(
+        \[\^ $line
+        $line_not_blank*
+        \n+
+      )
+    }{}x
+      and push @s, {footnote => $1} and next;
+
     s/\A(----\n)\n+//
       and push @s, {hr => $1} and next;
 
@@ -394,6 +403,8 @@ sub fmt_comment {}
 sub fmt_img {}
 
 sub fmt_table {}
+
+sub fmt_footnote {}
 
 #------------------------------------------------------------------------------
 sub read_files {
