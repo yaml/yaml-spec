@@ -261,7 +261,7 @@ For more information on using both XML and YAML, please visit
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in [RFC 2119^].
+interpreted as described in RFC 2119[^RFC-2119].
 
 The rest of this document is arranged as follows.
 Chapter [2] provides a short preview of the main YAML features.
@@ -6441,7 +6441,7 @@ well as raising any questions regarding this draft.
 [^SAX]: [Wikipedia - Simple API for XML](https://en.wikipedia.org/wiki/Simple_API_for_XML)
 [^SOAP]: [SOAP](https://en.wikipedia.org/wiki/SOAP)
 [^JSON]: [The JSON data interchange syntax](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/)
-[^RFC-2119]: [Request for Comments Summary](https://tools.ietf.org/html/rfc2119)
+[^RFC-2119]: [Key words for use in RFCs to Indicate Requirement Levels](https://tools.ietf.org/html/rfc2119)
 [^digraph]: [directed graph](https://xlinux.nist.gov/dads/HTML/directedGraph.html)
 [^tag-uri]: [The 'tag' URI Scheme](https://datatracker.ietf.org/doc/html/rfc4151)
 [^yaml-ref]: [YamlReference: YAML reference implementation](https://hackage.haskell.org/package/YamlReference)
