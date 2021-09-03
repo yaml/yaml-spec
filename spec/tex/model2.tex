@@ -23,12 +23,8 @@
 \entity[above right=of Tag]{+ Non-Specific Tag}{};
 \draw[inherits] (+ Non-Specific Tag) -| (Tag);
 
-\entity[below=of Node]{Scalar Node}{};
+\entity[below=of Node]{Scalar Node}{Canonical Form/\\+Formatted Content};
 \draw[inherits] (Scalar Node) -- (Node);
-
-\node[parallellogram, below=of Scalar Node](Canonical Form) {String};
-\draw[has] (Scalar Node) -- (Canonical Form)
-  node[onArrow, midway] {Canonical Form/\\++ Formatted Content};
 
 \entity[left=of Scalar Node]{Sequence Node}{};
 \draw[inherits] (Sequence Node) -- ++(0,+10mm) -| (Node);

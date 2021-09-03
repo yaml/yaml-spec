@@ -16,12 +16,8 @@
 \entity[right=of Tag]{Specific Tag}{};
 \draw[inherits] (Specific Tag) -- (Tag);
 
-\entity[below=of Node]{Scalar Node}{};
+\entity[below=of Node]{Scalar Node}{Canonical Form};
 \draw[inherits] (Scalar Node) -- (Node);
-
-\node[parallellogram, below=of Scalar Node](Canonical Form) {String};
-\draw[has] (Scalar Node) -- (Canonical Form)
-  node[onArrow, midway] {Canonical\\Form};
 
 \entity[left=of Scalar Node]{Sequence Node}{};
 \draw[inherits] (Sequence Node) -- ++(0,+10mm) -| (Node);
