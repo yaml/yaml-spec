@@ -534,9 +534,8 @@ sub format_internal_link {
 }
 
 sub set_dates {
+  s/YYYY(.)MM(.)DD/$YYYY$1$MM$2$DD/g;
   s/YYYY/$YYYY/g;
-  s/MM/$MM/g;
-  s/DD/$DD/g;
 }
 
 my $example_number;
