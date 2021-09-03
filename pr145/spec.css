@@ -32,12 +32,8 @@ ul.author-group, ul.release-info, #markdown-toc, #markdown-toc ul { list-style: 
 
 #markdown-toc ul ul ul ul { display: none; }
 
-span.footnote-link { text-decoration: underline solid #606c71; }
-span.footnote-link sup a { color: blue; text-decoration: none; }
-
-.footnote-links p { margin-bottom: 0px; }
-
-.footnote-links-after { height: 1000px; }
+.footnotes { margin-bottom: 1000px; }
+.footnotes p { margin-bottom: 0px; margin-block: 0px; }
 
 .language-json .highlight .nl { font-weight: normal; color: blue; }
 .language-json .highlight .s2 { color: darkgreen; }
