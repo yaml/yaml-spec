@@ -12,9 +12,10 @@ USER_ID ?= $(shell $(ROOT)/tool/bin/get-user-id)
 REMOTE_NAME ?= $(shell $(ROOT)/tool/bin/get-remote-name)
 REPO_NAME := $(shell $(ROOT)/tool/bin/get-repo-name)
 
-SITEDIR ?= $(shell $(ROOT)/tool/bin/get-sitedir)
-ifneq ($(shell git status -s --untracked-files --ignored),)
-SITEDIR=main
+ifeq ($(SITEDIR),main)
+ifneq ($(shell git rev-parse --abbrev-ref HEAD), main)
+$(error Must be on branch main to use SITEDIR=main)
+endif
 endif
 
 #------------------------------------------------------------------------------
@@ -22,7 +23,7 @@ endif
 build serve shell html:
 	$(MAKE) -C $(BUILD) $@ SITEDIR=$(SITEDIR)
 
-publish: build
+publish: check-publish build
 	@( \
 	    set -x ; \
 	    git -C $(SITE) add -A . && \
@@ -32,6 +33,14 @@ publish: build
 	@echo
 	@echo "Published: https://$(PUBLISH_CNAME)/$(SITEDIR)"
 	@echo
+
+check-publish:
+ifeq ($(SITEDIR),)
+	$(error Please set SITEDIR=<word>)
+endif
+ifneq ($(wildcard $(SITE)),)
+	$(error Please make clean before make publish)
+endif
 
 # Remove generated files to force rebuild:
 force:

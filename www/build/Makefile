@@ -12,7 +12,9 @@ SITE := $(WWW)/spec.yaml.io
 HTML := $(WWW)/html
 O := o
 
-SITEDIR ?= $(shell $(ROOT)/tool/bin/get-sitedir)
+ifeq ($(SITEDIR),)
+    override SITEDIR := main
+endif
 
 HTML_FILES := $(wildcard $(SPEC)/*.md)
 HTML_FILES := $(HTML_FILES:$(SPEC)/%.md=%.html)
