@@ -28,7 +28,9 @@ BRANCHES_NOT_121 := \
 BRANCHES_121 := $(filter-out $(BRANCHES_NOT_121),$(BRANCHES))
 
 default:
-	@printf "%s\n" $(DIRS)
+
+fetch:
+	git fetch
 
 all: $(BRANCHES)
 

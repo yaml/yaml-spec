@@ -45,8 +45,11 @@ main() (
         jq ".[$i]" <<<"$cards_json"
         exit 1
       fi
-      # print-tsv
-      print-data
+      if [[ $TSV ]]; then
+        print-tsv
+      else
+        print-data
+      fi
     done
   done
 )
@@ -98,7 +101,7 @@ get() (
 
   set +x
   curl -s "${opts[@]}" \
-    -u "$user:${TOKEN-}" \
+    -u "$user:$token" \
     -H "Accept: application/vnd.github.inertia-preview+json" \
     "$url"
 )
