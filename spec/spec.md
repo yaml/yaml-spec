@@ -787,7 +787,7 @@ data model, as shown in the following diagram:
 
 **Figure #. Processing Overview**
 
-![Processing Overview](img/overview2.png)
+![Processing Overview](img/overview2.svg)
 
 A YAML processor need not expose the [serialization] or [representation]
 stages.
@@ -925,7 +925,7 @@ A single "**`+`**" denotes [serialization] details, a double "**`++`**" denotes
 
 **Figure #. Information Models**
 
-![Information Models](img/model2.png)
+![Information Models](img/model2.svg)
 
 
 ### #. Representation Graph
@@ -948,7 +948,7 @@ be [unique].
 
 **Figure #. Representation Model**
 
-![Representation Model](img/represent2.png)
+![Representation Model](img/represent2.svg)
 
 
 #### #. Nodes
@@ -1105,7 +1105,7 @@ use [key order] or [anchor names] for the preservation of [application] data.
 
 **Figure #. Serialization Model**
 
-![Serialization Model](img/serialize2.png)
+![Serialization Model](img/serialize2.svg)
 
 
 #### #. Keys Order
@@ -1155,7 +1155,7 @@ not appear in more than one [serialization tree] or [representation graph].
 
 **Figure #. Presentation Model**
 
-![Presentation Model](img/present2.png)
+![Presentation Model](img/present2.svg)
 
 
 #### #. Node Styles
@@ -1184,7 +1184,7 @@ These allow for a natural "ordered mapping" notation.
 
 **Figure #. Kind/Style Combinations**
 
-![Kind/Style Combinations](img/styles2.png)
+![Kind/Style Combinations](img/styles2.svg)
 
 
 #### #. Scalar Formats
@@ -1243,7 +1243,7 @@ structures].
 
 **Figure #. Loading Failure Points**
 
-![Loading Failure Points](img/validity2.png)
+![Loading Failure Points](img/validity2.svg)
 
 
 ### #. Well-Formed Streams and Identified Aliases

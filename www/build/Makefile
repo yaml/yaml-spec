@@ -60,7 +60,7 @@ SPEC_MD := $(SPEC_MD:$(SPEC)/%=src/%)
 SPEC_LINKS := $(SPEC)/links.yaml
 
 SPEC_IMAGE := $(wildcard $(SPEC)/tex/*.tex)
-SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC)/tex/%.tex=img/%.png)
+SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC)/tex/%.tex=img/%.svg)
 SPEC_IMAGE := $(SPEC_IMAGE:%=src/%)
 
 SPEC_FILES := \

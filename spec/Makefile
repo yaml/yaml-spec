@@ -4,7 +4,7 @@ include ../tool/make/init.mk
 ALL_MD := $(wildcard *.md)
 ALL_CHECK := $(ALL_MD:%=check-%)
 ALL_TEX := $(wildcard tex/*.tex)
-ALL_IMG := $(ALL_TEX:tex/%.tex=img/%.png)
+ALL_IMG := $(ALL_TEX:tex/%.tex=img/%.svg)
 BUILD_TEX :=
 
 ALL_MD := $(wildcard *.md)
@@ -31,16 +31,16 @@ html/%.html: build/%.md
 build/%.md: %.md
 	markydown-to-kramdown $(ROOT) $^ > /tmp/$@
 
-img/%.png: tex/%.tex tex/include/*
+img/%.svg: tex/%.tex tex/include/*
 	@mkdir -p $(dir $@)
 ifeq ($(MAKECMDGOALS),build)
 	$(eval override BUILD_TEX += $<)
 else
-	tex-to-png img/ $<
+	tex-to-img img/ $<
 endif
 
 build-img-all:
 	@[[ -z '$(BUILD_TEX)' ]] || \
-	    (set -x; tex-to-png img/ $(BUILD_TEX))
+	    (set -x; tex-to-img img/ $(BUILD_TEX))
 
 .PHONY: build

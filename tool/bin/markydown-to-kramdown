@@ -175,7 +175,7 @@ sub parse_sections {
     s/\A((?s:```.+?\n```\n))\n+//
       and push @s, {pre => $1} and next;
 
-    s/\A(!\[.*\.png\)\n)\s+//
+    s/\A(!\[.*\.svg\)\n)\s+//
       and push @s, {img => $1} and next;
 
     s/\A(\* .*\n(?:  \S.*\n|\n(?=  \S))+)\n+//

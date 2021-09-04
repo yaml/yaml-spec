@@ -42,7 +42,7 @@ web pages for https://spec.yaml.io.
 
 * `build`
 
-  Build the bare HTML content from Markdown and build the png image files from
+  Build the bare HTML content from Markdown and build the svg image files from
   LaTeX.
 
 * `build-html`
