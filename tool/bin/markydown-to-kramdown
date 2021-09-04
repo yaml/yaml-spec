@@ -601,8 +601,8 @@ sub apply_highlights {
         else { $end = $col }
       }
       else { $col = 0; $end = $len }
-      $chars[$row]->[$col] =~ s{^}{[%code class="legend-$i"%]};
-      $chars[$row]->[$end] =~ s{$}{[%/code%]};
+      $chars[$row]->[$col] =~ s{^}{[%mark class="legend-$i"%]};
+      $chars[$row]->[$end] =~ s{$}{[%/mark%]};
     }
   }
 
@@ -623,7 +623,7 @@ sub apply_highlights {
     }
     next unless @re;
     my $re = '(' . join('|', @re) . ')';
-    $yaml =~ s{$re}{[%code class="legend-$i"%]${1}[%/code%]}g;
+    $yaml =~ s{$re}{[%mark class="legend-$i"%]${1}[%/mark%]}g;
   }
 
   return $yaml;
@@ -664,7 +664,7 @@ sub format_legend {
   my $i = 1;
   for (@lines) {
     if (/^\*\ /) {
-      s{^\*\ (.*)}{* <code class="legend-$i">$1</code>}g;
+      s{^\*\ (.*)}{* <mark class="legend-$i">$1</mark>}g;
       $i++;
     }
   }
