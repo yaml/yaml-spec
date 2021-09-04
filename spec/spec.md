@@ -61,7 +61,7 @@ See:
 
 YAML™ (rhymes with "camel") is a human-friendly, cross language, Unicode based
 data serialization language designed around the common native data types of
-agile programming languages.
+dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 Internet messaging to object persistence to data auditing.
 Together with the Unicode standard for characters[^Unicode], this specification
@@ -106,7 +106,7 @@ structure].
 While most programming languages can use YAML for data serialization, YAML
 excels in working with those languages that are fundamentally built around the
 three basic primitives.
-These include the new wave of agile languages such as Perl, Python, PHP, Ruby
+These include the new wave of dynamic languages such as Perl, Python, PHP, Ruby
 and JavaScript.
 
 There are hundreds of different languages for programming, but only a handful
@@ -124,7 +124,7 @@ The design goals for YAML are, in decreasing priority:
 
 1. YAML is easily readable by humans.
 1. YAML data is portable between programming languages.
-1. YAML matches the [native data structures] of agile languages.
+1. YAML matches the [native data structures] of dynamic languages.
 1. YAML has a consistent model to support generic tools.
 1. YAML supports one-pass processing.
 1. YAML is expressive and extensible.
@@ -172,8 +172,8 @@ are interpreted as [line break] characters.
 This technique allows for paragraphs to be word-wrapped without affecting the
 [canonical form] of the [scalar content].
 
-YAML's core type system is based on the requirements of agile languages such as
-Perl, Python and Ruby.
+YAML's core type system is based on the requirements of dynamic languages such
+as Perl, Python and Ruby.
 YAML directly supports both [collections] ([mappings], [sequences]) and
 [scalars].
 Support for these common types enables programmers to use their language's
