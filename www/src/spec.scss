@@ -63,11 +63,12 @@ div.legend, pre {
   mark {
     border-radius: 0.3rem;
     box-shadow: 0 0 0 1px #666 inset;
-    padding: 3px 0;
     color: inherit;
+    display: inline-block;
+    line-height: 16px;
 
     mark {
-      padding: 0;
+      margin: 3px 0;
     }
   }
 }
