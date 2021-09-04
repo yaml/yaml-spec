@@ -8,6 +8,7 @@ docker-build: $(DOCKER_DEPS) $(DOCKER_BIN)
 	    $(DOCKER_OPTS) \
 	    $(DOCKERFILE) \
 	    $(DOCKER_DIR)
+	rm -f $(DOCKER_BIN)
 
 $(DOCKER_BIN):
 	cp $(ROOT)/tool/bin/$@ $@
