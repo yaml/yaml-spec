@@ -3,7 +3,6 @@ layout: spec
 title: YAML Ain’t Markup Language (YAML™) Version 1.2
 status: draft
 ---
-<!-- If I remove this comment the perl script fails. -->
 
 # YAML Ain't Markup Language (YAML™) Version 1.2
 

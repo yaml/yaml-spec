@@ -10,5 +10,3 @@ RUN apt-get update \
 RUN cpanm -n YAML::PP XXX
 
 COPY markydown-to-kramdown /bin
-
-RUN apt-get install -y git silversearcher-ag tig tmux vim

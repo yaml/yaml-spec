@@ -407,7 +407,7 @@ sub read_files {
   my ($front, $markdown, $links);
 
   $markdown = read_file($markdown_file);
-  if ($markdown =~ s/\A---\n(.*?\n)---\n//s) {
+  if ($markdown =~ s/\A---\n(.*?\n)---\n+//s) {
     $front = $1;
     if ($front) {
       if (my $source = YAML::PP::Load($front)->{source}) {
