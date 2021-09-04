@@ -72,10 +72,10 @@ div.legend, pre {
   }
 }
 
-.legend-1 { background-color: #F8F8E0; }
-.legend-2 { background-color: #E0E0F8; }
-.legend-3 { background-color: #F8E0F8; }
-.legend-4 { background-color: #E0F8F8; }
+.legend-1 { background-color: #F8F8E0 !important; }
+.legend-2 { background-color: #E0E0F8 !important; }
+.legend-3 { background-color: #F8E0F8 !important; }
+.legend-4 { background-color: #E0F8F8 !important; }
 
 div.legend {
   margin-left: 1rem;
@@ -97,6 +97,10 @@ div.legend {
       display: inline;
       white-space: nowrap;
     }
+  }
+
+  code {
+    box-shadow: 0 0 0 1px #666 inset;
   }
 }
 

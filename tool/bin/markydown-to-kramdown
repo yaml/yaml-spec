@@ -664,7 +664,7 @@ sub format_legend {
   my $i = 1;
   for (@lines) {
     if (/^\*\ /) {
-      s{^\*\ (.*)}{* <mark class="legend-$i">$1</mark>}g;
+      s{^\*\ (.*)}{* <code class="legend-$i">$1</code>}g;
       $i++;
     }
   }
