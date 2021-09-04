@@ -10,13 +10,16 @@
   +Anchor
 };
 
-\entity[above=of Node]{Tag}{Name\\Kind};
+\entity[above=of Node]{Tag}{Name};
 \draw[has] (Node) -- (Tag)
-  node[near start, right]{1}
-  node[near end, right]{*};
+  node[near start, left]{1}
+  node[near end, left]{*};
 
-\entity[right=of Tag]{Scalar Tag}{Canonical Format};
-\draw[inherits] (Scalar Tag) -- (Tag);
+\entity[right=of Tag]{Specific Tag}{};
+\draw[inherits] (Specific Tag) -- (Tag);
+
+\entity[above right=of Tag]{+ Non-Specific Tag}{};
+\draw[inherits] (+ Non-Specific Tag) -| (Tag);
 
 \entity[below=of Node]{Scalar Node}{};
 \draw[inherits] (Scalar Node) -- (Node);
