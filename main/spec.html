@@ -49,7 +49,7 @@ the content of this draft or cite it as an authority.
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>YAML Specification Version 1.2.1 – Released 2021-09-03</strong></p>
+<p><strong>YAML Specification Version 1.2.1 – Released 2021-09-04</strong></p>
 
 <p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -2058,7 +2058,7 @@ encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">⇔</code># Comment only.
+<mark class="legend-1">⇔</mark># Comment only.
 
 </pre>
 
@@ -2088,7 +2088,7 @@ encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><
 <td class="side-by-side">
 <pre class="error">
 - Invalid use of BOM
-<code class="legend-1">⇔</code>
+<mark class="legend-1">⇔</mark>
 - Inside a document.
 </pre>
 
@@ -2096,7 +2096,7 @@ encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><
 <td class="side-by-side">
 <pre class="error">
 ERROR:
- A <code class="legend-1">BOM</code> must not appear
+ A <mark class="legend-1">BOM</mark> must not appear
  inside a document.
 </pre>
 
@@ -2138,13 +2138,13 @@ ERROR:
 <tr>
 <td class="side-by-side">
 <pre>
-sequence<code class="legend-3">:</code>
-<code class="legend-1">-</code> one
-<code class="legend-1">-</code> two
-mapping<code class="legend-3">:</code>
-  <code class="legend-2">?</code> sky
-  <code class="legend-3">:</code> blue
-  sea <code class="legend-3">:</code> green
+sequence<mark class="legend-3">:</mark>
+<mark class="legend-1">-</mark> one
+<mark class="legend-1">-</mark> two
+mapping<mark class="legend-3">:</mark>
+  <mark class="legend-2">?</mark> sky
+  <mark class="legend-3">:</mark> blue
+  sea <mark class="legend-3">:</mark> green
 </pre>
 
 </td>
@@ -2212,8 +2212,8 @@ mapping<code class="legend-3">:</code>
 <tr>
 <td class="side-by-side">
 <pre>
-sequence: <code class="legend-1">[</code> one<code class="legend-3">,</code> two<code class="legend-3">,</code> <code class="legend-1">]</code>
-mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code> sea: green <code class="legend-2">}</code>
+sequence: <mark class="legend-1">[</mark> one<mark class="legend-3">,</mark> two<mark class="legend-3">,</mark> <mark class="legend-1">]</mark>
+mapping: <mark class="legend-2">{</mark> sky: blue<mark class="legend-3">,</mark> sea: green <mark class="legend-2">}</mark>
 </pre>
 
 </td>
@@ -2251,7 +2251,7 @@ mapping: <code class="legend-2">{</code> sky: blue<code class="legend-3">,</code
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">#</code> Comment only.
+<mark class="legend-1">#</mark> Comment only.
 
 </pre>
 
@@ -2305,8 +2305,8 @@ non-<a href="#plain-style">plain scalars</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-anchored: <code class="legend-1">!</code>local <code class="legend-2">&amp;</code>anchor value
-alias: <code class="legend-3">*</code>anchor
+anchored: <mark class="legend-1">!</mark>local <mark class="legend-2">&amp;</mark>anchor value
+alias: <mark class="legend-3">*</mark>anchor
 </pre>
 
 </td>
@@ -2349,10 +2349,10 @@ alias: <code class="legend-3">*</code>anchor
 <tr>
 <td class="side-by-side">
 <pre>
-literal: <code class="legend-1">|</code>
+literal: <mark class="legend-1">|</mark>
   some
   text
-folded: <code class="legend-2">&gt;</code>
+folded: <mark class="legend-2">&gt;</mark>
   some
   text
 </pre>
@@ -2398,8 +2398,8 @@ scalar</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-single: <code class="legend-1">'</code>text<code class="legend-1">'</code>
-double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
+single: <mark class="legend-1">'</mark>text<mark class="legend-1">'</mark>
+double: <mark class="legend-2">"</mark>text<mark class="legend-2">"</mark>
 </pre>
 
 </td>
@@ -2434,7 +2434,7 @@ double: <code class="legend-2">"</code>text<code class="legend-2">"</code>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">%</code>YAML 1.2
+<mark class="legend-1">%</mark>YAML 1.2
 --- text
 </pre>
 
@@ -2470,15 +2470,15 @@ grave accent) are <em>reserved</em> for future use.</p>
 <tr>
 <td class="side-by-side">
 <pre class="error">
-commercial-at: <code class="legend-1">@</code>text
-grave-accent: <code class="legend-1">`</code>text
+commercial-at: <mark class="legend-1">@</mark>text
+grave-accent: <mark class="legend-1">`</mark>text
 </pre>
 
 </td>
 <td class="side-by-side">
 <pre class="error">
 ERROR:
- <code class="legend-1">Reserved indicators</code> can't
+ <mark class="legend-1">Reserved indicators</mark> can't
  start a plain scalar.
 </pre>
 
@@ -2597,7 +2597,7 @@ for clarity.</p>
 <pre>
 |
   Line break (no glyph)
-  Line break (glyphed)<code class="legend-1">↓</code>
+  Line break (glyphed)<mark class="legend-1">↓</mark>
 </pre>
 
 </td>
@@ -2659,11 +2659,11 @@ Space characters are sometimes displayed as the glyph “<strong><code class="la
 <td class="side-by-side">
 <pre>
 # Tabs and spaces
-quoted:<code class="legend-1">·</code>"Quoted <code class="legend-2">→</code>"
-block:<code class="legend-2">→</code>|
-<code class="legend-1">··</code>void main() {
-<code class="legend-1">··</code><code class="legend-2">→</code>printf("Hello, world!\n");
-<code class="legend-1">··</code>}
+quoted:<mark class="legend-1">·</mark>"Quoted <mark class="legend-2">→</mark>"
+block:<mark class="legend-2">→</mark>|
+<mark class="legend-1">··</mark>void main() {
+<mark class="legend-1">··</mark><mark class="legend-2">→</mark>printf("Hello, world!\n");
+<mark class="legend-1">··</mark>}
 </pre>
 
 </td>
@@ -2948,11 +2948,11 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- "Fun with <code class="legend-1">\\</code>"
-- "<code class="legend-1">\"</code> <code class="legend-1">\a</code> <code class="legend-1">\b</code> <code class="legend-1">\e</code> <code class="legend-1">\f</code>"
-- "<code class="legend-1">\n</code> <code class="legend-1">\r</code> <code class="legend-1">\t</code> <code class="legend-1">\v</code> <code class="legend-1">\0</code>"
-- "<code class="legend-1">\ </code> <code class="legend-1">\_</code> <code class="legend-1">\N</code> <code class="legend-1">\L</code> <code class="legend-1">\P</code> \
-  <code class="legend-1">\x41</code> <code class="legend-1">\u0041</code> <code class="legend-1">\U00000041</code>"
+- "Fun with <mark class="legend-1">\\</mark>"
+- "<mark class="legend-1">\"</mark> <mark class="legend-1">\a</mark> <mark class="legend-1">\b</mark> <mark class="legend-1">\e</mark> <mark class="legend-1">\f</mark>"
+- "<mark class="legend-1">\n</mark> <mark class="legend-1">\r</mark> <mark class="legend-1">\t</mark> <mark class="legend-1">\v</mark> <mark class="legend-1">\0</mark>"
+- "<mark class="legend-1">\ </mark> <mark class="legend-1">\_</mark> <mark class="legend-1">\N</mark> <mark class="legend-1">\L</mark> <mark class="legend-1">\P</mark> \
+  <mark class="legend-1">\x41</mark> <mark class="legend-1">\u0041</mark> <mark class="legend-1">\U00000041</mark>"
 </pre>
 
 </td>
@@ -2982,16 +2982,16 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <td class="side-by-side">
 <pre class="error">
 Bad escapes:
-  "\<code class="legend-1">c</code>
-  \x<code class="legend-2">q-</code>"
+  "\<mark class="legend-1">c</mark>
+  \x<mark class="legend-2">q-</mark>"
 </pre>
 
 </td>
 <td class="side-by-side">
 <pre class="error">
 ERROR:
-- <code class="legend-1">c</code> is an invalid escaped character.
-- <code class="legend-2">q</code> and <code class="legend-2">-</code> are invalid hex digits.
+- <mark class="legend-1">c</mark> is an invalid escaped character.
+- <mark class="legend-2">q</mark> and <mark class="legend-2">-</mark> are invalid hex digits.
 </pre>
 
 </td>
@@ -3052,18 +3052,18 @@ independently.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-3">··</code># Leading comment line spaces are
-<code class="legend-3">···</code># neither content nor indentation.
-<code class="legend-3">····</code>
+<mark class="legend-3">··</mark># Leading comment line spaces are
+<mark class="legend-3">···</mark># neither content nor indentation.
+<mark class="legend-3">····</mark>
 Not indented:
-<code class="legend-1">·</code>By one space: |
-<code class="legend-1">····</code>By four
-<code class="legend-1">····</code><code class="legend-2">··</code>spaces
-<code class="legend-1">·</code>Flow style: [    # Leading spaces
-<code class="legend-1">··</code><code class="legend-3">·</code>By two,        # in flow style
-<code class="legend-1">··</code>Also by two,    # are neither
-<code class="legend-1">··</code>→Still by two   # content nor
-<code class="legend-1">··</code><code class="legend-3">··</code>]             # indentation.
+<mark class="legend-1">·</mark>By one space: |
+<mark class="legend-1">····</mark>By four
+<mark class="legend-1">····</mark><mark class="legend-2">··</mark>spaces
+<mark class="legend-1">·</mark>Flow style: [    # Leading spaces
+<mark class="legend-1">··</mark><mark class="legend-3">·</mark>By two,        # in flow style
+<mark class="legend-1">··</mark>Also by two,    # are neither
+<mark class="legend-1">··</mark>→Still by two   # content nor
+<mark class="legend-1">··</mark><mark class="legend-3">··</mark>]             # indentation.
 </pre>
 
 </td>
@@ -3100,10 +3100,10 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1"><code class="legend-3">?</code></code>·a
-<code class="legend-1"><code class="legend-3">:</code><code class="legend-2">·</code><code class="legend-3">-</code></code>→b
-<code class="legend-1"><code class="legend-2">··</code><code class="legend-3">-</code><code class="legend-2">··</code><code class="legend-3">-</code></code>→c
-<code class="legend-1"><code class="legend-2">·····</code><code class="legend-3">-</code></code>·d
+<mark class="legend-1"><mark class="legend-3">?</mark></mark>·a
+<mark class="legend-1"><mark class="legend-3">:</mark><mark class="legend-2">·</mark><mark class="legend-3">-</mark></mark>→b
+<mark class="legend-1"><mark class="legend-2">··</mark><mark class="legend-3">-</mark><mark class="legend-2">··</mark><mark class="legend-3">-</mark></mark>→c
+<mark class="legend-1"><mark class="legend-2">·····</mark><mark class="legend-3">-</mark></mark>·d
 </pre>
 
 </td>
@@ -3150,9 +3150,9 @@ Note that such <a href="#white-space-characters">white space</a> may safely incl
 <tr>
 <td class="side-by-side">
 <pre>
--<code class="legend-1">·</code>foo:<code class="legend-1">→·</code>bar
-- -<code class="legend-1">·</code>baz
-  -<code class="legend-1">→</code>baz
+-<mark class="legend-1">·</mark>foo:<mark class="legend-1">→·</mark>bar
+- -<mark class="legend-1">·</mark>baz
+  -<mark class="legend-1">→</mark>baz
 </pre>
 
 </td>
@@ -3212,12 +3212,12 @@ which may contain <a href="#white-space-characters">tab</a> characters.</p>
 <td class="side-by-side">
 <pre>
 plain: text
-<code class="legend-1"><code class="legend-3">·</code>·</code>lines
+<mark class="legend-1"><mark class="legend-3">·</mark>·</mark>lines
 quoted: "text
-<code class="legend-1"><code class="legend-3">·</code>·→</code>lines"
+<mark class="legend-1"><mark class="legend-3">·</mark>·→</mark>lines"
 block: |
-<code class="legend-2"><code class="legend-3">··</code></code>text
-<code class="legend-2"><code class="legend-3">··</code></code>·→lines
+<mark class="legend-2"><mark class="legend-3">··</mark></mark>text
+<mark class="legend-2"><mark class="legend-3">··</mark></mark>·→lines
 </pre>
 
 </td>
@@ -3265,11 +3265,11 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 <pre>
 Folding:
   "Empty line
-<code class="legend-1">···→</code>
+<mark class="legend-1">···→</mark>
   as a line feed"
 Chomping: |
   Clipped empty lines
-<code class="legend-1">·</code>
+<mark class="legend-1">·</mark>
 </pre>
 
 </td>
@@ -3327,11 +3327,11 @@ a single <a href="#white-space-characters">space</a> (<strong><code class="langu
 <td class="side-by-side">
 <pre>
 &gt;-
-  trimmed<code class="legend-1">↓</code>
-<code class="legend-1">··↓</code>
-<code class="legend-1">·↓</code>
-<code class="legend-1">↓</code>
-  as<code class="legend-2">↓</code>
+  trimmed<mark class="legend-1">↓</mark>
+<mark class="legend-1">··↓</mark>
+<mark class="legend-1">·↓</mark>
+<mark class="legend-1">↓</mark>
+  as<mark class="legend-2">↓</mark>
   space
 </pre>
 
@@ -3383,11 +3383,11 @@ feed and the formatting of <a href="#example-more-indented-lines">more-indented<
 <td class="side-by-side">
 <pre>
 &gt;
-<code class="legend-2">··</code>foo<code class="legend-3">·</code><code class="legend-1">↓</code>
-<code class="legend-1">·↓</code>
-<code class="legend-2">··</code><code class="legend-3">→·</code>bar<code class="legend-1">↓</code>
-<code class="legend-1">↓</code>
-<code class="legend-2">··</code>baz↓
+<mark class="legend-2">··</mark>foo<mark class="legend-3">·</mark><mark class="legend-1">↓</mark>
+<mark class="legend-1">·↓</mark>
+<mark class="legend-2">··</mark><mark class="legend-3">→·</mark>bar<mark class="legend-1">↓</mark>
+<mark class="legend-1">↓</mark>
+<mark class="legend-2">··</mark>baz↓
 </pre>
 
 </td>
@@ -3442,12 +3442,12 @@ can be freely <a href="#example-more-indented-lines">more-indented</a> without a
 <tr>
 <td class="side-by-side">
 <pre>
-"<code class="legend-1">↓</code>
-<code class="legend-1"><code class="legend-2">··</code></code>foo<code class="legend-1"><code class="legend-2">·</code>↓</code>
-<code class="legend-1"><code class="legend-2">·</code>↓</code>
-<code class="legend-1"><code class="legend-2">··→·</code></code>bar<code class="legend-1">↓</code>
-<code class="legend-1">↓</code>
-<code class="legend-1"><code class="legend-2">··</code></code>baz<code class="legend-1">↓</code> "
+"<mark class="legend-1">↓</mark>
+<mark class="legend-1"><mark class="legend-2">··</mark></mark>foo<mark class="legend-1"><mark class="legend-2">·</mark>↓</mark>
+<mark class="legend-1"><mark class="legend-2">·</mark>↓</mark>
+<mark class="legend-1"><mark class="legend-2">··→·</mark></mark>bar<mark class="legend-1">↓</mark>
+<mark class="legend-1">↓</mark>
+<mark class="legend-1"><mark class="legend-2">··</mark></mark>baz<mark class="legend-1">↓</mark> "
 </pre>
 
 </td>
@@ -3506,8 +3506,8 @@ However, as this confuses many tools, YAML <a href="#processing-yaml-information
 <tr>
 <td class="side-by-side">
 <pre>
-key:<code class="legend-3">····<code class="legend-1"># Comment</code><code class="legend-2">↓</code></code>
-  value<code class="legend-2"><code class="legend-3"><i>eof</i></code></code>
+key:<mark class="legend-3">····<mark class="legend-1"># Comment</mark><mark class="legend-2">↓</mark></mark>
+  value<mark class="legend-2"><mark class="legend-3"><i>eof</i></mark></mark>
 </pre>
 
 </td>
@@ -3546,9 +3546,9 @@ characters is taken to be a comment line.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-2">··<code class="legend-1"># Comment↓</code></code>
-<code class="legend-2">···<code class="legend-1">↓</code></code>
-<code class="legend-1"><code class="legend-2">↓</code></code>
+<mark class="legend-2">··<mark class="legend-1"># Comment↓</mark></mark>
+<mark class="legend-2">···<mark class="legend-1">↓</mark></mark>
+<mark class="legend-1"><mark class="legend-2">↓</mark></mark>
 </pre>
 
 </td>
@@ -3588,10 +3588,10 @@ The only exception is a comment ending a <a href="#block-scalar-headers">block s
 <tr>
 <td class="side-by-side">
 <pre>
-key:<code class="legend-1"><code class="legend-3">····# Comment↓</code></code>
-<code class="legend-2"><code class="legend-3">········# lines↓</code></code>
-  value<code class="legend-1"><code class="legend-3">↓</code></code>
-<code class="legend-2"><code class="legend-3">↓</code></code>
+key:<mark class="legend-1"><mark class="legend-3">····# Comment↓</mark></mark>
+<mark class="legend-2"><mark class="legend-3">········# lines↓</mark></mark>
+  value<mark class="legend-1"><mark class="legend-3">↓</mark></mark>
+<mark class="legend-2"><mark class="legend-3">↓</mark></mark>
 </pre>
 
 </td>
@@ -3648,12 +3648,12 @@ empty) <a href="#comments">comments</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-{<code class="legend-1">·</code>first:<code class="legend-1">·</code>Sammy,<code class="legend-1">·</code>last:<code class="legend-1">·</code>Sosa<code class="legend-1">·</code>}:<code class="legend-2">↓</code>
-<code class="legend-2"># Statistics:</code>
-<code class="legend-2"><code class="legend-3">··</code></code>hr:<code class="legend-2">··# Home runs</code>
-<code class="legend-2"><code class="legend-3">···</code>··</code>65
-<code class="legend-3">··</code>avg:<code class="legend-2">·# Average</code>
-<code class="legend-2"><code class="legend-3">···</code></code>0.278
+{<mark class="legend-1">·</mark>first:<mark class="legend-1">·</mark>Sammy,<mark class="legend-1">·</mark>last:<mark class="legend-1">·</mark>Sosa<mark class="legend-1">·</mark>}:<mark class="legend-2">↓</mark>
+<mark class="legend-2"># Statistics:</mark>
+<mark class="legend-2"><mark class="legend-3">··</mark></mark>hr:<mark class="legend-2">··# Home runs</mark>
+<mark class="legend-2"><mark class="legend-3">···</mark>··</mark>65
+<mark class="legend-3">··</mark>avg:<mark class="legend-2">·# Average</mark>
+<mark class="legend-2"><mark class="legend-3">···</mark></mark>0.278
 </pre>
 
 </td>
@@ -3729,7 +3729,7 @@ warning.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-%<code class="legend-1"><code class="legend-2">FOO</code>  <code class="legend-3">bar</code> <code class="legend-3">baz</code></code> # Should be ignored
+%<mark class="legend-1"><mark class="legend-2">FOO</mark>  <mark class="legend-3">bar</mark> <mark class="legend-3">baz</mark></mark> # Should be ignored
                # with a warning.
 --- "foo"
 </pre>
@@ -3797,7 +3797,7 @@ of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a h
 <tr>
 <td class="side-by-side">
 <pre>
-%<code class="legend-1">YAML <code class="legend-2">1.3</code></code> # Attempt parsing
+%<mark class="legend-1">YAML <mark class="legend-2">1.3</mark></mark> # Attempt parsing
            # with a warning
 ---
 "foo"
@@ -3831,7 +3831,7 @@ document, even if both occurrences give the same version number.</p>
 <td class="side-by-side">
 <pre class="error">
 %YAML 1.2
-%<code class="legend-1">YAML</code> 1.1
+%<mark class="legend-1">YAML</mark> 1.1
 foo
 </pre>
 
@@ -3839,7 +3839,7 @@ foo
 <td class="side-by-side">
 <pre class="error">
 ERROR:
-The <code class="legend-1">YAML</code> directive must only be
+The <mark class="legend-1">YAML</mark> directive must only be
 given at most once per document.
 </pre>
 
@@ -3871,7 +3871,7 @@ This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-%<code class="legend-1">TAG <code class="legend-2">!yaml!</code> <code class="legend-3">tag:yaml.org,2002:</code></code>
+%<mark class="legend-1">TAG <mark class="legend-2">!yaml!</mark> <mark class="legend-3">tag:yaml.org,2002:</mark></mark>
 ---
 !yaml!str "foo"
 </pre>
@@ -3905,7 +3905,7 @@ This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 <td class="side-by-side">
 <pre class="error">
 %TAG ! !foo
-%TAG <code class="legend-1">!</code> !foo
+%TAG <mark class="legend-1">!</mark> !foo
 bar
 </pre>
 
@@ -3915,7 +3915,7 @@ bar
 ERROR:
 The TAG directive must only
 be given at most once per
-<code class="legend-1">handle</code> in the same document.
+<mark class="legend-1">handle</mark> in the same document.
 </pre>
 
 </td>
@@ -3970,12 +3970,12 @@ by the simple addition of a single “<strong><code class="language-plaintext hi
 <td class="side-by-side">
 <pre>
 # Private
-<code class="legend-1">!</code>foo "bar"
+<mark class="legend-1">!</mark>foo "bar"
 ...
 # Global
-%TAG <code class="legend-1">!</code> tag:example.com,2000:app/
+%TAG <mark class="legend-1">!</mark> tag:example.com,2000:app/
 ---
-<code class="legend-1">!</code>foo "bar"
+<mark class="legend-1">!</mark>foo "bar"
 </pre>
 
 </td>
@@ -4026,9 +4026,9 @@ This prefix is used by the <a href="#other-schemas">YAML tag repository</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-%TAG <code class="legend-1">!!</code> tag:example.com,2000:app/
+%TAG <mark class="legend-1">!!</mark> tag:example.com,2000:app/
 ---
-<code class="legend-1">!!</code>int 1 - 3 # Interval, not integer
+<mark class="legend-1">!!</mark>int 1 - 3 # Interval, not integer
 </pre>
 
 </td>
@@ -4077,9 +4077,9 @@ In particular, the YAML <a href="#processing-yaml-information">processor</a> nee
 <tr>
 <td class="side-by-side">
 <pre>
-%TAG <code class="legend-1">!e!</code> tag:example.com,2000:app/
+%TAG <mark class="legend-1">!e!</mark> tag:example.com,2000:app/
 ---
-<code class="legend-1">!e!</code>foo "bar"
+<mark class="legend-1">!e!</mark>foo "bar"
 </pre>
 
 </td>
@@ -4136,11 +4136,11 @@ semantics to the same <a href="#tags">local tag</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-%TAG !m! <code class="legend-1">!my-</code>
+%TAG !m! <mark class="legend-1">!my-</mark>
 --- # Bulb here
 !m!light fluorescent
 ...
-%TAG !m! <code class="legend-1">!my-</code>
+%TAG !m! <mark class="legend-1">!my-</mark>
 --- # Color here
 !m!light green
 </pre>
@@ -4190,7 +4190,7 @@ semantics to the same <a href="#tags">global tag</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-%TAG !e! <code class="legend-1">tag:example.com,2000:app/</code>
+%TAG !e! <mark class="legend-1">tag:example.com,2000:app/</mark>
 ---
 - !e!foo "bar"
 </pre>
@@ -4235,9 +4235,9 @@ Either or both may be omitted.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1"><code class="legend-3">!!str</code> <code class="legend-2">&amp;a1</code></code> "foo":
-  <code class="legend-1"><code class="legend-3">!!str</code></code> bar
-<code class="legend-1"><code class="legend-2">&amp;a2</code></code> baz : *a1
+<mark class="legend-1"><mark class="legend-3">!!str</mark> <mark class="legend-2">&amp;a1</mark></mark> "foo":
+  <mark class="legend-1"><mark class="legend-3">!!str</mark></mark> bar
+<mark class="legend-1"><mark class="legend-2">&amp;a2</mark></mark> baz : *a1
 </pre>
 
 </td>
@@ -4302,8 +4302,8 @@ valid URI (a <a href="#tags">global tag</a>).</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">!&lt;tag:yaml.org,2002:str&gt;</code> foo :
-  <code class="legend-1">!&lt;!bar&gt;</code> baz
+<mark class="legend-1">!&lt;tag:yaml.org,2002:str&gt;</mark> foo :
+  <mark class="legend-1">!&lt;!bar&gt;</mark> baz
 </pre>
 
 </td>
@@ -4329,8 +4329,8 @@ valid URI (a <a href="#tags">global tag</a>).</p>
 <tr>
 <td class="side-by-side">
 <pre class="error">
-- !&lt;<code class="legend-1">!</code>&gt; foo
-- !&lt;<code class="legend-2">$:?</code>&gt; bar
+- !&lt;<mark class="legend-1">!</mark>&gt; foo
+- !&lt;<mark class="legend-2">$:?</mark>&gt; bar
 </pre>
 
 </td>
@@ -4338,8 +4338,8 @@ valid URI (a <a href="#tags">global tag</a>).</p>
 <pre class="error">
 ERROR:
 - Verbatim tags aren't resolved,
-  so <code class="legend-1">!</code> is invalid.
-- The <code class="legend-2">$:?</code> tag is neither a global
+  so <mark class="legend-1">!</mark> is invalid.
+- The <mark class="legend-2">$:?</mark> tag is neither a global
   URI tag nor a local tag starting
   with "!".
 </pre>
@@ -4396,9 +4396,9 @@ This behavior is consistent with the URI character escaping rules
 <pre>
 %TAG !e! tag:example.com,2000:app/
 ---
-- <code class="legend-1">!local</code> foo
-- <code class="legend-1">!!str</code> bar
-- <code class="legend-1">!e!tag%21</code> baz
+- <mark class="legend-1">!local</mark> foo
+- <mark class="legend-1">!!str</mark> bar
+- <mark class="legend-1">!e!tag%21</mark> baz
 </pre>
 
 </td>
@@ -4428,16 +4428,16 @@ This behavior is consistent with the URI character escaping rules
 <pre class="error">
 %TAG !e! tag:example,2000:app/
 ---
-- <code class="legend-1">!e!</code> foo
-- <code class="legend-2">!h!</code>bar baz
+- <mark class="legend-1">!e!</mark> foo
+- <mark class="legend-2">!h!</mark>bar baz
 </pre>
 
 </td>
 <td class="side-by-side">
 <pre class="error">
 ERROR:
-- The <code class="legend-1">!o!</code> handle has no suffix.
-- The <code class="legend-2">!h!</code> handle wasn't declared.
+- The <mark class="legend-1">!o!</mark> handle has no suffix.
+- The <mark class="legend-2">!h!</mark> handle wasn't declared.
 </pre>
 
 </td>
@@ -4485,7 +4485,7 @@ This is intentional.</p>
 # Assuming conventional resolution:
 - "12"
 - 12
-- <code class="legend-1">!</code> 12
+- <mark class="legend-1">!</mark> 12
 </pre>
 
 </td>
@@ -4551,8 +4551,8 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 <tr>
 <td class="side-by-side">
 <pre>
-First occurrence: <code class="legend-1">&amp;<code class="legend-2">anchor</code></code> Value
-Second occurrence: *<code class="legend-2">anchor</code>
+First occurrence: <mark class="legend-1">&amp;<mark class="legend-2">anchor</mark></mark> Value
+Second occurrence: *<mark class="legend-2">anchor</mark>
 </pre>
 
 </td>
@@ -4611,10 +4611,10 @@ these were already specified at the first occurrence of the <a href="#nodes">nod
 <tr>
 <td class="side-by-side">
 <pre>
-First occurrence: &amp;<code class="legend-2">anchor</code> Foo
-Second occurrence: <code class="legend-1">*<code class="legend-2">anchor</code></code>
-Override anchor: &amp;<code class="legend-2">anchor</code> Bar
-Reuse anchor: <code class="legend-1">*<code class="legend-2">anchor</code></code>
+First occurrence: &amp;<mark class="legend-2">anchor</mark> Foo
+Second occurrence: <mark class="legend-1">*<mark class="legend-2">anchor</mark></mark>
+Override anchor: &amp;<mark class="legend-2">anchor</mark> Bar
+Reuse anchor: <mark class="legend-1">*<mark class="legend-2">anchor</mark></mark>
 </pre>
 
 </td>
@@ -4664,8 +4664,8 @@ rather than to an actual character.</p>
 <td class="side-by-side">
 <pre>
 {
-  foo : !!str<code class="legend-1">°</code>,
-  !!str<code class="legend-1">°</code> : bar,
+  foo : !!str<mark class="legend-1">°</mark>,
+  !!str<mark class="legend-1">°</mark> : bar,
 }
 </pre>
 
@@ -4704,8 +4704,8 @@ for their existence.</p>
 <td class="side-by-side">
 <pre>
 {
-  ? foo :<code class="legend-1">°</code>,
-  <code class="legend-1">°</code>: bar,
+  ? foo :<mark class="legend-1">°</mark>,
+  <mark class="legend-1">°</mark>: bar,
 }
 </pre>
 
@@ -4788,8 +4788,8 @@ characters.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-2">"<code class="legend-1">implicit block key</code>"</code> : [
-  <code class="legend-2">"<code class="legend-1">implicit flow key</code>"</code> : value,
+<mark class="legend-2">"<mark class="legend-1">implicit block key</mark>"</mark> : [
+  <mark class="legend-2">"<mark class="legend-1">implicit flow key</mark>"</mark> : value,
  ]
 </pre>
 
@@ -4839,11 +4839,11 @@ double-quoted lines to be broken at arbitrary positions.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-"folded<code class="legend-1">·↓</code>
-to a space,<code class="legend-1">→↓</code>
-<code class="legend-1">·↓</code>
-to a line feed, or<code class="legend-2">·→\↓</code>
-<code class="legend-2">·</code>\·→non-content"
+"folded<mark class="legend-1">·↓</mark>
+to a space,<mark class="legend-1">→↓</mark>
+<mark class="legend-1">·↓</mark>
+to a line feed, or<mark class="legend-2">·→\↓</mark>
+<mark class="legend-2">·</mark>\·→non-content"
 </pre>
 
 </td>
@@ -4897,10 +4897,10 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <tr>
 <td class="side-by-side">
 <pre>
-"<code class="legend-1">·1st non-empty</code><code class="legend-2">↓</code>
-<code class="legend-2">↓</code>
-<code class="legend-2">·<code class="legend-1">2nd non-empty</code>·</code>
-<code class="legend-2">→<code class="legend-1">3rd non-empty</code></code>·"
+"<mark class="legend-1">·1st non-empty</mark><mark class="legend-2">↓</mark>
+<mark class="legend-2">↓</mark>
+<mark class="legend-2">·<mark class="legend-1">2nd non-empty</mark>·</mark>
+<mark class="legend-2">→<mark class="legend-1">3rd non-empty</mark></mark>·"
 </pre>
 
 </td>
@@ -4956,7 +4956,7 @@ In addition, it is only possible to break a long single-quoted line where a
 <tr>
 <td class="side-by-side">
 <pre>
-'here<code class="legend-1">''</code>s to "quotes"'
+'here<mark class="legend-1">''</mark>s to "quotes"'
 </pre>
 
 </td>
@@ -5005,8 +5005,8 @@ In addition, it is only possible to break a long single-quoted line where a
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-2">'<code class="legend-1">implicit block key</code>'</code> : [
-  <code class="legend-2">'<code class="legend-1">implicit flow key</code>'</code> : value,
+<mark class="legend-2">'<mark class="legend-1">implicit block key</mark>'</mark> : [
+  <mark class="legend-2">'<mark class="legend-1">implicit flow key</mark>'</mark> : value,
  ]
 </pre>
 
@@ -5062,10 +5062,10 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <tr>
 <td class="side-by-side">
 <pre>
-'<code class="legend-1">·1st non-empty</code><code class="legend-2">↓</code>
-<code class="legend-2">↓</code>
-<code class="legend-2">·<code class="legend-1">2nd non-empty</code>·</code>
-<code class="legend-2">→<code class="legend-1">3rd non-empty</code></code>·'
+'<mark class="legend-1">·1st non-empty</mark><mark class="legend-2">↓</mark>
+<mark class="legend-2">↓</mark>
+<mark class="legend-2">·<mark class="legend-1">2nd non-empty</mark>·</mark>
+<mark class="legend-2">→<mark class="legend-1">3rd non-empty</mark></mark>·'
 </pre>
 
 </td>
@@ -5156,17 +5156,17 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 <td class="side-by-side">
 <pre>
 # Outside flow collection:
-- <code class="legend-1">:</code><code class="legend-2">:</code>vector
-- "<code class="legend-3">:</code> - ()"
-- Up<code class="legend-2">,</code> up, and away!
-- <code class="legend-1">-</code>123
-- http<code class="legend-2">s</code>://example.com/fo<code class="legend-2">o</code>#bar
+- <mark class="legend-1">:</mark><mark class="legend-2">:</mark>vector
+- "<mark class="legend-3">:</mark> - ()"
+- Up<mark class="legend-2">,</mark> up, and away!
+- <mark class="legend-1">-</mark>123
+- http<mark class="legend-2">s</mark>://example.com/fo<mark class="legend-2">o</mark>#bar
 # Inside flow collection:
-- [ <code class="legend-1">:</code><code class="legend-2">:</code>vector,
-  "<code class="legend-3">:</code> - ()",
-  "Up<code class="legend-4">,</code> up and away!",
-  <code class="legend-1">-</code>123,
-  http<code class="legend-2">s</code>://example.com/fo<code class="legend-2">o</code>#bar ]
+- [ <mark class="legend-1">:</mark><mark class="legend-2">:</mark>vector,
+  "<mark class="legend-3">:</mark> - ()",
+  "Up<mark class="legend-4">,</mark> up and away!",
+  <mark class="legend-1">-</mark>123,
+  http<mark class="legend-2">s</mark>://example.com/fo<mark class="legend-2">o</mark>#bar ]
 </pre>
 
 </td>
@@ -5228,8 +5228,8 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">implicit block key</code> : [
-  <code class="legend-1">implicit flow key</code> : value,
+<mark class="legend-1">implicit block key</mark> : [
+  <mark class="legend-1">implicit flow key</mark> : value,
  ]
 </pre>
 
@@ -5277,10 +5277,10 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">1st non-empty</code><code class="legend-2">↓</code>
-<code class="legend-2">↓</code>
-<code class="legend-2">·<code class="legend-1">2nd non-empty</code>·</code>
-<code class="legend-2">→<code class="legend-1">3rd non-empty</code></code>
+<mark class="legend-1">1st non-empty</mark><mark class="legend-2">↓</mark>
+<mark class="legend-2">↓</mark>
+<mark class="legend-2">·<mark class="legend-1">2nd non-empty</mark>·</mark>
+<mark class="legend-2">→<mark class="legend-1">3rd non-empty</mark></mark>
 </pre>
 
 </td>
@@ -5351,8 +5351,8 @@ characters.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- <code class="legend-1">[</code> <code class="legend-2">one</code>, <code class="legend-2">two</code>, <code class="legend-1">]</code>
-- <code class="legend-1">[</code><code class="legend-2">three</code> ,<code class="legend-2">four</code><code class="legend-1">]</code>
+- <mark class="legend-1">[</mark> <mark class="legend-2">one</mark>, <mark class="legend-2">two</mark>, <mark class="legend-1">]</mark>
+- <mark class="legend-1">[</mark><mark class="legend-2">three</mark> ,<mark class="legend-2">four</mark><mark class="legend-1">]</mark>
 </pre>
 
 </td>
@@ -5393,12 +5393,12 @@ sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">sin
 <td class="side-by-side">
 <pre>
 [
-<code class="legend-1">"double</code>
-<code class="legend-1"> quoted"</code>, <code class="legend-1">'single</code>
-<code class="legend-1">           quoted'</code>,
-<code class="legend-1">plain</code>
-<code class="legend-1"> text</code>, <code class="legend-1">[ nested ]</code>,
-<code class="legend-2">single: pair</code>,
+<mark class="legend-1">"double</mark>
+<mark class="legend-1"> quoted"</mark>, <mark class="legend-1">'single</mark>
+<mark class="legend-1">           quoted'</mark>,
+<mark class="legend-1">plain</mark>
+<mark class="legend-1"> text</mark>, <mark class="legend-1">[ nested ]</mark>,
+<mark class="legend-2">single: pair</mark>,
 ]
 </pre>
 
@@ -5453,8 +5453,8 @@ characters.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- <code class="legend-1">{</code> <code class="legend-2">one : two</code> , <code class="legend-2">three: four</code> , <code class="legend-1">}</code>
-- <code class="legend-1">{</code><code class="legend-2">five: six</code>,<code class="legend-2">seven : eight</code><code class="legend-1">}</code>
+- <mark class="legend-1">{</mark> <mark class="legend-2">one : two</mark> , <mark class="legend-2">three: four</mark> , <mark class="legend-1">}</mark>
+- <mark class="legend-1">{</mark><mark class="legend-2">five: six</mark>,<mark class="legend-2">seven : eight</mark><mark class="legend-1">}</mark>
 </pre>
 
 </td>
@@ -5504,9 +5504,9 @@ entry may be <a href="#example-empty-content">completely empty</a>.</p>
 <td class="side-by-side">
 <pre>
 {
-? <code class="legend-1">explicit: entry</code>,
-<code class="legend-2">implicit: entry</code>,
-?<code class="legend-3">°</code><code class="legend-3">°</code>
+? <mark class="legend-1">explicit: entry</mark>,
+<mark class="legend-2">implicit: entry</mark>,
+?<mark class="legend-3">°</mark><mark class="legend-3">°</mark>
 }
 </pre>
 
@@ -5582,10 +5582,10 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 <td class="side-by-side">
 <pre>
 {
-<code class="legend-1">unquoted</code>·<code class="legend-2">:·"separate"</code>,
-<code class="legend-1">https://foo.com</code>,
-<code class="legend-1">omitted value</code><code class="legend-2">:<code class="legend-3">°</code></code>,
-<code class="legend-3">°</code><code class="legend-2">:·omitted key</code>,
+<mark class="legend-1">unquoted</mark>·<mark class="legend-2">:·"separate"</mark>,
+<mark class="legend-1">https://foo.com</mark>,
+<mark class="legend-1">omitted value</mark><mark class="legend-2">:<mark class="legend-3">°</mark></mark>,
+<mark class="legend-3">°</mark><mark class="legend-2">:·omitted key</mark>,
 }
 </pre>
 
@@ -5643,9 +5643,9 @@ However, as this greatly reduces readability, YAML <a href="#processing-yaml-inf
 <td class="side-by-side">
 <pre>
 {
-<code class="legend-1">"adjacent"</code>:<code class="legend-3">value</code>,
-<code class="legend-1">"readable"</code>:·<code class="legend-3">value</code>,
-<code class="legend-1">"empty"</code>:<code class="legend-2">°</code>
+<mark class="legend-1">"adjacent"</mark>:<mark class="legend-3">value</mark>,
+<mark class="legend-1">"readable"</mark>:·<mark class="legend-3">value</mark>,
+<mark class="legend-1">"empty"</mark>:<mark class="legend-2">°</mark>
 }
 </pre>
 
@@ -5684,7 +5684,7 @@ in this case.</p>
 <td class="side-by-side">
 <pre>
 [
-<code class="legend-1">foo: bar</code>
+<mark class="legend-1">foo: bar</mark>
 ]
 </pre>
 
@@ -5723,8 +5723,8 @@ and the syntax is identical to the general case.</p>
 <td class="side-by-side">
 <pre>
 [
-? <code class="legend-1">foo</code>
- <code class="legend-1">bar : baz</code>
+? <mark class="legend-1">foo</mark>
+ <mark class="legend-1">bar : baz</mark>
 ]
 </pre>
 
@@ -5798,9 +5798,9 @@ been impossible to implement.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- [ <code class="legend-1">YAML·</code><code class="legend-4">: separate</code> ]
-- [ <code class="legend-2">°</code><code class="legend-4">: empty key entry</code> ]
-- [ <code class="legend-3">{JSON: like}</code><code class="legend-4">:adjacent</code> ]
+- [ <mark class="legend-1">YAML·</mark><mark class="legend-4">: separate</mark> ]
+- [ <mark class="legend-2">°</mark><mark class="legend-4">: empty key entry</mark> ]
+- [ <mark class="legend-3">{JSON: like}</mark><mark class="legend-4">:adjacent</mark> ]
 </pre>
 
 </td>
@@ -5831,17 +5831,17 @@ been impossible to implement.</p>
 <tr>
 <td class="side-by-side">
 <pre class="error">
-[ <code class="legend-1">foo</code>
-<code class="legend-1"> bar</code>: invalid,
- <code class="legend-2">"foo_...&gt;1K characters..._bar"</code>: invalid ]
+[ <mark class="legend-1">foo</mark>
+<mark class="legend-1"> bar</mark>: invalid,
+ <mark class="legend-2">"foo_...&gt;1K characters..._bar"</mark>: invalid ]
 </pre>
 
 </td>
 <td class="side-by-side">
 <pre class="error">
 ERROR:
-- The <code class="legend-1">foo bar</code> key spans multiple lines
-- The <code class="legend-2">foo...bar</code> key is too long
+- The <mark class="legend-1">foo bar</mark> key spans multiple lines
+- The <mark class="legend-2">foo...bar</mark> key is too long
 </pre>
 
 </td>
@@ -5882,11 +5882,11 @@ Even the <a href="#double-quoted-style">double-quoted style</a> is a superset of
 <tr>
 <td class="side-by-side">
 <pre>
-- <code class="legend-1">[ a, b ]</code>
-- <code class="legend-1">{ a: b }</code>
-- <code class="legend-1">"a"</code>
-- <code class="legend-1">'b'</code>
-- <code class="legend-2">c</code>
+- <mark class="legend-1">[ a, b ]</mark>
+- <mark class="legend-1">{ a: b }</mark>
+- <mark class="legend-1">"a"</mark>
+- <mark class="legend-1">'b'</mark>
+- <mark class="legend-2">c</mark>
 </pre>
 
 </td>
@@ -5949,11 +5949,11 @@ nodes</a> which refer to the <a href="#anchors-and-aliases">anchored</a> <a href
 <tr>
 <td class="side-by-side">
 <pre>
-- <code class="legend-1">!!str "a"</code>
-- <code class="legend-1">'b'</code>
-- <code class="legend-1">&amp;anchor "c"</code>
-- <code class="legend-2">*anchor</code>
-- <code class="legend-2">!!str°</code>
+- <mark class="legend-1">!!str "a"</mark>
+- <mark class="legend-1">'b'</mark>
+- <mark class="legend-1">&amp;anchor "c"</mark>
+- <mark class="legend-2">*anchor</mark>
+- <mark class="legend-2">!!str°</mark>
 </pre>
 
 </td>
@@ -6022,14 +6022,14 @@ variables.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- |<code class="legend-1"> # Empty header↓</code>
+- |<mark class="legend-1"> # Empty header↓</mark>
  literal
-- &gt;<code class="legend-1">1 # Indentation indicator↓</code>
+- &gt;<mark class="legend-1">1 # Indentation indicator↓</mark>
  ·folded
-- |<code class="legend-1">+ # Chomping indicator↓</code>
+- |<mark class="legend-1">+ # Chomping indicator↓</mark>
  keep
 
-- &gt;<code class="legend-1">1- # Both indicators↓</code>
+- &gt;<mark class="legend-1">1- # Both indicators↓</mark>
  ·strip
 </pre>
 
@@ -6087,17 +6087,17 @@ indicator for cases where detection will fail.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- |<code class="legend-1">°</code>
-<code class="legend-2">·</code>detected
-- &gt;<code class="legend-1">°</code>
-<code class="legend-2">·</code>
-<code class="legend-2">··</code>
-<code class="legend-2">··</code># detected
-- |<code class="legend-1">1</code>
-<code class="legend-2">··</code>explicit
-- &gt;<code class="legend-1">°</code>
-<code class="legend-2">·</code>→
-<code class="legend-2">·</code>detected
+- |<mark class="legend-1">°</mark>
+<mark class="legend-2">·</mark>detected
+- &gt;<mark class="legend-1">°</mark>
+<mark class="legend-2">·</mark>
+<mark class="legend-2">··</mark>
+<mark class="legend-2">··</mark># detected
+- |<mark class="legend-1">1</mark>
+<mark class="legend-2">··</mark>explicit
+- &gt;<mark class="legend-1">°</mark>
+<mark class="legend-2">·</mark>→
+<mark class="legend-2">·</mark>detected
 </pre>
 
 </td>
@@ -6128,13 +6128,13 @@ indicator for cases where detection will fail.</p>
 <td class="side-by-side">
 <pre class="error">
 - |
-·<code class="legend-1">·</code>
+·<mark class="legend-1">·</mark>
 ·text
 - &gt;
 ··text
-<code class="legend-2">·</code>text
+<mark class="legend-2">·</mark>text
 - |2
-<code class="legend-3">·</code>text
+<mark class="legend-3">·</mark>text
 </pre>
 
 </td>
@@ -6142,10 +6142,10 @@ indicator for cases where detection will fail.</p>
 <pre class="error">
 ERROR:
 - A leading all-space line must
-  not have too many <code class="legend-1">spaces</code>.
+  not have too many <mark class="legend-1">spaces</mark>.
 - A following text line must
-  not be <code class="legend-2">less indented</code>.
-- The text is <code class="legend-3">less indented</code>
+  not be <mark class="legend-2">less indented</mark>.
+- The text is <mark class="legend-3">less indented</mark>
   than the indicated level.
 </pre>
 
@@ -6227,11 +6227,11 @@ by the chomping indicator specified in the <a href="#block-scalar-headers">block
 <td class="side-by-side">
 <pre>
 strip: |-
-  text<code class="legend-1">↓</code>
+  text<mark class="legend-1">↓</mark>
 clip: |
-  text<code class="legend-2">↓</code>
+  text<mark class="legend-2">↓</mark>
 keep: |+
-  text<code class="legend-2">↓</code>
+  text<mark class="legend-2">↓</mark>
 </pre>
 
 </td>
@@ -6304,21 +6304,21 @@ constrained.</p>
   # Comments:
 strip: |-
   # text↓
-<code class="legend-1">··⇓</code>
-<code class="legend-1"><code class="legend-3">·# Clip</code></code>
-<code class="legend-1"><code class="legend-3">··# comments:</code></code>
-<code class="legend-1"><code class="legend-3">↓</code></code>
+<mark class="legend-1">··⇓</mark>
+<mark class="legend-1"><mark class="legend-3">·# Clip</mark></mark>
+<mark class="legend-1"><mark class="legend-3">··# comments:</mark></mark>
+<mark class="legend-1"><mark class="legend-3">↓</mark></mark>
 clip: |
   # text↓
-<code class="legend-1">·↓</code>
-<code class="legend-1"><code class="legend-3">·# Keep</code></code>
-<code class="legend-1"><code class="legend-3">··# comments:</code></code>
-<code class="legend-1"><code class="legend-3">↓</code></code>
+<mark class="legend-1">·↓</mark>
+<mark class="legend-1"><mark class="legend-3">·# Keep</mark></mark>
+<mark class="legend-1"><mark class="legend-3">··# comments:</mark></mark>
+<mark class="legend-1"><mark class="legend-3">↓</mark></mark>
 keep: |+
   # text↓
-<code class="legend-2">↓</code>
-<code class="legend-2"><code class="legend-3">·# Trail</code></code>
-<code class="legend-2"><code class="legend-3">··# comments.</code></code>
+<mark class="legend-2">↓</mark>
+<mark class="legend-2"><mark class="legend-3">·# Trail</mark></mark>
+<mark class="legend-2"><mark class="legend-3">··# comments.</mark></mark>
 </pre>
 
 </td>
@@ -6352,11 +6352,11 @@ considered as trailing lines and hence are affected by chomping.</p>
 <td class="side-by-side">
 <pre>
 strip: &gt;-
-<code class="legend-1">↓</code>
+<mark class="legend-1">↓</mark>
 clip: &gt;
-<code class="legend-1">↓</code>
+<mark class="legend-1">↓</mark>
 keep: |+
-<code class="legend-2">↓</code>
+<mark class="legend-2">↓</mark>
 </pre>
 
 </td>
@@ -6398,10 +6398,10 @@ It is the simplest, most restricted and most readable <a href="#node-styles">sca
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">|↓</code>
-<code class="legend-1">·literal↓</code>
-<code class="legend-1">·→text↓</code>
-<code class="legend-1">↓</code>
+<mark class="legend-1">|↓</mark>
+<mark class="legend-1">·literal↓</mark>
+<mark class="legend-1">·→text↓</mark>
+<mark class="legend-1">↓</mark>
 </pre>
 
 </td>
@@ -6460,14 +6460,14 @@ In addition, there is no way to break a long literal line.</p>
 <td class="side-by-side">
 <pre>
 |
-<code class="legend-1">·</code>
-<code class="legend-1">··</code>
-<code class="legend-1">··literal</code><code class="legend-2">↓</code>
-<code class="legend-1"><code class="legend-2">···</code></code><code class="legend-2">↓</code>
-<code class="legend-1"><code class="legend-2">··</code></code>
-<code class="legend-1"><code class="legend-2">··text</code></code><code class="legend-3">↓</code>
+<mark class="legend-1">·</mark>
+<mark class="legend-1">··</mark>
+<mark class="legend-1">··literal</mark><mark class="legend-2">↓</mark>
+<mark class="legend-1"><mark class="legend-2">···</mark></mark><mark class="legend-2">↓</mark>
+<mark class="legend-1"><mark class="legend-2">··</mark></mark>
+<mark class="legend-1"><mark class="legend-2">··text</mark></mark><mark class="legend-3">↓</mark>
 ↓
-<code class="legend-4">·# Comment</code>
+<mark class="legend-4">·# Comment</mark>
 </pre>
 
 </td>
@@ -6510,10 +6510,10 @@ It is similar to the <a href="#literal-style">literal style</a>; however, folded
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">&gt;↓</code>
-<code class="legend-1">·folded↓</code>
-<code class="legend-1">·text↓</code>
-<code class="legend-1">↓</code>
+<mark class="legend-1">&gt;↓</mark>
+<mark class="legend-1">·folded↓</mark>
+<mark class="legend-1">·text↓</mark>
+<mark class="legend-1">↓</mark>
 </pre>
 
 </td>
@@ -6557,18 +6557,18 @@ separates two non-<a href="#white-space-characters">space</a> characters.</p>
 <pre>
 &gt;
 
-<code class="legend-1"><code class="legend-2">·folded</code>↓</code>
-<code class="legend-1"><code class="legend-2">·line</code>↓</code>
+<mark class="legend-1"><mark class="legend-2">·folded</mark>↓</mark>
+<mark class="legend-1"><mark class="legend-2">·line</mark>↓</mark>
 ↓
-<code class="legend-1"><code class="legend-2">·next</code></code>
-<code class="legend-1"><code class="legend-2">·line</code></code>↓
+<mark class="legend-1"><mark class="legend-2">·next</mark></mark>
+<mark class="legend-1"><mark class="legend-2">·line</mark></mark>↓
    * bullet
 
    * list
    * lines
 
-<code class="legend-1"><code class="legend-2">·last</code>↓</code>
-<code class="legend-1"><code class="legend-2">·line</code></code>↓
+<mark class="legend-1"><mark class="legend-2">·last</mark>↓</mark>
+<mark class="legend-1"><mark class="legend-2">·line</mark></mark>↓
 
 # Comment
 </pre>
@@ -6632,10 +6632,10 @@ different productions.)</p>
 
  next
  line
-<code class="legend-1"><code class="legend-2">···* bullet</code>↓</code>
-<code class="legend-1">↓</code>
-<code class="legend-1"><code class="legend-2">···* list</code>↓</code>
-<code class="legend-1"><code class="legend-2">···* lines</code></code>↓
+<mark class="legend-1"><mark class="legend-2">···* bullet</mark>↓</mark>
+<mark class="legend-1">↓</mark>
+<mark class="legend-1"><mark class="legend-2">···* list</mark>↓</mark>
+<mark class="legend-1"><mark class="legend-2">···* lines</mark></mark>↓
 
  last
  line
@@ -6687,17 +6687,17 @@ also not <a href="#line-folding">folded</a>.</p>
 <td class="side-by-side">
 <pre>
 &gt;
-<code class="legend-2">↓</code>
+<mark class="legend-2">↓</mark>
  folded
- line<code class="legend-1">↓</code>
-<code class="legend-2">↓</code>
+ line<mark class="legend-1">↓</mark>
+<mark class="legend-2">↓</mark>
  next
- line<code class="legend-1">↓</code>
+ line<mark class="legend-1">↓</mark>
    * bullet
 
    * list
    * line↓
-<code class="legend-2">↓</code>
+<mark class="legend-2">↓</mark>
  last
  line
 
@@ -6754,9 +6754,9 @@ also not <a href="#line-folding">folded</a>.</p>
    * line
 
  last
- line<code class="legend-1">↓</code>
-<code class="legend-2">↓</code>
-<code class="legend-2"># Comment</code>
+ line<mark class="legend-1">↓</mark>
+<mark class="legend-2">↓</mark>
+<mark class="legend-2"># Comment</mark>
 </pre>
 
 </td>
@@ -6817,8 +6817,8 @@ followed by a non-space character (e.g. “<strong><code class="language-plainte
 <td class="side-by-side">
 <pre>
 block sequence:
-<code class="legend-2">··</code><code class="legend-1">- one↓</code>
-  <code class="legend-1">- two : three↓</code>
+<mark class="legend-2">··</mark><mark class="legend-1">- one↓</mark>
+  <mark class="legend-1">- two : three↓</mark>
 </pre>
 
 </td>
@@ -6873,12 +6873,12 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 <tr>
 <td class="side-by-side">
 <pre>
--<code class="legend-1">° # Empty</code>
--<code class="legend-2"> |</code>
- <code class="legend-2">block node</code>
--<code class="legend-3">·- one # Compact</code>
-<code class="legend-3">··- two # sequence</code>
--<code class="legend-4"> one: two # Compact mapping</code>
+-<mark class="legend-1">° # Empty</mark>
+-<mark class="legend-2"> |</mark>
+ <mark class="legend-2">block node</mark>
+-<mark class="legend-3">·- one # Compact</mark>
+<mark class="legend-3">··- two # sequence</mark>
+-<mark class="legend-4"> one: two # Compact mapping</mark>
 </pre>
 
 </td>
@@ -6924,7 +6924,7 @@ pair</a>.</p>
 <td class="side-by-side">
 <pre>
 block mapping:
-<code class="legend-2">·</code><code class="legend-1">key: value↓</code>
+<mark class="legend-2">·</mark><mark class="legend-1">key: value↓</mark>
 </pre>
 
 </td>
@@ -6985,11 +6985,11 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">? explicit key # Empty value↓</code><code class="legend-3">°</code>
-<code class="legend-1">? |</code>
-<code class="legend-1">  block key↓</code>
-<code class="legend-2">:·- one # Explicit compact</code>
-<code class="legend-2">··- two # block value↓</code>
+<mark class="legend-1">? explicit key # Empty value↓</mark><mark class="legend-3">°</mark>
+<mark class="legend-1">? |</mark>
+<mark class="legend-1">  block key↓</mark>
+<mark class="legend-2">:·- one # Explicit compact</mark>
+<mark class="legend-2">··- two # block value↓</mark>
 </pre>
 
 </td>
@@ -7061,10 +7061,10 @@ This prevents a potential ambiguity with multi-line <a href="#plain-style">plain
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">plain key</code><code class="legend-2">: in-line value</code>
-<code class="legend-1">°</code><code class="legend-2">:° # Both empty</code>
-<code class="legend-1">"quoted key"</code><code class="legend-2">:</code>
-<code class="legend-2">- entry</code>
+<mark class="legend-1">plain key</mark><mark class="legend-2">: in-line value</mark>
+<mark class="legend-1">°</mark><mark class="legend-2">:° # Both empty</mark>
+<mark class="legend-1">"quoted key"</mark><mark class="legend-2">:</mark>
+<mark class="legend-2">- entry</mark>
 </pre>
 
 </td>
@@ -7106,9 +7106,9 @@ mapping.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-- <code class="legend-1">sun: yellow↓</code>
-- <code class="legend-1">? earth: blue↓</code>
-<code class="legend-1">  : moon: white↓</code>
+- <mark class="legend-1">sun: yellow↓</mark>
+- <mark class="legend-1">? earth: blue↓</mark>
+<mark class="legend-1">  : moon: white↓</mark>
 </pre>
 
 </td>
@@ -7161,12 +7161,12 @@ scalar</a> and an <a href="#example-single-pair-explicit-entry">implicit key</a>
 <tr>
 <td class="side-by-side">
 <pre>
--<code class="legend-1">↓</code>
-<code class="legend-1">··"flow in block"↓</code>
--·<code class="legend-2">&gt;</code>
-<code class="legend-2"> Block scalar↓</code>
--·<code class="legend-2">!!map # Block collection</code>
-<code class="legend-2">  foo : bar↓</code>
+-<mark class="legend-1">↓</mark>
+<mark class="legend-1">··"flow in block"↓</mark>
+-·<mark class="legend-2">&gt;</mark>
+<mark class="legend-2"> Block scalar↓</mark>
+-·<mark class="legend-2">!!map # Block collection</mark>
+<mark class="legend-2">  foo : bar↓</mark>
 </pre>
 
 </td>
@@ -7214,12 +7214,12 @@ entries.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-literal: <code class="legend-1">|2</code>
-<code class="legend-1">··value</code>
-folded:<code class="legend-2">↓</code>
-<code class="legend-2">···!foo</code>
-<code class="legend-2">··&gt;1</code>
-<code class="legend-2">·value</code>
+literal: <mark class="legend-1">|2</mark>
+<mark class="legend-1">··value</mark>
+folded:<mark class="legend-2">↓</mark>
+<mark class="legend-2">···!foo</mark>
+<mark class="legend-2">··&gt;1</mark>
+<mark class="legend-2">·value</mark>
 </pre>
 
 </td>
@@ -7268,12 +7268,12 @@ versus <strong><code class="language-plaintext highlighter-rouge">block-in</code
 <tr>
 <td class="side-by-side">
 <pre>
-sequence:<code class="legend-1"> !!seq</code>
-<code class="legend-1"><code class="legend-2">- entry</code></code>
-<code class="legend-1"><code class="legend-2">- !!seq</code></code>
-<code class="legend-1"><code class="legend-2"> - nested</code></code>
-mapping:<code class="legend-1"> !!map</code>
-<code class="legend-1"><code class="legend-3"> foo: bar</code></code>
+sequence:<mark class="legend-1"> !!seq</mark>
+<mark class="legend-1"><mark class="legend-2">- entry</mark></mark>
+<mark class="legend-1"><mark class="legend-2">- !!seq</mark></mark>
+<mark class="legend-1"><mark class="legend-2"> - nested</mark></mark>
+mapping:<mark class="legend-1"> !!map</mark>
+<mark class="legend-1"><mark class="legend-3"> foo: bar</mark></mark>
 </pre>
 
 </td>
@@ -7332,8 +7332,8 @@ existence of an actual <a href="#document">document</a>.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">⇔# Comment</code>
-<code class="legend-1"># lines</code>
+<mark class="legend-1">⇔# Comment</mark>
+<mark class="legend-1"># lines</mark>
 Document
 </pre>
 
@@ -7414,9 +7414,9 @@ either of these markers.</p>
 <td class="side-by-side">
 <pre>
 %YAML 1.2
-<code class="legend-1">---</code>
+<mark class="legend-1">---</mark>
 Document
-<code class="legend-2"><code class="legend-3">...</code> # Suffix</code>
+<mark class="legend-2"><mark class="legend-3">...</mark> # Suffix</mark>
 </pre>
 
 </td>
@@ -7465,13 +7465,13 @@ document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">inden
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">Bare</code>
-<code class="legend-1">document</code>
+<mark class="legend-1">Bare</mark>
+<mark class="legend-1">document</mark>
 ...
 # No document
 ...
-<code class="legend-1">|</code>
-<code class="legend-1">%!PS-Adobe-2.0 # Not the first line</code>
+<mark class="legend-1">|</mark>
+<mark class="legend-1">%!PS-Adobe-2.0 # Not the first line</mark>
 </pre>
 
 </td>
@@ -7515,12 +7515,12 @@ Since the existence of the <a href="#document">document</a> is indicated by this
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">---</code>
-<code class="legend-1">{ matches</code>
-<code class="legend-1">% : 20 }</code>
+<mark class="legend-1">---</mark>
+<mark class="legend-1">{ matches</mark>
+<mark class="legend-1">% : 20 }</mark>
 ...
-<code class="legend-1">---</code>
-<code class="legend-1"># Empty</code>
+<mark class="legend-1">---</mark>
+<mark class="legend-1"># Empty</mark>
 ...
 </pre>
 
@@ -7562,13 +7562,13 @@ Since the existence of the <a href="#document">document</a> is indicated by this
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">%YAML 1.2</code>
-<code class="legend-1">--- |</code>
-<code class="legend-1">%!PS-Adobe-2.0</code>
+<mark class="legend-1">%YAML 1.2</mark>
+<mark class="legend-1">--- |</mark>
+<mark class="legend-1">%!PS-Adobe-2.0</mark>
 ...
-<code class="legend-1">%YAML1.2</code>
-<code class="legend-1">---</code>
-<code class="legend-1"># Empty</code>
+<mark class="legend-1">%YAML1.2</mark>
+<mark class="legend-1">---</mark>
+<mark class="legend-1"># Empty</mark>
 ...
 </pre>
 
@@ -7624,13 +7624,13 @@ such as stream concatenation.</p>
 <tr>
 <td class="side-by-side">
 <pre>
-<code class="legend-1">Document</code>
-<code class="legend-1">---</code>
-<code class="legend-1"># Empty</code>
-<code class="legend-2">...</code>
-<code class="legend-3">%YAML 1.2</code>
-<code class="legend-3">---</code>
-<code class="legend-3">matches %: 20</code>
+<mark class="legend-1">Document</mark>
+<mark class="legend-1">---</mark>
+<mark class="legend-1"># Empty</mark>
+<mark class="legend-2">...</mark>
+<mark class="legend-3">%YAML 1.2</mark>
+<mark class="legend-3">---</mark>
+<mark class="legend-3">matches %: 20</mark>
 </pre>
 
 </td>
@@ -8465,13 +8465,6 @@ well as raising any questions regarding this draft.</p>
 
 
 </main>
-
-<!-- XXX What is this for? -->
-<script>
-for (const c of document.querySelectorAll('code > code')) {
-  c.parentElement.classList.add('container');
-}
-</script>
 
 </body>
 
