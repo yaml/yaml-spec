@@ -1,4 +1,5 @@
+/yaml-common
 /eatme
-/ref-parser
+/yaml-reference-parser
 /npm-yaml
 /yaml-spec-12.html

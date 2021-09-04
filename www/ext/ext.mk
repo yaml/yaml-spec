@@ -1,14 +1,15 @@
 EXT_DIRS := \
-    _ext/eatme \
-    _ext/ref-parser \
-    _ext/npm-yaml \
-    _ext/yaml-spec-12.html \
+    ext/yaml-common \
+    ext/eatme \
+    ext/yaml-reference-parser \
+    ext/npm-yaml \
+    ext/yaml-spec-12.html \
 
 EXT_FILES := \
     ext/eatme/src/eatme.scss \
     ext/eatme/src/eatme.coffee \
     \
-    ext/ref-parser/javascript/lib/ \
+    ext/yaml-reference-parser/javascript/lib/ \
     \
     ext/npm-yaml/browser/dist/ \
     ext/npm-yaml/v1/browser/dist/ \

@@ -91,6 +91,7 @@ STORY_FILES := $(STORY_FILES:%=src/%)
 
 FILES := \
     _config.yml \
+    favicon.svg \
     $(WWW_FILES) \
     $(EXT_FILES) \
     $(SPEC_FILES) \
@@ -173,6 +174,9 @@ $O/_config.yml: $O/config.yaml
 	echo >> $@
 	echo '# Added by build system:' >> $@
 	echo "baseurl: '$(BASEURL)'" >> $@
+
+$O/favicon.svg: $(EXT)/yaml-common/image/yaml-logo.svg
+	cp $< $@
 
 $O/%: $(WWW)/%
 	@mkdir -p $(dir $@)
