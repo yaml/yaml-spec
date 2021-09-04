@@ -66,10 +66,8 @@ div.legend, pre {
     color: inherit;
     display: inline-block;
     line-height: 16px;
+    padding: 3px 0 !important;
 
-    mark {
-      margin: 3px 0 !important;
-    }
   }
 }
 
