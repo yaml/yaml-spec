@@ -70,8 +70,10 @@ else
 endif
 
 $(NPM_YAML):
-ifneq (,$(wildcard $(TMPEXT)))
-	ln -s $(TMPEXT)/$@ $@
+ifdef FAST_TEST
+	mkdir -p $(TMPEXT)/$(NPM_YAML)/browser/dist
+	mkdir -p $(TMPEXT)/$(NPM_YAML)/v1/browser/dist
+	mkdir -p $(TMPEXT)/$(NPM_YAML)/v2/browser/dist
 else ifneq ($(shell command -v npm),)
 	git clone $(NPM_YAML_REPO) $@
 	git -C $(NPM_YAML) worktree add -f v2 v2.0.0-6
@@ -84,9 +86,9 @@ else ifneq ($(shell command -v npm),)
 	(cd $@/v2 && npm install . && npm run build)
 	mkdir -p $(TMPEXT)
 	mv $@ $(TMPEXT)/
-	ln -s $(TMPEXT)/$@ $@
 else
 	@echo "*** NOTICE: 'npm' not available."
 	@echo "*** Can't build NodeJS variants for 'yaml.js'."
 	exit 1
 endif
+	ln -s $(TMPEXT)/$@ $@

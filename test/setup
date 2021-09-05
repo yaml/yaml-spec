@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+shopt -s inherit_errexit
+
+root=$(cd "$(dirname ${BASH_SOURCE[0]})" && pwd)
+
+test_file=${BASH_SOURCE[1]}
+
+cd "$root"
+
+R=$'\e[0;31m'
+G=$'\e[0;32m'
+Y=$'\e[0;33m'
+Z=$'\e[0m'
+
+end() (
+  if [[ $? -eq 0 ]]; then
+    echo "${G}PASSED$Z '$Y$test_file$Z'"
+  else
+    echo "${R}FAILED$Z '$Y$test_file$Z'"
+  fi
+  echo
+)
+
+trap end exit
