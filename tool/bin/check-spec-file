@@ -3,9 +3,9 @@
 set -e -u -o pipefail
 
 main() (
-  file=$1
-
-  spell-check "$file"
+  for file; do
+    spell-check "$file"
+  done
 )
 
 spell-check() (

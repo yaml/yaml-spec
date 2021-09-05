@@ -7,23 +7,18 @@ ALL_TEX := $(wildcard tex/*.tex)
 ALL_IMG := $(ALL_TEX:tex/%.tex=img/%.svg)
 BUILD_TEX :=
 
-ALL_MD := $(wildcard *.md)
-ALL_HTML := $(ALL_MD:%.md=build/%.md)
-
 #------------------------------------------------------------------------------
-build: build-html build-img
+.PHONY: build test
 
-build-html: $(ALL_HTML)
+build: build-img
 
-build-img: $(ALL_IMG) build-img-all
-
-check: $(ALL_CHECK)
-
-$(ALL_CHECK):
-	check-spec-file $(@:check-%=%)
+test:
+	check-spec-file $(ALL_CHECK:check-%=%)
 
 clean:
 	rm -fr img html build
+
+build-img: $(ALL_IMG) build-img-all
 
 html/%.html: build/%.md
 	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
@@ -42,5 +37,3 @@ endif
 build-img-all:
 	@[[ -z '$(BUILD_TEX)' ]] || \
 	    (set -x; tex-to-img img/ $(BUILD_TEX))
-
-.PHONY: build

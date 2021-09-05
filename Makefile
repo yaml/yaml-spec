@@ -1,6 +1,6 @@
 include tool/make/init.mk
 
-SHELL := bash
+TEST_FILES := $(wildcard test/test-*)
 
 default:
 
@@ -10,8 +10,15 @@ docker-build-all docker-push-all docker-pull-all:
 build html site serve publish publish-fork force diff:
 	$(MAKE) -C www $@
 
-check:
-	$(MAKE) -C spec $@
+test: test-spec $(TEST_FILES)
+
+test-spec:
+	$(MAKE) -C spec test
+
+$(TEST_FILES): force
+	bash $@
+
+force:
 
 _:
 	git worktree prune

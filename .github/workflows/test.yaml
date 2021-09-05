@@ -1,4 +1,4 @@
-name: yaml-spec Testing
+name: yaml-spec Repository Testing
 
 on:
   push:
@@ -6,21 +6,6 @@ on:
     types: [opened]
 
 jobs:
-  test-check:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v2
-
-    - name: Install prerequisites
-      run:
-        sudo apt-get update &&
-        sudo apt-get install -y
-          make
-          aspell
-
-    - name: Spellcheck
-      run: make check
-
   test-make-targets:
     runs-on: ubuntu-latest
 
@@ -28,44 +13,5 @@ jobs:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
 
-    - name: Set up Ubuntu environment
-      run:
-        sudo apt-get update &&
-        sudo apt-get install -y
-            build-essential
-            cpanminus
-
-    - name: Install prerequisites
-      run:
-        sudo cpanm -n YAML::PP XXX &&
-        npm install -g coffeescript &&
-        npm install
-            domino
-            ingy-prelude
-            turndown
-            turndown-plugin-gfm
-            smartwrap
-
-    - name: Fetch the gh-pages branch
-      run:
-        git fetch origin gh-pages
-
-    - name: Make the 2009 1.2 spec.html from docbook
-      run:
-        source .rc &&
-        make -C spec/2009 clean html
-
-    - name: Make web content
-      run:
-        source .rc &&
-        make -C www force build
-
-    - name: Check output files
-      run:
-        bash -c '
-          set -x;
-          [[ -e spec/2009/spec.html ]] &&
-          [[ -e www/spec.yaml.io/main/spec.html ]] &&
-          true
-        '
-
+    - name: Run `make test`
+      run:  make test
