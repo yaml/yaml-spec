@@ -250,6 +250,8 @@ $(EXT_DIRS):
 	$(MAKE) -C $(EXT) build
 
 $(SITE):
+	git show-ref -q origin/gh-pages || \
+	  git fetch origin gh-pages
 	-git branch --track gh-pages origin/gh-pages
 	git worktree add -f $@ gh-pages
 	git -C $(SITE) reset --hard origin/gh-pages

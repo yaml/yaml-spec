@@ -7,8 +7,6 @@ DIR=../www
 (
   set -x
 
-  git fetch origin gh-pages
-
   make -C "$DIR" force build FAST_TEST=1
 
   [[ -e $DIR/spec.yaml.io/favicon.svg ]]
