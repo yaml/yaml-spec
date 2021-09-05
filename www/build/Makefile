@@ -22,9 +22,9 @@ HTML_FILES := $(HTML_FILES:ReadMe.html=)
 
 STRIP_HTML := \
     perl -p0e ' \
-	s{.*<body>\n*}{}s; \
+	s{.*<body[^>]*?>\n*}{}s; \
 	s{</body>.*}{}s; \
-	s{\n*<script.*?</script>\n*}{\n}sg; \
+	s{\s*<script.*?</script>\s*}{}sg; \
     '
 
 #------------------------------------------------------------------------------
