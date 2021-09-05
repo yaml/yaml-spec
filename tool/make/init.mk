@@ -4,8 +4,10 @@ TTY := $(shell [ -t 0 ] && echo 1)
 UID := $(shell id -u)
 GID := $(shell id -g)
 
-ifneq ($(wildcard /.dockerenv),)
+ifneq (,$(wildcard /.dockerenv))
+  ifneq (true,$(shell echo $$ACT))
 IN_DOCKER := true
+  endif
 endif
 
 ifdef IN_DOCKER
