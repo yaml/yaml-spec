@@ -74,6 +74,7 @@ ifdef FAST_TEST
 	mkdir -p $(TMPEXT)/$(NPM_YAML)/browser/dist
 	mkdir -p $(TMPEXT)/$(NPM_YAML)/v1/browser/dist
 	mkdir -p $(TMPEXT)/$(NPM_YAML)/v2/browser/dist
+else ifneq (,$(wildcard $(TMPEXT)/$(NPM_YAML)))
 else ifneq ($(shell command -v npm),)
 	git clone $(NPM_YAML_REPO) $@
 	git -C $(NPM_YAML) worktree add -f v2 v2.0.0-6
