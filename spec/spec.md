@@ -96,7 +96,7 @@ YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful
 way.
 For example, [indentation] may be used for structure, [colons] separate [key:
-value pairs] and [dashes] are used to create "bullet" [lists].
+value pairs] and [dashes] are used to create "bulleted" [lists].
 
 There are myriad flavors of [data structures], but they can all be adequately
 [represented] with three basic primitives: [mappings] (hashes/dictionaries),
