@@ -8,7 +8,7 @@ body.status-draft {
   }
 }
 
-a[href^="#"] {
+a {
   color: inherit;
   text-decoration: underline solid $theme-color;
 
