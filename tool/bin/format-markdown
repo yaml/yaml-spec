@@ -1,0 +1,154 @@
+#!/usr/bin/env perl
+
+use v5.18;
+
+# use XXX;
+# use utf8;
+use Encode qw(decode encode);
+
+
+my @l = ();
+my $l = '';
+
+sub in {
+  decode('UTF-8', <>, Encode::FB_CROAK);
+}
+sub out {
+  print encode('UTF-8', $_[0], Encode::FB_CROAK);
+}
+sub peek {
+  @l and $l[0];
+}
+sub take {
+  shift(@l);
+}
+sub give {
+  unshift(@l, "$_[0]\n");
+}
+sub space {
+  out take while peek =~ /^$/;
+  return 1;
+}
+sub lines {
+  while ($l) {
+    if (length $l <= 79) {
+      out "$l\n";
+      last;
+    }
+    elsif ($l =~ s{^(.{5,77}\ \ )$/}{}) {
+      out "$1\n";
+    }
+    elsif ($l =~ s{^(\S.{10,77}\S)(?:$|\ (?=\S))}{}) {
+      out "$1\n";
+    }
+    else {
+      die ">>$l<<";
+    }
+  }
+}
+sub xhead {
+  my ($sub, $file, $line) = caller;
+  warn "Error from '$sub' line $line:\n";
+  my $lines = join '', @l[0..10];
+  die "$lines";
+}
+
+sub wrap {
+  my $end = shift;
+  my @l;
+  while (peek =~ /./) {
+    my $line = take;
+    chomp $line;
+    push @l, $line;
+    last if $line =~ /(  |\.)$/;
+    last if $end->();
+  }
+  $l = join ' ', @l;
+  $l =~ s{\]\(\ }{](};
+  lines;
+  space;
+  return 1;
+}
+
+sub line {
+  out take;
+}
+
+sub para {
+  my $end = sub { 0 };
+  wrap $end;
+}
+
+sub list {
+  my $end = sub { peek =~ /^(?:\*\ |$)/ };
+  wrap($end);
+}
+
+sub toc {
+  line;
+  line;
+  space;
+}
+
+sub pre {
+  line;
+  line while peek !~ /^\`\`\`$/;
+  line;
+  line while peek =~ /^<!-- .* -->$/;
+  space;
+}
+
+sub tabl {
+  line while peek =~ /^\|\ /;
+  space;
+}
+
+sub leg {
+  line;
+  line while peek =~ /^\*\ /;
+  space;
+}
+
+sub comm {
+  my $line = take;
+  out $line;
+  if ($line !~ /-->/) {
+    while (peek !~ /-->$/) {
+      out take;
+    }
+  }
+  space;
+}
+
+#------------------------------------------------------------------------------
+sub main {
+  push @l, $_ while $_ = in;
+
+  if (peek =~ /^---$/) {
+    out take;
+    out take while peek !~ /^---$/;
+    out take;
+    space;
+  }
+
+  while (my $peek = peek) {
+    line and next if $peek =~ /^\[\^/;
+    leg  and next if $peek =~ /^\*\*Legend:\*\*$/;
+    toc  and next if $peek =~ /^\{:toc\}$/;
+    pre  and next if $peek =~ /^\`\`\`$/;
+    list and next if $peek =~ /^\*\ /;
+    tabl and next if $peek =~ /^\|\ /;
+    comm and next if $peek =~ /^<--/;
+    para and next if $peek =~ /^(
+      [\w\#\*"] |
+      \[\w |
+      \!\[ |
+      \(\w |
+      [\?\:\>]\ |
+      \[\"\*\* |
+    )/x;
+    xhead;
+  }
+}
+
+main(@ARGV);

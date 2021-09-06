@@ -15,6 +15,10 @@ build: build-img
 test:
 	check-spec-file $(ALL_CHECK:check-%=%)
 
+format: spec.md
+	format-markdown $< > /tmp/spec.md
+	mv /tmp/spec.md $<
+
 clean:
 	rm -fr img html build
 
