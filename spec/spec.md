@@ -132,51 +132,44 @@ The design goals for YAML are, in decreasing priority:
 1. YAML should be easy to implement and use.
 
 
-## #. History
+## #. YAML History
 
-YAML design began in early 2001, when Clark Evans and Oren Ben-Kiki were
-working with the SML-DEV[^sml-dev] mailing list which was focused on
-simplifying XML.
-They were introduced to Ingy döt Net who was working on a plain text
-serialization module[^denter] for Perl.
-The three of them collaborated through the yaml-core mailing list[^yaml-core]
-to create the YAML 1.0 specification, which was published in early 2004.
+The YAML 1.0 specification was published in early 2004 by by Clark Evans, Oren
+Ben-Kiki, and Ingy döt Net after 3 years of collaborative design work through
+the yaml-core mailing list[^yaml-core].
+The project was initially rooted in Clark and Oren's work on the
+SML-DEV[^SML-DEV] mailing list (for simplifying XML) and Ingy's plain text
+serialization module[^Denter] for Perl.
+The language took a lot of inspiration from many other technologies and formats
+that preceded it.
 
-YAML took many of its ideas from existing technologies such as C, Java, Perl,
-Python, Ruby, email, HTML, MIME, URIs, XML, SAX, SOAP and JSON.
+The first YAML framework was written in Perl in 2001 and Ruby was the first
+language to ship a YAML framework as part of its core language distribution in
+2003.
 
-Adoption of YAML happened in a grassroots manner during this time.
-Ruby was the first language to ship a YAML framework as part of its core.
-
-The YAML 1.1 specification was published in 2005.
+The YAML 1.1[^1-1-spec] specification was published in 2005.
 Around this time, the developers became aware of JSON[^json].
 By sheer coincidence, JSON was almost a complete subset of YAML (both
 syntactically and semantically).
-This was due to YAML's flow collection style, which was influenced by Python
-more than JavaScript.
 
-In 2006, Kirill Siminov produced PyYAML[^pyyaml] and LibYAML[^libyaml], both of
-which are still key parts of YAML infrastructure.
-Many of the YAML frameworks in various programming languages are built over
-LibYAML.
-Many others have looked to PyYAML as a solid reference for their
+In 2006, Kirill Siminov produced PyYAML[^pyyaml] and LibYAML[^libyaml].
+A lot of the YAML frameworks in various programming languages are built over
+LibYAML and many others have looked to PyYAML as a solid reference for their
 implementations.
 
-The primary focus of the YAML 1.2 specification was to remove the handful of
-small syntax rules that kept YAML from being a complete superset of JSON.
-The 1.2 specification was published in 2009.
+The YAML 1.2[^1-2-spec] specification was published in 2009.
+Its primary focus was making YAML a strict superset of JSON.
+It also removed many of the problematic implicit typing recommendations.
 
-After that, new work on the YAML specification came to a halt, as its authors
-became focused on other ambitions.
-Meanwhile, the adoption of YAML in the computing industry continued to grow,
-with many large scale projects using it as their primary user interface.
+Since the release of the 1.2 specification, YAML adoption has continued to
+grow, and many large-scale projects use it as their primary configuration
+format.
+In 2020, the new [YAML language design team](core-team) began meeting regularly
+to discuss improvements to the YAML language and specification; to better meet
+the needs and expectations of its users and use cases.
 
-Around 2016 the current [YAML language design team](core-team) began to form.
-Starting in early 2020, this team began meeting weekly to discuss how to best
-improve YAML to meet the needs and expectations that are apparent today.
-
-This YAML 1.2.1 specification was published in September 2021; the first step
-in a new journey for the language.
+This YAML 1.2.1 specification, published in September 2021, is the first step
+in YAML's rejuvenated development journey.
 YAML is now more popular than it has ever been, but there is a long list of
 things that need to be addressed for it to reach its full potential.
 The YAML design team is focused on making YAML as good as possible.
@@ -6302,6 +6295,8 @@ defined above.
 
 [^spec-repo]: [YAML Specification on GitHub](https://github.com/yaml/yaml-spec)
 [^1-2-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.2](https://yaml.org/spec/1.2)
+[^1-1-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.1](https://yaml.org/spec/1.1)
+[^1-0-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.0](https://yaml.org/spec/1.0)
 [^unicode]: [Unicode – The World Standard for Text and Emoji](https://www.unicode.org)
 [^sml-dev]: [SML-DEV Mailing List Archive](https://github.com/yaml/sml-dev-archive)
 [^denter]: [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](https://metacpan.org/dist/Data-Denter/view/Denter.pod)
