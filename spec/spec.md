@@ -107,8 +107,8 @@ structure].
 While most programming languages can use YAML for data serialization, YAML
 excels in working with those languages that are fundamentally built around the
 three basic primitives.
-These include the new wave of dynamic languages such as Perl, Python, PHP, Ruby
-and JavaScript.
+These include common dynamic languages such as JavaScript, Perl, PHP, Python
+and Ruby.
 
 There are hundreds of different languages for programming, but only a handful
 of languages for storing and transferring data.
