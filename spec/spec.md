@@ -78,9 +78,9 @@ create programs that process YAML information.
 
 # Chapter #. Introduction
 
-"YAML Ain't Markup Language" (abbreviated YAML) is a data serialization
-language designed to be human-friendly and work well with modern programming
-languages for common everyday tasks.
+YAML (a recursive acronym for "YAML Ain't Markup Language") is a data
+serialization language designed to be human-friendly and work well with modern
+programming languages for common everyday tasks.
 This specification is both an introduction to the YAML language and the
 concepts supporting it.
 It is also a complete specification of the information needed to develop
