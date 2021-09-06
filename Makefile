@@ -1,6 +1,10 @@
 include tool/make/init.mk
 
+ifdef test
+TEST_FILES := $(test)
+else
 TEST_FILES := $(wildcard test/test-*)
+endif
 
 default:
 
@@ -9,6 +13,9 @@ docker-build-all docker-push-all docker-pull-all:
 
 build html site serve publish publish-fork force diff:
 	$(MAKE) -C www $@
+
+format:
+	$(MAKE) -C $(SPEC) $@
 
 test: test-spec $(TEST_FILES)
 

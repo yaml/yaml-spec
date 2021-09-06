@@ -15,6 +15,11 @@ G=$'\e[0;32m'
 Y=$'\e[0;33m'
 Z=$'\e[0m'
 
+die() (
+  echo "$R$*$Z" >&2
+  exit 1
+)
+
 end() (
   if [[ $? -eq 0 ]]; then
     echo "${G}PASSED$Z '$Y$test_file$Z'"
