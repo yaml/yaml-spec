@@ -283,7 +283,7 @@ specification.
 YAML's [block collections] use [indentation] for scope and begin each entry on
 its own line.
 [Block sequences] indicate each entry with a dash and space (["**`-`** "]).
-[Mappings] use a colon and space (["**`:`** "]) to mark each [key: value pair].
+[Mappings] use a colon and space (["**`:`** "]) to mark each [key/value pair].
 [Comments] begin with an octothorpe (also called a "hash", "sharp", "pound" or
 "number sign" - ["**`#`**"]).
 
@@ -434,7 +434,7 @@ rbi:
 ```
 
 A question mark and space (["**`?`** "]) indicate a complex [mapping] [key].
-Within a [block collection], [key: value pairs] can start immediately following
+Within a [block collection], [key/value pairs] can start immediately following
 the [dash], [colon] or [question mark].
 
 
@@ -974,7 +974,7 @@ It could even contain itself.
 _pairs_, with the restriction that each of the keys is [unique].
 YAML places no further restrictions on the nodes.
 In particular, keys may be arbitrary nodes, the same node may be used as the
-value of several key: value pairs and a mapping could even contain itself as a
+value of several key/value pairs and a mapping could even contain itself as a
 key or a value.
 
 
@@ -1106,7 +1106,7 @@ the [representation graph] (and hence for the preservation of [application]
 data).
 In every case where [node] order is significant, a [sequence] must be used.
 For example, an ordered [mapping] can be [represented] as a [sequence] of
-[mappings], where each [mapping] is a single [key: value pair].
+[mappings], where each [mapping] is a single [key/value pair].
 YAML provides convenient [compact notation] for this case.
 
 
@@ -1166,7 +1166,7 @@ Normally, [block sequences] and [mappings] begin on the next line.
 In some cases, YAML also allows nested [block] [collections] to start in-line
 for a more [compact notation].
 In addition, YAML provides a [compact notation] for [flow mappings] with a
-single [key: value pair], nested inside a [flow sequence].
+single [key/value pair], nested inside a [flow sequence].
 These allow for a natural "ordered mapping" notation.
 
 
@@ -3940,7 +3940,7 @@ causes no ambiguity.
 
 Plain scalars must never contain the ["**`:`** "] and [" **`#`**"] character
 combinations.
-Such combinations would cause ambiguity with [mapping] [key: value pairs] and
+Such combinations would cause ambiguity with [mapping] [key/value pairs] and
 [comments].
 In addition, inside [flow collections], or when used as [implicit keys], plain
 scalars must not contain the ["**`[`**"], ["**`]`**"], ["**`{`**"], ["**`}`**"]
@@ -4148,7 +4148,7 @@ Sequence entries are separated by a ["**`,`**"] character.
 
 Any [flow node] may be used as a flow sequence entry.
 In addition, YAML provides a [compact notation] for the case where a flow
-sequence entry is a [mapping] with a [single key: value pair].
+sequence entry is a [mapping] with a [single key/value pair].
 
 ```
 [#] ns-flow-seq-entry(n,c) ::=
@@ -4269,7 +4269,7 @@ A benefit of this restriction is that the "**`:`**" character can be used
 inside [plain scalars], as long as it is not followed by [white space].
 This allows for unquoted URLs and timestamps.
 It is also a potential source for confusion as "**`a:1`**" is a [plain scalar]
-and not a [key: value pair].
+and not a [key/value pair].
 
 Note that the [value] may be [completely empty] since its existence is
 indicated by the "**`:`**".
@@ -4375,7 +4375,7 @@ However, as this greatly reduces readability, YAML [processors] should
 
 
 A more compact notation is usable inside [flow sequences], if the [mapping]
-contains a _single key: value pair_.
+contains a _single key/value pair_.
 This notation does not require the surrounding "**`{`**" and "**`}`**"
 characters.
 Note that it is not possible to specify any [node properties] for the [mapping]
@@ -5238,7 +5238,7 @@ The final [line break] and trailing [empty lines] if any, are subject to
 
 For readability, _block collections styles_ are not denoted by any [indicator].
 Instead, YAML uses a lookahead method, where a block collection is
-distinguished from a [plain scalar] only when a [key: value pair] or a
+distinguished from a [plain scalar] only when a [key/value pair] or a
 [sequence entry] is seen.
 
 
@@ -5334,7 +5334,7 @@ Note that it is not possible to specify [node properties] for such a
 
 ### #. Block Mappings
 
-A _Block mapping_ is a series of entries, each [presenting] a [key: value
+A _Block mapping_ is a series of entries, each [presenting] a [key/value
 pair].
 
 ```
@@ -5416,7 +5416,7 @@ for [block sequence] entries.
 <!-- REVIEW value should be null above -->
 
 If the "**`?`**" indicator is omitted, [parsing] needs to see past the
-[implicit key], in the same way as in the [single key: value pair] [flow
+[implicit key], in the same way as in the [single key/value pair] [flow
 mapping].
 Hence, such [keys] are subject to the same restrictions; they are limited to a
 single line and must not span more than 1024 Unicode characters.
