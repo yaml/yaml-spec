@@ -6419,8 +6419,6 @@ specification.
 This allows it to evolve to better support YAML [applications].
 Hence, developers are encouraged to submit new "universal" types to the
 repository.
-The yaml-core mailing list is the preferred method for such submissions, as
-well as raising any questions regarding this draft.
 
 
 # Reference Links
