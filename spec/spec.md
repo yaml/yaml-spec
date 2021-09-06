@@ -1541,10 +1541,8 @@ Otherwise, the [stream] must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (**`#x00`**)
 characters.
 
-To make it easier to concatenate [streams], byte order marks may appear at the
-start of any [document].
-However all [documents] in the same [stream] must use the same character
-encoding.
+Byte order marks may appear at the start of any [document], however all
+[documents] in the same [stream] must use the same character encoding.
 
 To allow for [JSON compatibility], byte order marks are also allowed inside
 [quoted scalars].
@@ -5657,7 +5655,6 @@ and optional [comment] lines.
 Note that all [documents] in a stream must use the same [character encoding].
 However it is valid to re-specify the [encoding] using a [byte order mark] for
 each [document] in the stream.
-This makes it easier to concatenate streams.
 
 The existence of the optional prefix does not necessarily indicate the
 existence of an actual [document].
@@ -5873,9 +5870,6 @@ Subsequent [documents] require some sort of separation [marker] line.
 If a [document] is not terminated by a [document end marker] line, then the
 following [document] must begin with a [directives end marker] line.
 
-The stream format is intentionally "sloppy" to better support common use cases,
-such as stream concatenation.
-
 ```
 [#] l-any-document ::=
     l-directive-document
@@ -5931,17 +5925,13 @@ Note that each [document] is independent of the rest, allowing for
 heterogeneous log file entries.
 
 
-? Concatenating Streams
+? Joining Streams
 
-: Concatenating two YAML streams requires both to use the same [character
-encoding].
+: Joining two YAML streams requires both to use the same [character encoding].
 In addition, it is necessary to separate the last [document] of the first
 stream and the first [document] of the second stream.
 This is easily ensured by inserting a [document end marker] between the two
 streams.
-Note that this is safe regardless of the content of either stream.
-In particular, either or both may be empty and the first stream may or may not
-already contain such a marker.
 
 
 ? Communication Streams
