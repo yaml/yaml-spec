@@ -17,10 +17,7 @@ build html site serve publish publish-fork force diff:
 format:
 	$(MAKE) -C $(SPEC) $@
 
-test: test-spec $(TEST_FILES)
-
-test-spec:
-	$(MAKE) -C spec test
+test: $(TEST_FILES)
 
 $(TEST_FILES): force
 	bash $@
