@@ -19,6 +19,9 @@ format:
 
 test: $(TEST_FILES)
 
+test-docker:
+	$(MAKE) test YAML_SPEC_USE_DOCKER=1
+
 $(TEST_FILES): force
 	bash $@
 
