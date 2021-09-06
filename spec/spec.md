@@ -27,7 +27,7 @@ The input format is now Markdown instead of DocBook, and the images are made
 from plain text LaTeX files rather than proprietary drawing software.
 All the source content for the specification is publicly hosted[^spec-repo].
 
-The previous YAML specification[^1-2-spec] was published over 12 years ago.
+The previous YAML specification[^1-2-spec] was published about 12 years ago.
 In that time span, YAML's popularity has grown significantly.
 Efforts are ongoing to improve the language and grow it to meet the needs and
 expectations of its users.
@@ -37,7 +37,7 @@ begins a process by which the language intends to evolve and stay modern.
 The YAML specification is often seen as overly complicated for something which
 appears to be so simple.
 Even though YAML often is used for software configuration, it has always been
-and will continue to be a complete serialization language.
+and will continue to be a complete data serialization language.
 Future YAML plans are focused on making the language and ecosystem more
 powerful and reliable while simultaneously simplifying the development process
 for implementers.
