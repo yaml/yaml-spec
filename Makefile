@@ -1,10 +1,6 @@
 include tool/make/init.mk
 
-ifdef test
-TEST_FILES := $(test)
-else
-TEST_FILES := $(wildcard test/test-*)
-endif
+TESTS ?= $(wildcard test/test-*)
 
 default:
 
@@ -17,12 +13,12 @@ build html site serve publish publish-fork force diff:
 format:
 	$(MAKE) -C $(SPEC) $@
 
-test: $(TEST_FILES)
+test: $(TESTS)
 
 test-docker:
-	$(MAKE) test YAML_SPEC_USE_DOCKER=1
+	$(MAKE) test TESTS='$(TESTS)' YAML_SPEC_USE_DOCKER=1
 
-$(TEST_FILES): force
+$(TESTS): force
 	bash $@
 
 force:
