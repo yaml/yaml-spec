@@ -34,12 +34,10 @@
 
 <p>title: YAML Ain’t Markup Language (YAML™) Version 1.2
 status: draft
-—
-<!-- If I remove this comment the perl script fails. --></p>
-
+—</p>
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>YAML Specification Version 1.2.1 – Released 2021-09-04</strong></p>
+<p><strong>YAML Specification Version 1.2.1 – Released 2021-09-06</strong></p>
 
 <p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -297,8 +295,8 @@ information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful
 way.
-For example, <a href="#indentation-spaces">indentation</a> may be used for structure, <a href="#flow-mappings">colons</a> separate
-<a href="#mapping">key: value pairs</a> and <a href="#block-sequences">dashes</a> are used to create “bullet” <a href="#sequence">lists</a>.</p>
+For example, <a href="#indentation-spaces">indentation</a> may be used for structure, <a href="#flow-mappings">colons</a> separate <a href="#mapping">key:
+value pairs</a> and <a href="#block-sequences">dashes</a> are used to create “bullet” <a href="#sequence">lists</a>.</p>
 
 <p>There are myriad flavors of <a href="#dump">data structures</a>, but they can all be adequately
 <a href="#representation-graph">represented</a> with three basic primitives: <a href="#mapping">mappings</a> (hashes/dictionaries),
@@ -348,8 +346,8 @@ Since then, YAML has matured through ideas and support from its user community.<
 Perl<sup id="fnref:Perl" role="doc-noteref"><a href="#fn:Perl" class="footnote" rel="footnote">8</a></sup>, Python<sup id="fnref:Python" role="doc-noteref"><a href="#fn:Python" class="footnote" rel="footnote">9</a></sup>, Ruby<sup id="fnref:Ruby" role="doc-noteref"><a href="#fn:Ruby" class="footnote" rel="footnote">10</a></sup>, Email<sup id="fnref:Email" role="doc-noteref"><a href="#fn:Email" class="footnote" rel="footnote">11</a></sup>, HTML<sup id="fnref:HTML" role="doc-noteref"><a href="#fn:HTML" class="footnote" rel="footnote">12</a></sup>,
 MIME<sup id="fnref:MIME" role="doc-noteref"><a href="#fn:MIME" class="footnote" rel="footnote">13</a></sup>, URIs<sup id="fnref:URI" role="doc-noteref"><a href="#fn:URI" class="footnote" rel="footnote">14</a></sup>, XML<sup id="fnref:XML" role="doc-noteref"><a href="#fn:XML" class="footnote" rel="footnote">15</a></sup>, SAX<sup id="fnref:SAX" role="doc-noteref"><a href="#fn:SAX" class="footnote" rel="footnote">16</a></sup>, SOAP<sup id="fnref:SOAP" role="doc-noteref"><a href="#fn:SOAP" class="footnote" rel="footnote">17</a></sup> and JSON<sup id="fnref:JSON" role="doc-noteref"><a href="#fn:JSON" class="footnote" rel="footnote">18</a></sup>.</p>
 
-<p>The syntax of YAML was motivated by Internet Mail (Email) and remains
-partially compatible with that standard.
+<p>The syntax of YAML was motivated by Internet Mail (Email) and remains partially
+compatible with that standard.
 Further, borrowing from MIME, YAML’s top-level production is a <a href="#streams">stream</a> of
 independent <a href="#documents">documents</a>, ideal for message-based distributed processing
 systems.</p>
@@ -695,8 +693,8 @@ the <a href="#block-sequences">dash</a>, <a href="#flow-mappings">colon</a> or <
 <div id="scalars"></div>
 <h2 id="23-scalars">2.3. Scalars</h2>
 
-<p><a href="#scalar">Scalar content</a> can be written in <a href="#scalars">block</a> notation, using a <a href="#literal-style">literal
-style</a> (indicated by “<strong><code class="language-plaintext highlighter-rouge">|</code></strong>”) where all <a href="#line-break-characters">line breaks</a> are significant.
+<p><a href="#scalar">Scalar content</a> can be written in <a href="#scalars">block</a> notation, using a <a href="#literal-style">literal style</a>
+(indicated by “<strong><code class="language-plaintext highlighter-rouge">|</code></strong>”) where all <a href="#line-break-characters">line breaks</a> are significant.
 Alternatively, they can be written with the <a href="#folded-style">folded style</a> (denoted by
 “<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>”) where each <a href="#line-break-characters">line break</a> is <a href="#line-folding">folded</a> to a <a href="#white-space-characters">space</a> unless it ends an
 <a href="#empty-lines">empty</a> or a <a href="#example-more-indented-lines">more-indented</a> line.</p>
@@ -1084,8 +1082,8 @@ The <a href="#scalar">scalar</a> represents strings, integers, dates and other a
 specifying its data type.
 Type specifiers are either <a href="#tags">global</a> URIs or are <a href="#tags">local</a> in scope to a single
 <a href="#processing-yaml-information">application</a>.
-For example, an integer is represented in YAML with a <a href="#scalar">scalar</a> plus the
-<a href="#tags">global tag</a> “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></strong>”.
+For example, an integer is represented in YAML with a <a href="#scalar">scalar</a> plus the <a href="#tags">global
+tag</a> “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></strong>”.
 Similarly, an invoice object, particular to a given organization, could be
 represented as a <a href="#mapping">mapping</a> together with the <a href="#tags">local tag</a> “<strong><code class="language-plaintext highlighter-rouge">!invoice</code></strong>”.
 This simple model can represent any data structure independent of programming
@@ -1156,8 +1154,8 @@ Parsing can fail due to <a href="#well-formed-streams-and-identified-aliases">il
 <dl>
   <dt>Composing the Representation Graph</dt>
   <dd>
-    <p><em>Composing</em> takes a <a href="#serialization-tree">serialization tree</a> and produces a
-<a href="#representation-graph">representation graph</a>.
+    <p><em>Composing</em> takes a <a href="#serialization-tree">serialization tree</a> and produces a <a href="#representation-graph">representation
+graph</a>.
 Composing discards all the <a href="#presenting-the-serialization-tree">details</a> introduced in the <a href="#serialization-tree">serialization</a> process,
 producing only the <a href="#representation-graph">representation graph</a>.
 Composing can fail due to any of several reasons, detailed <a href="#loading-point-failures">below</a>.</p>
@@ -1334,9 +1332,9 @@ duplicate <a href="#nodes">key</a> as an error.</p>
 <dl>
   <dt>Canonical Form</dt>
   <dd>
-    <p>YAML supports the need for <a href="#scalar">scalar</a> equality by requiring that every
-<a href="#scalar">scalar</a> <a href="#tags">tag</a> must specify a mechanism for producing the <em>canonical form</em> of
-any <a href="#scalar-formats">formatted content</a>.
+    <p>YAML supports the need for <a href="#scalar">scalar</a> equality by requiring that every <a href="#scalar">scalar</a>
+<a href="#tags">tag</a> must specify a mechanism for producing the <em>canonical form</em> of any
+<a href="#scalar-formats">formatted content</a>.
 This form is a Unicode character string which also <a href="#presenting-the-serialization-tree">presents</a> the same
 <a href="#nodes">content</a> and can be used for equality testing.
 While this requirement is stronger than a well defined equality operator, it
@@ -1884,8 +1882,8 @@ To ensure readability, non-printable characters should be <a href="#escaped-char
 even inside such <a href="#scalars">scalars</a>.</p>
 
 <blockquote>
-  <p>Note: JSON <a href="#double-quoted-style">quoted scalars</a> cannot span multiple lines or contain <a href="#white-space-characters">tabs</a>,
-but YAML <a href="#double-quoted-style">quoted scalars</a> can.</p>
+  <p>Note: JSON <a href="#double-quoted-style">quoted scalars</a> cannot span multiple lines or contain <a href="#white-space-characters">tabs</a>, but
+YAML <a href="#double-quoted-style">quoted scalars</a> can.</p>
 </blockquote>
 
 <div id="rule-nb-json"></div>
@@ -2373,8 +2371,7 @@ flow scalar</a>.</p>
 [18] c-single-quote ::= "'"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x22</code></strong>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow
-scalar</a>.</p>
+<p>“<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">#x22</code></strong>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow scalar</a>.</p>
 
 <div id="rule-c-double-quote"></div>
 <pre class="rule">
@@ -4568,8 +4565,8 @@ Second occurrence: *<mark class="legend-2">anchor</mark>
 
 <p>YAML’s <em>flow styles</em> can be thought of as the natural extension of JSON to
 cover <a href="#line-folding">folding</a> long content lines for readability, <a href="#tags">tagging</a> nodes to control
-<a href="#constructing-native-data-structures">construction</a> of <a href="#representing-native-data-structures">native data structures</a> and using <a href="#anchors-and-aliases">anchors</a> and <a href="#anchors-and-aliases">aliases</a>
-to reuse <a href="#constructing-native-data-structures">constructed</a> object instances.</p>
+<a href="#constructing-native-data-structures">construction</a> of <a href="#representing-native-data-structures">native data structures</a> and using <a href="#anchors-and-aliases">anchors</a> and <a href="#anchors-and-aliases">aliases</a> to
+reuse <a href="#constructing-native-data-structures">constructed</a> object instances.</p>
 
 <div id="alias-nodes"></div>
 <h2 id="71-alias-nodes">7.1. Alias Nodes</h2>

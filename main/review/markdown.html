@@ -4,14 +4,12 @@ layout: spec
 title: YAML Ain’t Markup Language (YAML™) Version 1.2
 status: draft
 ---
-&lt;!-- If I remove this comment the perl script fails. --&gt;
 
 <code># YAML Ain't Markup Language (YAML™) Version 1.2</code>
 
 <code>**YAML Specification Version 1.2.1 -- Released YYYY-MM-DD**</code>
 
-Copyright presently by [The YAML Language Development Team](
-core-team)  
+Copyright presently by [The YAML Language Development Team](core-team)  
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net
 
 This document may be freely copied, provided it is not modified.
@@ -97,8 +95,8 @@ information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful
 way.
-For example, [indentation] may be used for structure, [colons] separate
-[key: value pairs] and [dashes] are used to create "bullet" [lists].
+For example, [indentation] may be used for structure, [colons] separate [key:
+value pairs] and [dashes] are used to create "bullet" [lists].
 
 There are myriad flavors of [data structures], but they can all be adequately
 [represented] with three basic primitives: [mappings] (hashes/dictionaries),
@@ -146,8 +144,8 @@ YAML integrates and builds upon concepts described by C[^C], Java[^Java],
 Perl[^Perl], Python[^Python], Ruby[^Ruby], Email[^Email], HTML[^HTML],
 MIME[^MIME], URIs[^URI], XML[^XML], SAX[^SAX], SOAP[^SOAP] and JSON[^JSON].
 
-The syntax of YAML was motivated by Internet Mail (Email) and remains
-partially compatible with that standard.
+The syntax of YAML was motivated by Internet Mail (Email) and remains partially
+compatible with that standard.
 Further, borrowing from MIME, YAML's top-level production is a [stream] of
 independent [documents], ideal for message-based distributed processing
 systems.
@@ -470,8 +468,8 @@ the [dash], [colon] or [question mark].
 
 <code>## #. Scalars</code>
 
-[Scalar content] can be written in [block] notation, using a [literal
-style] (indicated by ["**`|`**"]) where all [line breaks] are significant.
+[Scalar content] can be written in [block] notation, using a [literal style]
+(indicated by ["**`|`**"]) where all [line breaks] are significant.
 Alternatively, they can be written with the [folded style] [(denoted by
 "**`&gt;`**"]) where each [line break] is [folded] to a [space] unless it ends an
 [empty] or a [more-indented] line.
@@ -824,8 +822,8 @@ The [scalar] represents strings, integers, dates and other atomic data types.
 specifying its data type.
 Type specifiers are either [global] URIs or are [local] in scope to a single
 [application].
-For example, an integer is represented in YAML with a [scalar] plus the
-[global tag] "**`tag:yaml.org,2002:int`**".
+For example, an integer is represented in YAML with a [scalar] plus the [global
+tag] "**`tag:yaml.org,2002:int`**".
 Similarly, an invoice object, particular to a given organization, could be
 represented as a [mapping] together with the [local tag] "**`!invoice`**".
 This simple model can represent any data structure independent of programming
@@ -880,8 +878,8 @@ Parsing can fail due to [ill-formed] input.
 
 ? Composing the Representation Graph
 
-: _Composing_ takes a [serialization tree] and produces a
-[representation graph].
+: _Composing_ takes a [serialization tree] and produces a [representation
+graph].
 Composing discards all the [details] introduced in the [serialization] process,
 producing only the [representation graph].
 Composing can fail due to any of several reasons, detailed [below].
@@ -1040,9 +1038,9 @@ duplicate [key] as an error.
 
 ? Canonical Form
 
-: YAML supports the need for [scalar] equality by requiring that every
-[scalar] [tag] must specify a mechanism for producing the _canonical form_ of
-any [formatted content].
+: YAML supports the need for [scalar] equality by requiring that every [scalar]
+[tag] must specify a mechanism for producing the _canonical form_ of any
+[formatted content].
 This form is a Unicode character string which also [presents] the same
 [content] and can be used for equality testing.
 While this requirement is stronger than a well defined equality operator, it
@@ -1515,8 +1513,8 @@ characters inside [quoted scalars].
 To ensure readability, non-printable characters should be [escaped] on output,
 even inside such [scalars].
 
-&gt; Note: JSON [quoted scalars] cannot span multiple lines or contain [tabs],
-but YAML [quoted scalars] can.
+&gt; Note: JSON [quoted scalars] cannot span multiple lines or contain [tabs], but
+YAML [quoted scalars] can.
 
 ```
 [#] nb-json ::=
@@ -1837,8 +1835,7 @@ flow scalar].
 ```
 
 
-["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow
-scalar].
+["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow scalar].
 
 ```
 [#] c-double-quote ::= """
@@ -1894,6 +1891,7 @@ grave accent) are _reserved_ for future use.
 
 
 <code>**Example #. Invalid use of Reserved Indicators**</code>
+
 ```
 commercial-at: @text
 grave-accent: `text
@@ -3338,6 +3336,7 @@ valid URI (a [global tag]).
 
 
 <code>**Example #. Verbatim Tags**</code>
+
 ```
 !&lt;tag:yaml.org,2002:str&gt; foo :
   !&lt;!bar&gt; baz
@@ -3542,8 +3541,8 @@ Second occurrence: *anchor
 
 YAML's _flow styles_ can be thought of as the natural extension of JSON to
 cover [folding] long content lines for readability, [tagging] nodes to control
-[construction] of [native data structures] and using [anchors] and [aliases]
-to reuse [constructed] object instances.
+[construction] of [native data structures] and using [anchors] and [aliases] to
+reuse [constructed] object instances.
 
 
 <code>## #. Alias Nodes</code>
@@ -4600,6 +4599,7 @@ nodes] which refer to the [anchored] [node properties].
 
 
 <code>**Example #. Flow Nodes**</code>
+
 ```
 - !!str "a"
 - 'b'
@@ -6028,6 +6028,7 @@ tuple and Java's array or Vector.
 
 
 <code>**Example #. `!!seq` Examples**</code>
+
 ```
 Block style: !!seq
 - Clark Evans
@@ -6361,6 +6362,7 @@ string).
 
 
 <code>**Example #. Core Tag Resolution**</code>
+
 ```
 A null: null
 Also a null: # Empty
