@@ -98,7 +98,7 @@ way.
 For example, [indentation] may be used for structure, [colons] separate [key:
 value pairs] and [dashes] are used to create "bulleted" [lists].
 
-There are myriad flavors of [data structures], but they can all be adequately
+There are many kinds of [data structures], but they can all be adequately
 [represented] with three basic primitives: [mappings] (hashes/dictionaries),
 [sequences] (arrays/lists) and [scalars] (strings/numbers).
 YAML leverages these primitives and adds a simple typing system and [aliasing]
