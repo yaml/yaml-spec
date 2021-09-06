@@ -793,7 +793,7 @@ However, such a direct translation should take place so that the [native data
 structures] are [constructed] only from information available in the
 [representation].
 In particular, [mapping key order], [comments] and [tag handles] should not be
-referenced during [composition].
+referenced during [construction].
 
 
 ### #. Dump
