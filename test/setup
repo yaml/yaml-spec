@@ -30,3 +30,5 @@ end() (
 )
 
 trap end exit
+
+trap 'exit 1' int
