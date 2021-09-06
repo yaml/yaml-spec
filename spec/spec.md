@@ -977,14 +977,6 @@ In particular, keys may be arbitrary nodes, the same node may be used as the
 value of several key: value pairs and a mapping could even contain itself as a
 key or a value.
 
-When appropriate, it is convenient to consider sequences and mappings together,
-as _collections_.
-In this view, sequences are treated as mappings with integer keys starting at
-zero.
-Having a unified collections view for sequences and mappings is helpful both
-for theoretical analysis and for creating practical YAML tools and APIs.
-This strategy is also used by the JavaScript programming language.
-
 
 #### #. Tags
 
