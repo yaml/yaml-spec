@@ -970,7 +970,7 @@ It could even contain itself.
 
 ? Mapping
 
-: The content of a _mapping_ node is an unordered set of _key:_ _value_ node
+: The content of a _mapping_ node is an unordered set of _key/value_ node
 _pairs_, with the restriction that each of the keys is [unique].
 YAML places no further restrictions on the nodes.
 In particular, keys may be arbitrary nodes, the same node may be used as the
@@ -5238,8 +5238,8 @@ The final [line break] and trailing [empty lines] if any, are subject to
 
 For readability, _block collections styles_ are not denoted by any [indicator].
 Instead, YAML uses a lookahead method, where a block collection is
-distinguished from a [plain scalar] only when a [key/value pair] or a
-[sequence entry] is seen.
+distinguished from a [plain scalar] only when a [key/value pair] or a [sequence
+entry] is seen.
 
 
 ### #. Block Sequences
@@ -5334,8 +5334,7 @@ Note that it is not possible to specify [node properties] for such a
 
 ### #. Block Mappings
 
-A _Block mapping_ is a series of entries, each [presenting] a [key/value
-pair].
+A _Block mapping_ is a series of entries, each [presenting] a [key/value pair].
 
 ```
 [#] l+block-mapping(n) ::=
