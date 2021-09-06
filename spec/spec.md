@@ -561,9 +561,6 @@ The examples in this specification generally use the [**`seq`**], [**`map`**]
 and [**`str`**] types from the [fail safe schema].
 A few examples also use the [**`int`**], [**`float`**] and [**`null`**] types
 from the [JSON schema].
-The [repository] includes additional types such as
-[**`binary`**](/type/binary.html), [**`omap`**](/type/omap.html),
-[**`set`**](/type/set.html) and others.
 
 
 **Example #. Integers**
@@ -6409,16 +6406,6 @@ This allows interoperable [schemas] to use [untagged] [nodes].
 
 It is strongly recommended that such [schemas] be based on the [core schema]
 defined above.
-In addition, it is strongly recommended that such [schemas] make as much use as
-possible of the the _YAML tag repository_ at [https://yaml.org/type/](/type/).
-This repository provides recommended [global tags] for increasing the
-portability of YAML [documents] between different [applications].
-
-The tag repository is intentionally left out of the scope of this
-specification.
-This allows it to evolve to better support YAML [applications].
-Hence, developers are encouraged to submit new "universal" types to the
-repository.
 
 
 # Reference Links
