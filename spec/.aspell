@@ -21,6 +21,7 @@ Ingy
 JSON
 JSON's
 Kiki
+Kirill
 LF
 LaTeX
 Makefile
@@ -28,8 +29,10 @@ Markydown
 Müller
 NEL
 Oren
+PyYAML
 Pantelis
 SML
+Siminov
 Storable
 TODO
 URI
@@ -58,6 +61,7 @@ interprocess
 json
 kramdown
 libera
+libyaml
 lookahead
 mapping's
 markydown

@@ -132,133 +132,61 @@ The design goals for YAML are, in decreasing priority:
 1. YAML should be easy to implement and use.
 
 
-## #. Prior Art
+## #. History
 
-YAML's initial direction was set by the data serialization and markup language
-discussions among SML-DEV members[^SML-DEV].
-Later on, it directly incorporated experience from Ingy döt Net's Perl module
-Data::Denter[^Denter].
-Since then, YAML has matured through ideas and support from its user community.
+YAML design began in early 2001, when Clark Evans and Oren Ben-Kiki were
+working with the SML-DEV[^sml-dev] mailing list which was focused on
+simplifying XML.
+They were introduced to Ingy döt Net who was working on a plain text
+serialization module[^denter] for Perl.
+The three of them collaborated through the yaml-core mailing list[^yaml-core]
+to create the YAML 1.0 specification, which was published in early 2004.
 
-YAML integrates and builds upon concepts described by C[^C], Java[^Java],
-Perl[^Perl], Python[^Python], Ruby[^Ruby], Email[^Email], HTML[^HTML],
-MIME[^MIME], URIs[^URI], XML[^XML], SAX[^SAX], SOAP[^SOAP] and JSON[^JSON].
+YAML took many of its ideas from existing technologies such as C, Java, Perl,
+Python, Ruby, email, HTML, MIME, URIs, XML, SAX, SOAP and JSON.
 
-The syntax of YAML was motivated by Internet Mail (Email) and remains partially
-compatible with that standard.
-Further, borrowing from MIME, YAML's top-level production is a [stream] of
-independent [documents], ideal for message-based distributed processing
-systems.
+Adoption of YAML happened in a grassroots manner during this time.
+Ruby was the first language to ship a YAML framework as part of its core.
 
-YAML's [indentation]\-based scoping is similar to Python's (without the
-ambiguities caused by [tabs]).
-[Indented blocks] facilitate easy inspection of the data's structure.
-YAML's [literal style] leverages this by enabling formatted text to be cleanly
-mixed within an [indented] structure without troublesome [escaping].
-YAML also allows the use of traditional [indicator]\-based scoping similar to
-JSON's and Perl's.
-Such [flow content] can be freely nested inside [indented blocks].
+The YAML 1.1 specification was published in 2005.
+Around this time, the developers became aware of JSON[^json].
+By sheer coincidence, JSON was almost a complete subset of YAML (both
+syntactically and semantically).
+This was due to YAML's flow collection style, which was influenced by Python
+more than JavaScript.
 
-YAML's [double-quoted style] uses familiar C-style [escape sequences].
-This enables ASCII encoding of non-[printable] or 8-bit (ISO 8859-1) characters
-such as ["**`\x3B`**"].
-Non-[printable] 16-bit Unicode and 32-bit (ISO/IEC 10646) characters are
-supported with [escape sequences] such as ["**`\u003B`**"] and
-["**`\U0000003B`**"].
+In 2006, Kirill Siminov produced PyYAML[^pyyaml] and LibYAML[^libyaml], both of
+which are still key parts of YAML infrastructure.
+Many of the YAML frameworks in various programming languages are built over
+LibYAML.
+Many others have looked to PyYAML as a solid reference for their
+implementations.
 
-Motivated by HTML's end-of-line normalization, YAML's [line folding] employs an
-intuitive method of handling [line breaks].
-A single [line break] is [folded] into a single [space], while [empty lines]
-are interpreted as [line break] characters.
-This technique allows for paragraphs to be word-wrapped without affecting the
-[canonical form] of the [scalar content].
+The primary focus of the YAML 1.2 specification was to remove the handful of
+small syntax rules that kept YAML from being a complete superset of JSON.
+The 1.2 specification was published in 2009.
 
-YAML's core type system is based on the requirements of dynamic languages such
-as Perl, Python and Ruby.
-YAML directly supports both [collections] ([mappings], [sequences]) and
-[scalars].
-Support for these common types enables programmers to use their language's
-[native data structures] for YAML manipulation, instead of requiring a special
-document object model (DOM).
+After that, new work on the YAML specification came to a halt, as its authors
+became focused on other ambitions.
+Meanwhile, the adoption of YAML in the computing industry continued to grow,
+with many large scale projects using it as their primary user interface.
 
-Like XML's SOAP, YAML supports [serializing] a graph of [native data
-structures] through an [aliasing] mechanism.
-Also like SOAP, YAML provides for [application]\-defined [types].
-This allows YAML to [represent] rich data structures required for modern
-distributed computing.
-YAML provides globally unique [type names] using a namespace mechanism inspired
-by Java's DNS-based package naming convention and XML's URI-based namespaces.
-In addition, YAML allows for private [types] specific to a single
-[application].
+Around 2016 the current [YAML language design team](core-team) began to form.
+Starting in early 2020, this team began meeting weekly to discuss how to best
+improve YAML to meet the needs and expectations that are apparent today.
 
-YAML was designed to support incremental interfaces that include both input
-("**`getNextEvent()`**") and output ("**`sendNextEvent()`**") one-pass
-interfaces.
-Together, these enable YAML to support the processing of large [documents]
-(e.g. transaction logs) or continuous [streams] (e.g. feeds from a production
-machine).
-
-
-## #. Relation to JSON
-
-Both JSON and YAML aim to be human readable data interchange formats.
-However, JSON and YAML have different priorities.
-JSON's foremost design goal is simplicity and universality.
-Thus, JSON is trivial to generate and parse, at the cost of reduced human
-readability.
-It also uses a lowest common denominator information model, ensuring any JSON
-data can be easily processed by every modern programming environment.
-
-In contrast, YAML's foremost design goals are human readability and support for
-[serializing] arbitrary [native data structures].
-Thus, YAML allows for extremely readable files, but is more complex to generate
-and parse.
-In addition, YAML ventures beyond the lowest common denominator data types,
-requiring more complex processing when crossing between different programming
-environments.
-
-YAML can therefore be viewed as a natural superset of JSON, offering improved
-human readability and a more complete information model.
-This is also the case in practice; every JSON file is also a valid YAML file.
-This makes it easy to migrate from JSON to YAML if/when the additional features
-are required.
-
-JSON[^JSON] requires that [mappings] [keys] merely "SHOULD" be [unique], while
-YAML insists they "MUST" be.
-Technically, YAML therefore complies with the JSON specification, choosing to
-treat duplicates as an error.
-In practice, since JSON is silent on the semantics of such duplicates, the only
-portable JSON files are those with unique keys, which are therefore valid YAML
-files.
-
-
-## #. Relation to XML
-
-Newcomers to YAML often search for its correlation to the eXtensible Markup
-Language (XML).
-Although the two languages may actually compete in several application domains,
-there is no direct correlation between them.
-
-YAML is primarily a data serialization language.
-XML was designed to be backwards compatible with the Standard Generalized
-Markup Language (SGML), which was designed to support structured documentation.
-XML therefore had many design constraints placed on it that YAML does not
-share.
-XML is a pioneer in many domains, YAML is the result of lessons learned from
-XML and other technologies.
-
-It should be mentioned that there are ongoing efforts to define standard
-XML/YAML mappings.
-This generally requires that a subset of each language be used.
-For more information on using both XML and YAML, please visit
-[https://yaml.org/xml](/xml).
+This YAML 1.2.1 specification was published in September 2021; the first step
+in a new journey for the language.
+YAML is now more popular than it has ever been, but there is a long list of
+things that need to be addressed for it to reach its full potential.
+The YAML design team is focused on making YAML as good as possible.
 
 
 ## #. Terminology
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
-interpreted as described in RFC 2119[^RFC-2119].
+interpreted as described in RFC 2119[^rfc-2119].
 
 
 The rest of this document is arranged as follows.
@@ -6374,25 +6302,17 @@ defined above.
 
 [^spec-repo]: [YAML Specification on GitHub](https://github.com/yaml/yaml-spec)
 [^1-2-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.2](https://yaml.org/spec/1.2)
-[^Unicode]: [Unicode – The World Standard for Text and Emoji](https://www.unicode.org)
-[^SML-DEV]: [SML-DEV Mailing List Archive](https://github.com/yaml/sml-dev-archive)
-[^Denter]: [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](https://metacpan.org/dist/Data-Denter/view/Denter.pod)
-[^C]: [Wikipedia - C (programming language)](https://en.wikipedia.org/wiki/C_%28programming_language%29)
-[^Java]: [Wikipedia - Java (programming language)](https://en.wikipedia.org/wiki/Java_%28programming_language%29)
-[^Perl]: [The Perl Programming Language](https://www.perl.org/)
-[^Python]: [The Python Programming Language](https://www.python.org/)
-[^Ruby]: [Ruby Programming Language](https://www.ruby-lang.org/)
-[^Email]: [Internet Message Format](https://tools.ietf.org/html/rfc5322)
-[^HTML]: [HTML Living Standard](https://html.spec.whatwg.org/)
-[^MIME]: [Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies](https://tools.ietf.org/html/rfc2045)
-[^URI]: [Uniform Resource Identifiers (URI)](https://tools.ietf.org/html/rfc3986)
-[^XML]: [Extensible Markup Language (XML)](https://www.w3.org/TR/REC-xml.html)
-[^SAX]: [Wikipedia - Simple API for XML](https://en.wikipedia.org/wiki/Simple_API_for_XML)
-[^SOAP]: [SOAP](https://en.wikipedia.org/wiki/SOAP)
-[^JSON]: [The JSON data interchange syntax](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/)
-[^RFC-2119]: [Request for Comments Summary](https://tools.ietf.org/html/rfc2119)
+[^unicode]: [Unicode – The World Standard for Text and Emoji](https://www.unicode.org)
+[^sml-dev]: [SML-DEV Mailing List Archive](https://github.com/yaml/sml-dev-archive)
+[^denter]: [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](https://metacpan.org/dist/Data-Denter/view/Denter.pod)
+[^yaml-core]: [YAML Core Mailing List](https://sourceforge.net/projects/yaml/lists/yaml-core)
+[^json]: [The JSON data interchange syntax](https://www.ecma-international.org/publications-and-standards/standards/ecma-404/)
+[^pyyaml]: [PyYAML - YAML parser and emitter for Python](https://github.com/yaml/pyyaml)
+[^libyaml]: [LibYAML - A C library for parsing and emitting YAML](https://github.com/yaml/libyaml)
+[^rfc-2119]: [Request for Comments Summary](https://tools.ietf.org/html/rfc2119)
 [^digraph]: [directed graph](https://xlinux.nist.gov/dads/HTML/directedGraph.html)
 [^tag-uri]: [The 'tag' URI Scheme](https://datatracker.ietf.org/doc/html/rfc4151)
 [^c0-block]: [Wikipedia - C0 and C1 control codes](https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
 [^surrogates]: [Wikipedia - Universal Character Set characters #Surrogates](https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
 [^uni-faq]: [UTF-8, UTF-16, UTF-32 & BOM](https://www.unicode.org/faq/utf_bom.html)
+[^uri]: [Uniform Resource Identifiers (URI)](https://tools.ietf.org/html/rfc3986)
