@@ -965,7 +965,7 @@ a series of zero or more Unicode characters.
 
 : The content of a _sequence_ node is an ordered series of zero or more nodes.
 In particular, a sequence may contain the same node more than once.
-It could even contain itself (directly or indirectly).
+It could even contain itself.
 
 
 ? Mapping
@@ -975,7 +975,7 @@ _pairs_, with the restriction that each of the keys is [unique].
 YAML places no further restrictions on the nodes.
 In particular, keys may be arbitrary nodes, the same node may be used as the
 value of several key: value pairs and a mapping could even contain itself as a
-key or a value (directly or indirectly).
+key or a value.
 
 When appropriate, it is convenient to consider sequences and mappings together,
 as _collections_.
