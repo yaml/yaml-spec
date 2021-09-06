@@ -52,6 +52,7 @@ See:
 
 * [YAML Implementer's Reference Index](implementer-refs)
 * [YAML User's Reference Index](user-refs)
+* [YAML Community](community)
 * [YAML 1.2.1 Specification Errata](spec-errata)
 * [YAML 1.2.1 Specification Changes](spec-changes)
 * [YAML 1.2.1 Specification Authors](spec-authors)
