@@ -8,13 +8,13 @@ main() (
   for input; do
     output=${input%.tex}.svg
     output=${outdir%/}/${output#tex/}
-    tmp=/tmp/$(basename "${input%.tex}.pdf")
     make-svg
   done
 )
 
 make-svg() (
   ( set -x; pdflatex -halt-on-error -output-directory /tmp "$input" ) |
+
   (
     if [[ ${TEX_LOG-} ]]; then
       cat
@@ -22,8 +22,10 @@ make-svg() (
       cat >/dev/null
     fi
   )
+
   pdf=${input#*/}
   pdf=/tmp/${pdf%.tex}.pdf
+
   set -x
   pdf2svg "$pdf" tmp.svg
   mv tmp.svg "$output"

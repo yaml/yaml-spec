@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+shopt -s inherit_errexit
+
+main() (
+  export SHELLCHECK_OPTS='--shell=bash --exclude=1091,2030,2031'
+
+  shellcheck "$@"
+)
+
+main "$@"
