@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(cd "$(dirname ${BASH_SOURCE[0]})" && pwd)/setup"
+source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/setup"
 
 ( set -x; format-markdown ../spec/spec.md > /tmp/spec.md )
 
