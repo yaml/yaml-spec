@@ -7,7 +7,7 @@ DIR=../spec/2009
 (
   set -x
 
-  make -C $DIR clean html
+  make -C "$DIR" clean html
 
   [[ -e $DIR/spec.html ]]
 )

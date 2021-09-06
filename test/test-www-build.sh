@@ -7,7 +7,7 @@ DIR=../www
 (
   set -x
 
-  make -C $DIR force build FAST_TEST=1
+  make -C "$DIR" force build FAST_TEST=1
 
   [[ -e $DIR/spec.yaml.io/favicon.svg ]]
   [[ -e $DIR/spec.yaml.io/main/spec.html ]]

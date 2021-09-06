@@ -7,8 +7,8 @@ DIR=../www
 (
   set -x
 
-  make -C $DIR force html FAST_TEST=1
+  make -C "$DIR" force html FAST_TEST=1
 
   [[ -e $DIR/html/spec.html ]]
-  [[ $(head -n1 $DIR/html/spec.html) == '<main'* ]]
+  [[ $(head -n1 "$DIR/html/spec.html") == '<main'* ]]
 )

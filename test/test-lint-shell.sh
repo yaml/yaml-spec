@@ -5,7 +5,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/setup"
 DIR=..
 
 (
-  cd $DIR || exit
+  cd "$DIR" || exit
 
   mapfile -t files < <(grep -rl '^#!.* bash')
 
