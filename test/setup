@@ -4,7 +4,7 @@ set -e -u -o pipefail
 
 shopt -s inherit_errexit
 
-root=$(cd "$(dirname ${BASH_SOURCE[0]})" && pwd)
+root=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 
 test_file=${BASH_SOURCE[1]}
 
@@ -21,6 +21,7 @@ die() (
 )
 
 end() (
+  # shellcheck disable=2181
   if [[ $? -eq 0 ]]; then
     echo "${G}PASSED$Z '$Y$test_file$Z'"
   else
