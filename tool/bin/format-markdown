@@ -2,10 +2,7 @@
 
 use v5.18;
 
-# use XXX;
-# use utf8;
 use Encode qw(decode encode);
-
 
 my @l = ();
 my $l = '';
@@ -45,12 +42,6 @@ sub lines {
       die ">>$l<<";
     }
   }
-}
-sub xhead {
-  my ($sub, $file, $line) = caller;
-  warn "Error from '$sub' line $line:\n";
-  my $lines = join '', @l[0..10];
-  die "$lines";
 }
 
 sub wrap {
@@ -120,6 +111,15 @@ sub comm {
   space;
 }
 
+sub unknown {
+  my $line = take;
+  my $show = $line;
+  chomp $show;
+  warn "Unrecognized line: >>$show<<\n";
+  out $line;
+  space;
+}
+
 #------------------------------------------------------------------------------
 sub main {
   push @l, $_ while $_ = in;
@@ -138,16 +138,17 @@ sub main {
     pre  and next if $peek =~ /^\`\`\`$/;
     list and next if $peek =~ /^\*\ /;
     tabl and next if $peek =~ /^\|\ /;
-    comm and next if $peek =~ /^<--/;
+    comm and next if $peek =~ /^<!--/;
     para and next if $peek =~ /^(
       [\w\#\*"] |
       \[\w |
       \!\[ |
       \(\w |
       [\?\:\>]\ |
-      \[\"\*\* |
+      \[\"\*\*
     )/x;
-    xhead;
+
+    unknown;
   }
 }
 
