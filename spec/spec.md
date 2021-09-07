@@ -2082,7 +2082,7 @@ Word (alphanumeric) characters for identifiers:
   ns-dec-digit | ns-ascii-letter | "-"
 ```
 
-URI characters for [tags], as specified in the URI[^URI].
+URI characters for [tags], as defined in the URI specification[^URI].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8 and then each byte is _escaped_ using
