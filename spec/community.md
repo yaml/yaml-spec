@@ -1,8 +1,9 @@
 # YAML Community Resources
 
-* [YAML GitHub Org](https://github.com/yaml/)
+* [YAML GitHub Organization](https://github.com/yaml/)
 
-  YAML and its related core projects can all be found on GitHub.
+  The YAML specification and and other core YAML projects can all be found on
+  GitHub under the `yaml` organization.
   This is the place to get the source code, report or fix bugs, and discuss
   YAML topics publicly.
 
@@ -11,11 +12,11 @@
   This is currently the most active space to engage with the YAML community in
   real time.
   Matrix provides a chat-room environment that feels very much like Slack.
-  Matrix is Open Source, federated and E2E encrypted.
+  Matrix is Open Source, federated and end-to-end encrypted.
 
 * IRC
 
-  The `#yaml` channel on the libera.chat network is a long running place where
+  The `#yaml` channel on the libera.chat network is a long-running place where
   YAML developers hang out and field user queries from time to time.
 
 * [Mailing List](https://sourceforge.net/projects/yaml/lists/yaml-core)

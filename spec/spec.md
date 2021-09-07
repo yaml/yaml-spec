@@ -64,7 +64,7 @@ YAML™ (rhymes with "camel") is a human-friendly, cross language, Unicode based
 data serialization language designed around the common native data types of
 dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
-Internet messaging to object persistence to data auditing and visualization.
+internet messaging to object persistence to data auditing and visualization.
 Together with the Unicode standard for characters[^Unicode], this specification
 provides all the information necessary to understand YAML Version 1.2 and to
 create programs that process YAML information.
@@ -1085,7 +1085,7 @@ use [key order] or [anchor names] for the preservation of [application] data.
 ![Serialization Model](img/serialize2.svg)
 
 
-#### #. Key Order
+#### #. Mapping Key Order
 
 In the [representation] model, [mapping keys] do not have an order.
 To [serialize] a [mapping], it is necessary to impose an _ordering_ on its
@@ -1338,7 +1338,7 @@ The productions are accompanied by examples which are presented in a two-pane
 side-by-side format.
 The left-hand side is the YAML example and the right-hand side is an alternate
 YAML view of the example.
-The alternate view uses JSON when possible.
+The right-hand view uses JSON when possible.
 Otherwise it uses a YAML form that is as close to JSON as possible.
 
 
@@ -1382,8 +1382,8 @@ Hence in some cases productions need to behave differently inside [block
 sequences] (_block-in context_) and outside them (_block-out context_).
 
 : In [flow styles], explicit [indicators] are used to delineate structure.
-Since the plain scalars have no delineating [indicators], they are subject to
-some restrictions to avoid ambiguities.
+Since plain scalars have no delineating [indicators], they are subject to some
+restrictions to avoid ambiguities.
 These restrictions depend on where they appear: as implicit keys directly
 inside a [block mapping] (_block-key_); as implicit keys inside a [flow
 mapping] (_flow-key_); as values inside a [flow collection] (_flow-in_); or as
@@ -5896,9 +5896,10 @@ Note that each [document] is independent of the rest, allowing for
 heterogeneous log file entries.
 
 
-? Joining Streams
+? Concatenating Streams
 
-: Joining two YAML streams requires both to use the same [character encoding].
+: Concatenating two YAML streams requires both to use the same [character
+encoding].
 In addition, it is necessary to separate the last [document] of the first
 stream and the first [document] of the second stream.
 This is easily ensured by inserting a [document end marker] between the two
