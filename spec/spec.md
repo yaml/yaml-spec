@@ -1032,8 +1032,6 @@ duplicate [key] as an error.
 [formatted content].
 This form is a Unicode character string which also [presents] the same
 [content] and can be used for equality testing.
-While this requirement is stronger than a well defined equality operator, it
-has other uses, such as the production of digital signatures.
 
 
 ? Equality
@@ -1061,22 +1059,13 @@ scheme.
 [Tags] in a YAML stream must therefore be [presented] in a canonical way so
 that such comparison would yield the correct results.
 
+: A YAML [processor] may treat equal [scalars] as if they were identical.
+
 
 ? Uniqueness
 
 : A [mapping's] [keys] are _unique_ if no two keys are equal to each other.
-
-
-? Identity
-
-: Two [nodes] are _identical_ only when they [represent] the same [native data
-structure].
-Typically, this corresponds to a single memory address.
-Identity should not be confused with equality; two equal [nodes] need not have
-the same identity.
-A YAML [processor] may treat equal [scalars] as if they were identical.
-In contrast, the separate identity of two distinct but equal [collections] must
-be preserved.
+Obviously, identical nodes are always considered equal.
 
 
 ### #. Serialization Tree
