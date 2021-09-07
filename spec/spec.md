@@ -1338,8 +1338,8 @@ The productions are accompanied by examples which are presented in a two-pane
 side-by-side format.
 The left-hand side is the YAML example and the right-hand side is an alternate
 YAML view of the example.
-The alternate view uses double-quotes for string scalars, flow style for
-collections and JSON plain style for numbers, booleans and null values.
+The alternate view uses JSON when possible.
+Otherwise it uses a YAML form that is as close to JSON as possible.
 
 A reference implementation using the productions is available as the
 YamlReference Haskell package[^yaml-ref].
