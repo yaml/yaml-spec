@@ -1415,7 +1415,7 @@ YAML [quoted scalars] can.
   #x9 | [#x20-#x10FFFF]
 ```
 
-> Note: The rule name `nb-json` means "non-break JSON compatible" here.
+> Note: The production name `nb-json` means "non-break JSON compatible" here.
 
 ## #. Character Encodings
 
