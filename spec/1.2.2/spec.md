@@ -1258,6 +1258,7 @@ See for example the [**`b-break`**](#b-break) production.
 In addition, production matching is expected to be greedy.
 Optional (**`?`**), zero-or-more (**`*`**) and one-or-more (**`+`**) patterns
 are always expected to match as much of the input as possible.
+A (**`{n}`**) pattern is used to match a production exactly `n` times.
 
 The productions are accompanied by examples which are presented in a two-pane
 side-by-side format.
@@ -2185,7 +2186,7 @@ Escaped 8-bit Unicode character.
 ```
 [#] ns-esc-8-bit ::=
   'x'
-  ( ns-hex-digit × 2 )
+  ns-hex-digit{2}
 ```
 
 
@@ -2194,7 +2195,7 @@ Escaped 16-bit Unicode character.
 ```
 [#] ns-esc-16-bit ::=
   'u'
-  ( ns-hex-digit × 4 )
+  ns-hex-digit{4}
 ```
 
 
@@ -2203,7 +2204,7 @@ Escaped 32-bit Unicode character.
 ```
 [#] ns-esc-32-bit ::=
   'U'
-  ( ns-hex-digit × 8 )
+  ns-hex-digit{8}
 ```
 
 
@@ -2281,7 +2282,7 @@ convey [content] information.
 
 ```
 [#] s-indent(n) ::=
-  s-space × n
+  s-space{n}
 ```
 
 
@@ -2292,12 +2293,12 @@ to express this.
 
 ```
 [#] s-indent(<n) ::=
-  s-space × m /* Where m < n */
+  s-space{m} /* Where m < n */
 ```
 
 ```
 [#] s-indent(≤n) ::=
-  s-space × m /* Where m ≤ n */
+  s-space{m} /* Where m ≤ n */
 ```
 
 
