@@ -12,7 +12,7 @@
   This is currently the most active space to engage with the YAML community in
   real time.
   Matrix provides a chat-room environment that feels very much like Slack.
-  Matrix is Open Source, federated and end-to-end encrypted.
+  Matrix is open source, federated and end-to-end encrypted.
 
 * IRC
 
