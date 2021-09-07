@@ -1334,6 +1334,10 @@ prefix-style naming convention.
 Each production is given a prefix based on the type of characters it begins and
 ends with.
 
+? **`sp-`**
+
+: A "[special production]" described below.
+
 ? **`e-`**
 
 : A production matching no characters.
@@ -1374,7 +1378,90 @@ prefixes.
 [indentation] level is greater than the specified `n` parameter.
 
 
-# Chapter #. Characters
+## #. Special Productions
+
+The YAML grammar has several productions that cannot be easily expressed as
+BNF.
+They act the same as the numbered productions below in that they either
+**match** or **fail** to match.
+Their purposes and behaviors are defined below:
+
+
+? `sp-start-of-line`
+
+: An assertion that the current parse position is at the very beginning of the
+stream or immediately following a line break character.
+
+
+? `sp-end-of-stream`
+
+: An assertion the the current parse position is at the very end of the stream
+being parsed.
+
+
+? `sp-empty-scalar`
+
+: This production always matches.
+It consumes zero characters.
+
+
+? `sp-auto-detect-indent`
+
+: Set the current indentation variable `m` to a "detected" number.
+
+
+? `sp-auto-detect-indent-gt-zero`
+
+: Set the current indentation variable `m` to a "detected" number and assert
+that it is greater than zero.
+
+
+? `sp-assert-m-is-lt(n)`
+
+: An assertion that the current indentation variable `m` is less than the scope
+indentation variable `n`.
+
+
+? `sp-assert-m-is-le(n)`
+
+: An assertion that the current indentation variable `m` is less than or equal
+to the scope indentation variable `n`.
+
+
+? `sp-lookahead-ns-plain-safe(c)`
+
+: A lookahead assertion that `ns-plain-safe(c)` matches the next character.
+
+
+? `sp-lookahead-not-ns-plain-safe(c)`
+
+: A lookahead assertion that `ns-plain-safe(c)` **does not** match the next
+character.
+
+
+? `sp-lookbehind-ns-char`
+
+: A lookbehind assertion the `ns-char` matches the previous character.
+
+
+? `sp-lookahead-not-ns-char`
+
+: A lookahead assertion that `ns-char` **does not** match the next character.
+
+
+? `sp-lookahead-limit-1024`
+
+: An assertion that the current parse position is no more than 1024 characters
+past the start position of the production it is used in.
+
+
+? `sp-excluding-c-forbidden`
+
+: A global rule that `c-forbidden` must never match at any point during the
+application of the parent production.
+
+
+# Chapter #. Character Productions
 
 ## #. Character Set
 
@@ -2296,12 +2383,14 @@ to express this.
 
 ```
 [#] s-indent(<n) ::=
-  s-space × m /* Where m < n */
+  s-space{m}
+  sp-assert-m-is-lt(n)
 ```
 
 ```
-[#] s-indent(≤n) ::=
-  s-space × m /* Where m ≤ n */
+[#] s-indent(<=n) ::=
+  s-space{m}
+  sp-assert-m-is-le(n)
 ```
 
 
@@ -2381,7 +2470,8 @@ Separation spaces are a [presentation detail] and must not be used to convey
 
 ```
 [#] s-separate-in-line ::=
-  s-white+ | /* Start of line */
+  ( s-white+
+  | sp-start-of-line )
 ```
 
 
@@ -2641,7 +2731,8 @@ However, as this confuses many tools, YAML [processors] should terminate the
 
 ```
 [#] b-comment ::=
-  b-non-content | /* End of file */
+  ( b-non-content
+  | sp-end-of-stream )
 ```
 
 ```
@@ -2703,7 +2794,8 @@ The only exception is a comment ending a [block scalar header].
 
 ```
 [#] s-l-comments ::=
-  ( s-b-comment | /* Start of line */ )
+  ( s-b-comment
+  | sp-start-of-line )
   l-comment*
 ```
 
@@ -3493,7 +3585,7 @@ Such [nodes] are commonly resolved to a ["**`null`**"] value.
 
 ```
 [#] e-scalar ::=
-  /* Empty */
+  sp-empty-scalar
 ```
 
 
@@ -3841,9 +3933,17 @@ causes no ambiguity.
 
 ```
 [#] ns-plain-first(c) ::=
-    ( ns-char - c-indicator )
-  | ( ( "?" | ":" | "-" )
-      /* Followed by an ns-plain-safe(c)) */ )
+  ( ( ns-char
+    - c-indicator
+    )
+  | (
+      ( '?'
+      | ':'
+      | '-'
+      )
+      sp-lookahead-ns-plain-safe(c)
+    )
+  )
 ```
 
 
@@ -3875,9 +3975,11 @@ These characters would cause ambiguity with [flow collection] structures.
 
 ```
 [#] ns-plain-char(c) ::=
-    ( ns-plain-safe(c) - ":" - "#" )
-  | ( /* An ns-char preceding */ "#" )
-  | ( ":" /* Followed by an ns-plain-safe(c) */ )
+  ( ( ns-plain-safe(c)
+    - ':'
+    - '#'
+    )
+  | ( sp-lookbehind-ns-char
 ```
 
 
@@ -4206,10 +4308,13 @@ indicated by the "**`:`**".
 
 ```
 [#] c-ns-flow-map-separate-value(n,c) ::=
-  ":" /* Not followed by an
-         ns-plain-safe(c) */
-  ( ( s-separate(n,c) ns-flow-node(n,c) )
-  | e-node /* Value */ )
+  ':'
+  sp-lookahead-not-ns-plain-safe(c)
+  ( ( s-separate(n,c)
+      ns-flow-node(n,c)
+    )
+  | e-node
+  )
 ```
 
 
@@ -4367,14 +4472,16 @@ been impossible to implement.
 
 ```
 [#] ns-s-implicit-yaml-key(c) ::=
-  ns-flow-yaml-node(n/a,c) s-separate-in-line?
-  /* At most 1024 characters altogether */
+  ns-flow-yaml-node(n/a,c)
+  s-separate-in-line?
+  sp-lookahead-limit-1024
 ```
 
 ```
 [#] c-s-implicit-json-key(c) ::=
-  c-flow-json-node(n/a,c) s-separate-in-line?
-  /* At most 1024 characters altogether */
+  c-flow-json-node(n/a,c)
+  s-separate-in-line?
+  sp-lookahead-limit-1024
 ```
 
 
@@ -4599,8 +4706,8 @@ indicator for cases where detection will fail.
 
 ```
 [#] c-indentation-indicator(m) ::=
-  ns-dec-digit ⇒ m = ns-dec-digit - #x30
-  /* Empty */  ⇒ m = auto-detect()
+  ns-dec-digit    => m = ns-dec-digit - x30
+  sp-empty-scalar => m = sp-auto-detect-indent
 ```
 
 
@@ -4697,9 +4804,9 @@ convey [content] information.
 
 ```
 [#] c-chomping-indicator(t) ::=
-  "-"         ⇒ t = strip
-  "+"         ⇒ t = keep
-  /* Empty */ ⇒ t = clip
+  '-'             => t = strip
+  '+'             => t = keep
+  sp-empty-scalar => t = clip
 ```
 
 
@@ -4708,9 +4815,9 @@ by the chomping indicator specified in the [block scalar header].
 
 ```
 [#] b-chomped-last(t) ::=
-  t = strip ⇒ b-non-content | /* End of file */
-  t = clip  ⇒ b-as-line-feed | /* End of file */
-  t = keep  ⇒ b-as-line-feed | /* End of file */
+  t = strip => b-non-content  | sp-end-of-stream
+  t = clip  => b-as-line-feed | sp-end-of-stream
+  t = keep  => b-as-line-feed | sp-end-of-stream
 ```
 
 
@@ -5160,13 +5267,16 @@ followed by a non-space character (e.g. "**`-1`**").
 
 ```
 [#] l+block-sequence(n) ::=
-  ( s-indent(n+m) c-l-block-seq-entry(n+m) )+
-  /* For some fixed auto-detected m > 0 */
+  ( s-indent(n+m)
+    c-l-block-seq-entry(n+m)
+  )+
+  sp-auto-detect-indent-gt-zero
 ```
 
 ```
 [#] c-l-block-seq-entry(n) ::=
-  "-" /* Not followed by an ns-char */
+  '-'
+  sp-lookahead-not-ns-char
   s-l+block-indented(n,block-in)
 ```
 
@@ -5187,7 +5297,7 @@ block sequence:
 
 **Legend:**
 * [c-l-block-seq-entry(n)] <!-- 2:3, 3:3, -->
-* auto-detected [s-indent(n)] <!-- 2:1,2 -->
+* sp-auto-detect-indent-gt-zero [s-indent(n)] <!-- 2:1,2 -->
 
 
 The entry [node] may be either [completely empty], be a nested [block node] or
@@ -5246,8 +5356,10 @@ A _Block mapping_ is a series of entries, each [presenting] a [key/value pair].
 
 ```
 [#] l+block-mapping(n) ::=
-  ( s-indent(n+m) ns-l-block-map-entry(n+m) )+
-  /* For some fixed auto-detected m > 0 */
+  ( s-indent(n+m)
+    ns-l-block-map-entry(n+m)
+  )+
+  sp-auto-detect-indent-gt-zero
 ```
 
 
@@ -5265,7 +5377,7 @@ block mapping:
 
 **Legend:**
 * [ns-l-block-map-entry(n)] <!-- 2:2, -->
-* auto-detected [s-indent(n)] <!-- 2:1 -->
+* sp-auto-detect-indent-gt-zero [s-indent(n)] <!-- 2:1 -->
 
 
 If the ["**`?`**"] indicator is specified, the optional value node must be
@@ -5623,9 +5735,14 @@ either of these markers.
 
 ```
 [#] c-forbidden ::=
-  /* Start of line */
-  ( c-directives-end | c-document-end )
-  ( b-char | s-white | /* End of file */ )
+  start-of-line
+  ( c-directives-end
+  | c-document-end
+  )
+  ( b-char
+  | s-white
+  | sp-end-of-stream
+  )
 ```
 
 
@@ -5664,7 +5781,7 @@ document's [node] to be [indented] at zero or more [spaces].
 ```
 [#] l-bare-document ::=
   s-l+block-node(-1,block-in)
-  /* Excluding c-forbidden content */
+  sp-excluding-c-forbidden
 ```
 
 
@@ -5845,7 +5962,7 @@ lines or repeated [document end markers] without signaling the start of the
 next [document].
 
 
-# Chapter #. Recommended Schemas
+# Chapter #. Appendix A) Recommended Schemas
 
 A YAML _schema_ is a combination of a set of [tags] and a mechanism for
 [resolving] [non-specific tags].

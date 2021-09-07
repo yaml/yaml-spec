@@ -262,7 +262,10 @@ sub fmt_dt {
   set_dates();
 
   my $text = $_;
-  my $slug = slugify($text);
+  my $slug = $text;
+  $slug =~ s/\bsp-/production-sp-/;
+  $slug =~ s/\([cn]\)//;
+  my $slug = slugify($slug);
 
   $_ = qq{<div id="$slug" />\n\n$text\n};
 }
@@ -368,25 +371,25 @@ my $num = 0;
 sub fmt_pre {
   my $pre = format_pre($_);
   if ($pre =~ s/(\S+)(\s+::=)/%%%/) {
-    my $rule = $1;
+    my $production = $1;
     my $sep = $2;
     $num++;
     $pre =~ s/\[\#\]/[$num]/;
-    $pre =~ s/<pre>/<pre class="rule">/;
+    $pre =~ s/<pre>/<pre class="production">/;
     $pre =~
       s{
         \ (
-          (?:b|c|e|l|s|in|nb|ns)[-+]
+          (?:b|c|e|l|s|in|nb|ns|sp)[-+]
           .*?
         )
         (?=[\(\+\*\?]|\s|\z)
       }
-      {' ' . rule_link($1)}gex;
-    $pre =~ s/%%%/$rule$sep/;
+      {' ' . production_link($1)}gex;
+    $pre =~ s/%%%/$production$sep/;
     chomp $pre;
-    $rule =~ s/\(.*//;
+    $production =~ s/\(.*//;
     $pre = <<"...";
-<div id="rule-$rule" />
+<div id="production-$production" />
 $pre
 ...
   }
@@ -491,11 +494,11 @@ sub slugify {
   return $slug;
 }
 
-sub rule_link {
+sub production_link {
   my ($text) = @_;
-  my $rule = $text;
-  $rule =~ s/\(.*//;
-  return qq{<a href="#rule-$rule">$text<\/a>};
+  my $production = $text;
+  $production =~ s/[\{\(].*//;
+  return qq{<a href="#production-$production">$text<\/a>};
 }
 
 sub format_links {
@@ -565,11 +568,11 @@ sub set_example_level {
 sub apply_highlights {
   my ($yaml, $highlights) = @_;
   my @lines = split /\n/, $highlights;
-  my @rules;
+  my @productions;
   for my $line (@lines) {
     if ($line =~ /<!--/) {
       $line =~ s/.*<!--\s+(.*?)\s+-->/$1/;
-      push @rules, [split /\s+/, $line];
+      push @productions, [split /\s+/, $line];
     }
   }
 
@@ -582,10 +585,10 @@ sub apply_highlights {
     [ split //, $_ ],
     @lines;
 
-  my $i = @rules + 1;
-  for my $rule (reverse @rules) {
+  my $i = @productions + 1;
+  for my $production (reverse @productions) {
     $i--;
-    for my $r (@$rule) {
+    for my $r (@$production) {
       next unless $r =~ /^[1-9]/;
       $r =~ /^([1-9]\d*)(?::(\d+)(,\d*)?)?$/
         or XXX $r;
@@ -611,10 +614,10 @@ sub apply_highlights {
     @chars;
 
   my $i = 0;
-  for my $rule (@rules) {
+  for my $production (@productions) {
     $i++;
     my @re;
-    for my $r (@$rule) {
+    for my $r (@$production) {
       next if $r =~ /^[1-9]/;
       $r =~ s/^0//;
       $r =~ s/([\"\'\!\*\+\?\|\{\}\[\]\(\)\.\\])/\\$1/g;
@@ -669,7 +672,7 @@ sub format_legend {
     }
   }
   $_ = join "\n", @lines;
-  s{\[([^\]]+)\]}{rule_link($1)}ge;
+  s{\[([^\]]+)\]}{production_link($1)}ge;
   return $_;
 }
 
