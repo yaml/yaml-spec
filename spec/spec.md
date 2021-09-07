@@ -1401,7 +1401,7 @@ trailing line breaks, not their syntactic validity.
 ## #. Production Naming Conventions
 
 To make it easier to follow production combinations, production names use a
-Hungarian-style naming convention.
+prefix-style naming convention.
 Each production is given a prefix based on the type of characters it begins and
 ends with.
 
