@@ -2,6 +2,11 @@ include tool/make/init.mk
 
 TESTS ?= $(wildcard test/test-*)
 
+QUICK := \
+    test/test-line-wrap.sh \
+    test/test-format-markdown.sh \
+    test/test-lint-shell.sh \
+
 default:
 
 docker-build-all docker-push-all docker-pull-all:
@@ -15,7 +20,9 @@ format:
 
 test: $(TESTS)
 
-test-docker:
+quick-test: $(QUICK)
+
+docker-test:
 	$(MAKE) test TESTS='$(TESTS)' YAML_SPEC_USE_DOCKER=1
 
 $(TESTS): force
