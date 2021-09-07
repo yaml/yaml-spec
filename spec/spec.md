@@ -1382,10 +1382,8 @@ Hence in some cases productions need to behave differently inside [block
 sequences] (_block-in context_) and outside them (_block-out context_).
 
 : In [flow styles], explicit [indicators] are used to delineate structure.
-These styles can be viewed as the natural extension of JSON to cover [tagged],
-[single-quoted] and [plain scalars].
-Since the latter have no delineating [indicators], they are subject to some
-restrictions to avoid ambiguities.
+Since the plain scalars have no delineating [indicators], they are subject to
+some restrictions to avoid ambiguities.
 These restrictions depend on where they appear: as implicit keys directly
 inside a [block mapping] (_block-key_); as implicit keys inside a [flow
 mapping] (_flow-key_); as values inside a [flow collection] (_flow-in_); or as
