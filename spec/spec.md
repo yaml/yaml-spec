@@ -1122,12 +1122,8 @@ A YAML _presentation_ is a [stream] of Unicode characters making use of
 [styles], [scalar content formats], [comments], [directives] and other
 [presentation details] to [present] a YAML [serialization] in a human readable
 way.
-Although a YAML [processor] may provide these [details] when [parsing], they
-should not be reflected in the resulting [serialization].
 YAML allows several [serialization trees] to be contained in the same YAML
-character stream, as a series of [documents] separated by [markers].
-Documents appearing in the same stream are independent; that is, a [node] must
-not appear in more than one [serialization tree] or [representation graph].
+presentation stream, as a series of [documents] separated by [markers].
 
 
 **Figure #. Presentation Model**
