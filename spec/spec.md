@@ -6167,9 +6167,13 @@ Hence the YAML [processor] should consider them to be an error.
 | `null` | tag:yaml.org,2002:null
 | `true | false` | tag:yaml.org,2002:bool
 | `-? ( 0 | [1-9] [0-9]* )` | tag:yaml.org,2002:int
-| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]+ )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float
+| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float
 | `*` | Error
 
+Note: The regular expression for `float` does not exactly match the one in the
+JSON specification, where at least one digit is required after the dot: `( \.
+[0-9]+ )`.  The YAML 1.2 specification intended to match JSON behavior, but
+this cannot be addressed in the 1.2.1 specification.
 
 **Example #. JSON Tag Resolution**
 
