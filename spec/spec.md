@@ -1085,7 +1085,7 @@ use [key order] or [anchor names] for the preservation of [application] data.
 ![Serialization Model](img/serialize2.svg)
 
 
-#### #. Keys Order
+#### #. Key Order
 
 In the [representation] model, [mapping keys] do not have an order.
 To [serialize] a [mapping], it is necessary to impose an _ordering_ on its
