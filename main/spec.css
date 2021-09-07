@@ -1,8 +1,8 @@
 body.status-draft { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='200px' width='200px'><text transform='translate(20, 200) rotate(-45)' fill='rgb(245,245,245)' font-size='60'>DRAFT</text></svg>"); }
 body.status-draft .status-header { color: #f44; }
 
-a[href^="#"] { color: inherit; text-decoration: underline solid #606c71; }
-a[href^="#"]:hover { color: blue; text-decoration: underline solid blue; }
+a { color: inherit; text-decoration: underline solid #606c71; }
+a:hover { color: blue; text-decoration: underline solid blue; }
 
 table { width: 100%; }
 table th, table tr { width: 100%; }

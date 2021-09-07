@@ -47,7 +47,7 @@ the content of this draft or cite it as an authority.
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>YAML Specification Version 1.2.1 – Released 2021-09-06</strong></p>
+<p><strong>YAML Specification Version 1.2.1 – Released 2021-09-07</strong></p>
 
 <p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -67,7 +67,7 @@ The input format is now Markdown instead of DocBook, and the images are made
 from plain text LaTeX files rather than proprietary drawing software.
 All the source content for the specification is publicly hosted<sup id="fnref:spec-repo" role="doc-noteref"><a href="#fn:spec-repo" class="footnote" rel="footnote">1</a></sup>.</p>
 
-<p>The previous YAML specification<sup id="fnref:1-2-spec" role="doc-noteref"><a href="#fn:1-2-spec" class="footnote" rel="footnote">2</a></sup> was published over 12 years ago.
+<p>The previous YAML specification<sup id="fnref:1-2-spec" role="doc-noteref"><a href="#fn:1-2-spec" class="footnote" rel="footnote">2</a></sup> was published about 12 years ago.
 In that time span, YAML’s popularity has grown significantly.
 Efforts are ongoing to improve the language and grow it to meet the needs and
 expectations of its users.
@@ -77,7 +77,7 @@ begins a process by which the language intends to evolve and stay modern.</p>
 <p>The YAML specification is often seen as overly complicated for something which
 appears to be so simple.
 Even though YAML often is used for software configuration, it has always been
-and will continue to be a complete serialization language.
+and will continue to be a complete data serialization language.
 Future YAML plans are focused on making the language and ecosystem more
 powerful and reliable while simultaneously simplifying the development process
 for implementers.</p>
@@ -93,6 +93,7 @@ published versions of this specification.</p>
 <ul>
   <li><a href="implementer-refs">YAML Implementer’s Reference Index</a></li>
   <li><a href="user-refs">YAML User’s Reference Index</a></li>
+  <li><a href="community">YAML Community</a></li>
   <li><a href="spec-errata">YAML 1.2.1 Specification Errata</a></li>
   <li><a href="spec-changes">YAML 1.2.1 Specification Changes</a></li>
   <li><a href="spec-authors">YAML 1.2.1 Specification Authors</a></li>
@@ -102,10 +103,10 @@ published versions of this specification.</p>
 
 <p>YAML™ (rhymes with “camel”) is a human-friendly, cross language, Unicode based
 data serialization language designed around the common native data types of
-agile programming languages.
+dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
-Internet messaging to object persistence to data auditing.
-Together with the Unicode standard for characters<sup id="fnref:Unicode" role="doc-noteref"><a href="#fn:Unicode" class="footnote" rel="footnote">3</a></sup>, this specification
+internet messaging to object persistence to data auditing and visualization.
+Together with the Unicode standard for characters[^Unicode], this specification
 provides all the information necessary to understand YAML Version 1.2 and to
 create programs that process YAML information.</p>
 
@@ -115,10 +116,8 @@ create programs that process YAML information.</p>
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</a></li>
   <li><a href="#chapter-1-introduction" id="markdown-toc-chapter-1-introduction">Chapter 1. Introduction</a>    <ul>
       <li><a href="#11-goals" id="markdown-toc-11-goals">1.1. Goals</a></li>
-      <li><a href="#12-prior-art" id="markdown-toc-12-prior-art">1.2. Prior Art</a></li>
-      <li><a href="#13-relation-to-json" id="markdown-toc-13-relation-to-json">1.3. Relation to JSON</a></li>
-      <li><a href="#14-relation-to-xml" id="markdown-toc-14-relation-to-xml">1.4. Relation to XML</a></li>
-      <li><a href="#15-terminology" id="markdown-toc-15-terminology">1.5. Terminology</a></li>
+      <li><a href="#12-yaml-history" id="markdown-toc-12-yaml-history">1.2. YAML History</a></li>
+      <li><a href="#13-terminology" id="markdown-toc-13-terminology">1.3. Terminology</a></li>
     </ul>
   </li>
   <li><a href="#chapter-2-preview" id="markdown-toc-chapter-2-preview">Chapter 2. Preview</a>    <ul>
@@ -143,7 +142,7 @@ create programs that process YAML information.</p>
             </ul>
           </li>
           <li><a href="#322-serialization-tree" id="markdown-toc-322-serialization-tree">3.2.2. Serialization Tree</a>            <ul>
-              <li><a href="#3221-keys-order" id="markdown-toc-3221-keys-order">3.2.2.1. Keys Order</a></li>
+              <li><a href="#3221-mapping-key-order" id="markdown-toc-3221-mapping-key-order">3.2.2.1. Mapping Key Order</a></li>
               <li><a href="#3222-anchors-and-aliases" id="markdown-toc-3222-anchors-and-aliases">3.2.2.2. Anchors and Aliases</a></li>
             </ul>
           </li>
@@ -288,9 +287,9 @@ create programs that process YAML information.</p>
 <div id="introduction"></div>
 <h1 id="chapter-1-introduction">Chapter 1. Introduction</h1>
 
-<p>“YAML Ain’t Markup Language” (abbreviated YAML) is a data serialization
-language designed to be human-friendly and work well with modern programming
-languages for common everyday tasks.
+<p>YAML (a recursive acronym for “YAML Ain’t Markup Language”) is a data
+serialization language designed to be human-friendly and work well with modern
+programming languages for common everyday tasks.
 This specification is both an introduction to the YAML language and the
 concepts supporting it.
 It is also a complete specification of the information needed to develop
@@ -306,9 +305,9 @@ YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful
 way.
 For example, <a href="#indentation-spaces">indentation</a> may be used for structure, <a href="#flow-mappings">colons</a> separate <a href="#mapping">key:
-value pairs</a> and <a href="#block-sequences">dashes</a> are used to create “bullet” <a href="#sequence">lists</a>.</p>
+value pairs</a> and <a href="#block-sequences">dashes</a> are used to create “bulleted” <a href="#sequence">lists</a>.</p>
 
-<p>There are myriad flavors of <a href="#dump">data structures</a>, but they can all be adequately
+<p>There are many kinds of <a href="#dump">data structures</a>, but they can all be adequately
 <a href="#representation-graph">represented</a> with three basic primitives: <a href="#mapping">mappings</a> (hashes/dictionaries),
 <a href="#sequence">sequences</a> (arrays/lists) and <a href="#scalars">scalars</a> (strings/numbers).
 YAML leverages these primitives and adds a simple typing system and <a href="#anchors-and-aliases">aliasing</a>
@@ -317,8 +316,8 @@ structure</a>.
 While most programming languages can use YAML for data serialization, YAML
 excels in working with those languages that are fundamentally built around the
 three basic primitives.
-These include the new wave of agile languages such as Perl, Python, PHP, Ruby
-and JavaScript.</p>
+These include common dynamic languages such as JavaScript, Perl, PHP, Python
+and Ruby.</p>
 
 <p>There are hundreds of different languages for programming, but only a handful
 of languages for storing and transferring data.
@@ -334,143 +333,64 @@ When data is easy to view and understand, programming becomes a simpler task.</p
 <p>The design goals for YAML are, in decreasing priority:</p>
 
 <ol>
-  <li>YAML is easily readable by humans.</li>
-  <li>YAML data is portable between programming languages.</li>
-  <li>YAML matches the <a href="#representing-native-data-structures">native data structures</a> of agile languages.</li>
-  <li>YAML has a consistent model to support generic tools.</li>
-  <li>YAML supports one-pass processing.</li>
-  <li>YAML is expressive and extensible.</li>
-  <li>YAML is easy to implement and use.</li>
+  <li>YAML should be easily readable by humans.</li>
+  <li>YAML data should be portable between programming languages.</li>
+  <li>YAML should match the <a href="#representing-native-data-structures">native data structures</a> of dynamic languages.</li>
+  <li>YAML should have a consistent model to support generic tools.</li>
+  <li>YAML should support one-pass processing.</li>
+  <li>YAML should be expressive and extensible.</li>
+  <li>YAML should be easy to implement and use.</li>
 </ol>
 
-<div id="prior-art"></div>
-<h2 id="12-prior-art">1.2. Prior Art</h2>
+<div id="yaml-history"></div>
+<h2 id="12-yaml-history">1.2. YAML History</h2>
 
-<p>YAML’s initial direction was set by the data serialization and markup language
-discussions among SML-DEV members<sup id="fnref:SML-DEV" role="doc-noteref"><a href="#fn:SML-DEV" class="footnote" rel="footnote">4</a></sup>.
-Later on, it directly incorporated experience from Ingy döt Net’s Perl module
-Data::Denter<sup id="fnref:Denter" role="doc-noteref"><a href="#fn:Denter" class="footnote" rel="footnote">5</a></sup>.
-Since then, YAML has matured through ideas and support from its user community.</p>
+<p>The YAML 1.0 specification was published in early 2004 by by Clark Evans, Oren
+Ben-Kiki, and Ingy döt Net after 3 years of collaborative design work through
+the yaml-core mailing list<sup id="fnref:yaml-core" role="doc-noteref"><a href="#fn:yaml-core" class="footnote" rel="footnote">3</a></sup>.
+The project was initially rooted in Clark and Oren’s work on the
+SML-DEV[^SML-DEV] mailing list (for simplifying XML) and Ingy’s plain text
+serialization module[^Denter] for Perl.
+The language took a lot of inspiration from many other technologies and formats
+that preceded it.</p>
 
-<p>YAML integrates and builds upon concepts described by C<sup id="fnref:C" role="doc-noteref"><a href="#fn:C" class="footnote" rel="footnote">6</a></sup>, Java<sup id="fnref:Java" role="doc-noteref"><a href="#fn:Java" class="footnote" rel="footnote">7</a></sup>,
-Perl<sup id="fnref:Perl" role="doc-noteref"><a href="#fn:Perl" class="footnote" rel="footnote">8</a></sup>, Python<sup id="fnref:Python" role="doc-noteref"><a href="#fn:Python" class="footnote" rel="footnote">9</a></sup>, Ruby<sup id="fnref:Ruby" role="doc-noteref"><a href="#fn:Ruby" class="footnote" rel="footnote">10</a></sup>, Email<sup id="fnref:Email" role="doc-noteref"><a href="#fn:Email" class="footnote" rel="footnote">11</a></sup>, HTML<sup id="fnref:HTML" role="doc-noteref"><a href="#fn:HTML" class="footnote" rel="footnote">12</a></sup>,
-MIME<sup id="fnref:MIME" role="doc-noteref"><a href="#fn:MIME" class="footnote" rel="footnote">13</a></sup>, URIs<sup id="fnref:URI" role="doc-noteref"><a href="#fn:URI" class="footnote" rel="footnote">14</a></sup>, XML<sup id="fnref:XML" role="doc-noteref"><a href="#fn:XML" class="footnote" rel="footnote">15</a></sup>, SAX<sup id="fnref:SAX" role="doc-noteref"><a href="#fn:SAX" class="footnote" rel="footnote">16</a></sup>, SOAP<sup id="fnref:SOAP" role="doc-noteref"><a href="#fn:SOAP" class="footnote" rel="footnote">17</a></sup> and JSON<sup id="fnref:JSON" role="doc-noteref"><a href="#fn:JSON" class="footnote" rel="footnote">18</a></sup>.</p>
+<p>The first YAML framework was written in Perl in 2001 and Ruby was the first
+language to ship a YAML framework as part of its core language distribution in
+2003.</p>
 
-<p>The syntax of YAML was motivated by Internet Mail (Email) and remains partially
-compatible with that standard.
-Further, borrowing from MIME, YAML’s top-level production is a <a href="#streams">stream</a> of
-independent <a href="#documents">documents</a>, ideal for message-based distributed processing
-systems.</p>
+<p>The YAML 1.1<sup id="fnref:1-1-spec" role="doc-noteref"><a href="#fn:1-1-spec" class="footnote" rel="footnote">4</a></sup> specification was published in 2005.
+Around this time, the developers became aware of JSON<sup id="fnref:json" role="doc-noteref"><a href="#fn:json" class="footnote" rel="footnote">5</a></sup>.
+By sheer coincidence, JSON was almost a complete subset of YAML (both
+syntactically and semantically).</p>
 
-<p>YAML’s <a href="#indentation-spaces">indentation</a>-based scoping is similar to Python’s (without the
-ambiguities caused by <a href="#white-space-characters">tabs</a>).
-<a href="#block-styles">Indented blocks</a> facilitate easy inspection of the data’s structure.
-YAML’s <a href="#literal-style">literal style</a> leverages this by enabling formatted text to be cleanly
-mixed within an <a href="#indentation-spaces">indented</a> structure without troublesome <a href="#escaped-characters">escaping</a>.
-YAML also allows the use of traditional <a href="#indicator-characters">indicator</a>-based scoping similar to
-JSON’s and Perl’s.
-Such <a href="#flow-styles">flow content</a> can be freely nested inside <a href="#block-styles">indented blocks</a>.</p>
+<p>In 2006, Kirill Siminov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">6</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">7</a></sup>.
+A lot of the YAML frameworks in various programming languages are built over
+LibYAML and many others have looked to PyYAML as a solid reference for their
+implementations.</p>
 
-<p>YAML’s <a href="#double-quoted-style">double-quoted style</a> uses familiar C-style <a href="#escaped-characters">escape sequences</a>.
-This enables ASCII encoding of non-<a href="#character-set">printable</a> or 8-bit (ISO 8859-1) characters
-such as “<strong><code class="language-plaintext highlighter-rouge">\x3B</code></strong>”.
-Non-<a href="#character-set">printable</a> 16-bit Unicode and 32-bit (ISO/IEC 10646) characters are
-supported with <a href="#escaped-characters">escape sequences</a> such as “<strong><code class="language-plaintext highlighter-rouge">\u003B</code></strong>” and
-“<strong><code class="language-plaintext highlighter-rouge">\U0000003B</code></strong>”.</p>
+<p>The YAML 1.2<sup id="fnref:1-2-spec:1" role="doc-noteref"><a href="#fn:1-2-spec" class="footnote" rel="footnote">2</a></sup> specification was published in 2009.
+Its primary focus was making YAML a strict superset of JSON.
+It also removed many of the problematic implicit typing recommendations.</p>
 
-<p>Motivated by HTML’s end-of-line normalization, YAML’s <a href="#line-folding">line folding</a> employs an
-intuitive method of handling <a href="#line-break-characters">line breaks</a>.
-A single <a href="#line-break-characters">line break</a> is <a href="#line-folding">folded</a> into a single <a href="#white-space-characters">space</a>, while <a href="#empty-lines">empty lines</a>
-are interpreted as <a href="#line-break-characters">line break</a> characters.
-This technique allows for paragraphs to be word-wrapped without affecting the
-<a href="#canonical-form">canonical form</a> of the <a href="#scalar">scalar content</a>.</p>
+<p>Since the release of the 1.2 specification, YAML adoption has continued to
+grow, and many large-scale projects use it as their primary configuration
+format.
+In 2020, the new <a href="core-team">YAML language design team</a> began meeting regularly
+to discuss improvements to the YAML language and specification; to better meet
+the needs and expectations of its users and use cases.</p>
 
-<p>YAML’s core type system is based on the requirements of agile languages such as
-Perl, Python and Ruby.
-YAML directly supports both <a href="#collections">collections</a> (<a href="#mapping">mappings</a>, <a href="#sequence">sequences</a>) and
-<a href="#scalars">scalars</a>.
-Support for these common types enables programmers to use their language’s
-<a href="#representing-native-data-structures">native data structures</a> for YAML manipulation, instead of requiring a special
-document object model (DOM).</p>
-
-<p>Like XML’s SOAP, YAML supports <a href="#serializing-the-representation-graph">serializing</a> a graph of <a href="#representing-native-data-structures">native data
-structures</a> through an <a href="#anchors-and-aliases">aliasing</a> mechanism.
-Also like SOAP, YAML provides for <a href="#processing-yaml-information">application</a>-defined <a href="#tags">types</a>.
-This allows YAML to <a href="#representation-graph">represent</a> rich data structures required for modern
-distributed computing.
-YAML provides globally unique <a href="#tags">type names</a> using a namespace mechanism inspired
-by Java’s DNS-based package naming convention and XML’s URI-based namespaces.
-In addition, YAML allows for private <a href="#tags">types</a> specific to a single
-<a href="#processing-yaml-information">application</a>.</p>
-
-<p>YAML was designed to support incremental interfaces that include both input
-(“<strong><code class="language-plaintext highlighter-rouge">getNextEvent()</code></strong>”) and output (“<strong><code class="language-plaintext highlighter-rouge">sendNextEvent()</code></strong>”) one-pass
-interfaces.
-Together, these enable YAML to support the processing of large <a href="#documents">documents</a>
-(e.g. transaction logs) or continuous <a href="#streams">streams</a> (e.g. feeds from a production
-machine).</p>
-
-<div id="relation-to-json"></div>
-<h2 id="13-relation-to-json">1.3. Relation to JSON</h2>
-
-<p>Both JSON and YAML aim to be human readable data interchange formats.
-However, JSON and YAML have different priorities.
-JSON’s foremost design goal is simplicity and universality.
-Thus, JSON is trivial to generate and parse, at the cost of reduced human
-readability.
-It also uses a lowest common denominator information model, ensuring any JSON
-data can be easily processed by every modern programming environment.</p>
-
-<p>In contrast, YAML’s foremost design goals are human readability and support for
-<a href="#serializing-the-representation-graph">serializing</a> arbitrary <a href="#representing-native-data-structures">native data structures</a>.
-Thus, YAML allows for extremely readable files, but is more complex to generate
-and parse.
-In addition, YAML ventures beyond the lowest common denominator data types,
-requiring more complex processing when crossing between different programming
-environments.</p>
-
-<p>YAML can therefore be viewed as a natural superset of JSON, offering improved
-human readability and a more complete information model.
-This is also the case in practice; every JSON file is also a valid YAML file.
-This makes it easy to migrate from JSON to YAML if/when the additional features
-are required.</p>
-
-<p>JSON<sup id="fnref:JSON:1" role="doc-noteref"><a href="#fn:JSON" class="footnote" rel="footnote">18</a></sup> requires that <a href="#mapping">mappings</a> <a href="#nodes">keys</a> merely “SHOULD” be <a href="#node-comparison">unique</a>, while
-YAML insists they “MUST” be.
-Technically, YAML therefore complies with the JSON specification, choosing to
-treat duplicates as an error.
-In practice, since JSON is silent on the semantics of such duplicates, the only
-portable JSON files are those with unique keys, which are therefore valid YAML
-files.</p>
-
-<div id="relation-to-xml"></div>
-<h2 id="14-relation-to-xml">1.4. Relation to XML</h2>
-
-<p>Newcomers to YAML often search for its correlation to the eXtensible Markup
-Language (XML).
-Although the two languages may actually compete in several application domains,
-there is no direct correlation between them.</p>
-
-<p>YAML is primarily a data serialization language.
-XML was designed to be backwards compatible with the Standard Generalized
-Markup Language (SGML), which was designed to support structured documentation.
-XML therefore had many design constraints placed on it that YAML does not
-share.
-XML is a pioneer in many domains, YAML is the result of lessons learned from
-XML and other technologies.</p>
-
-<p>It should be mentioned that there are ongoing efforts to define standard
-XML/YAML mappings.
-This generally requires that a subset of each language be used.
-For more information on using both XML and YAML, please visit
-<a href="/xml">https://yaml.org/xml</a>.</p>
+<p>This YAML 1.2.1 specification, published in September 2021, is the first step
+in YAML’s rejuvenated development journey.
+YAML is now more popular than it has ever been, but there is a long list of
+things that need to be addressed for it to reach its full potential.
+The YAML design team is focused on making YAML as good as possible.</p>
 
 <div id="terminology"></div>
-<h2 id="15-terminology">1.5. Terminology</h2>
+<h2 id="13-terminology">1.3. Terminology</h2>
 
 <p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,
 “SHOULD NOT”, “RECOMMENDED”,  “MAY”, and “OPTIONAL” in this document are to be
-interpreted as described in RFC 2119<sup id="fnref:RFC-2119" role="doc-noteref"><a href="#fn:RFC-2119" class="footnote" rel="footnote">19</a></sup>.</p>
+interpreted as described in RFC 2119<sup id="fnref:rfc-2119" role="doc-noteref"><a href="#fn:rfc-2119" class="footnote" rel="footnote">8</a></sup>.</p>
 
 <p>The rest of this document is arranged as follows.
 Chapter [2] provides a short preview of the main YAML features.
@@ -494,7 +414,7 @@ specification.</p>
 <p>YAML’s <a href="#block-collection-styles">block collections</a> use <a href="#indentation-spaces">indentation</a> for scope and begin each entry on
 its own line.
 <a href="#block-sequences">Block sequences</a> indicate each entry with a dash and space (“<strong><code class="language-plaintext highlighter-rouge">-</code></strong> “).
-<a href="#mapping">Mappings</a> use a colon and space (“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “) to mark each <a href="#mapping">key: value pair</a>.
+<a href="#mapping">Mappings</a> use a colon and space (“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “) to mark each <del><a href="#undefined">key/value pair</a></del>.
 <a href="#comments">Comments</a> begin with an octothorpe (also called a “hash”, “sharp”, “pound” or
 “number sign” - “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”).</p>
 
@@ -665,7 +585,7 @@ rbi:
 </div>
 
 <p>A question mark and space (“<strong><code class="language-plaintext highlighter-rouge">?</code></strong> “) indicate a complex <a href="#mapping">mapping</a> <a href="#nodes">key</a>.
-Within a <a href="#block-collection-styles">block collection</a>, <a href="#mapping">key: value pairs</a> can start immediately following
+Within a <a href="#block-collection-styles">block collection</a>, <del><a href="#undefined">key/value pairs</a></del> can start immediately following
 the <a href="#block-sequences">dash</a>, <a href="#flow-mappings">colon</a> or <a href="#flow-mappings">question mark</a>.</p>
 
 <div id="example-mapping-between-sequences" class="example">
@@ -807,10 +727,7 @@ quoted: "So does this
 The examples in this specification generally use the <strong><code class="language-plaintext highlighter-rouge">seq</code></strong>, <strong><code class="language-plaintext highlighter-rouge">map</code></strong>
 and <strong><code class="language-plaintext highlighter-rouge">str</code></strong> types from the <a href="#failsafe-schema">fail safe schema</a>.
 A few examples also use the <strong><code class="language-plaintext highlighter-rouge">int</code></strong>, <strong><code class="language-plaintext highlighter-rouge">float</code></strong> and <strong><code class="language-plaintext highlighter-rouge">null</code></strong> types
-from the <a href="#json-schema">JSON schema</a>.
-The <a href="#other-schemas">repository</a> includes additional types such as
-<a href="/type/binary.html"><strong><code class="language-plaintext highlighter-rouge">binary</code></strong></a>, <a href="/type/omap.html"><strong><code class="language-plaintext highlighter-rouge">omap</code></strong></a>,
-<a href="/type/set.html"><strong><code class="language-plaintext highlighter-rouge">set</code></strong></a> and others.</p>
+from the <a href="#json-schema">JSON schema</a>.</p>
 
 <div id="example-integers" class="example">
   <p><strong>Example 2.19 Integers</strong></p>
@@ -1062,7 +979,7 @@ However, such a direct translation should take place so that the <a href="#repre
 structures</a> are <a href="#constructing-native-data-structures">constructed</a> only from information available in the
 <a href="#representation-graph">representation</a>.
 In particular, <a href="#mapping">mapping key order</a>, <a href="#comments">comments</a> and <a href="#tag-handles">tag handles</a> should not be
-referenced during <a href="#composing-the-representation-graph">composition</a>.</p>
+referenced during <a href="#constructing-native-data-structures">construction</a>.</p>
 
 <div id="dump"></div>
 <h3 id="311-dump">3.1.1. Dump</h3>
@@ -1224,7 +1141,7 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 directed graph of <a href="#tags">tagged</a> <a href="#nodes">nodes</a>.
 By “directed graph” we mean a set of <a href="#nodes">nodes</a> and directed edges (“arrows”),
 where each edge connects one <a href="#nodes">node</a> to another (see a formal directed graph
-definition<sup id="fnref:digraph" role="doc-noteref"><a href="#fn:digraph" class="footnote" rel="footnote">20</a></sup>).
+definition<sup id="fnref:digraph" role="doc-noteref"><a href="#fn:digraph" class="footnote" rel="footnote">9</a></sup>).
 All the <a href="#nodes">nodes</a> must be reachable from the <em>root node</em> via such edges.
 Note that the YAML graph may include cycles and a <a href="#nodes">node</a> may have more than one
 incoming edge.</p>
@@ -1264,7 +1181,7 @@ a series of zero or more Unicode characters.</p>
   <dd>
     <p>The content of a <em>sequence</em> node is an ordered series of zero or more nodes.
 In particular, a sequence may contain the same node more than once.
-It could even contain itself (directly or indirectly).</p>
+It could even contain itself.</p>
   </dd>
 </dl>
 
@@ -1273,22 +1190,14 @@ It could even contain itself (directly or indirectly).</p>
 <dl>
   <dt>Mapping</dt>
   <dd>
-    <p>The content of a <em>mapping</em> node is an unordered set of <em>key:</em> <em>value</em> node
+    <p>The content of a <em>mapping</em> node is an unordered set of <em>key/value</em> node
 <em>pairs</em>, with the restriction that each of the keys is <a href="#node-comparison">unique</a>.
 YAML places no further restrictions on the nodes.
 In particular, keys may be arbitrary nodes, the same node may be used as the
-value of several key: value pairs and a mapping could even contain itself as a
-key or a value (directly or indirectly).</p>
+value of several key/value pairs and a mapping could even contain itself as a
+key or a value.</p>
   </dd>
 </dl>
-
-<p>When appropriate, it is convenient to consider sequences and mappings together,
-as <em>collections</em>.
-In this view, sequences are treated as mappings with integer keys starting at
-zero.
-Having a unified collections view for sequences and mappings is helpful both
-for theoretical analysis and for creating practical YAML tools and APIs.
-This strategy is also used by the JavaScript programming language.</p>
 
 <div id="tags"></div>
 <h4 id="3212-tags">3.2.1.2. Tags</h4>
@@ -1296,7 +1205,7 @@ This strategy is also used by the JavaScript programming language.</p>
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
 identifier, called a <em>tag</em>.
 <em>Global tags</em> are URIs and hence globally unique across all <a href="#processing-yaml-information">applications</a>.
-The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">21</a></sup> is recommended for all global YAML tags.
+The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">10</a></sup> is recommended for all global YAML tags.
 In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
 Local tags start with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em>, are not URIs and are not expected to be
 globally unique.
@@ -1346,9 +1255,7 @@ duplicate <a href="#nodes">key</a> as an error.</p>
 <a href="#tags">tag</a> must specify a mechanism for producing the <em>canonical form</em> of any
 <a href="#scalar-formats">formatted content</a>.
 This form is a Unicode character string which also <a href="#presenting-the-serialization-tree">presents</a> the same
-<a href="#nodes">content</a> and can be used for equality testing.
-While this requirement is stronger than a well defined equality operator, it
-has other uses, such as the production of digital signatures.</p>
+<a href="#nodes">content</a> and can be used for equality testing.</p>
   </dd>
 </dl>
 
@@ -1381,6 +1288,9 @@ scheme.
 <a href="#tags">Tags</a> in a YAML stream must therefore be <a href="#presenting-the-serialization-tree">presented</a> in a canonical way so
 that such comparison would yield the correct results.</p>
   </dd>
+  <dd>
+    <p>A YAML <a href="#processing-yaml-information">processor</a> may treat equal <a href="#scalars">scalars</a> as if they were identical.</p>
+  </dd>
 </dl>
 
 <div id="uniqueness"></div>
@@ -1388,23 +1298,8 @@ that such comparison would yield the correct results.</p>
 <dl>
   <dt>Uniqueness</dt>
   <dd>
-    <p>A <a href="#mapping">mapping’s</a> <a href="#nodes">keys</a> are <em>unique</em> if no two keys are equal to each other.</p>
-  </dd>
-</dl>
-
-<div id="identity"></div>
-
-<dl>
-  <dt>Identity</dt>
-  <dd>
-    <p>Two <a href="#nodes">nodes</a> are <em>identical</em> only when they <a href="#representation-graph">represent</a> the same <a href="#representing-native-data-structures">native data
-structure</a>.
-Typically, this corresponds to a single memory address.
-Identity should not be confused with equality; two equal <a href="#nodes">nodes</a> need not have
-the same identity.
-A YAML <a href="#processing-yaml-information">processor</a> may treat equal <a href="#scalars">scalars</a> as if they were identical.
-In contrast, the separate identity of two distinct but equal <a href="#collections">collections</a> must
-be preserved.</p>
+    <p>A <a href="#mapping">mapping’s</a> <a href="#nodes">keys</a> are <em>unique</em> if no two keys are equal to each other.
+Obviously, identical nodes are always considered equal.</p>
   </dd>
 </dl>
 
@@ -1424,8 +1319,8 @@ use <a href="#keys-order">key order</a> or <a href="#anchors-and-aliases">anchor
 
 <p><img src="/main/img/serialize2.svg" alt="Serialization Model" /></p>
 
-<div id="keys-order"></div>
-<h4 id="3221-keys-order">3.2.2.1. Keys Order</h4>
+<div id="mapping-key-order"></div>
+<h4 id="3221-mapping-key-order">3.2.2.1. Mapping Key Order</h4>
 
 <p>In the <a href="#representation-graph">representation</a> model, <a href="#nodes">mapping keys</a> do not have an order.
 To <a href="#serializing-the-representation-graph">serialize</a> a <a href="#mapping">mapping</a>, it is necessary to impose an <em>ordering</em> on its
@@ -1435,7 +1330,7 @@ the <a href="#representation-graph">representation graph</a> (and hence for the 
 data).
 In every case where <a href="#nodes">node</a> order is significant, a <a href="#sequence">sequence</a> must be used.
 For example, an ordered <a href="#mapping">mapping</a> can be <a href="#representation-graph">represented</a> as a <a href="#sequence">sequence</a> of
-<a href="#mapping">mappings</a>, where each <a href="#mapping">mapping</a> is a single <a href="#mapping">key: value pair</a>.
+<a href="#mapping">mappings</a>, where each <a href="#mapping">mapping</a> is a single <del><a href="#undefined">key/value pair</a></del>.
 YAML provides convenient <a href="#example-flow-mapping-adjacent-values">compact notation</a> for this case.</p>
 
 <div id="anchors-and-aliases"></div>
@@ -1462,12 +1357,8 @@ In addition, an anchor need not have an alias node referring to it.</p>
 <a href="#node-styles">styles</a>, <a href="#scalar-formats">scalar content formats</a>, <a href="#comments">comments</a>, <a href="#directives">directives</a> and other
 <a href="#presenting-the-serialization-tree">presentation details</a> to <a href="#presenting-the-serialization-tree">present</a> a YAML <a href="#serialization-tree">serialization</a> in a human readable
 way.
-Although a YAML <a href="#processing-yaml-information">processor</a> may provide these <a href="#presenting-the-serialization-tree">details</a> when <a href="#parsing-the-presentation-stream">parsing</a>, they
-should not be reflected in the resulting <a href="#serialization-tree">serialization</a>.
 YAML allows several <a href="#serialization-tree">serialization trees</a> to be contained in the same YAML
-character stream, as a series of <a href="#documents">documents</a> separated by <a href="#document-markers">markers</a>.
-Documents appearing in the same stream are independent; that is, a <a href="#nodes">node</a> must
-not appear in more than one <a href="#serialization-tree">serialization tree</a> or <a href="#representation-graph">representation graph</a>.</p>
+presentation stream, as a series of <a href="#documents">documents</a> separated by <a href="#document-markers">markers</a>.</p>
 
 <p><strong>Figure 3.5. Presentation Model</strong></p>
 
@@ -1494,7 +1385,7 @@ readability.</p>
 In some cases, YAML also allows nested <a href="#scalars">block</a> <a href="#collections">collections</a> to start in-line
 for a more <a href="#example-flow-mapping-adjacent-values">compact notation</a>.
 In addition, YAML provides a <a href="#example-flow-mapping-adjacent-values">compact notation</a> for <a href="#flow-mappings">flow mappings</a> with a
-single <a href="#mapping">key: value pair</a>, nested inside a <a href="#flow-sequences">flow sequence</a>.
+single <del><a href="#undefined">key/value pair</a></del>, nested inside a <a href="#flow-sequences">flow sequence</a>.
 These allow for a natural “ordered mapping” notation.</p>
 
 <p><strong>Figure 3.6. Kind/Style Combinations</strong></p>
@@ -1548,8 +1439,9 @@ Each of these failures results with an incomplete loading.</p>
 <p>A <em>partial representation</em> need not <a href="#resolved-tags">resolve</a> the <a href="#tags">tag</a> of each <a href="#nodes">node</a> and the
 <a href="#canonical-form">canonical form</a> of <a href="#scalar-formats">formatted scalar content</a> need not be available.
 This weaker representation is useful for cases of incomplete knowledge of the
-types used in the <a href="#document">document</a>.
-In contrast, a <em>complete representation</em> specifies the <a href="#tags">tag</a> of each <a href="#nodes">node</a> and
+types used in the <a href="#document">document</a>.</p>
+
+<p>In contrast, a <em>complete representation</em> specifies the <a href="#tags">tag</a> of each <a href="#nodes">node</a> and
 provides the <a href="#canonical-form">canonical form</a> of <a href="#scalar-formats">formatted scalar content</a>, allowing for
 <a href="#equality">equality</a> testing.
 A complete representation is required in order to <a href="#constructing-native-data-structures">construct</a> <a href="#representing-native-data-structures">native data
@@ -1667,9 +1559,10 @@ Whenever possible, basic structures are specified before the more complex
 structures using them in a “bottom up” fashion.</p>
 
 <p>The order of alternatives inside a production is significant.
-Subsequent alternatives are only considered when previous ones fails.
-See for example the <a href="#b-break"><strong><code class="language-plaintext highlighter-rouge">b-break</code></strong></a> production.
-In addition, production matching is expected to be greedy.
+Subsequent alternatives are only considered when previous ones fail.
+See for example the <a href="#b-break"><strong><code class="language-plaintext highlighter-rouge">b-break</code></strong></a> production.</p>
+
+<p>In addition, production matching is expected to be greedy.
 Optional (<strong><code class="language-plaintext highlighter-rouge">?</code></strong>), zero-or-more (<strong><code class="language-plaintext highlighter-rouge">*</code></strong>) and one-or-more (<strong><code class="language-plaintext highlighter-rouge">+</code></strong>) patterns
 are always expected to match as much of the input as possible.</p>
 
@@ -1677,13 +1570,8 @@ are always expected to match as much of the input as possible.</p>
 side-by-side format.
 The left-hand side is the YAML example and the right-hand side is an alternate
 YAML view of the example.
-The alternate view uses double-quotes for string scalars, flow style for
-collections and JSON plain style for numbers, booleans and null values.</p>
-
-<p>A reference implementation using the productions is available as the
-YamlReference Haskell package<sup id="fnref:yaml-ref" role="doc-noteref"><a href="#fn:yaml-ref" class="footnote" rel="footnote">22</a></sup>.
-This reference implementation is also available as an interactive web
-application called ypaste<sup id="fnref:ypaste" role="doc-noteref"><a href="#fn:ypaste" class="footnote" rel="footnote">23</a></sup>.</p>
+The right-hand view uses JSON when possible.
+Otherwise it uses a YAML form that is as close to JSON as possible.</p>
 
 <div id="production-parameters"></div>
 <h2 id="41-production-parameters">4.1. Production Parameters</h2>
@@ -1735,9 +1623,7 @@ sequences</a> (<em>block-in context</em>) and outside them (<em>block-out contex
   </dd>
   <dd>
     <p>In <a href="#flow-styles">flow styles</a>, explicit <a href="#indicator-characters">indicators</a> are used to delineate structure.
-These styles can be viewed as the natural extension of JSON to cover <a href="#tags">tagged</a>,
-<a href="#single-quoted-style">single-quoted</a> and <a href="#plain-style">plain scalars</a>.
-Since the latter have no delineating <a href="#indicator-characters">indicators</a>, they are subject to some
+Since plain scalars have no delineating <a href="#indicator-characters">indicators</a>, they are subject to some
 restrictions to avoid ambiguities.
 These restrictions depend on where they appear: as implicit keys directly
 inside a <a href="#block-mappings">block mapping</a> (<em>block-key</em>); as implicit keys inside a <a href="#flow-mappings">flow
@@ -1753,8 +1639,8 @@ values outside one (<em>flow-out</em>).</p>
   <dd>
     <p>Block scalars offer three possible mechanisms for <a href="#block-chomping-indicator">chomping</a> any trailing
 <a href="#line-break-characters">line breaks</a>: <a href="#strip">strip</a>, <a href="#clip">clip</a> and <a href="#keep">keep</a>.
-Unlike the previous parameters, this only controls interpretation; the <a href="#line-break-characters">line
-breaks</a> are valid in all cases.</p>
+Unlike the previous parameters, this one only controls interpretation of the
+trailing line breaks, not their syntactic validity.</p>
   </dd>
 </dl>
 
@@ -1762,7 +1648,7 @@ breaks</a> are valid in all cases.</p>
 <h2 id="42-production-naming-conventions">4.2. Production Naming Conventions</h2>
 
 <p>To make it easier to follow production combinations, production names use a
-Hungarian-style naming convention.
+prefix-style naming convention.
 Each production is given a prefix based on the type of characters it begins and
 ends with.</p>
 
@@ -1858,10 +1744,10 @@ prefixes.</p>
 
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
-The allowed character range explicitly excludes the C0 control block<sup id="fnref:c0-block" role="doc-noteref"><a href="#fn:c0-block" class="footnote" rel="footnote">24</a></sup>
+The allowed character range explicitly excludes the C0 control block<sup id="fnref:c0-block" role="doc-noteref"><a href="#fn:c0-block" class="footnote" rel="footnote">11</a></sup>
 <strong><code class="language-plaintext highlighter-rouge">#x0-#x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">#xA</code></strong> and CR <strong><code class="language-plaintext highlighter-rouge">#xD</code></strong> which
 are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">#x7F</code></strong>, the C1 control block <strong><code class="language-plaintext highlighter-rouge">#x80-#x9F</code></strong> (except for
-NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">25</a></sup>
+NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">12</a></sup>
 <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>, <strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong> and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
 
 <p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
@@ -1928,10 +1814,8 @@ Otherwise, the <a href="#streams">stream</a> must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (<strong><code class="language-plaintext highlighter-rouge">#x00</code></strong>)
 characters.</p>
 
-<p>To make it easier to concatenate <a href="#streams">streams</a>, byte order marks may appear at the
-start of any <a href="#document">document</a>.
-However all <a href="#documents">documents</a> in the same <a href="#streams">stream</a> must use the same character
-encoding.</p>
+<p>Byte order marks may appear at the start of any <a href="#document">document</a>, however all
+<a href="#documents">documents</a> in the same <a href="#streams">stream</a> must use the same character encoding.</p>
 
 <p>To allow for <a href="#yaml-directives">JSON compatibility</a>, byte order marks are also allowed inside
 <a href="#double-quoted-style">quoted scalars</a>.
@@ -2040,7 +1924,7 @@ If another encoding is used, it is recommended that an explicit byte order mark
 be used, even if the first <a href="#streams">stream</a> character is ASCII.</p>
 
 <p>For more information about the byte order mark and the Unicode character
-encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><a href="#fn:uni-faq" class="footnote" rel="footnote">26</a></sup>.</p>
+encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><a href="#fn:uni-faq" class="footnote" rel="footnote">13</a></sup>.</p>
 
 <div id="rule-c-byte-order-mark"></div>
 <pre class="rule">
@@ -2549,7 +2433,7 @@ treat these line breaks as non-break characters, with an appropriate warning.</p
   <a href="#rule-c-printable">c-printable</a> - <a href="#rule-b-char">b-char</a> - <a href="#rule-c-byte-order-mark">c-byte-order-mark</a>
 </pre>
 
-<p>Line breaks are interpreted differently by different systems and have several
+<p>Line breaks are interpreted differently by different systems and have multiple
 widely used formats.</p>
 
 <div id="rule-b-break"></div>
@@ -2721,7 +2605,7 @@ classes:</p>
   <a href="#rule-ns-dec-digit">ns-dec-digit</a> | <a href="#rule-ns-ascii-letter">ns-ascii-letter</a> | "-"
 </pre>
 
-<p>URI characters for <a href="#tags">tags</a>, as specified in the URI<sup id="fnref:URI:1" role="doc-noteref"><a href="#fn:URI" class="footnote" rel="footnote">14</a></sup>.</p>
+<p>URI characters for <a href="#tags">tags</a>, as defined in the URI specification[^URI].</p>
 
 <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8 and then each byte is <em>escaped</em> using
@@ -5110,7 +4994,7 @@ causes no ambiguity.</p>
 
 <p>Plain scalars must never contain the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “ and “ <strong><code class="language-plaintext highlighter-rouge">#</code></strong>” character
 combinations.
-Such combinations would cause ambiguity with <a href="#mapping">mapping</a> <a href="#mapping">key: value pairs</a> and
+Such combinations would cause ambiguity with <a href="#mapping">mapping</a> <del><a href="#undefined">key/value pairs</a></del> and
 <a href="#comments">comments</a>.
 In addition, inside <a href="#flow-collection-styles">flow collections</a>, or when used as <a href="#example-single-pair-explicit-entry">implicit keys</a>, plain
 scalars must not contain the “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”], “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”
@@ -5374,7 +5258,7 @@ characters.</p>
 
 <p>Any <a href="#flow-nodes">flow node</a> may be used as a flow sequence entry.
 In addition, YAML provides a <a href="#example-flow-mapping-adjacent-values">compact notation</a> for the case where a flow
-sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">single key: value pair</a>.</p>
+sequence entry is a <a href="#mapping">mapping</a> with a <del><a href="#undefined">single key/value pair</a></del>.</p>
 
 <div id="rule-ns-flow-seq-entry"></div>
 <pre class="rule">
@@ -5533,7 +5417,7 @@ A benefit of this restriction is that the “<strong><code class="language-plain
 inside <a href="#plain-style">plain scalars</a>, as long as it is not followed by <a href="#white-space-characters">white space</a>.
 This allows for unquoted URLs and timestamps.
 It is also a potential source for confusion as “<strong><code class="language-plaintext highlighter-rouge">a:1</code></strong>” is a <a href="#plain-style">plain scalar</a>
-and not a <a href="#mapping">key: value pair</a>.</p>
+and not a <del><a href="#undefined">key/value pair</a></del>.</p>
 
 <p>Note that the <a href="#nodes">value</a> may be <a href="#example-empty-content">completely empty</a> since its existence is
 indicated by the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”.</p>
@@ -5667,7 +5551,7 @@ However, as this greatly reduces readability, YAML <a href="#processing-yaml-inf
 </div>
 
 <p>A more compact notation is usable inside <a href="#flow-sequences">flow sequences</a>, if the <a href="#mapping">mapping</a>
-contains a <em>single key: value pair</em>.
+contains a <em>single key/value pair</em>.
 This notation does not require the surrounding “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”
 characters.
 Note that it is not possible to specify any <a href="#node-properties">node properties</a> for the <a href="#mapping">mapping</a>
@@ -6780,8 +6664,8 @@ also not <a href="#line-folding">folded</a>.</p>
 
 <p>For readability, <em>block collections styles</em> are not denoted by any <a href="#indicator-characters">indicator</a>.
 Instead, YAML uses a lookahead method, where a block collection is
-distinguished from a <a href="#plain-style">plain scalar</a> only when a <a href="#mapping">key: value pair</a> or a
-<a href="#block-sequences">sequence entry</a> is seen.</p>
+distinguished from a <a href="#plain-style">plain scalar</a> only when a <del><a href="#undefined">key/value pair</a></del> or a <a href="#block-sequences">sequence
+entry</a> is seen.</p>
 
 <div id="block-sequences"></div>
 <h3 id="821-block-sequences">8.2.1. Block Sequences</h3>
@@ -6903,8 +6787,7 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 <div id="block-mappings"></div>
 <h3 id="822-block-mappings">8.2.2. Block Mappings</h3>
 
-<p>A <em>Block mapping</em> is a series of entries, each <a href="#presenting-the-serialization-tree">presenting</a> a <a href="#mapping">key: value
-pair</a>.</p>
+<p>A <em>Block mapping</em> is a series of entries, each <a href="#presenting-the-serialization-tree">presenting</a> a <del><a href="#undefined">key/value pair</a></del>.</p>
 
 <div id="rule-l+block-mapping"></div>
 <pre class="rule">
@@ -7013,7 +6896,7 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 <!-- REVIEW value should be null above -->
 
 <p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is omitted, <a href="#parsing-the-presentation-stream">parsing</a> needs to see past the
-<a href="#example-single-pair-explicit-entry">implicit key</a>, in the same way as in the <a href="#mapping">single key: value pair</a> <a href="#flow-mappings">flow
+<a href="#example-single-pair-explicit-entry">implicit key</a>, in the same way as in the <del><a href="#undefined">single key/value pair</a></del> <a href="#flow-mappings">flow
 mapping</a>.
 Hence, such <a href="#nodes">keys</a> are subject to the same restrictions; they are limited to a
 single line and must not span more than 1024 Unicode characters.</p>
@@ -7310,8 +7193,7 @@ Each document is completely independent from the rest.</p>
 and optional <a href="#comments">comment</a> lines.
 Note that all <a href="#documents">documents</a> in a stream must use the same <a href="#character-encodings">character encoding</a>.
 However it is valid to re-specify the <a href="#character-encodings">encoding</a> using a <a href="#character-encodings">byte order mark</a> for
-each <a href="#document">document</a> in the stream.
-This makes it easier to concatenate streams.</p>
+each <a href="#document">document</a> in the stream.</p>
 
 <p>The existence of the optional prefix does not necessarily indicate the
 existence of an actual <a href="#document">document</a>.</p>
@@ -7595,9 +7477,6 @@ Subsequent <a href="#documents">documents</a> require some sort of separation <a
 If a <a href="#document">document</a> is not terminated by a <a href="#document-markers">document end marker</a> line, then the
 following <a href="#document">document</a> must begin with a <a href="#document-markers">directives end marker</a> line.</p>
 
-<p>The stream format is intentionally “sloppy” to better support common use cases,
-such as stream concatenation.</p>
-
 <div id="rule-l-any-document"></div>
 <pre class="rule">
 [210] l-any-document ::=
@@ -7679,10 +7558,7 @@ encoding</a>.
 In addition, it is necessary to separate the last <a href="#document">document</a> of the first
 stream and the first <a href="#document">document</a> of the second stream.
 This is easily ensured by inserting a <a href="#document-markers">document end marker</a> between the two
-streams.
-Note that this is safe regardless of the content of either stream.
-In particular, either or both may be empty and the first stream may or may not
-already contain such a marker.</p>
+streams.</p>
   </dd>
 </dl>
 
@@ -8361,19 +8237,7 @@ path to the <a href="#nodes">node</a>.
 This allows interoperable <a href="#recommended-schemas">schemas</a> to use <a href="#resolved-tags">untagged</a> <a href="#nodes">nodes</a>.</p>
 
 <p>It is strongly recommended that such <a href="#recommended-schemas">schemas</a> be based on the <a href="#core-schema">core schema</a>
-defined above.
-In addition, it is strongly recommended that such <a href="#recommended-schemas">schemas</a> make as much use as
-possible of the the <em>YAML tag repository</em> at <a href="/type/">https://yaml.org/type/</a>.
-This repository provides recommended <a href="#tags">global tags</a> for increasing the
-portability of YAML <a href="#documents">documents</a> between different <a href="#processing-yaml-information">applications</a>.</p>
-
-<p>The tag repository is intentionally left out of the scope of this
-specification.
-This allows it to evolve to better support YAML <a href="#processing-yaml-information">applications</a>.
-Hence, developers are encouraged to submit new “universal” types to the
-repository.
-The yaml-core mailing list is the preferred method for such submissions, as
-well as raising any questions regarding this draft.</p>
+defined above.</p>
 
 <h1 id="reference-links">Reference Links</h1>
 
@@ -8383,70 +8247,31 @@ well as raising any questions regarding this draft.</p>
       <p><a href="https://github.com/yaml/yaml-spec">YAML Specification on GitHub</a> <a href="#fnref:spec-repo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:1-2-spec" role="doc-endnote">
-      <p><a href="https://yaml.org/spec/1.2">YAML Ain’t Markup Language (YAML™) Version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://yaml.org/spec/1.2">YAML Ain’t Markup Language (YAML™) Version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1-2-spec:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
     </li>
-    <li id="fn:Unicode" role="doc-endnote">
-      <p><a href="https://www.unicode.org">Unicode – The World Standard for Text and Emoji</a> <a href="#fnref:Unicode" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    <li id="fn:yaml-core" role="doc-endnote">
+      <p><a href="https://sourceforge.net/projects/yaml/lists/yaml-core">YAML Core Mailing List</a> <a href="#fnref:yaml-core" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:SML-DEV" role="doc-endnote">
-      <p><a href="https://github.com/yaml/sml-dev-archive">SML-DEV Mailing List Archive</a> <a href="#fnref:SML-DEV" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    <li id="fn:1-1-spec" role="doc-endnote">
+      <p><a href="https://yaml.org/spec/1.1">YAML Ain’t Markup Language (YAML™) Version 1.1</a> <a href="#fnref:1-1-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:Denter" role="doc-endnote">
-      <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod">Data::Denter - An (deprecated) alternative to Data::Dumper and Storable</a> <a href="#fnref:Denter" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    <li id="fn:json" role="doc-endnote">
+      <p><a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">The JSON data interchange syntax</a> <a href="#fnref:json" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:C" role="doc-endnote">
-      <p><a href="https://en.wikipedia.org/wiki/C_%28programming_language%29">Wikipedia - C (programming language)</a> <a href="#fnref:C" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    <li id="fn:pyyaml" role="doc-endnote">
+      <p><a href="https://github.com/yaml/pyyaml">PyYAML - YAML parser and emitter for Python</a> <a href="#fnref:pyyaml" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:Java" role="doc-endnote">
-      <p><a href="https://en.wikipedia.org/wiki/Java_%28programming_language%29">Wikipedia - Java (programming language)</a> <a href="#fnref:Java" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    <li id="fn:libyaml" role="doc-endnote">
+      <p><a href="https://github.com/yaml/libyaml">LibYAML - A C library for parsing and emitting YAML</a> <a href="#fnref:libyaml" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
-    <li id="fn:Perl" role="doc-endnote">
-      <p><a href="https://www.perl.org/">The Perl Programming Language</a> <a href="#fnref:Perl" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:Python" role="doc-endnote">
-      <p><a href="https://www.python.org/">The Python Programming Language</a> <a href="#fnref:Python" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:Ruby" role="doc-endnote">
-      <p><a href="https://www.ruby-lang.org/">Ruby Programming Language</a> <a href="#fnref:Ruby" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:Email" role="doc-endnote">
-      <p><a href="https://tools.ietf.org/html/rfc5322">Internet Message Format</a> <a href="#fnref:Email" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:HTML" role="doc-endnote">
-      <p><a href="https://html.spec.whatwg.org/">HTML Living Standard</a> <a href="#fnref:HTML" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:MIME" role="doc-endnote">
-      <p><a href="https://tools.ietf.org/html/rfc2045">Multipurpose Internet Mail Extensions (MIME) Part One: Format of Internet Message Bodies</a> <a href="#fnref:MIME" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:URI" role="doc-endnote">
-      <p><a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifiers (URI)</a> <a href="#fnref:URI" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:URI:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
-    </li>
-    <li id="fn:XML" role="doc-endnote">
-      <p><a href="https://www.w3.org/TR/REC-xml.html">Extensible Markup Language (XML)</a> <a href="#fnref:XML" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:SAX" role="doc-endnote">
-      <p><a href="https://en.wikipedia.org/wiki/Simple_API_for_XML">Wikipedia - Simple API for XML</a> <a href="#fnref:SAX" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:SOAP" role="doc-endnote">
-      <p><a href="https://en.wikipedia.org/wiki/SOAP">SOAP</a> <a href="#fnref:SOAP" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:JSON" role="doc-endnote">
-      <p><a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">The JSON data interchange syntax</a> <a href="#fnref:JSON" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:JSON:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
-    </li>
-    <li id="fn:RFC-2119" role="doc-endnote">
-      <p><a href="https://tools.ietf.org/html/rfc2119">Request for Comments Summary</a> <a href="#fnref:RFC-2119" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    <li id="fn:rfc-2119" role="doc-endnote">
+      <p><a href="https://tools.ietf.org/html/rfc2119">Request for Comments Summary</a> <a href="#fnref:rfc-2119" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:digraph" role="doc-endnote">
       <p><a href="https://xlinux.nist.gov/dads/HTML/directedGraph.html">directed graph</a> <a href="#fnref:digraph" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:tag-uri" role="doc-endnote">
       <p><a href="https://datatracker.ietf.org/doc/html/rfc4151">The ‘tag’ URI Scheme</a> <a href="#fnref:tag-uri" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:yaml-ref" role="doc-endnote">
-      <p><a href="https://hackage.haskell.org/package/YamlReference">YamlReference: YAML reference implementation</a> <a href="#fnref:yaml-ref" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
-    </li>
-    <li id="fn:ypaste" role="doc-endnote">
-      <p><a href="http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl">ypaste / YEAST2HTML</a> <a href="#fnref:ypaste" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:c0-block" role="doc-endnote">
       <p><a href="https://en.wikipedia.org/wiki/C0_and_C1_control_codes">Wikipedia - C0 and C1 control codes</a> <a href="#fnref:c0-block" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
