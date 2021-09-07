@@ -1377,9 +1377,9 @@ prefixes.
 To ensure readability, YAML [streams] use only the _printable_ subset of the
 Unicode character set.
 The allowed character range explicitly excludes the C0 control block[^c0-block]
-**`#x0-#x1F`** (except for TAB **`#x9`**, LF **`#xA`** and CR **`#xD`** which
-are allowed), DEL **`#x7F`**, the C1 control block **`#x80-#x9F`** (except for
-NEL **`#x85`** which is allowed), the surrogate block[^surrogates]
+**`#x00-#x1F`** (except for TAB **`#x09`**, LF **`#x0A`** and CR **`#x0D`**
+which are allowed), DEL **`#x7F`**, the C1 control block **`#x80-#x9F`**
+(except for NEL **`#x85`** which is allowed), the surrogate block[^surrogates]
 **`#xD800-#xDFFF`**, **`#xFFFE`** and **`#xFFFF`**.
 
 On input, a YAML [processor] must accept all characters in this printable
@@ -1396,9 +1396,9 @@ extensive character property tables.
 
 ```
 [#] c-printable ::=
-    #x9 | #xA | #xD | [#x20-#x7E]          /* 8 bit */
+    #x09 | #x0A | #x0D | [#x20-#x7E]       /* 8 bit */
   | #x85 | [#xA0-#xD7FF] | [#xE000-#xFFFD] /* 16 bit */
-  | [#x10000-#x10FFFF]                     /* 32 bit */
+  | [#x010000-#x10FFFF]                    /* 32 bit */
 ```
 
 
@@ -1412,7 +1412,7 @@ YAML [quoted scalars] can.
 
 ```
 [#] nb-json ::=
-  #x9 | [#x20-#x10FFFF]
+  #x09 | [#x20-#x10FFFF]
 ```
 
 > Note: The production name `nb-json` means "non-break JSON compatible" here.
@@ -1826,13 +1826,13 @@ YAML recognizes the following ASCII _line break_ characters.
 
 ```
 [#] b-line-feed ::=
-  #xA    /* LF */
+  #x0A    /* LF */
 ```
 
 
 ```
 [#] b-carriage-return ::=
-  #xD    /* CR */
+  #x0D    /* CR */
 ```
 
 
@@ -1926,7 +1926,7 @@ YAML recognizes two _white space_ characters: _space_ and _tab_.
 
 ```
 [#] s-tab ::=
-  #x9  /* TAB */
+  #x09  /* TAB */
 ```
 
 ```
@@ -2056,59 +2056,59 @@ and non-[printable] characters are not available.
 
 YAML escape sequences are a superset of C's escape sequences:
 
-Escaped ASCII null (**`#x0`**) character.
+Escaped ASCII null (**`#x00`**) character.
 
 ```
 [#] ns-esc-null ::= "0"
 ```
 
 
-Escaped ASCII bell (**`#x7`**) character.
+Escaped ASCII bell (**`#x07`**) character.
 
 ```
 [#] ns-esc-bell ::= "a"
 ```
 
 
-Escaped ASCII backspace (**`#x8`**) character.
+Escaped ASCII backspace (**`#x08`**) character.
 
 ```
 [#] ns-esc-backspace ::= "b"
 ```
 
 
-Escaped ASCII horizontal tab (**`#x9`**) character.
+Escaped ASCII horizontal tab (**`#x09`**) character.
 This is useful at the start or the end of a line to force a leading or trailing
 tab to become part of the [content].
 
 ```
 [#] ns-esc-horizontal-tab ::=
-  "t" | #x9
+  "t" | #x09
 ```
 
 
-Escaped ASCII line feed (**`#xA`**) character.
+Escaped ASCII line feed (**`#x0A`**) character.
 
 ```
 [#] ns-esc-line-feed ::= "n"
 ```
 
 
-Escaped ASCII vertical tab (**`#xB`**) character.
+Escaped ASCII vertical tab (**`#x0B`**) character.
 
 ```
 [#] ns-esc-vertical-tab ::= "v"
 ```
 
 
-Escaped ASCII form feed (**`#xC`**) character.
+Escaped ASCII form feed (**`#x0C`**) character.
 
 ```
 [#] ns-esc-form-feed ::= "f"
 ```
 
 
-Escaped ASCII carriage return (**`#xD`**) character.
+Escaped ASCII carriage return (**`#x0D`**) character.
 
 ```
 [#] ns-esc-carriage-return ::= "r"
