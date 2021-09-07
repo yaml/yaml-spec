@@ -1394,8 +1394,8 @@ values outside one (_flow-out_).
 
 : Block scalars offer three possible mechanisms for [chomping] any trailing
 [line breaks]: [strip], [clip] and [keep].
-Unlike the previous parameters, this only controls interpretation; the [line
-breaks] are valid in all cases.
+Unlike the previous parameters, this one only controls interpretation of the
+trailing line breaks, not their syntactic validity.
 
 
 ## #. Production Naming Conventions
