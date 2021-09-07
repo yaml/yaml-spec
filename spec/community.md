@@ -11,7 +11,8 @@
 
   This is currently the most active space to engage with the YAML community in
   real time.
-  Matrix provides a chat-room environment that feels very much like Slack.
+  Matrix (specifically the [Element](https://element.io/) client) provides a
+  very modern chat-room environment for phone and desktop.
   Matrix is open source, federated and end-to-end encrypted.
 
 * IRC
