@@ -1207,6 +1207,7 @@ A _partial representation_ need not [resolve] the [tag] of each [node] and the
 [canonical form] of [formatted scalar content] need not be available.
 This weaker representation is useful for cases of incomplete knowledge of the
 types used in the [document].
+
 In contrast, a _complete representation_ specifies the [tag] of each [node] and
 provides the [canonical form] of [formatted scalar content], allowing for
 [equality] testing.
