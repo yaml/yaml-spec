@@ -1341,11 +1341,6 @@ YAML view of the example.
 The alternate view uses JSON when possible.
 Otherwise it uses a YAML form that is as close to JSON as possible.
 
-A reference implementation using the productions is available as the
-YamlReference Haskell package[^yaml-ref].
-This reference implementation is also available as an interactive web
-application called ypaste[^ypaste].
-
 
 ## #. Production Parameters
 
@@ -6399,8 +6394,6 @@ defined above.
 [^RFC-2119]: [Request for Comments Summary](https://tools.ietf.org/html/rfc2119)
 [^digraph]: [directed graph](https://xlinux.nist.gov/dads/HTML/directedGraph.html)
 [^tag-uri]: [The 'tag' URI Scheme](https://datatracker.ietf.org/doc/html/rfc4151)
-[^yaml-ref]: [YamlReference: YAML reference implementation](https://hackage.haskell.org/package/YamlReference)
-[^ypaste]: [ypaste / YEAST2HTML](http://ben-kiki.org/ypaste/cgi-bin/ypaste.pl)
 [^c0-block]: [Wikipedia - C0 and C1 control codes](https://en.wikipedia.org/wiki/C0_and_C1_control_codes)
 [^surrogates]: [Wikipedia - Universal Character Set characters #Surrogates](https://en.wikipedia.org/wiki/Universal_Character_Set_characters#Surrogates)
 [^uni-faq]: [UTF-8, UTF-16, UTF-32 & BOM](https://www.unicode.org/faq/utf_bom.html)
