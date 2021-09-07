@@ -1937,7 +1937,7 @@ treat these line breaks as non-break characters, with an appropriate warning.
 ```
 
 
-Line breaks are interpreted differently by different systems and have several
+Line breaks are interpreted differently by different systems and have multiple
 widely used formats.
 
 ```
