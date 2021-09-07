@@ -1518,21 +1518,21 @@ _Indicators_ are characters that have special semantics.
 ["**`-`**"] (**`#x2D`**, hyphen) denotes a [block sequence] entry.
 
 ```
-[#] c-sequence-entry ::= "-"
+[#] c-sequence-entry ::= '-'
 ```
 
 
 ["**`?`**"] (**`#x3F`**, question mark) denotes a [mapping key].
 
 ```
-[#] c-mapping-key ::= "?"
+[#] c-mapping-key ::= '?'
 ```
 
 
 ["**`:`**"] (**`#x3A`**, colon) denotes a [mapping value].
 
 ```
-[#] c-mapping-value ::= ":"
+[#] c-mapping-value ::= ':'
 ```
 
 
@@ -1566,35 +1566,35 @@ mapping:
 ["**`,`**"] (**`#x2C`**, comma) ends a [flow collection] entry.
 
 ```
-[#] c-collect-entry ::= ","
+[#] c-collect-entry ::= ','
 ```
 
 
 ["**`[`**"] (**`#x5B`**, left bracket) starts a [flow sequence].
 
 ```
-[#] c-sequence-start ::= "["
+[#] c-sequence-start ::= '['
 ```
 
 
 ["**`]`**"] (**`#x5D`**, right bracket) ends a [flow sequence].
 
 ```
-[#] c-sequence-end ::= "]"
+[#] c-sequence-end ::= ']'
 ```
 
 
 ["**`{`**"] (**`#x7B`**, left brace) starts a [flow mapping].
 
 ```
-[#] c-mapping-start ::= "{"
+[#] c-mapping-start ::= '{'
 ```
 
 
 ["**`}`**"] (**`#x7D`**, right brace) ends a [flow mapping].
 
 ```
-[#] c-mapping-end ::= "}"
+[#] c-mapping-end ::= '}'
 ```
 
 
@@ -1621,7 +1621,7 @@ mapping: { sky: blue, sea: green }
 [comment].
 
 ```
-[#] c-comment ::= "#"
+[#] c-comment ::= '#'
 ```
 
 
@@ -1644,14 +1644,14 @@ mapping: { sky: blue, sea: green }
 ["**`&`**"] (**`#x26`**, ampersand) denotes a [node's anchor property].
 
 ```
-[#] c-anchor ::= "&"
+[#] c-anchor ::= '&'
 ```
 
 ["**`*`**"] (**`#x2A`**, asterisk) denotes an [alias node].
 
 
 ```
-[#] c-alias ::= "*"
+[#] c-alias ::= '*'
 ```
 
 
@@ -1662,7 +1662,7 @@ properties]; to denote [local tags]; and as the [non-specific tag] for
 non-[plain scalars].
 
 ```
-[#] c-tag ::= "!"
+[#] c-tag ::= '!'
 ```
 
 
@@ -1687,14 +1687,14 @@ alias: *anchor
 ["**`|`**"] (**`7C`**, vertical bar) denotes a [literal block scalar].
 
 ```
-[#] c-literal ::= "|"
+[#] c-literal ::= '|'
 ```
 
 
 ["**`>`**"] (**`#x3E`**, greater than) denotes a [folded block scalar].
 
 ```
-[#] c-folded ::= ">"
+[#] c-folded ::= '>'
 ```
 
 
@@ -1730,7 +1730,7 @@ flow scalar].
 ["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow scalar].
 
 ```
-[#] c-double-quote ::= """
+[#] c-double-quote ::= '"'
 ```
 
 
@@ -1754,7 +1754,7 @@ double: "text"
 ["**`%`**"] (**`#x25`**, percent) denotes a [directive] line.
 
 ```
-[#] c-directive ::= "%"
+[#] c-directive ::= '%'
 ```
 
 
@@ -1778,7 +1778,7 @@ grave accent) are _reserved_ for future use.
 
 ```
 [#] c-reserved ::=
-  "@" | "`"
+  '@' | '`'
 ```
 
 
@@ -1802,9 +1802,9 @@ Any indicator character:
 
 ```
 [#] c-indicator ::=
-    "-" | "?" | ":" | "," | "[" | "]" | "{" | "}"
-  | "#" | "&" | "*" | "!" | "|" | ">" | "'" | """
-  | "%" | "@" | "`"
+    '-' | '?' | ':' | ',' | '[' | ']' | '{' | '}'
+  | '#' | '&' | '*' | '!' | '|' | '>' | "'" | '"'
+  | '%' | '@' | '`'
 ```
 
 
@@ -1816,7 +1816,7 @@ This is handled on a case-by-case basis by the relevant productions.
 
 ```
 [#] c-flow-indicator ::=
-  "," | "[" | "]" | "{" | "}"
+  ',' | '[' | ']' | '{' | '}'
 ```
 
 
@@ -2004,7 +2004,7 @@ Word (alphanumeric) characters for identifiers:
 
 ```
 [#] ns-word-char ::=
-  ns-dec-digit | ns-ascii-letter | "-"
+  ns-dec-digit | ns-ascii-letter | '-'
 ```
 
 URI characters for [tags], as defined in the URI specification[^uri].
@@ -2018,9 +2018,9 @@ YAML [stream], without any processing.
 
 ```
 [#] ns-uri-char ::=
-    "%" ns-hex-digit ns-hex-digit | ns-word-char | "#"
-  | ";" | "/" | "?" | ":" | "@" | "&" | "=" | "+" | "$" | ","
-  | "_" | "." | "!" | "~" | "*" | "'" | "(" | ")" | "[" | "]"
+    '%' ns-hex-digit ns-hex-digit | ns-word-char | '#'
+  | ';' | '/' | '?' | ':' | '@' | '&' | '=' | '+' | '$' | ','
+  | '_' | '.' | '!' | '~' | '*' | "'" | '(' | ')' | '[' | ']'
 ```
 
 
@@ -2032,7 +2032,7 @@ These characters would cause ambiguity with [flow collection] structures.
 
 ```
 [#] ns-tag-char ::=
-  ns-uri-char - "!" - c-flow-indicator
+  ns-uri-char - '!' - c-flow-indicator
 ```
 
 
@@ -2050,7 +2050,7 @@ In all other [scalar styles], the "**`\`**" character has no special meaning
 and non-[printable] characters are not available.
 
 ```
-[#] c-escape ::= "\"
+[#] c-escape ::= '\'
 ```
 
 
@@ -2059,21 +2059,21 @@ YAML escape sequences are a superset of C's escape sequences:
 Escaped ASCII null (**`#x00`**) character.
 
 ```
-[#] ns-esc-null ::= "0"
+[#] ns-esc-null ::= '0'
 ```
 
 
 Escaped ASCII bell (**`#x07`**) character.
 
 ```
-[#] ns-esc-bell ::= "a"
+[#] ns-esc-bell ::= 'a'
 ```
 
 
 Escaped ASCII backspace (**`#x08`**) character.
 
 ```
-[#] ns-esc-backspace ::= "b"
+[#] ns-esc-backspace ::= 'b'
 ```
 
 
@@ -2083,42 +2083,42 @@ tab to become part of the [content].
 
 ```
 [#] ns-esc-horizontal-tab ::=
-  "t" | #x09
+  't' | #x09
 ```
 
 
 Escaped ASCII line feed (**`#x0A`**) character.
 
 ```
-[#] ns-esc-line-feed ::= "n"
+[#] ns-esc-line-feed ::= 'n'
 ```
 
 
 Escaped ASCII vertical tab (**`#x0B`**) character.
 
 ```
-[#] ns-esc-vertical-tab ::= "v"
+[#] ns-esc-vertical-tab ::= 'v'
 ```
 
 
 Escaped ASCII form feed (**`#x0C`**) character.
 
 ```
-[#] ns-esc-form-feed ::= "f"
+[#] ns-esc-form-feed ::= 'f'
 ```
 
 
 Escaped ASCII carriage return (**`#x0D`**) character.
 
 ```
-[#] ns-esc-carriage-return ::= "r"
+[#] ns-esc-carriage-return ::= 'r'
 ```
 
 
 Escaped ASCII escape (**`#x1B`**) character.
 
 ```
-[#] ns-esc-escape ::= "e"
+[#] ns-esc-escape ::= 'e'
 ```
 
 
@@ -2134,49 +2134,49 @@ space to become part of the [content].
 Escaped ASCII double quote (**`#x22`**).
 
 ```
-[#] ns-esc-double-quote ::= """
+[#] ns-esc-double-quote ::= '"'
 ```
 
 
 Escaped ASCII slash (**`#x2F`**), for [JSON compatibility].
 
 ```
-[#] ns-esc-slash ::= "/"
+[#] ns-esc-slash ::= '/'
 ```
 
 
 Escaped ASCII back slash (**`#x5C`**).
 
 ```
-[#] ns-esc-backslash ::= "\"
+[#] ns-esc-backslash ::= '\'
 ```
 
 
 Escaped Unicode next line (**`#x85`**) character.
 
 ```
-[#] ns-esc-next-line ::= "N"
+[#] ns-esc-next-line ::= 'N'
 ```
 
 
 Escaped Unicode non-breaking space (**`#xA0`**) character.
 
 ```
-[#] ns-esc-non-breaking-space ::= "_"
+[#] ns-esc-non-breaking-space ::= '_'
 ```
 
 
 Escaped Unicode line separator (**`#x2028`**) character.
 
 ```
-[#] ns-esc-line-separator ::= "L"
+[#] ns-esc-line-separator ::= 'L'
 ```
 
 
 Escaped Unicode paragraph separator (**`#x2029`**) character.
 
 ```
-[#] ns-esc-paragraph-separator ::= "P"
+[#] ns-esc-paragraph-separator ::= 'P'
 ```
 
 
@@ -2184,7 +2184,7 @@ Escaped 8-bit Unicode character.
 
 ```
 [#] ns-esc-8-bit ::=
-  "x"
+  'x'
   ( ns-hex-digit × 2 )
 ```
 
@@ -2193,7 +2193,7 @@ Escaped 16-bit Unicode character.
 
 ```
 [#] ns-esc-16-bit ::=
-  "u"
+  'u'
   ( ns-hex-digit × 4 )
 ```
 
@@ -2202,7 +2202,7 @@ Escaped 32-bit Unicode character.
 
 ```
 [#] ns-esc-32-bit ::=
-  "U"
+  'U'
   ( ns-hex-digit × 8 )
 ```
 
@@ -2211,7 +2211,7 @@ Any escaped character:
 
 ```
 [#] c-ns-esc-char ::=
-  "\"
+  '\'
   ( ns-esc-null | ns-esc-bell | ns-esc-backspace
   | ns-esc-horizontal-tab | ns-esc-line-feed
   | ns-esc-vertical-tab | ns-esc-form-feed
@@ -2632,7 +2632,7 @@ However, as this confuses many tools, YAML [processors] should terminate the
 
 ```
 [#] c-nb-comment-text ::=
-  "#" nb-char*
+  '#' nb-char*
 ```
 
 ```
@@ -2787,7 +2787,7 @@ information.
 
 ```
 [#] l-directive ::=
-  "%"
+  '%'
   ( ns-yaml-directive
   | ns-tag-directive
   | ns-reserved-directive )
@@ -2860,13 +2860,13 @@ of [non-ASCII line breaks], as described [above]).
 
 ```
 [#] ns-yaml-directive ::=
-  "Y" "A" "M" "L"
+  'Y' 'A' 'M' 'L'
   s-separate-in-line ns-yaml-version
 ```
 
 ```
 [#] ns-yaml-version ::=
-  ns-dec-digit+ "." ns-dec-digit+
+  ns-dec-digit+ '.' ns-dec-digit+
 ```
 
 
@@ -2918,7 +2918,7 @@ This allows for compact and readable [tag] notation.
 
 ```
 [#] ns-tag-directive ::=
-  "T" "A" "G"
+  'T' 'A' 'G'
   s-separate-in-line c-tag-handle
   s-separate-in-line ns-tag-prefix
 ```
@@ -2992,7 +2992,7 @@ This provides smooth migration from using [local tags] to using [global tags]
 by the simple addition of a single "**`TAG`**" directive.
 
 ```
-[#] c-primary-tag-handle ::= "!"
+[#] c-primary-tag-handle ::= '!'
 ```
 
 
@@ -3030,7 +3030,7 @@ By default, the prefix associated with this handle is
 
 ```
 [#] c-secondary-tag-handle ::=
-  "!" "!"
+  '!' '!'
 ```
 
 
@@ -3063,7 +3063,7 @@ In particular, the YAML [processor] need not preserve the handle name once
 
 ```
 [#] c-named-tag-handle ::=
-  "!" ns-word-char+ "!"
+  '!' ns-word-char+ '!'
 ```
 
 
@@ -3104,7 +3104,7 @@ semantics to the same [local tag].
 
 ```
 [#] c-ns-local-tag-prefix ::=
-  "!" ns-uri-char*
+  '!' ns-uri-char*
 ```
 
 
@@ -3222,7 +3222,7 @@ valid URI (a [global tag]).
 
 ```
 [#] c-verbatim-tag ::=
-  "!" "<" ns-uri-char+ ">"
+  '!' '<' ns-uri-char+ '>'
 ```
 
 
@@ -3256,7 +3256,7 @@ ERROR:
   so ! is invalid.
 - The $:? tag is neither a global
   URI tag nor a local tag starting
-  with "!".
+  with '!'.
 ```
 <!-- 3:6 -->
 <!-- 4:7,3 -->
@@ -3352,7 +3352,7 @@ interpreted as "**`tag:yaml.org,2002:seq`**", "**`tag:yaml.org,2002:map`**" or
 This is intentional.
 
 ```
-[#] c-non-specific-tag ::= "!"
+[#] c-non-specific-tag ::= '!'
 ```
 
 
@@ -3386,7 +3386,7 @@ it is valid for all [nodes] to be anchored.
 
 ```
 [#] c-ns-anchor-property ::=
-  "&" ns-anchor-name
+  '&' ns-anchor-name
 ```
 
 
@@ -3454,7 +3454,7 @@ these were already specified at the first occurrence of the [node].
 
 ```
 [#] c-ns-alias-node ::=
-  "*" ns-anchor-name
+  '*' ns-anchor-name
 ```
 
 
@@ -3565,7 +3565,7 @@ characters.
 
 ```
 [#] nb-double-char ::=
-  c-ns-esc-char | ( nb-json - "\" - """ )
+  c-ns-esc-char | ( nb-json - '\' - '"' )
 ```
 
 ```
@@ -3579,7 +3579,7 @@ Double-quoted scalars are restricted to a single line when contained inside an
 
 ```
 [#] c-double-quoted(n,c) ::=
-  """ nb-double-text(n,c) """
+  '"' nb-double-text(n,c) '"'
 ```
 
 ```
@@ -3623,7 +3623,7 @@ double-quoted lines to be broken at arbitrary positions.
 
 ```
 [#] s-double-escaped(n) ::=
-  s-white* "\" b-non-content
+  s-white* '\' b-non-content
   l-empty(n,flow-in)* s-flow-line-prefix(n)
 ```
 
@@ -3837,7 +3837,7 @@ causes no ambiguity.
 ```
 [#] ns-plain-first(c) ::=
     ( ns-char - c-indicator )
-  | ( ( "?" | ":" | "-" )
+  | ( ( '?' | ':' | '-' )
       /* Followed by an ns-plain-safe(c)) */ )
 ```
 
@@ -3870,9 +3870,9 @@ These characters would cause ambiguity with [flow collection] structures.
 
 ```
 [#] ns-plain-char(c) ::=
-    ( ns-plain-safe(c) - ":" - "#" )
-  | ( /* An ns-char preceding */ "#" )
-  | ( ":" /* Followed by an ns-plain-safe(c) */ )
+    ( ns-plain-safe(c) - ':' - '#' )
+  | ( /* An ns-char preceding */ '#' )
+  | ( ':' /* Followed by an ns-plain-safe(c) */ )
 ```
 
 
@@ -4016,8 +4016,8 @@ characters.
 
 ```
 [#] c-flow-sequence(n,c) ::=
-  "[" s-separate(n,c)?
-  ns-s-flow-seq-entries(n,in-flow(c))? "]"
+  '[' s-separate(n,c)?
+  ns-s-flow-seq-entries(n,in-flow(c))? ']'
 ```
 
 
@@ -4026,7 +4026,7 @@ Sequence entries are separated by a ["**`,`**"] character.
 ```
 [#] ns-s-flow-seq-entries(n,c) ::=
   ns-flow-seq-entry(n,c) s-separate(n,c)?
-  ( "," s-separate(n,c)?
+  ( ',' s-separate(n,c)?
     ns-s-flow-seq-entries(n,c)? )?
 ```
 
@@ -4093,8 +4093,8 @@ characters.
 
 ```
 [#] c-flow-mapping(n,c) ::=
-  "{" s-separate(n,c)?
-  ns-s-flow-map-entries(n,in-flow(c))? "}"
+  '{' s-separate(n,c)?
+  ns-s-flow-map-entries(n,in-flow(c))? '}'
 ```
 
 
@@ -4103,7 +4103,7 @@ Mapping entries are separated by a ["**`,`**"] character.
 ```
 [#] ns-s-flow-map-entries(n,c) ::=
   ns-flow-map-entry(n,c) s-separate(n,c)?
-  ( "," s-separate(n,c)?
+  ( ',' s-separate(n,c)?
     ns-s-flow-map-entries(n,c)? )?
 ```
 
@@ -4132,7 +4132,7 @@ entry may be [completely empty].
 
 ```
 [#] ns-flow-map-entry(n,c) ::=
-    ( "?" s-separate(n,c)
+    ( '?' s-separate(n,c)
       ns-flow-map-explicit-entry(n,c) )
   | ns-flow-map-implicit-entry(n,c)
 ```
@@ -4201,7 +4201,7 @@ indicated by the "**`:`**".
 
 ```
 [#] c-ns-flow-map-separate-value(n,c) ::=
-  ":" /* Not followed by an
+  ':' /* Not followed by an
          ns-plain-safe(c) */
   ( ( s-separate(n,c) ns-flow-node(n,c) )
   | e-node /* Value */ )
@@ -4250,7 +4250,7 @@ However, as this greatly reduces readability, YAML [processors] should
 
 ```
 [#] c-ns-flow-map-adjacent-value(n,c) ::=
-  ":" ( ( s-separate(n,c)?
+  ':' ( ( s-separate(n,c)?
           ns-flow-node(n,c) )
       | e-node ) /* Value */
 ```
@@ -4307,7 +4307,7 @@ and the syntax is identical to the general case.
 
 ```
 [#] ns-flow-pair(n,c) ::=
-    ( "?" s-separate(n,c)
+    ( '?' s-separate(n,c)
       ns-flow-map-explicit-entry(n,c) )
   | ns-flow-pair-entry(n,c)
 ```
@@ -4692,8 +4692,8 @@ convey [content] information.
 
 ```
 [#] c-chomping-indicator(t) ::=
-  "-"         ⇒ t = strip
-  "+"         ⇒ t = keep
+  '-'         ⇒ t = strip
+  '+'         ⇒ t = keep
   /* Empty */ ⇒ t = clip
 ```
 
@@ -4837,7 +4837,7 @@ It is the simplest, most restricted and most readable [scalar style].
 
 ```
 [#] c-l+literal(n) ::=
-  "|" c-b-block-header(m,t)
+  '|' c-b-block-header(m,t)
   l-literal-content(n+m,t)
 ```
 
@@ -4922,7 +4922,7 @@ It is similar to the [literal style]; however, folded scalars are subject to
 
 ```
 [#] c-l+folded(n) ::=
-  ">" c-b-block-header(m,t)
+  '>' c-b-block-header(m,t)
   l-folded-content(n+m,t)
 ```
 
@@ -5161,7 +5161,7 @@ followed by a non-space character (e.g. "**`-1`**").
 
 ```
 [#] c-l-block-seq-entry(n) ::=
-  "-" /* Not followed by an ns-char */
+  '-' /* Not followed by an ns-char */
   s-l+block-indented(n,block-in)
 ```
 
@@ -5283,13 +5283,13 @@ for [block sequence] entries.
 
 ```
 [#] c-l-block-map-explicit-key(n) ::=
-  "?" s-l+block-indented(n,block-out)
+  '?' s-l+block-indented(n,block-out)
 ```
 
 ```
 [#] l-block-map-explicit-value(n) ::=
   s-indent(n)
-  ":" s-l+block-indented(n,block-out)
+  ':' s-l+block-indented(n,block-out)
 ```
 
 
@@ -5350,7 +5350,7 @@ This prevents a potential ambiguity with multi-line [plain scalars].
 
 ```
 [#] c-l-block-map-implicit-value(n) ::=
-  ":" ( s-l+block-node(n,block-out)
+  ':' ( s-l+block-node(n,block-out)
       | ( e-node s-l-comments ) )
 ```
 
@@ -5603,12 +5603,12 @@ either of these markers.
 
 ```
 [#] c-directives-end ::=
-  "-" "-" "-"
+  '-' '-' '-'
 ```
 
 ```
 [#] c-document-end ::=
-  "." "." "."
+  '.' '.' '.'
 ```
 
 ```
