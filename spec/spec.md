@@ -1327,7 +1327,7 @@ Whenever possible, basic structures are specified before the more complex
 structures using them in a "bottom up" fashion.
 
 The order of alternatives inside a production is significant.
-Subsequent alternatives are only considered when previous ones fails.
+Subsequent alternatives are only considered when previous ones fail.
 See for example the [**`b-break`**](#b-break) production.
 In addition, production matching is expected to be greedy.
 Optional (**`?`**), zero-or-more (**`*`**) and one-or-more (**`+`**) patterns
