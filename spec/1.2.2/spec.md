@@ -1378,10 +1378,10 @@ prefixes.
 To ensure readability, YAML [streams] use only the _printable_ subset of the
 Unicode character set.
 The allowed character range explicitly excludes the C0 control block[^c0-block]
-**`#x00-#x1F`** (except for TAB **`#x09`**, LF **`#x0A`** and CR **`#x0D`**
-which are allowed), DEL **`#x7F`**, the C1 control block **`#x80-#x9F`**
-(except for NEL **`#x85`** which is allowed), the surrogate block[^surrogates]
-**`#xD800-#xDFFF`**, **`#xFFFE`** and **`#xFFFF`**.
+**`x00-x1F`** (except for TAB **`x09`**, LF **`x0A`** and CR **`x0D`** which
+are allowed), DEL **`x7F`**, the C1 control block **`x80-x9F`** (except for NEL
+**`x85`** which is allowed), the surrogate block[^surrogates]
+**`xD800-xDFFF`**, **`xFFFE`** and **`xFFFF`**.
 
 On input, a YAML [processor] must accept all characters in this printable
 subset.
@@ -1397,9 +1397,9 @@ extensive character property tables.
 
 ```
 [#] c-printable ::=
-    #x09 | #x0A | #x0D | [#x20-#x7E]       /* 8 bit */
-  | #x85 | [#xA0-#xD7FF] | [#xE000-#xFFFD] /* 16 bit */
-  | [#x010000-#x10FFFF]                    /* 32 bit */
+    x09 | x0A | x0D | [x20-x7E]       /* 8 bit */
+  | x85 | [xA0-xD7FF] | [xE000-xFFFD] /* 16 bit */
+  | [x010000-x10FFFF]                 /* 32 bit */
 ```
 
 
@@ -1413,7 +1413,7 @@ YAML [quoted scalars] can.
 
 ```
 [#] nb-json ::=
-  #x09 | [#x20-#x10FFFF]
+  x09 | [x20-x10FFFF]
 ```
 
 > Note: The production name `nb-json` means "non-break JSON compatible" here.
@@ -1423,7 +1423,7 @@ YAML [quoted scalars] can.
 All characters mentioned in this specification are Unicode code points.
 Each such code point is written as one or more bytes depending on the
 _character encoding_ used.
-Note that in UTF-16, characters above **`#xFFFF`** are written as four bytes,
+Note that in UTF-16, characters above **`xFFFF`** are written as four bytes,
 using a surrogate pair.
 
 The character encoding is a [presentation detail] and must not be used to
@@ -1436,7 +1436,7 @@ For [JSON compatibility], the UTF-32 encodings must also be supported.
 If a character [stream] begins with a _byte order mark_, the character encoding
 will be taken to be as indicated by the byte order mark.
 Otherwise, the [stream] must begin with an ASCII character.
-This allows the encoding to be deduced by the pattern of null (**`#x00`**)
+This allows the encoding to be deduced by the pattern of null (**`x00`**)
 characters.
 
 Byte order marks may appear at the start of any [document], however all
@@ -1472,7 +1472,7 @@ For more information about the byte order mark and the Unicode character
 encoding schemes see the Unicode FAQ[^uni-faq].
 
 ```
-[#] c-byte-order-mark ::= #xFEFF
+[#] c-byte-order-mark ::= xFEFF
 ```
 
 
@@ -1516,21 +1516,21 @@ ERROR:
 
 _Indicators_ are characters that have special semantics.
 
-["**`-`**"] (**`#x2D`**, hyphen) denotes a [block sequence] entry.
+["**`-`**"] (**`x2D`**, hyphen) denotes a [block sequence] entry.
 
 ```
 [#] c-sequence-entry ::= '-'
 ```
 
 
-["**`?`**"] (**`#x3F`**, question mark) denotes a [mapping key].
+["**`?`**"] (**`x3F`**, question mark) denotes a [mapping key].
 
 ```
 [#] c-mapping-key ::= '?'
 ```
 
 
-["**`:`**"] (**`#x3A`**, colon) denotes a [mapping value].
+["**`:`**"] (**`x3A`**, colon) denotes a [mapping value].
 
 ```
 [#] c-mapping-value ::= ':'
@@ -1564,35 +1564,35 @@ mapping:
 * [c-mapping-value] <!-- : -->
 
 
-["**`,`**"] (**`#x2C`**, comma) ends a [flow collection] entry.
+["**`,`**"] (**`x2C`**, comma) ends a [flow collection] entry.
 
 ```
 [#] c-collect-entry ::= ','
 ```
 
 
-["**`[`**"] (**`#x5B`**, left bracket) starts a [flow sequence].
+["**`[`**"] (**`x5B`**, left bracket) starts a [flow sequence].
 
 ```
 [#] c-sequence-start ::= '['
 ```
 
 
-["**`]`**"] (**`#x5D`**, right bracket) ends a [flow sequence].
+["**`]`**"] (**`x5D`**, right bracket) ends a [flow sequence].
 
 ```
 [#] c-sequence-end ::= ']'
 ```
 
 
-["**`{`**"] (**`#x7B`**, left brace) starts a [flow mapping].
+["**`{`**"] (**`x7B`**, left brace) starts a [flow mapping].
 
 ```
 [#] c-mapping-start ::= '{'
 ```
 
 
-["**`}`**"] (**`#x7D`**, right brace) ends a [flow mapping].
+["**`}`**"] (**`x7D`**, right brace) ends a [flow mapping].
 
 ```
 [#] c-mapping-end ::= '}'
@@ -1618,7 +1618,7 @@ mapping: { sky: blue, sea: green }
 * [c-collect-entry] <!-- , -->
 
 
-["**`#`**"] (**`#x23`**, octothorpe, hash, sharp, pound, number sign) denotes a
+["**`#`**"] (**`x23`**, octothorpe, hash, sharp, pound, number sign) denotes a
 [comment].
 
 ```
@@ -1642,13 +1642,13 @@ mapping: { sky: blue, sea: green }
 * [c-comment] <!-- # -->
 
 
-["**`&`**"] (**`#x26`**, ampersand) denotes a [node's anchor property].
+["**`&`**"] (**`x26`**, ampersand) denotes a [node's anchor property].
 
 ```
 [#] c-anchor ::= '&'
 ```
 
-["**`*`**"] (**`#x2A`**, asterisk) denotes an [alias node].
+["**`*`**"] (**`x2A`**, asterisk) denotes an [alias node].
 
 
 ```
@@ -1656,7 +1656,7 @@ mapping: { sky: blue, sea: green }
 ```
 
 
-The ["**`!`**"] (**`#x21`**, exclamation) is heavily overloaded for specifying
+The ["**`!`**"] (**`x21`**, exclamation) is heavily overloaded for specifying
 [node tags].
 It is used to denote [tag handles] used in [tag directives] and [tag
 properties]; to denote [local tags]; and as the [non-specific tag] for
@@ -1692,7 +1692,7 @@ alias: *anchor
 ```
 
 
-["**`>`**"] (**`#x3E`**, greater than) denotes a [folded block scalar].
+["**`>`**"] (**`x3E`**, greater than) denotes a [folded block scalar].
 
 ```
 [#] c-folded ::= '>'
@@ -1719,7 +1719,7 @@ folded: >
 * [c-literal] <!-- | -->
 * [c-folded] <!-- > -->
 
-["**`'`**"] (**`#x27`**, apostrophe, single quote) surrounds a [single-quoted
+["**`'`**"] (**`x27`**, apostrophe, single quote) surrounds a [single-quoted
 flow scalar].
 
 
@@ -1728,7 +1728,7 @@ flow scalar].
 ```
 
 
-["**`"`**"] (**`#x22`**, double quote) surrounds a [double-quoted flow scalar].
+["**`"`**"] (**`x22`**, double quote) surrounds a [double-quoted flow scalar].
 
 ```
 [#] c-double-quote ::= '"'
@@ -1752,7 +1752,7 @@ double: "text"
 * [c-double-quote] <!-- 2:9 2:14 -->
 
 
-["**`%`**"] (**`#x25`**, percent) denotes a [directive] line.
+["**`%`**"] (**`x25`**, percent) denotes a [directive] line.
 
 ```
 [#] c-directive ::= '%'
@@ -1774,7 +1774,7 @@ double: "text"
 * [c-directive] <!-- % -->
 
 
-The _"**`@`**"_ (**`#x40`**, at) and _"**<code>&grave;</code>**"_ (**`#x60`**,
+The _"**`@`**"_ (**`x40`**, at) and _"**<code>&grave;</code>**"_ (**`x60`**,
 grave accent) are _reserved_ for future use.
 
 ```
@@ -1827,13 +1827,13 @@ YAML recognizes the following ASCII _line break_ characters.
 
 ```
 [#] b-line-feed ::=
-  #x0A    /* LF */
+  x0A    /* LF */
 ```
 
 
 ```
 [#] b-carriage-return ::=
-  #x0D    /* CR */
+  x0D    /* CR */
 ```
 
 
@@ -1843,10 +1843,10 @@ YAML recognizes the following ASCII _line break_ characters.
 ```
 
 
-All other characters, including the form feed (**`#x0C`**), are considered to
-be non-break characters.
-Note that these include the _non-ASCII line breaks_: next line (**`#x85`**),
-line separator (**`#x2028`**) and paragraph separator (**`#x2029`**).
+All other characters, including the form feed (**`x0C`**), are considered to be
+non-break characters.
+Note that these include the _non-ASCII line breaks_: next line (**`x85`**),
+line separator (**`x2028`**) and paragraph separator (**`x2029`**).
 
 [YAML version 1.1] did support the above non-ASCII line break characters;
 however, JSON does not.
@@ -1922,12 +1922,12 @@ YAML recognizes two _white space_ characters: _space_ and _tab_.
 
 ```
 [#] s-space ::=
-  #x20 /* SP */
+  x20 /* SP */
 ```
 
 ```
 [#] s-tab ::=
-  #x09  /* TAB */
+  x09  /* TAB */
 ```
 
 ```
@@ -1980,7 +1980,7 @@ A decimal digit for numbers:
 
 ```
 [#] ns-dec-digit ::=
-  [#x30-#x39] /* 0-9 */
+  [x30-x39] /* 0-9 */
 ```
 
 
@@ -1989,7 +1989,7 @@ A hexadecimal digit for [escape sequences]:
 ```
 [#] ns-hex-digit ::=
     ns-dec-digit
-  | [#x41-#x46] /* A-F */ | [#x61-#x66] /* a-f */
+  | [x41-x46] /* A-F */ | [x61-x66] /* a-f */
 ```
 
 
@@ -1997,7 +1997,7 @@ ASCII letter (alphabetic) characters:
 
 ```
 [#] ns-ascii-letter ::=
-  [#x41-#x5A] /* A-Z */ | [#x61-#x7A] /* a-z */
+  [x41-x5A] /* A-Z */ | [x61-x7A] /* a-z */
 ```
 
 
@@ -2057,124 +2057,124 @@ and non-[printable] characters are not available.
 
 YAML escape sequences are a superset of C's escape sequences:
 
-Escaped ASCII null (**`#x00`**) character.
+Escaped ASCII null (**`x00`**) character.
 
 ```
 [#] ns-esc-null ::= '0'
 ```
 
 
-Escaped ASCII bell (**`#x07`**) character.
+Escaped ASCII bell (**`x07`**) character.
 
 ```
 [#] ns-esc-bell ::= 'a'
 ```
 
 
-Escaped ASCII backspace (**`#x08`**) character.
+Escaped ASCII backspace (**`x08`**) character.
 
 ```
 [#] ns-esc-backspace ::= 'b'
 ```
 
 
-Escaped ASCII horizontal tab (**`#x09`**) character.
+Escaped ASCII horizontal tab (**`x09`**) character.
 This is useful at the start or the end of a line to force a leading or trailing
 tab to become part of the [content].
 
 ```
 [#] ns-esc-horizontal-tab ::=
-  't' | #x09
+  't' | x09
 ```
 
 
-Escaped ASCII line feed (**`#x0A`**) character.
+Escaped ASCII line feed (**`x0A`**) character.
 
 ```
 [#] ns-esc-line-feed ::= 'n'
 ```
 
 
-Escaped ASCII vertical tab (**`#x0B`**) character.
+Escaped ASCII vertical tab (**`x0B`**) character.
 
 ```
 [#] ns-esc-vertical-tab ::= 'v'
 ```
 
 
-Escaped ASCII form feed (**`#x0C`**) character.
+Escaped ASCII form feed (**`x0C`**) character.
 
 ```
 [#] ns-esc-form-feed ::= 'f'
 ```
 
 
-Escaped ASCII carriage return (**`#x0D`**) character.
+Escaped ASCII carriage return (**`x0D`**) character.
 
 ```
 [#] ns-esc-carriage-return ::= 'r'
 ```
 
 
-Escaped ASCII escape (**`#x1B`**) character.
+Escaped ASCII escape (**`x1B`**) character.
 
 ```
 [#] ns-esc-escape ::= 'e'
 ```
 
 
-Escaped ASCII space (**`#x20`**) character.
+Escaped ASCII space (**`x20`**) character.
 This is useful at the start or the end of a line to force a leading or trailing
 space to become part of the [content].
 
 ```
-[#] ns-esc-space ::= #x20
+[#] ns-esc-space ::= x20
 ```
 
 
-Escaped ASCII double quote (**`#x22`**).
+Escaped ASCII double quote (**`x22`**).
 
 ```
 [#] ns-esc-double-quote ::= '"'
 ```
 
 
-Escaped ASCII slash (**`#x2F`**), for [JSON compatibility].
+Escaped ASCII slash (**`x2F`**), for [JSON compatibility].
 
 ```
 [#] ns-esc-slash ::= '/'
 ```
 
 
-Escaped ASCII back slash (**`#x5C`**).
+Escaped ASCII back slash (**`x5C`**).
 
 ```
 [#] ns-esc-backslash ::= '\'
 ```
 
 
-Escaped Unicode next line (**`#x85`**) character.
+Escaped Unicode next line (**`x85`**) character.
 
 ```
 [#] ns-esc-next-line ::= 'N'
 ```
 
 
-Escaped Unicode non-breaking space (**`#xA0`**) character.
+Escaped Unicode non-breaking space (**`xA0`**) character.
 
 ```
 [#] ns-esc-non-breaking-space ::= '_'
 ```
 
 
-Escaped Unicode line separator (**`#x2028`**) character.
+Escaped Unicode line separator (**`x2028`**) character.
 
 ```
 [#] ns-esc-line-separator ::= 'L'
 ```
 
 
-Escaped Unicode paragraph separator (**`#x2029`**) character.
+Escaped Unicode paragraph separator (**`x2029`**) character.
 
 ```
 [#] ns-esc-paragraph-separator ::= 'P'
@@ -2502,7 +2502,7 @@ If a [line break] is followed by an [empty line], it is _trimmed_; the first
 
 
 Otherwise (the following line is not [empty]), the [line break] is converted to
-a single [space] (**`#x20`**).
+a single [space] (**`x20`**).
 
 ```
 [#] b-as-space ::= b-break
@@ -4595,7 +4595,7 @@ indicator for cases where detection will fail.
 
 ```
 [#] c-indentation-indicator(m) ::=
-  ns-dec-digit => m = ns-dec-digit - #x30
+  ns-dec-digit => m = ns-dec-digit - x30
   /* Empty */  => m = auto-detect()
 ```
 
