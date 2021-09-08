@@ -32,6 +32,7 @@ block-sequences:
 - dashes
 - sequence entry
 block-styles:
+- block styles
 - indented blocks
 canonical-form:
 - canonical form
@@ -114,6 +115,7 @@ flow-sequences:
 flow-styles:
 - flow
 - flow content
+- flow styles
 indentation-spaces:
 - indentation
 - indented
@@ -146,14 +148,14 @@ loading-point-failures:
 mapping:
 - collection node
 - collection's
-- 'key/value pair'
 - key node
+- key/value pair
 - mapping
-- mapping's
 - mapping key order
 - mapping node
+- mapping's
 - mapping value
-- 'single key/value pair'
+- single key/value pair
 node-comparison:
 - unique
 nodes:
@@ -261,6 +263,8 @@ serializing-the-representation-graph:
 single-quoted-style:
 - single-quoted
 - single-quoted flow scalar
+special-productions:
+- special-production
 streams:
 strip:
 tags:

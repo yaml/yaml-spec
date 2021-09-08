@@ -525,7 +525,7 @@ sub format_internal_link {
   if ($anchor = $links->{"${text}s"}) {
     return "[$link](#$anchor)";
   }
-  die "Undefined link '[$link]' ($text) found";
+  die "Undefined link '[$link]' ($text) found. Check links.yaml file.";
 }
 
 sub set_dates {
