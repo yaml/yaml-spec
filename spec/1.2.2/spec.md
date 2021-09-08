@@ -9,7 +9,7 @@ status: draft
 ## Revision 1.2.2 (YYYY-MM-DD)
 {:.subtitle}
 
-Copyright presently by [The YAML Language Development Team](core-team)  
+Copyright presently by [YAML Language Development Team](team)  
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net
 
 This document may be freely copied, provided it is not modified.
@@ -51,12 +51,12 @@ published versions of this specification.
 
 See:
 
-* [YAML Implementer's Reference Index](implementer-refs)
-* [YAML User's Reference Index](user-refs)
-* [YAML Community](community)
-* [YAML 1.2.2 Specification Errata](spec-errata)
-* [YAML 1.2.2 Specification Changes](spec-changes)
-* [YAML 1.2.2 Specification Authors](spec-authors)
+* [YAML 1.2.1 Specification Errata](errata)
+* [YAML 1.2.1 Specification Changes](changes)
+* [YAML 1.2.1 Specification Authors](authors)
+* [YAML Community Resource Index](community)
+* [YAML User's Reference Index](use)
+* [YAML Developer's Reference Index](dev)
 
 
 **Abstract**
@@ -165,9 +165,9 @@ It also removed many of the problematic implicit typing recommendations.
 Since the release of the 1.2 specification, YAML adoption has continued to
 grow, and many large-scale projects use it as their primary configuration
 format.
-In 2020, the new [YAML language design team](core-team) began meeting regularly
-to discuss improvements to the YAML language and specification; to better meet
-the needs and expectations of its users and use cases.
+In 2020, the new [YAML language design team](team) began meeting regularly to
+discuss improvements to the YAML language and specification; to better meet the
+needs and expectations of its users and use cases.
 
 This YAML 1.2.2 specification, published in September 2021, is the first step
 in YAML's rejuvenated development journey.

@@ -38,6 +38,17 @@ web pages for https://spec.yaml.io.
 
   The LaTeX source files used to create the spec diagram images.
 
+* Companion Pages
+
+  The spec points to external pages that can be kept up to date after a spec
+  version is finalized and published.
+
+  * `changes.md` - YAML spec changes
+  * `community.md` - YAML community resource links
+  * `dev.md` - YAML developer docs index
+  * `use.md` - YAML user docs index
+  * `team.md`- YAML design team
+
 ## Makefile targets
 
 * `build`
