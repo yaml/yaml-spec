@@ -9,6 +9,7 @@ The current team consists of:
 * Tina Müller — [@perlpunk](https://github.com/perlpunk)
 * Pantelis Antoniou — [@pantoniou](https://github.com/pantoniou)
 * Eemeli Aro — [@eemeli](https://github.com/eemeli)
+* Thomas Smith — [@Thom1729](https://github.com/thom1729)
 
 ## The original creators of the YAML Data Language are:
 
