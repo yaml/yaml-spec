@@ -1397,9 +1397,17 @@ extensive character property tables.
 
 ```
 [#] c-printable ::=
-  ( x09 | x0A | x0D | [x20-x7E]         /* 8 bit */
-  | x85 | [xA0-xD7FF] | [xE000-xFFFD]   /* 16 bit */
-  | [x010000-x10FFFF] )                 /* 32 bit */
+                         # 8 bit
+  ( x09                  # Tab (\t)
+  | x0A                  # Line feed (LF \n)
+  | x0D                  # Carriage Return (CR \r)
+  | [x20-x7E]            # Printable ASCII
+                         # 16 bit
+  | x85                  # Next Line (NEL)
+  | [xA0-xD7FF]          # Basic Multilingual Plane (BMP)
+  | [xE000-xFFFD]        # Additional Unicode Areas
+  | [x010000-x10FFFF]    # 32 bit
+  )
 ```
 
 
@@ -1413,11 +1421,13 @@ YAML [quoted scalars] can.
 
 ```
 [#] nb-json ::=
-  ( x09
-  | [x20-x10FFFF] )
+  ( x09              # Tab character
+  | [x20-x10FFFF]    # Non-C0-control characters
+  )
 ```
 
 > Note: The production name `nb-json` means "non-break JSON compatible" here.
+
 
 ## #. Character Encodings
 
@@ -1781,7 +1791,8 @@ grave accent) are _reserved_ for future use.
 ```
 [#] c-reserved ::=
   ( '@'
-  | '`' )
+  | '`'
+  )
 ```
 
 
@@ -1805,25 +1816,25 @@ Any indicator character:
 
 ```
 [#] c-indicator ::=
-  ( '-'
-  | '?'
-  | ':'
-  | ','
-  | '['
-  | ']'
-  | '{'
-  | '}'
-  | '#'
-  | '&'
-  | '*'
-  | '!'
-  | '|'
-  | '>'
-  | "'"
-  | '"'
-  | '%'
-  | '@'
-  | '`' )
+  ( c-sequence-entry    # '-'
+  | c-mapping-key       # '?'
+  | c-mapping-value     # ':'
+  | c-collect-entry     # ','
+  | c-sequence-start    # '['
+  | c-sequence-end      # ']'
+  | c-mapping-start     # '{'
+  | c-mapping-end       # '}'
+  | c-comment           # '#'
+  | c-anchor            # '&'
+  | c-alias             # '*'
+  | c-tag               # '!'
+  | c-literal           # '|'
+  | c-folded            # '>'
+  | c-single-quote      # "'"
+  | c-double-quote      # '"'
+  | c-directive         # '%'
+  | c-reserved          # '@' '`'
+  )
 ```
 
 
@@ -1835,11 +1846,12 @@ This is handled on a case-by-case basis by the relevant productions.
 
 ```
 [#] c-flow-indicator ::=
-  ( ','
-  | '['
-  | ']'
-  | '{'
-  | '}' )
+  ( c-collect-entry     # ','
+  | c-sequence-start    # '['
+  | c-sequence-end      # ']'
+  | c-mapping-start     # '{'
+  | c-mapping-end       # '}'
+  )
 ```
 
 
@@ -1859,8 +1871,9 @@ YAML recognizes the following ASCII _line break_ characters.
 
 ```
 [#] b-char ::=
-  ( b-line-feed
-  | b-carriage-return )
+  ( b-line-feed          # x0A
+  | b-carriage-return    # X0D
+  )
 ```
 
 
@@ -1882,7 +1895,7 @@ treat these line breaks as non-break characters, with an appropriate warning.
 [#] nb-char ::=
   ( c-printable
   - b-char
-  - c-byte-order-mark
+  - c-byte-order-mark      # xFEFF
   )
 ```
 
@@ -1892,10 +1905,11 @@ widely used formats.
 
 ```
 [#] b-break ::=
-  ( ( b-carriage-return
-      b-line-feed )
+  ( ( b-carriage-return    # x0A
+      b-line-feed )        # x0D
   | b-carriage-return
-  | b-line-feed )
+  | b-line-feed
+  )
 ```
 
 
@@ -2008,7 +2022,7 @@ A decimal digit for numbers:
 
 ```
 [#] ns-dec-digit ::=
-  [x30-x39]
+  [x30-x39]             # 0-9
 ```
 
 
@@ -2016,9 +2030,9 @@ A hexadecimal digit for [escape sequences]:
 
 ```
 [#] ns-hex-digit ::=
-  ( ns-dec-digit
-  | [x41-x46]
-  | [x61-x66] )
+  ( ns-dec-digit        # 0-9
+  | [x41-x46]           # A-F
+  | [x61-x66] )         # a-f
 ```
 
 
@@ -2026,8 +2040,8 @@ ASCII letter (alphabetic) characters:
 
 ```
 [#] ns-ascii-letter ::=
-  ( [x41-x5A]
-  | [x61-x7A] )
+  ( [x41-x5A]           # A-Z
+  | [x61-x7A] )         # a-z
 ```
 
 
@@ -2035,9 +2049,9 @@ Word (alphanumeric) characters for identifiers:
 
 ```
 [#] ns-word-char ::=
-  ( ns-dec-digit
-  | ns-ascii-letter
-  | '-' )
+  ( ns-dec-digit        # 0-9
+  | ns-ascii-letter     # A-Z a-z
+  | '-' )               # '-'
 ```
 
 URI characters for [tags], as defined in the URI specification[^uri].
