@@ -2528,25 +2528,24 @@ ERROR:
 <div id="production-c-indicator"></div>
 <pre class="production">
 [22] c-indicator ::=
-  ( '-'    // <a href="#production-c-sequence-entry">c-sequence-entry</a>
-  | '?'    // <a href="#production-c-mapping-key">c-mapping-key</a>
-  | ':'    // <a href="#production-c-mapping-value">c-mapping-value</a>
-  | ','    // <a href="#production-c-collect-entry">c-collect-entry</a>
-  | '['    // <a href="#production-c-sequence-start">c-sequence-start</a>
-  | ']'    // <a href="#production-c-sequence-end">c-sequence-end</a>
-  | '{'    // <a href="#production-c-mapping-start">c-mapping-start</a>
-  | '}'    // <a href="#production-c-mapping-end">c-mapping-end</a>
-  | '#'    // <a href="#production-c-comment">c-comment</a>
-  | '&amp;'    // <a href="#production-c-anchor">c-anchor</a>
-  | '*'    // <a href="#production-c-alias">c-alias</a>
-  | '!'    // <a href="#production-c-tag">c-tag</a>
-  | '|'    // <a href="#production-c-literal">c-literal</a>
-  | '&gt;'    // <a href="#production-c-folded">c-folded</a>
-  | "'"    // <a href="#production-c-single-quote">c-single-quote</a>
-  | '"'    // <a href="#production-c-double-quote">c-double-quote</a>
-  | '%'    // <a href="#production-c-directive">c-directive</a>
-  | '@'    // <a href="#production-c-reserved">c-reserved</a>
-  | '`'    // <a href="#production-c-reserved">c-reserved</a>
+  ( <a href="#production-c-sequence-entry">c-sequence-entry</a>    // '-'
+  | <a href="#production-c-mapping-key">c-mapping-key</a>       // '?'
+  | <a href="#production-c-mapping-value">c-mapping-value</a>     // ':'
+  | <a href="#production-c-collect-entry">c-collect-entry</a>     // ','
+  | <a href="#production-c-sequence-start">c-sequence-start</a>    // '['
+  | <a href="#production-c-sequence-end">c-sequence-end</a>      // ']'
+  | <a href="#production-c-mapping-start">c-mapping-start</a>     // '{'
+  | <a href="#production-c-mapping-end">c-mapping-end</a>       // '}'
+  | <a href="#production-c-comment">c-comment</a>           // '#'
+  | <a href="#production-c-anchor">c-anchor</a>            // '&amp;'
+  | <a href="#production-c-alias">c-alias</a>             // '*'
+  | <a href="#production-c-tag">c-tag</a>               // '!'
+  | <a href="#production-c-literal">c-literal</a>           // '|'
+  | <a href="#production-c-folded">c-folded</a>            // '&gt;'
+  | <a href="#production-c-single-quote">c-single-quote</a>      // "'"
+  | <a href="#production-c-double-quote">c-double-quote</a>      // '"'
+  | <a href="#production-c-directive">c-directive</a>         // '%'
+  | <a href="#production-c-reserved">c-reserved</a>          // '@' '`'
   )
 </pre>
 

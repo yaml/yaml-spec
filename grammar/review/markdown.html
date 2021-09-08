@@ -1895,25 +1895,24 @@ Any indicator character:
 
 ```
 [#] c-indicator ::=
-  ( '-'    // c-sequence-entry
-  | '?'    // c-mapping-key
-  | ':'    // c-mapping-value
-  | ','    // c-collect-entry
-  | '['    // c-sequence-start
-  | ']'    // c-sequence-end
-  | '{'    // c-mapping-start
-  | '}'    // c-mapping-end
-  | '#'    // c-comment
-  | '&amp;'    // c-anchor
-  | '*'    // c-alias
-  | '!'    // c-tag
-  | '|'    // c-literal
-  | '&gt;'    // c-folded
-  | "'"    // c-single-quote
-  | '"'    // c-double-quote
-  | '%'    // c-directive
-  | '@'    // c-reserved
-  | '`'    // c-reserved
+  ( c-sequence-entry    // '-'
+  | c-mapping-key       // '?'
+  | c-mapping-value     // ':'
+  | c-collect-entry     // ','
+  | c-sequence-start    // '['
+  | c-sequence-end      // ']'
+  | c-mapping-start     // '{'
+  | c-mapping-end       // '}'
+  | c-comment           // '#'
+  | c-anchor            // '&amp;'
+  | c-alias             // '*'
+  | c-tag               // '!'
+  | c-literal           // '|'
+  | c-folded            // '&gt;'
+  | c-single-quote      // "'"
+  | c-double-quote      // '"'
+  | c-directive         // '%'
+  | c-reserved          // '@' '`'
   )
 ```
 
