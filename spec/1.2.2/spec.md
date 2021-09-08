@@ -51,9 +51,8 @@ published versions of this specification.
 
 See:
 
-* [YAML 1.2.1 Specification Errata](errata)
 * [YAML 1.2.1 Specification Changes](changes)
-* [YAML 1.2.1 Specification Authors](authors)
+* [YAML 1.2.1 Specification Errata](errata)
 * [YAML Community Resource Index](community)
 * [YAML User's Reference Index](use)
 * [YAML Developer's Reference Index](dev)
