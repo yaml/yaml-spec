@@ -1,9 +1,9 @@
 # YAML Specification Changes
 
 The current version of the YAML language is **1.2** and the current YAML
-specification version is **1.2.1**.
+specification version is **1.2.2**.
 
-## Changes in v1.2.1 (YYYY-MM-DD)
+## Changes in v1.2.2 (YYYY-MM-DD)
 
 * Host the YAML specification sources in a [public repository^]
 * Change the source format from DocBook to Markdown
@@ -14,7 +14,11 @@ specification version is **1.2.1**.
 * Fixed known bugs in the grammar productions
 * More TODO
 
-## Changes in v1.2 (2009-10-01)
+## Changes in v1.2.1 (2009-10-01)
+
+* TODO
+
+## Changes in v1.2.0 (2009-07-21)
 
 * TODO
 

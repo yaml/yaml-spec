@@ -6,7 +6,7 @@ status: draft
 
 # YAML Ain't Markup Language (YAML™) Version 1.2
 
-**YAML Specification Version 1.2.1 -- Released YYYY-MM-DD**
+**YAML Specification Version 1.2.2 -- Released YYYY-MM-DD**
 
 Copyright presently by [The YAML Language Development Team](core-team)  
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net
@@ -16,7 +16,7 @@ This document may be freely copied, provided it is not modified.
 
 **Status of this Document**
 
-This is the **YAML specification v1.2.1**.
+This is the **YAML specification v1.2.2**.
 It defines the **YAML 1.2 data language**.
 There are no normative changes from the **YAML specification v1.2**.
 The primary objectives of this version are to correct errors and add clarity.
@@ -53,9 +53,9 @@ See:
 * [YAML Implementer's Reference Index](implementer-refs)
 * [YAML User's Reference Index](user-refs)
 * [YAML Community](community)
-* [YAML 1.2.1 Specification Errata](spec-errata)
-* [YAML 1.2.1 Specification Changes](spec-changes)
-* [YAML 1.2.1 Specification Authors](spec-authors)
+* [YAML 1.2.2 Specification Errata](spec-errata)
+* [YAML 1.2.2 Specification Changes](spec-changes)
+* [YAML 1.2.2 Specification Authors](spec-authors)
 
 
 **Abstract**
@@ -168,7 +168,7 @@ In 2020, the new [YAML language design team](core-team) began meeting regularly
 to discuss improvements to the YAML language and specification; to better meet
 the needs and expectations of its users and use cases.
 
-This YAML 1.2.1 specification, published in September 2021, is the first step
+This YAML 1.2.2 specification, published in September 2021, is the first step
 in YAML's rejuvenated development journey.
 YAML is now more popular than it has ever been, but there is a long list of
 things that need to be addressed for it to reach its full potential.

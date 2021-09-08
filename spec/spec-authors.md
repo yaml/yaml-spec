@@ -1,9 +1,9 @@
 # YAML Specification Authors
 
 The current version of the YAML language is **1.2** and the current YAML
-specification version is **1.2.1**.
+specification version is **1.2.2**.
 
-# v1.2.1 Primary Authors
+# v1.2.2 Primary Authors
 
 * Ingy döt Net —
   [@ingydotnet](https://github.com/ingydotnet)
@@ -17,4 +17,4 @@ specification version is **1.2.1**.
   [@Thom1729](https://github.com/thom1729)
 
 See the specification [change history](
-https://github.com/yaml/yaml-spec/releases/tag/v1.2.1) for full details.
+https://github.com/yaml/yaml-spec/releases/tag/v1.2.2) for full details.

@@ -1,3 +1,3 @@
-# YAML Specification 1.2.1 Errata
+# YAML Specification 1.2.2 Errata
 
 * None yet reported
