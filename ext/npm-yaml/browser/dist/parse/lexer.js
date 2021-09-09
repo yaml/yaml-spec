@@ -454,7 +454,7 @@ class Lexer {
             }
             if (nl !== -1) {
                 // this is an error caused by an unexpected unindent
-                end = nl - 1;
+                end = nl - (qb[nl - 1] === '\r' ? 2 : 1);
             }
         }
         if (end === -1) {
@@ -554,17 +554,18 @@ class Lexer {
                 end = i;
             }
             else if (isEmpty(ch)) {
-                const next = this.buffer[i + 1];
-                if (next === '#' || (inFlow && invalidFlowScalarChars.includes(next)))
-                    break;
+                let next = this.buffer[i + 1];
                 if (ch === '\r') {
                     if (next === '\n') {
                         i += 1;
                         ch = '\n';
+                        next = this.buffer[i + 1];
                     }
                     else
                         end = i;
                 }
+                if (next === '#' || (inFlow && invalidFlowScalarChars.includes(next)))
+                    break;
                 if (ch === '\n') {
                     const cs = this.continueScalar(i + 1);
                     if (cs === -1)
