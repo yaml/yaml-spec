@@ -8,8 +8,6 @@ destination: /host/www/build/site
 kramdown:
   parse_block_html: true
 
-theme: jekyll-theme-cayman
-
 exclude:
 - .git
 - config.yaml
