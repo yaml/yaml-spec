@@ -1,5 +1,9 @@
-ext/
-main/
-site/
-_config.yml
-favicon.svg
+*
+!_includes/
+!_layouts/
+!_sass/
+!assets/
+!config.yaml
+!Gemfile.yaml
+!index.html
+!Makefile
