@@ -138,7 +138,6 @@ html: force
 	@mkdir -p $(HTML)
 	cp -r \
 	    site/XXXHTMLXXX/img \
-	    site/XXXHTMLXXX/spec.css \
 	    $(HTML)/
 
 	@for f in $(HTML_FILES); do \
