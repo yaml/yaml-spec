@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+<meta http-equiv="Content-Type"
+      content="text/html; charset=UTF-8" />
+
+<title>v1 Review YAML Spec Conversion</title>
+
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"s
+      crossorigin="anonymous" />
+<script src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js"></script>
+<style>
+div.iframe {
+  position: relative;
+  overflow: hidden;
+  padding-top: 50%;
+}
+div.iframe iframe {
+   position: absolute;
+   height: 100%;
+   width: 100%;
+   border: none;
+   left: 0px;
+   top: 0px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="iframe col-lg-4">
+      <iframe src="markdown.html"></iframe>
+    </div>
+    <div class="iframe col-lg-4">
+      <iframe src="spec-plain.html"></iframe>
+    </div>
+    <div class="iframe col-lg-4">
+      <iframe src="spec-12.html"></iframe>
+    </div>
+  </div>
+</div>
+
+<script type="text/coffeescript">
+window.say = console.log
+window.nmap = {}
+window.omap = {}
+
+window.goto = (e)->
+  e.scrollIntoView()
+
+run = (m, n, o)->
+  $(n).find('h1,h2,h3,h4').each ->
+    tag = @.tagName
+    text = $(@).text()
+      .replace(/^Chapter\s+(\d+\.)+\s+/, 'Chapter ')
+      .replace(/^(\d+\.)+\s+/, '')
+    nmap["#{tag} #{text}"] = @
+
+  $(n).find('p').each ->
+    children = @.childNodes
+    if children.length == 1 and children[0].tagName == 'STRONG'
+      text = $(children[0]).text()
+        .replace(/\s+/g, ' ')
+        .replace(/\s$/, '')
+        .replace(/^Example\s+\d+\.\d+\s+/, 'Example ')
+        .replace(/^Figure\s+\d+\.\d+\.\s+/, 'Figure ')
+      nmap["HB #{text}"] = @
+
+  $(o).find('h1,h2,h3,h4').each ->
+    tag = @.tagName
+    text = $(@).text()
+
+    if text.match /^\s*Chapter\s+\d+\.\s+/
+      tag = 'H1'
+    text = text
+      .replace(/\s+/g, ' ')
+      .replace(/^\s/, '')
+      .replace(/\s$/, '')
+      .replace(/^Chapter\s+(\d+\.)+\s+/, 'Chapter ')
+      .replace(/^(\d+\.)+\s+/, '')
+    omap["#{tag} #{text}"] = @
+
+  $(o).find('B').each ->
+    text = $(@).text()
+      .replace(/^\s+/, '')
+    return unless text.match /^(Figure|Example|Status|Abstract|Table)/
+    text = text
+      .replace(/\s+/g, ' ')
+      .replace(/\s$/, '')
+      .replace(/^Example\s+\d+\.\d+\.\s+/, 'Example ')
+      .replace(/^Figure\s+\d+\.\d+\.\s+/, 'Figure ')
+    omap["HB #{text}"] = @
+
+  IO = $('iframe')[0].contentWindow.IntersectionObserver
+
+  height = 200 - document.documentElement.scrollHeight
+
+  io = new IO (e)->
+    return unless e[0].isIntersecting
+    h = $(e[0].target).text()
+    if h.match /^(#{1,4})\s/
+      l = RegExp.$1
+      l = l.length
+      h = h.replace /^#+\s+/, ''
+      h = h.replace(/^Chapter\s+\#\.\s+/, 'Chapter ')
+      h = h.replace(/^\#\.\s+/, '')
+      t = "H#{l} #{h}"
+    else if h.match /^\*\*/
+      h = h
+        .replace(/^\*\*/, '')
+        .replace(/\*\*$/, '')
+        .replace(/\s+/g, ' ')
+        .replace(/Example\s+\#\.\s+/, 'Example ')
+        .replace(/Figure\s+\#\.\s+/, 'Figure ')
+      t = "HB #{h}"
+
+    try
+      goto nmap[t]
+    try
+      goto omap[t]
+  ,
+  rootMargin: "0px 0px #{height}px 0px"
+  threshold: [1]
+
+  $(m).find('code').each ->
+    io.observe(@)
+
+$(document).ready ->
+  window.m = (Im = $('iframe')[0]).contentDocument
+  window.n = (In = $('iframe')[1]).contentDocument
+  window.o = (Io = $('iframe')[2]).contentDocument
+  o = $('iframe')[2].contentDocument
+  wait = ->
+    say 'wait'
+    if m.readyState == 'complete' and
+       n.readyState == 'complete' and
+       o.readyState == 'complete'
+      setTimeout ->
+        run m, n, o
+      , 2000
+    else
+      setTimeout wait, 100
+  wait()
+</script>
+
+</body>
+
+</html>
+
