@@ -174,9 +174,8 @@ clean:
 	$(MAKE) -C $(EXT) $@
 	rm -fr $(BUILD) $(SITE) $(HTML)
 	rm -fr $(FILES)
-	# Delete empty dirs. Twice.
-	find . -empty -type d | xargs rm -fr
-	find . -empty -type d | xargs rm -fr
+	# Delete empty dirs.
+	find . -depth -empty -type d -delete
 
 diff: build
 	(cd $(SITE) && git diff)
