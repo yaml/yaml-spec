@@ -55,24 +55,24 @@
         throw "No EatMe.Config named '" + conf + "' found";
       }
       return $elem.each(function() {
-        var eatme;
-        eatme = new EatMe(this, config, code);
+        var $from, eatme;
+        $from = $(this);
+        eatme = new EatMe($from, config, code);
         return EatMe.objects.push(eatme);
       });
     };
 
-    function EatMe(from1, conf1, code1) {
-      this.from = from1;
+    function EatMe($from, conf1, code1) {
       this.conf = conf1;
       this.code = code1;
-      this.make_root();
+      this.make_root($from);
+      this.panes = $('<div hidden>').appendTo(this.root);
       this.make_cols();
-      $(this.from).replaceWith(this.root);
+      $from.replaceWith(this.root);
+      $(this.root).find('.eatme-pane:has(textarea)').first().find('.eatme-box').text($from.text()).change().focus();
     }
 
-    EatMe.prototype.make_root = function() {
-      var $from;
-      $from = $(this.from);
+    EatMe.prototype.make_root = function($from) {
       if ($from[0].tagName !== 'PRE') {
         throw "Can only make EatMe from '<pre>'";
       }
@@ -81,7 +81,6 @@
 
     EatMe.prototype.make_cols = function() {
       var $col, $pane, col, cols, column, i, j, len, pane, ref, ref1, self, size;
-      this.panes = $('<div hidden>').appendTo(this.root);
       cols = this.conf.cols;
       size = 12 / cols;
       for (col = i = 1, ref = cols; 1 <= ref ? i <= ref : i >= ref; col = 1 <= ref ? ++i : --i) {
@@ -147,7 +146,7 @@
     };
 
     EatMe.prototype.setup_pane = function($pane) {
-      var $textarea, base, call, calls, conf, copy_button, from, func, pane, pane_id, self, text;
+      var $from, call, conf, copy_button, from, func, pane_id, self;
       self = this;
       pane_id = $pane.attr('id');
       if (pane_id.match(/^empty-/)) {
@@ -163,46 +162,12 @@
       conf = this.conf.panes[pane_id];
       if ((call = conf.call) != null) {
         func = call[0], from = call[1];
-        calls = (base = this.root.find(".eatme-pane-" + from)[0]).calls || (base.calls = []);
-        calls.push([func, $pane]);
-      }
-      pane = $pane[0];
-      conf = pane.eatme;
-      if (conf.type === 'input' && (pane.cm == null)) {
-        $textarea = $pane.find('textarea');
-        text = $(this.from).text();
-        if (text) {
-          $textarea.text(text);
-        } else {
-          $textarea.text("\n");
-        }
-        return setTimeout(function() {
-          var cm, do_calls;
-          pane.cm = cm = CodeMirror.fromTextArea($textarea[0], {
-            lineNumbers: true
-          });
-          do_calls = function() {
-            var $to, i, len, ref, results;
-            text = cm.getValue();
-            ref = pane.calls;
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              call = ref[i];
-              func = call[0], $to = call[1];
-              results.push(self.call(func, text, $to));
-            }
-            return results;
-          };
-          cm.on('change', $.debounce(400, do_calls));
-          return setTimeout(function() {
-            do_calls();
-            cm.focus();
-            return cm.setCursor({
-              line: 0,
-              ch: 0
-            });
-          }, 200);
-        }, 100);
+        $from = this.root.find(".eatme-pane-" + from);
+        return $from.find('textarea').bind('change keyup', $.debounce(400, function() {
+          var text;
+          text = $(this).val();
+          return self.call(func, text, $pane);
+        }));
       }
     };
 
@@ -268,7 +233,6 @@
         })();
       }
       $pane = $("<div\n  id=\"" + pane.slug + "\"\n  class=\"eatme-pane eatme-pane-" + pane.slug + "\"\n>").append(this.make_nav());
-      $pane[0].eatme = pane;
       $pane[0].$output = $('<pre class="eatme-box">');
       $pane[0].$error = $('<pre class="eatme-box eatme-error">');
       $pane[0].$html = $('<div class="eatme-box">');
