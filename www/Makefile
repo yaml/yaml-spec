@@ -174,13 +174,15 @@ clean:
 	$(MAKE) -C $(EXT) $@
 	rm -fr $(BUILD) $(SITE) $(HTML)
 	rm -fr $(FILES)
+	# Delete empty dirs. Twice.
+	find . -empty -type d | xargs rm -fr
 	find . -empty -type d | xargs rm -fr
 
 diff: build
 	(cd $(SITE) && git diff)
 
 #------------------------------------------------------------------------------
-_config.yml: config.yaml
+_config.yml: jekyll/_config.yml
 	@mkdir -p $(dir $@)
 	cp $< $@
 	echo >> $@

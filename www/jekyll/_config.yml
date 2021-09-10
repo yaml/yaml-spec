@@ -1,6 +1,6 @@
 # See https://jekyllrb.com/docs/configuration/default/
 
-title: YAML™ Ain’t Markup Language — Version 1.x
+title: YAML™ Ain’t Markup Language — Spec Development
 name: null
 
 destination: /host/www/build
@@ -10,15 +10,13 @@ kramdown:
 
 theme: jekyll-theme-cayman
 
-layouts_dir: layouts
-includes_dir: includes
+layouts_dir: jekyll/_layouts
+includes_dir: jekyll/_includes
 
 exclude:
 - .git
 - .gitignore
-- config.yaml
 - ReadMe.md
 - Makefile
 - external
-- layouts
-- includes
+- jekyll
