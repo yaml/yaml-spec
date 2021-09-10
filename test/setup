@@ -10,6 +10,8 @@ test_file=${BASH_SOURCE[1]}
 
 cd "$root"
 
+export FAST_TEST=1
+
 R=$'\e[0;31m'
 G=$'\e[0;32m'
 Y=$'\e[0;33m'

@@ -15,7 +15,7 @@ spell-check() (
 
   out=$(
     aspell \
-      -p ./.aspell \
+      -p "$YAML_SPEC_ROOT/.aspell" \
       --encoding utf-8 \
       --mode markdown \
       list \

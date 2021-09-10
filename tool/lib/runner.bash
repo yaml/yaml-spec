@@ -23,6 +23,9 @@ run-local() (
 
 run-docker() (
   args=()
+  docker_run_options+=(
+    --env YAML_SPEC_ROOT=/host
+  )
   for arg; do
     if [[ $arg == "$YAML_SPEC_ROOT"/* ]]; then
       arg=/host/${arg#$YAML_SPEC_ROOT/}
