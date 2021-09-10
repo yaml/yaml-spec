@@ -1,3 +1,5 @@
+---
+---
 class window.Playground
   @refparser_events: (text)->
     parser = new Parser(new TestReceiver)

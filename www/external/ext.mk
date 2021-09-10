@@ -3,7 +3,6 @@ EXT_DIRS := \
     ext/eatme \
     ext/yaml-reference-parser \
     ext/npm-yaml \
-    ext/yaml-spec-12.html \
 
 EXT_FILES := \
     ext/eatme/src/eatme.scss \

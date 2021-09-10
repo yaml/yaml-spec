@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo '<pre style="overflow:hidden">'
+
+perl -Mstrict -p0 \
+  -e 's/&/&amp;/g; s/</&lt;/g; s/>/&gt;/g;' \
+  -e 's{^(#.*)}{<code>$1</code>}gm;' \
+  -e 's{^(\*\*(?!Legend).*(\n.*)?\*\*)$}{<code>$1</code>}gm;' \
+  "$1"
+
+echo '</pre>'

@@ -28,10 +28,10 @@ XXX-spell-check:
 docker-test:
 	$(MAKE) test TESTS='$(TESTS) XXX-spell-check' YAML_SPEC_USE_DOCKER=1
 
-$(TESTS): force
+$(TESTS): always
 	bash $@
 
-force:
+always:
 
 _:
 	git worktree prune

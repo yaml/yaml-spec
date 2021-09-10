@@ -1,2 +1,5 @@
-/spec.yaml.io/
-/html/
+*
+!/external/
+!/includes/
+!/layouts/
+!/main/

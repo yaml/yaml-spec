@@ -10,7 +10,7 @@ Building, testing and publishing the website content is controlled by the
 Makefile.
 The Makefile supports:
 
-* `make publish`
+* `make publish SITEDIR=...`
 
   Build and publish the content to <https://spec.yaml.io/BRANCH>.
 

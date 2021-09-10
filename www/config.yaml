@@ -3,15 +3,22 @@
 title: YAML™ Ain’t Markup Language — Version 1.x
 name: null
 
-destination: /host/www/build/site
+destination: /host/www/build
 
 kramdown:
   parse_block_html: true
 
 theme: jekyll-theme-cayman
 
+layouts_dir: layouts
+includes_dir: includes
+
 exclude:
 - .git
+- .gitignore
 - config.yaml
-- Gemfile
+- ReadMe.md
 - Makefile
+- external
+- layouts
+- includes

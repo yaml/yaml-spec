@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+echo '---'
+echo 'layout: spec'
+echo 'plain: true'
+echo '---'
+
+perl -Mstrict -p0 \
+  -e 's/\A---\n.*?\n---\n//s;' \
+  -e 's{\(img/}{(../img/}g;' \
+  "$1"
