@@ -56,8 +56,8 @@ HTML_FILES += $(files)
 files := $(wildcard $(SPEC_122)/*.md) title.html
 files := $(files:$(SPEC_122)/%.md=%.html)
 files := $(files:ReadMe.html=)
+files += spec.css img/
 HTML_FILES += $(files:%=1.2.2/%)
-HTML_FILES += 1.2.2/spec.css
 
 HTML_FILES := $(HTML_FILES:%/Makefile=)
 HTML_FILES := $(HTML_FILES:%=html/%)
@@ -127,6 +127,9 @@ FILES := $(FILES:%.swp=)
 # Makefile rules start here:
 #------------------------------------------------------------------------------
 .PHONY: build html site
+
+list-html:
+	@printf "%s\n" $(HTML_FILES)
 
 list-files:
 	@printf "%s\n" $(FILES)
@@ -283,6 +286,10 @@ html/%/title.html: $(SPEC)/%/spec.html
 html/1.2.2/%: $(SITE)/main/%
 	@mkdir -p $(dir $@)
 	cp $< $@
+
+html/1.2.2/%/: $(SITE)/main/%
+	mkdir -p $(shell dirname $@)
+	cp -r $< $(shell dirname $@)
 
 html/1.2.2/%.css: $(SITE)/main/%.css
 	@mkdir -p $(dir $@)
