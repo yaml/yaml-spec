@@ -7,7 +7,7 @@ DIR=..
 (
   cd "$DIR" || exit
 
-  files=(spec/*.md)
+  files=(spec/1.2.2/*.md)
 
   set -x
 

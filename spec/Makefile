@@ -1,43 +1,15 @@
-DOCKER_TOOL := html-to-markydown
 include ../tool/make/init.mk
 
-ALL_MD := $(wildcard *.md)
-ALL_CHECK := $(ALL_MD:%=check-%)
-ALL_TEX := $(wildcard tex/*.tex)
-ALL_IMG := $(ALL_TEX:tex/%.tex=img/%.svg)
-BUILD_TEX :=
+ALL := \
+    2009 \
+    1.2 \
+    1.2.0 \
+    1.2.1 \
+    1.2.2 \
 
-#------------------------------------------------------------------------------
-.PHONY: build test
+ALL_CLEAN := $(ALL:%=%-CLEAN)
 
-build: build-img
+clean: $(ALL_CLEAN)
 
-test:
-	check-spec-file $(ALL_CHECK:check-%=%)
-
-format: spec.md
-	format-markdown $< > /tmp/spec.md
-	mv /tmp/spec.md $<
-
-clean:
-	rm -fr img html build
-
-build-img: $(ALL_IMG) build-img-all
-
-html/%.html: build/%.md
-	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
-
-build/%.md: %.md
-	markydown-to-kramdown $(ROOT) $^ > /tmp/$@
-
-img/%.svg: tex/%.tex tex/include/*
-	@mkdir -p $(dir $@)
-ifeq ($(MAKECMDGOALS),build)
-	$(eval override BUILD_TEX += $<)
-else
-	tex-to-img img/ $<
-endif
-
-build-img-all:
-	@[[ -z '$(BUILD_TEX)' ]] || \
-	    (set -x; tex-to-img img/ $(BUILD_TEX))
+%-CLEAN: %
+	@$(MAKE) --no-print-directory -C $< clean

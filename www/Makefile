@@ -9,6 +9,10 @@ BUILD := build
 SITE := site
 HTML := html
 SPEC := ../spec
+SPEC_120 := $(SPEC)/1.2.0
+SPEC_121 := $(SPEC)/1.2.1
+SPEC_122 := $(SPEC)/1.2.2
+SPEC_2009 := ../spec/2009
 EXT := external
 
 include $(EXT)/ext.mk
@@ -36,22 +40,48 @@ JEKYLL_BUILD := jekyll build --trace
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 
 #------------------------------------------------------------------------------
+# Files for `make html`:
+#------------------------------------------------------------------------------
+
+HTML_FILES :=
+
+files := $(wildcard $(SPEC_120)/*)
+files := $(files:$(SPEC_120)/%=1.2.0/%)
+HTML_FILES += $(files)
+
+files := $(wildcard $(SPEC_121)/*)
+files := $(files:$(SPEC_121)/%=1.2.1/%)
+HTML_FILES += $(files)
+
+files := $(wildcard $(SPEC_122)/*.md)
+files := $(files:$(SPEC_122)/%.md=%.html)
+files := $(files:ReadMe.html=)
+HTML_FILES += $(files:%=1.2.2/%)
+HTML_FILES += 1.2.2/spec.css
+
+HTML_FILES := $(HTML_FILES:%/Makefile=)
+HTML_FILES := $(HTML_FILES:%=html/%)
+
+STRIP_HTML := \
+    perl -p0e ' \
+	s{.*<body[^>]*?>\n*}{}s; \
+	s{</body>.*}{}s; \
+	s{\s*<script.*?</script>\s*}{}sg; \
+    '
+
+#------------------------------------------------------------------------------
 # Gather all the build files:
 #------------------------------------------------------------------------------
 
-HTML_FILES := $(wildcard $(SPEC)/*.md)
-HTML_FILES := $(HTML_FILES:$(SPEC)/%.md=%.html)
-HTML_FILES := $(HTML_FILES:ReadMe.html=)
-
-SPEC_MD := $(wildcard $(SPEC)/*.md)
+SPEC_MD := $(wildcard $(SPEC_122)/*.md)
 SPEC_MD := $(SPEC_MD:%/ReadMe.md=)
-SPEC_MD := $(SPEC_MD:$(SPEC)/%=main/%)
+SPEC_MD := $(SPEC_MD:$(SPEC_122)/%=main/%)
 
-SPEC_LINKS := $(SPEC)/links.yaml
+SPEC_LINKS := $(SPEC_122)/links.yaml
 
-SPEC_IMAGE := $(wildcard $(SPEC)/tex/*.tex)
-SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC)/tex/%.tex=img/%.svg)
-.PRECIOUS: $(SPEC_IMAGE:%=$(SPEC)/%)
+SPEC_IMAGE := $(wildcard $(SPEC_122)/tex/*.tex)
+SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC_122)/tex/%.tex=img/%.svg)
+.PRECIOUS: $(SPEC_IMAGE:%=$(SPEC_122)/%)
 SPEC_IMAGE := $(SPEC_IMAGE:%=main/%)
 
 SPEC_FILES := \
@@ -125,23 +155,10 @@ serve: files
 shell: files
 	$(call docker-run,run $(DOCKER_SHELL_CMD),$(DOCKER_SHELL_OPTS))
 
-STRIP_HTML := \
-    perl -p0e ' \
-	s{.*<body[^>]*?>\n*}{}s; \
-	s{</body>.*}{}s; \
-	s{\s*<script.*?</script>\s*}{}sg; \
-    '
-
-html: always
-	$(MAKE) force site
-	@mkdir -p $(HTML)
-	cp -r $(BUILD)/main/img $(BUILD)/main/spec.css $(HTML)/
-	@for f in $(HTML_FILES); do \
-	    ( mkdir -p $$(dirname $(HTML)/$$f); \
-	      $(STRIP_HTML) $(SITE)/main/$$f > $(HTML)/$$f ) \
-	done
-
-always:
+html:
+	make clean
+	make site
+	make html-files
 
 publish: check-publish site
 	@(set -x ; \
@@ -152,32 +169,23 @@ publish: check-publish site
 	@echo "Published: https://$(PUBLISH_CNAME)/$(SITEDIR)"
 	@echo
 
-check-publish:
-ifeq ($(SITEDIR),)
-	$(error Please set SITEDIR=<word>)
-endif
-ifneq ($(wildcard $(SITE)),)
-	$(error Please make clean before make publish)
-endif
-ifeq ($(SITEDIR),main)
-ifneq ($(shell git rev-parse --abbrev-ref HEAD), main)
-	$(error Must be on branch main to use SITEDIR=main)
-endif
-endif
-
 
 # Remove generated files to force rebuild:
 force:
 	rm -fr ext $(BUILD) $(SITE) $(HTML) $(FILES)
 
 clean: force
-	$(MAKE) -C $(SPEC) $@
 	$(MAKE) -C $(EXT) $@
+
+clean-all:
+	make -C .. clean
 
 diff: build
 	(cd $(SITE) && git diff)
 
 #------------------------------------------------------------------------------
+html-files: $(HTML_FILES)
+
 _config.yml: jekyll/_config.yml
 	@mkdir -p $(dir $@)
 	cp $< $@
@@ -187,6 +195,9 @@ _config.yml: jekyll/_config.yml
 
 favicon.svg: $(EXT)/yaml-common/image/yaml-logo.svg
 	cp $< $@
+
+$(EXT_DIRS):
+	$(MAKE) -C $(EXT) build
 
 ext/%: $(EXT)/%
 	@mkdir -p $(dir $@)
@@ -215,34 +226,64 @@ main/story/%.md: $(STORY)/%.md
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-main/%.md: $(SPEC)/%.md
+main/%.md: $(SPEC_122)/%.md
 	@mkdir -p $(dir $@)
 	(echo '---'; echo '---'; cat $<) > $@
 
-main/spec.md: $(SPEC)/spec.md $(SPEC_LINKS)
+main/spec.md: $(SPEC_122)/spec.md $(SPEC_LINKS)
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-main/img/%: $(SPEC)/img/%
+main/img/%: $(SPEC_122)/img/%
 	@mkdir -p $(dir $@)
 	cp -r $< $@
 
-$(SPEC)/img/%:
-	$(MAKE) -C $(SPEC) build-img YAML_SPEC_DIR=
+$(SPEC_122)/img/%:
+	$(MAKE) -C $(SPEC_122) build-img YAML_SPEC_DIR=
 
 main/review/spec-12.html: $(EXT)/spec-2009/yaml-spec-12.html
 	cp $< $@
 	perl -pi -e 's{"(.*?\.png)"}{"../img/$$1"}' $@
 
-main/review/single_html.css: $(SPEC)/2009/single_html.css
+main/review/single_html.css: $(SPEC_2009)/single_html.css
 	cp $< $@
 
-main/review/markdown.html: $(SPEC)/spec.md
+main/review/markdown.html: $(SPEC_122)/spec.md
 	make-review-spec-html $< > $@
 
 main/review/spec-plain.md: main/spec.md
 	make-review-spec-md $< > $@
 
 #------------------------------------------------------------------------------
-$(EXT_DIRS):
-	$(MAKE) -C $(EXT) build
+check-publish:
+ifeq ($(SITEDIR),)
+	$(error Please set SITEDIR=<word>)
+endif
+ifneq ($(wildcard $(SITE)),)
+	$(error Please make clean before make publish)
+endif
+ifeq ($(SITEDIR),main)
+ifneq ($(shell git rev-parse --abbrev-ref HEAD), main)
+	$(error Must be on branch main to use SITEDIR=main)
+endif
+endif
+
+html/%: $(SPEC)/%
+	@mkdir -p $(dir $@)
+	cp $< $@
+
+html/%.html: $(SPEC)/%.html
+	@mkdir -p $(dir $@)
+	$(STRIP_HTML) $< > $@
+
+html/1.2.2/%: $(SITE)/main/%
+	@mkdir -p $(dir $@)
+	cp $< $@
+
+html/1.2.2/%.css: site/main/%.css
+	@mkdir -p $(dir $@)
+	cp $< $@
+
+html/1.2.2/%.html: site/main/%.html
+	@mkdir -p $(dir $@)
+	$(STRIP_HTML) $< > $@

@@ -40,7 +40,7 @@ _:
 	$(MAKE) -C $@ all
 
 clean:
-	git worktree prune
-	$(MAKE) -C spec/2009 $@
-	$(MAKE) -C www $@
-	$(MAKE) -C tool/docker clean-all
+	@git worktree prune
+	$(MAKE) --no-print-directory -C spec $@
+	$(MAKE) --no-print-directory -C www $@
+	$(MAKE) --no-print-directory -C tool/docker clean-all
