@@ -168,16 +168,11 @@ endif
 
 # Remove generated files to force rebuild:
 force:
-	rm -fr $(BUILD) $(SITE) $(HTML)
+	rm -fr ext $(BUILD) $(SITE) $(HTML) $(FILES)
 
-clean:
+clean: force
 	$(MAKE) -C $(SPEC) $@
 	$(MAKE) -C $(EXT) $@
-	rm -fr $(BUILD) $(SITE) $(HTML)
-	rm -fr $(FILES)
-	# Delete empty dirs. Twice.
-	find . -empty -type d | xargs rm -fr
-	find . -empty -type d | xargs rm -fr
 
 diff: build
 	(cd $(SITE) && git diff)
