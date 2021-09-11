@@ -26,4 +26,4 @@ clean-all: $(ALL_CLEAN)
 	$(MAKE) -C $(@:%-PULL=%) docker-pull
 
 %-CLEAN:
-	$(MAKE) -C $(@:%-CLEAN=%) clean
+	@$(MAKE) -C $(@:%-CLEAN=%) --no-print-directory clean

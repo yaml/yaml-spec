@@ -23,6 +23,6 @@ docker-pull:
 	docker pull $(DOCKER_IMAGE)
 
 clean:
-	rm -f $(DOCKER_BIN)
+	@rm -f $(DOCKER_BIN)
 
 include $(ROOT)/tool/make/docker-run.mk

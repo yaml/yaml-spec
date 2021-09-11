@@ -27,6 +27,3 @@ docker run $(IT) --rm \
     $(DOCKER_IMAGE) \
     $1
 endef
-
-docker-shell: docker-build
-	$(call docker-run,bash)
