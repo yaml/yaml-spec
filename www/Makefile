@@ -45,15 +45,15 @@ JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 
 HTML_FILES :=
 
-files := $(wildcard $(SPEC_120)/*)
+files := $(wildcard $(SPEC_120)/*) $(SPEC_120)/title.html
 files := $(files:$(SPEC_120)/%=1.2.0/%)
 HTML_FILES += $(files)
 
-files := $(wildcard $(SPEC_121)/*)
+files := $(wildcard $(SPEC_121)/*) $(SPEC_121)/title.html
 files := $(files:$(SPEC_121)/%=1.2.1/%)
 HTML_FILES += $(files)
 
-files := $(wildcard $(SPEC_122)/*.md)
+files := $(wildcard $(SPEC_122)/*.md) title.html
 files := $(files:$(SPEC_122)/%.md=%.html)
 files := $(files:ReadMe.html=)
 HTML_FILES += $(files:%=1.2.2/%)
@@ -276,14 +276,22 @@ html/%.html: $(SPEC)/%.html
 	@mkdir -p $(dir $@)
 	$(STRIP_HTML) $< > $@
 
+html/%/title.html: $(SPEC)/%/spec.html
+	@mkdir -p $(dir $@)
+	grep '<title>' $< | head -n1 > $@
+
 html/1.2.2/%: $(SITE)/main/%
 	@mkdir -p $(dir $@)
 	cp $< $@
 
-html/1.2.2/%.css: site/main/%.css
+html/1.2.2/%.css: $(SITE)/main/%.css
 	@mkdir -p $(dir $@)
 	cp $< $@
 
-html/1.2.2/%.html: site/main/%.html
+html/1.2.2/%.html: $(SITE)/main/%.html
 	@mkdir -p $(dir $@)
 	$(STRIP_HTML) $< > $@
+
+html/1.2.2/title.html: $(SITE)/main/spec.html
+	@mkdir -p $(dir $@)
+	grep '<title>' $< | head -n1 > $@
