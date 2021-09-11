@@ -6173,7 +6173,7 @@ Hence the YAML [processor] should consider them to be an error.
 > Note: The regular expression for `float` does not exactly match the one in
 the JSON specification, where at least one digit is required after the dot: `(
 \.  [0-9]+ )`.  The YAML 1.2 specification intended to match JSON behavior, but
-this cannot be addressed in the 1.2.1 specification.
+this cannot be addressed in the 1.2.2 specification.
 
 **Example #. JSON Tag Resolution**
 
