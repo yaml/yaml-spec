@@ -5074,7 +5074,7 @@ also not [folded].
    * bullet
 
    * list
-   * line↓
+   * lines↓
 ↓
  last
  line
