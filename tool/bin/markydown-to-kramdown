@@ -93,7 +93,7 @@ sub parse_sections {
       \n+
     }{}x and push @s, {heading => "# $1"} and next;
 
-    s/\A(#{1,5} .*\n)\n+//
+    s/\A(#{1,5} .*\n$ial?)\n+//
       and push @s, {heading => $1} and next;
 
     # Definition term:

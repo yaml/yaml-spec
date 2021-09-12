@@ -6,7 +6,8 @@ status: draft
 
 # YAML Ain't Markup Language (YAML™) Version 1.2
 
-**YAML Specification Version 1.2.2 -- Released YYYY-MM-DD**
+## Revision 1.2.2 (YYYY-MM-DD)
+{:.subtitle}
 
 Copyright presently by [The YAML Language Development Team](core-team)  
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net

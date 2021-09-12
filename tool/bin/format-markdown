@@ -61,6 +61,12 @@ sub wrap {
   return 1;
 }
 
+sub head {
+  out take;
+  out take if peek =~ /^\{:/;
+  space;
+}
+
 sub line {
   out take;
 }
@@ -132,6 +138,7 @@ sub main {
   }
 
   while (my $peek = peek) {
+    head and next if $peek =~ /^#+\ /;
     line and next if $peek =~ /^\[\^/;
     leg  and next if $peek =~ /^\*\*Legend:\*\*$/;
     toc  and next if $peek =~ /^\{:toc\}$/;
