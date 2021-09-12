@@ -1278,8 +1278,8 @@ This context sensitivity is the cause of most of the complexity of the YAML
 syntax definition.
 It is further complicated by struggling with the human tendency to look ahead
 when interpreting text.
-These complications are of course the source of most of YAML's power to
-[present] data in a very human readable way.
+These complications are the source of most of YAML's power to [present] data in
+a very human readable way.
 
 Productions use any of the following parameters:
 
