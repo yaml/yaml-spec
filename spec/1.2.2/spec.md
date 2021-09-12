@@ -66,7 +66,7 @@ data serialization language designed around the common native data types of
 dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 internet messaging to object persistence to data auditing and visualization.
-Together with the Unicode standard for characters[^Unicode], this specification
+Together with the Unicode standard for characters[^unicode], this specification
 provides all the information necessary to understand YAML Version 1.2 and to
 create programs that process YAML information.
 
@@ -96,8 +96,8 @@ information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful
 way.
-For example, [indentation] may be used for structure, [colons] separate [key:
-value pairs] and [dashes] are used to create "bulleted" [lists].
+For example, [indentation] may be used for structure, [colons] separate
+[key/value pairs] and [dashes] are used to create "bulleted" [lists].
 
 There are many kinds of [data structures], but they can all be adequately
 [represented] with three basic primitives: [mappings] (hashes/dictionaries),
@@ -139,8 +139,8 @@ The YAML 1.0 specification was published in early 2004 by by Clark Evans, Oren
 Ben-Kiki, and Ingy döt Net after 3 years of collaborative design work through
 the yaml-core mailing list[^yaml-core].
 The project was initially rooted in Clark and Oren's work on the
-SML-DEV[^SML-DEV] mailing list (for simplifying XML) and Ingy's plain text
-serialization module[^Denter] for Perl.
+SML-DEV[^sml-dev] mailing list (for simplifying XML) and Ingy's plain text
+serialization module[^denter] for Perl.
 The language took a lot of inspiration from many other technologies and formats
 that preceded it.
 
@@ -2004,7 +2004,7 @@ Word (alphanumeric) characters for identifiers:
   ns-dec-digit | ns-ascii-letter | "-"
 ```
 
-URI characters for [tags], as defined in the URI specification[^URI].
+URI characters for [tags], as defined in the URI specification[^uri].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8 and then each byte is _escaped_ using

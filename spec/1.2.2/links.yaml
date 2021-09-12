@@ -146,14 +146,14 @@ loading-point-failures:
 mapping:
 - collection node
 - collection's
-- 'key: value pair'
+- 'key/value pair'
 - key node
 - mapping
 - mapping's
 - mapping key order
 - mapping node
 - mapping value
-- 'single key: value pair'
+- 'single key/value pair'
 node-comparison:
 - unique
 nodes:
