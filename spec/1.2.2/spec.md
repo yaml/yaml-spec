@@ -3152,7 +3152,7 @@ semantics to the same [global tag].
 ```
 
 ```
-!<tag:example.com,2000:app/foo> "bar"
+- !<tag:example.com,2000:app/foo> "bar"
 ```
 
 **Legend:**
