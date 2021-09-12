@@ -2501,10 +2501,10 @@ Line prefixes are a [presentation detail] and must not be used to convey
 
 ```
 [#] s-line-prefix(n,c) ::=
-  c = block-out => s-block-line-prefix(n)
-  c = block-in  => s-block-line-prefix(n)
-  c = flow-out  => s-flow-line-prefix(n)
-  c = flow-in   => s-flow-line-prefix(n)
+  c == block-out => s-block-line-prefix(n)
+  c == block-in  => s-block-line-prefix(n)
+  c == flow-out  => s-flow-line-prefix(n)
+  c == flow-in   => s-flow-line-prefix(n)
 ```
 
 ```
@@ -2840,12 +2840,12 @@ Note that structures following multi-line comment separation must be properly
 
 ```
 [#] s-separate(n,c) ::=
-  c = block-out => s-separate-lines(n)
-  c = block-in  => s-separate-lines(n)
-  c = flow-out  => s-separate-lines(n)
-  c = flow-in   => s-separate-lines(n)
-  c = block-key => s-separate-in-line
-  c = flow-key  => s-separate-in-line
+  c == block-out => s-separate-lines(n)
+  c == block-in  => s-separate-lines(n)
+  c == flow-out  => s-separate-lines(n)
+  c == flow-in   => s-separate-lines(n)
+  c == block-key => s-separate-in-line
+  c == flow-key  => s-separate-in-line
 ```
 
 ```
@@ -3731,10 +3731,10 @@ Double-quoted scalars are restricted to a single line when contained inside an
 
 ```
 [#] nb-double-text(n,c) ::=
-  c = flow-out  => nb-double-multi-line(n)
-  c = flow-in   => nb-double-multi-line(n)
-  c = block-key => nb-double-one-line
-  c = flow-key  => nb-double-one-line
+  c == flow-out  => nb-double-multi-line(n)
+  c == flow-in   => nb-double-multi-line(n)
+  c == block-key => nb-double-one-line
+  c == flow-key  => nb-double-one-line
 ```
 
 ```
@@ -3912,10 +3912,10 @@ Single-quoted scalars are restricted to a single line when contained inside a
 
 ```
 [#] nb-single-text(n,c) ::=
-  c = flow-out  => nb-single-multi-line(n)
-  c = flow-in   => nb-single-multi-line(n)
-  c = block-key => nb-single-one-line
-  c = flow-key  => nb-single-one-line
+  c == flow-out  => nb-single-multi-line(n)
+  c == flow-in   => nb-single-multi-line(n)
+  c == block-key => nb-single-one-line
+  c == flow-key  => nb-single-one-line
 ```
 
 ```
@@ -4036,10 +4036,10 @@ These characters would cause ambiguity with [flow collection] structures.
 
 ```
 [#] ns-plain-safe(c) ::=
-  c = flow-out  => ns-plain-safe-out
-  c = flow-in   => ns-plain-safe-in
-  c = block-key => ns-plain-safe-out
-  c = flow-key  => ns-plain-safe-in
+  c == flow-out  => ns-plain-safe-out
+  c == flow-in   => ns-plain-safe-in
+  c == block-key => ns-plain-safe-out
+  c == flow-key  => ns-plain-safe-in
 ```
 
 ```
@@ -4112,10 +4112,10 @@ Plain scalars are further restricted to a single line when contained inside an
 
 ```
 [#] ns-plain(n,c) ::=
-  c = flow-out  => ns-plain-multi-line(n,c)
-  c = flow-in   => ns-plain-multi-line(n,c)
-  c = block-key => ns-plain-one-line(c)
-  c = flow-key  => ns-plain-one-line(c)
+  c == flow-out  => ns-plain-multi-line(n,c)
+  c == flow-in   => ns-plain-multi-line(n,c)
+  c == block-key => ns-plain-one-line(c)
+  c == flow-key  => ns-plain-one-line(c)
 ```
 
 ```
@@ -4200,10 +4200,10 @@ This does not cause ambiguity because flow collection entries can never be
 
 ```
 [#] in-flow(c) ::=
-  c = flow-out  => flow-in
-  c = flow-in   => flow-in
-  c = block-key => flow-key
-  c = flow-key  => flow-key
+  c == flow-out  => flow-in
+  c == flow-in   => flow-in
+  c == block-key => flow-key
+  c == flow-key  => flow-key
 ```
 
 
@@ -4948,9 +4948,9 @@ convey [content] information.
 
 ```
 [#] c-chomping-indicator(t) ::=
-  '-'         => t = strip
-  '+'         => t = keep
-  /* Empty */ => t = clip
+  '-'         => t = STRIP
+  '+'         => t = KEEP
+  /* Empty */ => t = CLIP
 ```
 
 
@@ -4959,9 +4959,9 @@ by the chomping indicator specified in the [block scalar header].
 
 ```
 [#] b-chomped-last(t) ::=
-  t = strip => b-non-content | /* End of file */
-  t = clip  => b-as-line-feed | /* End of file */
-  t = keep  => b-as-line-feed | /* End of file */
+  t == STRIP => b-non-content  | /* End of file */
+  t == CLIP  => b-as-line-feed | /* End of file */
+  t == KEEP  => b-as-line-feed | /* End of file */
 ```
 
 
@@ -4993,9 +4993,9 @@ header].
 
 ```
 [#] l-chomped-empty(n,t) ::=
-  t = strip => l-strip-empty(n)
-  t = clip  => l-strip-empty(n)
-  t = keep  => l-keep-empty(n)
+  t == STRIP => l-strip-empty(n)
+  t == CLIP  => l-strip-empty(n)
+  t == KEEP  => l-keep-empty(n)
 ```
 
 ```
@@ -5819,8 +5819,8 @@ versus [**`block-in`** context]).
 
 ```
 [#] seq-spaces(n,c) ::=
-  c = block-out => n-1
-  c = block-in  => n
+  c == block-out => n-1
+  c == block-in  => n
 ```
 
 
