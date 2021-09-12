@@ -5740,7 +5740,7 @@ A _directives document_ begins with some [directives] followed by an explicit
 --- |
 %!PS-Adobe-2.0
 ...
-%YAML1.2
+%YAML 1.2
 ---
 # Empty
 ...
