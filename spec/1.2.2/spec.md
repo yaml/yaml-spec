@@ -3024,7 +3024,6 @@ by the simple addition of a single "**`TAG`**" directive.
 This allows using a compact notation for a single "secondary" name space.
 By default, the prefix associated with this handle is
 "**`tag:yaml.org,2002:`**".
-This prefix is used by the [YAML tag repository].
 
 : It is possible to override this default behavior by providing an explicit
 "**`TAG`**" directive associating a different prefix for this handle.
