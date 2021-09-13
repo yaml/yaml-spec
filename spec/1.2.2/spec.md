@@ -4620,7 +4620,7 @@ indicator for cases where detection will fail.
 [ "detected\n",
   "\n\n# detected\n",
   " explicit\n",
-  "\t detected\n" ]
+  "\t\ndetected\n" ]
 ```
 
 **Legend:**
