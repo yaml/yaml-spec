@@ -3137,7 +3137,7 @@ semantics to the same [local tag].
 valid URI prefix, and should contain at least the scheme.
 [Shorthands] using the associated [handle] are expanded to globally unique URI
 tags and their semantics is consistent across [applications].
-In particular, every [documents] in every [stream] must assign the same
+In particular, every [document] in every [stream] must assign the same
 semantics to the same [global tag].
 
 ```
