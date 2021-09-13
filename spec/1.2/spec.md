@@ -1126,9 +1126,6 @@ scheme.
 [Tags] in a YAML stream must therefore be [presented] in a canonical way so
 that such comparison would yield the correct results.
 
-> If a node has itself as a descendant (via an alias), then equality of that node
-is implementation-defined.
-
 
 ##### Identity
 
