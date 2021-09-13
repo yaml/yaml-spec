@@ -4797,7 +4797,7 @@ keep: |+
 ```
 { "strip": "# text",
   "clip": "# text\n",
-  "keep": "# text\n" }
+  "keep": "# text\n\n" }
 ```
 
 **Legend:**
