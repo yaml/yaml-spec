@@ -6253,7 +6253,6 @@ next [document].
 
 This specification defines a number of [tags] that [represent] common native data
 structures.
-Implementations should [recognize] these tags.
 
 These tags are defined by the following characteristics:
 
@@ -6274,14 +6273,7 @@ These tags are defined by the following characteristics:
 : The intended use and interpretation of the tag.
 
 
-[Scalar] [tags] also have the following characteristics:
-
-
-? Allowed Formatted Content
-
-: The set of strings that may be the [formatted content] of [nodes] with the tag.
-If the node's [formatted content] does not match,
-then the [node] is [invalid].
+[Scalar] [tags] also have the following characteristic:
 
 
 ? Canonical Form
