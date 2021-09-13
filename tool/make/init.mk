@@ -21,7 +21,7 @@ endif
 ROOT := $(YAML_SPEC_ROOT)
 
 SPEC12 := $(ROOT)/1.2
-SPEC := $(ROOT)/spec
+SPEC := $(ROOT)/spec/1.2.2
 DOC := $(ROOT)/doc
 GRAMMAR := $(ROOT)/grammar
 RFC := $(ROOT)/rfc
