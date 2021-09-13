@@ -3327,7 +3327,7 @@ This behavior is consistent with the URI character escaping rules
 
 ```
 ERROR:
-- The !o! handle has no suffix.
+- The !e! handle has no suffix.
 - The !h! handle wasn't declared.
 ```
 <!-- 2:7,3 -->
