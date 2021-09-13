@@ -5089,9 +5089,8 @@ also not [folded].
 ```
 
 **Legend:**
-* [b-as-line-feed] <!-- 4:6 7:6 -->
-* (separation)
-* [l-empty(n,c)] <!-- 2 5 12 -->
+* [b-as-line-feed] <!-- 4:6 7:6 11:11 -->
+* (separation) [l-empty(n,c)] <!-- 2 5 12 -->
 
 
 The final [line break] and trailing [empty lines] if any, are subject to
