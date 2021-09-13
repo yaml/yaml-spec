@@ -3,10 +3,6 @@ import { resolveFlowScalar } from '../compose/resolve-flow-scalar.js';
 import { YAMLParseError } from '../errors.js';
 import { stringifyString } from '../stringify/stringifyString.js';
 
-/**
- * If `token` is a CST flow or block scalar, determine its string value and a few other attributes.
- * Otherwise, return `null`.
- */
 function resolveAsScalar(token, strict = true, onError) {
     if (token) {
         const _onError = (pos, code, message) => {
