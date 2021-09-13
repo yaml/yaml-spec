@@ -6251,8 +6251,8 @@ next [document].
 
 # Chapter #. Tag Repository
 
-This specification defines a number of [tags] that [represent] common native data
-structures.
+This specification defines a number of [tags] that [represent] common native
+data structures.
 
 These tags are defined by the following characteristics:
 
