@@ -47,7 +47,7 @@ the content of this draft or cite it as an authority.
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<p><strong>YAML Specification Version 1.2.1 – Released 2021-09-07</strong></p>
+<h2 class="subtitle" id="revision-122-2021-09-13">Revision 1.2.2 (2021-09-13)</h2>
 
 <p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -56,7 +56,7 @@ Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 
 <p><strong>Status of this Document</strong></p>
 
-<p>This is the <strong>YAML specification v1.2.1</strong>.
+<p>This is the <strong>YAML specification v1.2.2</strong>.
 It defines the <strong>YAML 1.2 data language</strong>.
 There are no normative changes from the <strong>YAML specification v1.2</strong>.
 The primary objectives of this version are to correct errors and add clarity.</p>
@@ -94,9 +94,9 @@ published versions of this specification.</p>
   <li><a href="implementer-refs">YAML Implementer’s Reference Index</a></li>
   <li><a href="user-refs">YAML User’s Reference Index</a></li>
   <li><a href="community">YAML Community</a></li>
-  <li><a href="spec-errata">YAML 1.2.1 Specification Errata</a></li>
-  <li><a href="spec-changes">YAML 1.2.1 Specification Changes</a></li>
-  <li><a href="spec-authors">YAML 1.2.1 Specification Authors</a></li>
+  <li><a href="spec-errata">YAML 1.2.2 Specification Errata</a></li>
+  <li><a href="spec-changes">YAML 1.2.2 Specification Changes</a></li>
+  <li><a href="spec-authors">YAML 1.2.2 Specification Authors</a></li>
 </ul>
 
 <p><strong>Abstract</strong></p>
@@ -106,14 +106,17 @@ data serialization language designed around the common native data types of
 dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 internet messaging to object persistence to data auditing and visualization.
-Together with the Unicode standard for characters[^Unicode], this specification
+Together with the Unicode standard for characters<sup id="fnref:unicode" role="doc-noteref"><a href="#fn:unicode" class="footnote" rel="footnote">3</a></sup>, this specification
 provides all the information necessary to understand YAML Version 1.2 and to
 create programs that process YAML information.</p>
 
 <p><strong>Contents</strong></p>
 
 <ul id="markdown-toc">
-  <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</a></li>
+  <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</a>    <ul>
+      <li><a href="#revision-122-2021-09-13" id="markdown-toc-revision-122-2021-09-13">Revision 1.2.2 (2021-09-13)</a></li>
+    </ul>
+  </li>
   <li><a href="#chapter-1-introduction" id="markdown-toc-chapter-1-introduction">Chapter 1. Introduction</a>    <ul>
       <li><a href="#11-goals" id="markdown-toc-11-goals">1.1. Goals</a></li>
       <li><a href="#12-yaml-history" id="markdown-toc-12-yaml-history">1.2. YAML History</a></li>
@@ -304,8 +307,8 @@ information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful
 way.
-For example, <a href="#indentation-spaces">indentation</a> may be used for structure, <a href="#flow-mappings">colons</a> separate <a href="#mapping">key:
-value pairs</a> and <a href="#block-sequences">dashes</a> are used to create “bulleted” <a href="#sequence">lists</a>.</p>
+For example, <a href="#indentation-spaces">indentation</a> may be used for structure, <a href="#flow-mappings">colons</a> separate
+<a href="#mapping">key/value pairs</a> and <a href="#block-sequences">dashes</a> are used to create “bulleted” <a href="#sequence">lists</a>.</p>
 
 <p>There are many kinds of <a href="#dump">data structures</a>, but they can all be adequately
 <a href="#representation-graph">represented</a> with three basic primitives: <a href="#mapping">mappings</a> (hashes/dictionaries),
@@ -347,10 +350,10 @@ When data is easy to view and understand, programming becomes a simpler task.</p
 
 <p>The YAML 1.0 specification was published in early 2004 by by Clark Evans, Oren
 Ben-Kiki, and Ingy döt Net after 3 years of collaborative design work through
-the yaml-core mailing list<sup id="fnref:yaml-core" role="doc-noteref"><a href="#fn:yaml-core" class="footnote" rel="footnote">3</a></sup>.
+the yaml-core mailing list<sup id="fnref:yaml-core" role="doc-noteref"><a href="#fn:yaml-core" class="footnote" rel="footnote">4</a></sup>.
 The project was initially rooted in Clark and Oren’s work on the
-SML-DEV[^SML-DEV] mailing list (for simplifying XML) and Ingy’s plain text
-serialization module[^Denter] for Perl.
+SML-DEV<sup id="fnref:sml-dev" role="doc-noteref"><a href="#fn:sml-dev" class="footnote" rel="footnote">5</a></sup> mailing list (for simplifying XML) and Ingy’s plain text
+serialization module<sup id="fnref:denter" role="doc-noteref"><a href="#fn:denter" class="footnote" rel="footnote">6</a></sup> for Perl.
 The language took a lot of inspiration from many other technologies and formats
 that preceded it.</p>
 
@@ -358,12 +361,12 @@ that preceded it.</p>
 language to ship a YAML framework as part of its core language distribution in
 2003.</p>
 
-<p>The YAML 1.1<sup id="fnref:1-1-spec" role="doc-noteref"><a href="#fn:1-1-spec" class="footnote" rel="footnote">4</a></sup> specification was published in 2005.
-Around this time, the developers became aware of JSON<sup id="fnref:json" role="doc-noteref"><a href="#fn:json" class="footnote" rel="footnote">5</a></sup>.
+<p>The YAML 1.1<sup id="fnref:1-1-spec" role="doc-noteref"><a href="#fn:1-1-spec" class="footnote" rel="footnote">7</a></sup> specification was published in 2005.
+Around this time, the developers became aware of JSON<sup id="fnref:json" role="doc-noteref"><a href="#fn:json" class="footnote" rel="footnote">8</a></sup>.
 By sheer coincidence, JSON was almost a complete subset of YAML (both
 syntactically and semantically).</p>
 
-<p>In 2006, Kirill Siminov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">6</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">7</a></sup>.
+<p>In 2006, Kirill Siminov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">9</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">10</a></sup>.
 A lot of the YAML frameworks in various programming languages are built over
 LibYAML and many others have looked to PyYAML as a solid reference for their
 implementations.</p>
@@ -379,7 +382,7 @@ In 2020, the new <a href="core-team">YAML language design team</a> began meeting
 to discuss improvements to the YAML language and specification; to better meet
 the needs and expectations of its users and use cases.</p>
 
-<p>This YAML 1.2.1 specification, published in September 2021, is the first step
+<p>This YAML 1.2.2 specification, published in September 2021, is the first step
 in YAML’s rejuvenated development journey.
 YAML is now more popular than it has ever been, but there is a long list of
 things that need to be addressed for it to reach its full potential.
@@ -390,7 +393,7 @@ The YAML design team is focused on making YAML as good as possible.</p>
 
 <p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,
 “SHOULD NOT”, “RECOMMENDED”,  “MAY”, and “OPTIONAL” in this document are to be
-interpreted as described in RFC 2119<sup id="fnref:rfc-2119" role="doc-noteref"><a href="#fn:rfc-2119" class="footnote" rel="footnote">8</a></sup>.</p>
+interpreted as described in RFC 2119<sup id="fnref:rfc-2119" role="doc-noteref"><a href="#fn:rfc-2119" class="footnote" rel="footnote">11</a></sup>.</p>
 
 <p>The rest of this document is arranged as follows.
 Chapter [2] provides a short preview of the main YAML features.
@@ -414,7 +417,7 @@ specification.</p>
 <p>YAML’s <a href="#block-collection-styles">block collections</a> use <a href="#indentation-spaces">indentation</a> for scope and begin each entry on
 its own line.
 <a href="#block-sequences">Block sequences</a> indicate each entry with a dash and space (“<strong><code class="language-plaintext highlighter-rouge">-</code></strong> “).
-<a href="#mapping">Mappings</a> use a colon and space (“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “) to mark each <del><a href="#undefined">key/value pair</a></del>.
+<a href="#mapping">Mappings</a> use a colon and space (“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “) to mark each <a href="#mapping">key/value pair</a>.
 <a href="#comments">Comments</a> begin with an octothorpe (also called a “hash”, “sharp”, “pound” or
 “number sign” - “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”).</p>
 
@@ -585,7 +588,7 @@ rbi:
 </div>
 
 <p>A question mark and space (“<strong><code class="language-plaintext highlighter-rouge">?</code></strong> “) indicate a complex <a href="#mapping">mapping</a> <a href="#nodes">key</a>.
-Within a <a href="#block-collection-styles">block collection</a>, <del><a href="#undefined">key/value pairs</a></del> can start immediately following
+Within a <a href="#block-collection-styles">block collection</a>, <a href="#mapping">key/value pairs</a> can start immediately following
 the <a href="#block-sequences">dash</a>, <a href="#flow-mappings">colon</a> or <a href="#flow-mappings">question mark</a>.</p>
 
 <div id="example-mapping-between-sequences" class="example">
@@ -1141,7 +1144,7 @@ A single “<strong><code class="language-plaintext highlighter-rouge">+</code><
 directed graph of <a href="#tags">tagged</a> <a href="#nodes">nodes</a>.
 By “directed graph” we mean a set of <a href="#nodes">nodes</a> and directed edges (“arrows”),
 where each edge connects one <a href="#nodes">node</a> to another (see a formal directed graph
-definition<sup id="fnref:digraph" role="doc-noteref"><a href="#fn:digraph" class="footnote" rel="footnote">9</a></sup>).
+definition<sup id="fnref:digraph" role="doc-noteref"><a href="#fn:digraph" class="footnote" rel="footnote">12</a></sup>).
 All the <a href="#nodes">nodes</a> must be reachable from the <em>root node</em> via such edges.
 Note that the YAML graph may include cycles and a <a href="#nodes">node</a> may have more than one
 incoming edge.</p>
@@ -1205,7 +1208,7 @@ key or a value.</p>
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
 identifier, called a <em>tag</em>.
 <em>Global tags</em> are URIs and hence globally unique across all <a href="#processing-yaml-information">applications</a>.
-The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">10</a></sup> is recommended for all global YAML tags.
+The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">13</a></sup> is recommended for all global YAML tags.
 In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
 Local tags start with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em>, are not URIs and are not expected to be
 globally unique.
@@ -1330,7 +1333,7 @@ the <a href="#representation-graph">representation graph</a> (and hence for the 
 data).
 In every case where <a href="#nodes">node</a> order is significant, a <a href="#sequence">sequence</a> must be used.
 For example, an ordered <a href="#mapping">mapping</a> can be <a href="#representation-graph">represented</a> as a <a href="#sequence">sequence</a> of
-<a href="#mapping">mappings</a>, where each <a href="#mapping">mapping</a> is a single <del><a href="#undefined">key/value pair</a></del>.
+<a href="#mapping">mappings</a>, where each <a href="#mapping">mapping</a> is a single <a href="#mapping">key/value pair</a>.
 YAML provides convenient <a href="#example-flow-mapping-adjacent-values">compact notation</a> for this case.</p>
 
 <div id="anchors-and-aliases"></div>
@@ -1385,7 +1388,7 @@ readability.</p>
 In some cases, YAML also allows nested <a href="#scalars">block</a> <a href="#collections">collections</a> to start in-line
 for a more <a href="#example-flow-mapping-adjacent-values">compact notation</a>.
 In addition, YAML provides a <a href="#example-flow-mapping-adjacent-values">compact notation</a> for <a href="#flow-mappings">flow mappings</a> with a
-single <del><a href="#undefined">key/value pair</a></del>, nested inside a <a href="#flow-sequences">flow sequence</a>.
+single <a href="#mapping">key/value pair</a>, nested inside a <a href="#flow-sequences">flow sequence</a>.
 These allow for a natural “ordered mapping” notation.</p>
 
 <p><strong>Figure 3.6. Kind/Style Combinations</strong></p>
@@ -1744,10 +1747,10 @@ prefixes.</p>
 
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
-The allowed character range explicitly excludes the C0 control block<sup id="fnref:c0-block" role="doc-noteref"><a href="#fn:c0-block" class="footnote" rel="footnote">11</a></sup>
+The allowed character range explicitly excludes the C0 control block<sup id="fnref:c0-block" role="doc-noteref"><a href="#fn:c0-block" class="footnote" rel="footnote">14</a></sup>
 <strong><code class="language-plaintext highlighter-rouge">#x0-#x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">#x9</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">#xA</code></strong> and CR <strong><code class="language-plaintext highlighter-rouge">#xD</code></strong> which
 are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">#x7F</code></strong>, the C1 control block <strong><code class="language-plaintext highlighter-rouge">#x80-#x9F</code></strong> (except for
-NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">12</a></sup>
+NEL <strong><code class="language-plaintext highlighter-rouge">#x85</code></strong> which is allowed), the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">15</a></sup>
 <strong><code class="language-plaintext highlighter-rouge">#xD800-#xDFFF</code></strong>, <strong><code class="language-plaintext highlighter-rouge">#xFFFE</code></strong> and <strong><code class="language-plaintext highlighter-rouge">#xFFFF</code></strong>.</p>
 
 <p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
@@ -1924,7 +1927,7 @@ If another encoding is used, it is recommended that an explicit byte order mark
 be used, even if the first <a href="#streams">stream</a> character is ASCII.</p>
 
 <p>For more information about the byte order mark and the Unicode character
-encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><a href="#fn:uni-faq" class="footnote" rel="footnote">13</a></sup>.</p>
+encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><a href="#fn:uni-faq" class="footnote" rel="footnote">16</a></sup>.</p>
 
 <div id="rule-c-byte-order-mark"></div>
 <pre class="rule">
@@ -2605,7 +2608,7 @@ classes:</p>
   <a href="#rule-ns-dec-digit">ns-dec-digit</a> | <a href="#rule-ns-ascii-letter">ns-ascii-letter</a> | "-"
 </pre>
 
-<p>URI characters for <a href="#tags">tags</a>, as defined in the URI specification[^URI].</p>
+<p>URI characters for <a href="#tags">tags</a>, as defined in the URI specification<sup id="fnref:uri" role="doc-noteref"><a href="#fn:uri" class="footnote" rel="footnote">17</a></sup>.</p>
 
 <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8 and then each byte is <em>escaped</em> using
@@ -4078,10 +4081,11 @@ semantics to the same <a href="#tags">global tag</a>.</p>
 
 </td>
 <td class="side-by-side">
-        <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">!&lt;tag:example.com,</span><span class="mi">2000</span><span class="err">:app/foo&gt;</span><span class="w"> </span><span class="s2">"bar"</span><span class="w">
-</span></code></pre></div>        </div>
+<pre>
+- !&lt;tag:example.com,2000:app/foo&gt; "bar"
+</pre>
 
-      </td>
+</td>
 </tr>
 </table>
   <div class="legend">
@@ -4994,7 +4998,7 @@ causes no ambiguity.</p>
 
 <p>Plain scalars must never contain the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “ and “ <strong><code class="language-plaintext highlighter-rouge">#</code></strong>” character
 combinations.
-Such combinations would cause ambiguity with <a href="#mapping">mapping</a> <del><a href="#undefined">key/value pairs</a></del> and
+Such combinations would cause ambiguity with <a href="#mapping">mapping</a> <a href="#mapping">key/value pairs</a> and
 <a href="#comments">comments</a>.
 In addition, inside <a href="#flow-collection-styles">flow collections</a>, or when used as <a href="#example-single-pair-explicit-entry">implicit keys</a>, plain
 scalars must not contain the “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”], “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”
@@ -5258,7 +5262,7 @@ characters.</p>
 
 <p>Any <a href="#flow-nodes">flow node</a> may be used as a flow sequence entry.
 In addition, YAML provides a <a href="#example-flow-mapping-adjacent-values">compact notation</a> for the case where a flow
-sequence entry is a <a href="#mapping">mapping</a> with a <del><a href="#undefined">single key/value pair</a></del>.</p>
+sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">single key/value pair</a>.</p>
 
 <div id="rule-ns-flow-seq-entry"></div>
 <pre class="rule">
@@ -5417,7 +5421,7 @@ A benefit of this restriction is that the “<strong><code class="language-plain
 inside <a href="#plain-style">plain scalars</a>, as long as it is not followed by <a href="#white-space-characters">white space</a>.
 This allows for unquoted URLs and timestamps.
 It is also a potential source for confusion as “<strong><code class="language-plaintext highlighter-rouge">a:1</code></strong>” is a <a href="#plain-style">plain scalar</a>
-and not a <del><a href="#undefined">key/value pair</a></del>.</p>
+and not a <a href="#mapping">key/value pair</a>.</p>
 
 <p>Note that the <a href="#nodes">value</a> may be <a href="#example-empty-content">completely empty</a> since its existence is
 indicated by the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”.</p>
@@ -6577,7 +6581,7 @@ also not <a href="#line-folding">folded</a>.</p>
    * bullet
 
    * list
-   * line↓
+   * lines<mark class="legend-1">↓</mark>
 <mark class="legend-2">↓</mark>
  last
  line
@@ -6599,8 +6603,7 @@ also not <a href="#line-folding">folded</a>.</p>
     <p><strong>Legend:</strong></p>
     <ul>
       <li><code class="legend-1"><a href="#rule-b-as-line-feed">b-as-line-feed</a></code></li>
-      <li><code class="legend-2">(separation)</code></li>
-      <li><code class="legend-3"><a href="#rule-l-empty">l-empty(n,c)</a></code></li>
+      <li><code class="legend-2">(separation) <a href="#rule-l-empty">l-empty(n,c)</a></code></li>
     </ul>
   </div>
 </div>
@@ -6664,7 +6667,7 @@ also not <a href="#line-folding">folded</a>.</p>
 
 <p>For readability, <em>block collections styles</em> are not denoted by any <a href="#indicator-characters">indicator</a>.
 Instead, YAML uses a lookahead method, where a block collection is
-distinguished from a <a href="#plain-style">plain scalar</a> only when a <del><a href="#undefined">key/value pair</a></del> or a <a href="#block-sequences">sequence
+distinguished from a <a href="#plain-style">plain scalar</a> only when a <a href="#mapping">key/value pair</a> or a <a href="#block-sequences">sequence
 entry</a> is seen.</p>
 
 <div id="block-sequences"></div>
@@ -6787,7 +6790,7 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 <div id="block-mappings"></div>
 <h3 id="822-block-mappings">8.2.2. Block Mappings</h3>
 
-<p>A <em>Block mapping</em> is a series of entries, each <a href="#presenting-the-serialization-tree">presenting</a> a <del><a href="#undefined">key/value pair</a></del>.</p>
+<p>A <em>Block mapping</em> is a series of entries, each <a href="#presenting-the-serialization-tree">presenting</a> a <a href="#mapping">key/value pair</a>.</p>
 
 <div id="rule-l+block-mapping"></div>
 <pre class="rule">
@@ -6896,7 +6899,7 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 <!-- REVIEW value should be null above -->
 
 <p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is omitted, <a href="#parsing-the-presentation-stream">parsing</a> needs to see past the
-<a href="#example-single-pair-explicit-entry">implicit key</a>, in the same way as in the <del><a href="#undefined">single key/value pair</a></del> <a href="#flow-mappings">flow
+<a href="#example-single-pair-explicit-entry">implicit key</a>, in the same way as in the <a href="#mapping">single key/value pair</a> <a href="#flow-mappings">flow
 mapping</a>.
 Hence, such <a href="#nodes">keys</a> are subject to the same restrictions; they are limited to a
 single line and must not span more than 1024 Unicode characters.</p>
@@ -7445,7 +7448,7 @@ Since the existence of the <a href="#document">document</a> is indicated by this
 <mark class="legend-1">--- |</mark>
 <mark class="legend-1">%!PS-Adobe-2.0</mark>
 ...
-<mark class="legend-1">%YAML1.2</mark>
+<mark class="legend-1">%YAML 1.2</mark>
 <mark class="legend-1">---</mark>
 <mark class="legend-1"># Empty</mark>
 ...
@@ -8053,7 +8056,7 @@ Hence the YAML <a href="#processing-yaml-information">processor</a> should consi
       <td>tag:yaml.org,2002:int</td>
     </tr>
     <tr>
-      <td><code class="language-plaintext highlighter-rouge">-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]+ )? ( [eE] [-+]? [0-9]+ )?</code></td>
+      <td><code class="language-plaintext highlighter-rouge">-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )?</code></td>
       <td>tag:yaml.org,2002:float</td>
     </tr>
     <tr>
@@ -8062,6 +8065,13 @@ Hence the YAML <a href="#processing-yaml-information">processor</a> should consi
     </tr>
   </tbody>
 </table>
+
+<blockquote>
+  <p>Note: The regular expression for <code class="language-plaintext highlighter-rouge">float</code> does not exactly match the one in
+the JSON specification, where at least one digit is required after the dot: <code class="language-plaintext highlighter-rouge">(
+\.  [0-9]+ )</code>.  The YAML 1.2 specification intended to match JSON behavior, but
+this cannot be addressed in the 1.2.2 specification.</p>
+</blockquote>
 
 <div id="example-json-tag-resolution" class="example">
   <p><strong>Example 10.8 JSON Tag Resolution</strong></p>
@@ -8249,8 +8259,17 @@ defined above.</p>
     <li id="fn:1-2-spec" role="doc-endnote">
       <p><a href="https://yaml.org/spec/1.2">YAML Ain’t Markup Language (YAML™) Version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1-2-spec:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
     </li>
+    <li id="fn:unicode" role="doc-endnote">
+      <p><a href="https://www.unicode.org">Unicode – The World Standard for Text and Emoji</a> <a href="#fnref:unicode" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
     <li id="fn:yaml-core" role="doc-endnote">
       <p><a href="https://sourceforge.net/projects/yaml/lists/yaml-core">YAML Core Mailing List</a> <a href="#fnref:yaml-core" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:sml-dev" role="doc-endnote">
+      <p><a href="https://github.com/yaml/sml-dev-archive">SML-DEV Mailing List Archive</a> <a href="#fnref:sml-dev" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:denter" role="doc-endnote">
+      <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod">Data::Denter - An (deprecated) alternative to Data::Dumper and Storable</a> <a href="#fnref:denter" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:1-1-spec" role="doc-endnote">
       <p><a href="https://yaml.org/spec/1.1">YAML Ain’t Markup Language (YAML™) Version 1.1</a> <a href="#fnref:1-1-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
@@ -8281,6 +8300,9 @@ defined above.</p>
     </li>
     <li id="fn:uni-faq" role="doc-endnote">
       <p><a href="https://www.unicode.org/faq/utf_bom.html">UTF-8, UTF-16, UTF-32 &amp; BOM</a> <a href="#fnref:uni-faq" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
+    <li id="fn:uri" role="doc-endnote">
+      <p><a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifiers (URI)</a> <a href="#fnref:uri" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>

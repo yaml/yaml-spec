@@ -1,4 +1,3 @@
-/*
 body {
   font-family: sans-serif;
   background-color: #ffffff;
@@ -62,7 +61,6 @@ h6 {
   font-style: normal;
   font-weight: bold;
 }
-*/
 
 div.toc p b,
 div.abstract p.title b {
@@ -226,14 +224,15 @@ span.honorific > code.literal {
 
 a[href^="#"] {
   text-decoration: none;
-  color: blue;
+  color: black;
+  border-bottom: 1px dotted gray;
 }
 
 a[href^="#"]:hover,
 div.indexdiv a,
 div.toc a {
   text-decoration: underline;
-  background: none;
+  border-bottom: none;
   color: blue;
 }
 
@@ -243,7 +242,7 @@ pre.synopsis a {
 
 table.productionset a {
   background-color: #E0F8F8;
-  background: none;
+  border-bottom: none;
 }
 
 a.preferred {

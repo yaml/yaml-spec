@@ -7,7 +7,8 @@ status: draft
 
 <code># YAML Ain't Markup Language (YAML™) Version 1.2</code>
 
-<code>**YAML Specification Version 1.2.1 -- Released YYYY-MM-DD**</code>
+<code>## Revision 1.2.2 (YYYY-MM-DD)</code>
+{:.subtitle}
 
 Copyright presently by [The YAML Language Development Team](core-team)  
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net
@@ -17,7 +18,7 @@ This document may be freely copied, provided it is not modified.
 
 <code>**Status of this Document**</code>
 
-This is the **YAML specification v1.2.1**.
+This is the **YAML specification v1.2.2**.
 It defines the **YAML 1.2 data language**.
 There are no normative changes from the **YAML specification v1.2**.
 The primary objectives of this version are to correct errors and add clarity.
@@ -54,9 +55,9 @@ See:
 * [YAML Implementer's Reference Index](implementer-refs)
 * [YAML User's Reference Index](user-refs)
 * [YAML Community](community)
-* [YAML 1.2.1 Specification Errata](spec-errata)
-* [YAML 1.2.1 Specification Changes](spec-changes)
-* [YAML 1.2.1 Specification Authors](spec-authors)
+* [YAML 1.2.2 Specification Errata](spec-errata)
+* [YAML 1.2.2 Specification Changes](spec-changes)
+* [YAML 1.2.2 Specification Authors](spec-authors)
 
 
 <code>**Abstract**</code>
@@ -66,7 +67,7 @@ data serialization language designed around the common native data types of
 dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 internet messaging to object persistence to data auditing and visualization.
-Together with the Unicode standard for characters[^Unicode], this specification
+Together with the Unicode standard for characters[^unicode], this specification
 provides all the information necessary to understand YAML Version 1.2 and to
 create programs that process YAML information.
 
@@ -96,8 +97,8 @@ information and the rest containing the data itself.
 YAML achieves a unique cleanness by minimizing the amount of structural
 characters and allowing the data to show itself in a natural and meaningful
 way.
-For example, [indentation] may be used for structure, [colons] separate [key:
-value pairs] and [dashes] are used to create "bulleted" [lists].
+For example, [indentation] may be used for structure, [colons] separate
+[key/value pairs] and [dashes] are used to create "bulleted" [lists].
 
 There are many kinds of [data structures], but they can all be adequately
 [represented] with three basic primitives: [mappings] (hashes/dictionaries),
@@ -139,8 +140,8 @@ The YAML 1.0 specification was published in early 2004 by by Clark Evans, Oren
 Ben-Kiki, and Ingy döt Net after 3 years of collaborative design work through
 the yaml-core mailing list[^yaml-core].
 The project was initially rooted in Clark and Oren's work on the
-SML-DEV[^SML-DEV] mailing list (for simplifying XML) and Ingy's plain text
-serialization module[^Denter] for Perl.
+SML-DEV[^sml-dev] mailing list (for simplifying XML) and Ingy's plain text
+serialization module[^denter] for Perl.
 The language took a lot of inspiration from many other technologies and formats
 that preceded it.
 
@@ -169,7 +170,7 @@ In 2020, the new [YAML language design team](core-team) began meeting regularly
 to discuss improvements to the YAML language and specification; to better meet
 the needs and expectations of its users and use cases.
 
-This YAML 1.2.1 specification, published in September 2021, is the first step
+This YAML 1.2.2 specification, published in September 2021, is the first step
 in YAML's rejuvenated development journey.
 YAML is now more popular than it has ever been, but there is a long list of
 things that need to be addressed for it to reach its full potential.
@@ -2004,7 +2005,7 @@ Word (alphanumeric) characters for identifiers:
   ns-dec-digit | ns-ascii-letter | "-"
 ```
 
-URI characters for [tags], as defined in the URI specification[^URI].
+URI characters for [tags], as defined in the URI specification[^uri].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8 and then each byte is _escaped_ using
@@ -3152,7 +3153,7 @@ semantics to the same [global tag].
 ```
 
 ```
-!&lt;tag:example.com,2000:app/foo&gt; "bar"
+- !&lt;tag:example.com,2000:app/foo&gt; "bar"
 ```
 
 **Legend:**
@@ -5074,7 +5075,7 @@ also not [folded].
    * bullet
 
    * list
-   * line↓
+   * lines↓
 ↓
  last
  line
@@ -5089,9 +5090,8 @@ also not [folded].
 ```
 
 **Legend:**
-* [b-as-line-feed] &lt;!-- 4:6 7:6 --&gt;
-* (separation)
-* [l-empty(n,c)] &lt;!-- 2 5 12 --&gt;
+* [b-as-line-feed] &lt;!-- 4:6 7:6 11:11 --&gt;
+* (separation) [l-empty(n,c)] &lt;!-- 2 5 12 --&gt;
 
 
 The final [line break] and trailing [empty lines] if any, are subject to
@@ -5740,7 +5740,7 @@ A _directives document_ begins with some [directives] followed by an explicit
 --- |
 %!PS-Adobe-2.0
 ...
-%YAML1.2
+%YAML 1.2
 ---
 <code># Empty</code>
 ...
@@ -6168,9 +6168,13 @@ Hence the YAML [processor] should consider them to be an error.
 | `null` | tag:yaml.org,2002:null
 | `true | false` | tag:yaml.org,2002:bool
 | `-? ( 0 | [1-9] [0-9]* )` | tag:yaml.org,2002:int
-| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]+ )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float
+| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float
 | `*` | Error
 
+&gt; Note: The regular expression for `float` does not exactly match the one in
+the JSON specification, where at least one digit is required after the dot: `(
+\.  [0-9]+ )`.  The YAML 1.2 specification intended to match JSON behavior, but
+this cannot be addressed in the 1.2.2 specification.
 
 <code>**Example #. JSON Tag Resolution**</code>
 
