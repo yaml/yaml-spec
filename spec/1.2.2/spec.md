@@ -5119,7 +5119,7 @@ The final [line break] and trailing [empty lines] if any, are subject to
    * bullet
 
    * list
-   * line
+   * lines
 
  last
  line↓
