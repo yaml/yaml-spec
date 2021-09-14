@@ -44,6 +44,10 @@ sub lines {
   }
 }
 
+sub xxx {
+  die join '', @l[0..10];
+}
+
 sub wrap {
   my $end = shift;
   my @l;
@@ -117,6 +121,13 @@ sub comm {
   space;
 }
 
+sub sect {
+  my $end = sub { peek =~ /^:$/ };
+  wrap($end);
+  line if peek =~ /^:$/;
+  return 1;
+}
+
 sub unknown {
   my $line = take;
   my $show = $line;
@@ -132,6 +143,7 @@ sub main {
 
   if (peek =~ /^---$/) {
     out take;
+    out take if peek =~ /^:$/;;
     out take while peek !~ /^---$/;
     out take;
     space;
@@ -146,6 +158,7 @@ sub main {
     list and next if $peek =~ /^\*\ /;
     tabl and next if $peek =~ /^\|\ /;
     comm and next if $peek =~ /^<!--/;
+    sect and next if $peek =~ /^:(?:\ |$)/;
     para and next if $peek =~ /^(
       [\w\#\*"] |
       \[\w |

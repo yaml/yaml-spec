@@ -32,6 +32,7 @@ block-sequences:
 - dashes
 - sequence entry
 block-style-productions:
+- block styles
 - indented blocks
 canonical-form:
 - canonical form
@@ -114,6 +115,7 @@ flow-sequences:
 flow-style-productions:
 - flow
 - flow content
+- flow styles
 indentation-spaces:
 - indentation
 - indented

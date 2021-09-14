@@ -69,6 +69,7 @@ libera
 libyaml
 lookahead
 lookbehind
+lt
 mapping's
 markydown
 md
@@ -95,9 +96,12 @@ svg
 toc
 undent
 unicode
+unparenthesized
+unquantified
 unresolvable
 untagged
 uri
+whitespace
 xBB
 xBF
 xEF
