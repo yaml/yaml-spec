@@ -1,0 +1,16 @@
+on: [push]
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    name: Send message via Matrix
+    steps:
+    - name: Send message to test channel
+      id: matrix-chat-message
+      uses: fadenb/matrix-chat-message@v0.0.6
+      with:
+        homeserver: chat.yaml.io
+        token: ${{ secrets.MATRIX_TOKEN }}
+        channel: '!NNVpntPQEtivxiuihs:yaml.io'
+        message: |
+          GitHub pushed ${{ github.sha }}
