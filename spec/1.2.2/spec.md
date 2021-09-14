@@ -6417,13 +6417,14 @@ Also, a [mapping] entry with some [key] and a null [value] is valid and
 different from not having that [key] in the [mapping].
 
 
-? Canonical Form
-
-: **`null`**.
-
 ? Valid Formatted Content
 
 : Any of the strings `null`, `Null`, `NULL`, or `~`, or the empty string.
+
+
+? Canonical Form
+
+: **`null`**.
 
 
 **Example #. `!!null` Examples**
