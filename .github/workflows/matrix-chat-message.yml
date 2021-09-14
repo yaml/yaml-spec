@@ -9,8 +9,14 @@ jobs:
       id: matrix-chat-message
       uses: fadenb/matrix-chat-message@v0.0.6
       with:
-        homeserver: chat.yaml.io
+        homeserver: yaml.ems.host
         token: ${{ secrets.MATRIX_TOKEN }}
-        channel: '!NNVpntPQEtivxiuihs:yaml.io'
+        channel: '!lUyCvwvbttMFxCVMLM:yaml.io'
         message: |
-          GitHub pushed ${{ github.sha }}
+          ```
+          action: ${{ github.action }}
+          actor:  ${{ github.actor }}
+          repo:   ${{ github.repository }}
+          commit: ${{ github.sha }}
+          branch: $(( github.ref }}
+          ```
