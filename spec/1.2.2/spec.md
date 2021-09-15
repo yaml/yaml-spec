@@ -6249,7 +6249,7 @@ lines or repeated [document end markers] without signaling the start of the
 next [document].
 
 
-# Chapter #. Tag Repository
+# Chapter #. Recommended Tags
 
 This specification defines a number of [tags] that [represent] common native
 data structures.
