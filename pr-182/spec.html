@@ -1584,7 +1584,10 @@ Otherwise it uses a YAML form that is as close to JSON as possible.</p>
 <div id="production-parameters"></div>
 <h2 id="41-production-parameters">4.1. Production Parameters</h2>
 
-<p>Some productions have parameters in parentheses after the name, such as <code class="language-plaintext highlighter-rouge">s-line-prefix(n,c)</code>. A parameterized production is shorthand for a family of productions, each with a fixed value for each parameter.</p>
+<p>Some productions have parameters in parentheses after the name, such as
+<strong><code class="language-plaintext highlighter-rouge">s-line-prefix(n,c)</code></strong>.
+A parameterized production is shorthand for a family of productions, each with
+a fixed value for each parameter.</p>
 
 <p>For instance, this production:</p>
 
@@ -1613,7 +1616,6 @@ s-indent(1) ::=
 
 <div id="rule-l+block-sequence"></div>
 <pre class="rule">
-# n = 0, m = 0
 l+block-sequence(n) ::=
   (
     <a href="#rule-s-indent">s-indent</a>(n+m)
@@ -1698,7 +1700,8 @@ and <a href="#flow-styles">flow styles</a>.</p>
 <dl>
   <dt>(Block) Chomping: <code class="language-plaintext highlighter-rouge">t</code></dt>
   <dd>
-    <p>The <a href="#line-break-characters">line break</a> chomping behavior for flow scalars. May be any of the following values:</p>
+    <p>The <a href="#line-break-characters">line break</a> chomping behavior for flow scalars.
+May be any of the following values:</p>
   </dd>
 </dl>
 
@@ -3041,8 +3044,8 @@ convey <a href="#nodes">content</a> information.</p>
 
 <p>A <a href="#block-styles">block style</a> construct is terminated when encountering a line which is less
 indented than the construct.
-The productions use the notation “<strong><code class="language-plaintext highlighter-rouge">s-indent-less-than(n)</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">s-indent-less-or-equal(n)</code></strong>”
-to express this.</p>
+The productions use the notation “<strong><code class="language-plaintext highlighter-rouge">s-indent-less-than(n)</code></strong>” and
+“<strong><code class="language-plaintext highlighter-rouge">s-indent-less-or-equal(n)</code></strong>” to express this.</p>
 
 <div id="rule-s-indent-less-than"></div>
 <pre class="rule">
@@ -6258,14 +6261,14 @@ plus the value of the indentation indicator.</p>
 equal to the number of leading <a href="#white-space-characters">spaces</a> on the first non-<a href="#empty-lines">empty line</a> of the
 contents.</p>
 
-<p>A block scalar may have an <em>indentation indicator</em>,
-which is a single decimal digit indicating the indentation level of the content.</p>
+<p>A block scalar may have an <em>indentation indicator</em>, which is a single decimal
+digit indicating the indentation level of the content.</p>
 
 <p>It is an error for any of the leading <a href="#empty-lines">empty lines</a> to contain more <a href="#white-space-characters">spaces</a>
 than the first non-<a href="#empty-lines">empty line</a>.</p>
 
-<p>A YAML <a href="#processing-yaml-information">processor</a> should only emit an explicit indentation
-indicator for cases where detection will fail.</p>
+<p>A YAML <a href="#processing-yaml-information">processor</a> should only emit an explicit indentation indicator for cases
+where detection will fail.</p>
 
 <div id="rule-c-indentation-indicator"></div>
 <pre class="rule">

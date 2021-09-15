@@ -1271,7 +1271,10 @@ Otherwise it uses a YAML form that is as close to JSON as possible.
 
 <code>## #. Production Parameters</code>
 
-Some productions have parameters in parentheses after the name, such as `s-line-prefix(n,c)`. A parameterized production is shorthand for a family of productions, each with a fixed value for each parameter.
+Some productions have parameters in parentheses after the name, such as
+**`s-line-prefix(n,c)`**.
+A parameterized production is shorthand for a family of productions, each with
+a fixed value for each parameter.
 
 For instance, this production:
 
@@ -1297,7 +1300,6 @@ s-indent(1) ::=
 And this production:
 
 ```
-<code># n = 0, m = 0</code>
 l+block-sequence(n) ::=
   (
     s-indent(n+m)
@@ -1367,7 +1369,8 @@ and [flow styles].
 
 ? (Block) Chomping: `t`
 
-: The [line break] chomping behavior for flow scalars. May be any of the following values:
+: The [line break] chomping behavior for flow scalars.
+May be any of the following values:
 
 * `STRIP` -- remove all trailing newlines
 * `CLIP` -- remove all trailing newlines except the first
@@ -2410,8 +2413,8 @@ convey [content] information.
 
 A [block style] construct is terminated when encountering a line which is less
 indented than the construct.
-The productions use the notation "**`s-indent-less-than(n)`**" and "**`s-indent-less-or-equal(n)`**"
-to express this.
+The productions use the notation "**`s-indent-less-than(n)`**" and
+"**`s-indent-less-or-equal(n)`**" to express this.
 
 ```
 [#] s-indent-less-than(n) ::=
@@ -4884,14 +4887,14 @@ If no indentation indicator is given, then the content indentation level is
 equal to the number of leading [spaces] on the first non-[empty line] of the
 contents.
 
-A block scalar may have an _indentation indicator_,
-which is a single decimal digit indicating the indentation level of the content.
+A block scalar may have an _indentation indicator_, which is a single decimal
+digit indicating the indentation level of the content.
 
 It is an error for any of the leading [empty lines] to contain more [spaces]
 than the first non-[empty line].
 
-A YAML [processor] should only emit an explicit indentation
-indicator for cases where detection will fail.
+A YAML [processor] should only emit an explicit indentation indicator for cases
+where detection will fail.
 
 ```
 [#] c-indentation-indicator ::=
