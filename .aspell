@@ -1,15 +1,18 @@
-personal_ws-1.1 en 74 
+personal_ws-1.1 en 74
 APIs
 ARPA
 Antoniou
 Aro
 BNF
 BOM
+Beder
+BlueGM
 DEV
 DNS
 DOM
 Denter
 DocBook
+EOF
 Eemeli
 Encodings
 Failsafe
@@ -32,12 +35,14 @@ Müller
 NEL
 Oren
 Oren's
+Osamu
 Pantelis
 PyYAML
 SML
 Simonov
 Storable
 TODO
+Takeuchi
 URI
 URIs
 URL's
@@ -81,11 +86,13 @@ octothorpe
 parenthesization
 pre
 pyyaml
+refernced
 repo
 representable
 rfc
 scalar's
 schemas
+sexagesimal
 shorthands
 sml
 str
@@ -98,10 +105,13 @@ unicode
 unresolvable
 untagged
 uri
+xA
 xBB
 xBF
+xC
 xEF
 xFE
 xFF
+xXX
 yaml
 ypaste
