@@ -29,6 +29,12 @@ quick-test: $(QUICK)
 docker-test:
 	$(MAKE) test TESTS='$(TESTS)' YAML_SPEC_USE_DOCKER=1
 
+edit-spec:
+	@$${EDITOR:-vim} $(SPEC)/spec.md
+
+edit-spec-dir:
+	@$${EDITOR:-vim} $(SPEC)
+
 $(TESTS): always
 	bash $@
 

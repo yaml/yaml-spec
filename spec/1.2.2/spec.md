@@ -153,7 +153,7 @@ Around this time, the developers became aware of JSON[^json].
 By sheer coincidence, JSON was almost a complete subset of YAML (both
 syntactically and semantically).
 
-In 2006, Kirill Siminov produced PyYAML[^pyyaml] and LibYAML[^libyaml].
+In 2006, Kirill Simonov produced PyYAML[^pyyaml] and LibYAML[^libyaml].
 A lot of the YAML frameworks in various programming languages are built over
 LibYAML and many others have looked to PyYAML as a solid reference for their
 implementations.
@@ -1271,70 +1271,42 @@ Otherwise it uses a YAML form that is as close to JSON as possible.
 ## #. Production Parameters
 
 Some productions have parameters in parentheses after the name, such as
-**`s-line-prefix(n,c)`**.
-A parameterized production is shorthand for a family of productions, each with
-a fixed value for each parameter.
+[`s-line-prefix(n,c)`](#production-s-line-prefix).
+A parameterized production is shorthand for a (infinite) series of productions,
+each with a fixed value for each parameter.
 
 For instance, this production:
 
 ```
-s-indent(n) ::=
-  s-space{n}
+production-a(n) ::= production-b(n)
 ```
 
 Is shorthand for:
 
 ```
-# n = 0
-s-indent(0) ::=
-  s-space{0}
-
-# n = 1
-s-indent(1) ::=
-  s-space{1}
-
+production-a(0) ::= production-b(0)
+production-a(1) ::= production-b(1)
 ⋮
 ```
 
 And this production:
 
 ```
-l+block-sequence(n) ::=
-  (
-    s-indent(n+m)
-    c-l-block-seq-entry(n+m)
-  )+
+production-a(n) ::=
+  ( production-b(n+m) production-c(n+m) )+
 ```
 
 Is shorthand for:
 
 ```
-l+block-sequence(0) ::=
-    # n = 0, m = 0
-    (
-      s-indent(0)
-      c-l-block-seq-entry(0)
-    )+
-  | # n = 0, m = 1
-    (
-      s-indent(1)
-      c-l-block-seq-entry(1)
-    )+
+production-a(0) ::=
+    ( production-b(0) production-c(0))+
+  | ( production-b(1) production-c(1))+
   | …
-
-l+block-sequence(1) ::=
-    # n = 1, m = 0
-    (
-      s-indent(1)
-      c-l-block-seq-entry(1)
-    )+
-  | # n = 1, m = 1
-    (
-      s-indent(2)
-      c-l-block-seq-entry(2)
-    )+
+production-a(1) ::=
+    ( production-b(1) production-c(1))+
+  | ( production-b(2) production-c(2))+
   | …
-
 ⋮
 ```
 
@@ -1352,7 +1324,7 @@ surrounding.
 YAML supports two groups of _contexts_, distinguishing between [block styles]
 and [flow styles].
 
-: Takes any of the following values:
+: May be any of the following values:
 
 * `BLOCK-IN` -- inside block context
 * `BLOCK-OUT` -- outside block context
@@ -5491,7 +5463,7 @@ A _block sequence_ is simply a series of [nodes], each denoted by a leading
 _"**`-`**" indicator_.
 The "**`-`**" indicator must be [separated] from the [node] by [white space].
 This allows "**`-`**" to be used as the first character in a [plain scalar] if
-followed by a non-space character (e.g. "**`-1`**").
+followed by a non-space character (e.g. "**`-42`**").
 
 ```
 [#] l+block-sequence(n) ::=
