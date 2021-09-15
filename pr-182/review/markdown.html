@@ -1310,35 +1310,31 @@ l+block-sequence(n) ::=
 Is shorthand for:
 
 ```
-<code># n = 0, m = 0</code>
 l+block-sequence(0) ::=
-  (
-    s-indent(0)
-    c-l-block-seq-entry(0)
-  )+
+    # n = 0, m = 0
+    (
+      s-indent(0)
+      c-l-block-seq-entry(0)
+    )+
+  | # n = 0, m = 1
+    (
+      s-indent(1)
+      c-l-block-seq-entry(1)
+    )+
+  | …
 
-<code># n = 0, m = 1</code>
-l+block-sequence(0) ::=
-  (
-    s-indent(1)
-    c-l-block-seq-entry(1)
-  )+
-
-⋮
-
-<code># n = 1, m = 0</code>
 l+block-sequence(1) ::=
-  (
-    s-indent(1)
-    c-l-block-seq-entry(1)
-  )+
-
-<code># n = 1, m = 1</code>
-l+block-sequence(1) ::=
-  (
-    s-indent(2)
-    c-l-block-seq-entry(2)
-  )+
+    # n = 1, m = 0
+    (
+      s-indent(1)
+      c-l-block-seq-entry(1)
+    )+
+  | # n = 1, m = 1
+    (
+      s-indent(2)
+      c-l-block-seq-entry(2)
+    )+
+  | …
 
 ⋮
 ```
@@ -2406,8 +2402,12 @@ The amount of indentation is a [presentation detail] and must not be used to
 convey [content] information.
 
 ```
-[#] s-indent(n) ::=
-  s-space{n}
+[#]
+s-indent(0) ::=
+  /* Empty */
+
+s-indent(n+1) ::=
+  s-space s-indent(n)
 ```
 
 
@@ -2417,13 +2417,24 @@ The productions use the notation "**`s-indent-less-than(n)`**" and
 "**`s-indent-less-or-equal(n)`**" to express this.
 
 ```
-[#] s-indent-less-than(n) ::=
-  s-space{0,n-1}
+[#]
+s-indent-less-than(0) ::=
+  /* Impossible */
+
+s-indent-less-than(1) ::=
+  /* Empty */
+
+s-indent-less-than(n+2) ::=
+  s-indent-less-than(n+1) s-space?
 ```
 
 ```
-[#] s-indent-less-or-equal(n) ::=
-  s-space{0,n}
+[#]
+s-indent-less-or-equal(0) ::=
+  /* Empty */
+
+s-indent-less-or-equal(n+1) ::=
+  s-indent-less-or-equal(n) s-space?
 ```
 
 
@@ -5489,7 +5500,6 @@ followed by a non-space character (e.g. "**`-1`**").
     s-indent(n+m)
     c-l-block-seq-entry(n+m)
   )+
-  /* For some fixed auto-detected m &gt; 0 */
 ```
 
 ```
@@ -5589,7 +5599,6 @@ A _Block mapping_ is a series of entries, each [presenting] a [key/value pair].
     s-indent(n+m)
     ns-l-block-map-entry(n+m)
   )+
-  /* For some fixed auto-detected m &gt; 0 */
 ```
 
 

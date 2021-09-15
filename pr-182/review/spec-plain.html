@@ -1614,35 +1614,31 @@ l+block-sequence(n) ::=
 
 <div id="rule-l+block-sequence"></div>
 <pre class="rule">
-# n = 0, m = 0
 l+block-sequence(0) ::=
-  (
-    <a href="#rule-s-indent">s-indent</a>(0)
-    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(0)
-  )+
+    # n = 0, m = 0
+    (
+      <a href="#rule-s-indent">s-indent</a>(0)
+      <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(0)
+    )+
+  | # n = 0, m = 1
+    (
+      <a href="#rule-s-indent">s-indent</a>(1)
+      <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(1)
+    )+
+  | …
 
-# n = 0, m = 1
-l+block-sequence(0) ::=
-  (
-    <a href="#rule-s-indent">s-indent</a>(1)
-    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(1)
-  )+
-
-⋮
-
-# n = 1, m = 0
 l+block-sequence(1) ::=
-  (
-    <a href="#rule-s-indent">s-indent</a>(1)
-    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(1)
-  )+
-
-# n = 1, m = 1
-l+block-sequence(1) ::=
-  (
-    <a href="#rule-s-indent">s-indent</a>(2)
-    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(2)
-  )+
+    # n = 1, m = 0
+    (
+      <a href="#rule-s-indent">s-indent</a>(1)
+      <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(1)
+    )+
+  | # n = 1, m = 1
+    (
+      <a href="#rule-s-indent">s-indent</a>(2)
+      <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(2)
+    )+
+  | …
 
 ⋮
 </pre>
@@ -3025,8 +3021,12 @@ convey <a href="#nodes">content</a> information.</p>
 
 <div id="rule-s-indent"></div>
 <pre class="rule">
-[67] s-indent(n) ::=
-  <a href="#rule-s-space{n}">s-space{n}</a>
+[67]
+s-indent(0) ::=
+  /* Empty */
+
+s-indent(n+1) ::=
+  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent">s-indent</a>(n)
 </pre>
 
 <p>A <a href="#block-styles">block style</a> construct is terminated when encountering a line which is less
@@ -3036,14 +3036,25 @@ The productions use the notation “<strong><code class="language-plaintext high
 
 <div id="rule-s-indent-less-than"></div>
 <pre class="rule">
-[68] s-indent-less-than(n) ::=
-  <a href="#rule-s-space{0,n-1}">s-space{0,n-1}</a>
+[68]
+s-indent-less-than(0) ::=
+  /* Impossible */
+
+s-indent-less-than(1) ::=
+  /* Empty */
+
+s-indent-less-than(n+2) ::=
+  <a href="#rule-s-indent-less-than">s-indent-less-than</a>(n+1) <a href="#rule-s-space">s-space</a>?
 </pre>
 
 <div id="rule-s-indent-less-or-equal"></div>
 <pre class="rule">
-[69] s-indent-less-or-equal(n) ::=
-  <a href="#rule-s-space{0,n}">s-space{0,n}</a>
+[69]
+s-indent-less-or-equal(0) ::=
+  /* Empty */
+
+s-indent-less-or-equal(n+1) ::=
+  <a href="#rule-s-indent-less-or-equal">s-indent-less-or-equal</a>(n) <a href="#rule-s-space">s-space</a>?
 </pre>
 
 <p>Each <a href="#nodes">node</a> must be indented further than its parent <a href="#nodes">node</a>.
@@ -7011,7 +7022,6 @@ followed by a non-space character (e.g. “<strong><code class="language-plainte
     <a href="#rule-s-indent">s-indent</a>(n+m)
     <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(n+m)
   )+
-  /* For some fixed auto-detected m &gt; 0 */
 </pre>
 
 <div id="rule-c-l-block-seq-entry"></div>
@@ -7138,7 +7148,6 @@ Note that it is not possible to specify <a href="#node-properties">node properti
     <a href="#rule-s-indent">s-indent</a>(n+m)
     <a href="#rule-ns-l-block-map-entry">ns-l-block-map-entry</a>(n+m)
   )+
-  /* For some fixed auto-detected m &gt; 0 */
 </pre>
 
 <div id="example-block-mappings" class="example">
