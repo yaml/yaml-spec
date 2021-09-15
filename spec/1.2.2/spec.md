@@ -2401,8 +2401,12 @@ The amount of indentation is a [presentation detail] and must not be used to
 convey [content] information.
 
 ```
-[#] s-indent(n) ::=
-  s-space{n}
+[#]
+s-indent(0) ::=
+  /* Empty */
+
+s-indent(n+1) ::=
+  s-space s-indent(n)
 ```
 
 
@@ -2412,13 +2416,24 @@ The productions use the notation "**`s-indent-less-than(n)`**" and
 "**`s-indent-less-or-equal(n)`**" to express this.
 
 ```
-[#] s-indent-less-than(n) ::=
-  s-space{0,n-1}
+[#]
+s-indent-less-than(0) ::=
+  /* Impossible */
+
+s-indent-less-than(1) ::=
+  /* Empty */
+
+s-indent-less-than(n+2) ::=
+  s-indent-less-than(n+1) s-space?
 ```
 
 ```
-[#] s-indent-less-or-equal(n) ::=
-  s-space{0,n}
+[#]
+s-indent-less-or-equal(0) ::=
+  /* Empty */
+
+s-indent-less-or-equal(n+1) ::=
+  s-indent-less-or-equal(n) s-space?
 ```
 
 
@@ -5481,10 +5496,9 @@ followed by a non-space character (e.g. "**`-1`**").
 ```
 [#] l+block-sequence(n) ::=
   (
-    s-indent(n+m)
-    c-l-block-seq-entry(n+m)
+    s-indent(n+1+m)
+    c-l-block-seq-entry(n+1+m)
   )+
-  /* For some fixed auto-detected m > 0 */
 ```
 
 ```
@@ -5581,10 +5595,9 @@ A _Block mapping_ is a series of entries, each [presenting] a [key/value pair].
 ```
 [#] l+block-mapping(n) ::=
   (
-    s-indent(n+m)
-    ns-l-block-map-entry(n+m)
+    s-indent(n+1+m)
+    ns-l-block-map-entry(n+1+m)
   )+
-  /* For some fixed auto-detected m > 0 */
 ```
 
 
