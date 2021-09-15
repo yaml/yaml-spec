@@ -1270,28 +1270,79 @@ Otherwise it uses a YAML form that is as close to JSON as possible.
 
 ## #. Production Parameters
 
-YAML's syntax is designed for maximal human readability.
-This requires [parsing] to depend on the surrounding text.
-For notational compactness, this dependency is expressed using parameterized
-BNF productions.
+Some productions have parameters in parentheses after the name, such as
+**`s-line-prefix(n,c)`**.
+A parameterized production is shorthand for a family of productions, each with
+a fixed value for each parameter.
 
-This context sensitivity is the cause of most of the complexity of the YAML
-syntax definition.
-It is further complicated by struggling with the human tendency to look ahead
-when interpreting text.
-These complications are the source of most of YAML's power to [present] data in
-a very human readable way.
+For instance, this production:
 
-Productions use any of the following parameters:
+```
+s-indent(n) ::=
+  s-space{n}
+```
 
+Is shorthand for:
+
+```
+# n = 0
+s-indent(0) ::=
+  s-space{0}
+
+# n = 1
+s-indent(1) ::=
+  s-space{1}
+
+⋮
+```
+
+And this production:
+
+```
+l+block-sequence(n) ::=
+  (
+    s-indent(n+m)
+    c-l-block-seq-entry(n+m)
+  )+
+```
+
+Is shorthand for:
+
+```
+l+block-sequence(0) ::=
+    # n = 0, m = 0
+    (
+      s-indent(0)
+      c-l-block-seq-entry(0)
+    )+
+  | # n = 0, m = 1
+    (
+      s-indent(1)
+      c-l-block-seq-entry(1)
+    )+
+  | …
+
+l+block-sequence(1) ::=
+    # n = 1, m = 0
+    (
+      s-indent(1)
+      c-l-block-seq-entry(1)
+    )+
+  | # n = 1, m = 1
+    (
+      s-indent(2)
+      c-l-block-seq-entry(2)
+    )+
+  | …
+
+⋮
+```
+
+The parameters are as follows:
 
 ? Indentation: `n` or `m`
 
-: Many productions use an explicit [indentation] level parameter.
-This is less elegant than Python's "indent" and "undent" conceptual tokens.
-However it is required to formally express YAML's indentation rules.
-
-: A value of `n/a` means "not applicable".
+: May be any natural number, including zero.
 
 
 ? Context: `c`
@@ -1301,27 +1352,24 @@ surrounding.
 YAML supports two groups of _contexts_, distinguishing between [block styles]
 and [flow styles].
 
-: In [block styles], [indentation] is used to delineate structure.
-To capture human perception of [indentation] the rules require special
-treatment of the ["**`-`**"] character, used in [block sequences].
-Hence in some cases productions need to behave differently inside [block
-sequences] (_BLOCK-IN Context_) and outside them (_BLOCK-OUT context_).
+: Takes any of the following values:
 
-: In [flow styles], explicit [indicators] are used to delineate structure.
-Since plain scalars have no delineating [indicators], they are subject to some
-restrictions to avoid ambiguities.
-These restrictions depend on where they appear: as implicit keys directly
-inside a [block mapping] (_BLOCK-KEY_); as implicit keys inside a [flow
-mapping] (_FLOW-KEY_); as values inside a [flow collection] (_FLOW-IN_); or as
-values outside one (_FLOW-OUT_).
+* `BLOCK-IN` -- inside block context
+* `BLOCK-OUT` -- outside block context
+* `BLOCK-KEY` -- inside block key context
+* `FLOW-IN` -- inside flow context
+* `FLOW-OUT` -- outside flow context
+* `FLOW-KEY` -- inside flow key context
 
 
 ? (Block) Chomping: `t`
 
-: Block scalars offer three possible mechanisms for [chomping] any trailing
-[line breaks]: [strip], [clip] and [keep].
-Unlike the previous parameters, this one only controls interpretation of the
-trailing line breaks, not their syntactic validity.
+: The [line break] chomping behavior for flow scalars.
+May be any of the following values:
+
+* `STRIP` -- remove all trailing newlines
+* `CLIP` -- remove all trailing newlines except the first
+* `KEEP` -- retain all trailing newlines
 
 
 ## #. Production Naming Conventions
@@ -2360,19 +2408,17 @@ convey [content] information.
 
 A [block style] construct is terminated when encountering a line which is less
 indented than the construct.
-The productions use the notation "**`s-indent(<n)`**" and "**`s-indent(<=n)`**"
-to express this.
+The productions use the notation "**`s-indent-less-than(n)`**" and
+"**`s-indent-less-or-equal(n)`**" to express this.
 
 ```
-[#] s-indent(<n) ::=
-  s-space{m}
-  /* Where m < n */
+[#] s-indent-less-than(n) ::=
+  s-space{0,n-1}
 ```
 
 ```
-[#] s-indent(<=n) ::=
-  s-space{m}
-  /* Where m ≤ n */
+[#] s-indent-less-or-equal(n) ::=
+  s-space{0,n}
 ```
 
 
@@ -2486,11 +2532,10 @@ Line prefixes are a [presentation detail] and must not be used to convey
 [content] information.
 
 ```
-[#] s-line-prefix(n,c) ::=
-  c == BLOCK-OUT => s-block-line-prefix(n)
-  c == BLOCK-IN  => s-block-line-prefix(n)
-  c == FLOW-OUT  => s-flow-line-prefix(n)
-  c == FLOW-IN   => s-flow-line-prefix(n)
+[#] s-line-prefix(n,BLOCK-OUT) ::= s-block-line-prefix(n)
+    s-line-prefix(n,BLOCK-IN)  ::= s-block-line-prefix(n)
+    s-line-prefix(n,FLOW-OUT)  ::= s-flow-line-prefix(n)
+    s-line-prefix(n,FLOW-IN)   ::= s-flow-line-prefix(n)
 ```
 
 ```
@@ -2538,7 +2583,7 @@ break].
 [#] l-empty(n,c) ::=
   (
       s-line-prefix(n,c)
-    | s-indent(<n)
+    | s-indent-less-than(n)
   )
   b-as-line-feed
 ```
@@ -2828,13 +2873,12 @@ Note that structures following multi-line comment separation must be properly
 [comment] lines themselves.
 
 ```
-[#] s-separate(n,c) ::=
-  c == BLOCK-OUT => s-separate-lines(n)
-  c == BLOCK-IN  => s-separate-lines(n)
-  c == FLOW-OUT  => s-separate-lines(n)
-  c == FLOW-IN   => s-separate-lines(n)
-  c == BLOCK-KEY => s-separate-in-line
-  c == FLOW-KEY  => s-separate-in-line
+[#] s-separate(n,BLOCK-OUT) ::= s-separate-lines(n)
+    s-separate(n,BLOCK-IN)  ::= s-separate-lines(n)
+    s-separate(n,FLOW-OUT)  ::= s-separate-lines(n)
+    s-separate(n,FLOW-IN)   ::= s-separate-lines(n)
+    s-separate(n,BLOCK-KEY) ::= s-separate-in-line
+    s-separate(n,FLOW-KEY)  ::= s-separate-in-line
 ```
 
 ```
@@ -3717,11 +3761,10 @@ Double-quoted scalars are restricted to a single line when contained inside an
 ```
 
 ```
-[#] nb-double-text(n,c) ::=
-  c == FLOW-OUT  => nb-double-multi-line(n)
-  c == FLOW-IN   => nb-double-multi-line(n)
-  c == BLOCK-KEY => nb-double-one-line
-  c == FLOW-KEY  => nb-double-one-line
+[#] nb-double-text(n,FLOW-OUT)  ::= nb-double-multi-line(n)
+    nb-double-text(n,FLOW-IN)   ::= nb-double-multi-line(n)
+    nb-double-text(n,BLOCK-KEY) ::= nb-double-one-line
+    nb-double-text(n,FLOW-KEY)  ::= nb-double-one-line
 ```
 
 ```
@@ -3899,11 +3942,10 @@ Single-quoted scalars are restricted to a single line when contained inside a
 ```
 
 ```
-[#] nb-single-text(n,c) ::=
-  c == FLOW-OUT  => nb-single-multi-line(n)
-  c == FLOW-IN   => nb-single-multi-line(n)
-  c == BLOCK-KEY => nb-single-one-line
-  c == FLOW-KEY  => nb-single-one-line
+[#] nb-single-text(FLOW-OUT)  ::= nb-single-multi-line(n)
+    nb-single-text(FLOW-IN)   ::= nb-single-multi-line(n)
+    nb-single-text(BLOCK-KEY) ::= nb-single-one-line
+    nb-single-text(FLOW-KEY)  ::= nb-single-one-line
 ```
 
 ```
@@ -4029,11 +4071,10 @@ and ["**`,`**"] characters.
 These characters would cause ambiguity with [flow collection] structures.
 
 ```
-[#] ns-plain-safe(c) ::=
-  c == FLOW-OUT  => ns-plain-safe-out
-  c == FLOW-IN   => ns-plain-safe-in
-  c == BLOCK-KEY => ns-plain-safe-out
-  c == FLOW-KEY  => ns-plain-safe-in
+[#] ns-plain-safe(FLOW-OUT)  ::= ns-plain-safe-out
+    ns-plain-safe(FLOW-IN)   ::= ns-plain-safe-in
+    ns-plain-safe(BLOCK-KEY) ::= ns-plain-safe-out
+    ns-plain-safe(FLOW-KEY)  ::= ns-plain-safe-in
 ```
 
 ```
@@ -4105,11 +4146,10 @@ Plain scalars are further restricted to a single line when contained inside an
 [implicit key].
 
 ```
-[#] ns-plain(n,c) ::=
-  c == FLOW-OUT  => ns-plain-multi-line(n,c)
-  c == FLOW-IN   => ns-plain-multi-line(n,c)
-  c == BLOCK-KEY => ns-plain-one-line(c)
-  c == FLOW-KEY  => ns-plain-one-line(c)
+[#] ns-plain(n,FLOW-OUT)  ::= ns-plain-multi-line(n,FLOW-OUT)
+    ns-plain(n,FLOW-IN)   ::= ns-plain-multi-line(n,FLOW-IN)
+    ns-plain(n,BLOCK-KEY) ::= ns-plain-one-line(BLOCK-KEY)
+    ns-plain(n,FLOW-KEY)  ::= ns-plain-one-line(FLOW-KEY)
 ```
 
 ```
@@ -4194,11 +4234,10 @@ This does not cause ambiguity because flow collection entries can never be
 [completely empty].
 
 ```
-[#] in-flow(c) ::=
-  c == FLOW-OUT  => FLOW-IN
-  c == FLOW-IN   => FLOW-IN
-  c == BLOCK-KEY => FLOW-KEY
-  c == FLOW-KEY  => FLOW-KEY
+[#] in-flow(n,FLOW-OUT)  ::= ns-s-flow-seq-entries(n,FLOW-IN)
+    in-flow(n,FLOW-IN)   ::= ns-s-flow-seq-entries(n,FLOW-IN)
+    in-flow(n,BLOCK-KEY) ::= ns-s-flow-seq-entries(n,FLOW-KEY)
+    in-flow(n,FLOW-KEY)  ::= ns-s-flow-seq-entries(n,FLOW-KEY)
 ```
 
 
@@ -4211,7 +4250,7 @@ characters.
 [#] c-flow-sequence(n,c) ::=
   c-sequence-start    # '['
   s-separate(n,c)?
-  ns-s-flow-seq-entries(n,in-flow(c))?
+  in-flow(n,c)?
   c-sequence-end      # ']'
 ```
 
@@ -4593,14 +4632,14 @@ been impossible to implement.
 
 ```
 [#] ns-s-implicit-yaml-key(c) ::=
-  ns-flow-yaml-node(n/a,c)
+  ns-flow-yaml-node(0,c)
   s-separate-in-line?
   /* At most 1024 characters altogether */
 ```
 
 ```
 [#] c-s-implicit-json-key(c) ::=
-  c-flow-json-node(n/a,c)
+  c-flow-json-node(0,c)
   s-separate-in-line?
   /* At most 1024 characters altogether */
 ```
@@ -4786,19 +4825,18 @@ This header is followed by a non-content [line break] with an optional
 This is the only case where a [comment] must not be followed by additional
 [comment] lines.
 
-> Note: See [Production Parameters] for definitions of the `m` and `t`
-variables.
+> Note: See [Production Parameters] for the definition of the `t` variable.
 
 ```
-[#] c-b-block-header(m,t) ::=
+[#] c-b-block-header(t) ::=
   (
       (
-        c-indentation-indicator(m)
+        c-indentation-indicator
         c-chomping-indicator(t)
       )
     | (
         c-chomping-indicator(t)
-        c-indentation-indicator(m)
+        c-indentation-indicator
       )
   )
   s-b-comment
@@ -4827,33 +4865,35 @@ variables.
 ```
 
 **Legend:**
-* [c-b-block-header(m,t)] <!-- _#_Empty_header↓ 01_#_Indentation_indicator↓ +_#_Chomping_indicator↓ 01-_#_Both_indicators↓ -->
+* [c-b-block-header(t)] <!-- _#_Empty_header↓ 01_#_Indentation_indicator↓ +_#_Chomping_indicator↓ 01-_#_Both_indicators↓ -->
 
 
 #### #. Block Indentation Indicator
 
-Typically, the [indentation] level of a [block scalar] is detected from its
-first non-[empty] line.
+Every block scalar has a _content indentation level_.
+The content of the block scalar excludes a number of leading [spaces] on each
+line equal to the content indentation level.
+
+If a block scalar has an _indentation indicator_, then the content indentation
+level of the block scalar is equal to the indentation level of the block scalar
+plus the value of the indentation indicator.
+
+If no indentation indicator is given, then the content indentation level is
+equal to the number of leading [spaces] on the first non-[empty line] of the
+contents.
+
+A block scalar may have an _indentation indicator_, which is a single decimal
+digit indicating the indentation level of the content.
+
 It is an error for any of the leading [empty lines] to contain more [spaces]
 than the first non-[empty line].
 
-Detection fails when the first non-[empty line] contains leading content
-[space] characters.
-[Content] may safely start with a [tab] or a ["**`#`**"] character.
-
-When detection would fail, YAML requires that the [indentation] level for the
-[content] be given using an explicit _indentation indicator_.
-This level is specified as the integer number of the additional [indentation]
-spaces used for the [content], relative to its parent [node].
-
-It is always valid to specify an indentation indicator for a [block scalar]
-node, though a YAML [processor] should only emit an explicit indentation
-indicator for cases where detection will fail.
+A YAML [processor] should only emit an explicit indentation indicator for cases
+where detection will fail.
 
 ```
-[#] c-indentation-indicator(m) ::=
-  ns-dec-digit => m = ns-dec-digit - x30
-  ""           => m = auto-detect()
+[#] c-indentation-indicator ::=
+  ns-dec-digit
 ```
 
 
@@ -4881,7 +4921,7 @@ indicator for cases where detection will fail.
 ```
 
 **Legend:**
-* [c-indentation-indicator(m)] <!-- ° 7:4 -->
+* [c-indentation-indicator] <!-- ° 7:4 -->
 * [s-indent(n)] <!-- ·· · -->
 
 
@@ -4949,10 +4989,9 @@ The chomping method used is a [presentation detail] and must not be used to
 convey [content] information.
 
 ```
-[#] c-chomping-indicator(t) ::=
-  '-' => t = STRIP
-  '+' => t = KEEP
-  ""  => t = CLIP
+[#] c-chomping-indicator(STRIP) ::= '-'
+    c-chomping-indicator(KEEP)  ::= '+'
+    c-chomping-indicator(CLIP)  ::= ""
 ```
 
 
@@ -4961,9 +5000,9 @@ by the chomping indicator specified in the [block scalar header].
 
 ```
 [#] b-chomped-last(t) ::=
-  t == STRIP => b-non-content  | /* End of file */
-  t == CLIP  => b-as-line-feed | /* End of file */
-  t == KEEP  => b-as-line-feed | /* End of file */
+    b-chomped-last(STRIP) ::= b-non-content  | /* End of file */
+    b-chomped-last(CLIP)  ::= b-as-line-feed | /* End of file */
+    b-chomped-last(KEEP)  ::= b-as-line-feed | /* End of file */
 ```
 
 
@@ -4994,16 +5033,15 @@ also controlled by the chomping indicator specified in the [block scalar
 header].
 
 ```
-[#] l-chomped-empty(n,t) ::=
-  t == STRIP => l-strip-empty(n)
-  t == CLIP  => l-strip-empty(n)
-  t == KEEP  => l-keep-empty(n)
+[#] l-chomped-empty(n,STRIP) ::= l-strip-empty(n)
+    l-chomped-empty(n,CLIP)  ::= l-strip-empty(n)
+    l-chomped-empty(n,KEEP)  ::= l-keep-empty(n)
 ```
 
 ```
 [#] l-strip-empty(n) ::=
   (
-    s-indent(<=n)
+    s-indent-less-or-equal(n)
     b-non-content
   )*
   l-trail-comments(n)?
@@ -5025,7 +5063,7 @@ constrained.
 
 ```
 [#] l-trail-comments(n) ::=
-  s-indent(<n)
+  s-indent-less-than(n)
   c-nb-comment-text
   b-comment
   l-comment*
@@ -5101,7 +5139,7 @@ It is the simplest, most restricted and most readable [scalar style].
 ```
 [#] c-l+literal(n) ::=
   c-literal                # '|'
-  c-b-block-header(m,t)
+  c-b-block-header(t)
   l-literal-content(n+m,t)
 ```
 
@@ -5190,7 +5228,7 @@ It is similar to the [literal style]; however, folded scalars are subject to
 ```
 [#] c-l+folded(n) ::=
   c-folded                 # '>'
-  c-b-block-header(m,t)
+  c-b-block-header(t)
   l-folded-content(n+m,t)
 ```
 
@@ -5831,15 +5869,14 @@ versus [**`BLOCK-IN`** context]).
   )?
   s-l-comments
   (
-      l+block-sequence(seq-spaces(n,c))
+      seq-space(n,c)
     | l+block-mapping(n)
   )
 ```
 
 ```
-[#] seq-spaces(n,c) ::=
-  c == BLOCK-OUT => n-1
-  c == BLOCK-IN  => n
+[#] seq-space(n,BLOCK-OUT) ::= l+block-sequence(n-1)
+    seq-space(n,BLOCK-IN)  ::= l+block-sequence(n)
 ```
 
 
