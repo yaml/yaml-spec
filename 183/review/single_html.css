@@ -1,0 +1,250 @@
+body {
+  font-family: sans-serif;
+  background-color: #ffffff;
+  color: #000000;
+}
+
+div.abstract p.title,
+div.toc p,
+p.releaseinfo em,
+div.figure p.title,
+div.example p.title,
+span.term,
+h1, h2, h3, h4, h5, h6  {
+  color: #005a9c;
+}
+
+h1 {
+  font-size: 170%;
+  font-style: normal;
+  font-weight: normal;
+}
+
+
+div.abstract p.title,
+div.toc p,
+h2 {
+  font-size: 140%;
+  font-style: normal;
+  font-weight: normal;
+}
+
+h3 {
+  font-size: 120%;
+  font-style: normal;
+  font-weight: normal;
+}
+
+p.releaseinfo em,
+h4 {
+  font-size: 100%;
+  font-style: normal;
+  font-weight: bold;
+}
+
+div.figure p.title,
+div.example p.title,
+span.term,
+h5 {
+  font-size: 80%;
+  font-style: normal;
+  font-weight: bold;
+}
+
+span.term tt {
+  font-size: 120%;
+  font-style: normal;
+}
+
+h6 {
+  font-size: 60%;
+  font-style: normal;
+  font-weight: bold;
+}
+
+div.toc p b,
+div.abstract p.title b {
+  font-weight: normal;
+}
+
+div.author h3 {
+  color: #000000;
+  font-weight: bold;
+  font-style: normal;
+  font-size: 100%;
+  margin-bottom: 0;
+}
+
+div.toc span.appendix,
+div.toc span.chapter {
+  font-weight: bold;
+}
+
+div.sect1 table.simplelist {
+  width: 100%;
+}
+
+div.sect1 table.simplelist td {
+  vertical-align: top;
+}
+
+div.figure div.informaltable table,
+div.figure table.simplelist,
+div.figure table.simplelist td {
+  width: auto;
+}
+
+div.figure div.informaltable table td {
+  border-style: none;
+}
+
+div.figure div.informaltable table {
+  border-color: #000000;
+}
+
+div.example pre.programlisting { /* valid example */
+  background-color: #E0F8E0;
+  border-style: ridge;
+  width: 90%;
+  padding: 0.25em;
+}
+
+div.example pre.synopsis { /* legend */
+  line-height: 150%;
+}
+
+div.example pre.screen { /* invalid example */
+  background-color: #F8E0E0;
+  border-style: ridge;
+  width: 90%;
+  padding: 0.25em;
+}
+
+table.productionset { /* productions */
+  background-color: #E0F8F8;
+  border-style: ridge;
+  width: 90%;
+}
+
+table.productionset table.productionset {
+  border-style: none;
+  width: 90%;
+}
+
+td.productioncounter {
+  font-family: monospace;
+# font-size: 12px;
+  padding-right: 0.5em;
+}
+
+td.productionlhs {
+  font-family: monospace;
+# font-size: 12px;
+  white-space: nowrap;
+}
+
+td.productionseperator {
+  font-family: monospace;
+# font-size: 12px;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+td.productionrhs {
+  font-family: monospace;
+# font-size: 12px;
+  white-space: nowrap;
+  width: 100%;
+}
+
+div.variablelist dt {
+  margin-top: 1em;
+}
+
+dd p {
+  margin-top: 0;
+}
+
+
+code.filename {   /* hl1 */
+  font-family: monospace;
+  background-color: #F8F8E0;
+  border-color: #000000;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0px;
+}
+
+code.literal {    /* hl2 */
+  font-family: monospace;
+  background-color: #E0E0F8;
+  border-color: #000000;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0px;
+}
+
+span.property { /* hl3 */
+  font-family: monospace;
+  background-color: #F8E0F8;
+  border-color: #000000;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0px;
+}
+
+code.constant { /* hl4 */
+  font-family: monospace;
+  background-color: #E0F8F8;
+  border-color: #000000;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0px;
+}
+
+span.honorific > code.filename {
+  padding: 4px 1px 4px 1px;
+  line-height: 175%;
+}
+
+span.honorific > code.constant {
+  padding: 4px 1px 4px 1px;
+  line-height: 175%;
+}
+
+span.honorific > span.property {
+  padding: 4px 1px 4px 1px;
+  line-height: 175%;
+}
+
+span.honorific > code.literal {
+  padding: 4px 1px 4px 1px;
+  line-height: 175%;
+}
+
+a[href^="#"] {
+  text-decoration: none;
+  color: black;
+  border-bottom: 1px dotted gray;
+}
+
+a[href^="#"]:hover,
+div.indexdiv a,
+div.toc a {
+  text-decoration: underline;
+  border-bottom: none;
+  color: blue;
+}
+
+pre.synopsis a {
+  background: none;
+}
+
+table.productionset a {
+  background-color: #E0F8F8;
+  border-bottom: none;
+}
+
+a.preferred {
+  font-style: italic;
+}
