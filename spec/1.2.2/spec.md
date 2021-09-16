@@ -1251,15 +1251,6 @@ Each BNF production is both named and numbered for easy reference.
 Whenever possible, basic structures are specified before the more complex
 structures using them in a "bottom up" fashion.
 
-The order of alternatives inside a production is significant.
-Subsequent alternatives are only considered when previous ones fail.
-See for example the [**`b-break`**](#b-break) production.
-
-In addition, production matching is expected to be greedy.
-Optional (**`?`**), zero-or-more (**`*`**) and one-or-more (**`+`**) patterns
-are always expected to match as much of the input as possible.
-A (**`{n}`**) pattern is used to match a production exactly `n` times.
-
 The productions are accompanied by examples which are presented in a two-pane
 side-by-side format.
 The left-hand side is the YAML example and the right-hand side is an alternate
@@ -1267,6 +1258,46 @@ YAML view of the example.
 The right-hand view uses JSON when possible.
 Otherwise it uses a YAML form that is as close to JSON as possible.
 
+
+## #. Production Syntax
+
+Productions are defined using the syntax `production-name ::= term`, where a
+term is either:
+
+* An atomic term:
+  * A quoted string (`"abc"`), which matches that sequence of characters.
+  * A hexadeximal number (`x0A`), which matches the character at that Unicode
+    code point.
+  * A range of hexadeximal numbers (`[x20-x7E]`), which matches any character
+    whose Unicode code point is within that range.
+  * The name of a production (`c-printable`), which matches that production.
+* A lookaround:
+  * `[lookahead = term]`, which matches the empty string if `term` would match.
+  * `[lookahead ≠ term]`, which matches the empty string if `term` would not
+    match.
+  * `[lookbehind = term]`, which matches the empty string if `term` would match
+  beginning at any prior point on the line and ending at the current position.
+* A special production:
+  * `<empty>`, which matches the empty string.
+  * `<impossible>`, which cannot match.
+  * `<start of line>`, which matches the empty string at the beginning of a
+    line.
+  * `<end of input>`, matches the empty string at the end of the input.
+* A parenthesized term, which matches its contents.
+* A sequence or alternation:
+  * `term-one term-two`, which matches `term-one` followed by `term-two`.
+  * `term-one | term-two`, which matches the `term-one` if possible, or
+    `term-two` otherwise.
+* A quantified term:
+  * `term?`, which matches `(term | <empty>)`.
+  * `term*`, which matches `(term term* | <empty>)`.
+  * `term+`, which matches `(term term*)`.
+
+The order of operations is parenthesization, then quantification, then
+sequence, then alternation. For example, `a b | c d` is equivalent to
+`(a b) | (c d)`.
+
+Whitespace in productions is not significant except inside quoted strings.
 
 ## #. Production Parameters
 
@@ -2375,10 +2406,10 @@ convey [content] information.
 ```
 [#]
 s-indent(-1) ::=
-  /* Impossible */
+  <impossible>
 
 s-indent(0) ::=
-  /* Empty */
+  <empty>
 
 s-indent(n+1) ::=
   s-space s-indent(n)
@@ -2393,13 +2424,13 @@ The productions use the notation "**`s-indent-less-than(n)`**" and
 ```
 [#]
 s-indent-less-than(-1) ::=
-  /* Impossible */
+  <impossible>
 
 s-indent-less-than(0) ::=
-  /* Impossible */
+  <impossible>
 
 s-indent-less-than(1) ::=
-  /* Empty */
+  <empty>
 
 s-indent-less-than(n+2) ::=
   s-indent-less-than(n+1) s-space?
@@ -2408,10 +2439,10 @@ s-indent-less-than(n+2) ::=
 ```
 [#]
 s-indent-less-or-equal(-1) ::=
-  /* Impossible */
+  <impossible>
 
 s-indent-less-or-equal(0) ::=
-  /* Empty */
+  <empty>
 
 s-indent-less-or-equal(n+1) ::=
   s-indent-less-or-equal(n) s-space?
@@ -2495,7 +2526,7 @@ Separation spaces are a [presentation detail] and must not be used to convey
 ```
 [#] s-separate-in-line ::=
     s-white+
-  | /* Start of line */
+  | <start of line>
 ```
 
 
@@ -2764,7 +2795,7 @@ However, as this confuses many tools, YAML [processors] should terminate the
 ```
 [#] b-comment ::=
     b-non-content
-  | /* End of file */
+  | <end of input>
 ```
 
 ```
@@ -2833,7 +2864,7 @@ The only exception is a comment ending a [block scalar header].
 [#] s-l-comments ::=
   (
       s-b-comment
-    | /* Start of line */
+    | <start of line>
   )
   l-comment*
 ```
@@ -4052,7 +4083,7 @@ causes no ambiguity.
         | c-mapping-value     #':'
         | c-sequence-entry    #'-'
       )
-      /* Followed by an ns-plain-safe(c) */
+      [lookahead = ns-plain-safe(c)]
     )
 ```
 
@@ -4091,12 +4122,12 @@ These characters would cause ambiguity with [flow collection] structures.
       - c-comment          # '#'
     )
   | (
-      /* An ns-char preceding */
+      [lookbehind = ns-char]
       c-comment          # '#'
     )
   | (
       c-mapping-value    # ':'
-      /* Followed by an ns-plain-safe(c) */
+      [lookahead = ns-plain-safe(c)]
     )
 ```
 
@@ -4451,7 +4482,7 @@ indicated by the "**`:`**".
 ```
 [#] c-ns-flow-map-separate-value(n,c) ::=
   c-mapping-value    # ':'
-  /* Not followed by an ns-plain-safe(c) */
+  [lookahead ≠ ns-plain-safe(c)]
   (
       (
         s-separate(n,c)
@@ -4996,9 +5027,9 @@ by the chomping indicator specified in the [block scalar header].
 
 ```
 [#] b-chomped-last(t) ::=
-    b-chomped-last(STRIP) ::= b-non-content  | /* End of file */
-    b-chomped-last(CLIP)  ::= b-as-line-feed | /* End of file */
-    b-chomped-last(KEEP)  ::= b-as-line-feed | /* End of file */
+    b-chomped-last(STRIP) ::= b-non-content  | <end of input>
+    b-chomped-last(CLIP)  ::= b-as-line-feed | <end of input>
+    b-chomped-last(KEEP)  ::= b-as-line-feed | <end of input>
 ```
 
 
@@ -5485,7 +5516,7 @@ followed by a non-space character (e.g. "**`-42`**").
 ```
 [#] c-l-block-seq-entry(n) ::=
   c-sequence-entry    # '-'
-  /* Not followed by an ns-char */
+  [lookahead ≠ ns-char]
   s-l+block-indented(n,BLOCK-IN)
 ```
 
@@ -5982,7 +6013,7 @@ either of these markers.
 
 ```
 [#] c-forbidden ::=
-  /* Start of line */
+  <start of line>
   (
       c-directives-end
     | c-document-end
@@ -5990,7 +6021,7 @@ either of these markers.
   (
       b-char
     | s-white
-    | /* End of file */
+    | <end of input>
   )
 ```
 
