@@ -1314,7 +1314,7 @@ The parameters are as follows:
 
 ? Indentation: `n` or `m`
 
-: May be any natural number, including zero.
+: May be any natural number, including zero. `n` may also be -1.
 
 
 ? Context: `c`
@@ -2374,6 +2374,9 @@ convey [content] information.
 
 ```
 [#]
+s-indent(-1) ::=
+  /* Impossible */
+
 s-indent(0) ::=
   /* Empty */
 
@@ -2389,6 +2392,9 @@ The productions use the notation "**`s-indent-less-than(n)`**" and
 
 ```
 [#]
+s-indent-less-than(-1) ::=
+  /* Impossible */
+
 s-indent-less-than(0) ::=
   /* Impossible */
 
@@ -2401,6 +2407,9 @@ s-indent-less-than(n+2) ::=
 
 ```
 [#]
+s-indent-less-or-equal(-1) ::=
+  /* Impossible */
+
 s-indent-less-or-equal(0) ::=
   /* Empty */
 
