@@ -1272,70 +1272,42 @@ Otherwise it uses a YAML form that is as close to JSON as possible.
 <code>## #. Production Parameters</code>
 
 Some productions have parameters in parentheses after the name, such as
-**`s-line-prefix(n,c)`**.
-A parameterized production is shorthand for a family of productions, each with
-a fixed value for each parameter.
+[`s-line-prefix(n,c)`](#production-s-line-prefix).
+A parameterized production is shorthand for a (infinite) series of productions,
+each with a fixed value for each parameter.
 
 For instance, this production:
 
 ```
-s-indent(n) ::=
-  s-space{n}
+production-a(n) ::= production-b(n)
 ```
 
 Is shorthand for:
 
 ```
-<code># n = 0</code>
-s-indent(0) ::=
-  s-space{0}
-
-<code># n = 1</code>
-s-indent(1) ::=
-  s-space{1}
-
+production-a(0) ::= production-b(0)
+production-a(1) ::= production-b(1)
 ⋮
 ```
 
 And this production:
 
 ```
-l+block-sequence(n) ::=
-  (
-    s-indent(n+m)
-    c-l-block-seq-entry(n+m)
-  )+
+production-a(n) ::=
+  ( production-b(n+m) production-c(n+m) )+
 ```
 
 Is shorthand for:
 
 ```
-l+block-sequence(0) ::=
-    # n = 0, m = 0
-    (
-      s-indent(0)
-      c-l-block-seq-entry(0)
-    )+
-  | # n = 0, m = 1
-    (
-      s-indent(1)
-      c-l-block-seq-entry(1)
-    )+
+production-a(0) ::=
+    ( production-b(0) production-c(0))+
+  | ( production-b(1) production-c(1))+
   | …
-
-l+block-sequence(1) ::=
-    # n = 1, m = 0
-    (
-      s-indent(1)
-      c-l-block-seq-entry(1)
-    )+
-  | # n = 1, m = 1
-    (
-      s-indent(2)
-      c-l-block-seq-entry(2)
-    )+
+production-a(1) ::=
+    ( production-b(1) production-c(1))+
+  | ( production-b(2) production-c(2))+
   | …
-
 ⋮
 ```
 
@@ -1343,7 +1315,7 @@ The parameters are as follows:
 
 ? Indentation: `n` or `m`
 
-: May be any natural number, including zero.
+: May be any natural number, including zero. `n` may also be -1.
 
 
 ? Context: `c`
@@ -1353,7 +1325,7 @@ surrounding.
 YAML supports two groups of _contexts_, distinguishing between [block styles]
 and [flow styles].
 
-: Takes any of the following values:
+: May be any of the following values:
 
 * `BLOCK-IN` -- inside block context
 * `BLOCK-OUT` -- outside block context
@@ -2403,6 +2375,9 @@ convey [content] information.
 
 ```
 [#]
+s-indent(-1) ::=
+  /* Impossible */
+
 s-indent(0) ::=
   /* Empty */
 
@@ -2418,6 +2393,9 @@ The productions use the notation "**`s-indent-less-than(n)`**" and
 
 ```
 [#]
+s-indent-less-than(-1) ::=
+  /* Impossible */
+
 s-indent-less-than(0) ::=
   /* Impossible */
 
@@ -2430,6 +2408,9 @@ s-indent-less-than(n+2) ::=
 
 ```
 [#]
+s-indent-less-or-equal(-1) ::=
+  /* Impossible */
+
 s-indent-less-or-equal(0) ::=
   /* Empty */
 
@@ -5497,8 +5478,8 @@ followed by a non-space character (e.g. "**`-1`**").
 ```
 [#] l+block-sequence(n) ::=
   (
-    s-indent(n+m)
-    c-l-block-seq-entry(n+m)
+    s-indent(n+1+m)
+    c-l-block-seq-entry(n+1+m)
   )+
 ```
 
@@ -5596,8 +5577,8 @@ A _Block mapping_ is a series of entries, each [presenting] a [key/value pair].
 ```
 [#] l+block-mapping(n) ::=
   (
-    s-indent(n+m)
-    ns-l-block-map-entry(n+m)
+    s-indent(n+1+m)
+    ns-l-block-map-entry(n+1+m)
   )+
 ```
 

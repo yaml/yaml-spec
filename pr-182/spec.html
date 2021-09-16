@@ -47,7 +47,7 @@ the content of this draft or cite it as an authority.
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-15">Revision 1.2.2 (2021-09-15)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-16">Revision 1.2.2 (2021-09-16)</h2>
 
 <p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -114,7 +114,7 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-15" id="markdown-toc-revision-122-2021-09-15">Revision 1.2.2 (2021-09-15)</a></li>
+      <li><a href="#revision-122-2021-09-16" id="markdown-toc-revision-122-2021-09-16">Revision 1.2.2 (2021-09-16)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction" id="markdown-toc-chapter-1-introduction">Chapter 1. Introduction</a>    <ul>
@@ -1585,74 +1585,46 @@ Otherwise it uses a YAML form that is as close to JSON as possible.</p>
 <h2 id="41-production-parameters">4.1. Production Parameters</h2>
 
 <p>Some productions have parameters in parentheses after the name, such as
-<strong><code class="language-plaintext highlighter-rouge">s-line-prefix(n,c)</code></strong>.
-A parameterized production is shorthand for a family of productions, each with
-a fixed value for each parameter.</p>
+<a href="#production-s-line-prefix"><code class="language-plaintext highlighter-rouge">s-line-prefix(n,c)</code></a>.
+A parameterized production is shorthand for a (infinite) series of productions,
+each with a fixed value for each parameter.</p>
 
 <p>For instance, this production:</p>
 
-<div id="rule-s-indent"></div>
+<div id="rule-production-a"></div>
 <pre class="rule">
-s-indent(n) ::=
-  <a href="#rule-s-space{n}">s-space{n}</a>
+production-a(n) ::= production-b(n)
 </pre>
 
 <p>Is shorthand for:</p>
 
-<div id="rule-s-indent"></div>
+<div id="rule-production-a"></div>
 <pre class="rule">
-# n = 0
-s-indent(0) ::=
-  <a href="#rule-s-space{0}">s-space{0}</a>
-
-# n = 1
-s-indent(1) ::=
-  <a href="#rule-s-space{1}">s-space{1}</a>
-
+production-a(0) ::= production-b(0)
+production-a(1) ::= production-b(1)
 ⋮
 </pre>
 
 <p>And this production:</p>
 
-<div id="rule-l+block-sequence"></div>
+<div id="rule-production-a"></div>
 <pre class="rule">
-l+block-sequence(n) ::=
-  (
-    <a href="#rule-s-indent">s-indent</a>(n+m)
-    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(n+m)
-  )+
+production-a(n) ::=
+  ( production-b(n+m) production-c(n+m) )+
 </pre>
 
 <p>Is shorthand for:</p>
 
-<div id="rule-l+block-sequence"></div>
+<div id="rule-production-a"></div>
 <pre class="rule">
-l+block-sequence(0) ::=
-    # n = 0, m = 0
-    (
-      <a href="#rule-s-indent">s-indent</a>(0)
-      <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(0)
-    )+
-  | # n = 0, m = 1
-    (
-      <a href="#rule-s-indent">s-indent</a>(1)
-      <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(1)
-    )+
+production-a(0) ::=
+    ( production-b(0) production-c(0))+
+  | ( production-b(1) production-c(1))+
   | …
-
-l+block-sequence(1) ::=
-    # n = 1, m = 0
-    (
-      <a href="#rule-s-indent">s-indent</a>(1)
-      <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(1)
-    )+
-  | # n = 1, m = 1
-    (
-      <a href="#rule-s-indent">s-indent</a>(2)
-      <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(2)
-    )+
+production-a(1) ::=
+    ( production-b(1) production-c(1))+
+  | ( production-b(2) production-c(2))+
   | …
-
 ⋮
 </pre>
 
@@ -1663,7 +1635,7 @@ l+block-sequence(1) ::=
 <dl>
   <dt>Indentation: <code class="language-plaintext highlighter-rouge">n</code> or <code class="language-plaintext highlighter-rouge">m</code></dt>
   <dd>
-    <p>May be any natural number, including zero.</p>
+    <p>May be any natural number, including zero. <code class="language-plaintext highlighter-rouge">n</code> may also be -1.</p>
   </dd>
 </dl>
 
@@ -1678,7 +1650,7 @@ YAML supports two groups of <em>contexts</em>, distinguishing between <a href="#
 and <a href="#flow-styles">flow styles</a>.</p>
   </dd>
   <dd>
-    <p>Takes any of the following values:</p>
+    <p>May be any of the following values:</p>
   </dd>
 </dl>
 
@@ -3035,6 +3007,9 @@ convey <a href="#nodes">content</a> information.</p>
 <div id="rule-s-indent"></div>
 <pre class="rule">
 [67]
+s-indent(-1) ::=
+  /* Impossible */
+
 s-indent(0) ::=
   /* Empty */
 
@@ -3050,6 +3025,9 @@ The productions use the notation “<strong><code class="language-plaintext high
 <div id="rule-s-indent-less-than"></div>
 <pre class="rule">
 [68]
+s-indent-less-than(-1) ::=
+  /* Impossible */
+
 s-indent-less-than(0) ::=
   /* Impossible */
 
@@ -3063,6 +3041,9 @@ s-indent-less-than(n+2) ::=
 <div id="rule-s-indent-less-or-equal"></div>
 <pre class="rule">
 [69]
+s-indent-less-or-equal(-1) ::=
+  /* Impossible */
+
 s-indent-less-or-equal(0) ::=
   /* Empty */
 
@@ -7032,8 +7013,8 @@ followed by a non-space character (e.g. “<strong><code class="language-plainte
 <pre class="rule">
 [187] l+block-sequence(n) ::=
   (
-    <a href="#rule-s-indent">s-indent</a>(n+m)
-    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(n+m)
+    <a href="#rule-s-indent">s-indent</a>(n+1+m)
+    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(n+1+m)
   )+
 </pre>
 
@@ -7158,8 +7139,8 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 <pre class="rule">
 [191] l+block-mapping(n) ::=
   (
-    <a href="#rule-s-indent">s-indent</a>(n+m)
-    <a href="#rule-ns-l-block-map-entry">ns-l-block-map-entry</a>(n+m)
+    <a href="#rule-s-indent">s-indent</a>(n+1+m)
+    <a href="#rule-ns-l-block-map-entry">ns-l-block-map-entry</a>(n+1+m)
   )+
 </pre>
 
