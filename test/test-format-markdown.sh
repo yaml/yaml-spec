@@ -2,7 +2,14 @@
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/setup"
 
-( set -x; format-markdown ../spec/1.2.2/spec.md > /tmp/spec.md )
+find "$SPEC" -name '*.md' |
+while read -r file; do
 
-( set -x; diff -u ../spec/1.2.2/spec.md /tmp/spec.md) ||
-  die "spec.md not properly formatted"
+  temp=/tmp/$(basename "$file")
+
+  ( set -x; format-markdown "$file" > "$temp" )
+
+  ( set -x; diff -u "$file" "$temp" ||
+    die "spec.md not properly formatted" )
+
+done
