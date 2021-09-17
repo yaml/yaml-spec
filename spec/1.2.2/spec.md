@@ -1265,10 +1265,10 @@ Productions are defined using the syntax `production-name ::= term`, where a
 term is either:
 
 * An atomic term:
-  * A quoted string (`"abc"`), which matches that sequence of characters.
-  * A hexadeximal number (`x0A`), which matches the character at that Unicode
+  * A quoted string (`"abc"`), which matches that concatenation of characters.
+  * A hexadecimal number (`x0A`), which matches the character at that Unicode
     code point.
-  * A range of hexadeximal numbers (`[x20-x7E]`), which matches any character
+  * A range of hexadecimal numbers (`[x20-x7E]`), which matches any character
     whose Unicode code point is within that range.
   * The name of a production (`c-printable`), which matches that production.
 * A lookaround:
@@ -1276,28 +1276,25 @@ term is either:
   * `[lookahead ≠ term]`, which matches the empty string if `term` would not
     match.
   * `[lookbehind = term]`, which matches the empty string if `term` would match
-  beginning at any prior point on the line and ending at the current position.
+    beginning at any prior point on the line and ending at the current
+    position.
 * A special production:
-  * `<empty>`, which matches the empty string.
-  * `<impossible>`, which cannot match.
   * `<start-of-line>`, which matches the empty string at the beginning of a
     line.
   * `<end-of-input>`, matches the empty string at the end of the input.
+  * `<empty>`, which (always) matches the empty string.
 * A parenthesized term, which matches its contents.
-* A sequence or alternation:
-  * `term-one term-two`, which matches `term-one` followed by `term-two`.
-  * `term-one | term-two`, which matches the `term-one` if possible, or
-    `term-two` otherwise.
+* A concatenation: `term-one term-two`, which matches `term-one` followed by
+  `term-two`.
+* A alternation: `term-one | term-two`, which matches the `term-one` if
+  possible, or `term-two` otherwise.
 * A quantified term:
   * `term?`, which matches `(term | <empty>)`.
   * `term*`, which matches `(term term* | <empty>)`.
   * `term+`, which matches `(term term*)`.
 
-The order of operations is parenthesization, then quantification, then
-sequence, then alternation. For example, `a b | c d` is equivalent to
-`(a b) | (c d)`.
-
-Whitespace in productions is not significant except inside quoted strings.
+The order of precedence is parenthesization, then quantification, then
+concatenation, then alternation.
 
 ## #. Production Parameters
 
@@ -2405,9 +2402,6 @@ convey [content] information.
 
 ```
 [#]
-s-indent(-1) ::=
-  <impossible>
-
 s-indent(0) ::=
   <empty>
 
@@ -2423,12 +2417,6 @@ The productions use the notation "**`s-indent-less-than(n)`**" and
 
 ```
 [#]
-s-indent-less-than(-1) ::=
-  <impossible>
-
-s-indent-less-than(0) ::=
-  <impossible>
-
 s-indent-less-than(1) ::=
   <empty>
 
@@ -2438,9 +2426,6 @@ s-indent-less-than(n+2) ::=
 
 ```
 [#]
-s-indent-less-or-equal(-1) ::=
-  <impossible>
-
 s-indent-less-or-equal(0) ::=
   <empty>
 
