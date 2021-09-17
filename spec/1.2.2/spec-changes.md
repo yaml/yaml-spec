@@ -127,9 +127,14 @@ Additionally there are some minor differences between the parsing rules:
 * Anchors can no longer include any of the characters `,[]{}`.
 * Inside double-quoted strings `\/` is now a valid escape for the `/`
   character.
+* No space is required after the colon in flow style if the key is quoted, e.g.
+  `{"key":value}`
+* The maximum key length of 1024 characters has been removed for flow mapping
+  keys
 * Quoted content can include practically all Unicode characters.
 * Documents in streams are now independent of each other, and no longer inherit
   preceding document directives if they do not define their own.
+* Explicit document-end marker is now always required before a directive
 
 ## Changes in v1.1 (2005-01-18)
 
