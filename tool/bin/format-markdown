@@ -26,20 +26,44 @@ sub space {
   out take while peek =~ /^$/;
   return 1;
 }
+
+
 sub lines {
-  while ($l) {
-    if (length $l <= 79) {
-      out "$l\n";
+  my $p = '';
+  my $m = 79;
+  my $first = 1;
+  while (my $s = $l) {
+    my $m2 = $m - 2;
+    my $m3 = $m - 4;
+    if (length $l <= $m) {
+      out "$p$l\n";
       last;
     }
-    elsif ($l =~ s{^(.{5,77}\ \ )$/}{}) {
-      out "$1\n";
+    elsif ($l =~ s{^(\ \ \*\ .{10,$m3}\S)(?:$|\ (?=\S))}{}) {
+      out "$p$1\n";
     }
-    elsif ($l =~ s{^(\S.{10,77}\S)(?:$|\ (?=\S))}{}) {
-      out "$1\n";
+    elsif ($l =~ s{^(.{5,$m2}\ \ )$/}{}) {
+      out "$p$1\n";
+    }
+    elsif ($l =~ s{^(\S.{10,$m2}\S)(?:$|\ (?=\S))}{}) {
+      out "$p$1\n";
     }
     else {
       die ">>$l<<";
+    }
+    if ($first) {
+      $first = 0;
+      if ($s =~ /^\*\ /) {
+        $p = '  ';
+        $m -= 2;
+      }
+      elsif ($s =~ /^\ {2}\*\ /) {
+        $p = '    ';
+        $m -= 4;
+      }
+      elsif ($s =~ /^\ /) {
+        die "Unsupported line '$s'";
+      }
     }
   }
 }
@@ -50,6 +74,7 @@ sub wrap {
   while (peek =~ /./) {
     my $line = take;
     chomp $line;
+    $line =~ s/^\ +(?=\S)(?!\*)//;
     push @l, $line;
     last if $line =~ /(  |\.)$/;
     last if $end->();
@@ -77,7 +102,7 @@ sub para {
 }
 
 sub list {
-  my $end = sub { peek =~ /^(?:\*\ |$)/ };
+  my $end = sub { peek =~ /^(?:\s{0,2}\*\ |$)/ };
   wrap($end);
 }
 
@@ -143,7 +168,7 @@ sub main {
     leg  and next if $peek =~ /^\*\*Legend:\*\*$/;
     toc  and next if $peek =~ /^\{:toc\}$/;
     pre  and next if $peek =~ /^\`\`\`$/;
-    list and next if $peek =~ /^\*\ /;
+    list and next if $peek =~ /^\ {0,2}\*\ /;
     tabl and next if $peek =~ /^\|\ /;
     comm and next if $peek =~ /^<!--/;
     para and next if $peek =~ /^(

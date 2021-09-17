@@ -47,6 +47,6 @@ _:
 
 clean:
 	@git worktree prune
-	$(MAKE) --no-print-directory -C spec $@
-	$(MAKE) --no-print-directory -C www $@
+	$(MAKE) --no-print-directory -C spec $@ &>/dev/null
+	$(MAKE) --no-print-directory -C www $@ &>/dev/null
 	$(MAKE) --no-print-directory -C tool/docker clean-all
