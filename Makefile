@@ -1,5 +1,7 @@
 include tool/make/init.mk
 
+export ROOT SPEC
+
 TESTS ?= $(wildcard test/test-*)
 
 QUICK := \

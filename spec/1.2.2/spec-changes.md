@@ -58,8 +58,7 @@ Patches and error corrections:
 The core data schema is introduced as the recommended default, replacing the
 YAML 1.1 type library:
 
-* Only `true` and `false` strings are parsed as booleans (including `True` and `TRUE`);
-  `y`, `yes`, `on`, and their negative counterparts are parsed as strings.
+* Only `true` and `false` strings are parsed as booleans (including `True` and `TRUE`); `y`, `yes`, `on`, and their negative counterparts are parsed as strings.
 * Underlines `_` cannot be used within numerical values.
 * Octal values need a `0o` prefix; e.g. `010` is now parsed with the value 10 rather than 8.
 * The binary and sexagesimal integer formats have been dropped.
@@ -69,13 +68,10 @@ YAML 1.1 type library:
 The other major change has been to make sure that YAML 1.2 is a valid superset of JSON.
 Additionally there are some minor differences between the parsing rules:
 
-* The next-line `\x85`, line-separator `\u2028` and paragraph-separator `\u2029` characters
-  are no longer considered line-break characters.
-  Within scalar values,
-  this means that next-line characters will not be included in the white-space normalization.
+* The next-line `\x85`, line-separator `\u2028` and paragraph-separator `\u2029` characters are no longer considered line-break characters.
+  Within scalar values, this means that next-line characters will not be included in the white-space normalization.
   Using any of these outside scalar values is likely to result in errors during parsing.
-  For a relatively robust solution,
-  try replacing `\x85` and `\u2028` with `\n` and `\u2029` with `\n\n`.
+  For a relatively robust solution, try replacing `\x85` and `\u2028` with `\n` and `\u2029` with `\n\n`.
 * Tag shorthands can no longer include any of the characters `,[]{}`, but can include `#`.
   To work around this, either fix your tag names or use verbatim tags.
 * Anchors can no longer include any of the characters `,[]{}`.

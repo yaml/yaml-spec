@@ -14,7 +14,7 @@ sub out {
   print encode('UTF-8', $_[0], Encode::FB_CROAK);
 }
 sub peek {
-  @l and $l[0];
+  @l ? $l[0] : '';
 }
 sub take {
   shift(@l);
@@ -23,15 +23,17 @@ sub give {
   unshift(@l, "$_[0]\n");
 }
 sub space {
-  out take while peek =~ /^$/;
+  out take while peek eq "\n";
+  out take if @l == 1;
   return 1;
 }
 
 
 sub lines {
-  my $p = '';
-  my $m = 79;
-  my $first = 1;
+  my ($p, $m, $f) = @_;
+  $p //= '';
+  $m //= 79;
+  $f //= 1;
   while (my $s = $l) {
     my $m2 = $m - 2;
     my $m3 = $m - 4;
@@ -51,8 +53,8 @@ sub lines {
     else {
       die ">>$l<<";
     }
-    if ($first) {
-      $first = 0;
+    if ($f) {
+      $f = 0;
       if ($s =~ /^\*\ /) {
         $p = '  ';
         $m -= 2;
@@ -76,14 +78,35 @@ sub wrap {
     chomp $line;
     $line =~ s/^\ +(?=\S)(?!\*)//;
     push @l, $line;
-    last if $line =~ /(  |\.)$/;
-    last if $end->();
+    last if $end->($line);
   }
   $l = join ' ', @l;
   $l =~ s{\]\(\ }{](};
   lines;
   space;
   return 1;
+}
+
+sub lis2 {
+  my @l;
+  while (peek =~ /^\ \ \S/) {
+    my $line = take;
+    chomp $line;
+    $line =~ s/^\ \ //;
+    push @l, $line;
+    last if $line =~ /(  |\.)$/;
+  }
+  $l = join ' ', @l;
+  $l =~ s{\]\(\ }{](};
+  lines('  ', 77, 0);
+  space;
+  return 1;
+}
+
+sub titl {
+    out take;
+    out take;
+    space;
 }
 
 sub head {
@@ -97,7 +120,7 @@ sub line {
 }
 
 sub para {
-  my $end = sub { 0 };
+  my $end = sub { $_[0] =~ /(  |\.)$/ };
   wrap $end;
 }
 
@@ -163,12 +186,14 @@ sub main {
   }
 
   while (my $peek = peek) {
+    titl and next if @l >= 2 and $l[1] =~ /^===+$/;
     head and next if $peek =~ /^#+\ /;
     line and next if $peek =~ /^\[\^/;
     leg  and next if $peek =~ /^\*\*Legend:\*\*$/;
     toc  and next if $peek =~ /^\{:toc\}$/;
     pre  and next if $peek =~ /^\`\`\`$/;
     list and next if $peek =~ /^\ {0,2}\*\ /;
+    lis2 and next if $peek =~ /^\ \ \S/;
     tabl and next if $peek =~ /^\|\ /;
     comm and next if $peek =~ /^<!--/;
     para and next if $peek =~ /^(
