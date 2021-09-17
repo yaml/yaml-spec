@@ -1293,8 +1293,8 @@ term is either:
   * `term?`, which matches `(term | &lt;empty&gt;)`.
   * `term*`, which matches `(term term* | &lt;empty&gt;)`.
   * `term+`, which matches `(term term*)`.
-  * `term{n}`, which matches `term` exactly `n` times for some natural number
-    `n`.
+
+&gt; Note: Quantified terms are always greedy.
 
 The order of precedence is parenthesization, then quantification, then
 concatenation, then alternation.

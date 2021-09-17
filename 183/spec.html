@@ -1618,11 +1618,13 @@ possible, or <code class="language-plaintext highlighter-rouge">term-two</code> 
       <li><code class="language-plaintext highlighter-rouge">term?</code>, which matches <code class="language-plaintext highlighter-rouge">(term | &lt;empty&gt;)</code>.</li>
       <li><code class="language-plaintext highlighter-rouge">term*</code>, which matches <code class="language-plaintext highlighter-rouge">(term term* | &lt;empty&gt;)</code>.</li>
       <li><code class="language-plaintext highlighter-rouge">term+</code>, which matches <code class="language-plaintext highlighter-rouge">(term term*)</code>.</li>
-      <li><code class="language-plaintext highlighter-rouge">term{n}</code>, which matches <code class="language-plaintext highlighter-rouge">term</code> exactly <code class="language-plaintext highlighter-rouge">n</code> times for some natural number
-<code class="language-plaintext highlighter-rouge">n</code>.</li>
     </ul>
   </li>
 </ul>
+
+<blockquote>
+  <p>Note: Quantified terms are always greedy.</p>
+</blockquote>
 
 <p>The order of precedence is parenthesization, then quantification, then
 concatenation, then alternation.</p>
