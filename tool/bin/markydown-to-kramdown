@@ -367,7 +367,8 @@ sub fmt_indent {
 my $num = 0;
 sub fmt_pre {
   my $pre = format_pre($_);
-  if ($pre =~ s/(\S+)(\s+::=)/%%%/) {
+  my $x = $pre;
+  if ($pre =~ s/\b([a-z]{1,3}[-+]\S+)(\s+::=)/%%%/) {
     my $rule = $1;
     my $sep = $2;
     $num++;

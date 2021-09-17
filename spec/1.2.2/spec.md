@@ -1293,6 +1293,8 @@ term is either:
   * `term*`, which matches `(term term* | <empty>)`.
   * `term+`, which matches `(term term*)`.
 
+> Note: Quantified terms are always greedy.
+
 The order of precedence is parenthesization, then quantification, then
 concatenation, then alternation.
 
