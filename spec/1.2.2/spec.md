@@ -2407,6 +2407,7 @@ convey [content] information.
 s-indent(0) ::=
   <empty>
 
+# When n≥0
 s-indent(n+1) ::=
   s-space s-indent(n)
 ```
@@ -2422,6 +2423,7 @@ The productions use the notation "**`s-indent-less-than(n)`**" and
 s-indent-less-than(1) ::=
   <empty>
 
+# When n≥0
 s-indent-less-than(n+2) ::=
   s-indent-less-than(n+1) s-space?
 ```
@@ -2431,6 +2433,7 @@ s-indent-less-than(n+2) ::=
 s-indent-less-or-equal(0) ::=
   <empty>
 
+# When n≥0
 s-indent-less-or-equal(n+1) ::=
   s-indent-less-or-equal(n) s-space?
 ```
