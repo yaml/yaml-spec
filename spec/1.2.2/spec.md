@@ -1280,9 +1280,9 @@ term is either:
 * A special production:
   * `<empty>`, which matches the empty string.
   * `<impossible>`, which cannot match.
-  * `<start of line>`, which matches the empty string at the beginning of a
+  * `<start-of-line>`, which matches the empty string at the beginning of a
     line.
-  * `<end of input>`, matches the empty string at the end of the input.
+  * `<end-of-input>`, matches the empty string at the end of the input.
 * A parenthesized term, which matches its contents.
 * A sequence or alternation:
   * `term-one term-two`, which matches `term-one` followed by `term-two`.
@@ -2526,7 +2526,7 @@ Separation spaces are a [presentation detail] and must not be used to convey
 ```
 [#] s-separate-in-line ::=
     s-white+
-  | <start of line>
+  | <start-of-line>
 ```
 
 
@@ -2795,7 +2795,7 @@ However, as this confuses many tools, YAML [processors] should terminate the
 ```
 [#] b-comment ::=
     b-non-content
-  | <end of input>
+  | <end-of-input>
 ```
 
 ```
@@ -2864,7 +2864,7 @@ The only exception is a comment ending a [block scalar header].
 [#] s-l-comments ::=
   (
       s-b-comment
-    | <start of line>
+    | <start-of-line>
   )
   l-comment*
 ```
@@ -5027,9 +5027,9 @@ by the chomping indicator specified in the [block scalar header].
 
 ```
 [#] b-chomped-last(t) ::=
-    b-chomped-last(STRIP) ::= b-non-content  | <end of input>
-    b-chomped-last(CLIP)  ::= b-as-line-feed | <end of input>
-    b-chomped-last(KEEP)  ::= b-as-line-feed | <end of input>
+    b-chomped-last(STRIP) ::= b-non-content  | <end-of-input>
+    b-chomped-last(CLIP)  ::= b-as-line-feed | <end-of-input>
+    b-chomped-last(KEEP)  ::= b-as-line-feed | <end-of-input>
 ```
 
 
@@ -6013,7 +6013,7 @@ either of these markers.
 
 ```
 [#] c-forbidden ::=
-  <start of line>
+  <start-of-line>
   (
       c-directives-end
     | c-document-end
@@ -6021,7 +6021,7 @@ either of these markers.
   (
       b-char
     | s-white
-    | <end of input>
+    | <end-of-input>
   )
 ```
 
