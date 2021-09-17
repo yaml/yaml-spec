@@ -3070,9 +3070,10 @@ The productions use the notation “<strong><code class="language-plaintext high
 s-indent-less-than(1) ::=
   &lt;empty&gt;
 
-# When n≥0
-s-indent-less-than(n+2) ::=
-  <a href="#rule-s-indent-less-than">s-indent-less-than</a>(n+1) <a href="#rule-s-space">s-space</a>?
+# When n≥1
+s-indent-less-than(n+1) ::=
+  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent-less-than">s-indent-less-than</a>(n)
+  | &lt;empty&gt;
 </pre>
 
 <div id="rule-s-indent-less-or-equal"></div>
@@ -3083,7 +3084,8 @@ s-indent-less-or-equal(0) ::=
 
 # When n≥0
 s-indent-less-or-equal(n+1) ::=
-  <a href="#rule-s-indent-less-or-equal">s-indent-less-or-equal</a>(n) <a href="#rule-s-space">s-space</a>?
+  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent-less-or-equal">s-indent-less-or-equal</a>(n)
+  | &lt;empty&gt;
 </pre>
 
 <p>Each <a href="#nodes">node</a> must be indented further than its parent <a href="#nodes">node</a>.
