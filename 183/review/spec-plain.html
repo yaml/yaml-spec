@@ -34,7 +34,7 @@
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-16">Revision 1.2.2 (2021-09-16)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-17">Revision 1.2.2 (2021-09-17)</h2>
 
 <p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -101,7 +101,7 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-16" id="markdown-toc-revision-122-2021-09-16">Revision 1.2.2 (2021-09-16)</a></li>
+      <li><a href="#revision-122-2021-09-17" id="markdown-toc-revision-122-2021-09-17">Revision 1.2.2 (2021-09-17)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction" id="markdown-toc-chapter-1-introduction">Chapter 1. Introduction</a>    <ul>
@@ -1569,10 +1569,10 @@ term is either:</p>
 <ul>
   <li>An atomic term:
     <ul>
-      <li>A quoted string (<code class="language-plaintext highlighter-rouge">"abc"</code>), which matches that sequence of characters.</li>
-      <li>A hexadeximal number (<code class="language-plaintext highlighter-rouge">x0A</code>), which matches the character at that Unicode
+      <li>A quoted string (<code class="language-plaintext highlighter-rouge">"abc"</code>), which matches that concatenation of characters.</li>
+      <li>A hexadecimal number (<code class="language-plaintext highlighter-rouge">x0A</code>), which matches the character at that Unicode
 code point.</li>
-      <li>A range of hexadeximal numbers (<code class="language-plaintext highlighter-rouge">[x20-x7E]</code>), which matches any character
+      <li>A range of hexadecimal numbers (<code class="language-plaintext highlighter-rouge">[x20-x7E]</code>), which matches any character
 whose Unicode code point is within that range.</li>
       <li>The name of a production (<code class="language-plaintext highlighter-rouge">c-printable</code>), which matches that production.</li>
     </ul>
@@ -1583,40 +1583,36 @@ whose Unicode code point is within that range.</li>
       <li><code class="language-plaintext highlighter-rouge">[lookahead ≠ term]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would not
 match.</li>
       <li><code class="language-plaintext highlighter-rouge">[lookbehind = term]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would match
-beginning at any prior point on the line and ending at the current position.</li>
+beginning at any prior point on the line and ending at the current
+position.</li>
     </ul>
   </li>
   <li>A special production:
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">&lt;empty&gt;</code>, which matches the empty string.</li>
-      <li><code class="language-plaintext highlighter-rouge">&lt;impossible&gt;</code>, which cannot match.</li>
-      <li><code class="language-plaintext highlighter-rouge">&lt;start of line&gt;</code>, which matches the empty string at the beginning of a
+      <li><code class="language-plaintext highlighter-rouge">&lt;start-of-line&gt;</code>, which matches the empty string at the beginning of a
 line.</li>
-      <li><code class="language-plaintext highlighter-rouge">&lt;end of input&gt;</code>, matches the empty string at the end of the input.</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;end-of-input&gt;</code>, matches the empty string at the end of the input.</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;empty&gt;</code>, which (always) matches the empty string.</li>
     </ul>
   </li>
   <li>A parenthesized term, which matches its contents.</li>
-  <li>A sequence or alternation:
-    <ul>
-      <li><code class="language-plaintext highlighter-rouge">term-one term-two</code>, which matches <code class="language-plaintext highlighter-rouge">term-one</code> followed by <code class="language-plaintext highlighter-rouge">term-two</code>.</li>
-      <li><code class="language-plaintext highlighter-rouge">term-one | term-two</code>, which matches the <code class="language-plaintext highlighter-rouge">term-one</code> if possible, or
-<code class="language-plaintext highlighter-rouge">term-two</code> otherwise.</li>
-    </ul>
-  </li>
+  <li>A concatenation: <code class="language-plaintext highlighter-rouge">term-one term-two</code>, which matches <code class="language-plaintext highlighter-rouge">term-one</code> followed by
+<code class="language-plaintext highlighter-rouge">term-two</code>.</li>
+  <li>A alternation: <code class="language-plaintext highlighter-rouge">term-one | term-two</code>, which matches the <code class="language-plaintext highlighter-rouge">term-one</code> if
+possible, or <code class="language-plaintext highlighter-rouge">term-two</code> otherwise.</li>
   <li>A quantified term:
     <ul>
       <li><code class="language-plaintext highlighter-rouge">term?</code>, which matches <code class="language-plaintext highlighter-rouge">(term | &lt;empty&gt;)</code>.</li>
       <li><code class="language-plaintext highlighter-rouge">term*</code>, which matches <code class="language-plaintext highlighter-rouge">(term term* | &lt;empty&gt;)</code>.</li>
       <li><code class="language-plaintext highlighter-rouge">term+</code>, which matches <code class="language-plaintext highlighter-rouge">(term term*)</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">term{n}</code>, which matches <code class="language-plaintext highlighter-rouge">term</code> exactly <code class="language-plaintext highlighter-rouge">n</code> times for some natural number
+<code class="language-plaintext highlighter-rouge">n</code>.</li>
     </ul>
   </li>
 </ul>
 
-<p>The order of operations is parenthesization, then quantification, then
-sequence, then alternation. For example, <code class="language-plaintext highlighter-rouge">a b | c d</code> is equivalent to
-<code class="language-plaintext highlighter-rouge">(a b) | (c d)</code>.</p>
-
-<p>Whitespace in productions is not significant except inside quoted strings.</p>
+<p>The order of precedence is parenthesization, then quantification, then
+concatenation, then alternation.</p>
 
 <div id="production-parameters"></div>
 <h2 id="42-production-parameters">4.2. Production Parameters</h2>
@@ -3044,9 +3040,6 @@ convey <a href="#nodes">content</a> information.</p>
 <div id="rule-s-indent"></div>
 <pre class="rule">
 [67]
-s-indent(-1) ::=
-  &lt;impossible&gt;
-
 s-indent(0) ::=
   &lt;empty&gt;
 
@@ -3062,12 +3055,6 @@ The productions use the notation “<strong><code class="language-plaintext high
 <div id="rule-s-indent-less-than"></div>
 <pre class="rule">
 [68]
-s-indent-less-than(-1) ::=
-  &lt;impossible&gt;
-
-s-indent-less-than(0) ::=
-  &lt;impossible&gt;
-
 s-indent-less-than(1) ::=
   &lt;empty&gt;
 
@@ -3078,9 +3065,6 @@ s-indent-less-than(n+2) ::=
 <div id="rule-s-indent-less-or-equal"></div>
 <pre class="rule">
 [69]
-s-indent-less-or-equal(-1) ::=
-  &lt;impossible&gt;
-
 s-indent-less-or-equal(0) ::=
   &lt;empty&gt;
 
@@ -3189,7 +3173,7 @@ Note that such <a href="#white-space-characters">white space</a> may safely incl
 <pre class="rule">
 [70] s-separate-in-line ::=
     <a href="#rule-s-white">s-white</a>+
-  | &lt;start of line&gt;
+  | &lt;start-of-line&gt;
 </pre>
 
 <div id="example-separation-spaces" class="example">
@@ -3547,7 +3531,7 @@ However, as this confuses many tools, YAML <a href="#processing-yaml-information
 <pre class="rule">
 [80] b-comment ::=
     <a href="#rule-b-non-content">b-non-content</a>
-  | &lt;end of input&gt;
+  | &lt;end-of-input&gt;
 </pre>
 
 <div id="rule-s-b-comment"></div>
@@ -3642,7 +3626,7 @@ The only exception is a comment ending a <a href="#block-scalar-headers">block s
 [83] s-l-comments ::=
   (
       <a href="#rule-s-b-comment">s-b-comment</a>
-    | &lt;start of line&gt;
+    | &lt;start-of-line&gt;
   )
   <a href="#rule-l-comment">l-comment</a>*
 </pre>
@@ -6438,9 +6422,9 @@ by the chomping indicator specified in the <a href="#block-scalar-headers">block
 <div id="rule-b-chomped-last"></div>
 <pre class="rule">
 [169] b-chomped-last(t) ::=
-    <a href="#rule-b-chomped-last">b-chomped-last</a>(STRIP) ::= <a href="#rule-b-non-content">b-non-content</a>  | &lt;end of input&gt;
-    <a href="#rule-b-chomped-last">b-chomped-last</a>(CLIP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end of input&gt;
-    <a href="#rule-b-chomped-last">b-chomped-last</a>(KEEP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end of input&gt;
+    <a href="#rule-b-chomped-last">b-chomped-last</a>(STRIP) ::= <a href="#rule-b-non-content">b-non-content</a>  | &lt;end-of-input&gt;
+    <a href="#rule-b-chomped-last">b-chomped-last</a>(CLIP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end-of-input&gt;
+    <a href="#rule-b-chomped-last">b-chomped-last</a>(KEEP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end-of-input&gt;
 </pre>
 
 <div id="example-chomping-final-line-break" class="example">
@@ -7693,7 +7677,7 @@ either of these markers.</p>
 <div id="rule-c-forbidden"></div>
 <pre class="rule">
 [210] c-forbidden ::=
-  &lt;start of line&gt;
+  &lt;start-of-line&gt;
   (
       <a href="#rule-c-directives-end">c-directives-end</a>
     | <a href="#rule-c-document-end">c-document-end</a>
@@ -7701,7 +7685,7 @@ either of these markers.</p>
   (
       <a href="#rule-b-char">b-char</a>
     | <a href="#rule-s-white">s-white</a>
-    | &lt;end of input&gt;
+    | &lt;end-of-input&gt;
   )
 </pre>
 

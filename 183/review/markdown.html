@@ -1266,10 +1266,10 @@ Productions are defined using the syntax `production-name ::= term`, where a
 term is either:
 
 * An atomic term:
-  * A quoted string (`"abc"`), which matches that sequence of characters.
-  * A hexadeximal number (`x0A`), which matches the character at that Unicode
+  * A quoted string (`"abc"`), which matches that concatenation of characters.
+  * A hexadecimal number (`x0A`), which matches the character at that Unicode
     code point.
-  * A range of hexadeximal numbers (`[x20-x7E]`), which matches any character
+  * A range of hexadecimal numbers (`[x20-x7E]`), which matches any character
     whose Unicode code point is within that range.
   * The name of a production (`c-printable`), which matches that production.
 * A lookaround:
@@ -1277,28 +1277,27 @@ term is either:
   * `[lookahead ≠ term]`, which matches the empty string if `term` would not
     match.
   * `[lookbehind = term]`, which matches the empty string if `term` would match
-  beginning at any prior point on the line and ending at the current position.
+    beginning at any prior point on the line and ending at the current
+    position.
 * A special production:
-  * `&lt;empty&gt;`, which matches the empty string.
-  * `&lt;impossible&gt;`, which cannot match.
-  * `&lt;start of line&gt;`, which matches the empty string at the beginning of a
+  * `&lt;start-of-line&gt;`, which matches the empty string at the beginning of a
     line.
-  * `&lt;end of input&gt;`, matches the empty string at the end of the input.
+  * `&lt;end-of-input&gt;`, matches the empty string at the end of the input.
+  * `&lt;empty&gt;`, which (always) matches the empty string.
 * A parenthesized term, which matches its contents.
-* A sequence or alternation:
-  * `term-one term-two`, which matches `term-one` followed by `term-two`.
-  * `term-one | term-two`, which matches the `term-one` if possible, or
-    `term-two` otherwise.
+* A concatenation: `term-one term-two`, which matches `term-one` followed by
+  `term-two`.
+* A alternation: `term-one | term-two`, which matches the `term-one` if
+  possible, or `term-two` otherwise.
 * A quantified term:
   * `term?`, which matches `(term | &lt;empty&gt;)`.
   * `term*`, which matches `(term term* | &lt;empty&gt;)`.
   * `term+`, which matches `(term term*)`.
+  * `term{n}`, which matches `term` exactly `n` times for some natural number
+    `n`.
 
-The order of operations is parenthesization, then quantification, then
-sequence, then alternation. For example, `a b | c d` is equivalent to
-`(a b) | (c d)`.
-
-Whitespace in productions is not significant except inside quoted strings.
+The order of precedence is parenthesization, then quantification, then
+concatenation, then alternation.
 
 <code>## #. Production Parameters</code>
 
@@ -2406,9 +2405,6 @@ convey [content] information.
 
 ```
 [#]
-s-indent(-1) ::=
-  &lt;impossible&gt;
-
 s-indent(0) ::=
   &lt;empty&gt;
 
@@ -2424,12 +2420,6 @@ The productions use the notation "**`s-indent-less-than(n)`**" and
 
 ```
 [#]
-s-indent-less-than(-1) ::=
-  &lt;impossible&gt;
-
-s-indent-less-than(0) ::=
-  &lt;impossible&gt;
-
 s-indent-less-than(1) ::=
   &lt;empty&gt;
 
@@ -2439,9 +2429,6 @@ s-indent-less-than(n+2) ::=
 
 ```
 [#]
-s-indent-less-or-equal(-1) ::=
-  &lt;impossible&gt;
-
 s-indent-less-or-equal(0) ::=
   &lt;empty&gt;
 
@@ -2527,7 +2514,7 @@ Separation spaces are a [presentation detail] and must not be used to convey
 ```
 [#] s-separate-in-line ::=
     s-white+
-  | &lt;start of line&gt;
+  | &lt;start-of-line&gt;
 ```
 
 
@@ -2796,7 +2783,7 @@ However, as this confuses many tools, YAML [processors] should terminate the
 ```
 [#] b-comment ::=
     b-non-content
-  | &lt;end of input&gt;
+  | &lt;end-of-input&gt;
 ```
 
 ```
@@ -2865,7 +2852,7 @@ The only exception is a comment ending a [block scalar header].
 [#] s-l-comments ::=
   (
       s-b-comment
-    | &lt;start of line&gt;
+    | &lt;start-of-line&gt;
   )
   l-comment*
 ```
@@ -5028,9 +5015,9 @@ by the chomping indicator specified in the [block scalar header].
 
 ```
 [#] b-chomped-last(t) ::=
-    b-chomped-last(STRIP) ::= b-non-content  | &lt;end of input&gt;
-    b-chomped-last(CLIP)  ::= b-as-line-feed | &lt;end of input&gt;
-    b-chomped-last(KEEP)  ::= b-as-line-feed | &lt;end of input&gt;
+    b-chomped-last(STRIP) ::= b-non-content  | &lt;end-of-input&gt;
+    b-chomped-last(CLIP)  ::= b-as-line-feed | &lt;end-of-input&gt;
+    b-chomped-last(KEEP)  ::= b-as-line-feed | &lt;end-of-input&gt;
 ```
 
 
@@ -6014,7 +6001,7 @@ either of these markers.
 
 ```
 [#] c-forbidden ::=
-  &lt;start of line&gt;
+  &lt;start-of-line&gt;
   (
       c-directives-end
     | c-document-end
@@ -6022,7 +6009,7 @@ either of these markers.
   (
       b-char
     | s-white
-    | &lt;end of input&gt;
+    | &lt;end-of-input&gt;
   )
 ```
 
