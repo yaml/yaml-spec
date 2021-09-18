@@ -4395,7 +4395,8 @@ entry may be [completely empty].
 ```
 [#] ns-flow-map-entry(n,c) ::=
     (
-      c-mapping-key      # '?'
+      c-mapping-key             # '?'
+      [ lookahead ≠ ns-char ]   # Not followed by non-whitespace
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -4592,7 +4593,8 @@ the syntax is identical to the general case.
 ```
 [#] ns-flow-pair(n,c) ::=
     (
-      c-mapping-key      # '?'
+      c-mapping-key             # '?'
+      [ lookahead ≠ ns-char ]   # Not followed by non-whitespace
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -5509,8 +5511,8 @@ followed by a non-space character (e.g. "`-42`").
 
 ```
 [#] c-l-block-seq-entry(n) ::=
-  c-sequence-entry    # '-'
-  [ lookahead ≠ ns-char ]
+  c-sequence-entry                  # '-'
+  [ lookahead ≠ ns-char ]           # Not followed by non-whitespace
   s-l+block-indented(n,BLOCK-IN)
 ```
 
@@ -5640,21 +5642,22 @@ for [block sequence] entries.
   c-l-block-map-explicit-key(n)
   (
       l-block-map-explicit-value(n)
-    | e-node    # ""
+    | e-node                        # ""
   )
 ```
 
 ```
 [#] c-l-block-map-explicit-key(n) ::=
-  c-mapping-key                      # '?'
-  [ lookahead ≠ ns-char ]
+  c-mapping-key                     # '?'
+  [ lookahead ≠ ns-char ]           # Not followed by non-whitespace
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
 ```
 [#] l-block-map-explicit-value(n) ::=
   s-indent(n)
-  c-mapping-value    # ':'
+  c-mapping-value                   # ':'
+  [ lookahead ≠ ns-char ]           # Not followed by non-whitespace
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
@@ -5718,7 +5721,8 @@ This prevents a potential ambiguity with multi-line [plain scalars].
 
 ```
 [#] c-l-block-map-implicit-value(n) ::=
-  c-mapping-value                  # ':'
+  c-mapping-value           # ':'
+  [ lookahead ≠ ns-char ]   # Not followed by non-whitespace
   (
       s-l+block-node(n,BLOCK-OUT)
     | (
@@ -5997,7 +6001,9 @@ either of these markers.
 ```
 
 ```
-[#] c-document-end ::= "..."
+[#] c-document-end ::=
+  "..."
+  [ lookahead ≠ ns-char ]   # Not followed by non-whitespace
 ```
 
 ```
