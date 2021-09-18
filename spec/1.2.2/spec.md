@@ -5635,6 +5635,7 @@ for [block sequence] entries.
 ```
 [#] c-l-block-map-explicit-key(n) ::=
   c-mapping-key                      # '?'
+  [lookahead ≠ ns-char]
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
