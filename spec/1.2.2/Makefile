@@ -1,11 +1,11 @@
 DOCKER_TOOL := html-to-markydown
 include ../../tool/make/init.mk
 
-ALL_MD := $(wildcard *.md)
+ALL_MD := $(wildcard *.md) $(wildcard ext/*.md)
 ALL_FORMAT := $(ALL_MD:%=format-%)
 ALL_CHECK := $(ALL_MD:%=check-%)
-ALL_TEX := $(wildcard tex/*.tex)
-ALL_IMG := $(ALL_TEX:tex/%.tex=img/%.svg)
+ALL_TEX := $(wildcard src/*.tex)
+ALL_IMG := $(ALL_TEX:src/%.tex=img/%.svg)
 BUILD_TEX :=
 
 #------------------------------------------------------------------------------
@@ -33,7 +33,7 @@ html/%.html: build/%.md
 build/%.md: %.md
 	markydown-to-kramdown $(ROOT) $^ > /tmp/$@
 
-img/%.svg: tex/%.tex tex/include/*
+img/%.svg: src/%.tex src/include/*
 	@mkdir -p $(dir $@)
 ifeq ($(MAKECMDGOALS),build)
 	$(eval override BUILD_TEX += $<)

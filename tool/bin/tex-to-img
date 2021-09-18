@@ -7,7 +7,7 @@ main() (
 
   for input; do
     output=${input%.tex}.svg
-    output=${outdir%/}/${output#tex/}
+    output=${outdir%/}/${output#src/}
     make-svg
   done
 )

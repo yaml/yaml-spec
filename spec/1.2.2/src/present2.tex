@@ -1,12 +1,16 @@
 \documentclass[12pt]{standalone}
 
-\input{tex/include/head}
+\input{src/include/head}
 
 \begin{document}
 
 \begin{tikzpicture}
 
-\entity{Node}{};
+\entity{Node}{
+  +Anchor\\
+  ++Style, Spacing,\\
+  Line Wrapping…
+};
 
 \entity[above=of Node]{Tag}{Name};
 \draw[has] (Node) -- (Tag)
@@ -16,7 +20,10 @@
 \entity[right=of Tag]{Specific Tag}{};
 \draw[inherits] (Specific Tag) -- (Tag);
 
-\entity[below=of Node]{Scalar Node}{Canonical Form};
+\entity[above right=of Tag]{+ Non-Specific Tag}{};
+\draw[inherits] (+ Non-Specific Tag) -| (Tag);
+
+\entity[below=of Node]{Scalar Node}{+Formatted Content};
 \draw[inherits] (Scalar Node) -- (Node);
 
 \entity[left=of Scalar Node]{Sequence Node}{};
@@ -27,6 +34,15 @@
   |- (Node) node[onArrow, pos=0.25] {Ordered\\Content}
   node[at end, above left] {*};
 
+\entity[below=of Sequence Node]{+ Alias Node}{};
+\draw[inherits]
+  let
+    \p1 = ($(+ Alias Node.east)+(5mm,0)$),
+    \p2 = ($(Sequence Node)+(0,10mm)$)
+  in
+  (+ Alias Node) -| (\x1,\y2) -| (Node)
+;
+
 \entity[right=of Scalar Node]{Mapping Node}{};
 \draw[inherits] (Mapping Node) -- ++(0,+10mm) -| (Node);
 
@@ -34,8 +50,8 @@
 
 \draw[has]
   (Mapping Node.east)
-  -- ++(5mm, 0) node[near start, below] {*}
-  |- (Key/Value Pair) node[onArrow, pos=0.25] {Unordered\\Content}
+  -- ++(10mm, 0) node[near start, below] {*}
+  |- (Key/Value Pair) node[onArrow, pos=0.25] {+ Ordered\\Content}
   node[at end, above right] {*};
 
 \draw[has] (Key/Value Pair.north)
@@ -51,6 +67,16 @@
   node[pos=0.75, onArrow] {Value}
   -- ($(Node.south)+(0.5,0)$)
   node[at start, below right] {*};
+
+\entity[below=of Mapping Node]{++ Comment}{}
+
+\entity[above left=of Node]{++ Directive}{Name\\Parameters}
+
+\entity[above left=of Tag]{Legend}{
+  YAML Representation\\
+  + YAML Serialization\\
+  \textbf {++ YAML Presentation}
+}
 
 \end{tikzpicture}
 

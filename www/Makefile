@@ -73,14 +73,17 @@ STRIP_HTML := \
 # Gather all the build files:
 #------------------------------------------------------------------------------
 
-SPEC_MD := $(wildcard $(SPEC_122)/*.md)
+SPEC_MD := \
+    $(wildcard $(SPEC_122)/*.md) \
+    $(wildcard $(SPEC_122)/ext/*.md) \
+
 SPEC_MD := $(SPEC_MD:%/ReadMe.md=)
 SPEC_MD := $(SPEC_MD:$(SPEC_122)/%=main/%)
 
 SPEC_LINKS := $(SPEC_122)/links.yaml
 
-SPEC_IMAGE := $(wildcard $(SPEC_122)/tex/*.tex)
-SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC_122)/tex/%.tex=img/%.svg)
+SPEC_IMAGE := $(wildcard $(SPEC_122)/src/*.tex)
+SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC_122)/src/%.tex=img/%.svg)
 .PRECIOUS: $(SPEC_IMAGE:%=$(SPEC_122)/%)
 SPEC_IMAGE := $(SPEC_IMAGE:%=main/%)
 
