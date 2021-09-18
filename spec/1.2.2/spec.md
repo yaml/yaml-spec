@@ -6170,10 +6170,9 @@ following [document] must begin with a [directives end marker] line.
         l-document-prefix*
         l-any-document?
       )
-    | (
-        l-document-prefix*
-        l-explicit-document?
-      )
+    | c-byte-order-mark
+    | l-comment
+    | l-explicit-document
   )*
 ```
 
