@@ -128,13 +128,13 @@ Additionally there are some minor differences between the parsing rules:
 * Inside double-quoted strings `\/` is now a valid escape for the `/`
   character.
 * No space is required after the colon in flow style if the key is quoted, e.g.
-  `{"key":value}`
+  `{"key":value}`.
 * The maximum key length of 1024 characters has been removed for flow mapping
-  keys
+  keys.
 * Quoted content can include practically all Unicode characters.
 * Documents in streams are now independent of each other, and no longer inherit
   preceding document directives if they do not define their own.
-* Explicit document-end marker is now always required before a directive
+* Explicit document-end marker is now always required before a directive.
 
 ## Changes in v1.1 (2005-01-18)
 
@@ -151,11 +151,12 @@ A complete refactoring of the tag syntax:
   requirement.
 
 The formal description of the language describing the document structure was
-completely refactored, while not changing its intent. Other changes include:
+completely refactored, while not changing its intent.
+Other changes include:
 
 * A `\` escape has been added for the tab character, in addition to the
-  pre-existing `\t`
-* The `\^` escape has been removed
+  pre-existing `\t`.
+* The `\^` escape has been removed.
 * Directives now use a blank space `' '` rather than `:` as the separator
   between the name and its parameter/value.
 

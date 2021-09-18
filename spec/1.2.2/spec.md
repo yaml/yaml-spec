@@ -1329,12 +1329,12 @@ Is shorthand for:
 
 ```
 production-a(0) ::=
-    ( production-b(0) production-c(0))+
-  | ( production-b(1) production-c(1))+
+    ( production-b(0) production-c(0) )+
+  | ( production-b(1) production-c(1) )+
   | …
 production-a(1) ::=
-    ( production-b(1) production-c(1))+
-  | ( production-b(2) production-c(2))+
+    ( production-b(1) production-c(1) )+
+  | ( production-b(2) production-c(2) )+
   | …
 ⋮
 ```
@@ -1941,7 +1941,8 @@ widely used formats.
 
 ```
 [#] b-break ::=
-    ( b-carriage-return  # x0A
+    (
+      b-carriage-return  # x0A
       b-line-feed
     )                    # x0D
   | b-carriage-return
@@ -2898,7 +2899,8 @@ Note that structures following multi-line comment separation must be properly
 
 ```
 [#] s-separate-lines(n) ::=
-    ( s-l-comments
+    (
+      s-l-comments
       s-flow-line-prefix(n)
     )
   | s-separate-in-line
