@@ -22,7 +22,7 @@ Some good ways to get involved include:
 
 Changes to the YAML language itself will be made using an RFC process.
 We are still working out the final details of this process, but we intend to
-have it all worked out by the end of October 2021.
+have it all worked out in the coming weeks.
 
 For now we ask that you **don't submit RFCs** or comment on the ones that we
 attempted to start earlier.
