@@ -5010,10 +5010,10 @@ The interpretation of the final [line break] of a [block scalar] is controlled
 by the chomping indicator specified in the [block scalar header].
 
 ```
-[#] b-chomped-last(t) ::=
-    b-chomped-last(STRIP) ::= b-non-content  | <end-of-input>
-    b-chomped-last(CLIP)  ::= b-as-line-feed | <end-of-input>
-    b-chomped-last(KEEP)  ::= b-as-line-feed | <end-of-input>
+[#]
+b-chomped-last(STRIP) ::= b-non-content  | <end-of-input>
+b-chomped-last(CLIP)  ::= b-as-line-feed | <end-of-input>
+b-chomped-last(KEEP)  ::= b-as-line-feed | <end-of-input>
 ```
 
 
