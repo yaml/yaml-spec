@@ -204,10 +204,10 @@ specification.
 
 YAML's [block collections] use [indentation] for scope and begin each entry on
 its own line.
-[Block sequences] indicate each entry with a dash and space (["**`-`** "]).
-[Mappings] use a colon and space (["**`:`** "]) to mark each [key/value pair].
+[Block sequences] indicate each entry with a dash and space ("`- `").
+[Mappings] use a colon and space ("`: `") to mark each [key/value pair].
 [Comments] begin with an octothorpe (also called a "hash", "sharp", "pound" or
-"number sign" - ["**`#`**"]).
+"number sign" - "`#`").
 
 
 **Example #. Sequence of Scalars (ball players)**
@@ -284,12 +284,12 @@ Sammy Sosa: {
 
 ## #. Structures
 
-YAML uses three dashes (["**`---`**"]) to separate [directives] from [document]
+YAML uses three dashes ("`---`") to separate [directives] from [document]
 [content].
 This also serves to signal the start of a document if no [directives] are
 present.
-Three dots ( ["**`...`**"]) indicate the end of a document without starting a
-new one, for use in communication channels.
+Three dots ( "`...`") indicate the end of a document without starting a new
+one, for use in communication channels.
 
 
 **Example #. Two Documents in a Stream (each with a leading comment)**
@@ -324,8 +324,8 @@ action: grand slam
 ```
 
 Repeated [nodes] (objects) are first [identified] by an [anchor] (marked with
-the ampersand - ["**`&`**"]) and are then [aliased] (referenced with an
-asterisk - ["**`*`**"]) thereafter.
+the ampersand - "`&`") and are then [aliased] (referenced with an asterisk -
+"`*`") thereafter.
 
 
 **Example #. Single Document with Two Comments**
@@ -342,7 +342,7 @@ rbi:
 ```
 
 
-**Example #. Node for "**`Sammy Sosa`**" appears twice in this document**
+**Example #. Node for "`Sammy Sosa`" appears twice in this document**
 
 ```
 ---
@@ -355,7 +355,7 @@ rbi:
 - Ken Griffey
 ```
 
-A question mark and space (["**`?`** "]) indicate a complex [mapping] [key].
+A question mark and space ("`? `") indicate a complex [mapping] [key].
 Within a [block collection], [key/value pairs] can start immediately following
 the [dash], [colon] or [question mark].
 
@@ -391,10 +391,10 @@ the [dash], [colon] or [question mark].
 ## #. Scalars
 
 [Scalar content] can be written in [block] notation, using a [literal style]
-(indicated by ["**`|`**"]) where all [line breaks] are significant.
-Alternatively, they can be written with the [folded style] [(denoted by
-"**`>`**"]) where each [line break] is [folded] to a [space] unless it ends an
-[empty] or a [more-indented] line.
+(indicated by "`|`") where all [line breaks] are significant.
+Alternatively, they can be written with the [folded style] (denoted by "`>`")
+where each [line break] is [folded] to a [space] unless it ends an [empty] or a
+[more-indented] line.
 
 
 **Example #. In literals, newlines are preserved**
@@ -479,10 +479,10 @@ quoted: "So does this
 ## #. Tags
 
 In YAML, [untagged nodes] are given a type depending on the [application].
-The examples in this specification generally use the [**`seq`**], [**`map`**]
-and [**`str`**] types from the [fail safe schema].
-A few examples also use the [**`int`**], [**`float`**] and [**`null`**] types
-from the [JSON schema].
+The examples in this specification generally use the `seq`, `map` and `str`
+types from the [fail safe schema].
+A few examples also use the `int`, `float` and `null` types from the [JSON
+schema].
 
 
 **Example #. Integers**
@@ -524,8 +524,8 @@ spaced: 2001-12-14 21:59:43.10 -5
 date: 2002-12-14
 ```
 
-Explicit typing is denoted with a [tag] using the exclamation point
-(["**`!`**"]) symbol.
+Explicit typing is denoted with a [tag] using the exclamation point ("`!`")
+symbol.
 [Global tags] are URIs and may be specified in a [tag shorthand] notation using
 a [handle].
 [Application]\-specific [local tags] may also be used.
@@ -742,9 +742,9 @@ specifying its data type.
 Type specifiers are either [global] URIs or are [local] in scope to a single
 [application].
 For example, an integer is represented in YAML with a [scalar] plus the [global
-tag] "**`tag:yaml.org,2002:int`**".
+tag] "`tag:yaml.org,2002:int`".
 Similarly, an invoice object, particular to a given organization, could be
-represented as a [mapping] together with the [local tag] "**`!invoice`**".
+represented as a [mapping] together with the [local tag] "`!invoice`".
 This simple model can represent any data structure independent of programming
 language.
 
@@ -835,9 +835,9 @@ By carefully separating properties needed for [serialization] and
 consistent and portable between various programming environments.
 
 The following diagram summarizes the three _information models_.
-Full arrows denote composition, hollow arrows denote inheritance, "**`1`**" and
-"**`*`**" denote "one" and "many" relationships.
-A single "**`+`**" denotes [serialization] details, a double "**`++`**" denotes
+Full arrows denote composition, hollow arrows denote inheritance, "`1`" and
+"`*`" denote "one" and "many" relationships.
+A single "`+`" denotes [serialization] details, a double "`++`" denotes
 [presentation] details.
 
 
@@ -905,25 +905,25 @@ key or a value.
 YAML [represents] type information of [native data structures] with a simple
 identifier, called a _tag_.
 _Global tags_ are URIs and hence globally unique across all [applications].
-The "**`tag:`**" URI scheme[^tag-uri] is recommended for all global YAML tags.
+The "`tag:`" URI scheme[^tag-uri] is recommended for all global YAML tags.
 In contrast, _local tags_ are specific to a single [application].
-Local tags start with _"**`!`**"_, are not URIs and are not expected to be
-globally unique.
-YAML provides a ["**`TAG`**" directive] to make tag notation less verbose; it
-also offers easy migration from local to global tags.
+Local tags start with _"`!`"_, are not URIs and are not expected to be globally
+unique.
+YAML provides a "`TAG`" directive to make tag notation less verbose; it also
+offers easy migration from local to global tags.
 To ensure this, local tags are restricted to the URI character set and use URI
 character [escaping].
 
 YAML does not mandate any special relationship between different tags that
 begin with the same substring.
-Tags ending with URI fragments (containing "**`#`**") are no exception; tags
-that share the same base URI but differ in their fragment part are considered
-to be different, independent tags.
+Tags ending with URI fragments (containing "`#`") are no exception; tags that
+share the same base URI but differ in their fragment part are considered to be
+different, independent tags.
 By convention, fragments are used to identify different "variants" of a tag,
-while "**`/`**" is used to define nested tag "namespace" hierarchies.
+while "`/`" is used to define nested tag "namespace" hierarchies.
 However, this is merely a convention and each tag may employ its own rules.
-For example, Perl tags may use "**`::`**" to express namespace hierarchies,
-Java tags may use "**`.`**", etc.
+For example, Perl tags may use "`::`" to express namespace hierarchies, Java
+tags may use "`.`", etc.
 
 YAML tags are used to associate meta information with each [node].
 In particular, each tag must specify the expected [node kind] ([scalar],
@@ -940,8 +940,8 @@ any other data that is applicable to all of the tag's [nodes].
 Since YAML [mappings] require [key] uniqueness, [representations] must include
 a mechanism for testing the equality of [nodes].
 This is non-trivial since YAML allows various ways to [format scalar content].
-For example, the integer eleven can be written as "**`0o13`**" (octal) or
-"**`0xB`**" (hexadecimal).
+For example, the integer eleven can be written as "`0o13`" (octal) or "`0xB`"
+(hexadecimal).
 If both notations are used as [keys] in the same [mapping], only a YAML
 [processor] which recognizes integer [formats] would correctly flag the
 duplicate [key] as an error.
@@ -976,7 +976,7 @@ URIs.
 Since a YAML [processor] cannot be reasonably expected to be aware of them all,
 it must resort to a simple character-by-character comparison of [tags] to
 ensure consistency.
-This also happens to be the comparison method defined by the "**`tag:`**" URI
+This also happens to be the comparison method defined by the "`tag:`" URI
 scheme.
 [Tags] in a YAML stream must therefore be [presented] in a canonical way so
 that such comparison would yield the correct results.
@@ -1088,7 +1088,7 @@ These allow for a natural "ordered mapping" notation.
 #### #. Scalar Formats
 
 YAML allows [scalars] to be [presented] in several _formats_.
-For example, the integer "**`11`**" might also be written as "**`0xB`**".
+For example, the integer "`11`" might also be written as "`0xB`".
 [Tags] must specify a mechanism for converting the formatted content to a
 [canonical form] for use in [equality] testing.
 Like [node style], the format is a [presentation detail] and is not reflected
@@ -1114,7 +1114,7 @@ A directive has a name and an optional sequence of parameters.
 Directives are instructions to the YAML [processor] and like all other
 [presentation details] are not reflected in the YAML [serialization tree] or
 [representation graph].
-This version of YAML defines two directives, ["**`YAML`**"] and ["**`TAG`**"].
+This version of YAML defines two directives, "`YAML`" and "`TAG`".
 All other directives are [reserved] for future versions of YAML.
 
 
@@ -1161,8 +1161,7 @@ parts of the input, but it must provide a mechanism for reporting such errors.
 
 Typically, most [tags] are not explicitly specified in the character [stream].
 During [parsing], [nodes] lacking an explicit [tag] are given a _non-specific
-tag_: _"**`!`**"_ for non-[plain scalars] and _"**`?`**"_ for all other
-[nodes].
+tag_: _"`!`"_ for non-[plain scalars] and _"`?`"_ for all other [nodes].
 [Composing] a [complete representation] requires each such non-specific tag to
 be _resolved_ to a _specific tag_, be it a [global tag] or a [local tag].
 
@@ -1190,17 +1189,17 @@ previously parsed [nodes].
 Thus, in most cases, tag resolution in one-pass [processors] is both possible
 and practical.
 
-YAML [processors] should resolve [nodes] having the "**`!`**" non-specific tag
-as "**`tag:yaml.org,2002:seq`**", "**`tag:yaml.org,2002:map`**" or
-"**`tag:yaml.org,2002:str`**" depending on their [kind].
+YAML [processors] should resolve [nodes] having the "`!`" non-specific tag as
+"`tag:yaml.org,2002:seq`", "`tag:yaml.org,2002:map`" or
+"`tag:yaml.org,2002:str`" depending on their [kind].
 This _tag resolution convention_ allows the author of a YAML character [stream]
 to effectively "disable" the tag resolution process.
-By explicitly specifying a "**`!`**" non-specific [tag property], the [node]
-would then be resolved to a "vanilla" [sequence], [mapping] or string,
-according to its [kind].
+By explicitly specifying a "`!`" non-specific [tag property], the [node] would
+then be resolved to a "vanilla" [sequence], [mapping] or string, according to
+its [kind].
 
 [Application] specific tag resolution rules should be restricted to resolving
-the "**`?`**" non-specific tag, most commonly to resolving [plain scalars].
+the "`?`" non-specific tag, most commonly to resolving [plain scalars].
 These may be matched against a set of regular expressions to provide automatic
 resolution of integers, floats, timestamps and similar types.
 An [application] may also match the [content] of [mapping nodes] against sets
@@ -1381,41 +1380,40 @@ prefix-style naming convention.
 Each production is given a prefix based on the type of characters it begins and
 ends with.
 
-? **`e-`**
+? `e-`
 
 : A production matching no characters.
 
-? **`c-`**
+? `c-`
 
 : A production starting and ending with a special character.
 
-? **`b-`**
+? `b-`
 
 : A production matching a single [line break].
 
-? **`nb-`**
+? `nb-`
 
 : A production starting and ending with a non-[break] character.
 
-? **`s-`**
+? `s-`
 
 : A production starting and ending with a [white space] character.
 
-? **`ns-`**
+? `ns-`
 
 : A production starting and ending with a non-[space] character.
 
-? **`l-`**
+? `l-`
 
 : A production matching complete line(s).
 
-? `X`**`-`**`Y`**`-`**
+? `X-Y-`
 
-: A production starting with an `X`**`-`** character and ending with a
-`Y`**`-`** character, where `X`**`-`** and `Y`**`-`** are any of the above
-prefixes.
+: A production starting with an `X-` character and ending with a `Y-`
+character, where `X-` and `Y-` are any of the above prefixes.
 
-? `X`**`+`**, `X`**`-`**`Y`**`+`**
+? `X+`, `X-Y+`
 
 : A production as above, with the additional property that the matched content
 [indentation] level is greater than the specified `n` parameter.
@@ -1428,10 +1426,9 @@ prefixes.
 To ensure readability, YAML [streams] use only the _printable_ subset of the
 Unicode character set.
 The allowed character range explicitly excludes the C0 control block[^c0-block]
-**`x00-x1F`** (except for TAB **`x09`**, LF **`x0A`** and CR **`x0D`** which
-are allowed), DEL **`x7F`**, the C1 control block **`x80-x9F`** (except for NEL
-**`x85`** which is allowed), the surrogate block[^surrogates]
-**`xD800-xDFFF`**, **`xFFFE`** and **`xFFFF`**.
+`x00-x1F` (except for TAB `x09`, LF `x0A` and CR `x0D` which are allowed), DEL
+`x7F`, the C1 control block `x80-x9F` (except for NEL `x85` which is allowed),
+the surrogate block[^surrogates] `xD800-xDFFF`, `xFFFE` and `xFFFF`.
 
 On input, a YAML [processor] must accept all characters in this printable
 subset.
@@ -1482,8 +1479,8 @@ YAML [quoted scalars] can.
 All characters mentioned in this specification are Unicode code points.
 Each such code point is written as one or more bytes depending on the
 _character encoding_ used.
-Note that in UTF-16, characters above **`xFFFF`** are written as four bytes,
-using a surrogate pair.
+Note that in UTF-16, characters above `xFFFF` are written as four bytes, using
+a surrogate pair.
 
 The character encoding is a [presentation detail] and must not be used to
 convey [content] information.
@@ -1495,7 +1492,7 @@ For [JSON compatibility], the UTF-32 encodings must also be supported.
 If a character [stream] begins with a _byte order mark_, the character encoding
 will be taken to be as indicated by the byte order mark.
 Otherwise, the [stream] must begin with an ASCII character.
-This allows the encoding to be deduced by the pattern of null (**`x00`**)
+This allows the encoding to be deduced by the pattern of null (`x00`)
 characters.
 
 Byte order marks may appear at the start of any [document], however all
@@ -1535,7 +1532,7 @@ encoding schemes see the Unicode FAQ[^uni-faq].
 ```
 
 
-In the examples, byte order mark characters are displayed as "**`⇔`**".
+In the examples, byte order mark characters are displayed as "`⇔`".
 
 
 **Example #. Byte Order Mark**
@@ -1575,21 +1572,21 @@ ERROR:
 
 _Indicators_ are characters that have special semantics.
 
-["**`-`**"] (**`x2D`**, hyphen) denotes a [block sequence] entry.
+"`-`" (`x2D`, hyphen) denotes a [block sequence] entry.
 
 ```
 [#] c-sequence-entry ::= '-'
 ```
 
 
-["**`?`**"] (**`x3F`**, question mark) denotes a [mapping key].
+"`?`" (`x3F`, question mark) denotes a [mapping key].
 
 ```
 [#] c-mapping-key ::= '?'
 ```
 
 
-["**`:`**"] (**`x3A`**, colon) denotes a [mapping value].
+"`:`" (`x3A`, colon) denotes a [mapping value].
 
 ```
 [#] c-mapping-value ::= ':'
@@ -1623,35 +1620,35 @@ mapping:
 * [c-mapping-value] <!-- : -->
 
 
-["**`,`**"] (**`x2C`**, comma) ends a [flow collection] entry.
+"`,`" (`x2C`, comma) ends a [flow collection] entry.
 
 ```
 [#] c-collect-entry ::= ','
 ```
 
 
-["**`[`**"] (**`x5B`**, left bracket) starts a [flow sequence].
+"`[`" (`x5B`, left bracket) starts a [flow sequence].
 
 ```
 [#] c-sequence-start ::= '['
 ```
 
 
-["**`]`**"] (**`x5D`**, right bracket) ends a [flow sequence].
+"`]`" (`x5D`, right bracket) ends a [flow sequence].
 
 ```
 [#] c-sequence-end ::= ']'
 ```
 
 
-["**`{`**"] (**`x7B`**, left brace) starts a [flow mapping].
+"`{`" (`x7B`, left brace) starts a [flow mapping].
 
 ```
 [#] c-mapping-start ::= '{'
 ```
 
 
-["**`}`**"] (**`x7D`**, right brace) ends a [flow mapping].
+"`}`" (`x7D`, right brace) ends a [flow mapping].
 
 ```
 [#] c-mapping-end ::= '}'
@@ -1677,8 +1674,7 @@ mapping: { sky: blue, sea: green }
 * [c-collect-entry] <!-- , -->
 
 
-["**`#`**"] (**`x23`**, octothorpe, hash, sharp, pound, number sign) denotes a
-[comment].
+"`#`" (`x23`, octothorpe, hash, sharp, pound, number sign) denotes a [comment].
 
 ```
 [#] c-comment ::= '#'
@@ -1701,13 +1697,13 @@ mapping: { sky: blue, sea: green }
 * [c-comment] <!-- # -->
 
 
-["**`&`**"] (**`x26`**, ampersand) denotes a [node's anchor property].
+"`&`" (`x26`, ampersand) denotes a [node's anchor property].
 
 ```
 [#] c-anchor ::= '&'
 ```
 
-["**`*`**"] (**`x2A`**, asterisk) denotes an [alias node].
+"`*`" (`x2A`, asterisk) denotes an [alias node].
 
 
 ```
@@ -1715,8 +1711,8 @@ mapping: { sky: blue, sea: green }
 ```
 
 
-The ["**`!`**"] (**`x21`**, exclamation) is heavily overloaded for specifying
-[node tags].
+The "`!`" (`x21`, exclamation) is heavily overloaded for specifying [node
+tags].
 It is used to denote [tag handles] used in [tag directives] and [tag
 properties]; to denote [local tags]; and as the [non-specific tag] for
 non-[plain scalars].
@@ -1744,14 +1740,14 @@ alias: *anchor
 * [c-alias] <!-- * -->
 
 
-["**`|`**"] (**`7C`**, vertical bar) denotes a [literal block scalar].
+"`|`" (`7C`, vertical bar) denotes a [literal block scalar].
 
 ```
 [#] c-literal ::= '|'
 ```
 
 
-["**`>`**"] (**`x3E`**, greater than) denotes a [folded block scalar].
+"`>`" (`x3E`, greater than) denotes a [folded block scalar].
 
 ```
 [#] c-folded ::= '>'
@@ -1778,8 +1774,8 @@ folded: >
 * [c-literal] <!-- | -->
 * [c-folded] <!-- > -->
 
-["**`'`**"] (**`x27`**, apostrophe, single quote) surrounds a [single-quoted
-flow scalar].
+"`'`" (`x27`, apostrophe, single quote) surrounds a [single-quoted flow
+scalar].
 
 
 ```
@@ -1787,7 +1783,7 @@ flow scalar].
 ```
 
 
-["**`"`**"] (**`x22`**, double quote) surrounds a [double-quoted flow scalar].
+"`"`" (`x22`, double quote) surrounds a [double-quoted flow scalar].
 
 ```
 [#] c-double-quote ::= '"'
@@ -1811,7 +1807,7 @@ double: "text"
 * [c-double-quote] <!-- 2:9 2:14 -->
 
 
-["**`%`**"] (**`x25`**, percent) denotes a [directive] line.
+"`%`" (`x25`, percent) denotes a [directive] line.
 
 ```
 [#] c-directive ::= '%'
@@ -1833,8 +1829,8 @@ double: "text"
 * [c-directive] <!-- % -->
 
 
-The _"**`@`**"_ (**`x40`**, at) and _"**<code>&grave;</code>**"_ (**`x60`**,
-grave accent) are _reserved_ for future use.
+The _"`@`"_ (`x40`, at) and _"<code>&grave;</code>"_ (`x60`, grave accent) are
+_reserved_ for future use.
 
 ```
 [#] c-reserved ::=
@@ -1883,8 +1879,8 @@ Any indicator character:
 ```
 
 
-The ["**`[`**"], ["**`]`**"], ["**`{`**"], ["**`}`**"] and ["**`,`**"]
-indicators denote structure in [flow collections].
+The "`[`", "`]`", "`{`", "`}`" and "`,`" indicators denote structure in [flow
+collections].
 They are therefore forbidden in some cases, to avoid ambiguity in several
 constructs.
 This is handled on a case-by-case basis by the relevant productions.
@@ -1920,10 +1916,10 @@ YAML recognizes the following ASCII _line break_ characters.
 ```
 
 
-All other characters, including the form feed (**`x0C`**), are considered to be
+All other characters, including the form feed (`x0C`), are considered to be
 non-break characters.
-Note that these include the _non-ASCII line breaks_: next line (**`x85`**),
-line separator (**`x2028`**) and paragraph separator (**`x2029`**).
+Note that these include the _non-ASCII line breaks_: next line (`x85`), line
+separator (`x2028`) and paragraph separator (`x2029`).
 
 [YAML version 1.1] did support the above non-ASCII line break characters;
 however, JSON does not.
@@ -1977,8 +1973,8 @@ lines.
 On output, a YAML [processor] is free to emit line breaks using whatever
 convention is most appropriate.
 
-In the examples, line breaks are sometimes displayed using the "**`↓`**" glyph
-for clarity.
+In the examples, line breaks are sometimes displayed using the "`↓`" glyph for
+clarity.
 
 
 **Example #. Line Break Characters**
@@ -2024,8 +2020,8 @@ non-space characters.
 ```
 
 
-In the examples, tab characters are displayed as the glyph "**`→`**".
-Space characters are sometimes displayed as the glyph "**`·`**" for clarity.
+In the examples, tab characters are displayed as the glyph "`→`".
+Space characters are sometimes displayed as the glyph "`·`" for clarity.
 
 
 **Example #. Tabs and Spaces**
@@ -2095,7 +2091,7 @@ URI characters for [tags], as defined in the URI specification[^uri].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8 and then each byte is _escaped_ using
-the _"**`%`**"_ character.
+the _"`%`"_ character.
 The YAML [processor] must not expand such escaped characters.
 [Tag] characters must be preserved and compared exactly as [presented] in the
 YAML [stream], without any processing.
@@ -2131,10 +2127,10 @@ YAML [stream], without any processing.
 ```
 
 
-The ["**`!`**"] character is used to indicate the end of a [named tag handle];
-hence its use in [tag shorthands] is restricted.
-In addition, such [shorthands] must not contain the ["**`[`**"], ["**`]`**"],
-["**`{`**"], ["**`}`**"] and ["**`,`**"] characters.
+The "`!`" character is used to indicate the end of a [named tag handle]; hence
+its use in [tag shorthands] is restricted.
+In addition, such [shorthands] must not contain the "`[`", "`]`", "`{`", "`}`"
+and "`,`" characters.
 These characters would cause ambiguity with [flow collection] structures.
 
 ```
@@ -2148,15 +2144,15 @@ These characters would cause ambiguity with [flow collection] structures.
 ## #. Escaped Characters
 
 All non-[printable] characters must be _escaped_.
-YAML escape sequences use the _"**`\`**"_ notation common to most modern
-computer languages.
+YAML escape sequences use the _"`\`"_ notation common to most modern computer
+languages.
 Each escape sequence must be [parsed] into the appropriate Unicode character.
 The original escape sequence is a [presentation detail] and must not be used to
 convey [content] information.
 
 Note that escape sequences are only interpreted in [double-quoted scalars].
-In all other [scalar styles], the "**`\`**" character has no special meaning
-and non-[printable] characters are not available.
+In all other [scalar styles], the "`\`" character has no special meaning and
+non-[printable] characters are not available.
 
 ```
 [#] c-escape ::= '\'
@@ -2165,28 +2161,28 @@ and non-[printable] characters are not available.
 
 YAML escape sequences are a superset of C's escape sequences:
 
-Escaped ASCII null (**`x00`**) character.
+Escaped ASCII null (`x00`) character.
 
 ```
 [#] ns-esc-null ::= '0'
 ```
 
 
-Escaped ASCII bell (**`x07`**) character.
+Escaped ASCII bell (`x07`) character.
 
 ```
 [#] ns-esc-bell ::= 'a'
 ```
 
 
-Escaped ASCII backspace (**`x08`**) character.
+Escaped ASCII backspace (`x08`) character.
 
 ```
 [#] ns-esc-backspace ::= 'b'
 ```
 
 
-Escaped ASCII horizontal tab (**`x09`**) character.
+Escaped ASCII horizontal tab (`x09`) character.
 This is useful at the start or the end of a line to force a leading or trailing
 tab to become part of the [content].
 
@@ -2196,42 +2192,42 @@ tab to become part of the [content].
 ```
 
 
-Escaped ASCII line feed (**`x0A`**) character.
+Escaped ASCII line feed (`x0A`) character.
 
 ```
 [#] ns-esc-line-feed ::= 'n'
 ```
 
 
-Escaped ASCII vertical tab (**`x0B`**) character.
+Escaped ASCII vertical tab (`x0B`) character.
 
 ```
 [#] ns-esc-vertical-tab ::= 'v'
 ```
 
 
-Escaped ASCII form feed (**`x0C`**) character.
+Escaped ASCII form feed (`x0C`) character.
 
 ```
 [#] ns-esc-form-feed ::= 'f'
 ```
 
 
-Escaped ASCII carriage return (**`x0D`**) character.
+Escaped ASCII carriage return (`x0D`) character.
 
 ```
 [#] ns-esc-carriage-return ::= 'r'
 ```
 
 
-Escaped ASCII escape (**`x1B`**) character.
+Escaped ASCII escape (`x1B`) character.
 
 ```
 [#] ns-esc-escape ::= 'e'
 ```
 
 
-Escaped ASCII space (**`x20`**) character.
+Escaped ASCII space (`x20`) character.
 This is useful at the start or the end of a line to force a leading or trailing
 space to become part of the [content].
 
@@ -2240,49 +2236,49 @@ space to become part of the [content].
 ```
 
 
-Escaped ASCII double quote (**`x22`**).
+Escaped ASCII double quote (`x22`).
 
 ```
 [#] ns-esc-double-quote ::= '"'
 ```
 
 
-Escaped ASCII slash (**`x2F`**), for [JSON compatibility].
+Escaped ASCII slash (`x2F`), for [JSON compatibility].
 
 ```
 [#] ns-esc-slash ::= '/'
 ```
 
 
-Escaped ASCII back slash (**`x5C`**).
+Escaped ASCII back slash (`x5C`).
 
 ```
 [#] ns-esc-backslash ::= '\'
 ```
 
 
-Escaped Unicode next line (**`x85`**) character.
+Escaped Unicode next line (`x85`) character.
 
 ```
 [#] ns-esc-next-line ::= 'N'
 ```
 
 
-Escaped Unicode non-breaking space (**`xA0`**) character.
+Escaped Unicode non-breaking space (`xA0`) character.
 
 ```
 [#] ns-esc-non-breaking-space ::= '_'
 ```
 
 
-Escaped Unicode line separator (**`x2028`**) character.
+Escaped Unicode line separator (`x2028`) character.
 
 ```
 [#] ns-esc-line-separator ::= 'L'
 ```
 
 
-Escaped Unicode paragraph separator (**`x2029`**) character.
+Escaped Unicode paragraph separator (`x2029`) character.
 
 ```
 [#] ns-esc-paragraph-separator ::= 'P'
@@ -2415,8 +2411,8 @@ s-indent(n+1) ::=
 
 A [block style] construct is terminated when encountering a line which is less
 indented than the construct.
-The productions use the notation "**`s-indent-less-than(n)`**" and
-"**`s-indent-less-or-equal(n)`**" to express this.
+The productions use the notation "`s-indent-less-than(n)`" and
+"`s-indent-less-or-equal(n)`" to express this.
 
 ```
 [#]
@@ -2479,8 +2475,8 @@ Not indented:
 * Neither content nor indentation <!-- 1:1,2 2:1,3 3 9:3 12:3,2 -->
 
 
-The ["**`-`**"], ["**`?`**"] and ["**`:`**"] characters used to denote [block
-collection] entries are perceived by people to be part of the indentation.
+The "`-`", "`?`" and "`:`" characters used to denote [block collection] entries
+are perceived by people to be part of the indentation.
 This is handled on a case-by-case basis by the relevant productions.
 
 
@@ -2647,7 +2643,7 @@ If a [line break] is followed by an [empty line], it is _trimmed_; the first
 
 
 Otherwise (the following line is not [empty]), the [line break] is converted to
-a single [space] (**`x20`**).
+a single [space] (`x20`).
 
 ```
 [#] b-as-space ::=
@@ -2768,7 +2764,7 @@ can be freely [more-indented] without affecting the [content] information.
 
 ## #. Comments
 
-An explicit _comment_ is marked by a _"**`#`**" indicator_.
+An explicit _comment_ is marked by a _"`#`" indicator_.
 Comments are a [presentation detail] and must not be used to convey [content]
 information.
 
@@ -2936,8 +2932,8 @@ Note that structures following multi-line comment separation must be properly
 ## #. Directives
 
 _Directives_ are instructions to the YAML [processor].
-This specification defines two directives, ["**`YAML`**"] and ["**`TAG`**"],
-and _reserves_ all other directives for future use.
+This specification defines two directives, "`YAML`" and "`TAG`", and _reserves_
+all other directives for future use.
 There is no way to define private directives.
 This is intentional.
 
@@ -2957,7 +2953,7 @@ information.
 
 
 Each directive is specified on a separate non-[indented] line starting with the
-_"**`%`**" indicator_, followed by the directive name and a list of parameters.
+_"`%`" indicator_, followed by the directive name and a list of parameters.
 The semantics of these parameters depends on the specific directive.
 A YAML [processor] should ignore unknown directives with an appropriate
 warning.
@@ -3000,24 +2996,23 @@ warning.
 * [ns-directive-parameter] <!-- 1:7,3 1:11,3 -->
 
 
-### #. "**`YAML`**" Directives
+### #. "`YAML`" Directives
 
-The _"**`YAML`**" directive_ specifies the version of YAML the [document]
-conforms to.
-This specification defines version "**`1.2`**", including recommendations for
-_YAML 1.1 processing_.
+The _"`YAML`" directive_ specifies the version of YAML the [document] conforms
+to.
+This specification defines version "`1.2`", including recommendations for _YAML
+1.1 processing_.
 
-A version 1.2 YAML [processor] must accept [documents] with an explicit
-"**`%YAML 1.2`**" directive, as well as [documents] lacking a "**`YAML`**"
-directive.
+A version 1.2 YAML [processor] must accept [documents] with an explicit "`%YAML
+1.2`" directive, as well as [documents] lacking a "`YAML`" directive.
 Such [documents] are assumed to conform to the 1.2 version specification.
-[Documents] with a "**`YAML`**" directive specifying a higher minor version
-(e.g. "**`%YAML 1.3`**") should be processed with an appropriate warning.
-[Documents] with a "**`YAML`**" directive specifying a higher major version
-(e.g. "**`%YAML 2.0`**") should be rejected with an appropriate error message.
+[Documents] with a "`YAML`" directive specifying a higher minor version (e.g.
+"`%YAML 1.3`") should be processed with an appropriate warning.
+[Documents] with a "`YAML`" directive specifying a higher major version (e.g.
+"`%YAML 2.0`") should be rejected with an appropriate error message.
 
 A version 1.2 YAML [processor] must also accept [documents] with an explicit
-"**`%YAML 1.1`**" directive.
+"`%YAML 1.1`" directive.
 Note that version 1.2 is mostly a superset of version 1.1, defined for the
 purpose of ensuring _JSON compatibility_.
 Hence a version 1.2 [processor] should process version 1.1 [documents] as if
@@ -3039,7 +3034,7 @@ of [non-ASCII line breaks], as described [above]).
 ```
 
 
-**Example #. "**`YAML`**" directive**
+**Example #. "`YAML`" directive**
 
 ```
 %YAML 1.3 # Attempt parsing
@@ -3057,7 +3052,7 @@ of [non-ASCII line breaks], as described [above]).
 * [ns-yaml-version] <!-- 1:7,3 -->
 
 
-It is an error to specify more than one "**`YAML`**" directive for the same
+It is an error to specify more than one "`YAML`" directive for the same
 document, even if both occurrences give the same version number.
 
 
@@ -3078,11 +3073,11 @@ given at most once per document.
 <!-- 2:5,4 -->
 
 
-### #. "**`TAG`**" Directives
+### #. "`TAG`" Directives
 
-The _"**`TAG`**" directive_ establishes a [tag shorthand] notation for
-specifying [node tags].
-Each "**`TAG`**" directive associates a [handle] with a [prefix].
+The _"`TAG`" directive_ establishes a [tag shorthand] notation for specifying
+[node tags].
+Each "`TAG`" directive associates a [handle] with a [prefix].
 This allows for compact and readable [tag] notation.
 
 ```
@@ -3095,7 +3090,7 @@ This allows for compact and readable [tag] notation.
 ```
 
 
-**Example #. "**`TAG`**" directive**
+**Example #. "`TAG`" directive**
 
 ```
 %TAG !yaml! tag:yaml.org,2002:
@@ -3113,8 +3108,8 @@ This allows for compact and readable [tag] notation.
 * [ns-tag-prefix] <!-- 1:13, -->
 
 
-It is an error to specify more than one "**`TAG`**" directive for the same
-[handle] in the same document, even if both occurrences give the same [prefix].
+It is an error to specify more than one "`TAG`" directive for the same [handle]
+in the same document, even if both occurrences give the same [prefix].
 
 
 **Example #. Invalid Repeated TAG directive**
@@ -3150,17 +3145,17 @@ There are three tag handle variants:
 
 ? Primary Handle
 
-: The _primary tag handle_ is a single _"**`!`**"_ character.
+: The _primary tag handle_ is a single _"`!`"_ character.
 This allows using the most compact possible notation for a single "primary"
 name space.
-By default, the prefix associated with this handle is ["**`!`**"].
+By default, the prefix associated with this handle is "`!`".
 Thus, by default, [shorthands] using this handle are interpreted as [local
 tags].
 
 : It is possible to override the default behavior by providing an explicit
-"**`TAG`**" directive, associating a different prefix for this handle.
+"`TAG`" directive, associating a different prefix for this handle.
 This provides smooth migration from using [local tags] to using [global tags]
-by the simple addition of a single "**`TAG`**" directive.
+by the simple addition of a single "`TAG`" directive.
 
 ```
 [#] c-primary-tag-handle ::= '!'
@@ -3191,13 +3186,12 @@ by the simple addition of a single "**`TAG`**" directive.
 
 ? Secondary Handle
 
-: The _secondary tag handle_ is written as _"**`!!`**"_.
+: The _secondary tag handle_ is written as _"`!!`"_.
 This allows using a compact notation for a single "secondary" name space.
-By default, the prefix associated with this handle is
-"**`tag:yaml.org,2002:`**".
+By default, the prefix associated with this handle is "`tag:yaml.org,2002:`".
 
 : It is possible to override this default behavior by providing an explicit
-"**`TAG`**" directive associating a different prefix for this handle.
+"`TAG`" directive associating a different prefix for this handle.
 
 ```
 [#] c-secondary-tag-handle ::= "!!"
@@ -3222,9 +3216,9 @@ By default, the prefix associated with this handle is
 
 ? Named Handles
 
-: A _named tag handle_ surrounds a non-empty name with _"**`!`**"_ characters.
-A handle name must not be used in a [tag shorthand] unless an explicit
-"**`TAG`**" directive has associated some prefix with it.
+: A _named tag handle_ surrounds a non-empty name with _"`!`"_ characters.
+A handle name must not be used in a [tag shorthand] unless an explicit "`TAG`"
+directive has associated some prefix with it.
 
 : The name of the handle is a [presentation detail] and must not be used to
 convey [content] information.
@@ -3267,8 +3261,8 @@ There are two _tag prefix_ variants:
 
 ? Local Tag Prefix
 
-: If the prefix begins with a ["**`!`**"] character, [shorthands] using the
-[handle] are expanded to a [local tag].
+: If the prefix begins with a "`!`" character, [shorthands] using the [handle]
+are expanded to a [local tag].
 Note that such a [tag] is intentionally not a valid URI and its semantics are
 specific to the [application].
 In particular, two [documents] in the same [stream] may assign different
@@ -3305,8 +3299,8 @@ semantics to the same [local tag].
 
 ? Global Tag Prefix
 
-: If the prefix begins with a character other than ["**`!`**"], it must be a
-valid URI prefix, and should contain at least the scheme.
+: If the prefix begins with a character other than "`!`", it must be a valid
+URI prefix, and should contain at least the scheme.
 [Shorthands] using the associated [handle] are expanded to globally unique URI
 tags and their semantics is consistent across [applications].
 In particular, every [document] in every [stream] must assign the same
@@ -3384,7 +3378,7 @@ Either or both may be omitted.
 
 The _tag property_ identifies the type of the [native data structure]
 [presented] by the [node].
-A tag is denoted by the _"**`!`**" indicator_.
+A tag is denoted by the _"`!`" indicator_.
 
 ```
 [#] c-ns-tag-property ::=
@@ -3396,13 +3390,13 @@ A tag is denoted by the _"**`!`**" indicator_.
 
 ? Verbatim Tags
 
-: A tag may be written _verbatim_ by surrounding it with the _"**`<`**" and
-"**`>`**"_ characters.
+: A tag may be written _verbatim_ by surrounding it with the _"`<`" and "`>`"_
+characters.
 In this case, the YAML [processor] must deliver the verbatim tag as-is to the
 [application].
 In particular, verbatim tags are not subject to [tag resolution].
-A verbatim tag must either begin with a ["**`!`**"] (a [local tag]) or be a
-valid URI (a [global tag]).
+A verbatim tag must either begin with a "`!`" (a [local tag]) or be a valid URI
+(a [global tag]).
 
 ```
 [#] c-verbatim-tag ::=
@@ -3453,23 +3447,23 @@ ERROR:
 : A _tag shorthand_ consists of a valid [tag handle] followed by a non-empty
 suffix.
 The [tag handle] must be associated with a [prefix], either by default or by
-using a ["**`TAG`**" directive].
+using a "`TAG`" directive.
 The resulting [parsed] [tag] is the concatenation of the [prefix] and the
-suffix and must either begin with ["**`!`**"] (a [local tag]) or be a valid URI
-(a [global tag]).
+suffix and must either begin with "`!`" (a [local tag]) or be a valid URI (a
+[global tag]).
 
 : The choice of [tag handle] is a [presentation detail] and must not be used to
 convey [content] information.
 In particular, the [tag handle] may be discarded once [parsing] is completed.
 
-: The suffix must not contain any ["**`!`**"] character.
+: The suffix must not contain any "`!`" character.
 This would cause the tag shorthand to be interpreted as having a [named tag
 handle].
-In addition, the suffix must not contain the ["**`[`**"], ["**`]`**"],
-["**`{`**"], ["**`}`**"] and ["**`,`**"] characters.
+In addition, the suffix must not contain the "`[`", "`]`", "`{`", "`}`" and
+"`,`" characters.
 These characters would cause ambiguity with [flow collection] structures.
 If the suffix needs to specify any of the above restricted characters, they
-must be [escaped] using the ["**`%`**"] character.
+must be [escaped] using the "`%`" character.
 This behavior is consistent with the URI character escaping rules
 (specifically, section 2.3 of URI RFC).
 
@@ -3524,18 +3518,18 @@ ERROR:
 
 : If a [node] has no tag property, it is assigned a [non-specific tag] that
 needs to be [resolved] to a [specific] one.
-This [non-specific tag] is ["**`!`**"] for non-[plain scalars] and ["**`?`**"]
-for all other [nodes].
+This [non-specific tag] is "`!`" for non-[plain scalars] and "`?`" for all
+other [nodes].
 This is the only case where the [node style] has any effect on the [content]
 information.
 
-: It is possible for the tag property to be explicitly set to the ["**`!`**"
-non-specific tag].
+: It is possible for the tag property to be explicitly set to the "`!`"
+non-specific tag.
 By [convention], this "disables" [tag resolution], forcing the [node] to be
-interpreted as "**`tag:yaml.org,2002:seq`**", "**`tag:yaml.org,2002:map`**" or
-"**`tag:yaml.org,2002:str`**", according to its [kind].
+interpreted as "`tag:yaml.org,2002:seq`", "`tag:yaml.org,2002:map`" or
+"`tag:yaml.org,2002:str`", according to its [kind].
 
-: There is no way to explicitly specify the ["**`?`**" non-specific] tag.
+: There is no way to explicitly specify the "`?`" non-specific tag.
 This is intentional.
 
 ```
@@ -3564,7 +3558,7 @@ This is intentional.
 
 ### #. Node Anchors
 
-An anchor is denoted by the _"**`&`**" indicator_.
+An anchor is denoted by the _"`&`" indicator_.
 It marks a [node] for future reference.
 An [alias node] can then be used to indicate additional inclusions of the
 anchored [node].
@@ -3585,8 +3579,8 @@ to convey [content] information.
 In particular, the YAML [processor] need not preserve the anchor name once the
 [representation] is [composed].
 
-Anchor names must not contain the ["**`[`**"], ["**`]`**"], ["**`{`**"],
-["**`}`**"] and ["**`,`**"] characters.
+Anchor names must not contain the "`[`", "`]`", "`{`", "`}`" and "`,`"
+characters.
 These characters would cause ambiguity with [flow collection] structures.
 
 ```
@@ -3632,7 +3626,7 @@ _alias nodes_.
 The first occurrence of the [node] must be marked by an [anchor] to allow
 subsequent occurrences to be [presented] as alias nodes.
 
-An alias node is denoted by the _"**`*`**" indicator_.
+An alias node is denoted by the _"`*`" indicator_.
 The alias refers to the most recent preceding [node] having the same [anchor].
 It is an error for an alias node to use an [anchor] that does not previously
 occur in the [document].
@@ -3674,15 +3668,15 @@ Reuse anchor: *anchor
 YAML allows the [node content] to be omitted in many cases.
 [Nodes] with empty [content] are interpreted as if they were [plain scalars]
 with an empty value.
-Such [nodes] are commonly resolved to a ["**`null`**"] value.
+Such [nodes] are commonly resolved to a "`null`" value.
 
 ```
 [#] e-scalar ::= ""
 ```
 
 
-In the examples, empty [scalars] are sometimes displayed as the glyph "**`°`**"
-for clarity.
+In the examples, empty [scalars] are sometimes displayed as the glyph "`°`" for
+clarity.
 Note that this glyph corresponds to a position in the characters [stream]
 rather than to an actual character.
 
@@ -3747,11 +3741,10 @@ distinguished for the purpose of [tag resolution].
 
 ### #. Double-Quoted Style
 
-The _double-quoted style_ is specified by surrounding _"**`"`**" indicators_.
+The _double-quoted style_ is specified by surrounding _"`"`" indicators_.
 This is the only [style] capable of expressing arbitrary strings, by using
-["**`\`**"] [escape sequences].
-This comes at the cost of having to escape the ["**`\`**"] and "**`"`**"
-characters.
+"`\`" [escape sequences].
+This comes at the cost of having to escape the "`\`" and "`"`" characters.
 
 ```
 [#] nb-double-char ::=
@@ -3909,10 +3902,10 @@ Empty lines, if any, are consumed as part of the [line folding].
 
 ### #. Single-Quoted Style
 
-The _single-quoted style_ is specified by surrounding _"**`'`**" indicators_.
+The _single-quoted style_ is specified by surrounding _"`'`" indicators_.
 Therefore, within a single-quoted scalar, such characters need to be repeated.
 This is the only form of _escaping_ performed in single-quoted scalars.
-In particular, the "**`\`**" and "**`"`**" characters may be freely used.
+In particular, the "`\`" and "`"`" characters may be freely used.
 This restricts single-quoted scalars to [printable] characters.
 In addition, it is only possible to break a long single-quoted line where a
 [space] character is surrounded by non-[spaces].
@@ -4059,9 +4052,9 @@ surrounded by non-[spaces].
 
 Plain scalars must not begin with most [indicators], as this would cause
 ambiguity with other YAML constructs.
-However, the ["**`:`**"], ["**`?`**"] and ["**`-`**"] [indicators] may be used
-as the first character if followed by a non-[space] "safe" character, as this
-causes no ambiguity.
+However, the "`:`", "`?`" and "`-`" [indicators] may be used as the first
+character if followed by a non-[space] "safe" character, as this causes no
+ambiguity.
 
 ```
 [#] ns-plain-first(c) ::=
@@ -4080,13 +4073,11 @@ causes no ambiguity.
 ```
 
 
-Plain scalars must never contain the ["**`:`** "] and [" **`#`**"] character
-combinations.
+Plain scalars must never contain the "`:` " and " `#`" character combinations.
 Such combinations would cause ambiguity with [mapping] [key/value pairs] and
 [comments].
 In addition, inside [flow collections], or when used as [implicit keys], plain
-scalars must not contain the ["**`[`**"], ["**`]`**"], ["**`{`**"], ["**`}`**"]
-and ["**`,`**"] characters.
+scalars must not contain the "`[`", "`]`", "`{`", "`}`" and "`,`" characters.
 These characters would cause ambiguity with [flow collection] structures.
 
 ```
@@ -4243,12 +4234,11 @@ Empty lines, if any, are consumed as part of the [line folding].
 
 ## #. Flow Collection Styles
 
-A _flow collection_ may be nested within a [block collection] ([**`FLOW-OUT`**
-context]), nested within another flow collection ([**`FLOW-IN`** context]) or
-be a part of an [implicit key] ([**`FLOW-KEY`** context] or [**`BLOCK-KEY`**
-context]).
-Flow collection entries are terminated by the _"**`,`**" indicator_.
-The final "**`,`**" may be omitted.
+A _flow collection_ may be nested within a [block collection] ([`FLOW-OUT`
+context]), nested within another flow collection ([`FLOW-IN` context]) or be a
+part of an [implicit key] ([`FLOW-KEY` context] or [`BLOCK-KEY` context]).
+Flow collection entries are terminated by the _"`,`" indicator_.
+The final "`,`" may be omitted.
 This does not cause ambiguity because flow collection entries can never be
 [completely empty].
 
@@ -4262,7 +4252,7 @@ This does not cause ambiguity because flow collection entries can never be
 
 ### #. Flow Sequences
 
-_Flow sequence content_ is denoted by surrounding _"**`[`**"_ and _"**`]`**"_
+_Flow sequence content_ is denoted by surrounding _"`[`"_ and _"`]`"_
 characters.
 
 ```
@@ -4274,7 +4264,7 @@ characters.
 ```
 
 
-Sequence entries are separated by a ["**`,`**"] character.
+Sequence entries are separated by a "`,`" character.
 
 ```
 [#] ns-s-flow-seq-entries(n,c) ::=
@@ -4345,8 +4335,7 @@ single: pair,
 
 ### #. Flow Mappings
 
-_Flow mappings_ are denoted by surrounding _"**`{`**"_ and _"**`}`**"_
-characters.
+_Flow mappings_ are denoted by surrounding _"`{`"_ and _"`}`"_ characters.
 
 ```
 [#] c-flow-mapping(n,c) ::=
@@ -4357,7 +4346,7 @@ characters.
 ```
 
 
-Mapping entries are separated by a ["**`,`**"] character.
+Mapping entries are separated by a "`,`" character.
 
 ```
 [#] ns-s-flow-map-entries(n,c) ::=
@@ -4390,7 +4379,7 @@ Mapping entries are separated by a ["**`,`**"] character.
 * [ns-flow-map-entry(n,c)] <!-- one_:_two three:_four five:_six seven_:_eight -->
 
 
-If the optional _"**`?`**" mapping key indicator_ is specified, the rest of the
+If the optional _"`?`" mapping key indicator_ is specified, the rest of the
 entry may be [completely empty].
 
 ```
@@ -4435,16 +4424,16 @@ implicit: entry,
 * [e-node] <!-- ° -->
 
 
-Normally, YAML insists the _"**`:`**" mapping value indicator_ be [separated]
-from the [value] by [white space].
-A benefit of this restriction is that the "**`:`**" character can be used
-inside [plain scalars], as long as it is not followed by [white space].
+Normally, YAML insists the _"`:`" mapping value indicator_ be [separated] from
+the [value] by [white space].
+A benefit of this restriction is that the "`:`" character can be used inside
+[plain scalars], as long as it is not followed by [white space].
 This allows for unquoted URLs and timestamps.
-It is also a potential source for confusion as "**`a:1`**" is a [plain scalar]
-and not a [key/value pair].
+It is also a potential source for confusion as "`a:1`" is a [plain scalar] and
+not a [key/value pair].
 
 Note that the [value] may be [completely empty] since its existence is
-indicated by the "**`:`**".
+indicated by the "`:`".
 
 ```
 [#] ns-flow-map-implicit-entry(n,c) ::=
@@ -4511,11 +4500,11 @@ omitted value:°,
 
 To ensure [JSON compatibility], if a [key] inside a flow mapping is
 [JSON-like], YAML allows the following [value] to be specified adjacent to the
-"**`:`**".
+"`:`".
 This causes no ambiguity, as all [JSON-like] [keys] are surrounded by
 [indicators].
 However, as this greatly reduces readability, YAML [processors] should
-[separate] the [value] from the "**`:`**" on output, even in this case.
+[separate] the [value] from the "`:`" on output, even in this case.
 
 ```
 [#] c-ns-flow-map-json-key-entry(n,c) ::=
@@ -4566,8 +4555,7 @@ However, as this greatly reduces readability, YAML [processors] should
 
 A more compact notation is usable inside [flow sequences], if the [mapping]
 contains a _single key/value pair_.
-This notation does not require the surrounding "**`{`**" and "**`}`**"
-characters.
+This notation does not require the surrounding "`{`" and "`}`" characters.
 Note that it is not possible to specify any [node properties] for the [mapping]
 in this case.
 
@@ -4588,8 +4576,8 @@ foo: bar
 * [ns-flow-pair(n,c)] <!-- foo:_bar -->
 
 
-If the "**`?`**" indicator is explicitly specified, [parsing] is unambiguous
-and the syntax is identical to the general case.
+If the "`?`" indicator is explicitly specified, [parsing] is unambiguous and
+the syntax is identical to the general case.
 
 ```
 [#] ns-flow-pair(n,c) ::=
@@ -4619,10 +4607,10 @@ and the syntax is identical to the general case.
 * [ns-flow-map-explicit-entry(n,c)] <!-- foo bar_:_baz -->
 
 
-If the "**`?`**" indicator is omitted, [parsing] needs to see past the
-_implicit key_ to recognize it as such.
-To limit the amount of lookahead required, the "**`:`**" indicator must appear
-at most 1024 Unicode characters beyond the start of the [key].
+If the "`?`" indicator is omitted, [parsing] needs to see past the _implicit
+key_ to recognize it as such.
+To limit the amount of lookahead required, the "`:`" indicator must appear at
+most 1024 Unicode characters beyond the start of the [key].
 In addition, the [key] is restricted to a single line.
 
 Note that YAML allows arbitrary [nodes] to be used as [keys].
@@ -4983,7 +4971,7 @@ YAML provides three chomping methods:
 
 ? Strip
 
-: _Stripping_ is specified by the _"**`-`**" chomping indicator_.
+: _Stripping_ is specified by the _"`-`" chomping indicator_.
 In this case, the final [line break] and any trailing [empty lines] are
 excluded from the [scalar's content].
 
@@ -4999,7 +4987,7 @@ However, any trailing [empty lines] are excluded from the [scalar's content].
 
 ? Keep
 
-: _Keeping_ is specified by the _"**`+`**" chomping indicator_.
+: _Keeping_ is specified by the _"`+`" chomping indicator_.
 In this case, the final [line break] and any trailing [empty lines] are
 considered to be part of the [scalar's content].
 These additional lines are not subject to [folding].
@@ -5152,7 +5140,7 @@ keep: |+
 
 ### #. Literal Style
 
-The _literal style_ is denoted by the _"**`|`**" indicator_.
+The _literal style_ is denoted by the _"`|`" indicator_.
 It is the simplest, most restricted and most readable [scalar style].
 
 ```
@@ -5240,7 +5228,7 @@ In addition, there is no way to break a long literal line.
 
 ### #. Folded Style
 
-The _folded style_ is denoted by the _"**`>`**" indicator_.
+The _folded style_ is denoted by the _"`>`" indicator_.
 It is similar to the [literal style]; however, folded scalars are subject to
 [line folding].
 
@@ -5492,10 +5480,10 @@ entry] is seen.
 ### #. Block Sequences
 
 A _block sequence_ is simply a series of [nodes], each denoted by a leading
-_"**`-`**" indicator_.
-The "**`-`**" indicator must be [separated] from the [node] by [white space].
-This allows "**`-`**" to be used as the first character in a [plain scalar] if
-followed by a non-space character (e.g. "**`-42`**").
+_"`-`" indicator_.
+The "`-`" indicator must be [separated] from the [node] by [white space].
+This allows "`-`" to be used as the first character in a [plain scalar] if
+followed by a non-space character (e.g. "`-42`").
 
 ```
 [#] l+block-sequence(n) ::=
@@ -5536,7 +5524,7 @@ The entry [node] may be either [completely empty], be a nested [block node] or
 use a _compact in-line notation_.
 The compact notation may be used when the entry is itself a nested [block
 collection].
-In this case, both the "**`-`**" indicator and the following [spaces] are
+In this case, both the "`-`" indicator and the following [spaces] are
 considered to be part of the [indentation] of the nested [collection].
 Note that it is not possible to specify [node properties] for such a
 [collection].
@@ -5622,8 +5610,8 @@ block mapping:
 * auto-detected [s-indent(n)] <!-- 2:1 -->
 
 
-If the ["**`?`**"] indicator is specified, the optional value node must be
-specified on a separate line, denoted by the ["**`:`**"] indicator.
+If the "`?`" indicator is specified, the optional value node must be specified
+on a separate line, denoted by the "`:`" indicator.
 Note that YAML allows here the same [compact in-line notation] described above
 for [block sequence] entries.
 
@@ -5680,7 +5668,7 @@ for [block sequence] entries.
 
 <!-- REVIEW value should be null above -->
 
-If the "**`?`**" indicator is omitted, [parsing] needs to see past the
+If the "`?`" indicator is omitted, [parsing] needs to see past the
 [implicit key], in the same way as in the [single key/value pair] [flow
 mapping].
 Hence, such [keys] are subject to the same restrictions; they are limited to a
@@ -5705,12 +5693,12 @@ single line and must not span more than 1024 Unicode characters.
 In this case, the [value] may be specified on the same line as the [implicit
 key].
 Note however that in block mappings the [value] must never be adjacent to the
-"**`:`**", as this greatly reduces readability and is not required for [JSON
+"`:`", as this greatly reduces readability and is not required for [JSON
 compatibility] (unlike the case in [flow mappings]).
 
 There is no compact notation for in-line [values].
 Also, while both the [implicit key] and the [value] following it may be empty,
-the ["**`:`**"] indicator is mandatory.
+the "`:`" indicator is mandatory.
 This prevents a potential ambiguity with multi-line [plain scalars].
 
 ```
@@ -5873,10 +5861,10 @@ folded:↓
 * [c-l+folded(n)] <!-- 3:8 4 5 6 -->
 
 
-Since people perceive the ["**`-`**" indicator] as [indentation], nested [block
+Since people perceive the "`-`" indicator as [indentation], nested [block
 sequences] may be [indented] by one less [space] to compensate, except, of
-course, if nested inside another [block sequence] ([**`BLOCK-OUT`** context]
-versus [**`BLOCK-IN`** context]).
+course, if nested inside another [block sequence] ([`BLOCK-OUT` context] versus
+[`BLOCK-IN` context]).
 
 ```
 [#] s-l+block-collection(n,c) ::=
@@ -5966,19 +5954,19 @@ Document
 ### #. Document Markers
 
 Using [directives] creates a potential ambiguity.
-It is valid to have a ["**`%`**"] character at the start of a line (e.g. as the
-first character of the second line of a [plain scalar]).
+It is valid to have a "`%`" character at the start of a line (e.g. as the first
+character of the second line of a [plain scalar]).
 How, then, to distinguish between an actual [directive] and a [content] line
-that happens to start with a ["**`%`**"] character?
+that happens to start with a "`%`" character?
 
 The solution is the use of two special _marker_ lines to control the processing
 of [directives], one at the start of a [document] and one at the end.
 
-At the start of a [document], lines beginning with a ["**`%`**"] character are
+At the start of a [document], lines beginning with a "`%`" character are
 assumed to be [directives].
 The (possibly empty) list of [directives] is terminated by a _directives end
 marker_ line.
-Lines following this marker can safely use ["**`%`**"] as the first character.
+Lines following this marker can safely use "`%`" as the first character.
 
 At the end of a [document], a _document end marker_ line is used to signal the
 [parser] to begin scanning for [directives] again.
@@ -6042,7 +6030,7 @@ Document
 A _bare document_ does not begin with any [directives] or [marker] lines.
 Such documents are very "clean" as they contain nothing other than the
 [content].
-In this case, the first non-comment line may not start with a ["**`%`**"] first
+In this case, the first non-comment line may not start with a "`%`" first
 character.
 
 Document [nodes] are [indented] as if they have a parent [indented] at -1
@@ -6215,7 +6203,7 @@ null
 
 
 A sequence of bytes is a _well-formed stream_ if, taken as a whole, it complies
-with the above **`l-yaml-stream`** production.
+with the above `l-yaml-stream` production.
 
 Some common use case that can take advantage of the YAML stream structure are:
 
@@ -6269,7 +6257,7 @@ option.
 
 ? URI
 
-: **`tag:yaml.org,2002:map`**
+: `tag:yaml.org,2002:map`
 
 
 ? Kind
@@ -6303,7 +6291,7 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 
 ? URI
 
-: **`tag:yaml.org,2002:seq`**
+: `tag:yaml.org,2002:seq`
 
 
 ? Kind
@@ -6334,7 +6322,7 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 
 ? URI
 
-: **`tag:yaml.org,2002:str`**
+: `tag:yaml.org,2002:str`
 
 
 ? Kind
@@ -6366,12 +6354,11 @@ Flow style: !!str "String: just a theory."
 
 ### #. Tag Resolution
 
-All [nodes] with the ["**`!`**" non-specific tag] are [resolved], by the
-standard [convention], to "**`tag:yaml.org,2002:seq`**",
-"**`tag:yaml.org,2002:map`**" or "**`tag:yaml.org,2002:str`**", according to
-their [kind].
+All [nodes] with the "`!`" non-specific tag are [resolved], by the standard
+[convention], to "`tag:yaml.org,2002:seq`", "`tag:yaml.org,2002:map`" or
+"`tag:yaml.org,2002:str`", according to their [kind].
 
-All [nodes] with the ["**`?`**" non-specific tag] are left [unresolved].
+All [nodes] with the "`?`" non-specific tag are left [unresolved].
 This constrains the [application] to deal with a [partial representation].
 
 
@@ -6394,7 +6381,7 @@ The JSON [schema] uses the following [tags] in addition to those defined by the
 
 ? URI
 
-: **`tag:yaml.org,2002:null`**
+: `tag:yaml.org,2002:null`
 
 
 ? Kind
@@ -6405,8 +6392,8 @@ The JSON [schema] uses the following [tags] in addition to those defined by the
 ? Definition
 
 : [Represents] the lack of a value.
-This is typically [bound] to a [native] null-like value (e.g., **`undef`** in
-Perl, **`None`** in Python).
+This is typically [bound] to a [native] null-like value (e.g., `undef` in Perl,
+`None` in Python).
 Note that a null is different from an empty string.
 Also, a [mapping] entry with some [key] and a null [value] is valid and
 different from not having that [key] in the [mapping].
@@ -6414,7 +6401,7 @@ different from not having that [key] in the [mapping].
 
 ? Canonical Form
 
-: **`null`**.
+: `null`.
 
 **Example #. `!!null` Examples**
 
@@ -6428,7 +6415,7 @@ key with null value: !!null null
 
 ? URI
 
-: **`tag:yaml.org,2002:bool`**
+: `tag:yaml.org,2002:bool`
 
 
 ? Kind
@@ -6445,7 +6432,7 @@ In languages without a [native] Boolean type (such as C), they are usually
 
 ? Canonical Form
 
-: Either **`true`** or **`false`**.
+: Either `true` or `false`.
 
 
 **Example #. `!!bool` Examples**
@@ -6460,7 +6447,7 @@ Pluto is a planet: !!bool false
 
 ? URI
 
-: **`tag:yaml.org,2002:int`**
+: `tag:yaml.org,2002:int`
 
 
 ? Kind
@@ -6489,8 +6476,8 @@ round-trip through most systems.
 
 ? Canonical Form
 
-: Decimal integer notation, with a leading "**`-`**" character for negative
-values, matching the regular expression **`0 | -? [1-9] [0-9]*`**
+: Decimal integer notation, with a leading "`-`" character for negative values,
+matching the regular expression `0 | -? [1-9] [0-9]*`
 
 
 **Example #. `!!int` Examples**
@@ -6506,7 +6493,7 @@ positive: !!int 34
 
 ? URI
 
-: **`tag:yaml.org,2002:float`**
+: `tag:yaml.org,2002:float`
 
 
 ? Kind
@@ -6535,9 +6522,9 @@ Since YAML does not specify a particular accuracy, using floating-point
 
 ? Canonical Form
 
-: Either **`0`**, **`.inf`**, **`-.inf`**, **`.nan`** or scientific notation
-matching the regular expression  
-**`-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?`**.
+: Either `0`, `.inf`, `-.inf`, `.nan` or scientific notation matching the
+regular expression  
+`-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?`.
 
 
 **Example #. `!!float` Examples**
@@ -6556,18 +6543,17 @@ not a number: !!float .nan
 The [JSON schema] [tag resolution] is an extension of the [failsafe schema]
 [tag resolution].
 
-All [nodes] with the ["**`!`**" non-specific tag] are [resolved], by the
-standard [convention], to "**`tag:yaml.org,2002:seq`**",
-"**`tag:yaml.org,2002:map`**" or "**`tag:yaml.org,2002:str`**", according to
-their [kind].
+All [nodes] with the "`!`" non-specific tag are [resolved], by the standard
+[convention], to "`tag:yaml.org,2002:seq`", "`tag:yaml.org,2002:map`" or
+"`tag:yaml.org,2002:str`", according to their [kind].
 
-[Collections] with the ["**`?`**" non-specific tag] (that is, [untagged]
-[collections]) are [resolved] to "**`tag:yaml.org,2002:seq`**" or
-"**`tag:yaml.org,2002:map`**" according to their [kind].
+[Collections] with the "`?`" non-specific tag (that is, [untagged]
+[collections]) are [resolved] to "`tag:yaml.org,2002:seq`" or
+"`tag:yaml.org,2002:map`" according to their [kind].
 
-[Scalars] with the ["**`?`**" non-specific tag] (that is, [plain scalars]) are
-matched with a list of regular expressions (first match wins, e.g. **`0`** is
-resolved as **`!!int`**).
+[Scalars] with the "`?`" non-specific tag (that is, [plain scalars]) are
+matched with a list of regular expressions (first match wins, e.g. `0` is
+resolved as `!!int`).
 In principle, JSON files should not contain any [scalars] that do not match at
 least one of these.
 Hence the YAML [processor] should consider them to be an error.
@@ -6626,20 +6612,18 @@ The core [schema] uses the same [tags] as the [JSON schema].
 The [core schema] [tag resolution] is an extension of the [JSON schema] [tag
 resolution].
 
-All [nodes] with the ["**`!`**" non-specific tag] are [resolved], by the
-standard [convention], to "**`tag:yaml.org,2002:seq`**",
-"**`tag:yaml.org,2002:map`**" or "**`tag:yaml.org,2002:str`**", according to
-their [kind].
+All [nodes] with the "`!`" non-specific tag are [resolved], by the standard
+[convention], to "`tag:yaml.org,2002:seq`", "`tag:yaml.org,2002:map`" or
+"`tag:yaml.org,2002:str`", according to their [kind].
 
-[Collections] with the ["**`?`**" non-specific tag] (that is, [untagged]
-[collections]) are [resolved] to "**`tag:yaml.org,2002:seq`**" or
-"**`tag:yaml.org,2002:map`**" according to their [kind].
+[Collections] with the "`?`" non-specific tag (that is, [untagged]
+[collections]) are [resolved] to "`tag:yaml.org,2002:seq`" or
+"`tag:yaml.org,2002:map`" according to their [kind].
 
-[Scalars] with the ["**`?`**" non-specific tag] (that is, [plain scalars]) are
+[Scalars] with the "`?`" non-specific tag (that is, [plain scalars]) are
 matched with an extended list of regular expressions.
 However, in this case, if none of the regular expressions matches, the [scalar]
-is [resolved] to **`tag:yaml.org,2002:str`** (that is, considered to be a
-string).
+is [resolved] to `tag:yaml.org,2002:str` (that is, considered to be a string).
 
 
 | Regular expression                | Resolved to tag
@@ -6688,7 +6672,7 @@ None of the above recommended [schemas] preclude the use of arbitrary explicit
 [tags].
 Hence YAML [processors] for a particular programming language typically provide
 some form of [local tags] that map directly to the language's [native data
-structures] (e.g., **`!ruby/object:Set`**).
+structures] (e.g., `!ruby/object:Set`).
 
 While such [local tags] are useful for ad hoc [applications], they do not
 suffice for stable, interoperable cross-[application] or cross-platform data

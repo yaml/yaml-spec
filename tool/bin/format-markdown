@@ -197,7 +197,7 @@ sub main {
     tabl and next if $peek =~ /^\|\ /;
     comm and next if $peek =~ /^<!--/;
     para and next if $peek =~ /^(
-      [\w\#\*"] |
+      [\w\#\*"`] |
       \[\w |
       \!\[ |
       \(\w |
