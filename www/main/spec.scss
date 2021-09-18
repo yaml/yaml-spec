@@ -114,6 +114,9 @@ ul.release-info,
 #markdown-toc ul ul ul ul {
   display: none;
 }
+#markdown-toc > :first-child {
+  display: none;
+}
 
 .footnotes {
   margin-bottom: 1000px;
