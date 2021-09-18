@@ -1270,11 +1270,12 @@ term is either:
     whose Unicode code point is within that range.
   * The name of a production (`c-printable`), which matches that production.
 * A lookaround:
-  * `[lookahead = term]`, which matches the empty string if `term` would match.
-  * `[lookahead ≠ term]`, which matches the empty string if `term` would not
+  * `[ lookahead = term ]`, which matches the empty string if `term` would
     match.
-  * `[lookbehind = term]`, which matches the empty string if `term` would match
-    beginning at any prior point on the line and ending at the current
+  * `[ lookahead ≠ term ]`, which matches the empty string if `term` would not
+    match.
+  * `[ lookbehind = term ]`, which matches the empty string if `term` would
+    match beginning at any prior point on the line and ending at the current
     position.
 * A special production:
   * `<start-of-line>`, which matches the empty string at the beginning of a
@@ -4069,7 +4070,7 @@ ambiguity.
         | c-mapping-value     #':'
         | c-sequence-entry    #'-'
       )
-      [lookahead = ns-plain-safe(c)]
+      [ lookahead = ns-plain-safe(c) ]
     )
 ```
 
@@ -4106,12 +4107,12 @@ These characters would cause ambiguity with [flow collection] structures.
       - c-comment          # '#'
     )
   | (
-      [lookbehind = ns-char]
+      [ lookbehind = ns-char ]
       c-comment          # '#'
     )
   | (
       c-mapping-value    # ':'
-      [lookahead = ns-plain-safe(c)]
+      [ lookahead = ns-plain-safe(c) ]
     )
 ```
 
@@ -4464,7 +4465,7 @@ indicated by the "`:`".
 ```
 [#] c-ns-flow-map-separate-value(n,c) ::=
   c-mapping-value    # ':'
-  [lookahead ≠ ns-plain-safe(c)]
+  [ lookahead ≠ ns-plain-safe(c) ]
   (
       (
         s-separate(n,c)
@@ -5499,7 +5500,7 @@ followed by a non-space character (e.g. "`-42`").
 ```
 [#] c-l-block-seq-entry(n) ::=
   c-sequence-entry    # '-'
-  [lookahead ≠ ns-char]
+  [ lookahead ≠ ns-char ]
   s-l+block-indented(n,BLOCK-IN)
 ```
 
