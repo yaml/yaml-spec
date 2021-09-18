@@ -7,8 +7,9 @@ and YAML tools and the core [YAML development team](core).
 It should be noted that as of the time of the 2021, YAML specification and
 reference projects are once again under active development.
 To find out how you can help, reach out to us via the resources listed below
-and also checkout our [YAML Specification Contribution
-Guidelines](contributing) page.
+and also checkout our YAML Specification Contribution Guidelines[^contributing]
+page.
+
 
 ## YAML Community Resources
 
@@ -27,15 +28,21 @@ Guidelines](contributing) page.
   very modern chat-room environment for phone and desktop.
   Matrix is open source, federated and end-to-end encrypted.
 
-* IRC
+* [IRC](https://web.libera.chat/?channels#yaml)
 
   The `#yaml` channel on the libera.chat network is a long-running place where
   YAML developers hang out and field user queries from time to time.
 
+* [Twitter YAML News](https://twitter.com/yamlnews)
+
+  Follow us here to keep on the latest happenings in the life of YAML.
+
 * [Mailing List](https://sourceforge.net/projects/yaml/lists/yaml-core)
 
-  YAML was originally designed by its creators over this mailing list.
+  YAML was originally designed by its creators almost entirely on this mailing
+  list.
   These days the mailing list is really only used for major announcements.
+
 
 ## YAML Web Sites
 
@@ -59,3 +66,8 @@ Guidelines](contributing) page.
 * <https://yaml.info>
 
   This web site offers various useful information for learning about YAML.
+
+
+# Reference Links
+
+[^contributing]: [YAML Specification Contribution Guideline](https://github.com/yaml/yaml-spec/blob/main/.github/contributing.md)

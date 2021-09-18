@@ -1,10 +1,10 @@
 ---
 layout: spec
-title: YAML Ain’t Markup Language (YAML™) Version 1.2
+title: YAML Ain’t Markup Language (YAML™) revision 1.2.2
 status: draft
 ---
 
-# YAML Ain't Markup Language (YAML™) Version 1.2
+# YAML Ain't Markup Language (YAML™) version 1.2
 
 ## Revision 1.2.2 (YYYY-MM-DD)
 {:.subtitle}
@@ -20,9 +20,9 @@ This document may be freely copied, provided it is not modified.
 This is the **YAML specification v1.2.2**.
 It defines the **YAML 1.2 data language**.
 There are no normative changes from the **YAML specification v1.2**.
-The primary objectives of this version are to correct errors and add clarity.
+The primary objectives of this revision are to correct errors and add clarity.
 
-This version also strives to make the YAML language development process more
+This revision also strives to make the YAML language development process more
 open, more transparent and easier for people to contribute to.
 The input format is now Markdown instead of DocBook, and the images are made
 from plain text LaTeX files rather than proprietary drawing software.
@@ -32,7 +32,7 @@ The previous YAML specification[^1-2-spec] was published 12 years ago.
 In that time span, YAML's popularity has grown significantly.
 Efforts are ongoing to improve the language and grow it to meet the needs and
 expectations of its users.
-While this version of the specification makes no actual changes to YAML, it
+While this revision of the specification makes no actual changes to YAML, it
 begins a process by which the language intends to evolve and stay modern.
 
 The YAML specification is often seen as overly complicated for something which
@@ -43,11 +43,11 @@ Future YAML plans are focused on making the language and ecosystem more
 powerful and reliable while simultaneously simplifying the development process
 for implementers.
 
-While this version of the specification is limiting itself to informational
+While this revision of the specification is limiting itself to informational
 changes only, there is companion documentation intended to guide YAML framework
 implementers and YAML language users.
 This documentation can continue to evolve and expand continually between
-published versions of this specification.
+published revisions of this specification.
 
 See:
 
@@ -66,7 +66,7 @@ dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 internet messaging to object persistence to data auditing and visualization.
 Together with the Unicode standard for characters[^unicode], this specification
-provides all the information necessary to understand YAML Version 1.2 and to
+provides all the information necessary to understand YAML version 1.2 and to
 create programs that process YAML information.
 
 
@@ -6696,9 +6696,9 @@ defined above.
 
 [^team]: [YAML Language Development Team](ext/team)
 [^spec-repo]: [YAML Specification on GitHub](https://github.com/yaml/yaml-spec)
-[^1-2-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.2](https://yaml.org/spec/1.2)
-[^1-1-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.1](https://yaml.org/spec/1.1)
-[^1-0-spec]: [YAML Ain’t Markup Language (YAML™) Version 1.0](https://yaml.org/spec/1.0)
+[^1-2-spec]: [YAML Ain’t Markup Language (YAML™) version 1.2](https://yaml.org/spec/1.2)
+[^1-1-spec]: [YAML Ain’t Markup Language (YAML™) version 1.1](https://yaml.org/spec/1.1)
+[^1-0-spec]: [YAML Ain’t Markup Language (YAML™) version 1.0](https://yaml.org/spec/1.0)
 [^unicode]: [Unicode – The World Standard for Text and Emoji](https://www.unicode.org)
 [^sml-dev]: [SML-DEV Mailing List Archive](https://github.com/yaml/sml-dev-archive)
 [^denter]: [Data::Denter - An (deprecated) alternative to Data::Dumper and Storable](https://metacpan.org/dist/Data-Denter/view/Denter.pod)

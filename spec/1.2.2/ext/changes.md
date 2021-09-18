@@ -1,19 +1,42 @@
 # YAML Specification Changes
 
 The current version of the YAML language is **1.2** and the current YAML
-specification version is **1.2.2**.
+specification revision is **1.2.2**.
 
-## Changes in v1.2.2 (YYYY-MM-DD)
 
-* Host the YAML specification sources in a [public repository^]
-* Change the source format from DocBook to Markdown
-* Correct known errata from the previous specification
-* Address many [reported issues^]
-* Clarify wording and examples
-* Removed sentences that are no longer relevant in 2021
-* Fixed known bugs in the grammar productions
+## Changes in revision 1.2.2 (YYYY-MM-DD)
 
-## Changes in v1.2.1 (2009-10-01)
+* Hosted the YAML specification sources in a publicly accessible
+  repository[^repo].
+* Changed the source format from DocBook to Markdown in hopes of lowering the
+  bar to entry for public contribution. Special processing lets us keep almost
+  all the fancy things that were done by DocBook.
+* GNU make based system defaults to Docker containers for all processes where
+  dependencies are not installed locally.
+* Hundreds of change commits[^commits] submitted, reviewed and team approved as
+  a GitHub pull request[^pulls].
+* Corrected known errata from the previous specification.
+* Addressed many reported issues[^issues].
+* Clarified wording and examples.
+* Fixed all broken external links.
+* Images are now all generated from simple LaTeX files into SVG, requiring no
+  proprietary drawing software.
+* Removed sentences that are no longer relevant in 2021.
+* Reworked many of the grammar productions to be clearer and not rely on
+  instructional comments.
+* The names and numbers of all productions remain the same.
+* Added links to companion pages that can continually be updated with useful
+  information that doesn't fit into the spec or that would otherwise need to
+  wait until the next revision.
+* Added footnote style links for links to external pages.
+* Included all older specs in the spec repo and converted the www.yaml.org
+  build system to get spec pages from the yaml-spec repository.
+* Added new YAML logo favicon.
+* Added a test system to check formatting and spellng in Markdown files,
+  general linting and also checking the build systems are working properly.
+
+
+## Changes in revision 1.2.1 (2009-10-01)
 
 Patches and error corrections:
 
@@ -94,7 +117,8 @@ Patches and error corrections:
 * 10.2.1.2. Boolean: Changed "`an native`" to "`a native`" (pointed out by Brad
   Baxter).
 
-## Changes in v1.2.0 (2009-07-21)
+
+## Changes in version 1.2 (revision 1.2.0) (2009-07-21)
 
 The most significant difference between YAML 1.1 and YAML 1.2 is the
 introduction of the core data schema as the recommended default, replacing the
@@ -136,7 +160,7 @@ Additionally there are some minor differences between the parsing rules:
   preceding document directives if they do not define their own.
 * Explicit document-end marker is now always required before a directive.
 
-## Changes in v1.1 (2005-01-18)
+## Changes in version 1.1 (2005-01-18)
 
 The most significant difference between these versions is the complete
 refactoring of the tag syntax.
@@ -162,6 +186,15 @@ Other changes include:
 * Directives now use a blank space `' '` rather than `:` as the separator
   between the name and its parameter/value.
 
-## First published as v1.0 (2004-01-29)
+
+## First published as version 1.0 (2004-01-29)
 
 First release!
+
+
+# Reference Links
+
+[^repo]: [The YAML Specification Repository](https://github.com/yaml/yaml-spec)
+[^issues]: [YAML Spec Repo Issues](https://github.com/yaml/yaml-spec/issues)
+[^commits]: [YAML Spec Repo Commits for 1.2.2](https://github.com/yaml/yaml-spec/commits/1.2.2)
+[^pulls]: [YAML Spec Repo Pull Requests](https://github.com/yaml/yaml-spec/pulls)
