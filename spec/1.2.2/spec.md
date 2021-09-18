@@ -4902,7 +4902,7 @@ where detection will fail.
 
 ```
 [#] c-indentation-indicator ::=
-  ns-dec-digit
+  [x31-x39]    # 1-9
 ```
 
 
