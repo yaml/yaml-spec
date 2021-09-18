@@ -2549,10 +2549,11 @@ Line prefixes are a [presentation detail] and must not be used to convey
 [content] information.
 
 ```
-[#] s-line-prefix(n,BLOCK-OUT) ::= s-block-line-prefix(n)
-    s-line-prefix(n,BLOCK-IN)  ::= s-block-line-prefix(n)
-    s-line-prefix(n,FLOW-OUT)  ::= s-flow-line-prefix(n)
-    s-line-prefix(n,FLOW-IN)   ::= s-flow-line-prefix(n)
+[#]
+s-line-prefix(n,BLOCK-OUT) ::= s-block-line-prefix(n)
+s-line-prefix(n,BLOCK-IN)  ::= s-block-line-prefix(n)
+s-line-prefix(n,FLOW-OUT)  ::= s-flow-line-prefix(n)
+s-line-prefix(n,FLOW-IN)   ::= s-flow-line-prefix(n)
 ```
 
 ```
@@ -2890,12 +2891,13 @@ Note that structures following multi-line comment separation must be properly
 [comment] lines themselves.
 
 ```
-[#] s-separate(n,BLOCK-OUT) ::= s-separate-lines(n)
-    s-separate(n,BLOCK-IN)  ::= s-separate-lines(n)
-    s-separate(n,FLOW-OUT)  ::= s-separate-lines(n)
-    s-separate(n,FLOW-IN)   ::= s-separate-lines(n)
-    s-separate(n,BLOCK-KEY) ::= s-separate-in-line
-    s-separate(n,FLOW-KEY)  ::= s-separate-in-line
+[#]
+s-separate(n,BLOCK-OUT) ::= s-separate-lines(n)
+s-separate(n,BLOCK-IN)  ::= s-separate-lines(n)
+s-separate(n,FLOW-OUT)  ::= s-separate-lines(n)
+s-separate(n,FLOW-IN)   ::= s-separate-lines(n)
+s-separate(n,BLOCK-KEY) ::= s-separate-in-line
+s-separate(n,FLOW-KEY)  ::= s-separate-in-line
 ```
 
 ```
@@ -3776,10 +3778,11 @@ Double-quoted scalars are restricted to a single line when contained inside an
 ```
 
 ```
-[#] nb-double-text(n,FLOW-OUT)  ::= nb-double-multi-line(n)
-    nb-double-text(n,FLOW-IN)   ::= nb-double-multi-line(n)
-    nb-double-text(n,BLOCK-KEY) ::= nb-double-one-line
-    nb-double-text(n,FLOW-KEY)  ::= nb-double-one-line
+[#]
+nb-double-text(n,FLOW-OUT)  ::= nb-double-multi-line(n)
+nb-double-text(n,FLOW-IN)   ::= nb-double-multi-line(n)
+nb-double-text(n,BLOCK-KEY) ::= nb-double-one-line
+nb-double-text(n,FLOW-KEY)  ::= nb-double-one-line
 ```
 
 ```
@@ -3957,10 +3960,11 @@ Single-quoted scalars are restricted to a single line when contained inside a
 ```
 
 ```
-[#] nb-single-text(FLOW-OUT)  ::= nb-single-multi-line(n)
-    nb-single-text(FLOW-IN)   ::= nb-single-multi-line(n)
-    nb-single-text(BLOCK-KEY) ::= nb-single-one-line
-    nb-single-text(FLOW-KEY)  ::= nb-single-one-line
+[#]
+nb-single-text(FLOW-OUT)  ::= nb-single-multi-line(n)
+nb-single-text(FLOW-IN)   ::= nb-single-multi-line(n)
+nb-single-text(BLOCK-KEY) ::= nb-single-one-line
+nb-single-text(FLOW-KEY)  ::= nb-single-one-line
 ```
 
 ```
@@ -4068,8 +4072,8 @@ ambiguity.
   | (
       (
           c-mapping-key       # '?'
-        | c-mapping-value     #':'
-        | c-sequence-entry    #'-'
+        | c-mapping-value     # ':'
+        | c-sequence-entry    # '-'
       )
       [ lookahead = ns-plain-safe(c) ]
     )
@@ -4084,10 +4088,11 @@ scalars must not contain the "`[`", "`]`", "`{`", "`}`" and "`,`" characters.
 These characters would cause ambiguity with [flow collection] structures.
 
 ```
-[#] ns-plain-safe(FLOW-OUT)  ::= ns-plain-safe-out
-    ns-plain-safe(FLOW-IN)   ::= ns-plain-safe-in
-    ns-plain-safe(BLOCK-KEY) ::= ns-plain-safe-out
-    ns-plain-safe(FLOW-KEY)  ::= ns-plain-safe-in
+[#]
+ns-plain-safe(FLOW-OUT)  ::= ns-plain-safe-out
+ns-plain-safe(FLOW-IN)   ::= ns-plain-safe-in
+ns-plain-safe(BLOCK-KEY) ::= ns-plain-safe-out
+ns-plain-safe(FLOW-KEY)  ::= ns-plain-safe-in
 ```
 
 ```
@@ -4159,10 +4164,11 @@ Plain scalars are further restricted to a single line when contained inside an
 [implicit key].
 
 ```
-[#] ns-plain(n,FLOW-OUT)  ::= ns-plain-multi-line(n,FLOW-OUT)
-    ns-plain(n,FLOW-IN)   ::= ns-plain-multi-line(n,FLOW-IN)
-    ns-plain(n,BLOCK-KEY) ::= ns-plain-one-line(BLOCK-KEY)
-    ns-plain(n,FLOW-KEY)  ::= ns-plain-one-line(FLOW-KEY)
+[#]
+ns-plain(n,FLOW-OUT)  ::= ns-plain-multi-line(n,FLOW-OUT)
+ns-plain(n,FLOW-IN)   ::= ns-plain-multi-line(n,FLOW-IN)
+ns-plain(n,BLOCK-KEY) ::= ns-plain-one-line(BLOCK-KEY)
+ns-plain(n,FLOW-KEY)  ::= ns-plain-one-line(FLOW-KEY)
 ```
 
 ```
@@ -4246,10 +4252,11 @@ This does not cause ambiguity because flow collection entries can never be
 [completely empty].
 
 ```
-[#] in-flow(n,FLOW-OUT)  ::= ns-s-flow-seq-entries(n,FLOW-IN)
-    in-flow(n,FLOW-IN)   ::= ns-s-flow-seq-entries(n,FLOW-IN)
-    in-flow(n,BLOCK-KEY) ::= ns-s-flow-seq-entries(n,FLOW-KEY)
-    in-flow(n,FLOW-KEY)  ::= ns-s-flow-seq-entries(n,FLOW-KEY)
+[#]
+in-flow(n,FLOW-OUT)  ::= ns-s-flow-seq-entries(n,FLOW-IN)
+in-flow(n,FLOW-IN)   ::= ns-s-flow-seq-entries(n,FLOW-IN)
+in-flow(n,BLOCK-KEY) ::= ns-s-flow-seq-entries(n,FLOW-KEY)
+in-flow(n,FLOW-KEY)  ::= ns-s-flow-seq-entries(n,FLOW-KEY)
 ```
 
 
@@ -5001,9 +5008,10 @@ The chomping method used is a [presentation detail] and must not be used to
 convey [content] information.
 
 ```
-[#] c-chomping-indicator(STRIP) ::= '-'
-    c-chomping-indicator(KEEP)  ::= '+'
-    c-chomping-indicator(CLIP)  ::= ""
+[#]
+c-chomping-indicator(STRIP) ::= '-'
+c-chomping-indicator(KEEP)  ::= '+'
+c-chomping-indicator(CLIP)  ::= ""
 ```
 
 
@@ -5045,9 +5053,10 @@ also controlled by the chomping indicator specified in the [block scalar
 header].
 
 ```
-[#] l-chomped-empty(n,STRIP) ::= l-strip-empty(n)
-    l-chomped-empty(n,CLIP)  ::= l-strip-empty(n)
-    l-chomped-empty(n,KEEP)  ::= l-keep-empty(n)
+[#]
+l-chomped-empty(n,STRIP) ::= l-strip-empty(n)
+l-chomped-empty(n,CLIP)  ::= l-strip-empty(n)
+l-chomped-empty(n,KEEP)  ::= l-keep-empty(n)
 ```
 
 ```
