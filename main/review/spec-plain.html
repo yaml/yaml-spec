@@ -34,7 +34,7 @@
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-14">Revision 1.2.2 (2021-09-14)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-17">Revision 1.2.2 (2021-09-17)</h2>
 
 <p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -101,7 +101,7 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-14" id="markdown-toc-revision-122-2021-09-14">Revision 1.2.2 (2021-09-14)</a></li>
+      <li><a href="#revision-122-2021-09-17" id="markdown-toc-revision-122-2021-09-17">Revision 1.2.2 (2021-09-17)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction" id="markdown-toc-chapter-1-introduction">Chapter 1. Introduction</a>    <ul>
@@ -155,8 +155,9 @@ create programs that process YAML information.</p>
     </ul>
   </li>
   <li><a href="#chapter-4-syntax-conventions" id="markdown-toc-chapter-4-syntax-conventions">Chapter 4. Syntax Conventions</a>    <ul>
-      <li><a href="#41-production-parameters" id="markdown-toc-41-production-parameters">4.1. Production Parameters</a></li>
-      <li><a href="#42-production-naming-conventions" id="markdown-toc-42-production-naming-conventions">4.2. Production Naming Conventions</a></li>
+      <li><a href="#41-production-syntax" id="markdown-toc-41-production-syntax">4.1. Production Syntax</a></li>
+      <li><a href="#42-production-parameters" id="markdown-toc-42-production-parameters">4.2. Production Parameters</a></li>
+      <li><a href="#43-production-naming-conventions" id="markdown-toc-43-production-naming-conventions">4.3. Production Naming Conventions</a></li>
     </ul>
   </li>
   <li><a href="#chapter-5-characters" id="markdown-toc-chapter-5-characters">Chapter 5. Characters</a>    <ul>
@@ -178,8 +179,8 @@ create programs that process YAML information.</p>
       <li><a href="#66-comments" id="markdown-toc-66-comments">6.6. Comments</a></li>
       <li><a href="#67-separation-lines" id="markdown-toc-67-separation-lines">6.7. Separation Lines</a></li>
       <li><a href="#68-directives" id="markdown-toc-68-directives">6.8. Directives</a>        <ul>
-          <li><a href="#681-yaml-directives" id="markdown-toc-681-yaml-directives">6.8.1. “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” Directives</a></li>
-          <li><a href="#682-tag-directives" id="markdown-toc-682-tag-directives">6.8.2. “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” Directives</a>            <ul>
+          <li><a href="#681-yaml-directives" id="markdown-toc-681-yaml-directives">6.8.1. “<code class="language-plaintext highlighter-rouge">YAML</code>” Directives</a></li>
+          <li><a href="#682-tag-directives" id="markdown-toc-682-tag-directives">6.8.2. “<code class="language-plaintext highlighter-rouge">TAG</code>” Directives</a>            <ul>
               <li><a href="#6821-tag-handles" id="markdown-toc-6821-tag-handles">6.8.2.1. Tag Handles</a></li>
               <li><a href="#6822-tag-prefixes" id="markdown-toc-6822-tag-prefixes">6.8.2.2. Tag Prefixes</a></li>
             </ul>
@@ -353,7 +354,7 @@ Around this time, the developers became aware of JSON<sup id="fnref:json" role="
 By sheer coincidence, JSON was almost a complete subset of YAML (both
 syntactically and semantically).</p>
 
-<p>In 2006, Kirill Siminov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">9</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">10</a></sup>.
+<p>In 2006, Kirill Simonov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">9</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">10</a></sup>.
 A lot of the YAML frameworks in various programming languages are built over
 LibYAML and many others have looked to PyYAML as a solid reference for their
 implementations.</p>
@@ -403,10 +404,10 @@ specification.</p>
 
 <p>YAML’s <a href="#block-collection-styles">block collections</a> use <a href="#indentation-spaces">indentation</a> for scope and begin each entry on
 its own line.
-<a href="#block-sequences">Block sequences</a> indicate each entry with a dash and space (“<strong><code class="language-plaintext highlighter-rouge">-</code></strong> “).
-<a href="#mapping">Mappings</a> use a colon and space (“<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “) to mark each <a href="#mapping">key/value pair</a>.
+<a href="#block-sequences">Block sequences</a> indicate each entry with a dash and space (“<code class="language-plaintext highlighter-rouge">- </code>”).
+<a href="#mapping">Mappings</a> use a colon and space (“<code class="language-plaintext highlighter-rouge">: </code>”) to mark each <a href="#mapping">key/value pair</a>.
 <a href="#comments">Comments</a> begin with an octothorpe (also called a “hash”, “sharp”, “pound” or
-“number sign” - “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”).</p>
+“number sign” - “<code class="language-plaintext highlighter-rouge">#</code>”).</p>
 
 <div id="example-sequence-of-scalars" class="example">
   <p><strong>Example 2.1 Sequence of Scalars (ball players)</strong></p>
@@ -495,12 +496,12 @@ Sammy Sosa: {
 <div id="structures"></div>
 <h2 id="22-structures">2.2. Structures</h2>
 
-<p>YAML uses three dashes (“<strong><code class="language-plaintext highlighter-rouge">---</code></strong>”) to separate <a href="#directives">directives</a> from <a href="#document">document</a>
+<p>YAML uses three dashes (“<code class="language-plaintext highlighter-rouge">---</code>”) to separate <a href="#directives">directives</a> from <a href="#document">document</a>
 <a href="#nodes">content</a>.
 This also serves to signal the start of a document if no <a href="#directives">directives</a> are
 present.
-Three dots ( “<strong><code class="language-plaintext highlighter-rouge">...</code></strong>”) indicate the end of a document without starting a
-new one, for use in communication channels.</p>
+Three dots ( “<code class="language-plaintext highlighter-rouge">...</code>”) indicate the end of a document without starting a new
+one, for use in communication channels.</p>
 
 <div id="example-two-documents-in-a-stream" class="example">
   <p><strong>Example 2.7 Two Documents in a Stream (each with a leading comment)</strong></p>
@@ -539,8 +540,8 @@ action: grand slam
 </div>
 
 <p>Repeated <a href="#nodes">nodes</a> (objects) are first <a href="#anchors-and-aliases">identified</a> by an <a href="#anchors-and-aliases">anchor</a> (marked with
-the ampersand - “<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>”) and are then <a href="#anchors-and-aliases">aliased</a> (referenced with an
-asterisk - “<strong><code class="language-plaintext highlighter-rouge">*</code></strong>”) thereafter.</p>
+the ampersand - “<code class="language-plaintext highlighter-rouge">&amp;</code>”) and are then <a href="#anchors-and-aliases">aliased</a> (referenced with an asterisk -
+“<code class="language-plaintext highlighter-rouge">*</code>”) thereafter.</p>
 
 <div id="example-single-document-with-two-comments" class="example">
   <p><strong>Example 2.9 Single Document with Two Comments</strong></p>
@@ -559,7 +560,7 @@ rbi:
 </div>
 
 <div id="example-node-for-sammy-sosa-appears-twice-in-this-document" class="example">
-  <p><strong>Example 2.10 Node for “</strong><code class="language-plaintext highlighter-rouge">Sammy Sosa</code><strong>” appears twice in this document</strong></p>
+  <p><strong>Example 2.10 Node for “<code class="language-plaintext highlighter-rouge">Sammy Sosa</code>” appears twice in this document</strong></p>
 
   <pre class="example">
 ---
@@ -574,7 +575,7 @@ rbi:
 
 </div>
 
-<p>A question mark and space (“<strong><code class="language-plaintext highlighter-rouge">?</code></strong> “) indicate a complex <a href="#mapping">mapping</a> <a href="#nodes">key</a>.
+<p>A question mark and space (“<code class="language-plaintext highlighter-rouge">? </code>”) indicate a complex <a href="#mapping">mapping</a> <a href="#nodes">key</a>.
 Within a <a href="#block-collection-styles">block collection</a>, <a href="#mapping">key/value pairs</a> can start immediately following
 the <a href="#block-sequences">dash</a>, <a href="#flow-mappings">colon</a> or <a href="#flow-mappings">question mark</a>.</p>
 
@@ -614,10 +615,10 @@ the <a href="#block-sequences">dash</a>, <a href="#flow-mappings">colon</a> or <
 <h2 id="23-scalars">2.3. Scalars</h2>
 
 <p><a href="#scalar">Scalar content</a> can be written in <a href="#scalars">block</a> notation, using a <a href="#literal-style">literal style</a>
-(indicated by “<strong><code class="language-plaintext highlighter-rouge">|</code></strong>”) where all <a href="#line-break-characters">line breaks</a> are significant.
-Alternatively, they can be written with the <a href="#folded-style">folded style</a> (denoted by
-“<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>”) where each <a href="#line-break-characters">line break</a> is <a href="#line-folding">folded</a> to a <a href="#white-space-characters">space</a> unless it ends an
-<a href="#empty-lines">empty</a> or a <a href="#example-more-indented-lines">more-indented</a> line.</p>
+(indicated by “<code class="language-plaintext highlighter-rouge">|</code>”) where all <a href="#line-break-characters">line breaks</a> are significant.
+Alternatively, they can be written with the <a href="#folded-style">folded style</a> (denoted by “<code class="language-plaintext highlighter-rouge">&gt;</code>”)
+where each <a href="#line-break-characters">line break</a> is <a href="#line-folding">folded</a> to a <a href="#white-space-characters">space</a> unless it ends an <a href="#empty-lines">empty</a> or a
+<a href="#example-more-indented-lines">more-indented</a> line.</p>
 
 <div id="example-in-literals-newlines-are-preserved" class="example">
   <p><strong>Example 2.13 In literals, newlines are preserved</strong></p>
@@ -714,10 +715,10 @@ quoted: "So does this
 <h2 id="24-tags">2.4. Tags</h2>
 
 <p>In YAML, <a href="#resolved-tags">untagged nodes</a> are given a type depending on the <a href="#processing-yaml-information">application</a>.
-The examples in this specification generally use the <strong><code class="language-plaintext highlighter-rouge">seq</code></strong>, <strong><code class="language-plaintext highlighter-rouge">map</code></strong>
-and <strong><code class="language-plaintext highlighter-rouge">str</code></strong> types from the <a href="#failsafe-schema">fail safe schema</a>.
-A few examples also use the <strong><code class="language-plaintext highlighter-rouge">int</code></strong>, <strong><code class="language-plaintext highlighter-rouge">float</code></strong> and <strong><code class="language-plaintext highlighter-rouge">null</code></strong> types
-from the <a href="#json-schema">JSON schema</a>.</p>
+The examples in this specification generally use the <code class="language-plaintext highlighter-rouge">seq</code>, <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">str</code>
+types from the <a href="#failsafe-schema">fail safe schema</a>.
+A few examples also use the <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">float</code> and <code class="language-plaintext highlighter-rouge">null</code> types from the <a href="#json-schema">JSON
+schema</a>.</p>
 
 <div id="example-integers" class="example">
   <p><strong>Example 2.19 Integers</strong></p>
@@ -767,8 +768,8 @@ date: 2002-12-14
 
 </div>
 
-<p>Explicit typing is denoted with a <a href="#tags">tag</a> using the exclamation point
-(“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”) symbol.
+<p>Explicit typing is denoted with a <a href="#tags">tag</a> using the exclamation point (“<code class="language-plaintext highlighter-rouge">!</code>”)
+symbol.
 <a href="#tags">Global tags</a> are URIs and may be specified in a <a href="#tag-shorthands">tag shorthand</a> notation using
 a <a href="#tag-handles">handle</a>.
 <a href="#processing-yaml-information">Application</a>-specific <a href="#tags">local tags</a> may also be used.</p>
@@ -1000,9 +1001,9 @@ specifying its data type.
 Type specifiers are either <a href="#tags">global</a> URIs or are <a href="#tags">local</a> in scope to a single
 <a href="#processing-yaml-information">application</a>.
 For example, an integer is represented in YAML with a <a href="#scalar">scalar</a> plus the <a href="#tags">global
-tag</a> “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></strong>”.
+tag</a> “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code>”.
 Similarly, an invoice object, particular to a given organization, could be
-represented as a <a href="#mapping">mapping</a> together with the <a href="#tags">local tag</a> “<strong><code class="language-plaintext highlighter-rouge">!invoice</code></strong>”.
+represented as a <a href="#mapping">mapping</a> together with the <a href="#tags">local tag</a> “<code class="language-plaintext highlighter-rouge">!invoice</code>”.
 This simple model can represent any data structure independent of programming
 language.</p>
   </dd>
@@ -1115,9 +1116,9 @@ By carefully separating properties needed for <a href="#serialization-tree">seri
 consistent and portable between various programming environments.</p>
 
 <p>The following diagram summarizes the three <em>information models</em>.
-Full arrows denote composition, hollow arrows denote inheritance, “<strong><code class="language-plaintext highlighter-rouge">1</code></strong>” and
-“<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” denote “one” and “many” relationships.
-A single “<strong><code class="language-plaintext highlighter-rouge">+</code></strong>” denotes <a href="#serialization-tree">serialization</a> details, a double “<strong><code class="language-plaintext highlighter-rouge">++</code></strong>” denotes
+Full arrows denote composition, hollow arrows denote inheritance, “<code class="language-plaintext highlighter-rouge">1</code>” and
+“<code class="language-plaintext highlighter-rouge">*</code>” denote “one” and “many” relationships.
+A single “<code class="language-plaintext highlighter-rouge">+</code>” denotes <a href="#serialization-tree">serialization</a> details, a double “<code class="language-plaintext highlighter-rouge">++</code>” denotes
 <a href="#presentation-stream">presentation</a> details.</p>
 
 <p><strong>Figure 3.2. Information Models</strong></p>
@@ -1195,25 +1196,25 @@ key or a value.</p>
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
 identifier, called a <em>tag</em>.
 <em>Global tags</em> are URIs and hence globally unique across all <a href="#processing-yaml-information">applications</a>.
-The “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">13</a></sup> is recommended for all global YAML tags.
+The “<code class="language-plaintext highlighter-rouge">tag:</code>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">13</a></sup> is recommended for all global YAML tags.
 In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
-Local tags start with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em>, are not URIs and are not expected to be
-globally unique.
-YAML provides a “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive to make tag notation less verbose; it
-also offers easy migration from local to global tags.
+Local tags start with <em>”<code class="language-plaintext highlighter-rouge">!</code>“</em>, are not URIs and are not expected to be globally
+unique.
+YAML provides a “<code class="language-plaintext highlighter-rouge">TAG</code>” directive to make tag notation less verbose; it also
+offers easy migration from local to global tags.
 To ensure this, local tags are restricted to the URI character set and use URI
 character <a href="#escaped-characters">escaping</a>.</p>
 
 <p>YAML does not mandate any special relationship between different tags that
 begin with the same substring.
-Tags ending with URI fragments (containing “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>”) are no exception; tags
-that share the same base URI but differ in their fragment part are considered
-to be different, independent tags.
+Tags ending with URI fragments (containing “<code class="language-plaintext highlighter-rouge">#</code>”) are no exception; tags that
+share the same base URI but differ in their fragment part are considered to be
+different, independent tags.
 By convention, fragments are used to identify different “variants” of a tag,
-while “<strong><code class="language-plaintext highlighter-rouge">/</code></strong>” is used to define nested tag “namespace” hierarchies.
+while “<code class="language-plaintext highlighter-rouge">/</code>” is used to define nested tag “namespace” hierarchies.
 However, this is merely a convention and each tag may employ its own rules.
-For example, Perl tags may use “<strong><code class="language-plaintext highlighter-rouge">::</code></strong>” to express namespace hierarchies,
-Java tags may use “<strong><code class="language-plaintext highlighter-rouge">.</code></strong>”, etc.</p>
+For example, Perl tags may use “<code class="language-plaintext highlighter-rouge">::</code>” to express namespace hierarchies, Java
+tags may use “<code class="language-plaintext highlighter-rouge">.</code>”, etc.</p>
 
 <p>YAML tags are used to associate meta information with each <a href="#nodes">node</a>.
 In particular, each tag must specify the expected <a href="#nodes">node kind</a> (<a href="#scalar">scalar</a>,
@@ -1230,8 +1231,8 @@ any other data that is applicable to all of the tag’s <a href="#nodes">nodes</
 <p>Since YAML <a href="#mapping">mappings</a> require <a href="#nodes">key</a> uniqueness, <a href="#representation-graph">representations</a> must include
 a mechanism for testing the equality of <a href="#nodes">nodes</a>.
 This is non-trivial since YAML allows various ways to <a href="#scalar-formats">format scalar content</a>.
-For example, the integer eleven can be written as “<strong><code class="language-plaintext highlighter-rouge">0o13</code></strong>” (octal) or
-“<strong><code class="language-plaintext highlighter-rouge">0xB</code></strong>” (hexadecimal).
+For example, the integer eleven can be written as “<code class="language-plaintext highlighter-rouge">0o13</code>” (octal) or “<code class="language-plaintext highlighter-rouge">0xB</code>”
+(hexadecimal).
 If both notations are used as <a href="#nodes">keys</a> in the same <a href="#mapping">mapping</a>, only a YAML
 <a href="#processing-yaml-information">processor</a> which recognizes integer <a href="#scalar-formats">formats</a> would correctly flag the
 duplicate <a href="#nodes">key</a> as an error.</p>
@@ -1273,7 +1274,7 @@ URIs.
 Since a YAML <a href="#processing-yaml-information">processor</a> cannot be reasonably expected to be aware of them all,
 it must resort to a simple character-by-character comparison of <a href="#tags">tags</a> to
 ensure consistency.
-This also happens to be the comparison method defined by the “<strong><code class="language-plaintext highlighter-rouge">tag:</code></strong>” URI
+This also happens to be the comparison method defined by the “<code class="language-plaintext highlighter-rouge">tag:</code>” URI
 scheme.
 <a href="#tags">Tags</a> in a YAML stream must therefore be <a href="#presenting-the-serialization-tree">presented</a> in a canonical way so
 that such comparison would yield the correct results.</p>
@@ -1390,7 +1391,7 @@ These allow for a natural “ordered mapping” notation.</p>
 <h4 id="3232-scalar-formats">3.2.3.2. Scalar Formats</h4>
 
 <p>YAML allows <a href="#scalars">scalars</a> to be <a href="#presenting-the-serialization-tree">presented</a> in several <em>formats</em>.
-For example, the integer “<strong><code class="language-plaintext highlighter-rouge">11</code></strong>” might also be written as “<strong><code class="language-plaintext highlighter-rouge">0xB</code></strong>”.
+For example, the integer “<code class="language-plaintext highlighter-rouge">11</code>” might also be written as “<code class="language-plaintext highlighter-rouge">0xB</code>”.
 <a href="#tags">Tags</a> must specify a mechanism for converting the formatted content to a
 <a href="#canonical-form">canonical form</a> for use in <a href="#equality">equality</a> testing.
 Like <a href="#node-styles">node style</a>, the format is a <a href="#presenting-the-serialization-tree">presentation detail</a> and is not reflected
@@ -1416,7 +1417,7 @@ A directive has a name and an optional sequence of parameters.
 Directives are instructions to the YAML <a href="#processing-yaml-information">processor</a> and like all other
 <a href="#presenting-the-serialization-tree">presentation details</a> are not reflected in the YAML <a href="#serialization-tree">serialization tree</a> or
 <a href="#representation-graph">representation graph</a>.
-This version of YAML defines two directives, “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”.
+This version of YAML defines two directives, “<code class="language-plaintext highlighter-rouge">YAML</code>” and “<code class="language-plaintext highlighter-rouge">TAG</code>”.
 All other directives are <a href="#directives">reserved</a> for future versions of YAML.</p>
 
 <div id="loading-failure-points"></div>
@@ -1462,8 +1463,7 @@ parts of the input, but it must provide a mechanism for reporting such errors.</
 
 <p>Typically, most <a href="#tags">tags</a> are not explicitly specified in the character <a href="#streams">stream</a>.
 During <a href="#parsing-the-presentation-stream">parsing</a>, <a href="#nodes">nodes</a> lacking an explicit <a href="#tags">tag</a> are given a <em>non-specific
-tag</em>: <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em> for non-<a href="#plain-style">plain scalars</a> and <em>“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>“</em> for all other
-<a href="#nodes">nodes</a>.
+tag</em>: <em>”<code class="language-plaintext highlighter-rouge">!</code>“</em> for non-<a href="#plain-style">plain scalars</a> and <em>”<code class="language-plaintext highlighter-rouge">?</code>“</em> for all other <a href="#nodes">nodes</a>.
 <a href="#composing-the-representation-graph">Composing</a> a <a href="#loading-point-failures">complete representation</a> requires each such non-specific tag to
 be <em>resolved</em> to a <em>specific tag</em>, be it a <a href="#tags">global tag</a> or a <a href="#tags">local tag</a>.</p>
 
@@ -1491,17 +1491,17 @@ previously parsed <a href="#nodes">nodes</a>.
 Thus, in most cases, tag resolution in one-pass <a href="#processing-yaml-information">processors</a> is both possible
 and practical.</p>
 
-<p>YAML <a href="#processing-yaml-information">processors</a> should resolve <a href="#nodes">nodes</a> having the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific tag
-as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>” depending on their <a href="#nodes">kind</a>.
+<p>YAML <a href="#processing-yaml-information">processors</a> should resolve <a href="#nodes">nodes</a> having the “<code class="language-plaintext highlighter-rouge">!</code>” non-specific tag as
+“<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>”, “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” or
+“<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>” depending on their <a href="#nodes">kind</a>.
 This <em>tag resolution convention</em> allows the author of a YAML character <a href="#streams">stream</a>
 to effectively “disable” the tag resolution process.
-By explicitly specifying a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific <a href="#node-tags">tag property</a>, the <a href="#nodes">node</a>
-would then be resolved to a “vanilla” <a href="#sequence">sequence</a>, <a href="#mapping">mapping</a> or string,
-according to its <a href="#nodes">kind</a>.</p>
+By explicitly specifying a “<code class="language-plaintext highlighter-rouge">!</code>” non-specific <a href="#node-tags">tag property</a>, the <a href="#nodes">node</a> would
+then be resolved to a “vanilla” <a href="#sequence">sequence</a>, <a href="#mapping">mapping</a> or string, according to
+its <a href="#nodes">kind</a>.</p>
 
 <p><a href="#processing-yaml-information">Application</a> specific tag resolution rules should be restricted to resolving
-the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag, most commonly to resolving <a href="#plain-style">plain scalars</a>.
+the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag, most commonly to resolving <a href="#plain-style">plain scalars</a>.
 These may be matched against a set of regular expressions to provide automatic
 resolution of integers, floats, timestamps and similar types.
 An <a href="#processing-yaml-information">application</a> may also match the <a href="#nodes">content</a> of <a href="#mapping">mapping nodes</a> against sets
@@ -1552,15 +1552,6 @@ Each BNF production is both named and numbered for easy reference.
 Whenever possible, basic structures are specified before the more complex
 structures using them in a “bottom up” fashion.</p>
 
-<p>The order of alternatives inside a production is significant.
-Subsequent alternatives are only considered when previous ones fail.
-See for example the <a href="#b-break"><strong><code class="language-plaintext highlighter-rouge">b-break</code></strong></a> production.</p>
-
-<p>In addition, production matching is expected to be greedy.
-Optional (<strong><code class="language-plaintext highlighter-rouge">?</code></strong>), zero-or-more (<strong><code class="language-plaintext highlighter-rouge">*</code></strong>) and one-or-more (<strong><code class="language-plaintext highlighter-rouge">+</code></strong>) patterns
-are always expected to match as much of the input as possible.
-A (<strong><code class="language-plaintext highlighter-rouge">{n}</code></strong>) pattern is used to match a production exactly <code class="language-plaintext highlighter-rouge">n</code> times.</p>
-
 <p>The productions are accompanied by examples which are presented in a two-pane
 side-by-side format.
 The left-hand side is the YAML example and the right-hand side is an alternate
@@ -1568,34 +1559,113 @@ YAML view of the example.
 The right-hand view uses JSON when possible.
 Otherwise it uses a YAML form that is as close to JSON as possible.</p>
 
+<div id="production-syntax"></div>
+<h2 id="41-production-syntax">4.1. Production Syntax</h2>
+
+<p>Productions are defined using the syntax <code class="language-plaintext highlighter-rouge">production-name ::= term</code>, where a
+term is either:</p>
+
+<ul>
+  <li>An atomic term:
+    <ul>
+      <li>A quoted string (<code class="language-plaintext highlighter-rouge">"abc"</code>), which matches that concatenation of characters.</li>
+      <li>A hexadecimal number (<code class="language-plaintext highlighter-rouge">x0A</code>), which matches the character at that Unicode
+code point.</li>
+      <li>A range of hexadecimal numbers (<code class="language-plaintext highlighter-rouge">[x20-x7E]</code>), which matches any character
+whose Unicode code point is within that range.</li>
+      <li>The name of a production (<code class="language-plaintext highlighter-rouge">c-printable</code>), which matches that production.</li>
+    </ul>
+  </li>
+  <li>A lookaround:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">[lookahead = term]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would match.</li>
+      <li><code class="language-plaintext highlighter-rouge">[lookahead ≠ term]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would not
+match.</li>
+      <li><code class="language-plaintext highlighter-rouge">[lookbehind = term]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would match
+beginning at any prior point on the line and ending at the current
+position.</li>
+    </ul>
+  </li>
+  <li>A special production:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">&lt;start-of-line&gt;</code>, which matches the empty string at the beginning of a
+line.</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;end-of-input&gt;</code>, matches the empty string at the end of the input.</li>
+      <li><code class="language-plaintext highlighter-rouge">&lt;empty&gt;</code>, which (always) matches the empty string.</li>
+    </ul>
+  </li>
+  <li>A parenthesized term, which matches its contents.</li>
+  <li>A concatenation: <code class="language-plaintext highlighter-rouge">term-one term-two</code>, which matches <code class="language-plaintext highlighter-rouge">term-one</code> followed by
+<code class="language-plaintext highlighter-rouge">term-two</code>.</li>
+  <li>A alternation: <code class="language-plaintext highlighter-rouge">term-one | term-two</code>, which matches the <code class="language-plaintext highlighter-rouge">term-one</code> if
+possible, or <code class="language-plaintext highlighter-rouge">term-two</code> otherwise.</li>
+  <li>A quantified term:
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">term?</code>, which matches <code class="language-plaintext highlighter-rouge">(term | &lt;empty&gt;)</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">term*</code>, which matches <code class="language-plaintext highlighter-rouge">(term term* | &lt;empty&gt;)</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">term+</code>, which matches <code class="language-plaintext highlighter-rouge">(term term*)</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<blockquote>
+  <p>Note: Quantified terms are always greedy.</p>
+</blockquote>
+
+<p>The order of precedence is parenthesization, then quantification, then
+concatenation, then alternation.</p>
+
 <div id="production-parameters"></div>
-<h2 id="41-production-parameters">4.1. Production Parameters</h2>
+<h2 id="42-production-parameters">4.2. Production Parameters</h2>
 
-<p>YAML’s syntax is designed for maximal human readability.
-This requires <a href="#parsing-the-presentation-stream">parsing</a> to depend on the surrounding text.
-For notational compactness, this dependency is expressed using parameterized
-BNF productions.</p>
+<p>Some productions have parameters in parentheses after the name, such as
+<a href="#production-s-line-prefix"><code class="language-plaintext highlighter-rouge">s-line-prefix(n,c)</code></a>.
+A parameterized production is shorthand for a (infinite) series of productions,
+each with a fixed value for each parameter.</p>
 
-<p>This context sensitivity is the cause of most of the complexity of the YAML
-syntax definition.
-It is further complicated by struggling with the human tendency to look ahead
-when interpreting text.
-These complications are the source of most of YAML’s power to <a href="#presenting-the-serialization-tree">present</a> data in
-a very human readable way.</p>
+<p>For instance, this production:</p>
 
-<p>Productions use any of the following parameters:</p>
+<pre>
+production-a(n) ::= production-b(n)
+</pre>
+
+<p>Is shorthand for:</p>
+
+<pre>
+production-a(0) ::= production-b(0)
+production-a(1) ::= production-b(1)
+⋮
+</pre>
+
+<p>And this production:</p>
+
+<pre>
+production-a(n) ::=
+  ( production-b(n+m) production-c(n+m) )+
+</pre>
+
+<p>Is shorthand for:</p>
+
+<pre>
+production-a(0) ::=
+    ( production-b(0) production-c(0) )+
+  | ( production-b(1) production-c(1) )+
+  | …
+production-a(1) ::=
+    ( production-b(1) production-c(1) )+
+  | ( production-b(2) production-c(2) )+
+  | …
+⋮
+</pre>
+
+<p>The parameters are as follows:</p>
 
 <div id="indentation-n-or-m"></div>
 
 <dl>
   <dt>Indentation: <code class="language-plaintext highlighter-rouge">n</code> or <code class="language-plaintext highlighter-rouge">m</code></dt>
   <dd>
-    <p>Many productions use an explicit <a href="#indentation-spaces">indentation</a> level parameter.
-This is less elegant than Python’s “indent” and “undent” conceptual tokens.
-However it is required to formally express YAML’s indentation rules.</p>
-  </dd>
-  <dd>
-    <p>A value of <code class="language-plaintext highlighter-rouge">n/a</code> means “not applicable”.</p>
+    <p>May be any natural number, including zero. <code class="language-plaintext highlighter-rouge">n</code> may also be -1.</p>
   </dd>
 </dl>
 
@@ -1610,37 +1680,37 @@ YAML supports two groups of <em>contexts</em>, distinguishing between <a href="#
 and <a href="#flow-styles">flow styles</a>.</p>
   </dd>
   <dd>
-    <p>In <a href="#block-styles">block styles</a>, <a href="#indentation-spaces">indentation</a> is used to delineate structure.
-To capture human perception of <a href="#indentation-spaces">indentation</a> the rules require special
-treatment of the “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” character, used in <a href="#block-sequences">block sequences</a>.
-Hence in some cases productions need to behave differently inside <a href="#block-sequences">block
-sequences</a> (<em>BLOCK-IN Context</em>) and outside them (<em>BLOCK-OUT context</em>).</p>
-  </dd>
-  <dd>
-    <p>In <a href="#flow-styles">flow styles</a>, explicit <a href="#indicator-characters">indicators</a> are used to delineate structure.
-Since plain scalars have no delineating <a href="#indicator-characters">indicators</a>, they are subject to some
-restrictions to avoid ambiguities.
-These restrictions depend on where they appear: as implicit keys directly
-inside a <a href="#block-mappings">block mapping</a> (<em>BLOCK-KEY</em>); as implicit keys inside a <a href="#flow-mappings">flow
-mapping</a> (<em>FLOW-KEY</em>); as values inside a <a href="#flow-collection-styles">flow collection</a> (<em>FLOW-IN</em>); or as
-values outside one (<em>FLOW-OUT</em>).</p>
+    <p>May be any of the following values:</p>
   </dd>
 </dl>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">BLOCK-IN</code> – inside block context</li>
+  <li><code class="language-plaintext highlighter-rouge">BLOCK-OUT</code> – outside block context</li>
+  <li><code class="language-plaintext highlighter-rouge">BLOCK-KEY</code> – inside block key context</li>
+  <li><code class="language-plaintext highlighter-rouge">FLOW-IN</code> – inside flow context</li>
+  <li><code class="language-plaintext highlighter-rouge">FLOW-OUT</code> – outside flow context</li>
+  <li><code class="language-plaintext highlighter-rouge">FLOW-KEY</code> – inside flow key context</li>
+</ul>
 
 <div id="block-chomping-t"></div>
 
 <dl>
   <dt>(Block) Chomping: <code class="language-plaintext highlighter-rouge">t</code></dt>
   <dd>
-    <p>Block scalars offer three possible mechanisms for <a href="#block-chomping-indicator">chomping</a> any trailing
-<a href="#line-break-characters">line breaks</a>: <a href="#strip">strip</a>, <a href="#clip">clip</a> and <a href="#keep">keep</a>.
-Unlike the previous parameters, this one only controls interpretation of the
-trailing line breaks, not their syntactic validity.</p>
+    <p>The <a href="#line-break-characters">line break</a> chomping behavior for flow scalars.
+May be any of the following values:</p>
   </dd>
 </dl>
 
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">STRIP</code> – remove all trailing newlines</li>
+  <li><code class="language-plaintext highlighter-rouge">CLIP</code> – remove all trailing newlines except the first</li>
+  <li><code class="language-plaintext highlighter-rouge">KEEP</code> – retain all trailing newlines</li>
+</ul>
+
 <div id="production-naming-conventions"></div>
-<h2 id="42-production-naming-conventions">4.2. Production Naming Conventions</h2>
+<h2 id="43-production-naming-conventions">4.3. Production Naming Conventions</h2>
 
 <p>To make it easier to follow production combinations, production names use a
 prefix-style naming convention.
@@ -1650,7 +1720,7 @@ ends with.</p>
 <div id="e"></div>
 
 <dl>
-  <dt><strong><code class="language-plaintext highlighter-rouge">e-</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">e-</code></dt>
   <dd>
     <p>A production matching no characters.</p>
   </dd>
@@ -1659,7 +1729,7 @@ ends with.</p>
 <div id="c"></div>
 
 <dl>
-  <dt><strong><code class="language-plaintext highlighter-rouge">c-</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">c-</code></dt>
   <dd>
     <p>A production starting and ending with a special character.</p>
   </dd>
@@ -1668,7 +1738,7 @@ ends with.</p>
 <div id="b"></div>
 
 <dl>
-  <dt><strong><code class="language-plaintext highlighter-rouge">b-</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">b-</code></dt>
   <dd>
     <p>A production matching a single <a href="#line-break-characters">line break</a>.</p>
   </dd>
@@ -1677,7 +1747,7 @@ ends with.</p>
 <div id="nb"></div>
 
 <dl>
-  <dt><strong><code class="language-plaintext highlighter-rouge">nb-</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">nb-</code></dt>
   <dd>
     <p>A production starting and ending with a non-<a href="#line-break-characters">break</a> character.</p>
   </dd>
@@ -1686,7 +1756,7 @@ ends with.</p>
 <div id="s"></div>
 
 <dl>
-  <dt><strong><code class="language-plaintext highlighter-rouge">s-</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">s-</code></dt>
   <dd>
     <p>A production starting and ending with a <a href="#white-space-characters">white space</a> character.</p>
   </dd>
@@ -1695,7 +1765,7 @@ ends with.</p>
 <div id="ns"></div>
 
 <dl>
-  <dt><strong><code class="language-plaintext highlighter-rouge">ns-</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">ns-</code></dt>
   <dd>
     <p>A production starting and ending with a non-<a href="#white-space-characters">space</a> character.</p>
   </dd>
@@ -1704,7 +1774,7 @@ ends with.</p>
 <div id="l"></div>
 
 <dl>
-  <dt><strong><code class="language-plaintext highlighter-rouge">l-</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">l-</code></dt>
   <dd>
     <p>A production matching complete line(s).</p>
   </dd>
@@ -1713,18 +1783,17 @@ ends with.</p>
 <div id="x-y"></div>
 
 <dl>
-  <dt><code class="language-plaintext highlighter-rouge">X</code><strong><code class="language-plaintext highlighter-rouge">-</code></strong><code class="language-plaintext highlighter-rouge">Y</code><strong><code class="language-plaintext highlighter-rouge">-</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">X-Y-</code></dt>
   <dd>
-    <p>A production starting with an <code class="language-plaintext highlighter-rouge">X</code><strong><code class="language-plaintext highlighter-rouge">-</code></strong> character and ending with a
-<code class="language-plaintext highlighter-rouge">Y</code><strong><code class="language-plaintext highlighter-rouge">-</code></strong> character, where <code class="language-plaintext highlighter-rouge">X</code><strong><code class="language-plaintext highlighter-rouge">-</code></strong> and <code class="language-plaintext highlighter-rouge">Y</code><strong><code class="language-plaintext highlighter-rouge">-</code></strong> are any of the above
-prefixes.</p>
+    <p>A production starting with an <code class="language-plaintext highlighter-rouge">X-</code> character and ending with a <code class="language-plaintext highlighter-rouge">Y-</code>
+character, where <code class="language-plaintext highlighter-rouge">X-</code> and <code class="language-plaintext highlighter-rouge">Y-</code> are any of the above prefixes.</p>
   </dd>
 </dl>
 
 <div id="x-x-y"></div>
 
 <dl>
-  <dt><code class="language-plaintext highlighter-rouge">X</code><strong><code class="language-plaintext highlighter-rouge">+</code></strong>, <code class="language-plaintext highlighter-rouge">X</code><strong><code class="language-plaintext highlighter-rouge">-</code></strong><code class="language-plaintext highlighter-rouge">Y</code><strong><code class="language-plaintext highlighter-rouge">+</code></strong></dt>
+  <dt><code class="language-plaintext highlighter-rouge">X+</code>, <code class="language-plaintext highlighter-rouge">X-Y+</code></dt>
   <dd>
     <p>A production as above, with the additional property that the matched content
 <a href="#indentation-spaces">indentation</a> level is greater than the specified <code class="language-plaintext highlighter-rouge">n</code> parameter.</p>
@@ -1740,10 +1809,9 @@ prefixes.</p>
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
 The allowed character range explicitly excludes the C0 control block<sup id="fnref:c0-block" role="doc-noteref"><a href="#fn:c0-block" class="footnote" rel="footnote">14</a></sup>
-<strong><code class="language-plaintext highlighter-rouge">x00-x1F</code></strong> (except for TAB <strong><code class="language-plaintext highlighter-rouge">x09</code></strong>, LF <strong><code class="language-plaintext highlighter-rouge">x0A</code></strong> and CR <strong><code class="language-plaintext highlighter-rouge">x0D</code></strong> which
-are allowed), DEL <strong><code class="language-plaintext highlighter-rouge">x7F</code></strong>, the C1 control block <strong><code class="language-plaintext highlighter-rouge">x80-x9F</code></strong> (except for NEL
-<strong><code class="language-plaintext highlighter-rouge">x85</code></strong> which is allowed), the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">15</a></sup>
-<strong><code class="language-plaintext highlighter-rouge">xD800-xDFFF</code></strong>, <strong><code class="language-plaintext highlighter-rouge">xFFFE</code></strong> and <strong><code class="language-plaintext highlighter-rouge">xFFFF</code></strong>.</p>
+<code class="language-plaintext highlighter-rouge">x00-x1F</code> (except for TAB <code class="language-plaintext highlighter-rouge">x09</code>, LF <code class="language-plaintext highlighter-rouge">x0A</code> and CR <code class="language-plaintext highlighter-rouge">x0D</code> which are allowed), DEL
+<code class="language-plaintext highlighter-rouge">x7F</code>, the C1 control block <code class="language-plaintext highlighter-rouge">x80-x9F</code> (except for NEL <code class="language-plaintext highlighter-rouge">x85</code> which is allowed),
+the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">15</a></sup> <code class="language-plaintext highlighter-rouge">xD800-xDFFF</code>, <code class="language-plaintext highlighter-rouge">xFFFE</code> and <code class="language-plaintext highlighter-rouge">xFFFF</code>.</p>
 
 <p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
 subset.</p>
@@ -1801,8 +1869,8 @@ YAML <a href="#double-quoted-style">quoted scalars</a> can.</p>
 <p>All characters mentioned in this specification are Unicode code points.
 Each such code point is written as one or more bytes depending on the
 <em>character encoding</em> used.
-Note that in UTF-16, characters above <strong><code class="language-plaintext highlighter-rouge">xFFFF</code></strong> are written as four bytes,
-using a surrogate pair.</p>
+Note that in UTF-16, characters above <code class="language-plaintext highlighter-rouge">xFFFF</code> are written as four bytes, using
+a surrogate pair.</p>
 
 <p>The character encoding is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to
 convey <a href="#nodes">content</a> information.</p>
@@ -1814,7 +1882,7 @@ For <a href="#yaml-directives">JSON compatibility</a>, the UTF-32 encodings must
 <p>If a character <a href="#streams">stream</a> begins with a <em>byte order mark</em>, the character encoding
 will be taken to be as indicated by the byte order mark.
 Otherwise, the <a href="#streams">stream</a> must begin with an ASCII character.
-This allows the encoding to be deduced by the pattern of null (<strong><code class="language-plaintext highlighter-rouge">x00</code></strong>)
+This allows the encoding to be deduced by the pattern of null (<code class="language-plaintext highlighter-rouge">x00</code>)
 characters.</p>
 
 <p>Byte order marks may appear at the start of any <a href="#document">document</a>, however all
@@ -1934,7 +2002,7 @@ encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><
 [3] c-byte-order-mark ::= xFEFF
 </pre>
 
-<p>In the examples, byte order mark characters are displayed as “<strong><code class="language-plaintext highlighter-rouge">⇔</code></strong>”.</p>
+<p>In the examples, byte order mark characters are displayed as “<code class="language-plaintext highlighter-rouge">⇔</code>”.</p>
 
 <div id="example-byte-order-mark" class="example">
   <p><strong>Example 5.1 Byte Order Mark</strong></p>
@@ -1995,21 +2063,21 @@ ERROR:
 
 <p><em>Indicators</em> are characters that have special semantics.</p>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x2D</code></strong>, hyphen) denotes a <a href="#block-sequences">block sequence</a> entry.</p>
+<p>”<code class="language-plaintext highlighter-rouge">-</code>” (<code class="language-plaintext highlighter-rouge">x2D</code>, hyphen) denotes a <a href="#block-sequences">block sequence</a> entry.</p>
 
 <div id="rule-c-sequence-entry"></div>
 <pre class="rule">
 [4] c-sequence-entry ::= '-'
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x3F</code></strong>, question mark) denotes a <a href="#nodes">mapping key</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">?</code>” (<code class="language-plaintext highlighter-rouge">x3F</code>, question mark) denotes a <a href="#nodes">mapping key</a>.</p>
 
 <div id="rule-c-mapping-key"></div>
 <pre class="rule">
 [5] c-mapping-key ::= '?'
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x3A</code></strong>, colon) denotes a <a href="#mapping">mapping value</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">:</code>” (<code class="language-plaintext highlighter-rouge">x3A</code>, colon) denotes a <a href="#mapping">mapping value</a>.</p>
 
 <div id="rule-c-mapping-value"></div>
 <pre class="rule">
@@ -2055,35 +2123,35 @@ mapping<mark class="legend-3">:</mark>
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x2C</code></strong>, comma) ends a <a href="#flow-collection-styles">flow collection</a> entry.</p>
+<p>”<code class="language-plaintext highlighter-rouge">,</code>” (<code class="language-plaintext highlighter-rouge">x2C</code>, comma) ends a <a href="#flow-collection-styles">flow collection</a> entry.</p>
 
 <div id="rule-c-collect-entry"></div>
 <pre class="rule">
 [7] c-collect-entry ::= ','
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x5B</code></strong>, left bracket) starts a <a href="#flow-sequences">flow sequence</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">[</code>” (<code class="language-plaintext highlighter-rouge">x5B</code>, left bracket) starts a <a href="#flow-sequences">flow sequence</a>.</p>
 
 <div id="rule-c-sequence-start"></div>
 <pre class="rule">
 [8] c-sequence-start ::= '['
 </pre>
 
-<p>[“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”] (<strong><code class="language-plaintext highlighter-rouge">x5D</code></strong>, right bracket) ends a <a href="#flow-sequences">flow sequence</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">]</code>” (<code class="language-plaintext highlighter-rouge">x5D</code>, right bracket) ends a <a href="#flow-sequences">flow sequence</a>.</p>
 
 <div id="rule-c-sequence-end"></div>
 <pre class="rule">
 [9] c-sequence-end ::= ']'
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x7B</code></strong>, left brace) starts a <a href="#flow-mappings">flow mapping</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">{</code>” (<code class="language-plaintext highlighter-rouge">x7B</code>, left brace) starts a <a href="#flow-mappings">flow mapping</a>.</p>
 
 <div id="rule-c-mapping-start"></div>
 <pre class="rule">
 [10] c-mapping-start ::= '{'
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x7D</code></strong>, right brace) ends a <a href="#flow-mappings">flow mapping</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">}</code>” (<code class="language-plaintext highlighter-rouge">x7D</code>, right brace) ends a <a href="#flow-mappings">flow mapping</a>.</p>
 
 <div id="rule-c-mapping-end"></div>
 <pre class="rule">
@@ -2121,8 +2189,7 @@ mapping: <mark class="legend-2">{</mark> sky: blue<mark class="legend-3">,</mark
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x23</code></strong>, octothorpe, hash, sharp, pound, number sign) denotes a
-<a href="#comments">comment</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">#</code>” (<code class="language-plaintext highlighter-rouge">x23</code>, octothorpe, hash, sharp, pound, number sign) denotes a <a href="#comments">comment</a>.</p>
 
 <div id="rule-c-comment"></div>
 <pre class="rule">
@@ -2158,22 +2225,22 @@ mapping: <mark class="legend-2">{</mark> sky: blue<mark class="legend-3">,</mark
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x26</code></strong>, ampersand) denotes a <a href="#anchors-and-aliases">node’s anchor property</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">&amp;</code>” (<code class="language-plaintext highlighter-rouge">x26</code>, ampersand) denotes a <a href="#anchors-and-aliases">node’s anchor property</a>.</p>
 
 <div id="rule-c-anchor"></div>
 <pre class="rule">
 [13] c-anchor ::= '&amp;'
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x2A</code></strong>, asterisk) denotes an <a href="#alias-nodes">alias node</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">*</code>” (<code class="language-plaintext highlighter-rouge">x2A</code>, asterisk) denotes an <a href="#alias-nodes">alias node</a>.</p>
 
 <div id="rule-c-alias"></div>
 <pre class="rule">
 [14] c-alias ::= '*'
 </pre>
 
-<p>The “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x21</code></strong>, exclamation) is heavily overloaded for specifying
-<a href="#node-tags">node tags</a>.
+<p>The “<code class="language-plaintext highlighter-rouge">!</code>” (<code class="language-plaintext highlighter-rouge">x21</code>, exclamation) is heavily overloaded for specifying <a href="#node-tags">node
+tags</a>.
 It is used to denote <a href="#tag-handles">tag handles</a> used in <a href="#tag-directives">tag directives</a> and <a href="#node-tags">tag
 properties</a>; to denote <a href="#tags">local tags</a>; and as the <a href="#resolved-tags">non-specific tag</a> for
 non-<a href="#plain-style">plain scalars</a>.</p>
@@ -2213,14 +2280,14 @@ alias: <mark class="legend-3">*</mark>anchor
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">7C</code></strong>, vertical bar) denotes a <a href="#literal-style">literal block scalar</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">|</code>” (<code class="language-plaintext highlighter-rouge">7C</code>, vertical bar) denotes a <a href="#literal-style">literal block scalar</a>.</p>
 
 <div id="rule-c-literal"></div>
 <pre class="rule">
 [16] c-literal ::= '|'
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x3E</code></strong>, greater than) denotes a <a href="#block-folding">folded block scalar</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">&gt;</code>” (<code class="language-plaintext highlighter-rouge">x3E</code>, greater than) denotes a <a href="#block-folding">folded block scalar</a>.</p>
 
 <div id="rule-c-folded"></div>
 <pre class="rule">
@@ -2260,15 +2327,15 @@ folded: <mark class="legend-2">&gt;</mark>
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">'</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x27</code></strong>, apostrophe, single quote) surrounds a <a href="#single-quoted-style">single-quoted
-flow scalar</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">'</code>” (<code class="language-plaintext highlighter-rouge">x27</code>, apostrophe, single quote) surrounds a <a href="#single-quoted-style">single-quoted flow
+scalar</a>.</p>
 
 <div id="rule-c-single-quote"></div>
 <pre class="rule">
 [18] c-single-quote ::= "'"
 </pre>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x22</code></strong>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow scalar</a>.</p>
+<p>”<code class="language-plaintext highlighter-rouge">"</code>” (<code class="language-plaintext highlighter-rouge">x22</code>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow scalar</a>.</p>
 
 <div id="rule-c-double-quote"></div>
 <pre class="rule">
@@ -2304,7 +2371,7 @@ double: <mark class="legend-2">"</mark>text<mark class="legend-2">"</mark>
   </div>
 </div>
 
-<p>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” (<strong><code class="language-plaintext highlighter-rouge">x25</code></strong>, percent) denotes a <a href="#directives">directive</a> line.</p>
+<p>”<code class="language-plaintext highlighter-rouge">%</code>” (<code class="language-plaintext highlighter-rouge">x25</code>, percent) denotes a <a href="#directives">directive</a> line.</p>
 
 <div id="rule-c-directive"></div>
 <pre class="rule">
@@ -2338,8 +2405,8 @@ double: <mark class="legend-2">"</mark>text<mark class="legend-2">"</mark>
   </div>
 </div>
 
-<p>The <em>“<strong><code class="language-plaintext highlighter-rouge">@</code></strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">x40</code></strong>, at) and <em>“<strong><code>&grave;</code></strong>“</em> (<strong><code class="language-plaintext highlighter-rouge">x60</code></strong>,
-grave accent) are <em>reserved</em> for future use.</p>
+<p>The <em>”<code class="language-plaintext highlighter-rouge">@</code>“</em> (<code class="language-plaintext highlighter-rouge">x40</code>, at) and <em>“<code>&grave;</code>“</em> (<code class="language-plaintext highlighter-rouge">x60</code>, grave accent) are
+<em>reserved</em> for future use.</p>
 
 <div id="rule-c-reserved"></div>
 <pre class="rule">
@@ -2396,8 +2463,8 @@ ERROR:
   | <a href="#rule-c-reserved">c-reserved</a>          # '@' '`'
 </pre>
 
-<p>The “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”], “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>”
-indicators denote structure in <a href="#flow-collection-styles">flow collections</a>.
+<p>The “<code class="language-plaintext highlighter-rouge">[</code>”, “<code class="language-plaintext highlighter-rouge">]</code>”, “<code class="language-plaintext highlighter-rouge">{</code>”, “<code class="language-plaintext highlighter-rouge">}</code>” and “<code class="language-plaintext highlighter-rouge">,</code>” indicators denote structure in <a href="#flow-collection-styles">flow
+collections</a>.
 They are therefore forbidden in some cases, to avoid ambiguity in several
 constructs.
 This is handled on a case-by-case basis by the relevant productions.</p>
@@ -2434,10 +2501,10 @@ This is handled on a case-by-case basis by the relevant productions.</p>
   | <a href="#rule-b-carriage-return">b-carriage-return</a>    # X0D
 </pre>
 
-<p>All other characters, including the form feed (<strong><code class="language-plaintext highlighter-rouge">x0C</code></strong>), are considered to be
+<p>All other characters, including the form feed (<code class="language-plaintext highlighter-rouge">x0C</code>), are considered to be
 non-break characters.
-Note that these include the <em>non-ASCII line breaks</em>: next line (<strong><code class="language-plaintext highlighter-rouge">x85</code></strong>),
-line separator (<strong><code class="language-plaintext highlighter-rouge">x2028</code></strong>) and paragraph separator (<strong><code class="language-plaintext highlighter-rouge">x2029</code></strong>).</p>
+Note that these include the <em>non-ASCII line breaks</em>: next line (<code class="language-plaintext highlighter-rouge">x85</code>), line
+separator (<code class="language-plaintext highlighter-rouge">x2028</code>) and paragraph separator (<code class="language-plaintext highlighter-rouge">x2029</code>).</p>
 
 <p><a href="#yaml-directives">YAML version 1.1</a> did support the above non-ASCII line break characters;
 however, JSON does not.
@@ -2460,7 +2527,8 @@ widely used formats.</p>
 <div id="rule-b-break"></div>
 <pre class="rule">
 [28] b-break ::=
-    ( <a href="#rule-b-carriage-return">b-carriage-return</a>  # x0A
+    (
+      <a href="#rule-b-carriage-return">b-carriage-return</a>  # x0A
       <a href="#rule-b-line-feed">b-line-feed</a>
     )                    # x0D
   | <a href="#rule-b-carriage-return">b-carriage-return</a>
@@ -2491,8 +2559,8 @@ lines.</p>
 <p>On output, a YAML <a href="#processing-yaml-information">processor</a> is free to emit line breaks using whatever
 convention is most appropriate.</p>
 
-<p>In the examples, line breaks are sometimes displayed using the “<strong><code class="language-plaintext highlighter-rouge">↓</code></strong>” glyph
-for clarity.</p>
+<p>In the examples, line breaks are sometimes displayed using the “<code class="language-plaintext highlighter-rouge">↓</code>” glyph for
+clarity.</p>
 
 <div id="example-line-break-characters" class="example">
   <p><strong>Example 5.11 Line Break Characters</strong></p>
@@ -2552,8 +2620,8 @@ non-space characters.</p>
   <a href="#rule-nb-char">nb-char</a> - <a href="#rule-s-white">s-white</a>
 </pre>
 
-<p>In the examples, tab characters are displayed as the glyph “<strong><code class="language-plaintext highlighter-rouge">→</code></strong>”.
-Space characters are sometimes displayed as the glyph “<strong><code class="language-plaintext highlighter-rouge">·</code></strong>” for clarity.</p>
+<p>In the examples, tab characters are displayed as the glyph “<code class="language-plaintext highlighter-rouge">→</code>”.
+Space characters are sometimes displayed as the glyph “<code class="language-plaintext highlighter-rouge">·</code>” for clarity.</p>
 
 <div id="example-tabs-and-spaces" class="example">
   <p><strong>Example 5.12 Tabs and Spaces</strong></p>
@@ -2636,7 +2704,7 @@ classes:</p>
 
 <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8 and then each byte is <em>escaped</em> using
-the <em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>“</em> character.
+the <em>”<code class="language-plaintext highlighter-rouge">%</code>“</em> character.
 The YAML <a href="#processing-yaml-information">processor</a> must not expand such escaped characters.
 <a href="#tags">Tag</a> characters must be preserved and compared exactly as <a href="#presenting-the-serialization-tree">presented</a> in the
 YAML <a href="#streams">stream</a>, without any processing.</p>
@@ -2672,10 +2740,10 @@ YAML <a href="#streams">stream</a>, without any processing.</p>
   | ']'
 </pre>
 
-<p>The “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” character is used to indicate the end of a <a href="#tag-handles">named tag handle</a>;
-hence its use in <a href="#tag-shorthands">tag shorthands</a> is restricted.
-In addition, such <a href="#tag-shorthands">shorthands</a> must not contain the “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”],
-“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” characters.
+<p>The “<code class="language-plaintext highlighter-rouge">!</code>” character is used to indicate the end of a <a href="#tag-handles">named tag handle</a>; hence
+its use in <a href="#tag-shorthands">tag shorthands</a> is restricted.
+In addition, such <a href="#tag-shorthands">shorthands</a> must not contain the “<code class="language-plaintext highlighter-rouge">[</code>”, “<code class="language-plaintext highlighter-rouge">]</code>”, “<code class="language-plaintext highlighter-rouge">{</code>”, “<code class="language-plaintext highlighter-rouge">}</code>”
+and “<code class="language-plaintext highlighter-rouge">,</code>” characters.
 These characters would cause ambiguity with <a href="#flow-collection-styles">flow collection</a> structures.</p>
 
 <div id="rule-ns-tag-char"></div>
@@ -2690,15 +2758,15 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 <h2 id="57-escaped-characters">5.7. Escaped Characters</h2>
 
 <p>All non-<a href="#character-set">printable</a> characters must be <em>escaped</em>.
-YAML escape sequences use the <em>“<strong><code class="language-plaintext highlighter-rouge">\</code></strong>“</em> notation common to most modern
-computer languages.
+YAML escape sequences use the <em>”<code class="language-plaintext highlighter-rouge">\</code>“</em> notation common to most modern computer
+languages.
 Each escape sequence must be <a href="#parsing-the-presentation-stream">parsed</a> into the appropriate Unicode character.
 The original escape sequence is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to
 convey <a href="#nodes">content</a> information.</p>
 
 <p>Note that escape sequences are only interpreted in <a href="#double-quoted-style">double-quoted scalars</a>.
-In all other <a href="#node-styles">scalar styles</a>, the “<strong><code class="language-plaintext highlighter-rouge">\</code></strong>” character has no special meaning
-and non-<a href="#character-set">printable</a> characters are not available.</p>
+In all other <a href="#node-styles">scalar styles</a>, the “<code class="language-plaintext highlighter-rouge">\</code>” character has no special meaning and
+non-<a href="#character-set">printable</a> characters are not available.</p>
 
 <div id="rule-c-escape"></div>
 <pre class="rule">
@@ -2707,28 +2775,28 @@ and non-<a href="#character-set">printable</a> characters are not available.</p>
 
 <p>YAML escape sequences are a superset of C’s escape sequences:</p>
 
-<p>Escaped ASCII null (<strong><code class="language-plaintext highlighter-rouge">x00</code></strong>) character.</p>
+<p>Escaped ASCII null (<code class="language-plaintext highlighter-rouge">x00</code>) character.</p>
 
 <div id="rule-ns-esc-null"></div>
 <pre class="rule">
 [42] ns-esc-null ::= '0'
 </pre>
 
-<p>Escaped ASCII bell (<strong><code class="language-plaintext highlighter-rouge">x07</code></strong>) character.</p>
+<p>Escaped ASCII bell (<code class="language-plaintext highlighter-rouge">x07</code>) character.</p>
 
 <div id="rule-ns-esc-bell"></div>
 <pre class="rule">
 [43] ns-esc-bell ::= 'a'
 </pre>
 
-<p>Escaped ASCII backspace (<strong><code class="language-plaintext highlighter-rouge">x08</code></strong>) character.</p>
+<p>Escaped ASCII backspace (<code class="language-plaintext highlighter-rouge">x08</code>) character.</p>
 
 <div id="rule-ns-esc-backspace"></div>
 <pre class="rule">
 [44] ns-esc-backspace ::= 'b'
 </pre>
 
-<p>Escaped ASCII horizontal tab (<strong><code class="language-plaintext highlighter-rouge">x09</code></strong>) character.
+<p>Escaped ASCII horizontal tab (<code class="language-plaintext highlighter-rouge">x09</code>) character.
 This is useful at the start or the end of a line to force a leading or trailing
 tab to become part of the <a href="#nodes">content</a>.</p>
 
@@ -2738,42 +2806,42 @@ tab to become part of the <a href="#nodes">content</a>.</p>
   't' | x09
 </pre>
 
-<p>Escaped ASCII line feed (<strong><code class="language-plaintext highlighter-rouge">x0A</code></strong>) character.</p>
+<p>Escaped ASCII line feed (<code class="language-plaintext highlighter-rouge">x0A</code>) character.</p>
 
 <div id="rule-ns-esc-line-feed"></div>
 <pre class="rule">
 [46] ns-esc-line-feed ::= 'n'
 </pre>
 
-<p>Escaped ASCII vertical tab (<strong><code class="language-plaintext highlighter-rouge">x0B</code></strong>) character.</p>
+<p>Escaped ASCII vertical tab (<code class="language-plaintext highlighter-rouge">x0B</code>) character.</p>
 
 <div id="rule-ns-esc-vertical-tab"></div>
 <pre class="rule">
 [47] ns-esc-vertical-tab ::= 'v'
 </pre>
 
-<p>Escaped ASCII form feed (<strong><code class="language-plaintext highlighter-rouge">x0C</code></strong>) character.</p>
+<p>Escaped ASCII form feed (<code class="language-plaintext highlighter-rouge">x0C</code>) character.</p>
 
 <div id="rule-ns-esc-form-feed"></div>
 <pre class="rule">
 [48] ns-esc-form-feed ::= 'f'
 </pre>
 
-<p>Escaped ASCII carriage return (<strong><code class="language-plaintext highlighter-rouge">x0D</code></strong>) character.</p>
+<p>Escaped ASCII carriage return (<code class="language-plaintext highlighter-rouge">x0D</code>) character.</p>
 
 <div id="rule-ns-esc-carriage-return"></div>
 <pre class="rule">
 [49] ns-esc-carriage-return ::= 'r'
 </pre>
 
-<p>Escaped ASCII escape (<strong><code class="language-plaintext highlighter-rouge">x1B</code></strong>) character.</p>
+<p>Escaped ASCII escape (<code class="language-plaintext highlighter-rouge">x1B</code>) character.</p>
 
 <div id="rule-ns-esc-escape"></div>
 <pre class="rule">
 [50] ns-esc-escape ::= 'e'
 </pre>
 
-<p>Escaped ASCII space (<strong><code class="language-plaintext highlighter-rouge">x20</code></strong>) character.
+<p>Escaped ASCII space (<code class="language-plaintext highlighter-rouge">x20</code>) character.
 This is useful at the start or the end of a line to force a leading or trailing
 space to become part of the <a href="#nodes">content</a>.</p>
 
@@ -2782,49 +2850,49 @@ space to become part of the <a href="#nodes">content</a>.</p>
 [51] ns-esc-space ::= x20
 </pre>
 
-<p>Escaped ASCII double quote (<strong><code class="language-plaintext highlighter-rouge">x22</code></strong>).</p>
+<p>Escaped ASCII double quote (<code class="language-plaintext highlighter-rouge">x22</code>).</p>
 
 <div id="rule-ns-esc-double-quote"></div>
 <pre class="rule">
 [52] ns-esc-double-quote ::= '"'
 </pre>
 
-<p>Escaped ASCII slash (<strong><code class="language-plaintext highlighter-rouge">x2F</code></strong>), for <a href="#yaml-directives">JSON compatibility</a>.</p>
+<p>Escaped ASCII slash (<code class="language-plaintext highlighter-rouge">x2F</code>), for <a href="#yaml-directives">JSON compatibility</a>.</p>
 
 <div id="rule-ns-esc-slash"></div>
 <pre class="rule">
 [53] ns-esc-slash ::= '/'
 </pre>
 
-<p>Escaped ASCII back slash (<strong><code class="language-plaintext highlighter-rouge">x5C</code></strong>).</p>
+<p>Escaped ASCII back slash (<code class="language-plaintext highlighter-rouge">x5C</code>).</p>
 
 <div id="rule-ns-esc-backslash"></div>
 <pre class="rule">
 [54] ns-esc-backslash ::= '\'
 </pre>
 
-<p>Escaped Unicode next line (<strong><code class="language-plaintext highlighter-rouge">x85</code></strong>) character.</p>
+<p>Escaped Unicode next line (<code class="language-plaintext highlighter-rouge">x85</code>) character.</p>
 
 <div id="rule-ns-esc-next-line"></div>
 <pre class="rule">
 [55] ns-esc-next-line ::= 'N'
 </pre>
 
-<p>Escaped Unicode non-breaking space (<strong><code class="language-plaintext highlighter-rouge">xA0</code></strong>) character.</p>
+<p>Escaped Unicode non-breaking space (<code class="language-plaintext highlighter-rouge">xA0</code>) character.</p>
 
 <div id="rule-ns-esc-non-breaking-space"></div>
 <pre class="rule">
 [56] ns-esc-non-breaking-space ::= '_'
 </pre>
 
-<p>Escaped Unicode line separator (<strong><code class="language-plaintext highlighter-rouge">x2028</code></strong>) character.</p>
+<p>Escaped Unicode line separator (<code class="language-plaintext highlighter-rouge">x2028</code>) character.</p>
 
 <div id="rule-ns-esc-line-separator"></div>
 <pre class="rule">
 [57] ns-esc-line-separator ::= 'L'
 </pre>
 
-<p>Escaped Unicode paragraph separator (<strong><code class="language-plaintext highlighter-rouge">x2029</code></strong>) character.</p>
+<p>Escaped Unicode paragraph separator (<code class="language-plaintext highlighter-rouge">x2029</code>) character.</p>
 
 <div id="rule-ns-esc-paragraph-separator"></div>
 <pre class="rule">
@@ -2966,27 +3034,42 @@ convey <a href="#nodes">content</a> information.</p>
 
 <div id="rule-s-indent"></div>
 <pre class="rule">
-[63] s-indent(n) ::=
-  <a href="#rule-s-space{n}">s-space{n}</a>
+[63]
+s-indent(0) ::=
+  &lt;empty&gt;
+
+# When n≥0
+s-indent(n+1) ::=
+  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent">s-indent</a>(n)
 </pre>
 
 <p>A <a href="#block-styles">block style</a> construct is terminated when encountering a line which is less
 indented than the construct.
-The productions use the notation “<strong><code class="language-plaintext highlighter-rouge">s-indent(&lt;n)</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">s-indent(&lt;=n)</code></strong>”
-to express this.</p>
+The productions use the notation “<code class="language-plaintext highlighter-rouge">s-indent-less-than(n)</code>” and
+“<code class="language-plaintext highlighter-rouge">s-indent-less-or-equal(n)</code>” to express this.</p>
 
-<div id="rule-s-indent"></div>
+<div id="rule-s-indent-less-than"></div>
 <pre class="rule">
-[64] s-indent(&lt;n) ::=
-  <a href="#rule-s-space{m}">s-space{m}</a>
-  /* Where m &lt; n */
+[64]
+s-indent-less-than(1) ::=
+  &lt;empty&gt;
+
+# When n≥1
+s-indent-less-than(n+1) ::=
+  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent-less-than">s-indent-less-than</a>(n)
+  | &lt;empty&gt;
 </pre>
 
-<div id="rule-s-indent"></div>
+<div id="rule-s-indent-less-or-equal"></div>
 <pre class="rule">
-[65] s-indent(&lt;=n) ::=
-  <a href="#rule-s-space{m}">s-space{m}</a>
-  /* Where m ≤ n */
+[65]
+s-indent-less-or-equal(0) ::=
+  &lt;empty&gt;
+
+# When n≥0
+s-indent-less-or-equal(n+1) ::=
+  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent-less-or-equal">s-indent-less-or-equal</a>(n)
+  | &lt;empty&gt;
 </pre>
 
 <p>Each <a href="#nodes">node</a> must be indented further than its parent <a href="#nodes">node</a>.
@@ -3038,8 +3121,8 @@ Not indented:
   </div>
 </div>
 
-<p>The “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” characters used to denote <a href="#block-collection-styles">block
-collection</a> entries are perceived by people to be part of the indentation.
+<p>The “<code class="language-plaintext highlighter-rouge">-</code>”, “<code class="language-plaintext highlighter-rouge">?</code>” and “<code class="language-plaintext highlighter-rouge">:</code>” characters used to denote <a href="#block-collection-styles">block collection</a> entries
+are perceived by people to be part of the indentation.
 This is handled on a case-by-case basis by the relevant productions.</p>
 
 <div id="example-indentation-indicators" class="example">
@@ -3090,7 +3173,7 @@ Note that such <a href="#white-space-characters">white space</a> may safely incl
 <pre class="rule">
 [66] s-separate-in-line ::=
     <a href="#rule-s-white">s-white</a>+
-  | /* Start of line */
+  | &lt;start-of-line&gt;
 </pre>
 
 <div id="example-separation-spaces" class="example">
@@ -3136,11 +3219,10 @@ which may contain <a href="#white-space-characters">tab</a> characters.</p>
 
 <div id="rule-s-line-prefix"></div>
 <pre class="rule">
-[67] s-line-prefix(n,c) ::=
-  c == BLOCK-OUT =&gt; <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
-  c == BLOCK-IN  =&gt; <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
-  c == FLOW-OUT  =&gt; <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
-  c == FLOW-IN   =&gt; <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
+[67] s-line-prefix(n,BLOCK-OUT) ::= <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
+    <a href="#rule-s-line-prefix">s-line-prefix</a>(n,BLOCK-IN)  ::= <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
+    <a href="#rule-s-line-prefix">s-line-prefix</a>(n,FLOW-OUT)  ::= <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
+    <a href="#rule-s-line-prefix">s-line-prefix</a>(n,FLOW-IN)   ::= <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
 </pre>
 
 <div id="rule-s-block-line-prefix"></div>
@@ -3203,7 +3285,7 @@ break</a>.</p>
 [70] l-empty(n,c) ::=
   (
       <a href="#rule-s-line-prefix">s-line-prefix</a>(n,c)
-    | <a href="#rule-s-indent">s-indent</a>(&lt;n)
+    | <a href="#rule-s-indent-less-than">s-indent-less-than</a>(n)
   )
   <a href="#rule-b-as-line-feed">b-as-line-feed</a>
 </pre>
@@ -3260,7 +3342,7 @@ If a <a href="#line-break-characters">line break</a> is followed by an <a href="
 </pre>
 
 <p>Otherwise (the following line is not <a href="#empty-lines">empty</a>), the <a href="#line-break-characters">line break</a> is converted to
-a single <a href="#white-space-characters">space</a> (<strong><code class="language-plaintext highlighter-rouge">x20</code></strong>).</p>
+a single <a href="#white-space-characters">space</a> (<code class="language-plaintext highlighter-rouge">x20</code>).</p>
 
 <div id="rule-b-as-space"></div>
 <pre class="rule">
@@ -3428,7 +3510,7 @@ can be freely <a href="#example-more-indented-lines">more-indented</a> without a
 <div id="comments"></div>
 <h2 id="66-comments">6.6. Comments</h2>
 
-<p>An explicit <em>comment</em> is marked by a <em>“<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” indicator</em>.
+<p>An explicit <em>comment</em> is marked by a <em>”<code class="language-plaintext highlighter-rouge">#</code>” indicator</em>.
 Comments are a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to convey <a href="#nodes">content</a>
 information.</p>
 
@@ -3449,7 +3531,7 @@ However, as this confuses many tools, YAML <a href="#processing-yaml-information
 <pre class="rule">
 [76] b-comment ::=
     <a href="#rule-b-non-content">b-non-content</a>
-  | /* End of file */
+  | &lt;end-of-input&gt;
 </pre>
 
 <div id="rule-s-b-comment"></div>
@@ -3544,7 +3626,7 @@ The only exception is a comment ending a <a href="#block-scalar-headers">block s
 [79] s-l-comments ::=
   (
       <a href="#rule-s-b-comment">s-b-comment</a>
-    | /* Start of line */
+    | &lt;start-of-line&gt;
   )
   <a href="#rule-l-comment">l-comment</a>*
 </pre>
@@ -3593,19 +3675,19 @@ empty) <a href="#comments">comments</a>.</p>
 
 <div id="rule-s-separate"></div>
 <pre class="rule">
-[80] s-separate(n,c) ::=
-  c == BLOCK-OUT =&gt; <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
-  c == BLOCK-IN  =&gt; <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
-  c == FLOW-OUT  =&gt; <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
-  c == FLOW-IN   =&gt; <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
-  c == BLOCK-KEY =&gt; <a href="#rule-s-separate-in-line">s-separate-in-line</a>
-  c == FLOW-KEY  =&gt; <a href="#rule-s-separate-in-line">s-separate-in-line</a>
+[80] s-separate(n,BLOCK-OUT) ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
+    <a href="#rule-s-separate">s-separate</a>(n,BLOCK-IN)  ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
+    <a href="#rule-s-separate">s-separate</a>(n,FLOW-OUT)  ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
+    <a href="#rule-s-separate">s-separate</a>(n,FLOW-IN)   ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
+    <a href="#rule-s-separate">s-separate</a>(n,BLOCK-KEY) ::= <a href="#rule-s-separate-in-line">s-separate-in-line</a>
+    <a href="#rule-s-separate">s-separate</a>(n,FLOW-KEY)  ::= <a href="#rule-s-separate-in-line">s-separate-in-line</a>
 </pre>
 
 <div id="rule-s-separate-lines"></div>
 <pre class="rule">
 [81] s-separate-lines(n) ::=
-    ( <a href="#rule-s-l-comments">s-l-comments</a>
+    (
+      <a href="#rule-s-l-comments">s-l-comments</a>
       <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
     )
   | <a href="#rule-s-separate-in-line">s-separate-in-line</a>
@@ -3651,8 +3733,8 @@ empty) <a href="#comments">comments</a>.</p>
 <h2 id="68-directives">6.8. Directives</h2>
 
 <p><em>Directives</em> are instructions to the YAML <a href="#processing-yaml-information">processor</a>.
-This specification defines two directives, “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>”,
-and <em>reserves</em> all other directives for future use.
+This specification defines two directives, “<code class="language-plaintext highlighter-rouge">YAML</code>” and “<code class="language-plaintext highlighter-rouge">TAG</code>”, and <em>reserves</em>
+all other directives for future use.
 There is no way to define private directives.
 This is intentional.</p>
 
@@ -3672,7 +3754,7 @@ information.</p>
 </pre>
 
 <p>Each directive is specified on a separate non-<a href="#indentation-spaces">indented</a> line starting with the
-<em>“<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” indicator</em>, followed by the directive name and a list of parameters.
+<em>”<code class="language-plaintext highlighter-rouge">%</code>” indicator</em>, followed by the directive name and a list of parameters.
 The semantics of these parameters depends on the specific directive.
 A YAML <a href="#processing-yaml-information">processor</a> should ignore unknown directives with an appropriate
 warning.</p>
@@ -3730,24 +3812,23 @@ warning.</p>
 </div>
 
 <div id="yaml-directives"></div>
-<h3 id="681-yaml-directives">6.8.1. “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” Directives</h3>
+<h3 id="681-yaml-directives">6.8.1. “<code class="language-plaintext highlighter-rouge">YAML</code>” Directives</h3>
 
-<p>The <em>“<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” directive</em> specifies the version of YAML the <a href="#document">document</a>
-conforms to.
-This specification defines version “<strong><code class="language-plaintext highlighter-rouge">1.2</code></strong>”, including recommendations for
-<em>YAML 1.1 processing</em>.</p>
+<p>The <em>“<code class="language-plaintext highlighter-rouge">YAML</code>” directive</em> specifies the version of YAML the <a href="#document">document</a> conforms
+to.
+This specification defines version “<code class="language-plaintext highlighter-rouge">1.2</code>”, including recommendations for <em>YAML
+1.1 processing</em>.</p>
 
-<p>A version 1.2 YAML <a href="#processing-yaml-information">processor</a> must accept <a href="#documents">documents</a> with an explicit
-“<strong><code class="language-plaintext highlighter-rouge">%YAML 1.2</code></strong>” directive, as well as <a href="#documents">documents</a> lacking a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>”
-directive.
+<p>A version 1.2 YAML <a href="#processing-yaml-information">processor</a> must accept <a href="#documents">documents</a> with an explicit “<code class="language-plaintext highlighter-rouge">%YAML
+1.2</code>” directive, as well as <a href="#documents">documents</a> lacking a “<code class="language-plaintext highlighter-rouge">YAML</code>” directive.
 Such <a href="#documents">documents</a> are assumed to conform to the 1.2 version specification.
-<a href="#documents">Documents</a> with a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” directive specifying a higher minor version
-(e.g. “<strong><code class="language-plaintext highlighter-rouge">%YAML 1.3</code></strong>”) should be processed with an appropriate warning.
-<a href="#documents">Documents</a> with a “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” directive specifying a higher major version
-(e.g. “<strong><code class="language-plaintext highlighter-rouge">%YAML 2.0</code></strong>”) should be rejected with an appropriate error message.</p>
+<a href="#documents">Documents</a> with a “<code class="language-plaintext highlighter-rouge">YAML</code>” directive specifying a higher minor version (e.g.
+“<code class="language-plaintext highlighter-rouge">%YAML 1.3</code>”) should be processed with an appropriate warning.
+<a href="#documents">Documents</a> with a “<code class="language-plaintext highlighter-rouge">YAML</code>” directive specifying a higher major version (e.g.
+“<code class="language-plaintext highlighter-rouge">%YAML 2.0</code>”) should be rejected with an appropriate error message.</p>
 
 <p>A version 1.2 YAML <a href="#processing-yaml-information">processor</a> must also accept <a href="#documents">documents</a> with an explicit
-“<strong><code class="language-plaintext highlighter-rouge">%YAML 1.1</code></strong>” directive.
+“<code class="language-plaintext highlighter-rouge">%YAML 1.1</code>” directive.
 Note that version 1.2 is mostly a superset of version 1.1, defined for the
 purpose of ensuring <em>JSON compatibility</em>.
 Hence a version 1.2 <a href="#processing-yaml-information">processor</a> should process version 1.1 <a href="#documents">documents</a> as if
@@ -3771,7 +3852,7 @@ of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a h
 </pre>
 
 <div id="example-yaml-directive" class="example">
-  <p><strong>Example 6.14 “</strong><code class="language-plaintext highlighter-rouge">YAML</code><strong>” directive</strong></p>
+  <p><strong>Example 6.14 “<code class="language-plaintext highlighter-rouge">YAML</code>” directive</strong></p>
 
   <table width="100%">
 <tr>
@@ -3800,7 +3881,7 @@ of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a h
   </div>
 </div>
 
-<p>It is an error to specify more than one “<strong><code class="language-plaintext highlighter-rouge">YAML</code></strong>” directive for the same
+<p>It is an error to specify more than one “<code class="language-plaintext highlighter-rouge">YAML</code>” directive for the same
 document, even if both occurrences give the same version number.</p>
 
 <div id="example-invalid-repeated-yaml-directive" class="example">
@@ -3829,11 +3910,11 @@ given at most once per document.
 </div>
 
 <div id="tag-directives"></div>
-<h3 id="682-tag-directives">6.8.2. “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” Directives</h3>
+<h3 id="682-tag-directives">6.8.2. “<code class="language-plaintext highlighter-rouge">TAG</code>” Directives</h3>
 
-<p>The <em>“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive</em> establishes a <a href="#tag-shorthands">tag shorthand</a> notation for
-specifying <a href="#node-tags">node tags</a>.
-Each “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive associates a <a href="#tag-handles">handle</a> with a <a href="#tag-prefixes">prefix</a>.
+<p>The <em>“<code class="language-plaintext highlighter-rouge">TAG</code>” directive</em> establishes a <a href="#tag-shorthands">tag shorthand</a> notation for specifying
+<a href="#node-tags">node tags</a>.
+Each “<code class="language-plaintext highlighter-rouge">TAG</code>” directive associates a <a href="#tag-handles">handle</a> with a <a href="#tag-prefixes">prefix</a>.
 This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 
 <div id="rule-ns-tag-directive"></div>
@@ -3847,7 +3928,7 @@ This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 </pre>
 
 <div id="example-tag-directive" class="example">
-  <p><strong>Example 6.16 “</strong><code class="language-plaintext highlighter-rouge">TAG</code><strong>” directive</strong></p>
+  <p><strong>Example 6.16 “<code class="language-plaintext highlighter-rouge">TAG</code>” directive</strong></p>
 
   <table width="100%">
 <tr>
@@ -3876,8 +3957,8 @@ This allows for compact and readable <a href="#tags">tag</a> notation.</p>
   </div>
 </div>
 
-<p>It is an error to specify more than one “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive for the same
-<a href="#tag-handles">handle</a> in the same document, even if both occurrences give the same <a href="#tag-prefixes">prefix</a>.</p>
+<p>It is an error to specify more than one “<code class="language-plaintext highlighter-rouge">TAG</code>” directive for the same <a href="#tag-handles">handle</a>
+in the same document, even if both occurrences give the same <a href="#tag-prefixes">prefix</a>.</p>
 
 <div id="example-invalid-repeated-tag-directive" class="example">
   <p><strong>Example 6.17 Invalid Repeated TAG directive</strong></p>
@@ -3924,18 +4005,18 @@ There are three tag handle variants:</p>
 <dl>
   <dt>Primary Handle</dt>
   <dd>
-    <p>The <em>primary tag handle</em> is a single <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em> character.
+    <p>The <em>primary tag handle</em> is a single <em>”<code class="language-plaintext highlighter-rouge">!</code>“</em> character.
 This allows using the most compact possible notation for a single “primary”
 name space.
-By default, the prefix associated with this handle is “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”.
+By default, the prefix associated with this handle is “<code class="language-plaintext highlighter-rouge">!</code>”.
 Thus, by default, <a href="#tag-shorthands">shorthands</a> using this handle are interpreted as <a href="#tags">local
 tags</a>.</p>
   </dd>
   <dd>
     <p>It is possible to override the default behavior by providing an explicit
-“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive, associating a different prefix for this handle.
+“<code class="language-plaintext highlighter-rouge">TAG</code>” directive, associating a different prefix for this handle.
 This provides smooth migration from using <a href="#tags">local tags</a> to using <a href="#tags">global tags</a>
-by the simple addition of a single “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive.</p>
+by the simple addition of a single “<code class="language-plaintext highlighter-rouge">TAG</code>” directive.</p>
   </dd>
 </dl>
 
@@ -3983,14 +4064,13 @@ by the simple addition of a single “<strong><code class="language-plaintext hi
 <dl>
   <dt>Secondary Handle</dt>
   <dd>
-    <p>The <em>secondary tag handle</em> is written as <em>“<strong><code class="language-plaintext highlighter-rouge">!!</code></strong>“</em>.
+    <p>The <em>secondary tag handle</em> is written as <em>”<code class="language-plaintext highlighter-rouge">!!</code>“</em>.
 This allows using a compact notation for a single “secondary” name space.
-By default, the prefix associated with this handle is
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:</code></strong>”.</p>
+By default, the prefix associated with this handle is “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:</code>”.</p>
   </dd>
   <dd>
     <p>It is possible to override this default behavior by providing an explicit
-“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive associating a different prefix for this handle.</p>
+“<code class="language-plaintext highlighter-rouge">TAG</code>” directive associating a different prefix for this handle.</p>
   </dd>
 </dl>
 
@@ -4032,9 +4112,9 @@ By default, the prefix associated with this handle is
 <dl>
   <dt>Named Handles</dt>
   <dd>
-    <p>A <em>named tag handle</em> surrounds a non-empty name with <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>“</em> characters.
-A handle name must not be used in a <a href="#tag-shorthands">tag shorthand</a> unless an explicit
-“<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive has associated some prefix with it.</p>
+    <p>A <em>named tag handle</em> surrounds a non-empty name with <em>”<code class="language-plaintext highlighter-rouge">!</code>“</em> characters.
+A handle name must not be used in a <a href="#tag-shorthands">tag shorthand</a> unless an explicit “<code class="language-plaintext highlighter-rouge">TAG</code>”
+directive has associated some prefix with it.</p>
   </dd>
   <dd>
     <p>The name of the handle is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to
@@ -4096,8 +4176,8 @@ In particular, the YAML <a href="#processing-yaml-information">processor</a> nee
 <dl>
   <dt>Local Tag Prefix</dt>
   <dd>
-    <p>If the prefix begins with a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” character, <a href="#tag-shorthands">shorthands</a> using the
-<a href="#tag-handles">handle</a> are expanded to a <a href="#tags">local tag</a>.
+    <p>If the prefix begins with a “<code class="language-plaintext highlighter-rouge">!</code>” character, <a href="#tag-shorthands">shorthands</a> using the <a href="#tag-handles">handle</a>
+are expanded to a <a href="#tags">local tag</a>.
 Note that such a <a href="#tags">tag</a> is intentionally not a valid URI and its semantics are
 specific to the <a href="#processing-yaml-information">application</a>.
 In particular, two <a href="#documents">documents</a> in the same <a href="#streams">stream</a> may assign different
@@ -4151,8 +4231,8 @@ semantics to the same <a href="#tags">local tag</a>.</p>
 <dl>
   <dt>Global Tag Prefix</dt>
   <dd>
-    <p>If the prefix begins with a character other than “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”, it must be a
-valid URI prefix, and should contain at least the scheme.
+    <p>If the prefix begins with a character other than “<code class="language-plaintext highlighter-rouge">!</code>”, it must be a valid
+URI prefix, and should contain at least the scheme.
 <a href="#tag-shorthands">Shorthands</a> using the associated <a href="#tag-handles">handle</a> are expanded to globally unique URI
 tags and their semantics is consistent across <a href="#processing-yaml-information">applications</a>.
 In particular, every <a href="#document">document</a> in every <a href="#streams">stream</a> must assign the same
@@ -4259,7 +4339,7 @@ Either or both may be omitted.</p>
 
 <p>The <em>tag property</em> identifies the type of the <a href="#representing-native-data-structures">native data structure</a>
 <a href="#presenting-the-serialization-tree">presented</a> by the <a href="#nodes">node</a>.
-A tag is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” indicator</em>.</p>
+A tag is denoted by the <em>”<code class="language-plaintext highlighter-rouge">!</code>” indicator</em>.</p>
 
 <div id="rule-c-ns-tag-property"></div>
 <pre class="rule">
@@ -4274,13 +4354,13 @@ A tag is denoted by the <em>“<strong><code class="language-plaintext highlight
 <dl>
   <dt>Verbatim Tags</dt>
   <dd>
-    <p>A tag may be written <em>verbatim</em> by surrounding it with the <em>“<strong><code class="language-plaintext highlighter-rouge">&lt;</code></strong>” and
-“<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>“</em> characters.
+    <p>A tag may be written <em>verbatim</em> by surrounding it with the <em>”<code class="language-plaintext highlighter-rouge">&lt;</code>” and “<code class="language-plaintext highlighter-rouge">&gt;</code>“</em>
+characters.
 In this case, the YAML <a href="#processing-yaml-information">processor</a> must deliver the verbatim tag as-is to the
 <a href="#processing-yaml-information">application</a>.
 In particular, verbatim tags are not subject to <a href="#tag-resolution">tag resolution</a>.
-A verbatim tag must either begin with a “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” (a <a href="#tags">local tag</a>) or be a
-valid URI (a <a href="#tags">global tag</a>).</p>
+A verbatim tag must either begin with a “<code class="language-plaintext highlighter-rouge">!</code>” (a <a href="#tags">local tag</a>) or be a valid URI
+(a <a href="#tags">global tag</a>).</p>
   </dd>
 </dl>
 
@@ -4354,10 +4434,10 @@ ERROR:
     <p>A <em>tag shorthand</em> consists of a valid <a href="#tag-handles">tag handle</a> followed by a non-empty
 suffix.
 The <a href="#tag-handles">tag handle</a> must be associated with a <a href="#tag-prefixes">prefix</a>, either by default or by
-using a “<strong><code class="language-plaintext highlighter-rouge">TAG</code></strong>” directive.
+using a “<code class="language-plaintext highlighter-rouge">TAG</code>” directive.
 The resulting <a href="#parsing-the-presentation-stream">parsed</a> <a href="#tags">tag</a> is the concatenation of the <a href="#tag-prefixes">prefix</a> and the
-suffix and must either begin with “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” (a <a href="#tags">local tag</a>) or be a valid URI
-(a <a href="#tags">global tag</a>).</p>
+suffix and must either begin with “<code class="language-plaintext highlighter-rouge">!</code>” (a <a href="#tags">local tag</a>) or be a valid URI (a
+<a href="#tags">global tag</a>).</p>
   </dd>
   <dd>
     <p>The choice of <a href="#tag-handles">tag handle</a> is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to
@@ -4365,14 +4445,14 @@ convey <a href="#nodes">content</a> information.
 In particular, the <a href="#tag-handles">tag handle</a> may be discarded once <a href="#parsing-the-presentation-stream">parsing</a> is completed.</p>
   </dd>
   <dd>
-    <p>The suffix must not contain any “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” character.
+    <p>The suffix must not contain any “<code class="language-plaintext highlighter-rouge">!</code>” character.
 This would cause the tag shorthand to be interpreted as having a <a href="#tag-handles">named tag
 handle</a>.
-In addition, the suffix must not contain the “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”],
-“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” characters.
+In addition, the suffix must not contain the “<code class="language-plaintext highlighter-rouge">[</code>”, “<code class="language-plaintext highlighter-rouge">]</code>”, “<code class="language-plaintext highlighter-rouge">{</code>”, “<code class="language-plaintext highlighter-rouge">}</code>” and
+“<code class="language-plaintext highlighter-rouge">,</code>” characters.
 These characters would cause ambiguity with <a href="#flow-collection-styles">flow collection</a> structures.
 If the suffix needs to specify any of the above restricted characters, they
-must be <a href="#escaped-characters">escaped</a> using the “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” character.
+must be <a href="#escaped-characters">escaped</a> using the “<code class="language-plaintext highlighter-rouge">%</code>” character.
 This behavior is consistent with the URI character escaping rules
 (specifically, section 2.3 of URI RFC).</p>
   </dd>
@@ -4450,20 +4530,20 @@ ERROR:
   <dd>
     <p>If a <a href="#nodes">node</a> has no tag property, it is assigned a <a href="#resolved-tags">non-specific tag</a> that
 needs to be <a href="#resolved-tags">resolved</a> to a <a href="#resolved-tags">specific</a> one.
-This <a href="#resolved-tags">non-specific tag</a> is “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” for non-<a href="#plain-style">plain scalars</a> and “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>”
-for all other <a href="#nodes">nodes</a>.
+This <a href="#resolved-tags">non-specific tag</a> is “<code class="language-plaintext highlighter-rouge">!</code>” for non-<a href="#plain-style">plain scalars</a> and “<code class="language-plaintext highlighter-rouge">?</code>” for all
+other <a href="#nodes">nodes</a>.
 This is the only case where the <a href="#node-styles">node style</a> has any effect on the <a href="#nodes">content</a>
 information.</p>
   </dd>
   <dd>
-    <p>It is possible for the tag property to be explicitly set to the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>”
+    <p>It is possible for the tag property to be explicitly set to the “<code class="language-plaintext highlighter-rouge">!</code>”
 non-specific tag.
 By <a href="#resolved-tags">convention</a>, this “disables” <a href="#tag-resolution">tag resolution</a>, forcing the <a href="#nodes">node</a> to be
-interpreted as “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to its <a href="#nodes">kind</a>.</p>
+interpreted as “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>”, “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” or
+“<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>”, according to its <a href="#nodes">kind</a>.</p>
   </dd>
   <dd>
-    <p>There is no way to explicitly specify the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag.
+    <p>There is no way to explicitly specify the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag.
 This is intentional.</p>
   </dd>
 </dl>
@@ -4507,7 +4587,7 @@ This is intentional.</p>
 <div id="node-anchors"></div>
 <h3 id="692-node-anchors">6.9.2. Node Anchors</h3>
 
-<p>An anchor is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">&amp;</code></strong>” indicator</em>.
+<p>An anchor is denoted by the <em>”<code class="language-plaintext highlighter-rouge">&amp;</code>” indicator</em>.
 It marks a <a href="#nodes">node</a> for future reference.
 An <a href="#alias-nodes">alias node</a> can then be used to indicate additional inclusions of the
 anchored <a href="#nodes">node</a>.
@@ -4528,8 +4608,8 @@ to convey <a href="#nodes">content</a> information.
 In particular, the YAML <a href="#processing-yaml-information">processor</a> need not preserve the anchor name once the
 <a href="#representation-graph">representation</a> is <a href="#composing-the-representation-graph">composed</a>.</p>
 
-<p>Anchor names must not contain the “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”], “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”,
-“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” characters.
+<p>Anchor names must not contain the “<code class="language-plaintext highlighter-rouge">[</code>”, “<code class="language-plaintext highlighter-rouge">]</code>”, “<code class="language-plaintext highlighter-rouge">{</code>”, “<code class="language-plaintext highlighter-rouge">}</code>” and “<code class="language-plaintext highlighter-rouge">,</code>”
+characters.
 These characters would cause ambiguity with <a href="#flow-collection-styles">flow collection</a> structures.</p>
 
 <div id="rule-ns-anchor-char"></div>
@@ -4589,7 +4669,7 @@ reuse <a href="#constructing-native-data-structures">constructed</a> object inst
 The first occurrence of the <a href="#nodes">node</a> must be marked by an <a href="#anchors-and-aliases">anchor</a> to allow
 subsequent occurrences to be <a href="#presenting-the-serialization-tree">presented</a> as alias nodes.</p>
 
-<p>An alias node is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">*</code></strong>” indicator</em>.
+<p>An alias node is denoted by the <em>”<code class="language-plaintext highlighter-rouge">*</code>” indicator</em>.
 The alias refers to the most recent preceding <a href="#nodes">node</a> having the same <a href="#anchors-and-aliases">anchor</a>.
 It is an error for an alias node to use an <a href="#anchors-and-aliases">anchor</a> that does not previously
 occur in the <a href="#document">document</a>.
@@ -4644,15 +4724,15 @@ Reuse anchor: <mark class="legend-1">*<mark class="legend-2">anchor</mark></mark
 <p>YAML allows the <a href="#nodes">node content</a> to be omitted in many cases.
 <a href="#nodes">Nodes</a> with empty <a href="#nodes">content</a> are interpreted as if they were <a href="#plain-style">plain scalars</a>
 with an empty value.
-Such <a href="#nodes">nodes</a> are commonly resolved to a “<strong><code class="language-plaintext highlighter-rouge">null</code></strong>” value.</p>
+Such <a href="#nodes">nodes</a> are commonly resolved to a “<code class="language-plaintext highlighter-rouge">null</code>” value.</p>
 
 <div id="rule-e-scalar"></div>
 <pre class="rule">
 [105] e-scalar ::= ""
 </pre>
 
-<p>In the examples, empty <a href="#scalars">scalars</a> are sometimes displayed as the glyph “<strong><code class="language-plaintext highlighter-rouge">°</code></strong>”
-for clarity.
+<p>In the examples, empty <a href="#scalars">scalars</a> are sometimes displayed as the glyph “<code class="language-plaintext highlighter-rouge">°</code>” for
+clarity.
 Note that this glyph corresponds to a position in the characters <a href="#streams">stream</a>
 rather than to an actual character.</p>
 
@@ -4741,11 +4821,10 @@ distinguished for the purpose of <a href="#tag-resolution">tag resolution</a>.</
 <div id="double-quoted-style"></div>
 <h3 id="731-double-quoted-style">7.3.1. Double-Quoted Style</h3>
 
-<p>The <em>double-quoted style</em> is specified by surrounding <em>“<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” indicators</em>.
+<p>The <em>double-quoted style</em> is specified by surrounding <em>”<code class="language-plaintext highlighter-rouge">"</code>” indicators</em>.
 This is the only <a href="#node-styles">style</a> capable of expressing arbitrary strings, by using
-“<strong><code class="language-plaintext highlighter-rouge">\</code></strong>” <a href="#escaped-characters">escape sequences</a>.
-This comes at the cost of having to escape the “<strong><code class="language-plaintext highlighter-rouge">\</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">"</code></strong>”
-characters.</p>
+“<code class="language-plaintext highlighter-rouge">\</code>” <a href="#escaped-characters">escape sequences</a>.
+This comes at the cost of having to escape the “<code class="language-plaintext highlighter-rouge">\</code>” and “<code class="language-plaintext highlighter-rouge">"</code>” characters.</p>
 
 <div id="rule-nb-double-char"></div>
 <pre class="rule">
@@ -4777,11 +4856,10 @@ characters.</p>
 
 <div id="rule-nb-double-text"></div>
 <pre class="rule">
-[110] nb-double-text(n,c) ::=
-  c == FLOW-OUT  =&gt; <a href="#rule-nb-double-multi-line">nb-double-multi-line</a>(n)
-  c == FLOW-IN   =&gt; <a href="#rule-nb-double-multi-line">nb-double-multi-line</a>(n)
-  c == BLOCK-KEY =&gt; <a href="#rule-nb-double-one-line">nb-double-one-line</a>
-  c == FLOW-KEY  =&gt; <a href="#rule-nb-double-one-line">nb-double-one-line</a>
+[110] nb-double-text(n,FLOW-OUT)  ::= <a href="#rule-nb-double-multi-line">nb-double-multi-line</a>(n)
+    <a href="#rule-nb-double-text">nb-double-text</a>(n,FLOW-IN)   ::= <a href="#rule-nb-double-multi-line">nb-double-multi-line</a>(n)
+    <a href="#rule-nb-double-text">nb-double-text</a>(n,BLOCK-KEY) ::= <a href="#rule-nb-double-one-line">nb-double-one-line</a>
+    <a href="#rule-nb-double-text">nb-double-text</a>(n,FLOW-KEY)  ::= <a href="#rule-nb-double-one-line">nb-double-one-line</a>
 </pre>
 
 <div id="rule-nb-double-one-line"></div>
@@ -4947,10 +5025,10 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <div id="single-quoted-style"></div>
 <h3 id="732-single-quoted-style">7.3.2. Single-Quoted Style</h3>
 
-<p>The <em>single-quoted style</em> is specified by surrounding <em>“<strong><code class="language-plaintext highlighter-rouge">'</code></strong>” indicators</em>.
+<p>The <em>single-quoted style</em> is specified by surrounding <em>”<code class="language-plaintext highlighter-rouge">'</code>” indicators</em>.
 Therefore, within a single-quoted scalar, such characters need to be repeated.
 This is the only form of <em>escaping</em> performed in single-quoted scalars.
-In particular, the “<strong><code class="language-plaintext highlighter-rouge">\</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">"</code></strong>” characters may be freely used.
+In particular, the “<code class="language-plaintext highlighter-rouge">\</code>” and “<code class="language-plaintext highlighter-rouge">"</code>” characters may be freely used.
 This restricts single-quoted scalars to <a href="#character-set">printable</a> characters.
 In addition, it is only possible to break a long single-quoted line where a
 <a href="#white-space-characters">space</a> character is surrounded by non-<a href="#white-space-characters">spaces</a>.</p>
@@ -5015,11 +5093,10 @@ In addition, it is only possible to break a long single-quoted line where a
 
 <div id="rule-nb-single-text"></div>
 <pre class="rule">
-[121] nb-single-text(n,c) ::=
-  c == FLOW-OUT  =&gt; <a href="#rule-nb-single-multi-line">nb-single-multi-line</a>(n)
-  c == FLOW-IN   =&gt; <a href="#rule-nb-single-multi-line">nb-single-multi-line</a>(n)
-  c == BLOCK-KEY =&gt; <a href="#rule-nb-single-one-line">nb-single-one-line</a>
-  c == FLOW-KEY  =&gt; <a href="#rule-nb-single-one-line">nb-single-one-line</a>
+[121] nb-single-text(FLOW-OUT)  ::= <a href="#rule-nb-single-multi-line">nb-single-multi-line</a>(n)
+    <a href="#rule-nb-single-text">nb-single-text</a>(FLOW-IN)   ::= <a href="#rule-nb-single-multi-line">nb-single-multi-line</a>(n)
+    <a href="#rule-nb-single-text">nb-single-text</a>(BLOCK-KEY) ::= <a href="#rule-nb-single-one-line">nb-single-one-line</a>
+    <a href="#rule-nb-single-text">nb-single-text</a>(FLOW-KEY)  ::= <a href="#rule-nb-single-one-line">nb-single-one-line</a>
 </pre>
 
 <div id="rule-nb-single-one-line"></div>
@@ -5141,9 +5218,9 @@ surrounded by non-<a href="#white-space-characters">spaces</a>.</p>
 
 <p>Plain scalars must not begin with most <a href="#indicator-characters">indicators</a>, as this would cause
 ambiguity with other YAML constructs.
-However, the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” <a href="#indicator-characters">indicators</a> may be used
-as the first character if followed by a non-<a href="#white-space-characters">space</a> “safe” character, as this
-causes no ambiguity.</p>
+However, the “<code class="language-plaintext highlighter-rouge">:</code>”, “<code class="language-plaintext highlighter-rouge">?</code>” and “<code class="language-plaintext highlighter-rouge">-</code>” <a href="#indicator-characters">indicators</a> may be used as the first
+character if followed by a non-<a href="#white-space-characters">space</a> “safe” character, as this causes no
+ambiguity.</p>
 
 <div id="rule-ns-plain-first"></div>
 <pre class="rule">
@@ -5158,26 +5235,23 @@ causes no ambiguity.</p>
         | <a href="#rule-c-mapping-value">c-mapping-value</a>     #':'
         | <a href="#rule-c-sequence-entry">c-sequence-entry</a>    #'-'
       )
-      /* Followed by an <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) */
+      [lookahead = <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c)]
     )
 </pre>
 
-<p>Plain scalars must never contain the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong> “ and “ <strong><code class="language-plaintext highlighter-rouge">#</code></strong>” character
-combinations.
+<p>Plain scalars must never contain the “<code class="language-plaintext highlighter-rouge">:</code> “ and “ <code class="language-plaintext highlighter-rouge">#</code>” character combinations.
 Such combinations would cause ambiguity with <a href="#mapping">mapping</a> <a href="#mapping">key/value pairs</a> and
 <a href="#comments">comments</a>.
 In addition, inside <a href="#flow-collection-styles">flow collections</a>, or when used as <a href="#example-single-pair-explicit-entry">implicit keys</a>, plain
-scalars must not contain the “<strong><code class="language-plaintext highlighter-rouge">[</code></strong>”, [“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>”], “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>”, “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”
-and “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” characters.
+scalars must not contain the “<code class="language-plaintext highlighter-rouge">[</code>”, “<code class="language-plaintext highlighter-rouge">]</code>”, “<code class="language-plaintext highlighter-rouge">{</code>”, “<code class="language-plaintext highlighter-rouge">}</code>” and “<code class="language-plaintext highlighter-rouge">,</code>” characters.
 These characters would cause ambiguity with <a href="#flow-collection-styles">flow collection</a> structures.</p>
 
 <div id="rule-ns-plain-safe"></div>
 <pre class="rule">
-[127] ns-plain-safe(c) ::=
-  c == FLOW-OUT  =&gt; <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
-  c == FLOW-IN   =&gt; <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
-  c == BLOCK-KEY =&gt; <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
-  c == FLOW-KEY  =&gt; <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
+[127] ns-plain-safe(FLOW-OUT)  ::= <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
+    <a href="#rule-ns-plain-safe">ns-plain-safe</a>(FLOW-IN)   ::= <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
+    <a href="#rule-ns-plain-safe">ns-plain-safe</a>(BLOCK-KEY) ::= <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
+    <a href="#rule-ns-plain-safe">ns-plain-safe</a>(FLOW-KEY)  ::= <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
 </pre>
 
 <div id="rule-ns-plain-safe-out"></div>
@@ -5201,12 +5275,12 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
       - <a href="#rule-c-comment">c-comment</a>          # '#'
     )
   | (
-      /* An <a href="#rule-ns-char">ns-char</a> preceding */
+      [lookbehind = <a href="#rule-ns-char]">ns-char]</a>
       <a href="#rule-c-comment">c-comment</a>          # '#'
     )
   | (
       <a href="#rule-c-mapping-value">c-mapping-value</a>    # ':'
-      /* Followed by an <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) */
+      [lookahead = <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c)]
     )
 </pre>
 
@@ -5264,11 +5338,10 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 
 <div id="rule-ns-plain"></div>
 <pre class="rule">
-[131] ns-plain(n,c) ::=
-  c == FLOW-OUT  =&gt; <a href="#rule-ns-plain-multi-line">ns-plain-multi-line</a>(n,c)
-  c == FLOW-IN   =&gt; <a href="#rule-ns-plain-multi-line">ns-plain-multi-line</a>(n,c)
-  c == BLOCK-KEY =&gt; <a href="#rule-ns-plain-one-line">ns-plain-one-line</a>(c)
-  c == FLOW-KEY  =&gt; <a href="#rule-ns-plain-one-line">ns-plain-one-line</a>(c)
+[131] ns-plain(n,FLOW-OUT)  ::= <a href="#rule-ns-plain-multi-line">ns-plain-multi-line</a>(n,FLOW-OUT)
+    <a href="#rule-ns-plain">ns-plain</a>(n,FLOW-IN)   ::= <a href="#rule-ns-plain-multi-line">ns-plain-multi-line</a>(n,FLOW-IN)
+    <a href="#rule-ns-plain">ns-plain</a>(n,BLOCK-KEY) ::= <a href="#rule-ns-plain-one-line">ns-plain-one-line</a>(BLOCK-KEY)
+    <a href="#rule-ns-plain">ns-plain</a>(n,FLOW-KEY)  ::= <a href="#rule-ns-plain-one-line">ns-plain-one-line</a>(FLOW-KEY)
 </pre>
 
 <div id="rule-nb-ns-plain-in-line"></div>
@@ -5370,28 +5443,26 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 <div id="flow-collection-styles"></div>
 <h2 id="74-flow-collection-styles">7.4. Flow Collection Styles</h2>
 
-<p>A <em>flow collection</em> may be nested within a <a href="#block-collection-styles">block collection</a> (<strong><code class="language-plaintext highlighter-rouge">FLOW-OUT</code></strong>
-context), nested within another flow collection (<strong><code class="language-plaintext highlighter-rouge">FLOW-IN</code></strong> context) or
-be a part of an <a href="#example-single-pair-explicit-entry">implicit key</a> (<strong><code class="language-plaintext highlighter-rouge">FLOW-KEY</code></strong> context or <strong><code class="language-plaintext highlighter-rouge">BLOCK-KEY</code></strong>
-context).
-Flow collection entries are terminated by the <em>“<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” indicator</em>.
-The final “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” may be omitted.
+<p>A <em>flow collection</em> may be nested within a <a href="#block-collection-styles">block collection</a> ([<code class="language-plaintext highlighter-rouge">FLOW-OUT</code>
+context]), nested within another flow collection ([<code class="language-plaintext highlighter-rouge">FLOW-IN</code> context]) or be a
+part of an <a href="#example-single-pair-explicit-entry">implicit key</a> ([<code class="language-plaintext highlighter-rouge">FLOW-KEY</code> context] or [<code class="language-plaintext highlighter-rouge">BLOCK-KEY</code> context]).
+Flow collection entries are terminated by the <em>”<code class="language-plaintext highlighter-rouge">,</code>” indicator</em>.
+The final “<code class="language-plaintext highlighter-rouge">,</code>” may be omitted.
 This does not cause ambiguity because flow collection entries can never be
 <a href="#example-empty-content">completely empty</a>.</p>
 
 <div id="rule-in-flow"></div>
 <pre class="rule">
-[136] in-flow(c) ::=
-  c == FLOW-OUT  =&gt; FLOW-IN
-  c == FLOW-IN   =&gt; FLOW-IN
-  c == BLOCK-KEY =&gt; FLOW-KEY
-  c == FLOW-KEY  =&gt; FLOW-KEY
+[136] in-flow(n,FLOW-OUT)  ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-IN)
+    <a href="#rule-in-flow">in-flow</a>(n,FLOW-IN)   ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-IN)
+    <a href="#rule-in-flow">in-flow</a>(n,BLOCK-KEY) ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-KEY)
+    <a href="#rule-in-flow">in-flow</a>(n,FLOW-KEY)  ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-KEY)
 </pre>
 
 <div id="flow-sequences"></div>
 <h3 id="741-flow-sequences">7.4.1. Flow Sequences</h3>
 
-<p><em>Flow sequence content</em> is denoted by surrounding <em>“<strong><code class="language-plaintext highlighter-rouge">[</code></strong>“</em> and <em>“<strong><code class="language-plaintext highlighter-rouge">]</code></strong>“</em>
+<p><em>Flow sequence content</em> is denoted by surrounding <em>”<code class="language-plaintext highlighter-rouge">[</code>“</em> and <em>”<code class="language-plaintext highlighter-rouge">]</code>“</em>
 characters.</p>
 
 <div id="rule-c-flow-sequence"></div>
@@ -5399,11 +5470,11 @@ characters.</p>
 [137] c-flow-sequence(n,c) ::=
   <a href="#rule-c-sequence-start">c-sequence-start</a>    # '['
   <a href="#rule-s-separate">s-separate</a>(n,c)?
-  <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,in-flow(c))?
+  <a href="#rule-in-flow">in-flow</a>(n,c)?
   <a href="#rule-c-sequence-end">c-sequence-end</a>      # ']'
 </pre>
 
-<p>Sequence entries are separated by a “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” character.</p>
+<p>Sequence entries are separated by a “<code class="language-plaintext highlighter-rouge">,</code>” character.</p>
 
 <div id="rule-ns-s-flow-seq-entries"></div>
 <pre class="rule">
@@ -5499,8 +5570,7 @@ sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">sin
 <div id="flow-mappings"></div>
 <h3 id="742-flow-mappings">7.4.2. Flow Mappings</h3>
 
-<p><em>Flow mappings</em> are denoted by surrounding <em>“<strong><code class="language-plaintext highlighter-rouge">{</code></strong>“</em> and <em>“<strong><code class="language-plaintext highlighter-rouge">}</code></strong>“</em>
-characters.</p>
+<p><em>Flow mappings</em> are denoted by surrounding <em>”<code class="language-plaintext highlighter-rouge">{</code>“</em> and <em>”<code class="language-plaintext highlighter-rouge">}</code>“</em> characters.</p>
 
 <div id="rule-c-flow-mapping"></div>
 <pre class="rule">
@@ -5511,7 +5581,7 @@ characters.</p>
   <a href="#rule-c-mapping-end">c-mapping-end</a>         # '}'
 </pre>
 
-<p>Mapping entries are separated by a “<strong><code class="language-plaintext highlighter-rouge">,</code></strong>” character.</p>
+<p>Mapping entries are separated by a “<code class="language-plaintext highlighter-rouge">,</code>” character.</p>
 
 <div id="rule-ns-s-flow-map-entries"></div>
 <pre class="rule">
@@ -5556,7 +5626,7 @@ characters.</p>
   </div>
 </div>
 
-<p>If the optional <em>“<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” mapping key indicator</em> is specified, the rest of the
+<p>If the optional <em>”<code class="language-plaintext highlighter-rouge">?</code>” mapping key indicator</em> is specified, the rest of the
 entry may be <a href="#example-empty-content">completely empty</a>.</p>
 
 <div id="rule-ns-flow-map-entry"></div>
@@ -5614,16 +5684,16 @@ entry may be <a href="#example-empty-content">completely empty</a>.</p>
   </div>
 </div>
 
-<p>Normally, YAML insists the <em>“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” mapping value indicator</em> be <a href="#separation-spaces">separated</a>
-from the <a href="#nodes">value</a> by <a href="#white-space-characters">white space</a>.
-A benefit of this restriction is that the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” character can be used
-inside <a href="#plain-style">plain scalars</a>, as long as it is not followed by <a href="#white-space-characters">white space</a>.
+<p>Normally, YAML insists the <em>”<code class="language-plaintext highlighter-rouge">:</code>” mapping value indicator</em> be <a href="#separation-spaces">separated</a> from
+the <a href="#nodes">value</a> by <a href="#white-space-characters">white space</a>.
+A benefit of this restriction is that the “<code class="language-plaintext highlighter-rouge">:</code>” character can be used inside
+<a href="#plain-style">plain scalars</a>, as long as it is not followed by <a href="#white-space-characters">white space</a>.
 This allows for unquoted URLs and timestamps.
-It is also a potential source for confusion as “<strong><code class="language-plaintext highlighter-rouge">a:1</code></strong>” is a <a href="#plain-style">plain scalar</a>
-and not a <a href="#mapping">key/value pair</a>.</p>
+It is also a potential source for confusion as “<code class="language-plaintext highlighter-rouge">a:1</code>” is a <a href="#plain-style">plain scalar</a> and
+not a <a href="#mapping">key/value pair</a>.</p>
 
 <p>Note that the <a href="#nodes">value</a> may be <a href="#example-empty-content">completely empty</a> since its existence is
-indicated by the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”.</p>
+indicated by the “<code class="language-plaintext highlighter-rouge">:</code>”.</p>
 
 <div id="rule-ns-flow-map-implicit-entry"></div>
 <pre class="rule">
@@ -5657,7 +5727,7 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 <pre class="rule">
 [147] c-ns-flow-map-separate-value(n,c) ::=
   <a href="#rule-c-mapping-value">c-mapping-value</a>    # ':'
-  /* Not followed by an <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) */
+  [lookahead ≠ <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c)]
   (
       (
         <a href="#rule-s-separate">s-separate</a>(n,c)
@@ -5705,11 +5775,11 @@ indicated by the “<strong><code class="language-plaintext highlighter-rouge">:
 
 <p>To ensure <a href="#yaml-directives">JSON compatibility</a>, if a <a href="#nodes">key</a> inside a flow mapping is
 <a href="#flow-nodes">JSON-like</a>, YAML allows the following <a href="#nodes">value</a> to be specified adjacent to the
-“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”.
+“<code class="language-plaintext highlighter-rouge">:</code>”.
 This causes no ambiguity, as all <a href="#flow-nodes">JSON-like</a> <a href="#nodes">keys</a> are surrounded by
 <a href="#indicator-characters">indicators</a>.
 However, as this greatly reduces readability, YAML <a href="#processing-yaml-information">processors</a> should
-<a href="#separation-spaces">separate</a> the <a href="#nodes">value</a> from the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” on output, even in this case.</p>
+<a href="#separation-spaces">separate</a> the <a href="#nodes">value</a> from the “<code class="language-plaintext highlighter-rouge">:</code>” on output, even in this case.</p>
 
 <div id="rule-c-ns-flow-map-json-key-entry"></div>
 <pre class="rule">
@@ -5773,8 +5843,7 @@ However, as this greatly reduces readability, YAML <a href="#processing-yaml-inf
 
 <p>A more compact notation is usable inside <a href="#flow-sequences">flow sequences</a>, if the <a href="#mapping">mapping</a>
 contains a <em>single key/value pair</em>.
-This notation does not require the surrounding “<strong><code class="language-plaintext highlighter-rouge">{</code></strong>” and “<strong><code class="language-plaintext highlighter-rouge">}</code></strong>”
-characters.
+This notation does not require the surrounding “<code class="language-plaintext highlighter-rouge">{</code>” and “<code class="language-plaintext highlighter-rouge">}</code>” characters.
 Note that it is not possible to specify any <a href="#node-properties">node properties</a> for the <a href="#mapping">mapping</a>
 in this case.</p>
 
@@ -5806,8 +5875,8 @@ in this case.</p>
   </div>
 </div>
 
-<p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is explicitly specified, <a href="#parsing-the-presentation-stream">parsing</a> is unambiguous
-and the syntax is identical to the general case.</p>
+<p>If the “<code class="language-plaintext highlighter-rouge">?</code>” indicator is explicitly specified, <a href="#parsing-the-presentation-stream">parsing</a> is unambiguous and
+the syntax is identical to the general case.</p>
 
 <div id="rule-ns-flow-pair"></div>
 <pre class="rule">
@@ -5849,10 +5918,10 @@ and the syntax is identical to the general case.</p>
   </div>
 </div>
 
-<p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is omitted, <a href="#parsing-the-presentation-stream">parsing</a> needs to see past the
-<em>implicit key</em> to recognize it as such.
-To limit the amount of lookahead required, the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” indicator must appear
-at most 1024 Unicode characters beyond the start of the <a href="#nodes">key</a>.
+<p>If the “<code class="language-plaintext highlighter-rouge">?</code>” indicator is omitted, <a href="#parsing-the-presentation-stream">parsing</a> needs to see past the <em>implicit
+key</em> to recognize it as such.
+To limit the amount of lookahead required, the “<code class="language-plaintext highlighter-rouge">:</code>” indicator must appear at
+most 1024 Unicode characters beyond the start of the <a href="#nodes">key</a>.
 In addition, the <a href="#nodes">key</a> is restricted to a single line.</p>
 
 <p>Note that YAML allows arbitrary <a href="#nodes">nodes</a> to be used as <a href="#nodes">keys</a>.
@@ -5885,7 +5954,7 @@ been impossible to implement.</p>
 <div id="rule-ns-s-implicit-yaml-key"></div>
 <pre class="rule">
 [154] ns-s-implicit-yaml-key(c) ::=
-  <a href="#rule-ns-flow-yaml-node">ns-flow-yaml-node</a>(n/a,c)
+  <a href="#rule-ns-flow-yaml-node">ns-flow-yaml-node</a>(0,c)
   <a href="#rule-s-separate-in-line">s-separate-in-line</a>?
   /* At most 1024 characters altogether */
 </pre>
@@ -5893,7 +5962,7 @@ been impossible to implement.</p>
 <div id="rule-c-s-implicit-json-key"></div>
 <pre class="rule">
 [155] c-s-implicit-json-key(c) ::=
-  <a href="#rule-c-flow-json-node">c-flow-json-node</a>(n/a,c)
+  <a href="#rule-c-flow-json-node">c-flow-json-node</a>(0,c)
   <a href="#rule-s-separate-in-line">s-separate-in-line</a>?
   /* At most 1024 characters altogether */
 </pre>
@@ -6127,21 +6196,20 @@ This is the only case where a <a href="#comments">comment</a> must not be follow
 <a href="#comments">comment</a> lines.</p>
 
 <blockquote>
-  <p>Note: See <a href="#production-parameters">Production Parameters</a> for definitions of the <code class="language-plaintext highlighter-rouge">m</code> and <code class="language-plaintext highlighter-rouge">t</code>
-variables.</p>
+  <p>Note: See <a href="#production-parameters">Production Parameters</a> for the definition of the <code class="language-plaintext highlighter-rouge">t</code> variable.</p>
 </blockquote>
 
 <div id="rule-c-b-block-header"></div>
 <pre class="rule">
-[162] c-b-block-header(m,t) ::=
+[162] c-b-block-header(t) ::=
   (
       (
-        <a href="#rule-c-indentation-indicator">c-indentation-indicator</a>(m)
+        <a href="#rule-c-indentation-indicator">c-indentation-indicator</a>
         <a href="#rule-c-chomping-indicator">c-chomping-indicator</a>(t)
       )
     | (
         <a href="#rule-c-chomping-indicator">c-chomping-indicator</a>(t)
-        <a href="#rule-c-indentation-indicator">c-indentation-indicator</a>(m)
+        <a href="#rule-c-indentation-indicator">c-indentation-indicator</a>
       )
   )
   <a href="#rule-s-b-comment">s-b-comment</a>
@@ -6179,7 +6247,7 @@ variables.</p>
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-c-b-block-header">c-b-block-header(m,t)</a></code></li>
+      <li><code class="legend-1"><a href="#rule-c-b-block-header">c-b-block-header(t)</a></code></li>
     </ul>
   </div>
 </div>
@@ -6187,29 +6255,31 @@ variables.</p>
 <div id="block-indentation-indicator"></div>
 <h4 id="8111-block-indentation-indicator">8.1.1.1. Block Indentation Indicator</h4>
 
-<p>Typically, the <a href="#indentation-spaces">indentation</a> level of a <a href="#block-scalar-styles">block scalar</a> is detected from its
-first non-<a href="#empty-lines">empty</a> line.
-It is an error for any of the leading <a href="#empty-lines">empty lines</a> to contain more <a href="#white-space-characters">spaces</a>
+<p>Every block scalar has a <em>content indentation level</em>.
+The content of the block scalar excludes a number of leading <a href="#white-space-characters">spaces</a> on each
+line equal to the content indentation level.</p>
+
+<p>If a block scalar has an <em>indentation indicator</em>, then the content indentation
+level of the block scalar is equal to the indentation level of the block scalar
+plus the value of the indentation indicator.</p>
+
+<p>If no indentation indicator is given, then the content indentation level is
+equal to the number of leading <a href="#white-space-characters">spaces</a> on the first non-<a href="#empty-lines">empty line</a> of the
+contents.</p>
+
+<p>A block scalar may have an <em>indentation indicator</em>, which is a single decimal
+digit indicating the indentation level of the content.</p>
+
+<p>It is an error for any of the leading <a href="#empty-lines">empty lines</a> to contain more <a href="#white-space-characters">spaces</a>
 than the first non-<a href="#empty-lines">empty line</a>.</p>
 
-<p>Detection fails when the first non-<a href="#empty-lines">empty line</a> contains leading content
-<a href="#white-space-characters">space</a> characters.
-<a href="#nodes">Content</a> may safely start with a <a href="#white-space-characters">tab</a> or a “<strong><code class="language-plaintext highlighter-rouge">#</code></strong>” character.</p>
-
-<p>When detection would fail, YAML requires that the <a href="#indentation-spaces">indentation</a> level for the
-<a href="#nodes">content</a> be given using an explicit <em>indentation indicator</em>.
-This level is specified as the integer number of the additional <a href="#indentation-spaces">indentation</a>
-spaces used for the <a href="#nodes">content</a>, relative to its parent <a href="#nodes">node</a>.</p>
-
-<p>It is always valid to specify an indentation indicator for a <a href="#block-scalar-styles">block scalar</a>
-node, though a YAML <a href="#processing-yaml-information">processor</a> should only emit an explicit indentation
-indicator for cases where detection will fail.</p>
+<p>A YAML <a href="#processing-yaml-information">processor</a> should only emit an explicit indentation indicator for cases
+where detection will fail.</p>
 
 <div id="rule-c-indentation-indicator"></div>
 <pre class="rule">
-[163] c-indentation-indicator(m) ::=
-  <a href="#rule-ns-dec-digit">ns-dec-digit</a> =&gt; m = <a href="#rule-ns-dec-digit">ns-dec-digit</a> - x30
-  ""           =&gt; m = auto-detect()
+[163] c-indentation-indicator ::=
+  <a href="#rule-ns-dec-digit">ns-dec-digit</a>
 </pre>
 
 <div id="example-block-indentation-indicator" class="example">
@@ -6246,7 +6316,7 @@ indicator for cases where detection will fail.</p>
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-c-indentation-indicator">c-indentation-indicator(m)</a></code></li>
+      <li><code class="legend-1"><a href="#rule-c-indentation-indicator">c-indentation-indicator</a></code></li>
       <li><code class="legend-2"><a href="#rule-s-indent">s-indent(n)</a></code></li>
     </ul>
   </div>
@@ -6298,7 +6368,7 @@ YAML provides three chomping methods:</p>
 <dl>
   <dt>Strip</dt>
   <dd>
-    <p><em>Stripping</em> is specified by the <em>“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” chomping indicator</em>.
+    <p><em>Stripping</em> is specified by the <em>”<code class="language-plaintext highlighter-rouge">-</code>” chomping indicator</em>.
 In this case, the final <a href="#line-break-characters">line break</a> and any trailing <a href="#empty-lines">empty lines</a> are
 excluded from the <a href="#scalar">scalar’s content</a>.</p>
   </dd>
@@ -6322,7 +6392,7 @@ However, any trailing <a href="#empty-lines">empty lines</a> are excluded from t
 <dl>
   <dt>Keep</dt>
   <dd>
-    <p><em>Keeping</em> is specified by the <em>“<strong><code class="language-plaintext highlighter-rouge">+</code></strong>” chomping indicator</em>.
+    <p><em>Keeping</em> is specified by the <em>”<code class="language-plaintext highlighter-rouge">+</code>” chomping indicator</em>.
 In this case, the final <a href="#line-break-characters">line break</a> and any trailing <a href="#empty-lines">empty lines</a> are
 considered to be part of the <a href="#scalar">scalar’s content</a>.
 These additional lines are not subject to <a href="#line-folding">folding</a>.</p>
@@ -6334,10 +6404,9 @@ convey <a href="#nodes">content</a> information.</p>
 
 <div id="rule-c-chomping-indicator"></div>
 <pre class="rule">
-[164] c-chomping-indicator(t) ::=
-  '-' =&gt; t = STRIP
-  '+' =&gt; t = KEEP
-  ""  =&gt; t = CLIP
+[164] c-chomping-indicator(STRIP) ::= '-'
+    <a href="#rule-c-chomping-indicator">c-chomping-indicator</a>(KEEP)  ::= '+'
+    <a href="#rule-c-chomping-indicator">c-chomping-indicator</a>(CLIP)  ::= ""
 </pre>
 
 <p>The interpretation of the final <a href="#line-break-characters">line break</a> of a <a href="#block-scalar-styles">block scalar</a> is controlled
@@ -6346,9 +6415,9 @@ by the chomping indicator specified in the <a href="#block-scalar-headers">block
 <div id="rule-b-chomped-last"></div>
 <pre class="rule">
 [165] b-chomped-last(t) ::=
-  t == STRIP =&gt; <a href="#rule-b-non-content">b-non-content</a>  | /* End of file */
-  t == CLIP  =&gt; <a href="#rule-b-as-line-feed">b-as-line-feed</a> | /* End of file */
-  t == KEEP  =&gt; <a href="#rule-b-as-line-feed">b-as-line-feed</a> | /* End of file */
+    <a href="#rule-b-chomped-last">b-chomped-last</a>(STRIP) ::= <a href="#rule-b-non-content">b-non-content</a>  | &lt;end-of-input&gt;
+    <a href="#rule-b-chomped-last">b-chomped-last</a>(CLIP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end-of-input&gt;
+    <a href="#rule-b-chomped-last">b-chomped-last</a>(KEEP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end-of-input&gt;
 </pre>
 
 <div id="example-chomping-final-line-break" class="example">
@@ -6391,17 +6460,16 @@ header</a>.</p>
 
 <div id="rule-l-chomped-empty"></div>
 <pre class="rule">
-[166] l-chomped-empty(n,t) ::=
-  t == STRIP =&gt; <a href="#rule-l-strip-empty">l-strip-empty</a>(n)
-  t == CLIP  =&gt; <a href="#rule-l-strip-empty">l-strip-empty</a>(n)
-  t == KEEP  =&gt; <a href="#rule-l-keep-empty">l-keep-empty</a>(n)
+[166] l-chomped-empty(n,STRIP) ::= <a href="#rule-l-strip-empty">l-strip-empty</a>(n)
+    <a href="#rule-l-chomped-empty">l-chomped-empty</a>(n,CLIP)  ::= <a href="#rule-l-strip-empty">l-strip-empty</a>(n)
+    <a href="#rule-l-chomped-empty">l-chomped-empty</a>(n,KEEP)  ::= <a href="#rule-l-keep-empty">l-keep-empty</a>(n)
 </pre>
 
 <div id="rule-l-strip-empty"></div>
 <pre class="rule">
 [167] l-strip-empty(n) ::=
   (
-    <a href="#rule-s-indent">s-indent</a>(&lt;=n)
+    <a href="#rule-s-indent-less-or-equal">s-indent-less-or-equal</a>(n)
     <a href="#rule-b-non-content">b-non-content</a>
   )*
   <a href="#rule-l-trail-comments">l-trail-comments</a>(n)?
@@ -6424,7 +6492,7 @@ constrained.</p>
 <div id="rule-l-trail-comments"></div>
 <pre class="rule">
 [169] l-trail-comments(n) ::=
-  <a href="#rule-s-indent">s-indent</a>(&lt;n)
+  <a href="#rule-s-indent-less-than">s-indent-less-than</a>(n)
   <a href="#rule-c-nb-comment-text">c-nb-comment-text</a>
   <a href="#rule-b-comment">b-comment</a>
   <a href="#rule-l-comment">l-comment</a>*
@@ -6518,14 +6586,14 @@ keep: |+
 <div id="literal-style"></div>
 <h3 id="812-literal-style">8.1.2. Literal Style</h3>
 
-<p>The <em>literal style</em> is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">|</code></strong>” indicator</em>.
+<p>The <em>literal style</em> is denoted by the <em>”<code class="language-plaintext highlighter-rouge">|</code>” indicator</em>.
 It is the simplest, most restricted and most readable <a href="#node-styles">scalar style</a>.</p>
 
 <div id="rule-c-l+literal"></div>
 <pre class="rule">
 [170] c-l+literal(n) ::=
   <a href="#rule-c-literal">c-literal</a>                # '|'
-  <a href="#rule-c-b-block-header">c-b-block-header</a>(m,t)
+  <a href="#rule-c-b-block-header">c-b-block-header</a>(t)
   <a href="#rule-l-literal-content">l-literal-content</a>(n+m,t)
 </pre>
 
@@ -6633,7 +6701,7 @@ In addition, there is no way to break a long literal line.</p>
 <div id="folded-style"></div>
 <h3 id="813-folded-style">8.1.3. Folded Style</h3>
 
-<p>The <em>folded style</em> is denoted by the <em>“<strong><code class="language-plaintext highlighter-rouge">&gt;</code></strong>” indicator</em>.
+<p>The <em>folded style</em> is denoted by the <em>”<code class="language-plaintext highlighter-rouge">&gt;</code>” indicator</em>.
 It is similar to the <a href="#literal-style">literal style</a>; however, folded scalars are subject to
 <a href="#line-folding">line folding</a>.</p>
 
@@ -6641,7 +6709,7 @@ It is similar to the <a href="#literal-style">literal style</a>; however, folded
 <pre class="rule">
 [174] c-l+folded(n) ::=
   <a href="#rule-c-folded">c-folded</a>                 # '&gt;'
-  <a href="#rule-c-b-block-header">c-b-block-header</a>(m,t)
+  <a href="#rule-c-b-block-header">c-b-block-header</a>(t)
   <a href="#rule-l-folded-content">l-folded-content</a>(n+m,t)
 </pre>
 
@@ -6950,26 +7018,25 @@ entry</a> is seen.</p>
 <h3 id="821-block-sequences">8.2.1. Block Sequences</h3>
 
 <p>A <em>block sequence</em> is simply a series of <a href="#nodes">nodes</a>, each denoted by a leading
-<em>“<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator</em>.
-The “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator must be <a href="#separation-spaces">separated</a> from the <a href="#nodes">node</a> by <a href="#white-space-characters">white space</a>.
-This allows “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” to be used as the first character in a <a href="#plain-style">plain scalar</a> if
-followed by a non-space character (e.g. “<strong><code class="language-plaintext highlighter-rouge">-1</code></strong>”).</p>
+<em>”<code class="language-plaintext highlighter-rouge">-</code>” indicator</em>.
+The “<code class="language-plaintext highlighter-rouge">-</code>” indicator must be <a href="#separation-spaces">separated</a> from the <a href="#nodes">node</a> by <a href="#white-space-characters">white space</a>.
+This allows “<code class="language-plaintext highlighter-rouge">-</code>” to be used as the first character in a <a href="#plain-style">plain scalar</a> if
+followed by a non-space character (e.g. “<code class="language-plaintext highlighter-rouge">-42</code>”).</p>
 
 <div id="rule-l+block-sequence"></div>
 <pre class="rule">
 [183] l+block-sequence(n) ::=
   (
-    <a href="#rule-s-indent">s-indent</a>(n+m)
-    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(n+m)
+    <a href="#rule-s-indent">s-indent</a>(n+1+m)
+    <a href="#rule-c-l-block-seq-entry">c-l-block-seq-entry</a>(n+1+m)
   )+
-  /* For some fixed auto-detected m &gt; 0 */
 </pre>
 
 <div id="rule-c-l-block-seq-entry"></div>
 <pre class="rule">
 [184] c-l-block-seq-entry(n) ::=
   <a href="#rule-c-sequence-entry">c-sequence-entry</a>    # '-'
-  /* Not followed by an <a href="#rule-ns-char">ns-char</a> */
+  [lookahead ≠ <a href="#rule-ns-char]">ns-char]</a>
   <a href="#rule-s-l">s-l</a>+block-indented(n,BLOCK-IN)
 </pre>
 
@@ -7008,7 +7075,7 @@ block sequence:
 use a <em>compact in-line notation</em>.
 The compact notation may be used when the entry is itself a nested <a href="#block-collection-styles">block
 collection</a>.
-In this case, both the “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator and the following <a href="#white-space-characters">spaces</a> are
+In this case, both the “<code class="language-plaintext highlighter-rouge">-</code>” indicator and the following <a href="#white-space-characters">spaces</a> are
 considered to be part of the <a href="#indentation-spaces">indentation</a> of the nested <a href="#collections">collection</a>.
 Note that it is not possible to specify <a href="#node-properties">node properties</a> for such a
 <a href="#collections">collection</a>.</p>
@@ -7086,10 +7153,9 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 <pre class="rule">
 [187] l+block-mapping(n) ::=
   (
-    <a href="#rule-s-indent">s-indent</a>(n+m)
-    <a href="#rule-ns-l-block-map-entry">ns-l-block-map-entry</a>(n+m)
+    <a href="#rule-s-indent">s-indent</a>(n+1+m)
+    <a href="#rule-ns-l-block-map-entry">ns-l-block-map-entry</a>(n+1+m)
   )+
-  /* For some fixed auto-detected m &gt; 0 */
 </pre>
 
 <div id="example-block-mappings" class="example">
@@ -7121,8 +7187,8 @@ block mapping:
   </div>
 </div>
 
-<p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is specified, the optional value node must be
-specified on a separate line, denoted by the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” indicator.
+<p>If the “<code class="language-plaintext highlighter-rouge">?</code>” indicator is specified, the optional value node must be specified
+on a separate line, denoted by the “<code class="language-plaintext highlighter-rouge">:</code>” indicator.
 Note that YAML allows here the same <a href="#example-block-sequence">compact in-line notation</a> described above
 for <a href="#block-sequences">block sequence</a> entries.</p>
 
@@ -7195,7 +7261,7 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 
 <!-- REVIEW value should be null above -->
 
-<p>If the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” indicator is omitted, <a href="#parsing-the-presentation-stream">parsing</a> needs to see past the
+<p>If the “<code class="language-plaintext highlighter-rouge">?</code>” indicator is omitted, <a href="#parsing-the-presentation-stream">parsing</a> needs to see past the
 <a href="#example-single-pair-explicit-entry">implicit key</a>, in the same way as in the <a href="#mapping">single key/value pair</a> <a href="#flow-mappings">flow
 mapping</a>.
 Hence, such <a href="#nodes">keys</a> are subject to the same restrictions; they are limited to a
@@ -7221,12 +7287,12 @@ single line and must not span more than 1024 Unicode characters.</p>
 <p>In this case, the <a href="#nodes">value</a> may be specified on the same line as the <a href="#example-single-pair-explicit-entry">implicit
 key</a>.
 Note however that in block mappings the <a href="#nodes">value</a> must never be adjacent to the
-“<strong><code class="language-plaintext highlighter-rouge">:</code></strong>”, as this greatly reduces readability and is not required for <a href="#yaml-directives">JSON
+“<code class="language-plaintext highlighter-rouge">:</code>”, as this greatly reduces readability and is not required for <a href="#yaml-directives">JSON
 compatibility</a> (unlike the case in <a href="#flow-mappings">flow mappings</a>).</p>
 
 <p>There is no compact notation for in-line <a href="#nodes">values</a>.
 Also, while both the <a href="#example-single-pair-explicit-entry">implicit key</a> and the <a href="#nodes">value</a> following it may be empty,
-the “<strong><code class="language-plaintext highlighter-rouge">:</code></strong>” indicator is mandatory.
+the “<code class="language-plaintext highlighter-rouge">:</code>” indicator is mandatory.
 This prevents a potential ambiguity with multi-line <a href="#plain-style">plain scalars</a>.</p>
 
 <div id="rule-c-l-block-map-implicit-value"></div>
@@ -7440,10 +7506,10 @@ folded:<mark class="legend-2">↓</mark>
   </div>
 </div>
 
-<p>Since people perceive the “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” indicator as <a href="#indentation-spaces">indentation</a>, nested <a href="#block-sequences">block
+<p>Since people perceive the “<code class="language-plaintext highlighter-rouge">-</code>” indicator as <a href="#indentation-spaces">indentation</a>, nested <a href="#block-sequences">block
 sequences</a> may be <a href="#indentation-spaces">indented</a> by one less <a href="#white-space-characters">space</a> to compensate, except, of
-course, if nested inside another <a href="#block-sequences">block sequence</a> (<strong><code class="language-plaintext highlighter-rouge">BLOCK-OUT</code></strong> context
-versus <strong><code class="language-plaintext highlighter-rouge">BLOCK-IN</code></strong> context).</p>
+course, if nested inside another <a href="#block-sequences">block sequence</a> ([<code class="language-plaintext highlighter-rouge">BLOCK-OUT</code> context] versus
+[<code class="language-plaintext highlighter-rouge">BLOCK-IN</code> context]).</p>
 
 <div id="rule-s-l+block-collection"></div>
 <pre class="rule">
@@ -7454,16 +7520,15 @@ versus <strong><code class="language-plaintext highlighter-rouge">BLOCK-IN</code
   )?
   <a href="#rule-s-l-comments">s-l-comments</a>
   (
-      <a href="#rule-l+block-sequence">l+block-sequence</a>(seq-spaces(n,c))
+      seq-space(n,c)
     | <a href="#rule-l+block-mapping">l+block-mapping</a>(n)
   )
 </pre>
 
-<div id="rule-seq-spaces"></div>
+<div id="rule-seq-space"></div>
 <pre class="rule">
-[201] seq-spaces(n,c) ::=
-  c == BLOCK-OUT =&gt; n-1
-  c == BLOCK-IN  =&gt; n
+[201] seq-space(n,BLOCK-OUT) ::= <a href="#rule-l+block-sequence">l+block-sequence</a>(n-1)
+    seq-space(n,BLOCK-IN)  ::= <a href="#rule-l+block-sequence">l+block-sequence</a>(n)
 </pre>
 
 <div id="example-block-collection-nodes" class="example">
@@ -7562,19 +7627,19 @@ Document
 <h3 id="912-document-markers">9.1.2. Document Markers</h3>
 
 <p>Using <a href="#directives">directives</a> creates a potential ambiguity.
-It is valid to have a “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” character at the start of a line (e.g. as the
-first character of the second line of a <a href="#plain-style">plain scalar</a>).
+It is valid to have a “<code class="language-plaintext highlighter-rouge">%</code>” character at the start of a line (e.g. as the first
+character of the second line of a <a href="#plain-style">plain scalar</a>).
 How, then, to distinguish between an actual <a href="#directives">directive</a> and a <a href="#nodes">content</a> line
-that happens to start with a “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” character?</p>
+that happens to start with a “<code class="language-plaintext highlighter-rouge">%</code>” character?</p>
 
 <p>The solution is the use of two special <em>marker</em> lines to control the processing
 of <a href="#directives">directives</a>, one at the start of a <a href="#document">document</a> and one at the end.</p>
 
-<p>At the start of a <a href="#document">document</a>, lines beginning with a “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” character are
+<p>At the start of a <a href="#document">document</a>, lines beginning with a “<code class="language-plaintext highlighter-rouge">%</code>” character are
 assumed to be <a href="#directives">directives</a>.
 The (possibly empty) list of <a href="#directives">directives</a> is terminated by a <em>directives end
 marker</em> line.
-Lines following this marker can safely use “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” as the first character.</p>
+Lines following this marker can safely use “<code class="language-plaintext highlighter-rouge">%</code>” as the first character.</p>
 
 <p>At the end of a <a href="#document">document</a>, a <em>document end marker</em> line is used to signal the
 <a href="#parsing-the-presentation-stream">parser</a> to begin scanning for <a href="#directives">directives</a> again.</p>
@@ -7605,7 +7670,7 @@ either of these markers.</p>
 <div id="rule-c-forbidden"></div>
 <pre class="rule">
 [206] c-forbidden ::=
-  /* Start of line */
+  &lt;start-of-line&gt;
   (
       <a href="#rule-c-directives-end">c-directives-end</a>
     | <a href="#rule-c-document-end">c-document-end</a>
@@ -7613,7 +7678,7 @@ either of these markers.</p>
   (
       <a href="#rule-b-char">b-char</a>
     | <a href="#rule-s-white">s-white</a>
-    | /* End of file */
+    | &lt;end-of-input&gt;
   )
 </pre>
 
@@ -7654,7 +7719,7 @@ Document
 <p>A <em>bare document</em> does not begin with any <a href="#directives">directives</a> or <a href="#document-markers">marker</a> lines.
 Such documents are very “clean” as they contain nothing other than the
 <a href="#nodes">content</a>.
-In this case, the first non-comment line may not start with a “<strong><code class="language-plaintext highlighter-rouge">%</code></strong>” first
+In this case, the first non-comment line may not start with a “<code class="language-plaintext highlighter-rouge">%</code>” first
 character.</p>
 
 <p>Document <a href="#nodes">nodes</a> are <a href="#indentation-spaces">indented</a> as if they have a parent <a href="#indentation-spaces">indented</a> at -1
@@ -7833,10 +7898,9 @@ following <a href="#document">document</a> must begin with a <a href="#document-
         <a href="#rule-l-document-prefix">l-document-prefix</a>*
         <a href="#rule-l-any-document">l-any-document</a>?
       )
-    | (
-        <a href="#rule-l-document-prefix">l-document-prefix</a>*
-        <a href="#rule-l-explicit-document">l-explicit-document</a>?
-      )
+    | <a href="#rule-c-byte-order-mark">c-byte-order-mark</a>
+    | <a href="#rule-l-comment">l-comment</a>
+    | <a href="#rule-l-explicit-document">l-explicit-document</a>
   )*
 </pre>
 
@@ -7879,7 +7943,7 @@ following <a href="#document">document</a> must begin with a <a href="#document-
 </div>
 
 <p>A sequence of bytes is a <em>well-formed stream</em> if, taken as a whole, it complies
-with the above <strong><code class="language-plaintext highlighter-rouge">l-yaml-stream</code></strong> production.</p>
+with the above <code class="language-plaintext highlighter-rouge">l-yaml-stream</code> production.</p>
 
 <p>Some common use case that can take advantage of the YAML stream structure are:</p>
 
@@ -7949,7 +8013,7 @@ option.</p>
 <dl>
   <dt>URI</dt>
   <dd>
-    <p><strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong></p>
+    <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></p>
   </dd>
 </dl>
 
@@ -7998,7 +8062,7 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 <dl>
   <dt>URI</dt>
   <dd>
-    <p><strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong></p>
+    <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></p>
   </dd>
 </dl>
 
@@ -8044,7 +8108,7 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 <dl>
   <dt>URI</dt>
   <dd>
-    <p><strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong></p>
+    <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></p>
   </dd>
 </dl>
 
@@ -8092,12 +8156,11 @@ Flow style: !!str "String: just a theory."
 <div id="tag-resolution"></div>
 <h3 id="1012-tag-resolution">10.1.2. Tag Resolution</h3>
 
-<p>All <a href="#nodes">nodes</a> with the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the
-standard <a href="#resolved-tags">convention</a>, to “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”,
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
-their <a href="#nodes">kind</a>.</p>
+<p>All <a href="#nodes">nodes</a> with the “<code class="language-plaintext highlighter-rouge">!</code>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the standard
+<a href="#resolved-tags">convention</a>, to “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>”, “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” or
+“<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>”, according to their <a href="#nodes">kind</a>.</p>
 
-<p>All <a href="#nodes">nodes</a> with the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag are left <a href="#resolved-tags">unresolved</a>.
+<p>All <a href="#nodes">nodes</a> with the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag are left <a href="#resolved-tags">unresolved</a>.
 This constrains the <a href="#processing-yaml-information">application</a> to deal with a <a href="#loading-point-failures">partial representation</a>.</p>
 
 <div id="json-schema"></div>
@@ -8123,7 +8186,7 @@ It is also strongly recommended that other <a href="#recommended-schemas">schema
 <dl>
   <dt>URI</dt>
   <dd>
-    <p><strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:null</code></strong></p>
+    <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:null</code></p>
   </dd>
 </dl>
 
@@ -8142,8 +8205,8 @@ It is also strongly recommended that other <a href="#recommended-schemas">schema
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> the lack of a value.
-This is typically <a href="#representing-native-data-structures">bound</a> to a <a href="#representing-native-data-structures">native</a> null-like value (e.g., <strong><code class="language-plaintext highlighter-rouge">undef</code></strong> in
-Perl, <strong><code class="language-plaintext highlighter-rouge">None</code></strong> in Python).
+This is typically <a href="#representing-native-data-structures">bound</a> to a <a href="#representing-native-data-structures">native</a> null-like value (e.g., <code class="language-plaintext highlighter-rouge">undef</code> in Perl,
+<code class="language-plaintext highlighter-rouge">None</code> in Python).
 Note that a null is different from an empty string.
 Also, a <a href="#mapping">mapping</a> entry with some <a href="#nodes">key</a> and a null <a href="#nodes">value</a> is valid and
 different from not having that <a href="#nodes">key</a> in the <a href="#mapping">mapping</a>.</p>
@@ -8155,7 +8218,7 @@ different from not having that <a href="#nodes">key</a> in the <a href="#mapping
 <dl>
   <dt>Canonical Form</dt>
   <dd>
-    <p><strong><code class="language-plaintext highlighter-rouge">null</code></strong>.</p>
+    <p><code class="language-plaintext highlighter-rouge">null</code>.</p>
   </dd>
 </dl>
 
@@ -8177,7 +8240,7 @@ key with null value: !!null null
 <dl>
   <dt>URI</dt>
   <dd>
-    <p><strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:bool</code></strong></p>
+    <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:bool</code></p>
   </dd>
 </dl>
 
@@ -8206,7 +8269,7 @@ In languages without a <a href="#representing-native-data-structures">native</a>
 <dl>
   <dt>Canonical Form</dt>
   <dd>
-    <p>Either <strong><code class="language-plaintext highlighter-rouge">true</code></strong> or <strong><code class="language-plaintext highlighter-rouge">false</code></strong>.</p>
+    <p>Either <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>.</p>
   </dd>
 </dl>
 
@@ -8228,7 +8291,7 @@ Pluto is a planet: !!bool false
 <dl>
   <dt>URI</dt>
   <dd>
-    <p><strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></strong></p>
+    <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></p>
   </dd>
 </dl>
 
@@ -8271,8 +8334,8 @@ round-trip through most systems.</p>
 <dl>
   <dt>Canonical Form</dt>
   <dd>
-    <p>Decimal integer notation, with a leading “<strong><code class="language-plaintext highlighter-rouge">-</code></strong>” character for negative
-values, matching the regular expression <strong><code class="language-plaintext highlighter-rouge">0 | -? [1-9] [0-9]*</code></strong></p>
+    <p>Decimal integer notation, with a leading “<code class="language-plaintext highlighter-rouge">-</code>” character for negative values,
+matching the regular expression <code class="language-plaintext highlighter-rouge">0 | -? [1-9] [0-9]*</code></p>
   </dd>
 </dl>
 
@@ -8295,7 +8358,7 @@ positive: !!int 34
 <dl>
   <dt>URI</dt>
   <dd>
-    <p><strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:float</code></strong></p>
+    <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:float</code></p>
   </dd>
 </dl>
 
@@ -8338,9 +8401,9 @@ Since YAML does not specify a particular accuracy, using floating-point
 <dl>
   <dt>Canonical Form</dt>
   <dd>
-    <p>Either <strong><code class="language-plaintext highlighter-rouge">0</code></strong>, <strong><code class="language-plaintext highlighter-rouge">.inf</code></strong>, <strong><code class="language-plaintext highlighter-rouge">-.inf</code></strong>, <strong><code class="language-plaintext highlighter-rouge">.nan</code></strong> or scientific notation
-matching the regular expression<br />
-<strong><code class="language-plaintext highlighter-rouge">-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?</code></strong>.</p>
+    <p>Either <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">.inf</code>, <code class="language-plaintext highlighter-rouge">-.inf</code>, <code class="language-plaintext highlighter-rouge">.nan</code> or scientific notation matching the
+regular expression<br />
+<code class="language-plaintext highlighter-rouge">-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?</code>.</p>
   </dd>
 </dl>
 
@@ -8363,18 +8426,17 @@ not a number: !!float .nan
 <p>The <a href="#json-schema">JSON schema</a> <a href="#tag-resolution">tag resolution</a> is an extension of the <a href="#failsafe-schema">failsafe schema</a>
 <a href="#tag-resolution">tag resolution</a>.</p>
 
-<p>All <a href="#nodes">nodes</a> with the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the
-standard <a href="#resolved-tags">convention</a>, to “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”,
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
-their <a href="#nodes">kind</a>.</p>
+<p>All <a href="#nodes">nodes</a> with the “<code class="language-plaintext highlighter-rouge">!</code>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the standard
+<a href="#resolved-tags">convention</a>, to “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>”, “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” or
+“<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>”, according to their <a href="#nodes">kind</a>.</p>
 
-<p><a href="#collections">Collections</a> with the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag (that is, <a href="#resolved-tags">untagged</a>
-<a href="#collections">collections</a>) are <a href="#resolved-tags">resolved</a> to “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>” or
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” according to their <a href="#nodes">kind</a>.</p>
+<p><a href="#collections">Collections</a> with the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag (that is, <a href="#resolved-tags">untagged</a>
+<a href="#collections">collections</a>) are <a href="#resolved-tags">resolved</a> to “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>” or
+“<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” according to their <a href="#nodes">kind</a>.</p>
 
-<p><a href="#scalars">Scalars</a> with the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag (that is, <a href="#plain-style">plain scalars</a>) are
-matched with a list of regular expressions (first match wins, e.g. <strong><code class="language-plaintext highlighter-rouge">0</code></strong> is
-resolved as <strong><code class="language-plaintext highlighter-rouge">!!int</code></strong>).
+<p><a href="#scalars">Scalars</a> with the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag (that is, <a href="#plain-style">plain scalars</a>) are
+matched with a list of regular expressions (first match wins, e.g. <code class="language-plaintext highlighter-rouge">0</code> is
+resolved as <code class="language-plaintext highlighter-rouge">!!int</code>).
 In principle, JSON files should not contain any <a href="#scalars">scalars</a> that do not match at
 least one of these.
 Hence the YAML <a href="#processing-yaml-information">processor</a> should consider them to be an error.</p>
@@ -8467,20 +8529,18 @@ It is also strongly recommended that other <a href="#recommended-schemas">schema
 <p>The <a href="#core-schema">core schema</a> <a href="#tag-resolution">tag resolution</a> is an extension of the <a href="#json-schema">JSON schema</a> <a href="#tag-resolution">tag
 resolution</a>.</p>
 
-<p>All <a href="#nodes">nodes</a> with the “<strong><code class="language-plaintext highlighter-rouge">!</code></strong>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the
-standard <a href="#resolved-tags">convention</a>, to “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>”,
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” or “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong>”, according to
-their <a href="#nodes">kind</a>.</p>
+<p>All <a href="#nodes">nodes</a> with the “<code class="language-plaintext highlighter-rouge">!</code>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the standard
+<a href="#resolved-tags">convention</a>, to “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>”, “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” or
+“<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>”, according to their <a href="#nodes">kind</a>.</p>
 
-<p><a href="#collections">Collections</a> with the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag (that is, <a href="#resolved-tags">untagged</a>
-<a href="#collections">collections</a>) are <a href="#resolved-tags">resolved</a> to “<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></strong>” or
-“<strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></strong>” according to their <a href="#nodes">kind</a>.</p>
+<p><a href="#collections">Collections</a> with the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag (that is, <a href="#resolved-tags">untagged</a>
+<a href="#collections">collections</a>) are <a href="#resolved-tags">resolved</a> to “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>” or
+“<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” according to their <a href="#nodes">kind</a>.</p>
 
-<p><a href="#scalars">Scalars</a> with the “<strong><code class="language-plaintext highlighter-rouge">?</code></strong>” non-specific tag (that is, <a href="#plain-style">plain scalars</a>) are
+<p><a href="#scalars">Scalars</a> with the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag (that is, <a href="#plain-style">plain scalars</a>) are
 matched with an extended list of regular expressions.
 However, in this case, if none of the regular expressions matches, the <a href="#scalar">scalar</a>
-is <a href="#resolved-tags">resolved</a> to <strong><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></strong> (that is, considered to be a
-string).</p>
+is <a href="#resolved-tags">resolved</a> to <code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code> (that is, considered to be a string).</p>
 
 <table>
   <thead>
@@ -8576,7 +8636,7 @@ Also floats: [
 <a href="#tags">tags</a>.
 Hence YAML <a href="#processing-yaml-information">processors</a> for a particular programming language typically provide
 some form of <a href="#tags">local tags</a> that map directly to the language’s <a href="#representing-native-data-structures">native data
-structures</a> (e.g., <strong><code class="language-plaintext highlighter-rouge">!ruby/object:Set</code></strong>).</p>
+structures</a> (e.g., <code class="language-plaintext highlighter-rouge">!ruby/object:Set</code>).</p>
 
 <p>While such <a href="#tags">local tags</a> are useful for ad hoc <a href="#processing-yaml-information">applications</a>, they do not
 suffice for stable, interoperable cross-<a href="#processing-yaml-information">application</a> or cross-platform data
