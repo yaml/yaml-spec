@@ -4881,18 +4881,20 @@ This is the only case where a [comment] must not be followed by additional
 
 Every block scalar has a _content indentation level_.
 The content of the block scalar excludes a number of leading [spaces] on each
-line equal to the content indentation level.
+line that is less than or equal to the content indentation level.
 
 If a block scalar has an _indentation indicator_, then the content indentation
 level of the block scalar is equal to the indentation level of the block scalar
-plus the value of the indentation indicator.
+plus the integer value of the indentation indicator character.
 
 If no indentation indicator is given, then the content indentation level is
 equal to the number of leading [spaces] on the first non-[empty line] of the
 contents.
+If there is no non-[empty line] then the content indentation level is equal to
+the number of spaces on the longest line.
 
-It is an error if any line containing block scalar content does not begin with
-a number of spaces equal to at least the content indentation level.
+It is an error if any non-[empty line] does not begin with a number of spaces
+greater than or equal to the content indentation level.
 
 It is an error for any of the leading [empty lines] to contain more [spaces]
 than the first non-[empty line].
