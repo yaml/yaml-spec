@@ -4891,8 +4891,8 @@ If no indentation indicator is given, then the content indentation level is
 equal to the number of leading [spaces] on the first non-[empty line] of the
 contents.
 
-A block scalar may have an _indentation indicator_, which is a single decimal
-digit indicating the indentation level of the content.
+It is an error if any line containing block scalar content does not begin with
+a number of spaces equal to at least the content indentation level.
 
 It is an error for any of the leading [empty lines] to contain more [spaces]
 than the first non-[empty line].
