@@ -1301,7 +1301,7 @@ concatenation, then alternation.
 ## #. Production Parameters
 
 Some productions have parameters in parentheses after the name, such as
-[`s-line-prefix(n,c)`](#production-s-line-prefix).
+[`s-line-prefix(n,c)`](#rule-s-line-prefix).
 A parameterized production is shorthand for a (infinite) series of productions,
 each with a fixed value for each parameter.
 
