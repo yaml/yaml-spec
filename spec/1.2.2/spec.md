@@ -76,7 +76,7 @@ create programs that process YAML information.
 * TOC
 
 
-# Chapter #. Introduction
+# Chapter #. Introduction to YAML
 
 YAML (a recursive acronym for "YAML Ain't Markup Language") is a data
 serialization language designed to be human-friendly and work well with modern
@@ -191,7 +191,7 @@ format.
 Finally, chapter [10] recommends basic YAML schemas.
 
 
-# Chapter #. Preview
+# Chapter #. Language Overview
 
 This section provides a quick glimpse into the expressive power of YAML.
 It is not expected that the first-time reader grok all of the examples.
@@ -668,7 +668,7 @@ Stack:
 ```
 
 
-# Chapter #. Processing YAML Information
+# Chapter #. Processes and Models
 
 YAML is both a text format and a method for [presenting] any [native data
 structure] in this format.
@@ -1241,7 +1241,7 @@ In this case, a [complete representation] may still be [composed] and an
 [application] may wish to use this [representation] directly.
 
 
-# Chapter #. Syntax Conventions
+# Chapter #. Grammar Productions
 
 The following chapters formally define the syntax of YAML character [streams],
 using parameterized BNF productions.
@@ -1420,7 +1420,7 @@ character, where `X-` and `Y-` are any of the above prefixes.
 [indentation] level is greater than the specified `n` parameter.
 
 
-# Chapter #. Characters
+# Chapter #. Character Productions
 
 ## #. Character Set
 
@@ -2384,7 +2384,7 @@ ERROR:
 <!-- 3:3 3:9 -->
 
 
-# Chapter #. Basic Structures
+# Chapter #. Structural Productions
 
 ## #. Indentation Spaces
 
@@ -3616,7 +3616,7 @@ Second occurrence: *anchor
 * [ns-anchor-name] <!-- 1:20,6 2:21,6 -->
 
 
-# Chapter #. Flow Styles
+# Chapter #. Flow Style Productions
 
 YAML's _flow styles_ can be thought of as the natural extension of JSON to
 cover [folding] long content lines for readability, [tagging] nodes to control
@@ -4820,7 +4820,7 @@ nodes] which refer to the [anchored] [node properties].
 * [ns-flow-yaml-node(n,c)] <!-- *anchor !!str° -->
 
 
-# Chapter #. Block Styles
+# Chapter #. Block Style Productions
 
 YAML's _block styles_ employ [indentation] rather than [indicators] to denote
 structure.
@@ -5923,7 +5923,7 @@ mapping: !!map
 * [l+block-mapping(n)] <!-- 6 -->
 
 
-# Chapter #. YAML Character Stream
+# Chapter #. Document Stream Productions
 
 ## #. Documents
 

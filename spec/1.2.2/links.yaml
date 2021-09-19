@@ -31,7 +31,7 @@ block-sequences:
 - dash
 - dashes
 - sequence entry
-block-styles:
+block-style-productions:
 - block styles
 - indented blocks
 canonical-form:
@@ -112,7 +112,7 @@ flow-scalar-styles:
 flow-sequences:
 - brackets
 - square
-flow-styles:
+flow-style-productions:
 - flow
 - flow content
 - flow styles
@@ -198,7 +198,7 @@ presenting-the-serialization-tree:
 - presented
 - presenting
 - presentation detail
-processing-yaml-information:
+processes-and-models:
 - application
 - processor
 production-parameters:
