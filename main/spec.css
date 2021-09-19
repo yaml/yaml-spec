@@ -39,6 +39,8 @@ ul.author-group, ul.release-info, #markdown-toc, #markdown-toc ul { list-style: 
 
 #markdown-toc ul ul ul ul { display: none; }
 
+#markdown-toc > :first-child { display: none; }
+
 .footnotes { margin-bottom: 1000px; }
 .footnotes p { margin-bottom: 0px; margin-block: 0px; }
 
