@@ -377,6 +377,15 @@ sub fmt_pre {
     $pre =~
       s{
         \ (
+          [cs]-l\+
+          .*?
+        )
+        (?=[\(\+\*\?]|\s|\z)
+      }
+      {' ' . rule_link($1)}gex;
+    $pre =~
+      s{
+        \ (
           (?:b|c|e|l|s|in|nb|ns)[-+]
           .*?
         )
