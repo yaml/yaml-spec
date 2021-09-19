@@ -1315,7 +1315,7 @@ Is shorthand for:
 ```
 production-a(0) ::= production-b(0)
 production-a(1) ::= production-b(1)
-⋮
+…
 ```
 
 And this production:
@@ -1336,7 +1336,7 @@ production-a(1) ::=
     ( production-b(1) production-c(1) )+
   | ( production-b(2) production-c(2) )+
   | …
-⋮
+…
 ```
 
 The parameters are as follows:
