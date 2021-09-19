@@ -1263,7 +1263,8 @@ Productions are defined using the syntax `production-name ::= term`, where a
 term is either:
 
 * An atomic term:
-  * A quoted string (`"abc"`), which matches that concatenation of characters.
+  * A quoted string (`"abc"`), which matches that concatenation of characters. A
+    single character is usually written with single quotes (`'a'`).
   * A hexadecimal number (`x0A`), which matches the character at that Unicode
     code point.
   * A range of hexadecimal numbers (`[x20-x7E]`), which matches any character
