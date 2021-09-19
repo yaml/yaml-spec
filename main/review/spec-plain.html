@@ -34,7 +34,7 @@
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-18">Revision 1.2.2 (2021-09-18)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-19">Revision 1.2.2 (2021-09-19)</h2>
 
 <p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -101,7 +101,7 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-18" id="markdown-toc-revision-122-2021-09-18">Revision 1.2.2 (2021-09-18)</a></li>
+      <li><a href="#revision-122-2021-09-19" id="markdown-toc-revision-122-2021-09-19">Revision 1.2.2 (2021-09-19)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction" id="markdown-toc-chapter-1-introduction">Chapter 1. Introduction</a>    <ul>
@@ -6257,18 +6257,20 @@ This is the only case where a <a href="#comments">comment</a> must not be follow
 
 <p>Every block scalar has a <em>content indentation level</em>.
 The content of the block scalar excludes a number of leading <a href="#white-space-characters">spaces</a> on each
-line equal to the content indentation level.</p>
+line up to the content indentation level.</p>
 
 <p>If a block scalar has an <em>indentation indicator</em>, then the content indentation
 level of the block scalar is equal to the indentation level of the block scalar
-plus the value of the indentation indicator.</p>
+plus the integer value of the indentation indicator character.</p>
 
 <p>If no indentation indicator is given, then the content indentation level is
 equal to the number of leading <a href="#white-space-characters">spaces</a> on the first non-<a href="#empty-lines">empty line</a> of the
-contents.</p>
+contents.
+If there is no non-<a href="#empty-lines">empty line</a> then the content indentation level is equal to
+the number of spaces on the longest line.</p>
 
-<p>A block scalar may have an <em>indentation indicator</em>, which is a single decimal
-digit indicating the indentation level of the content.</p>
+<p>It is an error if any non-<a href="#empty-lines">empty line</a> does not begin with a number of spaces
+greater than or equal to the content indentation level.</p>
 
 <p>It is an error for any of the leading <a href="#empty-lines">empty lines</a> to contain more <a href="#white-space-characters">spaces</a>
 than the first non-<a href="#empty-lines">empty line</a>.</p>
