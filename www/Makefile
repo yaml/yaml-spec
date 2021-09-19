@@ -53,7 +53,10 @@ files := $(wildcard $(SPEC_121)/*) $(SPEC_121)/title.html
 files := $(files:$(SPEC_121)/%=1.2.1/%)
 HTML_FILES += $(files)
 
-files := $(wildcard $(SPEC_122)/*.md) title.html
+files := \
+    $(wildcard $(SPEC_122)/*.md) \
+    $(wildcard $(SPEC_122)/ext/*.md) \
+    title.html
 files := $(files:$(SPEC_122)/%.md=%.html)
 files := $(files:ReadMe.html=)
 files += spec.css img/
