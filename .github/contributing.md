@@ -9,8 +9,8 @@ versions and specification revisions.
 
 This is the official repository for the YAML Specification source files.
 The project has an active [core team](
-https://github.com/yaml/yaml-spec/blob/main/spec/1.2.2/ext/core.md) but we do all changes
-publicly and take some direction from issues and pull requests.
+https://github.com/yaml/yaml-spec/blob/main/spec/1.2.2/ext/team.md) but we do
+all changes publicly and take some direction from issues and pull requests.
 
 Some good ways to get involved include:
 
