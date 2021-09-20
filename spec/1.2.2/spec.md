@@ -1235,6 +1235,7 @@ tag if it matches one of the [regular expressions](#1032-tag-resolution) that
 the core schema would use to resolve content to that tag.
 Otherwise, content validity is implementation-defined.
 
+
 ### #. Available Tags
 
 In a given processing environment, there need not be an _available_ native type
