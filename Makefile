@@ -37,6 +37,12 @@ edit-spec:
 edit-spec-dir:
 	@$${EDITOR:-vim} $(SPEC)
 
+grammar-report:
+	@grammar-report < $(SPEC)/spec.md | less -FReX
+
+grammar-report-quiet:
+	@grammar-report -q < $(SPEC)/spec.md | less -FReX
+
 $(TESTS): always
 	bash $@
 
