@@ -1230,6 +1230,10 @@ data type.
 However, such a [complete representation] cannot be used to [construct] a
 [native data structure].
 
+Implementations should consider a scalar node's content to be valid for a given
+tag if it matches one of the [regular expressions](#1032-tag-resolution) that
+the core schema would use to resolve content to that tag.
+Otherwise, content validity is implementation-defined.
 
 ### #. Available Tags
 
