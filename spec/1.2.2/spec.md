@@ -1298,6 +1298,20 @@ term is either:
 The order of precedence is parenthesization, then quantification, then
 concatenation, then alternation.
 
+Some lines in a production definition might have a comment like:
+
+```
+production-a ::=
+  production-b      # clarifying comment
+```
+
+These comments are meant to be informative only.
+For instance a comment that says `# not followed by non-ws char` just means
+that you should be aware that actual production rules will behave as described
+even though it might not be obvious from the content of that particular
+production alone.
+
+
 ## #. Production Parameters
 
 Some productions have parameters in parentheses after the name, such as
@@ -4395,8 +4409,7 @@ entry may be [completely empty].
 ```
 [#] ns-flow-map-entry(n,c) ::=
     (
-      c-mapping-key             # '?'
-      [ lookahead ≠ ns-char ]   # Not followed by non-whitespace
+      c-mapping-key    # '?' (not followed by non-ws char)
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -4593,8 +4606,7 @@ the syntax is identical to the general case.
 ```
 [#] ns-flow-pair(n,c) ::=
     (
-      c-mapping-key             # '?'
-      [ lookahead ≠ ns-char ]   # Not followed by non-whitespace
+      c-mapping-key     # '?' (not followed by non-ws char)
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -5511,8 +5523,7 @@ followed by a non-space character (e.g. "`-42`").
 
 ```
 [#] c-l-block-seq-entry(n) ::=
-  c-sequence-entry                  # '-'
-  [ lookahead ≠ ns-char ]           # Not followed by non-whitespace
+  c-sequence-entry                  # '-' (not followed by non-ws char)
   s-l+block-indented(n,BLOCK-IN)
 ```
 
@@ -5648,16 +5659,14 @@ for [block sequence] entries.
 
 ```
 [#] c-l-block-map-explicit-key(n) ::=
-  c-mapping-key                     # '?'
-  [ lookahead ≠ ns-char ]           # Not followed by non-whitespace
+  c-mapping-key                     # '?' (not followed by non-ws char)
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
 ```
 [#] l-block-map-explicit-value(n) ::=
   s-indent(n)
-  c-mapping-value                   # ':'
-  [ lookahead ≠ ns-char ]           # Not followed by non-whitespace
+  c-mapping-value                   # ':' (not followed by non-ws char)
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
@@ -5721,8 +5730,7 @@ This prevents a potential ambiguity with multi-line [plain scalars].
 
 ```
 [#] c-l-block-map-implicit-value(n) ::=
-  c-mapping-value           # ':'
-  [ lookahead ≠ ns-char ]   # Not followed by non-whitespace
+  c-mapping-value           # ':' (not followed by non-ws char)
   (
       s-l+block-node(n,BLOCK-OUT)
     | (
@@ -6002,8 +6010,7 @@ either of these markers.
 
 ```
 [#] c-document-end ::=
-  "..."
-  [ lookahead ≠ ns-char ]   # Not followed by non-whitespace
+  "..."    # (not followed by non-ws char)
 ```
 
 ```
