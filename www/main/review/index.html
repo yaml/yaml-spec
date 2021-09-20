@@ -109,7 +109,7 @@ run = (m, n, o)->
   mmap['# Chapter #. Introduction to YAML']     = 'H1 Chapter 1.'
   mmap['# Chapter #. Language Overview']        = 'H1 Chapter 2.'
   mmap['# Chapter #. Processes and Models']     = 'H1 Chapter 3.'
-  mmap['# Chapter #. Grammar Productions']      = 'H1 Chapter 4.'
+  mmap['# Chapter #. Syntax Conventions']       = 'H1 Chapter 4.'
   mmap['# Chapter #. Character Productions']    = 'H1 Chapter 5.'
   mmap['# Chapter #. Structural Productions']   = 'H1 Chapter 6.'
   mmap['# Chapter #. Flow Style Productions']   = 'H1 Chapter 7.'
@@ -120,7 +120,6 @@ run = (m, n, o)->
   io = new IO (e)->
     return unless e[0].isIntersecting
     h = $(e[0].target).text()
-    console.log(h)
     if mmap[h]?
       t = mmap[h]
     else if h.match /^(#{1,4})\s/

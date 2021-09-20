@@ -1241,7 +1241,7 @@ In this case, a [complete representation] may still be [composed] and an
 [application] may wish to use this [representation] directly.
 
 
-# Chapter #. Grammar Productions
+# Chapter #. Syntax Conventions
 
 The following chapters formally define the syntax of YAML character [streams],
 using parameterized BNF productions.
