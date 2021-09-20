@@ -7,7 +7,7 @@
   content="text/html; charset=UTF-8"
 />
 
-<title>YAML Ain’t Markup Language (YAML™) Version 1.2</title>
+<title>YAML Ain’t Markup Language (YAML™) revision 1.2.2</title>
 
 
   
@@ -45,11 +45,11 @@ the content of this draft or cite it as an authority.
 </p>
 
 
-<h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</h1>
+<h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-19">Revision 1.2.2 (2021-09-19)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-20">Revision 1.2.2 (2021-09-20)</h2>
 
-<p>Copyright presently by <a href="core-team">The YAML Language Development Team</a><br />
+<p>Copyright presently by YAML Language Development Team<sup id="fnref:team" role="doc-noteref"><a href="#fn:team" class="footnote" rel="footnote">1</a></sup><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 
 <p>This document may be freely copied, provided it is not modified.</p>
@@ -59,19 +59,19 @@ Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 <p>This is the <strong>YAML specification v1.2.2</strong>.
 It defines the <strong>YAML 1.2 data language</strong>.
 There are no normative changes from the <strong>YAML specification v1.2</strong>.
-The primary objectives of this version are to correct errors and add clarity.</p>
+The primary objectives of this revision are to correct errors and add clarity.</p>
 
-<p>This version also strives to make the YAML language development process more
+<p>This revision also strives to make the YAML language development process more
 open, more transparent and easier for people to contribute to.
 The input format is now Markdown instead of DocBook, and the images are made
 from plain text LaTeX files rather than proprietary drawing software.
-All the source content for the specification is publicly hosted<sup id="fnref:spec-repo" role="doc-noteref"><a href="#fn:spec-repo" class="footnote" rel="footnote">1</a></sup>.</p>
+All the source content for the specification is publicly hosted<sup id="fnref:spec-repo" role="doc-noteref"><a href="#fn:spec-repo" class="footnote" rel="footnote">2</a></sup>.</p>
 
-<p>The previous YAML specification<sup id="fnref:1-2-spec" role="doc-noteref"><a href="#fn:1-2-spec" class="footnote" rel="footnote">2</a></sup> was published about 12 years ago.
+<p>The previous YAML specification<sup id="fnref:1-2-spec" role="doc-noteref"><a href="#fn:1-2-spec" class="footnote" rel="footnote">3</a></sup> was published 12 years ago.
 In that time span, YAML’s popularity has grown significantly.
 Efforts are ongoing to improve the language and grow it to meet the needs and
 expectations of its users.
-While this version of the specification makes no actual changes to YAML, it
+While this revision of the specification makes no actual changes to YAML, it
 begins a process by which the language intends to evolve and stay modern.</p>
 
 <p>The YAML specification is often seen as overly complicated for something which
@@ -82,21 +82,20 @@ Future YAML plans are focused on making the language and ecosystem more
 powerful and reliable while simultaneously simplifying the development process
 for implementers.</p>
 
-<p>While this version of the specification is limiting itself to informational
+<p>While this revision of the specification is limiting itself to informational
 changes only, there is companion documentation intended to guide YAML framework
 implementers and YAML language users.
 This documentation can continue to evolve and expand continually between
-published versions of this specification.</p>
+published revisions of this specification.</p>
 
 <p>See:</p>
 
 <ul>
-  <li><a href="implementer-refs">YAML Implementer’s Reference Index</a></li>
-  <li><a href="user-refs">YAML User’s Reference Index</a></li>
-  <li><a href="community">YAML Community</a></li>
-  <li><a href="spec-errata">YAML 1.2.2 Specification Errata</a></li>
-  <li><a href="spec-changes">YAML 1.2.2 Specification Changes</a></li>
-  <li><a href="spec-authors">YAML 1.2.2 Specification Authors</a></li>
+  <li><a href="ext/changes">YAML 1.2.1 Specification Changes</a></li>
+  <li><a href="ext/errata">YAML 1.2.1 Specification Errata</a></li>
+  <li><a href="ext/community">YAML Community Resource Index</a></li>
+  <li><a href="ext/use">YAML User’s Reference Index</a></li>
+  <li><a href="ext/dev">YAML Developer’s Reference Index</a></li>
 </ul>
 
 <p><strong>Abstract</strong></p>
@@ -106,15 +105,15 @@ data serialization language designed around the common native data types of
 dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 internet messaging to object persistence to data auditing and visualization.
-Together with the Unicode standard for characters<sup id="fnref:unicode" role="doc-noteref"><a href="#fn:unicode" class="footnote" rel="footnote">3</a></sup>, this specification
-provides all the information necessary to understand YAML Version 1.2 and to
+Together with the Unicode standard for characters<sup id="fnref:unicode" role="doc-noteref"><a href="#fn:unicode" class="footnote" rel="footnote">4</a></sup>, this specification
+provides all the information necessary to understand YAML version 1.2 and to
 create programs that process YAML information.</p>
 
 <p><strong>Contents</strong></p>
 
 <ul id="markdown-toc">
-  <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) Version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-19" id="markdown-toc-revision-122-2021-09-19">Revision 1.2.2 (2021-09-19)</a></li>
+  <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</a>    <ul>
+      <li><a href="#revision-122-2021-09-20" id="markdown-toc-revision-122-2021-09-20">Revision 1.2.2 (2021-09-20)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction" id="markdown-toc-chapter-1-introduction">Chapter 1. Introduction</a>    <ul>
@@ -351,10 +350,10 @@ When data is easy to view and understand, programming becomes a simpler task.</p
 
 <p>The YAML 1.0 specification was published in early 2004 by by Clark Evans, Oren
 Ben-Kiki, and Ingy döt Net after 3 years of collaborative design work through
-the yaml-core mailing list<sup id="fnref:yaml-core" role="doc-noteref"><a href="#fn:yaml-core" class="footnote" rel="footnote">4</a></sup>.
+the yaml-core mailing list<sup id="fnref:yaml-core" role="doc-noteref"><a href="#fn:yaml-core" class="footnote" rel="footnote">5</a></sup>.
 The project was initially rooted in Clark and Oren’s work on the
-SML-DEV<sup id="fnref:sml-dev" role="doc-noteref"><a href="#fn:sml-dev" class="footnote" rel="footnote">5</a></sup> mailing list (for simplifying XML) and Ingy’s plain text
-serialization module<sup id="fnref:denter" role="doc-noteref"><a href="#fn:denter" class="footnote" rel="footnote">6</a></sup> for Perl.
+SML-DEV<sup id="fnref:sml-dev" role="doc-noteref"><a href="#fn:sml-dev" class="footnote" rel="footnote">6</a></sup> mailing list (for simplifying XML) and Ingy’s plain text
+serialization module<sup id="fnref:denter" role="doc-noteref"><a href="#fn:denter" class="footnote" rel="footnote">7</a></sup> for Perl.
 The language took a lot of inspiration from many other technologies and formats
 that preceded it.</p>
 
@@ -362,26 +361,26 @@ that preceded it.</p>
 language to ship a YAML framework as part of its core language distribution in
 2003.</p>
 
-<p>The YAML 1.1<sup id="fnref:1-1-spec" role="doc-noteref"><a href="#fn:1-1-spec" class="footnote" rel="footnote">7</a></sup> specification was published in 2005.
-Around this time, the developers became aware of JSON<sup id="fnref:json" role="doc-noteref"><a href="#fn:json" class="footnote" rel="footnote">8</a></sup>.
+<p>The YAML 1.1<sup id="fnref:1-1-spec" role="doc-noteref"><a href="#fn:1-1-spec" class="footnote" rel="footnote">8</a></sup> specification was published in 2005.
+Around this time, the developers became aware of JSON<sup id="fnref:json" role="doc-noteref"><a href="#fn:json" class="footnote" rel="footnote">9</a></sup>.
 By sheer coincidence, JSON was almost a complete subset of YAML (both
 syntactically and semantically).</p>
 
-<p>In 2006, Kirill Simonov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">9</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">10</a></sup>.
+<p>In 2006, Kirill Simonov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">10</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">11</a></sup>.
 A lot of the YAML frameworks in various programming languages are built over
 LibYAML and many others have looked to PyYAML as a solid reference for their
 implementations.</p>
 
-<p>The YAML 1.2<sup id="fnref:1-2-spec:1" role="doc-noteref"><a href="#fn:1-2-spec" class="footnote" rel="footnote">2</a></sup> specification was published in 2009.
+<p>The YAML 1.2<sup id="fnref:1-2-spec:1" role="doc-noteref"><a href="#fn:1-2-spec" class="footnote" rel="footnote">3</a></sup> specification was published in 2009.
 Its primary focus was making YAML a strict superset of JSON.
 It also removed many of the problematic implicit typing recommendations.</p>
 
 <p>Since the release of the 1.2 specification, YAML adoption has continued to
 grow, and many large-scale projects use it as their primary configuration
 format.
-In 2020, the new <a href="core-team">YAML language design team</a> began meeting regularly
-to discuss improvements to the YAML language and specification; to better meet
-the needs and expectations of its users and use cases.</p>
+In 2020, the new <a href="team">YAML language design team</a> began meeting regularly to
+discuss improvements to the YAML language and specification; to better meet the
+needs and expectations of its users and use cases.</p>
 
 <p>This YAML 1.2.2 specification, published in September 2021, is the first step
 in YAML’s rejuvenated development journey.
@@ -394,7 +393,7 @@ The YAML design team is focused on making YAML as good as possible.</p>
 
 <p>The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”,
 “SHOULD NOT”, “RECOMMENDED”,  “MAY”, and “OPTIONAL” in this document are to be
-interpreted as described in RFC 2119<sup id="fnref:rfc-2119" role="doc-noteref"><a href="#fn:rfc-2119" class="footnote" rel="footnote">11</a></sup>.</p>
+interpreted as described in RFC 2119<sup id="fnref:rfc-2119" role="doc-noteref"><a href="#fn:rfc-2119" class="footnote" rel="footnote">12</a></sup>.</p>
 
 <p>The rest of this document is arranged as follows.
 Chapter [2] provides a short preview of the main YAML features.
@@ -1145,7 +1144,7 @@ A single “<code class="language-plaintext highlighter-rouge">+</code>” denot
 directed graph of <a href="#tags">tagged</a> <a href="#nodes">nodes</a>.
 By “directed graph” we mean a set of <a href="#nodes">nodes</a> and directed edges (“arrows”),
 where each edge connects one <a href="#nodes">node</a> to another (see a formal directed graph
-definition<sup id="fnref:digraph" role="doc-noteref"><a href="#fn:digraph" class="footnote" rel="footnote">12</a></sup>).
+definition<sup id="fnref:digraph" role="doc-noteref"><a href="#fn:digraph" class="footnote" rel="footnote">13</a></sup>).
 All the <a href="#nodes">nodes</a> must be reachable from the <em>root node</em> via such edges.
 Note that the YAML graph may include cycles and a <a href="#nodes">node</a> may have more than one
 incoming edge.</p>
@@ -1209,7 +1208,7 @@ key or a value.</p>
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
 identifier, called a <em>tag</em>.
 <em>Global tags</em> are URIs and hence globally unique across all <a href="#processing-yaml-information">applications</a>.
-The “<code class="language-plaintext highlighter-rouge">tag:</code>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">13</a></sup> is recommended for all global YAML tags.
+The “<code class="language-plaintext highlighter-rouge">tag:</code>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">14</a></sup> is recommended for all global YAML tags.
 In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
 Local tags start with <em>”<code class="language-plaintext highlighter-rouge">!</code>“</em>, are not URIs and are not expected to be globally
 unique.
@@ -1581,7 +1580,8 @@ term is either:</p>
 <ul>
   <li>An atomic term:
     <ul>
-      <li>A quoted string (<code class="language-plaintext highlighter-rouge">"abc"</code>), which matches that concatenation of characters.</li>
+      <li>A quoted string (<code class="language-plaintext highlighter-rouge">"abc"</code>), which matches that concatenation of characters. A
+single character is usually written with single quotes (<code class="language-plaintext highlighter-rouge">'a'</code>).</li>
       <li>A hexadecimal number (<code class="language-plaintext highlighter-rouge">x0A</code>), which matches the character at that Unicode
 code point.</li>
       <li>A range of hexadecimal numbers (<code class="language-plaintext highlighter-rouge">[x20-x7E]</code>), which matches any character
@@ -1591,11 +1591,12 @@ whose Unicode code point is within that range.</li>
   </li>
   <li>A lookaround:
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">[lookahead = term]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would match.</li>
-      <li><code class="language-plaintext highlighter-rouge">[lookahead ≠ term]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would not
+      <li><code class="language-plaintext highlighter-rouge">[ lookahead = term ]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would
 match.</li>
-      <li><code class="language-plaintext highlighter-rouge">[lookbehind = term]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would match
-beginning at any prior point on the line and ending at the current
+      <li><code class="language-plaintext highlighter-rouge">[ lookahead ≠ term ]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would not
+match.</li>
+      <li><code class="language-plaintext highlighter-rouge">[ lookbehind = term ]</code>, which matches the empty string if <code class="language-plaintext highlighter-rouge">term</code> would
+match beginning at any prior point on the line and ending at the current
 position.</li>
     </ul>
   </li>
@@ -1632,7 +1633,7 @@ concatenation, then alternation.</p>
 <h2 id="42-production-parameters">4.2. Production Parameters</h2>
 
 <p>Some productions have parameters in parentheses after the name, such as
-<a href="#production-s-line-prefix"><code class="language-plaintext highlighter-rouge">s-line-prefix(n,c)</code></a>.
+<a href="#rule-s-line-prefix"><code class="language-plaintext highlighter-rouge">s-line-prefix(n,c)</code></a>.
 A parameterized production is shorthand for a (infinite) series of productions,
 each with a fixed value for each parameter.</p>
 
@@ -1647,7 +1648,7 @@ production-a(n) ::= production-b(n)
 <pre>
 production-a(0) ::= production-b(0)
 production-a(1) ::= production-b(1)
-⋮
+…
 </pre>
 
 <p>And this production:</p>
@@ -1668,7 +1669,7 @@ production-a(1) ::=
     ( production-b(1) production-c(1) )+
   | ( production-b(2) production-c(2) )+
   | …
-⋮
+…
 </pre>
 
 <p>The parameters are as follows:</p>
@@ -1821,10 +1822,10 @@ character, where <code class="language-plaintext highlighter-rouge">X-</code> an
 
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
-The allowed character range explicitly excludes the C0 control block<sup id="fnref:c0-block" role="doc-noteref"><a href="#fn:c0-block" class="footnote" rel="footnote">14</a></sup>
+The allowed character range explicitly excludes the C0 control block<sup id="fnref:c0-block" role="doc-noteref"><a href="#fn:c0-block" class="footnote" rel="footnote">15</a></sup>
 <code class="language-plaintext highlighter-rouge">x00-x1F</code> (except for TAB <code class="language-plaintext highlighter-rouge">x09</code>, LF <code class="language-plaintext highlighter-rouge">x0A</code> and CR <code class="language-plaintext highlighter-rouge">x0D</code> which are allowed), DEL
 <code class="language-plaintext highlighter-rouge">x7F</code>, the C1 control block <code class="language-plaintext highlighter-rouge">x80-x9F</code> (except for NEL <code class="language-plaintext highlighter-rouge">x85</code> which is allowed),
-the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">15</a></sup> <code class="language-plaintext highlighter-rouge">xD800-xDFFF</code>, <code class="language-plaintext highlighter-rouge">xFFFE</code> and <code class="language-plaintext highlighter-rouge">xFFFF</code>.</p>
+the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">16</a></sup> <code class="language-plaintext highlighter-rouge">xD800-xDFFF</code>, <code class="language-plaintext highlighter-rouge">xFFFE</code> and <code class="language-plaintext highlighter-rouge">xFFFF</code>.</p>
 
 <p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
 subset.</p>
@@ -2008,7 +2009,7 @@ If another encoding is used, it is recommended that an explicit byte order mark
 be used, even if the first <a href="#streams">stream</a> character is ASCII.</p>
 
 <p>For more information about the byte order mark and the Unicode character
-encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><a href="#fn:uni-faq" class="footnote" rel="footnote">16</a></sup>.</p>
+encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><a href="#fn:uni-faq" class="footnote" rel="footnote">17</a></sup>.</p>
 
 <div id="rule-c-byte-order-mark"></div>
 <pre class="rule">
@@ -2713,7 +2714,7 @@ classes:</p>
   | '-'                 # '-'
 </pre>
 
-<p>URI characters for <a href="#tags">tags</a>, as defined in the URI specification<sup id="fnref:uri" role="doc-noteref"><a href="#fn:uri" class="footnote" rel="footnote">17</a></sup>.</p>
+<p>URI characters for <a href="#tags">tags</a>, as defined in the URI specification<sup id="fnref:uri" role="doc-noteref"><a href="#fn:uri" class="footnote" rel="footnote">18</a></sup>.</p>
 
 <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8 and then each byte is <em>escaped</em> using
@@ -3232,10 +3233,11 @@ which may contain <a href="#white-space-characters">tab</a> characters.</p>
 
 <div id="rule-s-line-prefix"></div>
 <pre class="rule">
-[67] s-line-prefix(n,BLOCK-OUT) ::= <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
-    <a href="#rule-s-line-prefix">s-line-prefix</a>(n,BLOCK-IN)  ::= <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
-    <a href="#rule-s-line-prefix">s-line-prefix</a>(n,FLOW-OUT)  ::= <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
-    <a href="#rule-s-line-prefix">s-line-prefix</a>(n,FLOW-IN)   ::= <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
+[67]
+s-line-prefix(n,BLOCK-OUT) ::= <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
+s-line-prefix(n,BLOCK-IN)  ::= <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
+s-line-prefix(n,FLOW-OUT)  ::= <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
+s-line-prefix(n,FLOW-IN)   ::= <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
 </pre>
 
 <div id="rule-s-block-line-prefix"></div>
@@ -3688,12 +3690,13 @@ empty) <a href="#comments">comments</a>.</p>
 
 <div id="rule-s-separate"></div>
 <pre class="rule">
-[80] s-separate(n,BLOCK-OUT) ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
-    <a href="#rule-s-separate">s-separate</a>(n,BLOCK-IN)  ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
-    <a href="#rule-s-separate">s-separate</a>(n,FLOW-OUT)  ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
-    <a href="#rule-s-separate">s-separate</a>(n,FLOW-IN)   ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
-    <a href="#rule-s-separate">s-separate</a>(n,BLOCK-KEY) ::= <a href="#rule-s-separate-in-line">s-separate-in-line</a>
-    <a href="#rule-s-separate">s-separate</a>(n,FLOW-KEY)  ::= <a href="#rule-s-separate-in-line">s-separate-in-line</a>
+[80]
+s-separate(n,BLOCK-OUT) ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
+s-separate(n,BLOCK-IN)  ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
+s-separate(n,FLOW-OUT)  ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
+s-separate(n,FLOW-IN)   ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
+s-separate(n,BLOCK-KEY) ::= <a href="#rule-s-separate-in-line">s-separate-in-line</a>
+s-separate(n,FLOW-KEY)  ::= <a href="#rule-s-separate-in-line">s-separate-in-line</a>
 </pre>
 
 <div id="rule-s-separate-lines"></div>
@@ -4869,10 +4872,11 @@ This comes at the cost of having to escape the “<code class="language-plaintex
 
 <div id="rule-nb-double-text"></div>
 <pre class="rule">
-[110] nb-double-text(n,FLOW-OUT)  ::= <a href="#rule-nb-double-multi-line">nb-double-multi-line</a>(n)
-    <a href="#rule-nb-double-text">nb-double-text</a>(n,FLOW-IN)   ::= <a href="#rule-nb-double-multi-line">nb-double-multi-line</a>(n)
-    <a href="#rule-nb-double-text">nb-double-text</a>(n,BLOCK-KEY) ::= <a href="#rule-nb-double-one-line">nb-double-one-line</a>
-    <a href="#rule-nb-double-text">nb-double-text</a>(n,FLOW-KEY)  ::= <a href="#rule-nb-double-one-line">nb-double-one-line</a>
+[110]
+nb-double-text(n,FLOW-OUT)  ::= <a href="#rule-nb-double-multi-line">nb-double-multi-line</a>(n)
+nb-double-text(n,FLOW-IN)   ::= <a href="#rule-nb-double-multi-line">nb-double-multi-line</a>(n)
+nb-double-text(n,BLOCK-KEY) ::= <a href="#rule-nb-double-one-line">nb-double-one-line</a>
+nb-double-text(n,FLOW-KEY)  ::= <a href="#rule-nb-double-one-line">nb-double-one-line</a>
 </pre>
 
 <div id="rule-nb-double-one-line"></div>
@@ -5106,10 +5110,11 @@ In addition, it is only possible to break a long single-quoted line where a
 
 <div id="rule-nb-single-text"></div>
 <pre class="rule">
-[121] nb-single-text(FLOW-OUT)  ::= <a href="#rule-nb-single-multi-line">nb-single-multi-line</a>(n)
-    <a href="#rule-nb-single-text">nb-single-text</a>(FLOW-IN)   ::= <a href="#rule-nb-single-multi-line">nb-single-multi-line</a>(n)
-    <a href="#rule-nb-single-text">nb-single-text</a>(BLOCK-KEY) ::= <a href="#rule-nb-single-one-line">nb-single-one-line</a>
-    <a href="#rule-nb-single-text">nb-single-text</a>(FLOW-KEY)  ::= <a href="#rule-nb-single-one-line">nb-single-one-line</a>
+[121]
+nb-single-text(FLOW-OUT)  ::= <a href="#rule-nb-single-multi-line">nb-single-multi-line</a>(n)
+nb-single-text(FLOW-IN)   ::= <a href="#rule-nb-single-multi-line">nb-single-multi-line</a>(n)
+nb-single-text(BLOCK-KEY) ::= <a href="#rule-nb-single-one-line">nb-single-one-line</a>
+nb-single-text(FLOW-KEY)  ::= <a href="#rule-nb-single-one-line">nb-single-one-line</a>
 </pre>
 
 <div id="rule-nb-single-one-line"></div>
@@ -5245,10 +5250,10 @@ ambiguity.</p>
   | (
       (
           <a href="#rule-c-mapping-key">c-mapping-key</a>       # '?'
-        | <a href="#rule-c-mapping-value">c-mapping-value</a>     #':'
-        | <a href="#rule-c-sequence-entry">c-sequence-entry</a>    #'-'
+        | <a href="#rule-c-mapping-value">c-mapping-value</a>     # ':'
+        | <a href="#rule-c-sequence-entry">c-sequence-entry</a>    # '-'
       )
-      [lookahead = <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c)]
+      [ lookahead = <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) ]
     )
 </pre>
 
@@ -5261,10 +5266,11 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 
 <div id="rule-ns-plain-safe"></div>
 <pre class="rule">
-[127] ns-plain-safe(FLOW-OUT)  ::= <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
-    <a href="#rule-ns-plain-safe">ns-plain-safe</a>(FLOW-IN)   ::= <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
-    <a href="#rule-ns-plain-safe">ns-plain-safe</a>(BLOCK-KEY) ::= <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
-    <a href="#rule-ns-plain-safe">ns-plain-safe</a>(FLOW-KEY)  ::= <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
+[127]
+ns-plain-safe(FLOW-OUT)  ::= <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
+ns-plain-safe(FLOW-IN)   ::= <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
+ns-plain-safe(BLOCK-KEY) ::= <a href="#rule-ns-plain-safe-out">ns-plain-safe-out</a>
+ns-plain-safe(FLOW-KEY)  ::= <a href="#rule-ns-plain-safe-in">ns-plain-safe-in</a>
 </pre>
 
 <div id="rule-ns-plain-safe-out"></div>
@@ -5288,12 +5294,12 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
       - <a href="#rule-c-comment">c-comment</a>          # '#'
     )
   | (
-      [lookbehind = <a href="#rule-ns-char]">ns-char]</a>
+      [ lookbehind = <a href="#rule-ns-char">ns-char</a> ]
       <a href="#rule-c-comment">c-comment</a>          # '#'
     )
   | (
       <a href="#rule-c-mapping-value">c-mapping-value</a>    # ':'
-      [lookahead = <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c)]
+      [ lookahead = <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) ]
     )
 </pre>
 
@@ -5351,10 +5357,11 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 
 <div id="rule-ns-plain"></div>
 <pre class="rule">
-[131] ns-plain(n,FLOW-OUT)  ::= <a href="#rule-ns-plain-multi-line">ns-plain-multi-line</a>(n,FLOW-OUT)
-    <a href="#rule-ns-plain">ns-plain</a>(n,FLOW-IN)   ::= <a href="#rule-ns-plain-multi-line">ns-plain-multi-line</a>(n,FLOW-IN)
-    <a href="#rule-ns-plain">ns-plain</a>(n,BLOCK-KEY) ::= <a href="#rule-ns-plain-one-line">ns-plain-one-line</a>(BLOCK-KEY)
-    <a href="#rule-ns-plain">ns-plain</a>(n,FLOW-KEY)  ::= <a href="#rule-ns-plain-one-line">ns-plain-one-line</a>(FLOW-KEY)
+[131]
+ns-plain(n,FLOW-OUT)  ::= <a href="#rule-ns-plain-multi-line">ns-plain-multi-line</a>(n,FLOW-OUT)
+ns-plain(n,FLOW-IN)   ::= <a href="#rule-ns-plain-multi-line">ns-plain-multi-line</a>(n,FLOW-IN)
+ns-plain(n,BLOCK-KEY) ::= <a href="#rule-ns-plain-one-line">ns-plain-one-line</a>(BLOCK-KEY)
+ns-plain(n,FLOW-KEY)  ::= <a href="#rule-ns-plain-one-line">ns-plain-one-line</a>(FLOW-KEY)
 </pre>
 
 <div id="rule-nb-ns-plain-in-line"></div>
@@ -5466,10 +5473,11 @@ This does not cause ambiguity because flow collection entries can never be
 
 <div id="rule-in-flow"></div>
 <pre class="rule">
-[136] in-flow(n,FLOW-OUT)  ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-IN)
-    <a href="#rule-in-flow">in-flow</a>(n,FLOW-IN)   ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-IN)
-    <a href="#rule-in-flow">in-flow</a>(n,BLOCK-KEY) ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-KEY)
-    <a href="#rule-in-flow">in-flow</a>(n,FLOW-KEY)  ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-KEY)
+[136]
+in-flow(n,FLOW-OUT)  ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-IN)
+in-flow(n,FLOW-IN)   ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-IN)
+in-flow(n,BLOCK-KEY) ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-KEY)
+in-flow(n,FLOW-KEY)  ::= <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,FLOW-KEY)
 </pre>
 
 <div id="flow-sequences"></div>
@@ -5740,7 +5748,7 @@ indicated by the “<code class="language-plaintext highlighter-rouge">:</code>�
 <pre class="rule">
 [147] c-ns-flow-map-separate-value(n,c) ::=
   <a href="#rule-c-mapping-value">c-mapping-value</a>    # ':'
-  [lookahead ≠ <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c)]
+  [ lookahead ≠ <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) ]
   (
       (
         <a href="#rule-s-separate">s-separate</a>(n,c)
@@ -6419,9 +6427,10 @@ convey <a href="#nodes">content</a> information.</p>
 
 <div id="rule-c-chomping-indicator"></div>
 <pre class="rule">
-[164] c-chomping-indicator(STRIP) ::= '-'
-    <a href="#rule-c-chomping-indicator">c-chomping-indicator</a>(KEEP)  ::= '+'
-    <a href="#rule-c-chomping-indicator">c-chomping-indicator</a>(CLIP)  ::= ""
+[164]
+c-chomping-indicator(STRIP) ::= '-'
+c-chomping-indicator(KEEP)  ::= '+'
+c-chomping-indicator(CLIP)  ::= ""
 </pre>
 
 <p>The interpretation of the final <a href="#line-break-characters">line break</a> of a <a href="#block-scalar-styles">block scalar</a> is controlled
@@ -6429,10 +6438,10 @@ by the chomping indicator specified in the <a href="#block-scalar-headers">block
 
 <div id="rule-b-chomped-last"></div>
 <pre class="rule">
-[165] b-chomped-last(t) ::=
-    <a href="#rule-b-chomped-last">b-chomped-last</a>(STRIP) ::= <a href="#rule-b-non-content">b-non-content</a>  | &lt;end-of-input&gt;
-    <a href="#rule-b-chomped-last">b-chomped-last</a>(CLIP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end-of-input&gt;
-    <a href="#rule-b-chomped-last">b-chomped-last</a>(KEEP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end-of-input&gt;
+[165]
+b-chomped-last(STRIP) ::= <a href="#rule-b-non-content">b-non-content</a>  | &lt;end-of-input&gt;
+b-chomped-last(CLIP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end-of-input&gt;
+b-chomped-last(KEEP)  ::= <a href="#rule-b-as-line-feed">b-as-line-feed</a> | &lt;end-of-input&gt;
 </pre>
 
 <div id="example-chomping-final-line-break" class="example">
@@ -6475,9 +6484,10 @@ header</a>.</p>
 
 <div id="rule-l-chomped-empty"></div>
 <pre class="rule">
-[166] l-chomped-empty(n,STRIP) ::= <a href="#rule-l-strip-empty">l-strip-empty</a>(n)
-    <a href="#rule-l-chomped-empty">l-chomped-empty</a>(n,CLIP)  ::= <a href="#rule-l-strip-empty">l-strip-empty</a>(n)
-    <a href="#rule-l-chomped-empty">l-chomped-empty</a>(n,KEEP)  ::= <a href="#rule-l-keep-empty">l-keep-empty</a>(n)
+[166]
+l-chomped-empty(n,STRIP) ::= <a href="#rule-l-strip-empty">l-strip-empty</a>(n)
+l-chomped-empty(n,CLIP)  ::= <a href="#rule-l-strip-empty">l-strip-empty</a>(n)
+l-chomped-empty(n,KEEP)  ::= <a href="#rule-l-keep-empty">l-keep-empty</a>(n)
 </pre>
 
 <div id="rule-l-strip-empty"></div>
@@ -7051,8 +7061,8 @@ followed by a non-space character (e.g. “<code class="language-plaintext highl
 <pre class="rule">
 [184] c-l-block-seq-entry(n) ::=
   <a href="#rule-c-sequence-entry">c-sequence-entry</a>    # '-'
-  [lookahead ≠ <a href="#rule-ns-char]">ns-char]</a>
-  <a href="#rule-s-l">s-l</a>+block-indented(n,BLOCK-IN)
+  [ lookahead ≠ <a href="#rule-ns-char">ns-char</a> ]
+  <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-IN)
 </pre>
 
 <div id="example-block-sequence" class="example">
@@ -7105,7 +7115,7 @@ Note that it is not possible to specify <a href="#node-properties">node properti
         | <a href="#rule-ns-l-compact-mapping">ns-l-compact-mapping</a>(n+1+m)
       )
     )
-  | <a href="#rule-s-l">s-l</a>+block-node(n,c)
+  | <a href="#rule-s-l+block-node">s-l+block-node</a>(n,c)
   | (
       <a href="#rule-e-node">e-node</a>    # ""
       <a href="#rule-s-l-comments">s-l-comments</a>
@@ -7228,7 +7238,7 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 <pre class="rule">
 [190] c-l-block-map-explicit-key(n) ::=
   <a href="#rule-c-mapping-key">c-mapping-key</a>                      # '?'
-  <a href="#rule-s-l">s-l</a>+block-indented(n,BLOCK-OUT)
+  <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-OUT)
 </pre>
 
 <div id="rule-l-block-map-explicit-value"></div>
@@ -7236,7 +7246,7 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 [191] l-block-map-explicit-value(n) ::=
   <a href="#rule-s-indent">s-indent</a>(n)
   <a href="#rule-c-mapping-value">c-mapping-value</a>    # ':'
-  <a href="#rule-s-l">s-l</a>+block-indented(n,BLOCK-OUT)
+  <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-OUT)
 </pre>
 
 <div id="example-explicit-block-mapping-entries" class="example">
@@ -7315,7 +7325,7 @@ This prevents a potential ambiguity with multi-line <a href="#plain-style">plain
 [194] c-l-block-map-implicit-value(n) ::=
   <a href="#rule-c-mapping-value">c-mapping-value</a>                  # ':'
   (
-      <a href="#rule-s-l">s-l</a>+block-node(n,BLOCK-OUT)
+      <a href="#rule-s-l+block-node">s-l+block-node</a>(n,BLOCK-OUT)
     | (
         <a href="#rule-e-node">e-node</a>    # ""
         <a href="#rule-s-l-comments">s-l-comments</a>
@@ -7416,8 +7426,8 @@ scalar</a> and an <a href="#example-single-pair-explicit-entry">implicit key</a>
 <div id="rule-s-l+block-node"></div>
 <pre class="rule">
 [196] s-l+block-node(n,c) ::=
-    <a href="#rule-s-l">s-l</a>+block-in-block(n,c)
-  | <a href="#rule-s-l">s-l</a>+flow-in-block(n)
+    <a href="#rule-s-l+block-in-block">s-l+block-in-block</a>(n,c)
+  | <a href="#rule-s-l+flow-in-block">s-l+flow-in-block</a>(n)
 </pre>
 
 <div id="rule-s-l+flow-in-block"></div>
@@ -7470,8 +7480,8 @@ entries.</p>
 <div id="rule-s-l+block-in-block"></div>
 <pre class="rule">
 [198] s-l+block-in-block(n,c) ::=
-    <a href="#rule-s-l">s-l</a>+block-scalar(n,c)
-  | <a href="#rule-s-l">s-l</a>+block-collection(n,c)
+    <a href="#rule-s-l+block-scalar">s-l+block-scalar</a>(n,c)
+  | <a href="#rule-s-l+block-collection">s-l+block-collection</a>(n,c)
 </pre>
 
 <div id="rule-s-l+block-scalar"></div>
@@ -7483,8 +7493,8 @@ entries.</p>
     <a href="#rule-s-separate">s-separate</a>(n+1,c)
   )?
   (
-      <a href="#rule-c-l">c-l</a>+literal(n)
-    | <a href="#rule-c-l">c-l</a>+folded(n)
+      <a href="#rule-c-l+literal">c-l+literal</a>(n)
+    | <a href="#rule-c-l+folded">c-l+folded</a>(n)
   )
 </pre>
 
@@ -7745,7 +7755,7 @@ document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">inden
 <div id="rule-l-bare-document"></div>
 <pre class="rule">
 [207] l-bare-document ::=
-  <a href="#rule-s-l">s-l</a>+block-node(-1,BLOCK-IN)
+  <a href="#rule-s-l+block-node">s-l+block-node</a>(-1,BLOCK-IN)
   /* Excluding <a href="#rule-c-forbidden">c-forbidden</a> content */
 </pre>
 
@@ -8672,11 +8682,14 @@ defined above.</p>
 
 <div class="footnotes" role="doc-endnotes">
   <ol>
+    <li id="fn:team" role="doc-endnote">
+      <p><a href="ext/team">YAML Language Development Team</a> <a href="#fnref:team" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+    </li>
     <li id="fn:spec-repo" role="doc-endnote">
       <p><a href="https://github.com/yaml/yaml-spec">YAML Specification on GitHub</a> <a href="#fnref:spec-repo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:1-2-spec" role="doc-endnote">
-      <p><a href="https://yaml.org/spec/1.2">YAML Ain’t Markup Language (YAML™) Version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1-2-spec:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+      <p><a href="https://yaml.org/spec/1.2">YAML Ain’t Markup Language (YAML™) version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1-2-spec:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
     </li>
     <li id="fn:unicode" role="doc-endnote">
       <p><a href="https://www.unicode.org">Unicode – The World Standard for Text and Emoji</a> <a href="#fnref:unicode" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
@@ -8691,7 +8704,7 @@ defined above.</p>
       <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod">Data::Denter - An (deprecated) alternative to Data::Dumper and Storable</a> <a href="#fnref:denter" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:1-1-spec" role="doc-endnote">
-      <p><a href="https://yaml.org/spec/1.1">YAML Ain’t Markup Language (YAML™) Version 1.1</a> <a href="#fnref:1-1-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://yaml.org/spec/1.1">YAML Ain’t Markup Language (YAML™) version 1.1</a> <a href="#fnref:1-1-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:json" role="doc-endnote">
       <p><a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">The JSON data interchange syntax</a> <a href="#fnref:json" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
