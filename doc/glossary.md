@@ -1,7 +1,7 @@
 YAML Vocabulary Glossary
 ========================
 
-The YAML language has its own vocabulary.
+The YAML data language and its specification has its own vocabulary.
 It is important to use the correct terms when developers discuss YAML topics.
 For example the terms: `list`, `array` and `sequence` seem like they are the
 same thing and can be used interchangably, but in YAML they have different

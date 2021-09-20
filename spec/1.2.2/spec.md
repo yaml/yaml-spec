@@ -51,11 +51,12 @@ published revisions of this specification.
 
 See:
 
-* [YAML 1.2.1 Specification Changes](ext/changes)
-* [YAML 1.2.1 Specification Errata](ext/errata)
+* [YAML Vocabulary Glossary](ext/glossary)
 * [YAML Community Resource Index](ext/community)
 * [YAML User's Reference Index](ext/use)
 * [YAML Developer's Reference Index](ext/dev)
+* [YAML 1.2.1 Specification Changes](ext/changes)
+* [YAML 1.2.1 Specification Errata](ext/errata)
 
 
 **Abstract**
