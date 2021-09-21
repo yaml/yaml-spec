@@ -1,0 +1,53 @@
+body.status-draft { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' height='200px' width='200px'><text transform='translate(20, 200) rotate(-45)' fill='rgb(245,245,245)' font-size='60'>DRAFT</text></svg>"); }
+body.status-draft .status-header { color: #f44; }
+
+a { color: inherit; text-decoration: underline solid #606c71; }
+a:hover { color: blue; text-decoration: underline solid blue; }
+
+table { width: 100%; }
+table th, table tr { width: 100%; }
+
+pre.rule { background-color: #E0F8F8; border: none; }
+
+div.example > * td.side-by-side { vertical-align: top; border: none; width: 10%; }
+div.example > * pre { background-color: #E0F8E0; border: none; margin-bottom: 0px; }
+
+pre.error { background-color: #F8E0E0 !important; }
+
+pre.example { background-color: #E1F8E0; border: none; }
+
+.main-content blockquote { margin-right: 0px; border-left: none; }
+
+div.legend mark, pre mark { border-radius: 0.3rem; box-shadow: 0 0 0 1px #666 inset; color: inherit; display: inline-block; line-height: 16px; padding: 3px 0 !important; }
+
+.legend-1 { background-color: #F8F8E0 !important; }
+
+.legend-2 { background-color: #E0E0F8 !important; }
+
+.legend-3 { background-color: #F8E0F8 !important; }
+
+.legend-4 { background-color: #E0F8F8 !important; }
+
+div.legend { margin-left: 1rem; }
+div.legend p { margin: 0px; margin-top: 5px; }
+div.legend p strong { font-weight: normal; }
+div.legend ul { padding-inline-start: 20px; margin-block-start: 0px; }
+div.legend ul li { display: inline; white-space: nowrap; }
+div.legend code { box-shadow: 0 0 0 1px #666 inset; }
+
+ul.author-group, ul.release-info, #markdown-toc, #markdown-toc ul { list-style: none; }
+
+#markdown-toc ul ul ul ul { display: none; }
+
+#markdown-toc > :first-child { display: none; }
+
+.footnotes { margin-bottom: 1000px; }
+.footnotes p { margin-bottom: 0px; margin-block: 0px; }
+
+.language-json .highlight .nl { font-weight: normal; color: blue; }
+.language-json .highlight .s2 { color: darkgreen; }
+.language-json .highlight .kc { color: #567482; font-weight: bold; }
+.language-json .highlight .se { color: darkblue; font-weight: bold; }
+.language-json .highlight .err, .language-json .highlight .err + .mi, .language-json .highlight .err + .p + .mi { color: #567482; background-color: inherit; }
+
+dt { font-weight: normal !important; color: #159957; }
