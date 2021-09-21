@@ -5523,7 +5523,7 @@ followed by a non-space character (e.g. "`-42`").
 
 ```
 [#] c-l-block-seq-entry(n) ::=
-  c-sequence-entry
+  c-sequence-entry    # '-'
   [ lookahead ≠ ns-char ]
   s-l+block-indented(n,BLOCK-IN)
 ```
