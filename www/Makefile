@@ -1,6 +1,8 @@
 DOCKER_TOOL := github-pages
 include ../tool/make/init.mk
 
+export ROOT
+
 #------------------------------------------------------------------------------
 # Makefile variables defined here:
 #------------------------------------------------------------------------------
@@ -125,6 +127,7 @@ FILES := \
     $(REVIEW_FILES) \
     $(DOC_FILES) \
     $(STORY_FILES) \
+    jekyll/_includes/sitedir-pulldown.html \
 
 FILES := $(FILES:%.swp=)
 
@@ -140,18 +143,17 @@ list-html:
 list-files:
 	@printf "%s\n" $(FILES)
 
-files: $(EXT_DIRS) $(FILES)
+files: $(EXT_DIRS) $(FILES) track-gh-pages
 
 build: files
 	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
 ifneq (,$(SITEDIR))
+ifneq (main,$(SITEDIR))
 	mv $(BUILD)/main $(BUILD)/$(SITEDIR)
+endif
 endif
 
 site: build
-	git show-ref -q origin/gh-pages || \
-	  git fetch origin gh-pages
-	-git branch --track gh-pages origin/gh-pages
 	git worktree add -f $@ gh-pages
 	git -C $(SITE) reset --hard origin/gh-pages
 	cd $(BUILD) && find . | grep -v Gemfile | cpio -dump ../$(SITE)
@@ -263,6 +265,9 @@ main/review/markdown.html: $(SPEC_122)/spec.md
 main/review/spec-plain.md: main/spec.md
 	make-review-spec-md $< > $@
 
+jekyll/_includes/sitedir-pulldown.html:
+	./bin/generate-sitedir-pulldown > $@
+
 #------------------------------------------------------------------------------
 check-publish:
 ifeq ($(SITEDIR),)
@@ -308,3 +313,8 @@ html/1.2.2/%.html: $(SITE)/main/%.html
 html/1.2.2/title.html: $(SITE)/main/spec.html
 	@mkdir -p $(dir $@)
 	grep '<title>' $< | head -n1 > $@
+
+track-gh-pages:
+	git show-ref -q origin/gh-pages || \
+	  git fetch origin gh-pages
+	-git branch --track gh-pages origin/gh-pages

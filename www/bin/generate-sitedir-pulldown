@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+mapfile -t list < <(cd "$ROOT" && git ls-tree --name-only gh-pages)
+
+
+echo '<select onChange="window.location.href=this.value">'
+echo '<option value="https://spec.yaml.io">Choose</option>'
+echo '<option value="https://spec.yaml.io/main">main</option>'
+
+for dir in "${list[@]}"; do
+  [[
+    $dir == @(CNAME|index.html|main|.nojekyll|assets|bin|ext|favicon.svg)
+  ]] && continue
+
+  echo "<option value=\"/$dir/\">$dir</option>"
+done
+
+echo '</select>'

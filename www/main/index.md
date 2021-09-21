@@ -21,6 +21,5 @@ subdirectory.
 For example the contents of the `main` branch are published to
 <https://yaml.spec.io/main/>.
 
-Select a branch:
-
-{{ include branch-pulldown }}
+Select a branch / site-directory:
+{% include sitedir-pulldown.html %}
