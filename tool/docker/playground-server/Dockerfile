@@ -31,6 +31,7 @@ RUN pip3 install \
         pyyaml \
  && true
 
+# This hack is to keep the Haskell reference parser working:
 RUN cd /usr/lib \
  && ln -s libffi.so.7.1.0 libffi.so.6 \
  && true
