@@ -2,7 +2,25 @@
   window.Playground = (function() {
     function Playground() {}
 
-    Playground.refparser_events = function(text) {
+    Playground.init = function(eatme) {
+      var params;
+      params = new URLSearchParams(window.location.search);
+      if (params.has('input')) {
+        try {
+          return eatme.input = atob(params.get('input'));
+        } catch (error1) {}
+      }
+    };
+
+    Playground.change = function(text, pane) {
+      var base64, newurl, origin, pathname, ref;
+      ref = window.location, origin = ref.origin, pathname = ref.pathname;
+      base64 = btoa(text);
+      newurl = "" + origin + pathname + "?input=" + base64;
+      return window.history.replaceState(null, null, newurl);
+    };
+
+    Playground.js_refparser_events = function(text) {
       var parser;
       parser = new Parser(new TestReceiver);
       parser.parse(text);
@@ -58,6 +76,16 @@
       var data;
       data = npmJSYAML.load(text);
       return JSON.stringify(data, null, 2);
+    };
+
+    Playground.hs_refparser_yeast = function(text) {
+      var value;
+      value = this.localhost_server(text, 'cmd=hs-reference-yeast');
+      if (_.isString(value) && value.match(/\ =REST\|/)) {
+        throw value;
+      } else {
+        return value;
+      }
     };
 
     Playground.yamlpp_events = function(text) {
@@ -129,7 +157,7 @@
       console.dir(resp);
       help = loc.replace(/(\/playground\/).*/, "$1#setting-up-a-local-sandbox");
       return {
-        mark: "This pane requires a localhost sandbox server.\n\nSimply run:\n\n```\n$ docker run --rm -p " + port + ":" + port + " \\\n    yamlio/playground-sandbox:0.0.3 " + scheme + "\n```\n\n\non the same computer as your web browser.\n\nSee " + help + "  \nfor more instructions."
+        mark: "This pane requires a localhost sandbox server.\n\nSimply run:\n\n```\n$ docker run --rm -p " + port + ":" + port + " \\\n    yamlio/playground-sandbox:0.0.4 " + scheme + "\n```\n\n\non the same computer as your web browser.\n\nSee " + help + "  \nfor more instructions."
       };
     };
 

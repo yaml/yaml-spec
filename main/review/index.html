@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type"
       content="text/html; charset=UTF-8" />
 
-<title>v1 Review YAML Spec Conversion</title>
+<title>Markdown / 1.2.2 / 1.2.1 Compare</title>
 
 <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
@@ -52,6 +52,7 @@ div.iframe iframe {
 
 <script type="text/coffeescript">
 window.say = console.log
+window.mmap = {}
 window.nmap = {}
 window.omap = {}
 
@@ -62,7 +63,7 @@ run = (m, n, o)->
   $(n).find('h1,h2,h3,h4').each ->
     tag = @.tagName
     text = $(@).text()
-      .replace(/^Chapter\s+(\d+\.)+\s+/, 'Chapter ')
+      .replace(/^Chapter\s+(\d+\.)+\s+.*/, 'Chapter $1')
       .replace(/^(\d+\.)+\s+/, '')
     nmap["#{tag} #{text}"] = @
 
@@ -86,7 +87,7 @@ run = (m, n, o)->
       .replace(/\s+/g, ' ')
       .replace(/^\s/, '')
       .replace(/\s$/, '')
-      .replace(/^Chapter\s+(\d+\.)+\s+/, 'Chapter ')
+      .replace(/^Chapter\s+(\d+\.)+\s+.*/, 'Chapter $1')
       .replace(/^(\d+\.)+\s+/, '')
     omap["#{tag} #{text}"] = @
 
@@ -105,14 +106,26 @@ run = (m, n, o)->
 
   height = 200 - document.documentElement.scrollHeight
 
+  mmap['# Chapter #. Introduction to YAML']     = 'H1 Chapter 1.'
+  mmap['# Chapter #. Language Overview']        = 'H1 Chapter 2.'
+  mmap['# Chapter #. Processes and Models']     = 'H1 Chapter 3.'
+  mmap['# Chapter #. Syntax Conventions']       = 'H1 Chapter 4.'
+  mmap['# Chapter #. Character Productions']    = 'H1 Chapter 5.'
+  mmap['# Chapter #. Structural Productions']   = 'H1 Chapter 6.'
+  mmap['# Chapter #. Flow Style Productions']   = 'H1 Chapter 7.'
+  mmap['# Chapter #. Block Style Productions']  = 'H1 Chapter 8.'
+  mmap['# Chapter #. Document Stream Productions'] = 'H1 Chapter 9.'
+  mmap['# Chapter #. Recommended Schemas']      = 'H1 Chapter 10.'
+
   io = new IO (e)->
     return unless e[0].isIntersecting
     h = $(e[0].target).text()
-    if h.match /^(#{1,4})\s/
+    if mmap[h]?
+      t = mmap[h]
+    else if h.match /^(#{1,4})\s/
       l = RegExp.$1
       l = l.length
       h = h.replace /^#+\s+/, ''
-      h = h.replace(/^Chapter\s+\#\.\s+/, 'Chapter ')
       h = h.replace(/^\#\.\s+/, '')
       t = "H#{l} #{h}"
     else if h.match /^\*\*/

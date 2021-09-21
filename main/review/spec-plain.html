@@ -34,7 +34,7 @@
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-20">Revision 1.2.2 (2021-09-20)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-21">Revision 1.2.2 (2021-09-21)</h2>
 
 <p>Copyright presently by YAML Language Development Team<sup id="fnref:team" role="doc-noteref"><a href="#fn:team" class="footnote" rel="footnote">1</a></sup><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -100,16 +100,16 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-20" id="markdown-toc-revision-122-2021-09-20">Revision 1.2.2 (2021-09-20)</a></li>
+      <li><a href="#revision-122-2021-09-21" id="markdown-toc-revision-122-2021-09-21">Revision 1.2.2 (2021-09-21)</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-1-introduction" id="markdown-toc-chapter-1-introduction">Chapter 1. Introduction</a>    <ul>
+  <li><a href="#chapter-1-introduction-to-yaml" id="markdown-toc-chapter-1-introduction-to-yaml">Chapter 1. Introduction to YAML</a>    <ul>
       <li><a href="#11-goals" id="markdown-toc-11-goals">1.1. Goals</a></li>
       <li><a href="#12-yaml-history" id="markdown-toc-12-yaml-history">1.2. YAML History</a></li>
       <li><a href="#13-terminology" id="markdown-toc-13-terminology">1.3. Terminology</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-2-preview" id="markdown-toc-chapter-2-preview">Chapter 2. Preview</a>    <ul>
+  <li><a href="#chapter-2-language-overview" id="markdown-toc-chapter-2-language-overview">Chapter 2. Language Overview</a>    <ul>
       <li><a href="#21-collections" id="markdown-toc-21-collections">2.1. Collections</a></li>
       <li><a href="#22-structures" id="markdown-toc-22-structures">2.2. Structures</a></li>
       <li><a href="#23-scalars" id="markdown-toc-23-scalars">2.3. Scalars</a></li>
@@ -117,7 +117,7 @@ create programs that process YAML information.</p>
       <li><a href="#25-full-length-example" id="markdown-toc-25-full-length-example">2.5. Full Length Example</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-3-processing-yaml-information" id="markdown-toc-chapter-3-processing-yaml-information">Chapter 3. Processing YAML Information</a>    <ul>
+  <li><a href="#chapter-3-processes-and-models" id="markdown-toc-chapter-3-processes-and-models">Chapter 3. Processes and Models</a>    <ul>
       <li><a href="#31-processes" id="markdown-toc-31-processes">3.1. Processes</a>        <ul>
           <li><a href="#311-dump" id="markdown-toc-311-dump">3.1.1. Dump</a></li>
           <li><a href="#312-load" id="markdown-toc-312-load">3.1.2. Load</a></li>
@@ -159,7 +159,7 @@ create programs that process YAML information.</p>
       <li><a href="#43-production-naming-conventions" id="markdown-toc-43-production-naming-conventions">4.3. Production Naming Conventions</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-5-characters" id="markdown-toc-chapter-5-characters">Chapter 5. Characters</a>    <ul>
+  <li><a href="#chapter-5-character-productions" id="markdown-toc-chapter-5-character-productions">Chapter 5. Character Productions</a>    <ul>
       <li><a href="#51-character-set" id="markdown-toc-51-character-set">5.1. Character Set</a></li>
       <li><a href="#52-character-encodings" id="markdown-toc-52-character-encodings">5.2. Character Encodings</a></li>
       <li><a href="#53-indicator-characters" id="markdown-toc-53-indicator-characters">5.3. Indicator Characters</a></li>
@@ -169,7 +169,7 @@ create programs that process YAML information.</p>
       <li><a href="#57-escaped-characters" id="markdown-toc-57-escaped-characters">5.7. Escaped Characters</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-6-basic-structures" id="markdown-toc-chapter-6-basic-structures">Chapter 6. Basic Structures</a>    <ul>
+  <li><a href="#chapter-6-structural-productions" id="markdown-toc-chapter-6-structural-productions">Chapter 6. Structural Productions</a>    <ul>
       <li><a href="#61-indentation-spaces" id="markdown-toc-61-indentation-spaces">6.1. Indentation Spaces</a></li>
       <li><a href="#62-separation-spaces" id="markdown-toc-62-separation-spaces">6.2. Separation Spaces</a></li>
       <li><a href="#63-line-prefixes" id="markdown-toc-63-line-prefixes">6.3. Line Prefixes</a></li>
@@ -193,7 +193,7 @@ create programs that process YAML information.</p>
       </li>
     </ul>
   </li>
-  <li><a href="#chapter-7-flow-styles" id="markdown-toc-chapter-7-flow-styles">Chapter 7. Flow Styles</a>    <ul>
+  <li><a href="#chapter-7-flow-style-productions" id="markdown-toc-chapter-7-flow-style-productions">Chapter 7. Flow Style Productions</a>    <ul>
       <li><a href="#71-alias-nodes" id="markdown-toc-71-alias-nodes">7.1. Alias Nodes</a></li>
       <li><a href="#72-empty-nodes" id="markdown-toc-72-empty-nodes">7.2. Empty Nodes</a></li>
       <li><a href="#73-flow-scalar-styles" id="markdown-toc-73-flow-scalar-styles">7.3. Flow Scalar Styles</a>        <ul>
@@ -210,7 +210,7 @@ create programs that process YAML information.</p>
       <li><a href="#75-flow-nodes" id="markdown-toc-75-flow-nodes">7.5. Flow Nodes</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-8-block-styles" id="markdown-toc-chapter-8-block-styles">Chapter 8. Block Styles</a>    <ul>
+  <li><a href="#chapter-8-block-style-productions" id="markdown-toc-chapter-8-block-style-productions">Chapter 8. Block Style Productions</a>    <ul>
       <li><a href="#81-block-scalar-styles" id="markdown-toc-81-block-scalar-styles">8.1. Block Scalar Styles</a>        <ul>
           <li><a href="#811-block-scalar-headers" id="markdown-toc-811-block-scalar-headers">8.1.1. Block Scalar Headers</a>            <ul>
               <li><a href="#8111-block-indentation-indicator" id="markdown-toc-8111-block-indentation-indicator">8.1.1.1. Block Indentation Indicator</a></li>
@@ -229,7 +229,7 @@ create programs that process YAML information.</p>
       </li>
     </ul>
   </li>
-  <li><a href="#chapter-9-yaml-character-stream" id="markdown-toc-chapter-9-yaml-character-stream">Chapter 9. YAML Character Stream</a>    <ul>
+  <li><a href="#chapter-9-document-stream-productions" id="markdown-toc-chapter-9-document-stream-productions">Chapter 9. Document Stream Productions</a>    <ul>
       <li><a href="#91-documents" id="markdown-toc-91-documents">9.1. Documents</a>        <ul>
           <li><a href="#911-document-prefix" id="markdown-toc-911-document-prefix">9.1.1. Document Prefix</a></li>
           <li><a href="#912-document-markers" id="markdown-toc-912-document-markers">9.1.2. Document Markers</a></li>
@@ -274,8 +274,8 @@ create programs that process YAML information.</p>
   <li><a href="#reference-links" id="markdown-toc-reference-links">Reference Links</a></li>
 </ul>
 
-<div id="introduction"></div>
-<h1 id="chapter-1-introduction">Chapter 1. Introduction</h1>
+<div id="introduction-to-yaml"></div>
+<h1 id="chapter-1-introduction-to-yaml">Chapter 1. Introduction to YAML</h1>
 
 <p>YAML (a recursive acronym for “YAML Ain’t Markup Language”) is a data
 serialization language designed to be human-friendly and work well with modern
@@ -283,7 +283,7 @@ programming languages for common everyday tasks.
 This specification is both an introduction to the YAML language and the
 concepts supporting it.
 It is also a complete specification of the information needed to develop
-<a href="#processing-yaml-information">applications</a> for processing YAML.</p>
+<a href="#processes-and-models">applications</a> for processing YAML.</p>
 
 <p>Open, interoperable and readily understandable tools have advanced computing
 immensely.
@@ -390,8 +390,8 @@ The bulk of the document, chapters [4] through [9], formally define this text
 format.
 Finally, chapter [10] recommends basic YAML schemas.</p>
 
-<div id="preview"></div>
-<h1 id="chapter-2-preview">Chapter 2. Preview</h1>
+<div id="language-overview"></div>
+<h1 id="chapter-2-language-overview">Chapter 2. Language Overview</h1>
 
 <p>This section provides a quick glimpse into the expressive power of YAML.
 It is not expected that the first-time reader grok all of the examples.
@@ -462,7 +462,7 @@ national:
 
 </div>
 
-<p>YAML also has <a href="#flow-styles">flow styles</a>, using explicit <a href="#indicator-characters">indicators</a> rather than
+<p>YAML also has <a href="#flow-style-productions">flow styles</a>, using explicit <a href="#indicator-characters">indicators</a> rather than
 <a href="#indentation-spaces">indentation</a> to denote scope.
 The <a href="#flow-sequences">flow sequence</a> is written as a <a href="#flow-collection-styles">comma</a> separated list within <a href="#flow-sequences">square</a>
 <a href="#flow-sequences">brackets</a>.
@@ -713,7 +713,7 @@ quoted: "So does this
 <div id="tags"></div>
 <h2 id="24-tags">2.4. Tags</h2>
 
-<p>In YAML, <a href="#resolved-tags">untagged nodes</a> are given a type depending on the <a href="#processing-yaml-information">application</a>.
+<p>In YAML, <a href="#resolved-tags">untagged nodes</a> are given a type depending on the <a href="#processes-and-models">application</a>.
 The examples in this specification generally use the <code class="language-plaintext highlighter-rouge">seq</code>, <code class="language-plaintext highlighter-rouge">map</code> and <code class="language-plaintext highlighter-rouge">str</code>
 types from the <a href="#failsafe-schema">fail safe schema</a>.
 A few examples also use the <code class="language-plaintext highlighter-rouge">int</code>, <code class="language-plaintext highlighter-rouge">float</code> and <code class="language-plaintext highlighter-rouge">null</code> types from the <a href="#json-schema">JSON
@@ -771,7 +771,7 @@ date: 2002-12-14
 symbol.
 <a href="#tags">Global tags</a> are URIs and may be specified in a <a href="#tag-shorthands">tag shorthand</a> notation using
 a <a href="#tag-handles">handle</a>.
-<a href="#processing-yaml-information">Application</a>-specific <a href="#tags">local tags</a> may also be used.</p>
+<a href="#processes-and-models">Application</a>-specific <a href="#tags">local tags</a> may also be used.</p>
 
 <div id="example-various-explicit-tags" class="example">
   <p><strong>Example 2.23 Various Explicit Tags</strong></p>
@@ -923,8 +923,8 @@ Stack:
 
 </div>
 
-<div id="processing-yaml-information"></div>
-<h1 id="chapter-3-processing-yaml-information">Chapter 3. Processing YAML Information</h1>
+<div id="processes-and-models"></div>
+<h1 id="chapter-3-processes-and-models">Chapter 3. Processes and Models</h1>
 
 <p>YAML is both a text format and a method for <a href="#presenting-the-serialization-tree">presenting</a> any <a href="#representing-native-data-structures">native data
 structure</a> in this format.
@@ -998,7 +998,7 @@ The <a href="#scalar">scalar</a> represents strings, integers, dates and other a
     <p>Each YAML <a href="#nodes">node</a> requires, in addition to its <a href="#nodes">kind</a> and <a href="#nodes">content</a>, a <a href="#tags">tag</a>
 specifying its data type.
 Type specifiers are either <a href="#tags">global</a> URIs or are <a href="#tags">local</a> in scope to a single
-<a href="#processing-yaml-information">application</a>.
+<a href="#processes-and-models">application</a>.
 For example, an integer is represented in YAML with a <a href="#scalar">scalar</a> plus the <a href="#tags">global
 tag</a> “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code>”.
 Similarly, an invoice object, particular to a given organization, could be
@@ -1021,8 +1021,8 @@ serialization process is required to impose an <a href="#keys-order">ordering</a
 and to replace the second and subsequent references to a given <a href="#nodes">node</a> with
 place holders called <a href="#anchors-and-aliases">aliases</a>.
 YAML does not specify how these <em>serialization details</em> are chosen.
-It is up to the YAML <a href="#processing-yaml-information">processor</a> to come up with human-friendly <a href="#keys-order">key order</a> and
-<a href="#anchors-and-aliases">anchor</a> names, possibly with the help of the <a href="#processing-yaml-information">application</a>.
+It is up to the YAML <a href="#processes-and-models">processor</a> to come up with human-friendly <a href="#keys-order">key order</a> and
+<a href="#anchors-and-aliases">anchor</a> names, possibly with the help of the <a href="#processes-and-models">application</a>.
 The result of this process, a YAML <a href="#serialization-tree">serialization tree</a>, can then be traversed
 to produce a series of event calls for one-pass processing of YAML data.</p>
   </dd>
@@ -1037,12 +1037,12 @@ to produce a series of event calls for one-pass processing of YAML data.</p>
 character <a href="#streams">stream</a> in a human-friendly manner.
 To maximize human readability, YAML offers a rich set of stylistic options
 which go far beyond the minimal functional needs of simple data storage.
-Therefore the YAML <a href="#processing-yaml-information">processor</a> is required to introduce various <em>presentation
+Therefore the YAML <a href="#processes-and-models">processor</a> is required to introduce various <em>presentation
 details</em> when creating the <a href="#streams">stream</a>, such as the choice of <a href="#node-styles">node styles</a>, how
 to <a href="#scalar-formats">format scalar content</a>, the amount of <a href="#indentation-spaces">indentation</a>, which <a href="#tag-handles">tag handles</a> to
 use, the <a href="#node-tags">node tags</a> to leave <a href="#resolved-tags">unspecified</a>, the set of <a href="#directives">directives</a> to provide
 and possibly even what <a href="#comments">comments</a> to add.
-While some of this can be done with the help of the <a href="#processing-yaml-information">application</a>, in general
+While some of this can be done with the help of the <a href="#processes-and-models">application</a>, in general
 this process should be guided by the preferences of the user.</p>
   </dd>
 </dl>
@@ -1106,12 +1106,12 @@ users of YAML should be mindful of the distinction between <a href="#serializati
 <a href="#representation-graph">representation</a>.
 Thus, while imposing a <a href="#keys-order">order</a> on <a href="#nodes">mapping keys</a> is necessary for flattening
 YAML <a href="#representation-graph">representations</a> to a sequential access medium, this <a href="#serializing-the-representation-graph">serialization
-detail</a> must not be used to convey <a href="#processing-yaml-information">application</a> level information.
+detail</a> must not be used to convey <a href="#processes-and-models">application</a> level information.
 In a similar manner, while <a href="#indentation-spaces">indentation</a> technique and a choice of a <a href="#node-styles">node
 style</a> are needed for the human readability, these <a href="#presenting-the-serialization-tree">presentation details</a> are
 neither part of the YAML <a href="#serialization-tree">serialization</a> nor the YAML <a href="#representation-graph">representation</a>.
 By carefully separating properties needed for <a href="#serialization-tree">serialization</a> and
-<a href="#presentation-stream">presentation</a>, YAML <a href="#representation-graph">representations</a> of <a href="#processing-yaml-information">application</a> information will be
+<a href="#presentation-stream">presentation</a>, YAML <a href="#representation-graph">representations</a> of <a href="#processes-and-models">application</a> information will be
 consistent and portable between various programming environments.</p>
 
 <p>The following diagram summarizes the three <em>information models</em>.
@@ -1194,9 +1194,9 @@ key or a value.</p>
 
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
 identifier, called a <em>tag</em>.
-<em>Global tags</em> are URIs and hence globally unique across all <a href="#processing-yaml-information">applications</a>.
+<em>Global tags</em> are URIs and hence globally unique across all <a href="#processes-and-models">applications</a>.
 The “<code class="language-plaintext highlighter-rouge">tag:</code>” URI scheme<sup id="fnref:tag-uri" role="doc-noteref"><a href="#fn:tag-uri" class="footnote" rel="footnote">14</a></sup> is recommended for all global YAML tags.
-In contrast, <em>local tags</em> are specific to a single <a href="#processing-yaml-information">application</a>.
+In contrast, <em>local tags</em> are specific to a single <a href="#processes-and-models">application</a>.
 Local tags start with <em>”<code class="language-plaintext highlighter-rouge">!</code>“</em>, are not URIs and are not expected to be globally
 unique.
 YAML provides a “<code class="language-plaintext highlighter-rouge">TAG</code>” directive to make tag notation less verbose; it also
@@ -1233,7 +1233,7 @@ This is non-trivial since YAML allows various ways to <a href="#scalar-formats">
 For example, the integer eleven can be written as “<code class="language-plaintext highlighter-rouge">0o13</code>” (octal) or “<code class="language-plaintext highlighter-rouge">0xB</code>”
 (hexadecimal).
 If both notations are used as <a href="#nodes">keys</a> in the same <a href="#mapping">mapping</a>, only a YAML
-<a href="#processing-yaml-information">processor</a> which recognizes integer <a href="#scalar-formats">formats</a> would correctly flag the
+<a href="#processes-and-models">processor</a> which recognizes integer <a href="#scalar-formats">formats</a> would correctly flag the
 duplicate <a href="#nodes">key</a> as an error.</p>
 
 <div id="canonical-form"></div>
@@ -1270,7 +1270,7 @@ Two <a href="#mapping">mappings</a> are equal only when they have the same <a hr
   <dd>
     <p>Different URI schemes may define different rules for testing the equality of
 URIs.
-Since a YAML <a href="#processing-yaml-information">processor</a> cannot be reasonably expected to be aware of them all,
+Since a YAML <a href="#processes-and-models">processor</a> cannot be reasonably expected to be aware of them all,
 it must resort to a simple character-by-character comparison of <a href="#tags">tags</a> to
 ensure consistency.
 This also happens to be the comparison method defined by the “<code class="language-plaintext highlighter-rouge">tag:</code>” URI
@@ -1285,7 +1285,7 @@ that such comparison would yield the correct results.</p>
 equality of that node is implementation-defined.</p>
 </blockquote>
 
-<p>: A YAML <a href="#processing-yaml-information">processor</a> may treat equal <a href="#scalars">scalars</a> as if they were identical.</p>
+<p>: A YAML <a href="#processes-and-models">processor</a> may treat equal <a href="#scalars">scalars</a> as if they were identical.</p>
 
 <div id="uniqueness"></div>
 
@@ -1307,7 +1307,7 @@ The result of this process is a <em>serialization tree</em>, where each <a href=
 ordered set of children.
 This tree can be traversed for a serial event-based API.
 <a href="#constructing-native-data-structures">Construction</a> of <a href="#representing-native-data-structures">native data structures</a> from the serial interface should not
-use <a href="#keys-order">key order</a> or <a href="#anchors-and-aliases">anchor names</a> for the preservation of <a href="#processing-yaml-information">application</a> data.</p>
+use <a href="#keys-order">key order</a> or <a href="#anchors-and-aliases">anchor names</a> for the preservation of <a href="#processes-and-models">application</a> data.</p>
 
 <p><strong>Figure 3.4. Serialization Model</strong></p>
 
@@ -1320,7 +1320,7 @@ use <a href="#keys-order">key order</a> or <a href="#anchors-and-aliases">anchor
 To <a href="#serializing-the-representation-graph">serialize</a> a <a href="#mapping">mapping</a>, it is necessary to impose an <em>ordering</em> on its
 <a href="#nodes">keys</a>.
 This order is a <a href="#serializing-the-representation-graph">serialization detail</a> and should not be used when <a href="#composing-the-representation-graph">composing</a>
-the <a href="#representation-graph">representation graph</a> (and hence for the preservation of <a href="#processing-yaml-information">application</a>
+the <a href="#representation-graph">representation graph</a> (and hence for the preservation of <a href="#processes-and-models">application</a>
 data).
 In every case where <a href="#nodes">node</a> order is significant, a <a href="#sequence">sequence</a> must be used.
 For example, an ordered <a href="#mapping">mapping</a> can be <a href="#representation-graph">represented</a> as a <a href="#sequence">sequence</a> of
@@ -1365,8 +1365,8 @@ presentation stream, as a series of <a href="#documents">documents</a> separated
 The node style is a <a href="#presenting-the-serialization-tree">presentation detail</a> and is not reflected in the
 <a href="#serialization-tree">serialization tree</a> or <a href="#representation-graph">representation graph</a>.
 There are two groups of styles.
-<a href="#block-styles">Block styles</a> use <a href="#indentation-spaces">indentation</a> to denote structure.
-In contrast, <a href="#flow-styles">flow styles</a> rely on explicit <a href="#indicator-characters">indicators</a>.</p>
+<a href="#block-style-productions">Block styles</a> use <a href="#indentation-spaces">indentation</a> to denote structure.
+In contrast, <a href="#flow-style-productions">flow styles</a> rely on explicit <a href="#indicator-characters">indicators</a>.</p>
 
 <p>YAML provides a rich set of <em>scalar styles</em>.
 <a href="#block-scalar-styles">Block scalar</a> styles include the <a href="#literal-style">literal style</a> and the <a href="#folded-style">folded style</a>.
@@ -1413,7 +1413,7 @@ Comments must not appear inside <a href="#scalars">scalars</a>, but may be inter
 
 <p>Each <a href="#document">document</a> may be associated with a set of <a href="#directives">directives</a>.
 A directive has a name and an optional sequence of parameters.
-Directives are instructions to the YAML <a href="#processing-yaml-information">processor</a> and like all other
+Directives are instructions to the YAML <a href="#processes-and-models">processor</a> and like all other
 <a href="#presenting-the-serialization-tree">presentation details</a> are not reflected in the YAML <a href="#serialization-tree">serialization tree</a> or
 <a href="#representation-graph">representation graph</a>.
 This version of YAML defines two directives, “<code class="language-plaintext highlighter-rouge">YAML</code>” and “<code class="language-plaintext highlighter-rouge">TAG</code>”.
@@ -1452,9 +1452,9 @@ structures</a>.</p>
 the following chapters.
 Successful loading also requires that each <a href="#anchors-and-aliases">alias</a> shall refer to a previous
 <a href="#nodes">node</a> <a href="#anchors-and-aliases">identified</a> by the <a href="#anchors-and-aliases">anchor</a>.
-A YAML <a href="#processing-yaml-information">processor</a> should reject <em>ill-formed streams</em> and <em>unidentified
+A YAML <a href="#processes-and-models">processor</a> should reject <em>ill-formed streams</em> and <em>unidentified
 aliases</em>.
-A YAML <a href="#processing-yaml-information">processor</a> may recover from syntax errors, possibly by ignoring certain
+A YAML <a href="#processes-and-models">processor</a> may recover from syntax errors, possibly by ignoring certain
 parts of the input, but it must provide a mechanism for reporting such errors.</p>
 
 <div id="resolved-tags"></div>
@@ -1487,10 +1487,10 @@ being resolved.</p>
 first encountered in the <a href="#streams">stream</a>, typically before its <a href="#nodes">content</a> is <a href="#parsing-the-presentation-stream">parsed</a>.
 Also, tag resolution only requires referring to a relatively small number of
 previously parsed <a href="#nodes">nodes</a>.
-Thus, in most cases, tag resolution in one-pass <a href="#processing-yaml-information">processors</a> is both possible
+Thus, in most cases, tag resolution in one-pass <a href="#processes-and-models">processors</a> is both possible
 and practical.</p>
 
-<p>YAML <a href="#processing-yaml-information">processors</a> should resolve <a href="#nodes">nodes</a> having the “<code class="language-plaintext highlighter-rouge">!</code>” non-specific tag as
+<p>YAML <a href="#processes-and-models">processors</a> should resolve <a href="#nodes">nodes</a> having the “<code class="language-plaintext highlighter-rouge">!</code>” non-specific tag as
 “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>”, “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” or
 “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>” depending on their <a href="#nodes">kind</a>.
 This <em>tag resolution convention</em> allows the author of a YAML character <a href="#streams">stream</a>
@@ -1499,33 +1499,33 @@ By explicitly specifying a “<code class="language-plaintext highlighter-rouge"
 then be resolved to a “vanilla” <a href="#sequence">sequence</a>, <a href="#mapping">mapping</a> or string, according to
 its <a href="#nodes">kind</a>.</p>
 
-<p><a href="#processing-yaml-information">Application</a> specific tag resolution rules should be restricted to resolving
+<p><a href="#processes-and-models">Application</a> specific tag resolution rules should be restricted to resolving
 the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag, most commonly to resolving <a href="#plain-style">plain scalars</a>.
 These may be matched against a set of regular expressions to provide automatic
 resolution of integers, floats, timestamps and similar types.
-An <a href="#processing-yaml-information">application</a> may also match the <a href="#nodes">content</a> of <a href="#mapping">mapping nodes</a> against sets
+An <a href="#processes-and-models">application</a> may also match the <a href="#nodes">content</a> of <a href="#mapping">mapping nodes</a> against sets
 of expected <a href="#nodes">keys</a> to automatically resolve points, complex numbers and similar
 types.
 Resolved <a href="#sequence">sequence node</a> types such as the “ordered mapping” are also possible.</p>
 
-<p>That said, tag resolution is specific to the <a href="#processing-yaml-information">application</a>.
-YAML <a href="#processing-yaml-information">processors</a> should therefore provide a mechanism allowing the
-<a href="#processing-yaml-information">application</a> to override and expand these default tag resolution rules.</p>
+<p>That said, tag resolution is specific to the <a href="#processes-and-models">application</a>.
+YAML <a href="#processes-and-models">processors</a> should therefore provide a mechanism allowing the
+<a href="#processes-and-models">application</a> to override and expand these default tag resolution rules.</p>
 
-<p>If a <a href="#document">document</a> contains <em>unresolved tags</em>, the YAML <a href="#processing-yaml-information">processor</a> is unable to
+<p>If a <a href="#document">document</a> contains <em>unresolved tags</em>, the YAML <a href="#processes-and-models">processor</a> is unable to
 <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete representation</a> graph.
-In such a case, the YAML <a href="#processing-yaml-information">processor</a> may <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">partial representation</a>,
+In such a case, the YAML <a href="#processes-and-models">processor</a> may <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">partial representation</a>,
 based on each <a href="#nodes">node’s kind</a> and allowing for non-specific tags.</p>
 
 <div id="recognized-and-valid-tags"></div>
 <h3 id="333-recognized-and-valid-tags">3.3.3. Recognized and Valid Tags</h3>
 
 <p>To be <em>valid</em>, a <a href="#nodes">node</a> must have a <a href="#tags">tag</a> which is <em>recognized</em> by the YAML
-<a href="#processing-yaml-information">processor</a> and its <a href="#nodes">content</a> must satisfy the constraints imposed by this
+<a href="#processes-and-models">processor</a> and its <a href="#nodes">content</a> must satisfy the constraints imposed by this
 <a href="#tags">tag</a>.
 If a <a href="#document">document</a> contains a <a href="#nodes">scalar node</a> with an <em>unrecognized tag</em> or <em>invalid
 content</em>, only a <a href="#loading-point-failures">partial representation</a> may be <a href="#composing-the-representation-graph">composed</a>.
-In contrast, a YAML <a href="#processing-yaml-information">processor</a> can always <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete
+In contrast, a YAML <a href="#processes-and-models">processor</a> can always <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete
 representation</a> for an unrecognized or an invalid <a href="#collections">collection</a>, since
 <a href="#collections">collection</a> <a href="#equality">equality</a> does not depend upon knowledge of the <a href="#mapping">collection’s</a>
 data type.
@@ -1537,10 +1537,10 @@ However, such a <a href="#loading-point-failures">complete representation</a> ca
 
 <p>In a given processing environment, there need not be an <em>available</em> native type
 corresponding to a given <a href="#tags">tag</a>.
-If a <a href="#tags">node’s tag</a> is <em>unavailable</em>, a YAML <a href="#processing-yaml-information">processor</a> will not be able to
+If a <a href="#tags">node’s tag</a> is <em>unavailable</em>, a YAML <a href="#processes-and-models">processor</a> will not be able to
 <a href="#constructing-native-data-structures">construct</a> a <a href="#representing-native-data-structures">native data structure</a> for it.
 In this case, a <a href="#loading-point-failures">complete representation</a> may still be <a href="#composing-the-representation-graph">composed</a> and an
-<a href="#processing-yaml-information">application</a> may wish to use this <a href="#representation-graph">representation</a> directly.</p>
+<a href="#processes-and-models">application</a> may wish to use this <a href="#representation-graph">representation</a> directly.</p>
 
 <div id="syntax-conventions"></div>
 <h1 id="chapter-4-syntax-conventions">Chapter 4. Syntax Conventions</h1>
@@ -1677,8 +1677,8 @@ production-a(1) ::=
   <dd>
     <p>This parameter allows productions to tweak their behavior according to their
 surrounding.
-YAML supports two groups of <em>contexts</em>, distinguishing between <a href="#block-styles">block styles</a>
-and <a href="#flow-styles">flow styles</a>.</p>
+YAML supports two groups of <em>contexts</em>, distinguishing between <a href="#block-style-productions">block styles</a>
+and <a href="#flow-style-productions">flow styles</a>.</p>
   </dd>
   <dd>
     <p>May be any of the following values:</p>
@@ -1801,8 +1801,8 @@ character, where <code class="language-plaintext highlighter-rouge">X-</code> an
   </dd>
 </dl>
 
-<div id="characters"></div>
-<h1 id="chapter-5-characters">Chapter 5. Characters</h1>
+<div id="character-productions"></div>
+<h1 id="chapter-5-character-productions">Chapter 5. Character Productions</h1>
 
 <div id="character-set"></div>
 <h2 id="51-character-set">5.1. Character Set</h2>
@@ -1814,10 +1814,10 @@ The allowed character range explicitly excludes the C0 control block<sup id="fnr
 <code class="language-plaintext highlighter-rouge">x7F</code>, the C1 control block <code class="language-plaintext highlighter-rouge">x80-x9F</code> (except for NEL <code class="language-plaintext highlighter-rouge">x85</code> which is allowed),
 the surrogate block<sup id="fnref:surrogates" role="doc-noteref"><a href="#fn:surrogates" class="footnote" rel="footnote">16</a></sup> <code class="language-plaintext highlighter-rouge">xD800-xDFFF</code>, <code class="language-plaintext highlighter-rouge">xFFFE</code> and <code class="language-plaintext highlighter-rouge">xFFFF</code>.</p>
 
-<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must accept all characters in this printable
+<p>On input, a YAML <a href="#processes-and-models">processor</a> must accept all characters in this printable
 subset.</p>
 
-<p>On output, a YAML <a href="#processing-yaml-information">processor</a> must only produce only characters in this
+<p>On output, a YAML <a href="#processes-and-models">processor</a> must only produce only characters in this
 printable subset.
 Characters outside this set must be <a href="#presenting-the-serialization-tree">presented</a> using <a href="#escaped-characters">escape</a> sequences.
 In addition, any allowed characters known to be non-printable should also be
@@ -1843,7 +1843,7 @@ extensive character property tables.</p>
   | [x010000-x10FFFF]    # 32 bit
 </pre>
 
-<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> must allow all non-C0
+<p>To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processes-and-models">processors</a> must allow all non-C0
 characters inside <a href="#double-quoted-style">quoted scalars</a>.
 To ensure readability, non-printable characters should be <a href="#escaped-characters">escaped</a> on output,
 even inside such <a href="#scalars">scalars</a>.</p>
@@ -1876,7 +1876,7 @@ a surrogate pair.</p>
 <p>The character encoding is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to
 convey <a href="#nodes">content</a> information.</p>
 
-<p>On input, a YAML <a href="#processing-yaml-information">processor</a> must support the UTF-8 and UTF-16 character
+<p>On input, a YAML <a href="#processes-and-models">processor</a> must support the UTF-8 and UTF-16 character
 encodings.
 For <a href="#yaml-directives">JSON compatibility</a>, the UTF-32 encodings must also be supported.</p>
 
@@ -2513,7 +2513,7 @@ Hence, to ensure <a href="#yaml-directives">JSON compatibility</a>, YAML treats 
 as of version 1.2.
 In theory this would cause incompatibility with <a href="#yaml-directives">version 1.1</a>; in practice
 these characters were rarely (if ever) used.
-YAML 1.2 <a href="#processing-yaml-information">processors</a> <a href="#parsing-the-presentation-stream">parsing</a> a <a href="#yaml-directives">version 1.1</a> <a href="#document">document</a> should therefore
+YAML 1.2 <a href="#processes-and-models">processors</a> <a href="#parsing-the-presentation-stream">parsing</a> a <a href="#yaml-directives">version 1.1</a> <a href="#document">document</a> should therefore
 treat these line breaks as non-break characters, with an appropriate warning.</p>
 
 <div id="rule-nb-char"></div>
@@ -2537,7 +2537,7 @@ widely used formats.</p>
 </pre>
 
 <p>Line breaks inside <a href="#scalar">scalar content</a> must be <em>normalized</em> by the YAML
-<a href="#processing-yaml-information">processor</a>.
+<a href="#processes-and-models">processor</a>.
 Each such line break must be <a href="#parsing-the-presentation-stream">parsed</a> into a single line feed character.
 The original line break format is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used
 to convey <a href="#nodes">content</a> information.</p>
@@ -2557,7 +2557,7 @@ lines.</p>
   <a href="#rule-b-break">b-break</a>
 </pre>
 
-<p>On output, a YAML <a href="#processing-yaml-information">processor</a> is free to emit line breaks using whatever
+<p>On output, a YAML <a href="#processes-and-models">processor</a> is free to emit line breaks using whatever
 convention is most appropriate.</p>
 
 <p>In the examples, line breaks are sometimes displayed using the “<code class="language-plaintext highlighter-rouge">↓</code>” glyph for
@@ -2706,7 +2706,7 @@ classes:</p>
 <p>By convention, any URI characters other than the allowed printable ASCII
 characters are first <em>encoded</em> in UTF-8 and then each byte is <em>escaped</em> using
 the <em>”<code class="language-plaintext highlighter-rouge">%</code>“</em> character.
-The YAML <a href="#processing-yaml-information">processor</a> must not expand such escaped characters.
+The YAML <a href="#processes-and-models">processor</a> must not expand such escaped characters.
 <a href="#tags">Tag</a> characters must be preserved and compared exactly as <a href="#presenting-the-serialization-tree">presented</a> in the
 YAML <a href="#streams">stream</a>, without any processing.</p>
 
@@ -3015,13 +3015,13 @@ ERROR:
 </table>
 </div>
 
-<div id="basic-structures"></div>
-<h1 id="chapter-6-basic-structures">Chapter 6. Basic Structures</h1>
+<div id="structural-productions"></div>
+<h1 id="chapter-6-structural-productions">Chapter 6. Structural Productions</h1>
 
 <div id="indentation-spaces"></div>
 <h2 id="61-indentation-spaces">6.1. Indentation Spaces</h2>
 
-<p>In YAML <a href="#block-styles">block styles</a>, structure is determined by <em>indentation</em>.
+<p>In YAML <a href="#block-style-productions">block styles</a>, structure is determined by <em>indentation</em>.
 In general, indentation is defined as a zero or more <a href="#white-space-characters">space</a> characters at the
 start of a line.</p>
 
@@ -3044,7 +3044,7 @@ s-indent(n+1) ::=
   <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent">s-indent</a>(n)
 </pre>
 
-<p>A <a href="#block-styles">block style</a> construct is terminated when encountering a line which is less
+<p>A <a href="#block-style-productions">block style</a> construct is terminated when encountering a line which is less
 indented than the construct.
 The productions use the notation “<code class="language-plaintext highlighter-rouge">s-indent-less-than(n)</code>” and
 “<code class="language-plaintext highlighter-rouge">s-indent-less-or-equal(n)</code>” to express this.</p>
@@ -3454,8 +3454,8 @@ feed and the formatting of <a href="#example-more-indented-lines">more-indented<
 <dl>
   <dt>Flow Folding</dt>
   <dd>
-    <p>Folding in <a href="#flow-styles">flow styles</a> provides more relaxed semantics.
-<a href="#flow-styles">Flow styles</a> typically depend on explicit <a href="#indicator-characters">indicators</a> rather than
+    <p>Folding in <a href="#flow-style-productions">flow styles</a> provides more relaxed semantics.
+<a href="#flow-style-productions">Flow styles</a> typically depend on explicit <a href="#indicator-characters">indicators</a> rather than
 <a href="#indentation-spaces">indentation</a> to convey structure.
 Hence spaces preceding or following the text in a line are a <a href="#presenting-the-serialization-tree">presentation
 detail</a> and must not be used to convey <a href="#nodes">content</a> information.
@@ -3517,9 +3517,9 @@ Comments are a <a href="#presenting-the-serialization-tree">presentation detail<
 information.</p>
 
 <p>Comments must be <a href="#separation-spaces">separated</a> from other tokens by <a href="#white-space-characters">white space</a> characters.
-To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processing-yaml-information">processors</a> must allow for the omission
+To ensure <a href="#yaml-directives">JSON compatibility</a>, YAML <a href="#processes-and-models">processors</a> must allow for the omission
 of the final comment <a href="#line-break-characters">line break</a> of the input <a href="#streams">stream</a>.
-However, as this confuses many tools, YAML <a href="#processing-yaml-information">processors</a> should terminate the
+However, as this confuses many tools, YAML <a href="#processes-and-models">processors</a> should terminate the
 <a href="#streams">stream</a> with an explicit <a href="#line-break-characters">line break</a> on output.</p>
 
 <div id="rule-c-nb-comment-text"></div>
@@ -3735,7 +3735,7 @@ s-separate(n,FLOW-KEY)  ::= <a href="#rule-s-separate-in-line">s-separate-in-lin
 <div id="directives"></div>
 <h2 id="68-directives">6.8. Directives</h2>
 
-<p><em>Directives</em> are instructions to the YAML <a href="#processing-yaml-information">processor</a>.
+<p><em>Directives</em> are instructions to the YAML <a href="#processes-and-models">processor</a>.
 This specification defines two directives, “<code class="language-plaintext highlighter-rouge">YAML</code>” and “<code class="language-plaintext highlighter-rouge">TAG</code>”, and <em>reserves</em>
 all other directives for future use.
 There is no way to define private directives.
@@ -3759,7 +3759,7 @@ information.</p>
 <p>Each directive is specified on a separate non-<a href="#indentation-spaces">indented</a> line starting with the
 <em>”<code class="language-plaintext highlighter-rouge">%</code>” indicator</em>, followed by the directive name and a list of parameters.
 The semantics of these parameters depends on the specific directive.
-A YAML <a href="#processing-yaml-information">processor</a> should ignore unknown directives with an appropriate
+A YAML <a href="#processes-and-models">processor</a> should ignore unknown directives with an appropriate
 warning.</p>
 
 <div id="rule-ns-reserved-directive"></div>
@@ -3822,7 +3822,7 @@ to.
 This specification defines version “<code class="language-plaintext highlighter-rouge">1.2</code>”, including recommendations for <em>YAML
 1.1 processing</em>.</p>
 
-<p>A version 1.2 YAML <a href="#processing-yaml-information">processor</a> must accept <a href="#documents">documents</a> with an explicit “<code class="language-plaintext highlighter-rouge">%YAML
+<p>A version 1.2 YAML <a href="#processes-and-models">processor</a> must accept <a href="#documents">documents</a> with an explicit “<code class="language-plaintext highlighter-rouge">%YAML
 1.2</code>” directive, as well as <a href="#documents">documents</a> lacking a “<code class="language-plaintext highlighter-rouge">YAML</code>” directive.
 Such <a href="#documents">documents</a> are assumed to conform to the 1.2 version specification.
 <a href="#documents">Documents</a> with a “<code class="language-plaintext highlighter-rouge">YAML</code>” directive specifying a higher minor version (e.g.
@@ -3830,11 +3830,11 @@ Such <a href="#documents">documents</a> are assumed to conform to the 1.2 versio
 <a href="#documents">Documents</a> with a “<code class="language-plaintext highlighter-rouge">YAML</code>” directive specifying a higher major version (e.g.
 “<code class="language-plaintext highlighter-rouge">%YAML 2.0</code>”) should be rejected with an appropriate error message.</p>
 
-<p>A version 1.2 YAML <a href="#processing-yaml-information">processor</a> must also accept <a href="#documents">documents</a> with an explicit
+<p>A version 1.2 YAML <a href="#processes-and-models">processor</a> must also accept <a href="#documents">documents</a> with an explicit
 “<code class="language-plaintext highlighter-rouge">%YAML 1.1</code>” directive.
 Note that version 1.2 is mostly a superset of version 1.1, defined for the
 purpose of ensuring <em>JSON compatibility</em>.
-Hence a version 1.2 <a href="#processing-yaml-information">processor</a> should process version 1.1 <a href="#documents">documents</a> as if
+Hence a version 1.2 <a href="#processes-and-models">processor</a> should process version 1.1 <a href="#documents">documents</a> as if
 they were version 1.2, giving a warning on points of incompatibility (handling
 of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a href="#line-break-characters">above</a>).</p>
 
@@ -4122,7 +4122,7 @@ directive has associated some prefix with it.</p>
   <dd>
     <p>The name of the handle is a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to
 convey <a href="#nodes">content</a> information.
-In particular, the YAML <a href="#processing-yaml-information">processor</a> need not preserve the handle name once
+In particular, the YAML <a href="#processes-and-models">processor</a> need not preserve the handle name once
 <a href="#parsing-the-presentation-stream">parsing</a> is completed.</p>
   </dd>
 </dl>
@@ -4182,7 +4182,7 @@ In particular, the YAML <a href="#processing-yaml-information">processor</a> nee
     <p>If the prefix begins with a “<code class="language-plaintext highlighter-rouge">!</code>” character, <a href="#tag-shorthands">shorthands</a> using the <a href="#tag-handles">handle</a>
 are expanded to a <a href="#tags">local tag</a>.
 Note that such a <a href="#tags">tag</a> is intentionally not a valid URI and its semantics are
-specific to the <a href="#processing-yaml-information">application</a>.
+specific to the <a href="#processes-and-models">application</a>.
 In particular, two <a href="#documents">documents</a> in the same <a href="#streams">stream</a> may assign different
 semantics to the same <a href="#tags">local tag</a>.</p>
   </dd>
@@ -4237,7 +4237,7 @@ semantics to the same <a href="#tags">local tag</a>.</p>
     <p>If the prefix begins with a character other than “<code class="language-plaintext highlighter-rouge">!</code>”, it must be a valid
 URI prefix, and should contain at least the scheme.
 <a href="#tag-shorthands">Shorthands</a> using the associated <a href="#tag-handles">handle</a> are expanded to globally unique URI
-tags and their semantics is consistent across <a href="#processing-yaml-information">applications</a>.
+tags and their semantics is consistent across <a href="#processes-and-models">applications</a>.
 In particular, every <a href="#document">document</a> in every <a href="#streams">stream</a> must assign the same
 semantics to the same <a href="#tags">global tag</a>.</p>
   </dd>
@@ -4359,8 +4359,8 @@ A tag is denoted by the <em>”<code class="language-plaintext highlighter-rouge
   <dd>
     <p>A tag may be written <em>verbatim</em> by surrounding it with the <em>”<code class="language-plaintext highlighter-rouge">&lt;</code>” and “<code class="language-plaintext highlighter-rouge">&gt;</code>“</em>
 characters.
-In this case, the YAML <a href="#processing-yaml-information">processor</a> must deliver the verbatim tag as-is to the
-<a href="#processing-yaml-information">application</a>.
+In this case, the YAML <a href="#processes-and-models">processor</a> must deliver the verbatim tag as-is to the
+<a href="#processes-and-models">application</a>.
 In particular, verbatim tags are not subject to <a href="#tag-resolution">tag resolution</a>.
 A verbatim tag must either begin with a “<code class="language-plaintext highlighter-rouge">!</code>” (a <a href="#tags">local tag</a>) or be a valid URI
 (a <a href="#tags">global tag</a>).</p>
@@ -4608,7 +4608,7 @@ it is valid for all <a href="#nodes">nodes</a> to be anchored.</p>
 <a href="#serialization-tree">serialization tree</a>.
 However, it is not reflected in the <a href="#representation-graph">representation</a> graph and must not be used
 to convey <a href="#nodes">content</a> information.
-In particular, the YAML <a href="#processing-yaml-information">processor</a> need not preserve the anchor name once the
+In particular, the YAML <a href="#processes-and-models">processor</a> need not preserve the anchor name once the
 <a href="#representation-graph">representation</a> is <a href="#composing-the-representation-graph">composed</a>.</p>
 
 <p>Anchor names must not contain the “<code class="language-plaintext highlighter-rouge">[</code>”, “<code class="language-plaintext highlighter-rouge">]</code>”, “<code class="language-plaintext highlighter-rouge">{</code>”, “<code class="language-plaintext highlighter-rouge">}</code>” and “<code class="language-plaintext highlighter-rouge">,</code>”
@@ -4656,8 +4656,8 @@ Second occurrence: *<mark class="legend-2">anchor</mark>
   </div>
 </div>
 
-<div id="flow-styles"></div>
-<h1 id="chapter-7-flow-styles">Chapter 7. Flow Styles</h1>
+<div id="flow-style-productions"></div>
+<h1 id="chapter-7-flow-style-productions">Chapter 7. Flow Style Productions</h1>
 
 <p>YAML’s <em>flow styles</em> can be thought of as the natural extension of JSON to
 cover <a href="#line-folding">folding</a> long content lines for readability, <a href="#tags">tagging</a> nodes to control
@@ -5786,7 +5786,7 @@ indicated by the “<code class="language-plaintext highlighter-rouge">:</code>�
 “<code class="language-plaintext highlighter-rouge">:</code>”.
 This causes no ambiguity, as all <a href="#flow-nodes">JSON-like</a> <a href="#nodes">keys</a> are surrounded by
 <a href="#indicator-characters">indicators</a>.
-However, as this greatly reduces readability, YAML <a href="#processing-yaml-information">processors</a> should
+However, as this greatly reduces readability, YAML <a href="#processes-and-models">processors</a> should
 <a href="#separation-spaces">separate</a> the <a href="#nodes">value</a> from the “<code class="language-plaintext highlighter-rouge">:</code>” on output, even in this case.</p>
 
 <div id="rule-c-ns-flow-map-json-key-entry"></div>
@@ -6036,8 +6036,8 @@ ERROR:
 <div id="flow-nodes"></div>
 <h2 id="75-flow-nodes">7.5. Flow Nodes</h2>
 
-<p><em>JSON-like</em> <a href="#flow-styles">flow styles</a> all have explicit start and end <a href="#indicator-characters">indicators</a>.
-The only <a href="#flow-styles">flow style</a> that does not have this property is the <a href="#plain-style">plain scalar</a>.
+<p><em>JSON-like</em> <a href="#flow-style-productions">flow styles</a> all have explicit start and end <a href="#indicator-characters">indicators</a>.
+The only <a href="#flow-style-productions">flow style</a> that does not have this property is the <a href="#plain-style">plain scalar</a>.
 Note that none of the “JSON-like” styles is actually acceptable by JSON.
 Even the <a href="#double-quoted-style">double-quoted style</a> is a superset of the JSON string format.</p>
 
@@ -6098,7 +6098,7 @@ Even the <a href="#double-quoted-style">double-quoted style</a> is a superset of
   </div>
 </div>
 
-<p>A complete <a href="#flow-styles">flow</a> <a href="#nodes">node</a> also has optional <a href="#node-properties">node properties</a>, except for <a href="#alias-nodes">alias
+<p>A complete <a href="#flow-style-productions">flow</a> <a href="#nodes">node</a> also has optional <a href="#node-properties">node properties</a>, except for <a href="#alias-nodes">alias
 nodes</a> which refer to the <a href="#anchors-and-aliases">anchored</a> <a href="#node-properties">node properties</a>.</p>
 
 <div id="rule-ns-flow-yaml-node"></div>
@@ -6180,8 +6180,8 @@ nodes</a> which refer to the <a href="#anchors-and-aliases">anchored</a> <a href
   </div>
 </div>
 
-<div id="block-styles"></div>
-<h1 id="chapter-8-block-styles">Chapter 8. Block Styles</h1>
+<div id="block-style-productions"></div>
+<h1 id="chapter-8-block-style-productions">Chapter 8. Block Style Productions</h1>
 
 <p>YAML’s <em>block styles</em> employ <a href="#indentation-spaces">indentation</a> rather than <a href="#indicator-characters">indicators</a> to denote
 structure.
@@ -6283,7 +6283,7 @@ greater than or equal to the content indentation level.</p>
 <p>It is an error for any of the leading <a href="#empty-lines">empty lines</a> to contain more <a href="#white-space-characters">spaces</a>
 than the first non-<a href="#empty-lines">empty line</a>.</p>
 
-<p>A YAML <a href="#processing-yaml-information">processor</a> should only emit an explicit indentation indicator for cases
+<p>A YAML <a href="#processes-and-models">processor</a> should only emit an explicit indentation indicator for cases
 where detection will fail.</p>
 
 <div id="rule-c-indentation-indicator"></div>
@@ -7579,8 +7579,8 @@ mapping:<mark class="legend-1"> !!map</mark>
   </div>
 </div>
 
-<div id="yaml-character-stream"></div>
-<h1 id="chapter-9-yaml-character-stream">Chapter 9. YAML Character Stream</h1>
+<div id="document-stream-productions"></div>
+<h1 id="chapter-9-document-stream-productions">Chapter 9. Document Stream Productions</h1>
 
 <div id="documents"></div>
 <h2 id="91-documents">9.1. Documents</h2>
@@ -7965,7 +7965,7 @@ with the above <code class="language-plaintext highlighter-rouge">l-yaml-stream<
   <dt>Appending to Streams</dt>
   <dd>
     <p>Allowing multiple <a href="#documents">documents</a> in a single stream makes YAML suitable for log
-files and similar <a href="#processing-yaml-information">applications</a>.
+files and similar <a href="#processes-and-models">applications</a>.
 Note that each <a href="#document">document</a> is independent of the rest, allowing for
 heterogeneous log file entries.</p>
   </dd>
@@ -8011,7 +8011,7 @@ next <a href="#document">document</a>.</p>
 
 <p>The <em>failsafe schema</em> is guaranteed to work with any YAML <a href="#document">document</a>.
 It is therefore the recommended <a href="#recommended-schemas">schema</a> for generic YAML tools.
-A YAML <a href="#processing-yaml-information">processor</a> should therefore support this <a href="#recommended-schemas">schema</a>, at least as an
+A YAML <a href="#processes-and-models">processor</a> should therefore support this <a href="#recommended-schemas">schema</a>, at least as an
 option.</p>
 
 <div id="tags"></div>
@@ -8173,14 +8173,14 @@ Flow style: !!str "String: just a theory."
 “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>”, according to their <a href="#nodes">kind</a>.</p>
 
 <p>All <a href="#nodes">nodes</a> with the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag are left <a href="#resolved-tags">unresolved</a>.
-This constrains the <a href="#processing-yaml-information">application</a> to deal with a <a href="#loading-point-failures">partial representation</a>.</p>
+This constrains the <a href="#processes-and-models">application</a> to deal with a <a href="#loading-point-failures">partial representation</a>.</p>
 
 <div id="json-schema"></div>
 <h2 id="102-json-schema">10.2. JSON Schema</h2>
 
 <p>The <em>JSON schema</em> is the lowest common denominator of most modern computer
 languages and allows <a href="#parsing-the-presentation-stream">parsing</a> JSON files.
-A YAML <a href="#processing-yaml-information">processor</a> should therefore support this <a href="#recommended-schemas">schema</a>, at least as an
+A YAML <a href="#processes-and-models">processor</a> should therefore support this <a href="#recommended-schemas">schema</a>, at least as an
 option.
 It is also strongly recommended that other <a href="#recommended-schemas">schemas</a> should be based on it.</p>
 
@@ -8328,13 +8328,13 @@ possible.</p>
   <dd>
     <p>Some languages (such as Perl) provide only a “number” type that allows for
 both integer and floating-point values.
-A YAML <a href="#processing-yaml-information">processor</a> may use such a type for integers as long as they round-trip
+A YAML <a href="#processes-and-models">processor</a> may use such a type for integers as long as they round-trip
 properly.</p>
   </dd>
   <dd>
     <p>In some languages (such as C), an integer may overflow the <a href="#representing-native-data-structures">native</a> type’s
 storage capability.
-A YAML <a href="#processing-yaml-information">processor</a> may reject such a value as an error, truncate it with a
+A YAML <a href="#processes-and-models">processor</a> may reject such a value as an error, truncate it with a
 warning or find some other manner to round-trip it.
 In general, integers representable using 32 binary digits should safely
 round-trip through most systems.</p>
@@ -8394,7 +8394,7 @@ positive: !!int 34
   <dd>
     <p>Some languages (such as Perl) provide only a “number” type that allows for
 both integer and floating-point values.
-A YAML <a href="#processing-yaml-information">processor</a> may use such a type for floating-point numbers, as long as
+A YAML <a href="#processes-and-models">processor</a> may use such a type for floating-point numbers, as long as
 they round-trip properly.</p>
   </dd>
   <dd>
@@ -8451,7 +8451,7 @@ matched with a list of regular expressions (first match wins, e.g. <code class="
 resolved as <code class="language-plaintext highlighter-rouge">!!int</code>).
 In principle, JSON files should not contain any <a href="#scalars">scalars</a> that do not match at
 least one of these.
-Hence the YAML <a href="#processing-yaml-information">processor</a> should consider them to be an error.</p>
+Hence the YAML <a href="#processes-and-models">processor</a> should consider them to be an error.</p>
 
 <table>
   <thead>
@@ -8526,7 +8526,7 @@ Invalid: [ True, Null,
 
 <p>The <em>Core schema</em> is an extension of the <a href="#json-schema">JSON schema</a>, allowing for more
 human-readable <a href="#presentation-stream">presentation</a> of the same types.
-This is the recommended default <a href="#recommended-schemas">schema</a> that YAML <a href="#processing-yaml-information">processor</a> should use
+This is the recommended default <a href="#recommended-schemas">schema</a> that YAML <a href="#processes-and-models">processor</a> should use
 unless instructed otherwise.
 It is also strongly recommended that other <a href="#recommended-schemas">schemas</a> should be based on it.</p>
 
@@ -8646,12 +8646,12 @@ Also floats: [
 
 <p>None of the above recommended <a href="#recommended-schemas">schemas</a> preclude the use of arbitrary explicit
 <a href="#tags">tags</a>.
-Hence YAML <a href="#processing-yaml-information">processors</a> for a particular programming language typically provide
+Hence YAML <a href="#processes-and-models">processors</a> for a particular programming language typically provide
 some form of <a href="#tags">local tags</a> that map directly to the language’s <a href="#representing-native-data-structures">native data
 structures</a> (e.g., <code class="language-plaintext highlighter-rouge">!ruby/object:Set</code>).</p>
 
-<p>While such <a href="#tags">local tags</a> are useful for ad hoc <a href="#processing-yaml-information">applications</a>, they do not
-suffice for stable, interoperable cross-<a href="#processing-yaml-information">application</a> or cross-platform data
+<p>While such <a href="#tags">local tags</a> are useful for ad hoc <a href="#processes-and-models">applications</a>, they do not
+suffice for stable, interoperable cross-<a href="#processes-and-models">application</a> or cross-platform data
 exchange.</p>
 
 <p>Interoperable <a href="#recommended-schemas">schemas</a> make use of <a href="#tags">global tags</a> (URIs) that <a href="#representation-graph">represent</a> the
