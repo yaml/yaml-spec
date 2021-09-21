@@ -1,6 +1,18 @@
 ---
 ---
 class window.Playground
+  @init: (eatme) ->
+    params = new URLSearchParams(window.location.search)
+    if params.has('input')
+      try
+        eatme.input = atob(params.get('input'))
+
+  @change: (text, pane)->
+    {origin, pathname} = window.location
+    base64 = btoa(text)
+    newurl = "#{origin}#{pathname}?input=#{base64}"
+    window.history.replaceState(null, null, newurl)
+
   @js_refparser_events: (text)->
     parser = new Parser(new TestReceiver)
     parser.parse(text)
