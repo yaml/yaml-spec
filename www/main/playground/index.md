@@ -7,6 +7,10 @@ Welcome to the playground area.
 Here you'll find live demos of activity related to ongoing YAML language
 development.
 
+When you change values in the playgrounds, your changes are saved into the URL.
+You can share your sessions with others just by sending them the URL.
+This is a useful when reporting problems you come across.
+
 ## Playgrounds
 
 * [YAML Parsers](parser)
