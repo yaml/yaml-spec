@@ -18,12 +18,14 @@ development.
 
 * [JavaScript](javascript)
 
-  This playground compares the JavaScript loaders.
+  This playground compares only the JavaScript loaders.
 
+<!--
 * [Playground Development](devel)
 
   This is a playground that we use mostly for developing the playground
   functionality itself.
+-->
 
 ## Setting up a Local Sandbox
 
