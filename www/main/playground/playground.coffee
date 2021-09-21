@@ -1,7 +1,7 @@
 ---
 ---
 class window.Playground
-  @refparser_events: (text)->
+  @js_refparser_events: (text)->
     parser = new Parser(new TestReceiver)
     parser.parse(text)
     return parser.receiver.output()
@@ -36,6 +36,13 @@ class window.Playground
   @npmjsyaml_json: (text)->
     data = npmJSYAML.load(text)
     return JSON.stringify(data, null, 2)
+
+  @hs_refparser_yeast: (text)->
+    value = @localhost_server(text, 'cmd=hs-reference-yeast')
+    if _.isString(value) and value.match(/\ =REST\|/)
+      throw value
+    else
+      return value
 
   @yamlpp_events: (text)->
     return @sandbox_events(text, 'cmd=perl-pp-event')
@@ -106,7 +113,7 @@ class window.Playground
 
       ```
       $ docker run --rm -p #{port}:#{port} \\
-          yamlio/playground-sandbox:0.0.3 #{scheme}
+          yamlio/playground-sandbox:0.0.4 #{scheme}
       ```
 
 

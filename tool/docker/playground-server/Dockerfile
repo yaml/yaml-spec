@@ -31,6 +31,10 @@ RUN pip3 install \
         pyyaml \
  && true
 
+RUN cd /usr/lib \
+ && ln -s libffi.so.7.1.0 libffi.so.6 \
+ && true
+
 COPY ./bin/ /bin/
 
 ENTRYPOINT ["playground-sandbox"]
