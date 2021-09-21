@@ -65,6 +65,9 @@
       this.from = from1;
       this.conf = conf1;
       this.code = code1;
+      if ((this.code != null) && (this.code.init != null)) {
+        this.code.init(this);
+      }
       this.make_root();
       this.make_cols();
       $(this.from).replaceWith(this.root);
@@ -170,7 +173,7 @@
       conf = pane.eatme;
       if (conf.type === 'input' && (pane.cm == null)) {
         $textarea = $pane.find('textarea');
-        text = $(this.from).text();
+        text = this.input != null ? this.input : $(this.from).text();
         if (text) {
           $textarea.text(text);
         } else {
@@ -184,6 +187,9 @@
           do_calls = function() {
             var $to, i, len, ref, results;
             text = cm.getValue();
+            if ((self.code != null) && (self.code.change != null)) {
+              self.code.change(text, pane);
+            }
             ref = pane.calls;
             results = [];
             for (i = 0, len = ref.length; i < len; i++) {
