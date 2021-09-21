@@ -102,7 +102,7 @@ sub parse_sections {
 
     # Unordered list:
     s/\A
-      (
+      ([ ]*
         $ial*
         $li
         $line_not_blank*
@@ -125,7 +125,7 @@ sub parse_sections {
 
     # Regular paragraph:
     s/\A
-      (
+      ([ ]*
         (?:
           (?:$b|-1$s|\`x|\[[\w\"\*\`]|`[\(]|<http|[\w\"\(])
           .*\n

@@ -981,10 +981,10 @@ scheme.
 [Tags] in a YAML stream must therefore be [presented] in a canonical way so
 that such comparison would yield the correct results.
 
-> If a node has itself as a descendant (via an alias), then determining the
+  If a node has itself as a descendant (via an alias), then determining the
 equality of that node is implementation-defined.
 
-: A YAML [processor] may treat equal [scalars] as if they were identical.
+  A YAML [processor] may treat equal [scalars] as if they were identical.
 
 
 ? Uniqueness
