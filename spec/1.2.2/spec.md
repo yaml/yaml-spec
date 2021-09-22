@@ -3827,8 +3827,9 @@ nb-double-text(n,FLOW-KEY)  ::= nb-double-one-line
 In a multi-line double-quoted scalar, [line breaks] are subject to [flow line
 folding], which discards any trailing [white space] characters.
 It is also possible to _escape_ the [line break] character.
-In this case, the [line break] is excluded from the [content] and the trailing
-[white space] characters are preserved.
+In this case, the escaped [line break] is excluded from the [content] and any
+trailing [white space] characters that precede the escaped line break are
+preserved.
 Combined with the ability to [escape] [white space] characters, this allows
 double-quoted lines to be broken at arbitrary positions.
 
