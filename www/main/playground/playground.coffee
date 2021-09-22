@@ -100,7 +100,7 @@ class window.Playground
         # error: (a...)=> @localhost_success()
       )
     catch e
-      throw 'Try: docker run -it --rm -p 31337:8000 yamlio/...'
+      throw 'Try: docker run --rm -d -p 31337:8000 yamlio/...'
 
     if resp.status == 200
       data = resp.responseJSON
@@ -121,11 +121,11 @@ class window.Playground
     return mark: """
       This pane requires a localhost sandbox server.
 
-      Simply run:
+      Run:
 
       ```
-      $ docker run --rm -p #{port}:#{port} \\
-          yamlio/playground-sandbox:0.0.4 #{scheme}
+      $ docker run --rm -d -p #{port}:#{port} \\
+          yamlio/playground-sandbox:0.0.5 #{scheme}
       ```
 
 

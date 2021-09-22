@@ -90,7 +90,7 @@ else ifneq ($(shell command -v npm),)
 	mv $@ $(TMPEXT)/
 else
 	@echo "*** NOTICE: 'npm' not available."
-	@echo "*** Can't build NodeJS variants for 'yaml.js'."
+	@echo "*** Can't build NodeJS variants for 'yaml' package."
 	exit 1
 endif
 	ln -s $(TMPEXT)/$@ $@
