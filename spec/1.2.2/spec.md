@@ -3868,8 +3868,8 @@ to a line feed, or·→\↓
 * [s-double-escaped(n)] <!-- ·→\↓ 5:1 -->
 
 
-All leading and trailing [white space] characters are excluded from the
-[content].
+All leading and trailing [white space] characters on each line are excluded
+from the [content].
 Each continuation line must therefore contain at least one non-[space]
 character.
 Empty lines, if any, are consumed as part of the [line folding].
