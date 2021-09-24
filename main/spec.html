@@ -47,7 +47,7 @@ the content of this draft or cite it as an authority.
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-21">Revision 1.2.2 (2021-09-21)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-24">Revision 1.2.2 (2021-09-24)</h2>
 
 <p>Copyright presently by YAML Language Development Team<sup id="fnref:team" role="doc-noteref"><a href="#fn:team" class="footnote" rel="footnote">1</a></sup><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -91,11 +91,12 @@ published revisions of this specification.</p>
 <p>See:</p>
 
 <ul>
-  <li><a href="ext/changes">YAML 1.2.1 Specification Changes</a></li>
-  <li><a href="ext/errata">YAML 1.2.1 Specification Errata</a></li>
+  <li><a href="ext/glossary">YAML Vocabulary Glossary</a></li>
   <li><a href="ext/community">YAML Community Resource Index</a></li>
   <li><a href="ext/use">YAML User’s Reference Index</a></li>
   <li><a href="ext/dev">YAML Developer’s Reference Index</a></li>
+  <li><a href="ext/changes">YAML Specification Changes</a></li>
+  <li><a href="ext/errata">YAML Specification Errata</a></li>
 </ul>
 
 <p><strong>Abstract</strong></p>
@@ -113,7 +114,7 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-21" id="markdown-toc-revision-122-2021-09-21">Revision 1.2.2 (2021-09-21)</a></li>
+      <li><a href="#revision-122-2021-09-24" id="markdown-toc-revision-122-2021-09-24">Revision 1.2.2 (2021-09-24)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction-to-yaml" id="markdown-toc-chapter-1-introduction-to-yaml">Chapter 1. Introduction to YAML</a>    <ul>
@@ -1628,6 +1629,19 @@ possible, or <code class="language-plaintext highlighter-rouge">term-two</code> 
 
 <p>The order of precedence is parenthesization, then quantification, then
 concatenation, then alternation.</p>
+
+<p>Some lines in a production definition might have a comment like:</p>
+
+<pre>
+production-a ::=
+  production-b      # clarifying comment
+</pre>
+
+<p>These comments are meant to be informative only.
+For instance a comment that says <code class="language-plaintext highlighter-rouge"># not followed by non-ws char</code> just means
+that you should be aware that actual production rules will behave as described
+even though it might not be obvious from the content of that particular
+production alone.</p>
 
 <div id="production-parameters"></div>
 <h2 id="42-production-parameters">4.2. Production Parameters</h2>
@@ -4918,8 +4932,9 @@ nb-double-text(n,FLOW-KEY)  ::= <a href="#rule-nb-double-one-line">nb-double-one
 <p>In a multi-line double-quoted scalar, <a href="#line-break-characters">line breaks</a> are subject to <a href="#flow-folding">flow line
 folding</a>, which discards any trailing <a href="#white-space-characters">white space</a> characters.
 It is also possible to <em>escape</em> the <a href="#line-break-characters">line break</a> character.
-In this case, the <a href="#line-break-characters">line break</a> is excluded from the <a href="#nodes">content</a> and the trailing
-<a href="#white-space-characters">white space</a> characters are preserved.
+In this case, the escaped <a href="#line-break-characters">line break</a> is excluded from the <a href="#nodes">content</a> and any
+trailing <a href="#white-space-characters">white space</a> characters that precede the escaped line break are
+preserved.
 Combined with the ability to <a href="#escaped-characters">escape</a> <a href="#white-space-characters">white space</a> characters, this allows
 double-quoted lines to be broken at arbitrary positions.</p>
 
@@ -5654,7 +5669,7 @@ entry may be <a href="#example-empty-content">completely empty</a>.</p>
 <pre class="rule">
 [142] ns-flow-map-entry(n,c) ::=
     (
-      <a href="#rule-c-mapping-key">c-mapping-key</a>      # '?'
+      <a href="#rule-c-mapping-key">c-mapping-key</a>    # '?' (not followed by non-ws char)
       <a href="#rule-s-separate">s-separate</a>(n,c)
       <a href="#rule-ns-flow-map-explicit-entry">ns-flow-map-explicit-entry</a>(n,c)
     )
@@ -5903,7 +5918,7 @@ the syntax is identical to the general case.</p>
 <pre class="rule">
 [150] ns-flow-pair(n,c) ::=
     (
-      <a href="#rule-c-mapping-key">c-mapping-key</a>      # '?'
+      <a href="#rule-c-mapping-key">c-mapping-key</a>     # '?' (not followed by non-ws char)
       <a href="#rule-s-separate">s-separate</a>(n,c)
       <a href="#rule-ns-flow-map-explicit-entry">ns-flow-map-explicit-entry</a>(n,c)
     )
@@ -7230,14 +7245,14 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
   <a href="#rule-c-l-block-map-explicit-key">c-l-block-map-explicit-key</a>(n)
   (
       <a href="#rule-l-block-map-explicit-value">l-block-map-explicit-value</a>(n)
-    | <a href="#rule-e-node">e-node</a>    # ""
+    | <a href="#rule-e-node">e-node</a>                        # ""
   )
 </pre>
 
 <div id="rule-c-l-block-map-explicit-key"></div>
 <pre class="rule">
 [190] c-l-block-map-explicit-key(n) ::=
-  <a href="#rule-c-mapping-key">c-mapping-key</a>                      # '?'
+  <a href="#rule-c-mapping-key">c-mapping-key</a>                     # '?' (not followed by non-ws char)
   <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-OUT)
 </pre>
 
@@ -7245,7 +7260,7 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 <pre class="rule">
 [191] l-block-map-explicit-value(n) ::=
   <a href="#rule-s-indent">s-indent</a>(n)
-  <a href="#rule-c-mapping-value">c-mapping-value</a>    # ':'
+  <a href="#rule-c-mapping-value">c-mapping-value</a>                   # ':' (not followed by non-ws char)
   <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-OUT)
 </pre>
 
@@ -7323,7 +7338,7 @@ This prevents a potential ambiguity with multi-line <a href="#plain-style">plain
 <div id="rule-c-l-block-map-implicit-value"></div>
 <pre class="rule">
 [194] c-l-block-map-implicit-value(n) ::=
-  <a href="#rule-c-mapping-value">c-mapping-value</a>                  # ':'
+  <a href="#rule-c-mapping-value">c-mapping-value</a>           # ':' (not followed by non-ws char)
   (
       <a href="#rule-s-l+block-node">s-l+block-node</a>(n,BLOCK-OUT)
     | (
@@ -7682,7 +7697,8 @@ either of these markers.</p>
 
 <div id="rule-c-document-end"></div>
 <pre class="rule">
-[204] c-document-end ::= "..."
+[204] c-document-end ::=
+  "..."    # (not followed by non-ws char)
 </pre>
 
 <div id="rule-l-document-suffix"></div>

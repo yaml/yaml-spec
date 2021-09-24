@@ -52,11 +52,12 @@ published revisions of this specification.
 
 See:
 
-* [YAML 1.2.1 Specification Changes](ext/changes)
-* [YAML 1.2.1 Specification Errata](ext/errata)
+* [YAML Vocabulary Glossary](ext/glossary)
 * [YAML Community Resource Index](ext/community)
 * [YAML User's Reference Index](ext/use)
 * [YAML Developer's Reference Index](ext/dev)
+* [YAML Specification Changes](ext/changes)
+* [YAML Specification Errata](ext/errata)
 
 
 <code>**Abstract**</code>
@@ -1298,6 +1299,20 @@ term is either:
 
 The order of precedence is parenthesization, then quantification, then
 concatenation, then alternation.
+
+Some lines in a production definition might have a comment like:
+
+```
+production-a ::=
+  production-b      # clarifying comment
+```
+
+These comments are meant to be informative only.
+For instance a comment that says `# not followed by non-ws char` just means
+that you should be aware that actual production rules will behave as described
+even though it might not be obvious from the content of that particular
+production alone.
+
 
 <code>## #. Production Parameters</code>
 
@@ -3813,8 +3828,9 @@ nb-double-text(n,FLOW-KEY)  ::= nb-double-one-line
 In a multi-line double-quoted scalar, [line breaks] are subject to [flow line
 folding], which discards any trailing [white space] characters.
 It is also possible to _escape_ the [line break] character.
-In this case, the [line break] is excluded from the [content] and the trailing
-[white space] characters are preserved.
+In this case, the escaped [line break] is excluded from the [content] and any
+trailing [white space] characters that precede the escaped line break are
+preserved.
 Combined with the ability to [escape] [white space] characters, this allows
 double-quoted lines to be broken at arbitrary positions.
 
@@ -4396,7 +4412,7 @@ entry may be [completely empty].
 ```
 [#] ns-flow-map-entry(n,c) ::=
     (
-      c-mapping-key      # '?'
+      c-mapping-key    # '?' (not followed by non-ws char)
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -4593,7 +4609,7 @@ the syntax is identical to the general case.
 ```
 [#] ns-flow-pair(n,c) ::=
     (
-      c-mapping-key      # '?'
+      c-mapping-key     # '?' (not followed by non-ws char)
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -5641,20 +5657,20 @@ for [block sequence] entries.
   c-l-block-map-explicit-key(n)
   (
       l-block-map-explicit-value(n)
-    | e-node    # ""
+    | e-node                        # ""
   )
 ```
 
 ```
 [#] c-l-block-map-explicit-key(n) ::=
-  c-mapping-key                      # '?'
+  c-mapping-key                     # '?' (not followed by non-ws char)
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
 ```
 [#] l-block-map-explicit-value(n) ::=
   s-indent(n)
-  c-mapping-value    # ':'
+  c-mapping-value                   # ':' (not followed by non-ws char)
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
@@ -5718,7 +5734,7 @@ This prevents a potential ambiguity with multi-line [plain scalars].
 
 ```
 [#] c-l-block-map-implicit-value(n) ::=
-  c-mapping-value                  # ':'
+  c-mapping-value           # ':' (not followed by non-ws char)
   (
       s-l+block-node(n,BLOCK-OUT)
     | (
@@ -5997,7 +6013,8 @@ either of these markers.
 ```
 
 ```
-[#] c-document-end ::= "..."
+[#] c-document-end ::=
+  "..."    # (not followed by non-ws char)
 ```
 
 ```
