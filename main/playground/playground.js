@@ -7,7 +7,7 @@
       params = new URLSearchParams(window.location.search);
       if (params.has('input')) {
         try {
-          return eatme.input = atob(params.get('input'));
+          return eatme.input = decodeURIComponent(escape(atob(params.get('input'))));
         } catch (error1) {}
       }
     };
@@ -15,7 +15,7 @@
     Playground.change = function(text, pane) {
       var base64, newurl, origin, pathname, ref;
       ref = window.location, origin = ref.origin, pathname = ref.pathname;
-      base64 = btoa(text);
+      base64 = btoa(unescape(encodeURIComponent(text)));
       newurl = "" + origin + pathname + "?input=" + base64;
       return window.history.replaceState(null, null, newurl);
     };
