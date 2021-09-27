@@ -65,6 +65,9 @@
       this.from = from1;
       this.conf = conf1;
       this.code = code1;
+      if ((this.code != null) && (this.code.init != null)) {
+        this.code.init(this);
+      }
       this.make_root();
       this.make_cols();
       this.start();

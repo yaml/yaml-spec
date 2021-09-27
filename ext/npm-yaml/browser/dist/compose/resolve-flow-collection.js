@@ -18,7 +18,8 @@ function resolveFlowCollection({ composeNode, composeEmptyNode }, ctx, fc, onErr
     coll.flow = true;
     let offset = fc.offset;
     for (let i = 0; i < fc.items.length; ++i) {
-        const { start, key, sep, value } = fc.items[i];
+        const collItem = fc.items[i];
+        const { start, key, sep, value } = collItem;
         const props = resolveProps(start, {
             flow: fcName,
             indicator: 'explicit-key-ind',
@@ -145,6 +146,8 @@ function resolveFlowCollection({ composeNode, composeEmptyNode }, ctx, fc, onErr
                     keyNode.comment = valueProps.comment;
             }
             const pair = new Pair(keyNode, valueNode);
+            if (ctx.options.keepSourceTokens)
+                pair.srcToken = collItem;
             if (isMap) {
                 const map = coll;
                 if (mapIncludes(ctx, map.items, keyNode))

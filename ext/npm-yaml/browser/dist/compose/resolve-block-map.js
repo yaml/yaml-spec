@@ -9,7 +9,8 @@ function resolveBlockMap({ composeNode, composeEmptyNode }, ctx, bm, onError) {
     var _a;
     const map = new YAMLMap(ctx.schema);
     let offset = bm.offset;
-    for (const { start, key, sep, value } of bm.items) {
+    for (const collItem of bm.items) {
+        const { start, key, sep, value } = collItem;
         // key properties
         const keyProps = resolveProps(start, {
             indicator: 'explicit-key-ind',
@@ -71,7 +72,10 @@ function resolveBlockMap({ composeNode, composeEmptyNode }, ctx, bm, onError) {
                 ? composeNode(ctx, value, valueProps, onError)
                 : composeEmptyNode(ctx, offset, sep, null, valueProps, onError);
             offset = valueNode.range[2];
-            map.items.push(new Pair(keyNode, valueNode));
+            const pair = new Pair(keyNode, valueNode);
+            if (ctx.options.keepSourceTokens)
+                pair.srcToken = collItem;
+            map.items.push(pair);
         }
         else {
             // key with no value
@@ -83,7 +87,10 @@ function resolveBlockMap({ composeNode, composeEmptyNode }, ctx, bm, onError) {
                 else
                     keyNode.comment = valueProps.comment;
             }
-            map.items.push(new Pair(keyNode));
+            const pair = new Pair(keyNode);
+            if (ctx.options.keepSourceTokens)
+                pair.srcToken = collItem;
+            map.items.push(pair);
         }
     }
     map.range = [bm.offset, offset, offset];

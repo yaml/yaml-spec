@@ -43,6 +43,8 @@ function composeNode(ctx, token, props, onError) {
         else
             node.commentBefore = comment;
     }
+    if (ctx.options.keepSourceTokens)
+        node.srcToken = token;
     return node;
 }
 function composeEmptyNode(ctx, offset, before, pos, { spaceBefore, comment, anchor, tag }, onError) {

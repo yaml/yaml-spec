@@ -7,6 +7,7 @@
  */
 const defaultOptions = {
     intAsBigInt: false,
+    keepSourceTokens: false,
     logLevel: 'warn',
     prettyErrors: true,
     strict: true,
