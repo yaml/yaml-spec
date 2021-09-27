@@ -81,7 +81,7 @@
     Playground.hs_refparser_yeast = function(text) {
       var value;
       value = this.localhost_server(text, 'cmd=hs-reference-yeast');
-      if (_.isString(value) && value.match(/\ =REST\|/)) {
+      if (_.isString(value) && value.match(/\ =ERR\ \|/)) {
         throw value;
       } else {
         return value;
