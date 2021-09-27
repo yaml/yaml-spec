@@ -153,7 +153,7 @@ Around this time, the developers became aware of JSON[^json].
 By sheer coincidence, JSON was almost a complete subset of YAML (both
 syntactically and semantically).
 
-In 2006, Kirill Simonov produced PyYAML[^pyyaml] and LibYAML[^libyaml].
+In 2006, Kyrylo Simonov produced PyYAML[^pyyaml] and LibYAML[^libyaml].
 A lot of the YAML frameworks in various programming languages are built over
 LibYAML and many others have looked to PyYAML as a solid reference for their
 implementations.
