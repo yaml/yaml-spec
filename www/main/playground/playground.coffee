@@ -4,12 +4,20 @@ class window.Playground
   @init: (eatme) ->
     params = new URLSearchParams(window.location.search)
     if params.has('input')
+      base64 = params.get('input')
+        .replace(/-/g, '+')
+        .replace(/_/g, '/')
       try
-        eatme.input = atob(params.get('input'))
+        eatme.input = decodeURIComponent(escape(atob(base64)))
+      catch e
+        console.log(base64)
+        console.log(e)
 
   @change: (text, pane)->
     {origin, pathname} = window.location
-    base64 = btoa(text)
+    base64 = btoa(unescape(encodeURIComponent(text)))
+      .replace(/\+/g, '-')
+      .replace(/\//g, '_')
     newurl = "#{origin}#{pathname}?input=#{base64}"
     window.history.replaceState(null, null, newurl)
 
