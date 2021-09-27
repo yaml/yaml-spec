@@ -59,7 +59,7 @@ class window.Playground
 
   @hs_refparser_yeast: (text)->
     value = @localhost_server(text, 'cmd=hs-reference-yeast')
-    if _.isString(value) and value.match(/\ =REST\|/)
+    if _.isString(value) and value.match(/\ =(?:ERR\ |REST)\|/)
       throw value
     else
       return value
