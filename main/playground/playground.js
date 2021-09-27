@@ -3,19 +3,24 @@
     function Playground() {}
 
     Playground.init = function(eatme) {
-      var params;
+      var base64, e, params;
       params = new URLSearchParams(window.location.search);
       if (params.has('input')) {
+        base64 = params.get('input').replace(/-/g, '+').replace(/_/g, '/');
         try {
-          return eatme.input = decodeURIComponent(escape(atob(params.get('input'))));
-        } catch (error1) {}
+          return eatme.input = decodeURIComponent(escape(atob(base64)));
+        } catch (error1) {
+          e = error1;
+          console.log(base64);
+          return console.log(e);
+        }
       }
     };
 
     Playground.change = function(text, pane) {
       var base64, newurl, origin, pathname, ref;
       ref = window.location, origin = ref.origin, pathname = ref.pathname;
-      base64 = btoa(unescape(encodeURIComponent(text)));
+      base64 = btoa(unescape(encodeURIComponent(text))).replace(/\+/g, '-').replace(/\//g, '_');
       newurl = "" + origin + pathname + "?input=" + base64;
       return window.history.replaceState(null, null, newurl);
     };
