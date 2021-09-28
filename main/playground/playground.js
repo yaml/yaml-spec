@@ -25,7 +25,7 @@
       return window.history.replaceState(null, null, newurl);
     };
 
-    Playground.js_refparser_events = function(text) {
+    Playground.js_refparser_event = function(text) {
       var parser;
       parser = new Parser(new TestReceiver);
       parser.parse(text);
@@ -93,27 +93,51 @@
       }
     };
 
-    Playground.yamlpp_events = function(text) {
-      return this.sandbox_events(text, 'cmd=perl-pp-event');
+    Playground.yamlpp_event = function(text) {
+      return this.sandbox_event(text, 'cmd=perl-pp-event');
     };
 
-    Playground.npmyaml_events = function(text) {
-      return this.sandbox_events(text, 'cmd=js-yaml-event');
+    Playground.npmyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=js-yaml-event');
     };
 
-    Playground.pyyaml_events = function(text) {
-      return this.sandbox_events(text, 'cmd=py-pyyaml-event');
+    Playground.pyyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=py-pyyaml-event');
     };
 
-    Playground.libfyaml_events = function(text) {
-      return this.sandbox_events(text, 'cmd=c-libfyaml-event');
+    Playground.libfyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=c-libfyaml-event');
     };
 
-    Playground.libyaml_events = function(text) {
-      return this.sandbox_events(text, 'cmd=c-libyaml-event');
+    Playground.libyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=c-libfyaml-event');
     };
 
-    Playground.sandbox_events = function(text, args) {
+    Playground.yamlcpp_event = function(text) {
+      return this.sandbox_event(text, 'cmd=cpp-yamlcpp-event');
+    };
+
+    Playground.nimyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=nim-nimyaml-event');
+    };
+
+    Playground.hsyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=hs-hsyaml-event');
+    };
+
+    Playground.snakeyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=java-snakeyaml-event');
+    };
+
+    Playground.yamldotnet_event = function(text) {
+      return this.sandbox_event(text, 'cmd=dotnet-yamldotnet-event');
+    };
+
+    Playground.ruamel_event = function(text) {
+      return this.sandbox_event(text, 'cmd=py-ruamel-event');
+    };
+
+    Playground.sandbox_event = function(text, args) {
       var value;
       value = this.localhost_server(text, args);
       if (_.isString(value) && value.match(/^[^\+\-\=]/m)) {
