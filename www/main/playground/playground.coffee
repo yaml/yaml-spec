@@ -21,7 +21,7 @@ class window.Playground
     newurl = "#{origin}#{pathname}?input=#{base64}"
     window.history.replaceState(null, null, newurl)
 
-  @js_refparser_events: (text)->
+  @js_refparser_event: (text)->
     parser = new Parser(new TestReceiver)
     parser.parse(text)
     return parser.receiver.output()
@@ -64,22 +64,40 @@ class window.Playground
     else
       return value
 
-  @yamlpp_events: (text)->
-    return @sandbox_events(text, 'cmd=perl-pp-event')
+  @yamlpp_event: (text)->
+    return @sandbox_event(text, 'cmd=perl-pp-event')
 
-  @npmyaml_events: (text)->
-    return @sandbox_events(text, 'cmd=js-yaml-event')
+  @npmyaml_event: (text)->
+    return @sandbox_event(text, 'cmd=js-yaml-event')
 
-  @pyyaml_events: (text)->
-    return @sandbox_events(text, 'cmd=py-pyyaml-event')
+  @pyyaml_event: (text)->
+    return @sandbox_event(text, 'cmd=py-pyyaml-event')
 
-  @libfyaml_events: (text)->
-    return @sandbox_events(text, 'cmd=c-libfyaml-event')
+  @libfyaml_event: (text)->
+    return @sandbox_event(text, 'cmd=c-libfyaml-event')
 
-  @libyaml_events: (text)->
-    return @sandbox_events(text, 'cmd=c-libyaml-event')
+  @libyaml_event: (text)->
+    return @sandbox_event(text, 'cmd=c-libfyaml-event')
 
-  @sandbox_events: (text, args)->
+  @yamlcpp_event: (text)->
+    return @sandbox_event(text, 'cmd=cpp-yamlcpp-event')
+
+  @nimyaml_event: (text)->
+    return @sandbox_event(text, 'cmd=nim-nimyaml-event')
+
+  @hsyaml_event: (text)->
+    return @sandbox_event(text, 'cmd=hs-hsyaml-event')
+
+  @snakeyaml_event: (text)->
+    return @sandbox_event(text, 'cmd=java-snakeyaml-event')
+
+  @yamldotnet_event: (text)->
+    return @sandbox_event(text, 'cmd=dotnet-yamldotnet-event')
+
+  @ruamel_event: (text)->
+    return @sandbox_event(text, 'cmd=py-ruamel-event')
+
+  @sandbox_event: (text, args)->
     value = @localhost_server(text, args)
     if _.isString(value) and value.match(/^[^\+\-\=]/m)
       throw value

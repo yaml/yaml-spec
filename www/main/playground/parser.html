@@ -18,47 +18,82 @@ eatme:
     type: input
     colx: 1
 
-  - name: NPM 'yaml' master (JS)
-    slug: npmyamlmaster
-    type: text
-    call: [npmyamlmaster-event, yaml-input]
+  - name: New Reference Parser (JS)
+    slug: refparser
+    call: [js_refparser-event, yaml-input]
     colx: 1
 
-  - name: YAML Reference Parser (JS)
-    slug: refparser
-    call: [js_refparser-events, yaml-input]
-    colx: 2
-
-  - name: 2009 Reference Parser (Haskell)
+  - name: Old/Oren's Reference Parser (Haskell)
     slug: hsrefyeast
     call: [hs_refparser-yeast, yaml-input]
+    colx: 1
+
+  - name: libyaml (C)
+    slug: libyaml
+    call: [libyaml-event, yaml-input]
+    colx: 2
+
+  - name: libfyaml (C)
+    slug: libfyaml
+    call: [libfyaml-event, yaml-input]
+    colx: 2
+
+  - name: yamlcpp (C++)
+    slug: yamlcpp
+    call: [yamlcpp-event, yaml-input]
     colx: 2
 
   - name: PyYAML (Python)
     slug: pyyaml
-    call: [pyyaml-events, yaml-input]
-    colx: 3
-
-  - name: libyaml (C)
-    slug: libyaml
-    call: [libyaml-events, yaml-input]
+    call: [pyyaml-event, yaml-input]
     colx: 3
 
   - name: YAML::PP (Perl)
     slug: yamlpp
-    call: [yamlpp-events, yaml-input]
-    colx: 4
+    call: [yamlpp-event, yaml-input]
+    colx: 3
 
-  - name: libfyaml (C)
-    slug: libfyaml
-    call: [libfyaml-events, yaml-input]
-    colx: 4
-
-  - name: NPM 'yaml' v1.10.2 (JS)
-    slug: npmyaml1
+  - name: NPM 'yaml' master (JS)
+    slug: npmyamlmaster
     type: text
-    call: [npmyaml1-event, yaml-input]
-    # colx: 4
+    call: [npmyamlmaster-event, yaml-input]
+    colx: 3
+
+  - name: NimYAML (Nim)
+    slug: nimyaml
+    type: text
+    call: [nimyaml-event, yaml-input]
+    colx: 3
+
+  - name: HsYAML (Haskell)
+    slug: hsyaml
+    type: text
+    call: [hsyaml-event, yaml-input]
+    colx: 4
+
+  - name: SnakeYAML (Java)
+    slug: snakeyaml
+    type: text
+    call: [snakeyaml-event, yaml-input]
+    colx: 4
+
+  - name: YamlDotNet (C#)
+    slug: yamldotnet
+    type: text
+    call: [yamldotnet-event, yaml-input]
+    colx: 4
+
+  - name: Ruamel (Python)
+    slug: ruamel
+    type: text
+    call: [ruamel-event, yaml-input]
+    colx: 4
+
+#   - name: NPM 'yaml' v1.10.2 (JS)
+#     slug: npmyaml1
+#     type: text
+#     call: [npmyaml1-event, yaml-input]
+#     colx: ?
 
 ---
 <pre>
