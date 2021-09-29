@@ -3,24 +3,29 @@
     function Playground() {}
 
     Playground.init = function(eatme) {
-      var params;
+      var base64, e, params;
       params = new URLSearchParams(window.location.search);
       if (params.has('input')) {
+        base64 = params.get('input').replace(/-/g, '+').replace(/_/g, '/');
         try {
-          return eatme.input = atob(params.get('input'));
-        } catch (error1) {}
+          return eatme.input = decodeURIComponent(escape(atob(base64)));
+        } catch (error1) {
+          e = error1;
+          console.log(base64);
+          return console.log(e);
+        }
       }
     };
 
     Playground.change = function(text, pane) {
       var base64, newurl, origin, pathname, ref;
       ref = window.location, origin = ref.origin, pathname = ref.pathname;
-      base64 = btoa(text);
+      base64 = btoa(unescape(encodeURIComponent(text))).replace(/\+/g, '-').replace(/\//g, '_');
       newurl = "" + origin + pathname + "?input=" + base64;
       return window.history.replaceState(null, null, newurl);
     };
 
-    Playground.js_refparser_events = function(text) {
+    Playground.js_refparser_event = function(text) {
       var parser;
       parser = new Parser(new TestReceiver);
       parser.parse(text);
@@ -81,34 +86,58 @@
     Playground.hs_refparser_yeast = function(text) {
       var value;
       value = this.localhost_server(text, 'cmd=hs-reference-yeast');
-      if (_.isString(value) && value.match(/\ =REST\|/)) {
+      if (_.isString(value) && value.match(/\ =(?:ERR\ |REST)\|/)) {
         throw value;
       } else {
         return value;
       }
     };
 
-    Playground.yamlpp_events = function(text) {
-      return this.sandbox_events(text, 'cmd=perl-pp-event');
+    Playground.yamlpp_event = function(text) {
+      return this.sandbox_event(text, 'cmd=perl-pp-event');
     };
 
-    Playground.npmyaml_events = function(text) {
-      return this.sandbox_events(text, 'cmd=js-yaml-event');
+    Playground.npmyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=js-yaml-event');
     };
 
-    Playground.pyyaml_events = function(text) {
-      return this.sandbox_events(text, 'cmd=py-pyyaml-event');
+    Playground.pyyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=py-pyyaml-event');
     };
 
-    Playground.libfyaml_events = function(text) {
-      return this.sandbox_events(text, 'cmd=c-libfyaml-event');
+    Playground.libfyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=c-libfyaml-event');
     };
 
-    Playground.libyaml_events = function(text) {
-      return this.sandbox_events(text, 'cmd=c-libyaml-event');
+    Playground.libyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=c-libfyaml-event');
     };
 
-    Playground.sandbox_events = function(text, args) {
+    Playground.yamlcpp_event = function(text) {
+      return this.sandbox_event(text, 'cmd=cpp-yamlcpp-event');
+    };
+
+    Playground.nimyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=nim-nimyaml-event');
+    };
+
+    Playground.hsyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=hs-hsyaml-event');
+    };
+
+    Playground.snakeyaml_event = function(text) {
+      return this.sandbox_event(text, 'cmd=java-snakeyaml-event');
+    };
+
+    Playground.yamldotnet_event = function(text) {
+      return this.sandbox_event(text, 'cmd=dotnet-yamldotnet-event');
+    };
+
+    Playground.ruamel_event = function(text) {
+      return this.sandbox_event(text, 'cmd=py-ruamel-event');
+    };
+
+    Playground.sandbox_event = function(text, args) {
       var value;
       value = this.localhost_server(text, args);
       if (_.isString(value) && value.match(/^[^\+\-\=]/m)) {
@@ -140,7 +169,7 @@
         });
       } catch (error1) {
         e = error1;
-        throw 'Try: docker run -it --rm -p 31337:8000 yamlio/...';
+        throw 'Try: docker run --rm -d -p 31337:8000 yamlio/...';
       }
       if (resp.status === 200) {
         data = resp.responseJSON;
@@ -157,7 +186,7 @@
       console.dir(resp);
       help = loc.replace(/(\/playground\/).*/, "$1#setting-up-a-local-sandbox");
       return {
-        mark: "This pane requires a localhost sandbox server.\n\nSimply run:\n\n```\n$ docker run --rm -p " + port + ":" + port + " \\\n    yamlio/playground-sandbox:0.0.4 " + scheme + "\n```\n\n\non the same computer as your web browser.\n\nSee " + help + "  \nfor more instructions."
+        mark: "This pane requires a localhost sandbox server.\n\nRun:\n\n```\n$ docker run --rm -d -p " + port + ":" + port + " \\\n    yamlio/playground-sandbox:0.0.5 " + scheme + "\n```\n\n\non the same computer as your web browser.\n\nSee " + help + "  \nfor more instructions."
       };
     };
 

@@ -47,7 +47,7 @@ the content of this draft or cite it as an authority.
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-21">Revision 1.2.2 (2021-09-21)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-28">Revision 1.2.2 (2021-09-28)</h2>
 
 <p>Copyright presently by YAML Language Development Team<sup id="fnref:team" role="doc-noteref"><a href="#fn:team" class="footnote" rel="footnote">1</a></sup><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -91,11 +91,12 @@ published revisions of this specification.</p>
 <p>See:</p>
 
 <ul>
-  <li><a href="ext/changes">YAML 1.2.1 Specification Changes</a></li>
-  <li><a href="ext/errata">YAML 1.2.1 Specification Errata</a></li>
+  <li><a href="ext/glossary">YAML Vocabulary Glossary</a></li>
   <li><a href="ext/community">YAML Community Resource Index</a></li>
   <li><a href="ext/use">YAML User’s Reference Index</a></li>
   <li><a href="ext/dev">YAML Developer’s Reference Index</a></li>
+  <li><a href="ext/changes">YAML Specification Changes</a></li>
+  <li><a href="ext/errata">YAML Specification Errata</a></li>
 </ul>
 
 <p><strong>Abstract</strong></p>
@@ -113,7 +114,7 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-21" id="markdown-toc-revision-122-2021-09-21">Revision 1.2.2 (2021-09-21)</a></li>
+      <li><a href="#revision-122-2021-09-28" id="markdown-toc-revision-122-2021-09-28">Revision 1.2.2 (2021-09-28)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction-to-yaml" id="markdown-toc-chapter-1-introduction-to-yaml">Chapter 1. Introduction to YAML</a>    <ul>
@@ -366,7 +367,7 @@ Around this time, the developers became aware of JSON<sup id="fnref:json" role="
 By sheer coincidence, JSON was almost a complete subset of YAML (both
 syntactically and semantically).</p>
 
-<p>In 2006, Kirill Simonov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">10</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">11</a></sup>.
+<p>In 2006, Kyrylo Simonov produced PyYAML<sup id="fnref:pyyaml" role="doc-noteref"><a href="#fn:pyyaml" class="footnote" rel="footnote">10</a></sup> and LibYAML<sup id="fnref:libyaml" role="doc-noteref"><a href="#fn:libyaml" class="footnote" rel="footnote">11</a></sup>.
 A lot of the YAML frameworks in various programming languages are built over
 LibYAML and many others have looked to PyYAML as a solid reference for their
 implementations.</p>
@@ -990,8 +991,6 @@ referenced during <a href="#constructing-native-data-structures">construction</a
 <p><em>Dumping</em> native data structures to a character <a href="#streams">stream</a> is done using the
 following three stages:</p>
 
-<div id="representing-native-data-structures"></div>
-
 <dl>
   <dt>Representing Native Data Structures</dt>
   <dd>
@@ -1019,11 +1018,6 @@ represented as a <a href="#mapping">mapping</a> together with the <a href="#tags
 This simple model can represent any data structure independent of programming
 language.</p>
   </dd>
-</dl>
-
-<div id="serializing-the-representation-graph"></div>
-
-<dl>
   <dt>Serializing the Representation Graph</dt>
   <dd>
     <p>For sequential access mediums, such as an event callback API, a YAML
@@ -1039,11 +1033,6 @@ It is up to the YAML <a href="#processes-and-models">processor</a> to come up wi
 The result of this process, a YAML <a href="#serialization-tree">serialization tree</a>, can then be traversed
 to produce a series of event calls for one-pass processing of YAML data.</p>
   </dd>
-</dl>
-
-<div id="presenting-the-serialization-tree"></div>
-
-<dl>
   <dt>Presenting the Serialization Tree</dt>
   <dd>
     <p>The final output process is <em>presenting</em> the YAML <a href="#serialization-tree">serializations</a> as a
@@ -1066,8 +1055,6 @@ this process should be guided by the preferences of the user.</p>
 <p><em>Loading</em> <a href="#representing-native-data-structures">native data structures</a> from a character <a href="#streams">stream</a> is done using the
 following three stages:</p>
 
-<div id="parsing-the-presentation-stream"></div>
-
 <dl>
   <dt>Parsing the Presentation Stream</dt>
   <dd>
@@ -1077,24 +1064,13 @@ Parsing discards all the <a href="#presenting-the-serialization-tree">details</a
 reporting only the <a href="#serialization-tree">serialization tree</a>.
 Parsing can fail due to <a href="#well-formed-streams-and-identified-aliases">ill-formed</a> input.</p>
   </dd>
-</dl>
-
-<div id="composing-the-representation-graph"></div>
-
-<dl>
   <dt>Composing the Representation Graph</dt>
   <dd>
-    <p><em>Composing</em> takes a <a href="#serialization-tree">serialization tree</a> and produces a <a href="#representation-graph">representation
-graph</a>.
+    <p><em>Composing</em> takes a <a href="#serialization-tree">serialization tree</a> and produces a <a href="#representation-graph">representation graph</a>.
 Composing discards all the <a href="#presenting-the-serialization-tree">details</a> introduced in the <a href="#serialization-tree">serialization</a> process,
 producing only the <a href="#representation-graph">representation graph</a>.
 Composing can fail due to any of several reasons, detailed <a href="#loading-point-failures">below</a>.</p>
   </dd>
-</dl>
-
-<div id="constructing-native-data-structures"></div>
-
-<dl>
   <dt>Constructing Native Data Structures</dt>
   <dd>
     <p>The final input process is <em>constructing</em> <a href="#representing-native-data-structures">native data structures</a> from the
@@ -1167,30 +1143,18 @@ Such nodes have <em>content</em> of one of three <em>kinds</em>: scalar, sequenc
 In addition, each node has a <a href="#tags">tag</a> which serves to restrict the set of possible
 values the content can have.</p>
 
-<div id="scalar"></div>
-
 <dl>
   <dt>Scalar</dt>
   <dd>
-    <p>The content of a <em>scalar</em> node is an opaque datum that can be <a href="#presenting-the-serialization-tree">presented</a> as
-a series of zero or more Unicode characters.</p>
+    <p>The content of a <em>scalar</em> node is an opaque datum that can be <a href="#presenting-the-serialization-tree">presented</a> as a
+series of zero or more Unicode characters.</p>
   </dd>
-</dl>
-
-<div id="sequence"></div>
-
-<dl>
   <dt>Sequence</dt>
   <dd>
     <p>The content of a <em>sequence</em> node is an ordered series of zero or more nodes.
 In particular, a sequence may contain the same node more than once.
 It could even contain itself.</p>
   </dd>
-</dl>
-
-<div id="mapping"></div>
-
-<dl>
   <dt>Mapping</dt>
   <dd>
     <p>The content of a <em>mapping</em> node is an unordered set of <em>key/value</em> node
@@ -1249,8 +1213,6 @@ If both notations are used as <a href="#nodes">keys</a> in the same <a href="#ma
 <a href="#processes-and-models">processor</a> which recognizes integer <a href="#scalar-formats">formats</a> would correctly flag the
 duplicate <a href="#nodes">key</a> as an error.</p>
 
-<div id="canonical-form"></div>
-
 <dl>
   <dt>Canonical Form</dt>
   <dd>
@@ -1260,23 +1222,24 @@ duplicate <a href="#nodes">key</a> as an error.</p>
 This form is a Unicode character string which also <a href="#presenting-the-serialization-tree">presents</a> the same
 <a href="#nodes">content</a> and can be used for equality testing.</p>
   </dd>
-</dl>
-
-<div id="equality"></div>
-
-<dl>
   <dt>Equality</dt>
   <dd>
     <p>Two <a href="#nodes">nodes</a> must have the same <a href="#tags">tag</a> and <a href="#nodes">content</a> to be <em>equal</em>.
 Since each <a href="#tags">tag</a> applies to exactly one <a href="#nodes">kind</a>, this implies that the two
-<a href="#nodes">nodes</a> must have the same <a href="#nodes">kind</a> to be equal.
-Two <a href="#scalars">scalars</a> are equal only when their <a href="#tags">tags</a> and canonical forms are equal
+<a href="#nodes">nodes</a> must have the same <a href="#nodes">kind</a> to be equal.</p>
+  </dd>
+  <dd>
+    <p>Two <a href="#scalars">scalars</a> are equal only when their <a href="#tags">tags</a> and canonical forms are equal
 character-by-character.
-Equality of <a href="#collections">collections</a> is defined recursively.
-Two <a href="#sequence">sequences</a> are equal only when they have the same <a href="#tags">tag</a> and length and
+Equality of <a href="#collections">collections</a> is defined recursively.</p>
+  </dd>
+  <dd>
+    <p>Two <a href="#sequence">sequences</a> are equal only when they have the same <a href="#tags">tag</a> and length and
 each <a href="#nodes">node</a> in one <a href="#sequence">sequence</a> is equal to the corresponding <a href="#nodes">node</a> in the other
-<a href="#sequence">sequence</a>.
-Two <a href="#mapping">mappings</a> are equal only when they have the same <a href="#tags">tag</a> and an equal set of
+<a href="#sequence">sequence</a>.</p>
+  </dd>
+  <dd>
+    <p>Two <a href="#mapping">mappings</a> are equal only when they have the same <a href="#tags">tag</a> and an equal set of
 <a href="#nodes">keys</a> and each <a href="#nodes">key</a> in this set is associated with equal <a href="#nodes">values</a> in both
 <a href="#mapping">mappings</a>.</p>
   </dd>
@@ -1290,17 +1253,14 @@ This also happens to be the comparison method defined by the “<code class="lan
 scheme.
 <a href="#tags">Tags</a> in a YAML stream must therefore be <a href="#presenting-the-serialization-tree">presented</a> in a canonical way so
 that such comparison would yield the correct results.</p>
-
+  </dd>
+  <dd>
     <p>If a node has itself as a descendant (via an alias), then determining the
 equality of that node is implementation-defined.</p>
-
+  </dd>
+  <dd>
     <p>A YAML <a href="#processes-and-models">processor</a> may treat equal <a href="#scalars">scalars</a> as if they were identical.</p>
   </dd>
-</dl>
-
-<div id="uniqueness"></div>
-
-<dl>
   <dt>Uniqueness</dt>
   <dd>
     <p>A <a href="#mapping">mapping’s</a> <a href="#nodes">keys</a> are <em>unique</em> if no two keys are equal to each other.
@@ -1627,6 +1587,19 @@ possible, or <code class="language-plaintext highlighter-rouge">term-two</code> 
 <p>The order of precedence is parenthesization, then quantification, then
 concatenation, then alternation.</p>
 
+<p>Some lines in a production definition might have a comment like:</p>
+
+<pre>
+production-a ::=
+  production-b      # clarifying comment
+</pre>
+
+<p>These comments are meant to be informative only.
+For instance a comment that says <code class="language-plaintext highlighter-rouge"># not followed by non-ws char</code> just means
+that you should be aware that actual production rules will behave as described
+even though it might not be obvious from the content of that particular
+production alone.</p>
+
 <div id="production-parameters"></div>
 <h2 id="42-production-parameters">4.2. Production Parameters</h2>
 
@@ -1672,18 +1645,11 @@ production-a(1) ::=
 
 <p>The parameters are as follows:</p>
 
-<div id="indentation-n-or-m"></div>
-
 <dl>
   <dt>Indentation: <code class="language-plaintext highlighter-rouge">n</code> or <code class="language-plaintext highlighter-rouge">m</code></dt>
   <dd>
     <p>May be any natural number, including zero. <code class="language-plaintext highlighter-rouge">n</code> may also be -1.</p>
   </dd>
-</dl>
-
-<div id="context-c"></div>
-
-<dl>
   <dt>Context: <code class="language-plaintext highlighter-rouge">c</code></dt>
   <dd>
     <p>This parameter allows productions to tweak their behavior according to their
@@ -1694,20 +1660,16 @@ and <a href="#flow-style-productions">flow styles</a>.</p>
   <dd>
     <p>May be any of the following values:</p>
   </dd>
-</dl>
-
-<ul>
-  <li><code class="language-plaintext highlighter-rouge">BLOCK-IN</code> – inside block context</li>
-  <li><code class="language-plaintext highlighter-rouge">BLOCK-OUT</code> – outside block context</li>
-  <li><code class="language-plaintext highlighter-rouge">BLOCK-KEY</code> – inside block key context</li>
-  <li><code class="language-plaintext highlighter-rouge">FLOW-IN</code> – inside flow context</li>
-  <li><code class="language-plaintext highlighter-rouge">FLOW-OUT</code> – outside flow context</li>
-  <li><code class="language-plaintext highlighter-rouge">FLOW-KEY</code> – inside flow key context</li>
-</ul>
-
-<div id="block-chomping-t"></div>
-
-<dl>
+  <dd>
+    <ul>
+      <li><code class="language-plaintext highlighter-rouge">BLOCK-IN</code> – inside block context</li>
+      <li><code class="language-plaintext highlighter-rouge">BLOCK-OUT</code> – outside block context</li>
+      <li><code class="language-plaintext highlighter-rouge">BLOCK-KEY</code> – inside block key context</li>
+      <li><code class="language-plaintext highlighter-rouge">FLOW-IN</code> – inside flow context</li>
+      <li><code class="language-plaintext highlighter-rouge">FLOW-OUT</code> – outside flow context</li>
+      <li><code class="language-plaintext highlighter-rouge">FLOW-KEY</code> – inside flow key context</li>
+    </ul>
+  </dd>
   <dt>(Block) Chomping: <code class="language-plaintext highlighter-rouge">t</code></dt>
   <dd>
     <p>The <a href="#line-break-characters">line break</a> chomping behavior for flow scalars.
@@ -1729,82 +1691,40 @@ prefix-style naming convention.
 Each production is given a prefix based on the type of characters it begins and
 ends with.</p>
 
-<div id="e"></div>
-
 <dl>
   <dt><code class="language-plaintext highlighter-rouge">e-</code></dt>
   <dd>
     <p>A production matching no characters.</p>
   </dd>
-</dl>
-
-<div id="c"></div>
-
-<dl>
   <dt><code class="language-plaintext highlighter-rouge">c-</code></dt>
   <dd>
     <p>A production starting and ending with a special character.</p>
   </dd>
-</dl>
-
-<div id="b"></div>
-
-<dl>
   <dt><code class="language-plaintext highlighter-rouge">b-</code></dt>
   <dd>
     <p>A production matching a single <a href="#line-break-characters">line break</a>.</p>
   </dd>
-</dl>
-
-<div id="nb"></div>
-
-<dl>
   <dt><code class="language-plaintext highlighter-rouge">nb-</code></dt>
   <dd>
     <p>A production starting and ending with a non-<a href="#line-break-characters">break</a> character.</p>
   </dd>
-</dl>
-
-<div id="s"></div>
-
-<dl>
   <dt><code class="language-plaintext highlighter-rouge">s-</code></dt>
   <dd>
     <p>A production starting and ending with a <a href="#white-space-characters">white space</a> character.</p>
   </dd>
-</dl>
-
-<div id="ns"></div>
-
-<dl>
   <dt><code class="language-plaintext highlighter-rouge">ns-</code></dt>
   <dd>
     <p>A production starting and ending with a non-<a href="#white-space-characters">space</a> character.</p>
   </dd>
-</dl>
-
-<div id="l"></div>
-
-<dl>
   <dt><code class="language-plaintext highlighter-rouge">l-</code></dt>
   <dd>
     <p>A production matching complete line(s).</p>
   </dd>
-</dl>
-
-<div id="x-y"></div>
-
-<dl>
   <dt><code class="language-plaintext highlighter-rouge">X-Y-</code></dt>
   <dd>
-    <p>A production starting with an <code class="language-plaintext highlighter-rouge">X-</code> character and ending with a <code class="language-plaintext highlighter-rouge">Y-</code>
-character, where <code class="language-plaintext highlighter-rouge">X-</code> and <code class="language-plaintext highlighter-rouge">Y-</code> are any of the above prefixes.</p>
+    <p>A production starting with an <code class="language-plaintext highlighter-rouge">X-</code> character and ending with a <code class="language-plaintext highlighter-rouge">Y-</code> character,
+where <code class="language-plaintext highlighter-rouge">X-</code> and <code class="language-plaintext highlighter-rouge">Y-</code> are any of the above prefixes.</p>
   </dd>
-</dl>
-
-<div id="x-x-y"></div>
-
-<dl>
   <dt><code class="language-plaintext highlighter-rouge">X+</code>, <code class="language-plaintext highlighter-rouge">X-Y+</code></dt>
   <dd>
     <p>A production as above, with the additional property that the matched content
@@ -3408,8 +3328,6 @@ a single <a href="#white-space-characters">space</a> (<code class="language-plai
 flow styles</a>.
 Folding does distinguish between these cases in the following way:</p>
 
-<div id="block-folding"></div>
-
 <dl>
   <dt>Block Folding</dt>
   <dd>
@@ -3459,8 +3377,6 @@ feed and the formatting of <a href="#example-more-indented-lines">more-indented<
     </ul>
   </div>
 </div>
-
-<div id="flow-folding"></div>
 
 <dl>
   <dt>Flow Folding</dt>
@@ -4014,8 +3930,6 @@ There are three tag handle variants:</p>
   | <a href="#rule-c-primary-tag-handle">c-primary-tag-handle</a>
 </pre>
 
-<div id="primary-handle"></div>
-
 <dl>
   <dt>Primary Handle</dt>
   <dd>
@@ -4073,8 +3987,6 @@ by the simple addition of a single “<code class="language-plaintext highlighte
   </div>
 </div>
 
-<div id="secondary-handle"></div>
-
 <dl>
   <dt>Secondary Handle</dt>
   <dd>
@@ -4120,8 +4032,6 @@ By default, the prefix associated with this handle is “<code class="language-p
     </ul>
   </div>
 </div>
-
-<div id="named-handles"></div>
 
 <dl>
   <dt>Named Handles</dt>
@@ -4185,8 +4095,6 @@ In particular, the YAML <a href="#processes-and-models">processor</a> need not p
   <a href="#rule-c-ns-local-tag-prefix">c-ns-local-tag-prefix</a> | <a href="#rule-ns-global-tag-prefix">ns-global-tag-prefix</a>
 </pre>
 
-<div id="local-tag-prefix"></div>
-
 <dl>
   <dt>Local Tag Prefix</dt>
   <dd>
@@ -4239,8 +4147,6 @@ semantics to the same <a href="#tags">local tag</a>.</p>
     </ul>
   </div>
 </div>
-
-<div id="global-tag-prefix"></div>
 
 <dl>
   <dt>Global Tag Prefix</dt>
@@ -4363,8 +4269,6 @@ A tag is denoted by the <em>”<code class="language-plaintext highlighter-rouge
   | <a href="#rule-c-non-specific-tag">c-non-specific-tag</a>
 </pre>
 
-<div id="verbatim-tags"></div>
-
 <dl>
   <dt>Verbatim Tags</dt>
   <dd>
@@ -4439,8 +4343,6 @@ ERROR:
 </tr>
 </table>
 </div>
-
-<div id="tag-shorthands"></div>
 
 <dl>
   <dt>Tag Shorthands</dt>
@@ -4536,8 +4438,6 @@ ERROR:
 </tr>
 </table>
 </div>
-
-<div id="non-specific-tags"></div>
 
 <dl>
   <dt>Non-Specific Tags</dt>
@@ -4916,8 +4816,9 @@ nb-double-text(n,FLOW-KEY)  ::= <a href="#rule-nb-double-one-line">nb-double-one
 <p>In a multi-line double-quoted scalar, <a href="#line-break-characters">line breaks</a> are subject to <a href="#flow-folding">flow line
 folding</a>, which discards any trailing <a href="#white-space-characters">white space</a> characters.
 It is also possible to <em>escape</em> the <a href="#line-break-characters">line break</a> character.
-In this case, the <a href="#line-break-characters">line break</a> is excluded from the <a href="#nodes">content</a> and the trailing
-<a href="#white-space-characters">white space</a> characters are preserved.
+In this case, the escaped <a href="#line-break-characters">line break</a> is excluded from the <a href="#nodes">content</a> and any
+trailing <a href="#white-space-characters">white space</a> characters that precede the escaped line break are
+preserved.
 Combined with the ability to <a href="#escaped-characters">escape</a> <a href="#white-space-characters">white space</a> characters, this allows
 double-quoted lines to be broken at arbitrary positions.</p>
 
@@ -4969,8 +4870,8 @@ to a line feed, or<mark class="legend-2">·→\↓</mark>
   </div>
 </div>
 
-<p>All leading and trailing <a href="#white-space-characters">white space</a> characters are excluded from the
-<a href="#nodes">content</a>.
+<p>All leading and trailing <a href="#white-space-characters">white space</a> characters on each line are excluded
+from the <a href="#nodes">content</a>.
 Each continuation line must therefore contain at least one non-<a href="#white-space-characters">space</a>
 character.
 Empty lines, if any, are consumed as part of the <a href="#line-folding">line folding</a>.</p>
@@ -5652,7 +5553,7 @@ entry may be <a href="#example-empty-content">completely empty</a>.</p>
 <pre class="rule">
 [142] ns-flow-map-entry(n,c) ::=
     (
-      <a href="#rule-c-mapping-key">c-mapping-key</a>      # '?'
+      <a href="#rule-c-mapping-key">c-mapping-key</a>    # '?' (not followed by non-ws char)
       <a href="#rule-s-separate">s-separate</a>(n,c)
       <a href="#rule-ns-flow-map-explicit-entry">ns-flow-map-explicit-entry</a>(n,c)
     )
@@ -5901,7 +5802,7 @@ the syntax is identical to the general case.</p>
 <pre class="rule">
 [150] ns-flow-pair(n,c) ::=
     (
-      <a href="#rule-c-mapping-key">c-mapping-key</a>      # '?'
+      <a href="#rule-c-mapping-key">c-mapping-key</a>     # '?' (not followed by non-ws char)
       <a href="#rule-s-separate">s-separate</a>(n,c)
       <a href="#rule-ns-flow-map-explicit-entry">ns-flow-map-explicit-entry</a>(n,c)
     )
@@ -6384,8 +6285,6 @@ ERROR:
 interpreted.
 YAML provides three chomping methods:</p>
 
-<div id="strip"></div>
-
 <dl>
   <dt>Strip</dt>
   <dd>
@@ -6393,11 +6292,6 @@ YAML provides three chomping methods:</p>
 In this case, the final <a href="#line-break-characters">line break</a> and any trailing <a href="#empty-lines">empty lines</a> are
 excluded from the <a href="#scalar">scalar’s content</a>.</p>
   </dd>
-</dl>
-
-<div id="clip"></div>
-
-<dl>
   <dt>Clip</dt>
   <dd>
     <p><em>Clipping</em> is the default behavior used if no explicit chomping indicator is
@@ -6406,11 +6300,6 @@ In this case, the final <a href="#line-break-characters">line break</a> characte
 content</a>.
 However, any trailing <a href="#empty-lines">empty lines</a> are excluded from the <a href="#scalar">scalar’s content</a>.</p>
   </dd>
-</dl>
-
-<div id="keep"></div>
-
-<dl>
   <dt>Keep</dt>
   <dd>
     <p><em>Keeping</em> is specified by the <em>”<code class="language-plaintext highlighter-rouge">+</code>” chomping indicator</em>.
@@ -7228,14 +7117,14 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
   <a href="#rule-c-l-block-map-explicit-key">c-l-block-map-explicit-key</a>(n)
   (
       <a href="#rule-l-block-map-explicit-value">l-block-map-explicit-value</a>(n)
-    | <a href="#rule-e-node">e-node</a>    # ""
+    | <a href="#rule-e-node">e-node</a>                        # ""
   )
 </pre>
 
 <div id="rule-c-l-block-map-explicit-key"></div>
 <pre class="rule">
 [190] c-l-block-map-explicit-key(n) ::=
-  <a href="#rule-c-mapping-key">c-mapping-key</a>                      # '?'
+  <a href="#rule-c-mapping-key">c-mapping-key</a>                     # '?' (not followed by non-ws char)
   <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-OUT)
 </pre>
 
@@ -7243,7 +7132,7 @@ for <a href="#block-sequences">block sequence</a> entries.</p>
 <pre class="rule">
 [191] l-block-map-explicit-value(n) ::=
   <a href="#rule-s-indent">s-indent</a>(n)
-  <a href="#rule-c-mapping-value">c-mapping-value</a>    # ':'
+  <a href="#rule-c-mapping-value">c-mapping-value</a>                   # ':' (not followed by non-ws char)
   <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-OUT)
 </pre>
 
@@ -7321,7 +7210,7 @@ This prevents a potential ambiguity with multi-line <a href="#plain-style">plain
 <div id="rule-c-l-block-map-implicit-value"></div>
 <pre class="rule">
 [194] c-l-block-map-implicit-value(n) ::=
-  <a href="#rule-c-mapping-value">c-mapping-value</a>                  # ':'
+  <a href="#rule-c-mapping-value">c-mapping-value</a>           # ':' (not followed by non-ws char)
   (
       <a href="#rule-s-l+block-node">s-l+block-node</a>(n,BLOCK-OUT)
     | (
@@ -7680,7 +7569,8 @@ either of these markers.</p>
 
 <div id="rule-c-document-end"></div>
 <pre class="rule">
-[204] c-document-end ::= "..."
+[204] c-document-end ::=
+  "..."    # (not followed by non-ws char)
 </pre>
 
 <div id="rule-l-document-suffix"></div>
@@ -7970,8 +7860,6 @@ with the above <code class="language-plaintext highlighter-rouge">l-yaml-stream<
 
 <p>Some common use case that can take advantage of the YAML stream structure are:</p>
 
-<div id="appending-to-streams"></div>
-
 <dl>
   <dt>Appending to Streams</dt>
   <dd>
@@ -7980,11 +7868,6 @@ files and similar <a href="#processes-and-models">applications</a>.
 Note that each <a href="#document">document</a> is independent of the rest, allowing for
 heterogeneous log file entries.</p>
   </dd>
-</dl>
-
-<div id="concatenating-streams"></div>
-
-<dl>
   <dt>Concatenating Streams</dt>
   <dd>
     <p>Concatenating two YAML streams requires both to use the same <a href="#character-encodings">character
@@ -7994,11 +7877,6 @@ stream and the first <a href="#document">document</a> of the second stream.
 This is easily ensured by inserting a <a href="#document-markers">document end marker</a> between the two
 streams.</p>
   </dd>
-</dl>
-
-<div id="communication-streams"></div>
-
-<dl>
   <dt>Communication Streams</dt>
   <dd>
     <p>The <a href="#document-markers">document end marker</a> allows signaling the end of a <a href="#document">document</a> without
@@ -8031,27 +7909,15 @@ option.</p>
 <div id="generic-mapping"></div>
 <h4 id="10111-generic-mapping">10.1.1.1. Generic Mapping</h4>
 
-<div id="uri"></div>
-
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></p>
   </dd>
-</dl>
-
-<div id="kind"></div>
-
-<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#mapping">Mapping</a>.</p>
   </dd>
-</dl>
-
-<div id="definition"></div>
-
-<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> an associative container, where each <a href="#nodes">key</a> is unique in the
@@ -8080,27 +7946,15 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 <div id="generic-sequence"></div>
 <h4 id="10112-generic-sequence">10.1.1.2. Generic Sequence</h4>
 
-<div id="uri"></div>
-
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></p>
   </dd>
-</dl>
-
-<div id="kind"></div>
-
-<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#sequence">Sequence</a>.</p>
   </dd>
-</dl>
-
-<div id="definition"></div>
-
-<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> a collection indexed by sequential integers starting with zero.
@@ -8126,38 +7980,21 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 <div id="generic-string"></div>
 <h4 id="10113-generic-string">10.1.1.3. Generic String</h4>
 
-<div id="uri"></div>
-
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></p>
   </dd>
-</dl>
-
-<div id="kind"></div>
-
-<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
-</dl>
-
-<div id="definition"></div>
-
-<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> a Unicode string, a sequence of zero or more Unicode characters.
 This type is usually <a href="#representing-native-data-structures">bound</a> to the <a href="#representing-native-data-structures">native</a> language’s string type or, for
 languages lacking one (such as C), to a character array.</p>
   </dd>
-</dl>
-
-<div id="canonical-form"></div>
-
-<dl>
   <dt>Canonical Form:</dt>
   <dd>
     <p>The obvious.</p>
@@ -8204,27 +8041,15 @@ It is also strongly recommended that other <a href="#recommended-schemas">schema
 <div id="null"></div>
 <h4 id="10211-null">10.2.1.1. Null</h4>
 
-<div id="uri"></div>
-
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:null</code></p>
   </dd>
-</dl>
-
-<div id="kind"></div>
-
-<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
-</dl>
-
-<div id="definition"></div>
-
-<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> the lack of a value.
@@ -8234,11 +8059,6 @@ Note that a null is different from an empty string.
 Also, a <a href="#mapping">mapping</a> entry with some <a href="#nodes">key</a> and a null <a href="#nodes">value</a> is valid and
 different from not having that <a href="#nodes">key</a> in the <a href="#mapping">mapping</a>.</p>
   </dd>
-</dl>
-
-<div id="canonical-form"></div>
-
-<dl>
   <dt>Canonical Form</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">null</code>.</p>
@@ -8258,38 +8078,21 @@ key with null value: !!null null
 <div id="boolean"></div>
 <h4 id="10212-boolean">10.2.1.2. Boolean</h4>
 
-<div id="uri"></div>
-
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:bool</code></p>
   </dd>
-</dl>
-
-<div id="kind"></div>
-
-<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
-</dl>
-
-<div id="definition"></div>
-
-<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> a true/false value.
 In languages without a <a href="#representing-native-data-structures">native</a> Boolean type (such as C), they are usually
 <a href="#representing-native-data-structures">bound</a> to a native integer type, using one for true and zero for false.</p>
   </dd>
-</dl>
-
-<div id="canonical-form"></div>
-
-<dl>
   <dt>Canonical Form</dt>
   <dd>
     <p>Either <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>.</p>
@@ -8309,27 +8112,15 @@ Pluto is a planet: !!bool false
 <div id="integer"></div>
 <h4 id="10213-integer">10.2.1.3. Integer</h4>
 
-<div id="uri"></div>
-
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></p>
   </dd>
-</dl>
-
-<div id="kind"></div>
-
-<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
-</dl>
-
-<div id="definition"></div>
-
-<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> arbitrary sized finite mathematical integers.
@@ -8350,11 +8141,6 @@ warning or find some other manner to round-trip it.
 In general, integers representable using 32 binary digits should safely
 round-trip through most systems.</p>
   </dd>
-</dl>
-
-<div id="canonical-form"></div>
-
-<dl>
   <dt>Canonical Form</dt>
   <dd>
     <p>Decimal integer notation, with a leading “<code class="language-plaintext highlighter-rouge">-</code>” character for negative values,
@@ -8376,27 +8162,15 @@ positive: !!int 34
 <div id="floating-point"></div>
 <h4 id="10214-floating-point">10.2.1.4. Floating Point</h4>
 
-<div id="uri"></div>
-
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:float</code></p>
   </dd>
-</dl>
-
-<div id="kind"></div>
-
-<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
-</dl>
-
-<div id="definition"></div>
-
-<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> an approximation to real numbers, including three special values
@@ -8417,11 +8191,6 @@ IEEE floats should be safe.
 Since YAML does not specify a particular accuracy, using floating-point
 <a href="#nodes">mapping keys</a> requires great care and is not recommended.</p>
   </dd>
-</dl>
-
-<div id="canonical-form"></div>
-
-<dl>
   <dt>Canonical Form</dt>
   <dd>
     <p>Either <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">.inf</code>, <code class="language-plaintext highlighter-rouge">-.inf</code>, <code class="language-plaintext highlighter-rouge">.nan</code> or scientific notation matching the

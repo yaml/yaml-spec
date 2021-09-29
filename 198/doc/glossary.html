@@ -31,7 +31,7 @@
 
 <h1 id="yaml-vocabulary-glossary">YAML Vocabulary Glossary</h1>
 
-<p>The YAML language has its own vocabulary.
+<p>The YAML data language and its specification has its own vocabulary.
 It is important to use the correct terms when developers discuss YAML topics.
 For example the terms: <code class="language-plaintext highlighter-rouge">list</code>, <code class="language-plaintext highlighter-rouge">array</code> and <code class="language-plaintext highlighter-rouge">sequence</code> seem like they are the
 same thing and can be used interchangably, but in YAML they have different
@@ -59,8 +59,8 @@ A node with the anchor <code class="language-plaintext highlighter-rouge">&amp;f
   </dd>
   <dt>Array</dt>
   <dd>
-    <p>The word array is sometimes used to refer to a native data structure
-typically constructed from a sequence node.</p>
+    <p>The word array is sometimes used to refer to a native data structure typically
+constructed from a sequence node.</p>
   </dd>
 </dl>
 
@@ -69,8 +69,8 @@ typically constructed from a sequence node.</p>
 <dl>
   <dt>Block / Block Collection Style</dt>
   <dd>
-    <p>Block collections are written in the indentation-based scoping style that
-YAML is most known for.</p>
+    <p>Block collections are written in the indentation-based scoping style that YAML
+is most known for.</p>
   </dd>
   <dt>Boolean</dt>
   <dd>
@@ -93,7 +93,8 @@ It may also be reported as events and stored in the DOM or possibly in a
 native data structure.
 Syntactically, comments are text starting with a <code class="language-plaintext highlighter-rouge">#</code> character and continuing
 to the end of the line.</p>
-
+  </dd>
+  <dd>
     <p>Comments may be used within YAML documents or before/between/after them (in
 the YAML stream).</p>
   </dd>
@@ -139,7 +140,8 @@ or a representer and consumed by a constructor or a serializer.
 A DOM may also be consumed directly by an application.
 A DOM API can offer a lot more information and processing options than a
 native data structure.</p>
-
+  </dd>
+  <dd>
     <p>Frameworks do not need to implement a DOM as part of their stacks, as long as
 they adhere to the YAML specification rules for moving information through
 the DOM.</p>
@@ -171,7 +173,8 @@ that would typically be reading events from a parser.</p>
     <p>An event is an information state produced by a parser or serializer and
 consumed by a composer or emitter.
 Event types include:</p>
-
+  </dd>
+  <dd>
     <ul>
       <li>stream-start</li>
       <li>stream-end</li>
@@ -331,7 +334,8 @@ initial state given to a dumper.
 This state is defined by the programming language being used, or maybe a form
 crafted by the author of the application.
 Some YAML frameworks may use the DOM state as their native state.</p>
-
+  </dd>
+  <dd>
     <p>As an example, in Python, generic native states include dictionaries, lists,
 tuples and values.
 Custom native states include the instance objects of Python classes.</p>
@@ -415,7 +419,8 @@ Strings, numbers and booean values are examples of scalars.</p>
 YAML stream.
 Unlike traditional schemas which typically enforce the structural typing of
 information, a YAML schema can alter the semantic meaning of a YAML file.</p>
-
+  </dd>
+  <dd>
     <p>In YAML 1.2, schemas are almost always expressed in the source code of the
 framework.
 In future versions, a YAML Schema language can be used to control the
@@ -495,10 +500,11 @@ Tags are identifers preceded by a <code class="language-plaintext highlighter-ro
 A tag identifier is used to identify a function that will be applied to a
 node when it is retrieved from the DOM.
 The function’s return type is can be considered the “type” of the node.</p>
-
-    <p>While tags may be written explicitly into a YAML file using the <code class="language-plaintext highlighter-rouge">!abc</code>
-syntax, it is quite common for tags to be added to nodes implicitly according
-to the rules of a schema.</p>
+  </dd>
+  <dd>
+    <p>While tags may be written explicitly into a YAML file using the <code class="language-plaintext highlighter-rouge">!abc</code> syntax,
+it is quite common for tags to be added to nodes implicitly according to the
+rules of a schema.</p>
   </dd>
   <dt>Token</dt>
   <dd>
