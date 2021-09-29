@@ -4,7 +4,7 @@ The current version of the YAML language is **1.2** and the current YAML
 specification revision is **1.2.2**.
 
 
-## Changes in revision 1.2.2 (YYYY-MM-DD)
+## Changes in revision 1.2.2 (2021-10-01)
 
 * Hosted the YAML specification sources in a publicly accessible
   repository[^repo].

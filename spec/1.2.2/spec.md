@@ -6,7 +6,7 @@ status: draft
 
 # YAML Ain't Markup Language (YAML™) version 1.2
 
-## Revision 1.2.2 (YYYY-MM-DD)
+## Revision 1.2.2 (2021-10-01)
 {:.subtitle}
 
 Copyright presently by YAML Language Development Team[^team]  
