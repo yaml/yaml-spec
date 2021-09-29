@@ -2796,8 +2796,9 @@ Comments are a [presentation detail] and must not be used to convey [content]
 information.
 
 Comments must be [separated] from other tokens by [white space] characters.
-To ensure [JSON compatibility], YAML [processors] must allow for the omission
-of the final comment [line break] of the input [stream].
+
+> Note: To ensure [JSON compatibility], YAML [processors] must allow for the
+omission of the final comment [line break] of the input [stream].
 However, as this confuses many tools, YAML [processors] should terminate the
 [stream] with an explicit [line break] on output.
 
