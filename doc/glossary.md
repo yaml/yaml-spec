@@ -52,18 +52,18 @@ Comment
 Text in a YAML file that is typically intended for humans to read, but not
 considered part of the YAML data model.
 Comment text may be discarded entirely by a parser.
-It may also be reported as events and stored in the DOM or possibly in a
-native data structure.
+It may also be reported as events and stored in the DOM or possibly in a native
+data structure.
 Syntactically, comments are text starting with a `#` character and continuing
 to the end of the line.
 :
-Comments may be used within YAML documents or before/between/after them (in
-the YAML stream).
+Comments may be used within YAML documents or before/between/after them (in the
+YAML stream).
 
 Composer
 :
-A composer is the processor in a load stack that gets events from a parser
-and uses them to create the DOM state.
+A composer is the processor in a load stack that gets events from a parser and
+uses them to create the DOM state.
 
 Constructor
 :
@@ -82,8 +82,8 @@ YAML data model.
 Document
 :
 A document is a top level YAML node.
-Most YAML files consist of a single YAML document, although they may also
-have zero or multiple documents.
+Most YAML files consist of a single YAML document, although they may also have
+zero or multiple documents.
 
 Double quoted scalar
 :
@@ -94,15 +94,15 @@ They use a number of escape sequences to represent non-printable characters.
 
 DOM
 :
-A DOM is an information state that is a tree of nodes created by a composer
-or a representer and consumed by a constructor or a serializer.
+A DOM is an information state that is a tree of nodes created by a composer or
+a representer and consumed by a constructor or a serializer.
 A DOM may also be consumed directly by an application.
-A DOM API can offer a lot more information and processing options than a
-native data structure.
+A DOM API can offer a lot more information and processing options than a native
+data structure.
 :
 Frameworks do not need to implement a DOM as part of their stacks, as long as
-they adhere to the YAML specification rules for moving information through
-the DOM.
+they adhere to the YAML specification rules for moving information through the
+DOM.
 
 Dumper / Dump
 :
@@ -111,8 +111,8 @@ information all the way from native to file states.
 
 Dump Stack
 :
-The set of processors that move YAML information from a native state to a
-file state.
+The set of processors that move YAML information from a native state to a file
+state.
 
 ## E
 
@@ -144,8 +144,8 @@ Event types include:
 
 File
 :
-File is the term for YAML information in a final textual state, external to
-the YAML stack.
+File is the term for YAML information in a final textual state, external to the
+YAML stack.
 A YAML framework loads from a file and dumps to a file.
 The term is abstract and doesn't have to be a file stored to disk.
 It might be a socket or other external data source/target.
@@ -154,8 +154,8 @@ Flow / Flow Collection Style
 :
 In YAML, mappings and sequences can be represented in a style that uses curly
 braces and square brackets in the same manner that JSON does.
-Block collections may contain any collection nodes in the flow style, but
-flow collections may only contain collections in the flow style.
+Block collections may contain any collection nodes in the flow style, but flow
+collections may only contain collections in the flow style.
 
 Folded Scalar Style
 :
@@ -168,9 +168,9 @@ Framework / YAML Framework
 :
 A full YAML processing implementation in a given programming language.
 A framework almost always has at least a Loader and a Dumper.
-A complete, full-featured YAML framework would also support things like
-schema processors, path referencing, DOM API and standard library support,
-among many other details.
+A complete, full-featured YAML framework would also support things like schema
+processors, path referencing, DOM API and standard library support, among many
+other details.
 
 ## H
 
@@ -208,8 +208,8 @@ A kind should not be confused with a type.
 Library
 :
 The DOM resolves tags to functions.
-These functions come from the library that is registered to the DOM; often
-the YAML standard library.
+These functions come from the library that is registered to the DOM; often the
+YAML standard library.
 
 List
 :
@@ -257,8 +257,8 @@ An alias may be used for any node.
 
 Native / Native Object
 :
-A language specific state that is the final result of a loader, or the
-initial state given to a dumper.
+A language specific state that is the final result of a loader, or the initial
+state given to a dumper.
 This state is defined by the programming language being used, or maybe a form
 crafted by the author of the application.
 Some YAML frameworks may use the DOM state as their native state.
@@ -287,23 +287,21 @@ Parser / Parse
 A parser is the processor in the load stack that reads tokens, matches them
 against a grammar and write events.
 It may also throw an error if the tokens don't match the grammar.
-The events are usually consumed by the composer to create a DOM, but they
-might also be processed directly by a streaming application.
+The events are usually consumed by the composer to create a DOM, but they might
+also be processed directly by a streaming application.
 
 Plain Scalar
 :
 Plain refers to the quoting style of a scalar where the value is unquoted; as
 opposed to single/double quoted or literal or folded styles.
-A scalar-value event contains a flag as to whether the scalar was plain or
-not.
+A scalar-value event contains a flag as to whether the scalar was plain or not.
 Plain scalars are often assigned tags based on their content value.
 
 Processor
 :
 A component in the load stack or dump stack to transforms data from one state
 to another.
-Load stack processors include: reader, lexer, parser, composer and
-constructor.
+Load stack processors include: reader, lexer, parser, composer and constructor.
 Dump stack processors include: representer, serializer, emitter, streamer and
 writer.
 
@@ -340,8 +338,8 @@ information, a YAML schema can alter the semantic meaning of a YAML file.
 :
 In YAML 1.2, schemas are almost always expressed in the source code of the
 framework.
-In future versions, a YAML Schema language can be used to control the
-behavior of a framework (if the framework supports it).
+In future versions, a YAML Schema language can be used to control the behavior
+of a framework (if the framework supports it).
 
 Sequence
 :
@@ -360,8 +358,8 @@ The single quotes must be escaped using two single quotes (`''`).
 
 Stack / YAML Stack
 :
-YAML processing occurs as 2 stacks of processors, each moving data (in
-opposite directions) between YAML formatted text and computer memory states.
+YAML processing occurs as 2 stacks of processors, each moving data (in opposite
+directions) between YAML formatted text and computer memory states.
 They are called the load stack and the dump stack.
 Collectively the 2 stacks may be referred to as "the YAML stack".
 
@@ -378,14 +376,14 @@ and consumed by a composer or an emitter.
 
 Stream (Character Stream)
 :
-The set of unicode characters produced by a reader or streamer and consumed
-by a lexer or writer.
+The set of unicode characters produced by a reader or streamer and consumed by
+a lexer or writer.
 
 Stream (YAML Stream or Document Stream)
 :
 A YAML file is considered a "stream" of zero or more documents.
-A stream may also have directives and/or comments before, between or after
-the documents.
+A stream may also have directives and/or comments before, between or after the
+documents.
 This is the typical meaning when the word "stream" is used with no qualifier.
 
 Streamer
@@ -395,8 +393,8 @@ It simply joins tokens into a character stream.
 
 String
 :
-String is a heavily overloaded term in YAML and depends on the context in
-which it is used.
+String is a heavily overloaded term in YAML and depends on the context in which
+it is used.
 
 Style
 :
@@ -411,8 +409,8 @@ Tag
 :
 A tag is an annotation on a node.
 Tags are identifers preceded by a `!`, like `!foo` or `!!str`.
-A tag identifier is used to identify a function that will be applied to a
-node when it is retrieved from the DOM.
+A tag identifier is used to identify a function that will be applied to a node
+when it is retrieved from the DOM.
 The function's return type is can be considered the "type" of the node.
 :
 While tags may be written explicitly into a YAML file using the `!abc` syntax,

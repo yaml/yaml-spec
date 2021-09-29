@@ -10,8 +10,8 @@ this directory.
 
 ## RFC Process
 
-RFCs start out as GitHub Pull Requests (PRs) and should be based on the
-[RFC Template](RFC-0000-template.md) file.
+RFCs start out as GitHub Pull Requests (PRs) and should be based on the [RFC
+Template](RFC-0000-template.md) file.
 Each PR is reviewed by the core team to make sure it is something that should
 be under consideration/discussion.
 

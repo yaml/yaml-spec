@@ -48,6 +48,7 @@ here.
 
 Assuming you have [Docker installed](https://docs.docker.com/get-docker/), just
 run this command from a terminal:
+
 ```
 docker run --rm -p 31337:31337 \
   yamlio/playground-sandbox:0.0.3 https
@@ -85,14 +86,14 @@ browsers.
 
 * Firefox
   * Type `about:config` into the browser URL location
-  * Search for `security.fileuri.strict_origin_policy` in the "Search
-    preference name" box
+  * Search for `security.fileuri.strict_origin_policy` in the "Search preference
+    name" box
   * Change value from `true` to `false`
   * Restart Firefox
 
 That's everything.
-You should be all set to use all the playground things that need to
-run untrusted input on a server!
+You should be all set to use all the playground things that need to run
+untrusted input on a server!
 
 We'll keep looking for ways to make this simpler.
 If you have ideas, let us know!

@@ -77,7 +77,7 @@ sub lines {
 sub wrap {
   my $end = shift;
   my @l;
-  while (peek =~ /./) {
+  while (peek =~ /./ and peek !~ /^:/) {
     my $line = take;
     chomp $line;
     $line =~ s/^\ +(?=\S)(?!\*)//;
@@ -124,8 +124,12 @@ sub line {
 }
 
 sub para {
-  my $end = sub { $_[0] =~ /(  |\.)$/ };
+  my $end = sub { $_[0] =~ /(  |[\.\!\?])$/ };
   wrap $end;
+}
+
+sub ddef {
+  out take;
 }
 
 sub list {
@@ -165,11 +169,10 @@ sub comm {
     while (peek !~ /-->$/) {
       out take;
     }
+    out take;
   }
   space;
 }
-
-
 
 sub unknown {
   my $line = take;
@@ -202,12 +205,13 @@ sub main {
     lis2 and next if $peek =~ /^\ \ \S/;
     tabl and next if $peek =~ /^\|\ /;
     comm and next if $peek =~ /^<!--/;
+    ddef and next if $peek =~ /^:\n/;
     para and next if $peek =~ /^(
       [\w\#\*"`] |
       \[\w |
       \!\[ |
       \(\w |
-      [\?\:\>]\ |
+      \>\ |
       \[\"\*\*
     )/x;
 

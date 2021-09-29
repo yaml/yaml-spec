@@ -2707,16 +2707,16 @@ Folding does distinguish between these cases in the following way:
 
 Block Folding
 :
-In the [folded block style], the final [line break] and trailing [empty
-lines] are subject to [chomping] and are never folded.
+In the [folded block style], the final [line break] and trailing [empty lines]
+are subject to [chomping] and are never folded.
 In addition, folding does not apply to [line breaks] surrounding text lines
 that contain leading [white space].
 Note that such a [more-indented] line may consist only of such leading [white
 space].
 :
-The combined effect of the _block line folding_ rules is that each
-"paragraph" is interpreted as a line, [empty lines] are interpreted as a line
-feed and the formatting of [more-indented] lines is preserved.
+The combined effect of the _block line folding_ rules is that each "paragraph"
+is interpreted as a line, [empty lines] are interpreted as a line feed and the
+formatting of [more-indented] lines is preserved.
 
 
 **Example #. Block Folding**
@@ -3321,8 +3321,8 @@ semantics to the same [local tag].
 
 Global Tag Prefix
 :
-If the prefix begins with a character other than "`!`", it must be a valid
-URI prefix, and should contain at least the scheme.
+If the prefix begins with a character other than "`!`", it must be a valid URI
+prefix, and should contain at least the scheme.
 [Shorthands] using the associated [handle] are expanded to globally unique URI
 tags and their semantics is consistent across [applications].
 In particular, every [document] in every [stream] must assign the same
@@ -3538,8 +3538,8 @@ ERROR:
 
 Non-Specific Tags
 :
-If a [node] has no tag property, it is assigned a [non-specific tag] that
-needs to be [resolved] to a [specific] one.
+If a [node] has no tag property, it is assigned a [non-specific tag] that needs
+to be [resolved] to a [specific] one.
 This [non-specific tag] is "`!`" for non-[plain scalars] and "`?`" for all
 other [nodes].
 This is the only case where the [node style] has any effect on the [content]
@@ -6493,8 +6493,8 @@ Definition
 Scalars of this type should be [bound] to a [native] integer data type, if
 possible.
 :
-Some languages (such as Perl) provide only a "number" type that allows for
-both integer and floating-point values.
+Some languages (such as Perl) provide only a "number" type that allows for both
+integer and floating-point values.
 A YAML [processor] may use such a type for integers as long as they round-trip
 properly.
 :
@@ -6538,13 +6538,12 @@ Definition
 [Represents] an approximation to real numbers, including three special values
 (positive and negative infinity and "not a number").
 :
-Some languages (such as Perl) provide only a "number" type that allows for
-both integer and floating-point values.
+Some languages (such as Perl) provide only a "number" type that allows for both
+integer and floating-point values.
 A YAML [processor] may use such a type for floating-point numbers, as long as
 they round-trip properly.
 :
-Not all floating-point values can be stored exactly in any given [native]
-type.
+Not all floating-point values can be stored exactly in any given [native] type.
 Hence a float value may change by "a small amount" when round-tripped.
 The supported range and accuracy depends on the implementation, though 32 bit
 IEEE floats should be safe.
@@ -6554,8 +6553,8 @@ Since YAML does not specify a particular accuracy, using floating-point
 
 Canonical Form
 :
-Either `0`, `.inf`, `-.inf`, `.nan` or scientific notation matching the
-regular expression  
+Either `0`, `.inf`, `-.inf`, `.nan` or scientific notation matching the regular
+expression  
 `-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?`.
 
 

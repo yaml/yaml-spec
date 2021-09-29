@@ -105,6 +105,7 @@ For instance the post-processed forms might have a lot more Markdown HTML in
 them.
 
 The intent is to:
+
 * Keep the sources as simple and clean as possible.
 * Have the Markdown files render pretty good in the GitHub views of them.
 * Introduce a few powerful but not Markdown syntaxes.
