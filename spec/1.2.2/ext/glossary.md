@@ -3,438 +3,285 @@ YAML Vocabulary Glossary
 
 The YAML data language and its specification has its own vocabulary.
 It is important to use the correct terms when developers discuss YAML topics.
-For example the terms: `list`, `array` and `sequence` seem like they are the
-same thing and can be used interchangably, but in YAML they have different
-meanings.
 
 ## A
 
 Alias
 :
-An alias is a reference to another YAML node.
-It similar to a pointer in the C programming language.
+A serialization tree node that refers to another node.
 The alias `*foo` is a reference to a node with an anchor `&foo`.
+Aliases are not part of the representation graph.
 
 Anchor
 :
-An anchor is a label attached to a node.
-The node can be used elsewhere by referencing it with an alias.
+A label attached to a node in the serialization tree.
+The node can be used elsewhere in the serialization tree by referencing it with
+an alias.
 A node with the anchor `&foo` can be referenced elsewhere with the alias
 `*foo`.
+Anchors are not part of the representation graph.
 
 Application
 :
 An end user program using a YAML framework.
 
-Array
-:
-The word array is sometimes used to refer to a native data structure typically
-constructed from a sequence node.
-
 ## B
 
-Block / Block Collection Style
+Block Style
 :
-Block collections are written in the indentation-based scoping style that YAML
-is most known for.
+The indentation-based scoping style that YAML is best known for.
+Block style nodes may contain either block or flow style nodes.
 
 Boolean
 :
-Boolean is a native state consisting of the values true and false.
-Most constructors/schemas support booleans.
-It is typical for a schema to use the plain scalars `true` and `false` to
-assign the boolean tag function.
+A data type consisting of the values true and false.
+Represented in YAML by the tag `tag:yaml.org,2002:bool`.
+Typically, schemas will interpret the plain scalars `true` and `false` as
+booleans.
 
 ## C
 
+Canonical form
+:
+A standard form of a scalar node's content.
+The canonical form depends on the node's tag and on it's formatted content.
+For example, the canonical form of a node with tag `tag:yaml.org,2002:number`
+and formatted content `0xabc` is `2748`.
+During composition, each node's formatted content is replaced by its canonical
+form, so the content of scalar nodes in the representation graph is always in
+canonical form.
+
 Comment
 :
-Text in a YAML file that is typically intended for humans to read, but not
-considered part of the YAML data model.
-Comment text may be discarded entirely by a parser.
-It may also be reported as events and stored in the DOM or possibly in a native
-data structure.
-Syntactically, comments are text starting with a `#` character and continuing
-to the end of the line.
-:
-Comments may be used within YAML documents or before/between/after them (in the
-YAML stream).
+Text in a YAML file that is intended for humans to read, and which is ignored
+by processors.
+Comments begin with the `#` character and continue to the end of the line.
 
-Composer
+Composition
 :
-A composer is the processor in a load stack that gets events from a parser and
-uses them to create the DOM state.
+The process that turns a serialization tree into a representation graph.
+As part of composition, aliases are identified with anchored nodes,
+non-specific tags are resolved, and scalar node content is converted to
+canonical form.
+Composition depends on a schema, which determines how tags are resolved.
 
-Constructor
+Construction
 :
-A constructor is the processor in a load stack that iterates over a DOM tree
-and creates a native representation.
+The process that turns a representation graph into native data structures.
+The details of construction will vary by implementation.
 
 ## D
 
+Data model
+:
+One of the data models defined by the YAML spec: the presentation stream,
+serialization tree, and representation graph.
+
 Directive
 :
-A directive is an instruction to the parser.
+An instruction to the parser beginning with `%`.
 YAML 1.2 defines 2 directives: `%YAML ...` and `%TAG ...`.
-Directives are part of a YAML stream, but not part of YAML documents or the
-YAML data model.
+Directives are not part of the serialization tree or the representation graph.
 
 Document
 :
-A document is a top level YAML node.
+Part of a stream that will be loaded as a representation graph.
 Most YAML files consist of a single YAML document, although they may also have
 zero or multiple documents.
 
-Double quoted scalar
+Double-quoted scalar
 :
-Scalar values written in the double quote style are capable of expressing any
-possible string value.
-The double quoted style is the only scalar style capable of that.
-They use a number of escape sequences to represent non-printable characters.
+A scalar surrounded by double quotes.
+Any string can be represented as a double-quoted string using escape sequences.
 
-DOM
+Dumping
 :
-A DOM is an information state that is a tree of nodes created by a composer or
-a representer and consumed by a constructor or a serializer.
-A DOM may also be consumed directly by an application.
-A DOM API can offer a lot more information and processing options than a native
-data structure.
-:
-Frameworks do not need to implement a DOM as part of their stacks, as long as
-they adhere to the YAML specification rules for moving information through the
-DOM.
-
-Dumper / Dump
-:
-A dumper is a processor that links all the processors of a dump stack, taking
-information all the way from native to file states.
-
-Dump Stack
-:
-The set of processors that move YAML information from a native state to a file
-state.
-
-## E
-
-Emitter / Emit
-:
-An emitter is the process in the dump stack that turns events into tokens.
-In the dump stack the events come from the serializer.
-In stream processing the events would come from an application filter process
-that would typically be reading events from a parser.
-
-Event
-:
-An event is an information state produced by a parser or serializer and
-consumed by a composer or emitter.
-Event types include:
-:
-* stream-start
-* stream-end
-* document-start
-* document-end
-* mapping-start
-* mapping-end
-* sequence-start
-* sequence-end
-* scalar-value
-* alias-name
+The process of turning native data structures into a presentation stream.
+Dumping consists of the sub-processes of representation, serialization, and
+presentation.
 
 ## F
 
-File
+Flow style
 :
-File is the term for YAML information in a final textual state, external to the
-YAML stack.
-A YAML framework loads from a file and dumps to a file.
-The term is abstract and doesn't have to be a file stored to disk.
-It might be a socket or other external data source/target.
+The node style that uses curly braces to present mappings and square brackets
+to present sequences.
+Flow style is similar to JSON.
+Flow style nodes may only contain other flow style nodes, not block style
+nodes.
 
-Flow / Flow Collection Style
+Folded scalar style
 :
-In YAML, mappings and sequences can be represented in a style that uses curly
-braces and square brackets in the same manner that JSON does.
-Block collections may contain any collection nodes in the flow style, but flow
-collections may only contain collections in the flow style.
+Block scalars defined with the `>` indicator.
+Single newlines in folded block scalars are replaced by spaces, and *n*
+consecutive newlines are replaced by *n* - 1 newlines.
 
-Folded Scalar Style
+Formatted content
 :
-Folded scalars occur only in block collections.
-They are indicated by a greater-than sign.
-The indented lines that follow replace newlines with a space, and two or more
-consecutive newlines with n-1 literal newlines.
-
-Framework / YAML Framework
-:
-A full YAML processing implementation in a given programming language.
-A framework almost always has at least a Loader and a Dumper.
-A complete, full-featured YAML framework would also support things like schema
-processors, path referencing, DOM API and standard library support, among many
-other details.
-
-## H
-
-Hash
-:
-The word hash is sometimes used to refer to a native data structure typically
-constructed from a mapping node.
-
-## I
-
-Information
-:
-Any of the various data bits flowing through a YAML stack.
-
-## J
-
-JSON
-:
-When used with the JSON Schema or a derivative of that schema, YAML is a
-syntactic and semantic superset of the JSON data format.
-That is, a YAML loader using such a schema (which is typical) can load a JSON
-file and produce the same result as a JSON loading (often called `parse`)
-process.
+The content of a scalar node in the serialization tree, independent of
+presentation details such as node style but not necessarily in canonical form.
+For instance, the plain scalar `1.0` and the quoted scalars `"1.0"` and `'1.0'`
+all have the same formatted content, but the plain scalar `1.00` has different
+formatted content.
 
 ## K
 
 Kind
 :
-There are 3 kinds of nodes in YAML: mappings, sequences and scalars.
-A kind refers to the raw structure.
-A kind should not be confused with a type.
+There are three kinds of nodes in a representation graph: mappings, sequences,
+and scalars.
+
 
 ## L
 
-Library
+Literal scalar style
 :
-The DOM resolves tags to functions.
-These functions come from the library that is registered to the DOM; often the
-YAML standard library.
+Block scalars defined with the `|` indicator.
+Newlines in literal scalars are preserved.
 
-List
+Loading
 :
-A list is a property of a type.
-List types are often made from sequence nodes, but they can be result of any
-tag function whose return type is a list type.
-
-Literal / Literal Scalar Style
-:
-The literal scalar is similar to the heredoc style found in some programming
-languages like Perl and Bash.
-No character escaping is allowed and newlines are literal.
-Any valid YAML file's content can be encoded in the literal style by simply
-indenting it.
-
-Loader / Load
-:
-A dumper is a processor that links all the processors of a dump stack, taking
-information all the way from native to file states.
-
-Load Stack
-:
-The set of processors that move YAML information from the file state to the
-native state: read, lex, parse, compose, construct.
+The process of turning a presentation stream into native data structures.
+Loading consists of the sub-processes of parsing, composition, and
+construction.
 
 ## M
 
 Mapping
 :
-A mapping is a kind of YAML node that consists of a set of zero or more
-key/value pairs.
-Any kind of node is allowed to be a key, even though native models rarely
-support this.
-Equivalent keys (if they can be detected) are not supported.
-
-Model / Data Model
-:
-This word describes elementary kinds of data that YAML represents.
-A YAML file is a stream of YAML documents each of which have one root node.
-Nodes may be mappings, sequences or scalars.
-Nodes may be annotated with anchors and/or tags.
-An alias may be used for any node.
+A kind of YAML node whose content is an unordered set of zero or more key/value
+pairs.
+Keys and values may be any kind of node.
+Mapping keys must be unique.
 
 ## N
 
-Native / Native Object
+Native data structures
 :
-A language specific state that is the final result of a loader, or the initial
-state given to a dumper.
-This state is defined by the programming language being used, or maybe a form
-crafted by the author of the application.
-Some YAML frameworks may use the DOM state as their native state.
-:
-As an example, in Python, generic native states include dictionaries, lists,
-tuples and values.
-Custom native states include the instance objects of Python classes.
+Values in some implementation that are the final product of loading or the
+initial inputs to dumping.
+Native data structures will vary by implementation.
+For instance, an implementation written in Python might use the Python types
+`list`, `dict`, `str`, `int`, and so on.
 
 Node
 :
-A node is an addressable point in a YAML document.
+An element of a representation graph or serialization tree.
 Mappings, sequences, scalars are nodes.
 An alias is a reference to a node.
 Anchors and tags are annotations to nodes.
 
 Null
 :
-Null is a native value supported by most schemas.
-The plain value `null` as well as the plain empty value is most often used to
-represent it.
+A data type representing nothing or the lack of a value.
+Represented in YAML by the tag `tag:yaml.org,2002:null`.
+Typically, schemas will interpret the plain scalar `null` as a null value.
 
 ## P
 
-Parser / Parse
+Parsing
 :
-A parser is the processor in the load stack that reads tokens, matches them
-against a grammar and write events.
-It may also throw an error if the tokens don't match the grammar.
-The events are usually consumed by the composer to create a DOM, but they might
-also be processed directly by a streaming application.
+The process in the load stack turns a presentation stream into a serialization
+tree.
 
-Plain Scalar
+Plain scalar
 :
-Plain refers to the quoting style of a scalar where the value is unquoted; as
-opposed to single/double quoted or literal or folded styles.
-A scalar-value event contains a flag as to whether the scalar was plain or not.
-Plain scalars are often assigned tags based on their content value.
+A scalar whose value is unquoted.
+Plain scalars without explicit tags are usually resolved during composition.
+Not all scalars can be presented in the plain style.
 
-Processor
+Presentation stream
 :
-A component in the load stack or dump stack to transforms data from one state
-to another.
-Load stack processors include: reader, lexer, parser, composer and constructor.
-Dump stack processors include: representer, serializer, emitter, streamer and
-writer.
+A sequence of Unicode characters that can be parsed into a serialization tree.
+The presentation stream includes presentational details such as node style,
+directives, comments, and whitespace that do not exist in the other data
+models.
+
+Process
+:
+One of the defined processes in the spec that turns one data model into
+another.
+The top-level processes are loading and dumping.
+Loading includes the processes of parsing, composition, and construction, and
+dumping includes the processes of representation, serialization, and
+presentation.
 
 ## R
 
-Reader / Read
+Representation
 :
-A reader is a processor in the load stack that reads a file and produces a
-stream of unicode characters.
+The process that turns native data structures into a representation graph.
 
-Reference
+Representation graph
 :
-A reference can be thought of as a pointer to another node in the DOM.
-In YAML 1.2 the only references are aliases.
-
-Representer / Represent
-:
-A representer is a process that turns native programming data into a YAML DOM
-state.
+A graph of mapping, sequence, and scalar nodes that is the result of
+composition or representation.
+The representation graph does not contain any presentational information such
+as node style or document directives, nor does it contain aliases.
+All nodes in the representation graph have resolved tags and their content is
+in canonical form.
+The representation graph may contain cycles — nodes that contain themselves.
 
 ## S
 
 Scalar
 :
-A scalar is a a leaf node that contains exactly one value.
-Strings, numbers and booean values are examples of scalars.
+A leaf node whose content is a single string of characters.
+Native data structures such as strings, numbers, and booleans can be
+represented as scalars.
 
 Schema
 :
-Schema in YAML refers to all the external information required to process a
-YAML stream.
-Unlike traditional schemas which typically enforce the structural typing of
-information, a YAML schema can alter the semantic meaning of a YAML file.
-:
-In YAML 1.2, schemas are almost always expressed in the source code of the
-framework.
-In future versions, a YAML Schema language can be used to control the behavior
-of a framework (if the framework supports it).
+A set of tags, and rules for resolving non-specific tags.
+Schemas are used in composition, and may also be used in serialization.
 
 Sequence
 :
-A sequence is a collection node that consists of zero or more nodes.
+A node whose content is an ordered list of zero or more nodes.
 
-Serializer / Serialize
+Serialization
 :
-A serializer is the process in the dump stack that iterates over the DOM and
-produces events that are typically sent to an emitter.
+The process that turns a representation graph into a serialization tree.
+Serialization may introduce anchors and alias nodes to avoid cycles.
+It may also remove explicit tags when the schema renders them unnecessary.
 
-Single quoted scalar
+Serialization tree
 :
-Scalar values written in the single quote style can contain any sequence of
-printable characters except the single quote itself.
-The single quotes must be escaped using two single quotes (`''`).
+A tree of mapping, sequence, and alias nodes that is the result of parsing or
+serialization.
+The serialization tree does not contain any presentational information such as
+node style or document directives.
+Node tags may be unresolved and their content may not be in canonical form.
+The serialization tree cannot contain cycles.
+Instead, alias nodes and anchors are used to represent cyclic data.
 
-Stack / YAML Stack
+Single-quoted scalar
 :
-YAML processing occurs as 2 stacks of processors, each moving data (in opposite
-directions) between YAML formatted text and computer memory states.
-They are called the load stack and the dump stack.
-Collectively the 2 stacks may be referred to as "the YAML stack".
-
-Standard Library
-:
-Versions of YAML after 1.2 define a standard library of tag functions.
-
-State
-:
-A form that YAML information is in during various stages of the stack.
-States include: files, characters, tokens, events, DOMs and native objects.
-For instance an "event" is a data state produced by a parser or a serializer,
-and consumed by a composer or an emitter.
-
-Stream (Character Stream)
-:
-The set of unicode characters produced by a reader or streamer and consumed by
-a lexer or writer.
-
-Stream (YAML Stream or Document Stream)
-:
-A YAML file is considered a "stream" of zero or more documents.
-A stream may also have directives and/or comments before, between or after the
-documents.
-This is the typical meaning when the word "stream" is used with no qualifier.
-
-Streamer
-:
-This is the dump stack sister process to the lexer.
-It simply joins tokens into a character stream.
-
-String
-:
-String is a heavily overloaded term in YAML and depends on the context in which
-it is used.
+A scalar surrounded by single quotes.
+Single-quoted scalars can contain any printable characters.
+The single quote character itself must be escaped using two single quotes (e.g.
+`'YAML ain''t a markup language'`).
 
 Style
 :
-YAML has multiple styles to represent collections and scalars.
-Collection styles are "block" and "flow".
-Scalar styles are "plain", "single quoted", "double quoted", "literal" and
-"folded".
+The way that a node is presented in the presentation stream.
+Mappings and collections may be presented in the block or flow styles.
+Scalars may be presented in the plain, single-quotes, double-quoted, literal,
+or folded styles.
+Node style is only part of the presentation stream, not the serialization tree
+or representation graph.
 
 ## T
 
 Tag
 :
-A tag is an annotation on a node.
-Tags are identifers preceded by a `!`, like `!foo` or `!!str`.
-A tag identifier is used to identify a function that will be applied to a node
-when it is retrieved from the DOM.
-The function's return type is can be considered the "type" of the node.
-:
-While tags may be written explicitly into a YAML file using the `!abc` syntax,
-it is quite common for tags to be added to nodes implicitly according to the
-rules of a schema.
-
-Token
-:
-A token is a piece of information that is produced by a lexer or emitter.
-A token has a name and a value.
-The value is a sequence of zero or more contiguous characters from (or for) a
-character stream.
-
-Type
-:
-A type is a set of constraints on a node.
-Types are defined by schemas.
-
-## W
-
-Writer / Write
-:
-A writer is the processor in a dump stack that encodes unicode characters and
-writes them to a file state.
+A tag is an annotation on a node that roughly corresponds to a data type.
+In the presentation stream, tags are identifers preceded by a `!`, like `!foo`
+or `!!str`.
+In the serialization tree, every node has either a specific or a non-specific
+tag.
+During composition, non-specific tags are resolved to specific tags, so every
+node in the representation graph has a specific tag.
 
 ## Y
 
@@ -442,5 +289,5 @@ YAML
 :
 YAML is a programming-language-agnostic data serialization language.
 "YAML" rhymes with "camel".
-YAML is a recursive backronym that stands for "YAML Ain't Markup Language".
+YAML is a recursive acronym that stands for "YAML Ain't Markup Language".
 People often think YAML is Yet Another Markup Language, but it Ain't!
