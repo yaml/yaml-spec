@@ -1952,8 +1952,6 @@ separator (`x2028`) and paragraph separator (`x2029`).
 however, JSON does not.
 Hence, to ensure [JSON compatibility], YAML treats them as non-break characters
 as of version 1.2.
-In theory this would cause incompatibility with [version 1.1]; in practice
-these characters were rarely (if ever) used.
 YAML 1.2 [processors] [parsing] a [version 1.1] [document] should therefore
 treat these line breaks as non-break characters, with an appropriate warning.
 
