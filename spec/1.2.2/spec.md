@@ -1263,36 +1263,48 @@ Otherwise it uses a YAML form that is as close to JSON as possible.
 Productions are defined using the syntax `production-name ::= term`, where a
 term is either:
 
-* An atomic term:
-  * A quoted string (`"abc"`), which matches that concatenation of characters. A
-    single character is usually written with single quotes (`'a'`).
-  * A hexadecimal number (`x0A`), which matches the character at that Unicode
-    code point.
-  * A range of hexadecimal numbers (`[x20-x7E]`), which matches any character
-    whose Unicode code point is within that range.
-  * The name of a production (`c-printable`), which matches that production.
-* A lookaround:
-  * `[ lookahead = term ]`, which matches the empty string if `term` would
-    match.
-  * `[ lookahead ≠ term ]`, which matches the empty string if `term` would not
-    match.
-  * `[ lookbehind = term ]`, which matches the empty string if `term` would
-    match beginning at any prior point on the line and ending at the current
-    position.
-* A special production:
-  * `<start-of-line>`, which matches the empty string at the beginning of a
-    line.
-  * `<end-of-input>`, matches the empty string at the end of the input.
-  * `<empty>`, which (always) matches the empty string.
-* A parenthesized term, which matches its contents.
-* A concatenation: `term-one term-two`, which matches `term-one` followed by
-  `term-two`.
-* A alternation: `term-one | term-two`, which matches the `term-one` if
-  possible, or `term-two` otherwise.
-* A quantified term:
-  * `term?`, which matches `(term | <empty>)`.
-  * `term*`, which matches `(term term* | <empty>)`.
-  * `term+`, which matches `(term term*)`.
+An atomic term
+:
+* A quoted string (`"abc"`), which matches that concatenation of characters. A
+  single character is usually written with single quotes (`'a'`).
+* A hexadecimal number (`x0A`), which matches the character at that Unicode
+  code point.
+* A range of hexadecimal numbers (`[x20-x7E]`), which matches any character
+  whose Unicode code point is within that range.
+* The name of a production (`c-printable`), which matches that production.
+
+A lookaround
+:
+* `[ lookahead = term ]`, which matches the empty string if `term` would match.
+* `[ lookahead ≠ term ]`, which matches the empty string if `term` would not
+  match.
+* `[ lookbehind = term ]`, which matches the empty string if `term` would match
+  beginning at any prior point on the line and ending at the current position.
+
+A special production
+:
+* `<start-of-line>`, which matches the empty string at the beginning of a line.
+* `<end-of-input>`, matches the empty string at the end of the input.
+* `<empty>`, which (always) matches the empty string.
+
+A parenthesized term
+:
+Matches its contents.
+
+A concatenation
+:
+Is `term-one term-two`, which matches `term-one` followed by `term-two`.
+
+A alternation
+:
+Is `term-one | term-two`, which matches the `term-one` if possible, or
+`term-two` otherwise.
+
+A quantified term:
+:
+* `term?`, which matches `(term | <empty>)`.
+* `term*`, which matches `(term term* | <empty>)`.
+* `term+`, which matches `(term term*)`.
 
 > Note: Quantified terms are always greedy.
 
