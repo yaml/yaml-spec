@@ -241,6 +241,10 @@ main/%.md: $(SPEC_122)/%.md
 	@mkdir -p $(dir $@)
 	(echo '---'; echo '---'; cat $<) > $@
 
+main/ext/%.md: $(SPEC_122)/ext/%.md $(SPEC_LINKS)
+	@mkdir -p $(dir $@)
+	markydown-to-kramdown $(ROOT) $^ > $@
+
 main/spec.md: $(SPEC_122)/spec.md $(SPEC_LINKS)
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
