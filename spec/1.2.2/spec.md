@@ -1739,8 +1739,7 @@ mapping: { sky: blue, sea: green }
 ```
 
 
-The "`!`" (`x21`, exclamation) is heavily overloaded for specifying [node
-tags].
+The "`!`" (`x21`, exclamation) is used for specifying [node tags].
 It is used to denote [tag handles] used in [tag directives] and [tag
 properties]; to denote [local tags]; and as the [non-specific tag] for
 non-[plain scalars].
