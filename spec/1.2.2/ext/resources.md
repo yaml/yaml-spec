@@ -1,4 +1,10 @@
-# The YAML Community
+# YAML External Resources
+
+This page contains links to useful information for YAML users and framework
+developers.
+It will be continually updated over time.
+
+## The YAML Community
 
 The YAML Community consists of its users (in day-to-day programming tasks and
 also as part of larger software projects), the implementers of YAML frameworks
@@ -11,7 +17,7 @@ and also checkout our YAML Specification Contribution Guidelines[^contributing]
 page.
 
 
-## YAML Community Resources
+### YAML Community Resources
 
 * [YAML GitHub Organization](https://github.com/yaml/)
 
@@ -68,6 +74,6 @@ page.
   This web site offers various useful information for learning about YAML.
 
 
-# Reference Links
+## Reference Links
 
 [^contributing]: [YAML Specification Contribution Guideline](https://github.com/yaml/yaml-spec/blob/main/.github/contributing.md)
