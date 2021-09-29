@@ -32,6 +32,7 @@ block-sequences:
 - dashes
 - sequence entry
 block-style-productions:
+- 8
 - block styles
 - indented blocks
 canonical-form:
@@ -41,9 +42,10 @@ changes-in-yaml-specification-v121:
 character-encodings:
 - byte order mark
 - encoding
+character-productions:
+- 5
 character-set:
 - printable
-clip:
 composing-the-representation-graph:
 - compose
 - composed
@@ -58,11 +60,12 @@ context-c:
 - context
 directives:
 - reserved
-document:
 document-markers:
 - directives end marker
 - document end marker
 - marker
+document-stream-productions:
+- 9
 double-quoted-style:
 - double-quoted
 - double-quoted flow scalar
@@ -113,6 +116,7 @@ flow-sequences:
 - brackets
 - square
 flow-style-productions:
+- 7
 - flow
 - flow content
 - flow styles
@@ -122,11 +126,12 @@ indentation-spaces:
 indicator-characters:
 - indicator
 - some
-keep:
 keys-order:
 - key order
 - order
 - ordering
+language-overview:
+- 2
 line-break-characters:
 - above
 - break
@@ -199,6 +204,7 @@ presenting-the-serialization-tree:
 - presenting
 - presentation detail
 processes-and-models:
+- 3
 - application
 - processor
 production-parameters:
@@ -208,6 +214,7 @@ recognized-and-valid-tags:
 - unrecognized
 - valid
 recommended-schemas:
+- 10
 - schema
 representation-graph:
 - represent
@@ -265,8 +272,10 @@ single-quoted-style:
 - single-quoted flow scalar
 special-productions:
 - special-production
-streams:
-strip:
+structural-productions:
+- 6
+syntax-conventions:
+- 4
 tags:
 - global
 - global tag

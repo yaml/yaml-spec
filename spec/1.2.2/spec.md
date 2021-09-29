@@ -186,8 +186,8 @@ The rest of this document is arranged as follows.
 Chapter [2] provides a short preview of the main YAML features.
 Chapter [3] describes the YAML information model and the processes for
 converting from and to this model and the YAML text format.
-The bulk of the document, chapters [4] through [9], formally define this text
-format.
+The bulk of the document, chapters [4], [5], [6], [7], [8] and [9], formally
+define this text format.
 Finally, chapter [10] recommends basic YAML schemas.
 
 
