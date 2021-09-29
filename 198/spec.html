@@ -3331,17 +3331,17 @@ Folding does distinguish between these cases in the following way:</p>
 <dl>
   <dt>Block Folding</dt>
   <dd>
-    <p>In the <a href="#block-folding">folded block style</a>, the final <a href="#line-break-characters">line break</a> and trailing <a href="#empty-lines">empty
-lines</a> are subject to <a href="#block-chomping-indicator">chomping</a> and are never folded.
+    <p>In the <a href="#block-folding">folded block style</a>, the final <a href="#line-break-characters">line break</a> and trailing <a href="#empty-lines">empty lines</a>
+are subject to <a href="#block-chomping-indicator">chomping</a> and are never folded.
 In addition, folding does not apply to <a href="#line-break-characters">line breaks</a> surrounding text lines
 that contain leading <a href="#white-space-characters">white space</a>.
 Note that such a <a href="#example-more-indented-lines">more-indented</a> line may consist only of such leading <a href="#white-space-characters">white
 space</a>.</p>
   </dd>
   <dd>
-    <p>The combined effect of the <em>block line folding</em> rules is that each
-“paragraph” is interpreted as a line, <a href="#empty-lines">empty lines</a> are interpreted as a line
-feed and the formatting of <a href="#example-more-indented-lines">more-indented</a> lines is preserved.</p>
+    <p>The combined effect of the <em>block line folding</em> rules is that each “paragraph”
+is interpreted as a line, <a href="#empty-lines">empty lines</a> are interpreted as a line feed and the
+formatting of <a href="#example-more-indented-lines">more-indented</a> lines is preserved.</p>
   </dd>
 </dl>
 
@@ -4151,8 +4151,8 @@ semantics to the same <a href="#tags">local tag</a>.</p>
 <dl>
   <dt>Global Tag Prefix</dt>
   <dd>
-    <p>If the prefix begins with a character other than “<code class="language-plaintext highlighter-rouge">!</code>”, it must be a valid
-URI prefix, and should contain at least the scheme.
+    <p>If the prefix begins with a character other than “<code class="language-plaintext highlighter-rouge">!</code>”, it must be a valid URI
+prefix, and should contain at least the scheme.
 <a href="#tag-shorthands">Shorthands</a> using the associated <a href="#tag-handles">handle</a> are expanded to globally unique URI
 tags and their semantics is consistent across <a href="#processes-and-models">applications</a>.
 In particular, every <a href="#document">document</a> in every <a href="#streams">stream</a> must assign the same
@@ -4442,8 +4442,8 @@ ERROR:
 <dl>
   <dt>Non-Specific Tags</dt>
   <dd>
-    <p>If a <a href="#nodes">node</a> has no tag property, it is assigned a <a href="#resolved-tags">non-specific tag</a> that
-needs to be <a href="#resolved-tags">resolved</a> to a <a href="#resolved-tags">specific</a> one.
+    <p>If a <a href="#nodes">node</a> has no tag property, it is assigned a <a href="#resolved-tags">non-specific tag</a> that needs
+to be <a href="#resolved-tags">resolved</a> to a <a href="#resolved-tags">specific</a> one.
 This <a href="#resolved-tags">non-specific tag</a> is “<code class="language-plaintext highlighter-rouge">!</code>” for non-<a href="#plain-style">plain scalars</a> and “<code class="language-plaintext highlighter-rouge">?</code>” for all
 other <a href="#nodes">nodes</a>.
 This is the only case where the <a href="#node-styles">node style</a> has any effect on the <a href="#nodes">content</a>
@@ -8128,8 +8128,8 @@ Scalars of this type should be <a href="#representing-native-data-structures">bo
 possible.</p>
   </dd>
   <dd>
-    <p>Some languages (such as Perl) provide only a “number” type that allows for
-both integer and floating-point values.
+    <p>Some languages (such as Perl) provide only a “number” type that allows for both
+integer and floating-point values.
 A YAML <a href="#processes-and-models">processor</a> may use such a type for integers as long as they round-trip
 properly.</p>
   </dd>
@@ -8177,14 +8177,13 @@ positive: !!int 34
 (positive and negative infinity and “not a number”).</p>
   </dd>
   <dd>
-    <p>Some languages (such as Perl) provide only a “number” type that allows for
-both integer and floating-point values.
+    <p>Some languages (such as Perl) provide only a “number” type that allows for both
+integer and floating-point values.
 A YAML <a href="#processes-and-models">processor</a> may use such a type for floating-point numbers, as long as
 they round-trip properly.</p>
   </dd>
   <dd>
-    <p>Not all floating-point values can be stored exactly in any given <a href="#representing-native-data-structures">native</a>
-type.
+    <p>Not all floating-point values can be stored exactly in any given <a href="#representing-native-data-structures">native</a> type.
 Hence a float value may change by “a small amount” when round-tripped.
 The supported range and accuracy depends on the implementation, though 32 bit
 IEEE floats should be safe.
@@ -8193,8 +8192,8 @@ Since YAML does not specify a particular accuracy, using floating-point
   </dd>
   <dt>Canonical Form</dt>
   <dd>
-    <p>Either <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">.inf</code>, <code class="language-plaintext highlighter-rouge">-.inf</code>, <code class="language-plaintext highlighter-rouge">.nan</code> or scientific notation matching the
-regular expression<br />
+    <p>Either <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">.inf</code>, <code class="language-plaintext highlighter-rouge">-.inf</code>, <code class="language-plaintext highlighter-rouge">.nan</code> or scientific notation matching the regular
+expression<br />
 <code class="language-plaintext highlighter-rouge">-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?</code>.</p>
   </dd>
 </dl>

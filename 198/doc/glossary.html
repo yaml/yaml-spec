@@ -89,19 +89,19 @@ assign the boolean tag function.</p>
     <p>Text in a YAML file that is typically intended for humans to read, but not
 considered part of the YAML data model.
 Comment text may be discarded entirely by a parser.
-It may also be reported as events and stored in the DOM or possibly in a
-native data structure.
+It may also be reported as events and stored in the DOM or possibly in a native
+data structure.
 Syntactically, comments are text starting with a <code class="language-plaintext highlighter-rouge">#</code> character and continuing
 to the end of the line.</p>
   </dd>
   <dd>
-    <p>Comments may be used within YAML documents or before/between/after them (in
-the YAML stream).</p>
+    <p>Comments may be used within YAML documents or before/between/after them (in the
+YAML stream).</p>
   </dd>
   <dt>Composer</dt>
   <dd>
-    <p>A composer is the processor in a load stack that gets events from a parser
-and uses them to create the DOM state.</p>
+    <p>A composer is the processor in a load stack that gets events from a parser and
+uses them to create the DOM state.</p>
   </dd>
   <dt>Constructor</dt>
   <dd>
@@ -123,8 +123,8 @@ YAML data model.</p>
   <dt>Document</dt>
   <dd>
     <p>A document is a top level YAML node.
-Most YAML files consist of a single YAML document, although they may also
-have zero or multiple documents.</p>
+Most YAML files consist of a single YAML document, although they may also have
+zero or multiple documents.</p>
   </dd>
   <dt>Double quoted scalar</dt>
   <dd>
@@ -135,16 +135,16 @@ They use a number of escape sequences to represent non-printable characters.</p>
   </dd>
   <dt>DOM</dt>
   <dd>
-    <p>A DOM is an information state that is a tree of nodes created by a composer
-or a representer and consumed by a constructor or a serializer.
+    <p>A DOM is an information state that is a tree of nodes created by a composer or
+a representer and consumed by a constructor or a serializer.
 A DOM may also be consumed directly by an application.
-A DOM API can offer a lot more information and processing options than a
-native data structure.</p>
+A DOM API can offer a lot more information and processing options than a native
+data structure.</p>
   </dd>
   <dd>
     <p>Frameworks do not need to implement a DOM as part of their stacks, as long as
-they adhere to the YAML specification rules for moving information through
-the DOM.</p>
+they adhere to the YAML specification rules for moving information through the
+DOM.</p>
   </dd>
   <dt>Dumper / Dump</dt>
   <dd>
@@ -153,8 +153,8 @@ information all the way from native to file states.</p>
   </dd>
   <dt>Dump Stack</dt>
   <dd>
-    <p>The set of processors that move YAML information from a native state to a
-file state.</p>
+    <p>The set of processors that move YAML information from a native state to a file
+state.</p>
   </dd>
 </dl>
 
@@ -195,8 +195,8 @@ Event types include:</p>
 <dl>
   <dt>File</dt>
   <dd>
-    <p>File is the term for YAML information in a final textual state, external to
-the YAML stack.
+    <p>File is the term for YAML information in a final textual state, external to the
+YAML stack.
 A YAML framework loads from a file and dumps to a file.
 The term is abstract and doesn’t have to be a file stored to disk.
 It might be a socket or other external data source/target.</p>
@@ -205,8 +205,8 @@ It might be a socket or other external data source/target.</p>
   <dd>
     <p>In YAML, mappings and sequences can be represented in a style that uses curly
 braces and square brackets in the same manner that JSON does.
-Block collections may contain any collection nodes in the flow style, but
-flow collections may only contain collections in the flow style.</p>
+Block collections may contain any collection nodes in the flow style, but flow
+collections may only contain collections in the flow style.</p>
   </dd>
   <dt>Folded Scalar Style</dt>
   <dd>
@@ -219,9 +219,9 @@ consecutive newlines with n-1 literal newlines.</p>
   <dd>
     <p>A full YAML processing implementation in a given programming language.
 A framework almost always has at least a Loader and a Dumper.
-A complete, full-featured YAML framework would also support things like
-schema processors, path referencing, DOM API and standard library support,
-among many other details.</p>
+A complete, full-featured YAML framework would also support things like schema
+processors, path referencing, DOM API and standard library support, among many
+other details.</p>
   </dd>
 </dl>
 
@@ -274,8 +274,8 @@ A kind should not be confused with a type.</p>
   <dt>Library</dt>
   <dd>
     <p>The DOM resolves tags to functions.
-These functions come from the library that is registered to the DOM; often
-the YAML standard library.</p>
+These functions come from the library that is registered to the DOM; often the
+YAML standard library.</p>
   </dd>
   <dt>List</dt>
   <dd>
@@ -329,8 +329,8 @@ An alias may be used for any node.</p>
 <dl>
   <dt>Native / Native Object</dt>
   <dd>
-    <p>A language specific state that is the final result of a loader, or the
-initial state given to a dumper.
+    <p>A language specific state that is the final result of a loader, or the initial
+state given to a dumper.
 This state is defined by the programming language being used, or maybe a form
 crafted by the author of the application.
 Some YAML frameworks may use the DOM state as their native state.</p>
@@ -363,23 +363,21 @@ represent it.</p>
     <p>A parser is the processor in the load stack that reads tokens, matches them
 against a grammar and write events.
 It may also throw an error if the tokens don’t match the grammar.
-The events are usually consumed by the composer to create a DOM, but they
-might also be processed directly by a streaming application.</p>
+The events are usually consumed by the composer to create a DOM, but they might
+also be processed directly by a streaming application.</p>
   </dd>
   <dt>Plain Scalar</dt>
   <dd>
     <p>Plain refers to the quoting style of a scalar where the value is unquoted; as
 opposed to single/double quoted or literal or folded styles.
-A scalar-value event contains a flag as to whether the scalar was plain or
-not.
+A scalar-value event contains a flag as to whether the scalar was plain or not.
 Plain scalars are often assigned tags based on their content value.</p>
   </dd>
   <dt>Processor</dt>
   <dd>
     <p>A component in the load stack or dump stack to transforms data from one state
 to another.
-Load stack processors include: reader, lexer, parser, composer and
-constructor.
+Load stack processors include: reader, lexer, parser, composer and constructor.
 Dump stack processors include: representer, serializer, emitter, streamer and
 writer.</p>
   </dd>
@@ -423,8 +421,8 @@ information, a YAML schema can alter the semantic meaning of a YAML file.</p>
   <dd>
     <p>In YAML 1.2, schemas are almost always expressed in the source code of the
 framework.
-In future versions, a YAML Schema language can be used to control the
-behavior of a framework (if the framework supports it).</p>
+In future versions, a YAML Schema language can be used to control the behavior
+of a framework (if the framework supports it).</p>
   </dd>
   <dt>Sequence</dt>
   <dd>
@@ -443,8 +441,8 @@ The single quotes must be escaped using two single quotes (<code class="language
   </dd>
   <dt>Stack / YAML Stack</dt>
   <dd>
-    <p>YAML processing occurs as 2 stacks of processors, each moving data (in
-opposite directions) between YAML formatted text and computer memory states.
+    <p>YAML processing occurs as 2 stacks of processors, each moving data (in opposite
+directions) between YAML formatted text and computer memory states.
 They are called the load stack and the dump stack.
 Collectively the 2 stacks may be referred to as “the YAML stack”.</p>
   </dd>
@@ -461,14 +459,14 @@ and consumed by a composer or an emitter.</p>
   </dd>
   <dt>Stream (Character Stream)</dt>
   <dd>
-    <p>The set of unicode characters produced by a reader or streamer and consumed
-by a lexer or writer.</p>
+    <p>The set of unicode characters produced by a reader or streamer and consumed by
+a lexer or writer.</p>
   </dd>
   <dt>Stream (YAML Stream or Document Stream)</dt>
   <dd>
     <p>A YAML file is considered a “stream” of zero or more documents.
-A stream may also have directives and/or comments before, between or after
-the documents.
+A stream may also have directives and/or comments before, between or after the
+documents.
 This is the typical meaning when the word “stream” is used with no qualifier.</p>
   </dd>
   <dt>Streamer</dt>
@@ -478,8 +476,8 @@ It simply joins tokens into a character stream.</p>
   </dd>
   <dt>String</dt>
   <dd>
-    <p>String is a heavily overloaded term in YAML and depends on the context in
-which it is used.</p>
+    <p>String is a heavily overloaded term in YAML and depends on the context in which
+it is used.</p>
   </dd>
   <dt>Style</dt>
   <dd>
@@ -497,8 +495,8 @@ Scalar styles are “plain”, “single quoted”, “double quoted”, “lite
   <dd>
     <p>A tag is an annotation on a node.
 Tags are identifers preceded by a <code class="language-plaintext highlighter-rouge">!</code>, like <code class="language-plaintext highlighter-rouge">!foo</code> or <code class="language-plaintext highlighter-rouge">!!str</code>.
-A tag identifier is used to identify a function that will be applied to a
-node when it is retrieved from the DOM.
+A tag identifier is used to identify a function that will be applied to a node
+when it is retrieved from the DOM.
 The function’s return type is can be considered the “type” of the node.</p>
   </dd>
   <dd>
