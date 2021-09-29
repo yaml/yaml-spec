@@ -168,8 +168,8 @@ In 2020, the new [YAML language design team](team) began meeting regularly to
 discuss improvements to the YAML language and specification; to better meet the
 needs and expectations of its users and use cases.
 
-This YAML 1.2.2 specification, published in September 2021, is the first step
-in YAML's rejuvenated development journey.
+This YAML 1.2.2 specification, published in October 2021, is the first step in
+YAML's rejuvenated development journey.
 YAML is now more popular than it has ever been, but there is a long list of
 things that need to be addressed for it to reach its full potential.
 The YAML design team is focused on making YAML as good as possible.
