@@ -51,10 +51,8 @@ published revisions of this specification.
 
 See:
 
+* [YAML Resources Index](ext/resources)
 * [YAML Vocabulary Glossary](ext/glossary)
-* [YAML Community Resource Index](ext/community)
-* [YAML User's Reference Index](ext/use)
-* [YAML Developer's Reference Index](ext/dev)
 * [YAML Specification Changes](ext/changes)
 * [YAML Specification Errata](ext/errata)
 
