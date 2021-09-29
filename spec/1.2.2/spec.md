@@ -904,7 +904,7 @@ identifier, called a _tag_.
 _Global tags_ are URIs and hence globally unique across all [applications].
 The "`tag:`" URI scheme[^tag-uri] is recommended for all global YAML tags.
 In contrast, _local tags_ are specific to a single [application].
-Local tags start with _"`!`"_, are not URIs and are not expected to be globally
+Local tags start with "`!`", are not URIs and are not expected to be globally
 unique.
 YAML provides a "`TAG`" directive to make tag notation less verbose; it also
 offers easy migration from local to global tags.
@@ -1161,7 +1161,7 @@ parts of the input, but it must provide a mechanism for reporting such errors.
 
 Typically, most [tags] are not explicitly specified in the character [stream].
 During [parsing], [nodes] lacking an explicit [tag] are given a _non-specific
-tag_: _"`!`"_ for non-[plain scalars] and _"`?`"_ for all other [nodes].
+tag_: "`!`" for non-[plain scalars] and "`?`" for all other [nodes].
 [Composing] a [complete representation] requires each such non-specific tag to
 be _resolved_ to a _specific tag_, be it a [global tag] or a [local tag].
 
@@ -1845,7 +1845,7 @@ double: "text"
 * [c-directive] <!-- % -->
 
 
-The _"`@`"_ (`x40`, at) and _"<code>&grave;</code>"_ (`x60`, grave accent) are
+The "`@`" (`x40`, at) and "<code>&grave;</code>" (`x60`, grave accent) are
 _reserved_ for future use.
 
 ```
@@ -2108,7 +2108,7 @@ URI characters for [tags], as defined in the URI specification[^uri].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8 and then each byte is _escaped_ using
-the _"`%`"_ character.
+the "`%`" character.
 The YAML [processor] must not expand such escaped characters.
 [Tag] characters must be preserved and compared exactly as [presented] in the
 YAML [stream], without any processing.
@@ -2161,7 +2161,7 @@ These characters would cause ambiguity with [flow collection] structures.
 ## #. Escaped Characters
 
 All non-[printable] characters must be _escaped_.
-YAML escape sequences use the _"`\`"_ notation common to most modern computer
+YAML escape sequences use the "`\`" notation common to most modern computer
 languages.
 Each escape sequence must be [parsed] into the appropriate Unicode character.
 The original escape sequence is a [presentation detail] and must not be used to
@@ -2782,7 +2782,7 @@ can be freely [more-indented] without affecting the [content] information.
 
 ## #. Comments
 
-An explicit _comment_ is marked by a _"`#`" indicator_.
+An explicit _comment_ is marked by a "`#`" indicator.
 Comments are a [presentation detail] and must not be used to convey [content]
 information.
 
@@ -2973,7 +2973,7 @@ information.
 
 
 Each directive is specified on a separate non-[indented] line starting with the
-_"`%`" indicator_, followed by the directive name and a list of parameters.
+"`%`" indicator, followed by the directive name and a list of parameters.
 The semantics of these parameters depends on the specific directive.
 A YAML [processor] should ignore unknown directives with an appropriate
 warning.
@@ -3018,7 +3018,7 @@ warning.
 
 ### #. "`YAML`" Directives
 
-The _"`YAML`" directive_ specifies the version of YAML the [document] conforms
+The "`YAML`" directive specifies the version of YAML the [document] conforms
 to.
 This specification defines version "`1.2`", including recommendations for _YAML
 1.1 processing_.
@@ -3095,7 +3095,7 @@ given at most once per document.
 
 ### #. "`TAG`" Directives
 
-The _"`TAG`" directive_ establishes a [tag shorthand] notation for specifying
+The "`TAG`" directive establishes a [tag shorthand] notation for specifying
 [node tags].
 Each "`TAG`" directive associates a [handle] with a [prefix].
 This allows for compact and readable [tag] notation.
@@ -3165,7 +3165,7 @@ There are three tag handle variants:
 
 Primary Handle
 :
-The _primary tag handle_ is a single _"`!`"_ character.
+The _primary tag handle_ is a single "`!`" character.
 This allows using the most compact possible notation for a single "primary"
 name space.
 By default, the prefix associated with this handle is "`!`".
@@ -3206,7 +3206,7 @@ by the simple addition of a single "`TAG`" directive.
 
 Secondary Handle
 :
-The _secondary tag handle_ is written as _"`!!`"_.
+The _secondary tag handle_ is written as "`!!`".
 This allows using a compact notation for a single "secondary" name space.
 By default, the prefix associated with this handle is "`tag:yaml.org,2002:`".
 :
@@ -3236,7 +3236,7 @@ It is possible to override this default behavior by providing an explicit
 
 Named Handles
 :
-A _named tag handle_ surrounds a non-empty name with _"`!`"_ characters.
+A _named tag handle_ surrounds a non-empty name with "`!`" characters.
 A handle name must not be used in a [tag shorthand] unless an explicit "`TAG`"
 directive has associated some prefix with it.
 :
@@ -3398,7 +3398,7 @@ Either or both may be omitted.
 
 The _tag property_ identifies the type of the [native data structure]
 [presented] by the [node].
-A tag is denoted by the _"`!`" indicator_.
+A tag is denoted by the "`!`" indicator.
 
 ```
 [#] c-ns-tag-property ::=
@@ -3410,7 +3410,7 @@ A tag is denoted by the _"`!`" indicator_.
 
 Verbatim Tags
 :
-A tag may be written _verbatim_ by surrounding it with the _"`<`" and "`>`"_
+A tag may be written _verbatim_ by surrounding it with the "`<`" and "`>`"
 characters.
 In this case, the YAML [processor] must deliver the verbatim tag as-is to the
 [application].
@@ -3578,7 +3578,7 @@ This is intentional.
 
 ### #. Node Anchors
 
-An anchor is denoted by the _"`&`" indicator_.
+An anchor is denoted by the "`&`" indicator.
 It marks a [node] for future reference.
 An [alias node] can then be used to indicate additional inclusions of the
 anchored [node].
@@ -3646,7 +3646,7 @@ _alias nodes_.
 The first occurrence of the [node] must be marked by an [anchor] to allow
 subsequent occurrences to be [presented] as alias nodes.
 
-An alias node is denoted by the _"`*`" indicator_.
+An alias node is denoted by the "`*`" indicator.
 The alias refers to the most recent preceding [node] having the same [anchor].
 It is an error for an alias node to use an [anchor] that does not previously
 occur in the [document].
@@ -3761,7 +3761,7 @@ distinguished for the purpose of [tag resolution].
 
 ### #. Double-Quoted Style
 
-The _double-quoted style_ is specified by surrounding _"`"`" indicators_.
+The _double-quoted style_ is specified by surrounding "`"`" indicators.
 This is the only [style] capable of expressing arbitrary strings, by using
 "`\`" [escape sequences].
 This comes at the cost of having to escape the "`\`" and "`"`" characters.
@@ -3924,7 +3924,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 
 ### #. Single-Quoted Style
 
-The _single-quoted style_ is specified by surrounding _"`'`" indicators_.
+The _single-quoted style_ is specified by surrounding "`'`" indicators.
 Therefore, within a single-quoted scalar, such characters need to be repeated.
 This is the only form of _escaping_ performed in single-quoted scalars.
 In particular, the "`\`" and "`"`" characters may be freely used.
@@ -4262,7 +4262,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 A _flow collection_ may be nested within a [block collection] ([`FLOW-OUT`
 context]), nested within another flow collection ([`FLOW-IN` context]) or be a
 part of an [implicit key] ([`FLOW-KEY` context] or [`BLOCK-KEY` context]).
-Flow collection entries are terminated by the _"`,`" indicator_.
+Flow collection entries are terminated by the "`,`" indicator.
 The final "`,`" may be omitted.
 This does not cause ambiguity because flow collection entries can never be
 [completely empty].
@@ -4278,8 +4278,7 @@ in-flow(n,FLOW-KEY)  ::= ns-s-flow-seq-entries(n,FLOW-KEY)
 
 ### #. Flow Sequences
 
-_Flow sequence content_ is denoted by surrounding _"`[`"_ and _"`]`"_
-characters.
+_Flow sequence content_ is denoted by surrounding "`[`" and "`]`" characters.
 
 ```
 [#] c-flow-sequence(n,c) ::=
@@ -4361,7 +4360,7 @@ single: pair,
 
 ### #. Flow Mappings
 
-_Flow mappings_ are denoted by surrounding _"`{`"_ and _"`}`"_ characters.
+_Flow mappings_ are denoted by surrounding "`{`" and "`}`" characters.
 
 ```
 [#] c-flow-mapping(n,c) ::=
@@ -4405,8 +4404,8 @@ Mapping entries are separated by a "`,`" character.
 * [ns-flow-map-entry(n,c)] <!-- one_:_two three:_four five:_six seven_:_eight -->
 
 
-If the optional _"`?`" mapping key indicator_ is specified, the rest of the
-entry may be [completely empty].
+If the optional "`?`" mapping key indicator is specified, the rest of the entry
+may be [completely empty].
 
 ```
 [#] ns-flow-map-entry(n,c) ::=
@@ -4450,7 +4449,7 @@ implicit: entry,
 * [e-node] <!-- ° -->
 
 
-Normally, YAML insists the _"`:`" mapping value indicator_ be [separated] from
+Normally, YAML insists the "`:`" mapping value indicator be [separated] from
 the [value] by [white space].
 A benefit of this restriction is that the "`:`" character can be used inside
 [plain scalars], as long as it is not followed by [white space].
@@ -4999,7 +4998,7 @@ YAML provides three chomping methods:
 
 Strip
 :
-_Stripping_ is specified by the _"`-`" chomping indicator_.
+_Stripping_ is specified by the "`-`" chomping indicator.
 In this case, the final [line break] and any trailing [empty lines] are
 excluded from the [scalar's content].
 
@@ -5015,7 +5014,7 @@ However, any trailing [empty lines] are excluded from the [scalar's content].
 
 Keep
 :
-_Keeping_ is specified by the _"`+`" chomping indicator_.
+_Keeping_ is specified by the "`+`" chomping indicator.
 In this case, the final [line break] and any trailing [empty lines] are
 considered to be part of the [scalar's content].
 These additional lines are not subject to [folding].
@@ -5170,7 +5169,7 @@ keep: |+
 
 ### #. Literal Style
 
-The _literal style_ is denoted by the _"`|`" indicator_.
+The _literal style_ is denoted by the "`|`" indicator.
 It is the simplest, most restricted and most readable [scalar style].
 
 ```
@@ -5258,7 +5257,7 @@ In addition, there is no way to break a long literal line.
 
 ### #. Folded Style
 
-The _folded style_ is denoted by the _"`>`" indicator_.
+The _folded style_ is denoted by the "`>`" indicator.
 It is similar to the [literal style]; however, folded scalars are subject to
 [line folding].
 
@@ -5510,7 +5509,7 @@ entry] is seen.
 ### #. Block Sequences
 
 A _block sequence_ is simply a series of [nodes], each denoted by a leading
-_"`-`" indicator_.
+"`-`" indicator.
 The "`-`" indicator must be [separated] from the [node] by [white space].
 This allows "`-`" to be used as the first character in a [plain scalar] if
 followed by a non-space character (e.g. "`-42`").
