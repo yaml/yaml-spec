@@ -6244,37 +6244,6 @@ null
 A sequence of bytes is a _well-formed stream_ if, taken as a whole, it complies
 with the above `l-yaml-stream` production.
 
-Some common use case that can take advantage of the YAML stream structure are:
-
-
-Appending to Streams
-:
-Allowing multiple [documents] in a single stream makes YAML suitable for log
-files and similar [applications].
-Note that each [document] is independent of the rest, allowing for
-heterogeneous log file entries.
-
-
-Concatenating Streams
-:
-Concatenating two YAML streams requires both to use the same [character
-encoding].
-In addition, it is necessary to separate the last [document] of the first
-stream and the first [document] of the second stream.
-This is easily ensured by inserting a [document end marker] between the two
-streams.
-
-
-Communication Streams
-:
-The [document end marker] allows signaling the end of a [document] without
-closing the stream or starting the next [document].
-This allows the receiver to complete processing a [document] without having to
-wait for the next one to arrive.
-The sender may also transmit "keep-alive" messages in the form of [comment]
-lines or repeated [document end markers] without signaling the start of the
-next [document].
-
 
 # Chapter #. Recommended Schemas
 
