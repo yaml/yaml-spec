@@ -78,10 +78,8 @@ published revisions of this specification.</p>
 <p>See:</p>
 
 <ul>
+  <li><a href="ext/resources">YAML Resources Index</a></li>
   <li><a href="ext/glossary">YAML Vocabulary Glossary</a></li>
-  <li><a href="ext/community">YAML Community Resource Index</a></li>
-  <li><a href="ext/use">YAML User’s Reference Index</a></li>
-  <li><a href="ext/dev">YAML Developer’s Reference Index</a></li>
   <li><a href="ext/changes">YAML Specification Changes</a></li>
   <li><a href="ext/errata">YAML Specification Errata</a></li>
 </ul>
@@ -364,14 +362,13 @@ Its primary focus was making YAML a strict superset of JSON.
 It also removed many of the problematic implicit typing recommendations.</p>
 
 <p>Since the release of the 1.2 specification, YAML adoption has continued to
-grow, and many large-scale projects use it as their primary configuration
-format.
+grow, and many large-scale projects use it as their primary interface language.
 In 2020, the new <a href="team">YAML language design team</a> began meeting regularly to
 discuss improvements to the YAML language and specification; to better meet the
 needs and expectations of its users and use cases.</p>
 
-<p>This YAML 1.2.2 specification, published in September 2021, is the first step
-in YAML’s rejuvenated development journey.
+<p>This YAML 1.2.2 specification, published in October 2021, is the first step in
+YAML’s rejuvenated development journey.
 YAML is now more popular than it has ever been, but there is a long list of
 things that need to be addressed for it to reach its full potential.
 The YAML design team is focused on making YAML as good as possible.</p>
@@ -384,12 +381,12 @@ The YAML design team is focused on making YAML as good as possible.</p>
 interpreted as described in RFC 2119<sup id="fnref:rfc-2119" role="doc-noteref"><a href="#fn:rfc-2119" class="footnote" rel="footnote">12</a></sup>.</p>
 
 <p>The rest of this document is arranged as follows.
-Chapter [2] provides a short preview of the main YAML features.
-Chapter [3] describes the YAML information model and the processes for
+Chapter <a href="#language-overview">2</a> provides a short preview of the main YAML features.
+Chapter <a href="#processes-and-models">3</a> describes the YAML information model and the processes for
 converting from and to this model and the YAML text format.
-The bulk of the document, chapters [4] through [9], formally define this text
-format.
-Finally, chapter [10] recommends basic YAML schemas.</p>
+The bulk of the document, chapters <a href="#syntax-conventions">4</a>, <a href="#character-productions">5</a>, <a href="#structural-productions">6</a>, <a href="#flow-style-productions">7</a>, <a href="#block-style-productions">8</a> and <a href="#document-stream-productions">9</a>, formally
+define this text format.
+Finally, chapter <a href="#recommended-schemas">10</a> recommends basic YAML schemas.</p>
 
 <div id="language-overview"></div>
 <h1 id="chapter-2-language-overview">Chapter 2. Language Overview</h1>
@@ -496,7 +493,7 @@ Sammy Sosa: {
 <div id="structures"></div>
 <h2 id="22-structures">2.2. Structures</h2>
 
-<p>YAML uses three dashes (“<code class="language-plaintext highlighter-rouge">---</code>”) to separate <a href="#directives">directives</a> from <a href="#document">document</a>
+<p>YAML uses three dashes (“<code class="language-plaintext highlighter-rouge">---</code>”) to separate <a href="#directives">directives</a> from <a href="#documents">document</a>
 <a href="#nodes">content</a>.
 This also serves to signal the start of a document if no <a href="#directives">directives</a> are
 present.
@@ -1369,7 +1366,7 @@ Comments must not appear inside <a href="#scalars">scalars</a>, but may be inter
 <div id="directives"></div>
 <h4 id="3234-directives">3.2.3.4. Directives</h4>
 
-<p>Each <a href="#document">document</a> may be associated with a set of <a href="#directives">directives</a>.
+<p>Each <a href="#documents">document</a> may be associated with a set of <a href="#directives">directives</a>.
 A directive has a name and an optional sequence of parameters.
 Directives are instructions to the YAML <a href="#processes-and-models">processor</a> and like all other
 <a href="#presenting-the-serialization-tree">presentation details</a> are not reflected in the YAML <a href="#serialization-tree">serialization tree</a> or
@@ -1391,7 +1388,7 @@ Each of these failures results with an incomplete loading.</p>
 <p>A <em>partial representation</em> need not <a href="#resolved-tags">resolve</a> the <a href="#tags">tag</a> of each <a href="#nodes">node</a> and the
 <a href="#canonical-form">canonical form</a> of <a href="#scalar-formats">formatted scalar content</a> need not be available.
 This weaker representation is useful for cases of incomplete knowledge of the
-types used in the <a href="#document">document</a>.</p>
+types used in the <a href="#documents">document</a>.</p>
 
 <p>In contrast, a <em>complete representation</em> specifies the <a href="#tags">tag</a> of each <a href="#nodes">node</a> and
 provides the <a href="#canonical-form">canonical form</a> of <a href="#scalar-formats">formatted scalar content</a>, allowing for
@@ -1470,7 +1467,7 @@ Resolved <a href="#sequence">sequence node</a> types such as the “ordered mapp
 YAML <a href="#processes-and-models">processors</a> should therefore provide a mechanism allowing the
 <a href="#processes-and-models">application</a> to override and expand these default tag resolution rules.</p>
 
-<p>If a <a href="#document">document</a> contains <em>unresolved tags</em>, the YAML <a href="#processes-and-models">processor</a> is unable to
+<p>If a <a href="#documents">document</a> contains <em>unresolved tags</em>, the YAML <a href="#processes-and-models">processor</a> is unable to
 <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete representation</a> graph.
 In such a case, the YAML <a href="#processes-and-models">processor</a> may <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">partial representation</a>,
 based on each <a href="#nodes">node’s kind</a> and allowing for non-specific tags.</p>
@@ -1481,7 +1478,7 @@ based on each <a href="#nodes">node’s kind</a> and allowing for non-specific t
 <p>To be <em>valid</em>, a <a href="#nodes">node</a> must have a <a href="#tags">tag</a> which is <em>recognized</em> by the YAML
 <a href="#processes-and-models">processor</a> and its <a href="#nodes">content</a> must satisfy the constraints imposed by this
 <a href="#tags">tag</a>.
-If a <a href="#document">document</a> contains a <a href="#nodes">scalar node</a> with an <em>unrecognized tag</em> or <em>invalid
+If a <a href="#documents">document</a> contains a <a href="#nodes">scalar node</a> with an <em>unrecognized tag</em> or <em>invalid
 content</em>, only a <a href="#loading-point-failures">partial representation</a> may be <a href="#composing-the-representation-graph">composed</a>.
 In contrast, a YAML <a href="#processes-and-models">processor</a> can always <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete
 representation</a> for an unrecognized or an invalid <a href="#collections">collection</a>, since
@@ -1804,7 +1801,7 @@ Otherwise, the <a href="#streams">stream</a> must begin with an ASCII character.
 This allows the encoding to be deduced by the pattern of null (<code class="language-plaintext highlighter-rouge">x00</code>)
 characters.</p>
 
-<p>Byte order marks may appear at the start of any <a href="#document">document</a>, however all
+<p>Byte order marks may appear at the start of any <a href="#documents">document</a>, however all
 <a href="#documents">documents</a> in the same <a href="#streams">stream</a> must use the same character encoding.</p>
 
 <p>To allow for <a href="#yaml-directives">JSON compatibility</a>, byte order marks are also allowed inside
@@ -2431,7 +2428,7 @@ Hence, to ensure <a href="#yaml-directives">JSON compatibility</a>, YAML treats 
 as of version 1.2.
 In theory this would cause incompatibility with <a href="#yaml-directives">version 1.1</a>; in practice
 these characters were rarely (if ever) used.
-YAML 1.2 <a href="#processes-and-models">processors</a> <a href="#parsing-the-presentation-stream">parsing</a> a <a href="#yaml-directives">version 1.1</a> <a href="#document">document</a> should therefore
+YAML 1.2 <a href="#processes-and-models">processors</a> <a href="#parsing-the-presentation-stream">parsing</a> a <a href="#yaml-directives">version 1.1</a> <a href="#documents">document</a> should therefore
 treat these line breaks as non-break characters, with an appropriate warning.</p>
 
 <div id="rule-nb-char"></div>
@@ -3731,7 +3728,7 @@ warning.</p>
 <div id="yaml-directives"></div>
 <h3 id="681-yaml-directives">6.8.1. “<code class="language-plaintext highlighter-rouge">YAML</code>” Directives</h3>
 
-<p>The <em>“<code class="language-plaintext highlighter-rouge">YAML</code>” directive</em> specifies the version of YAML the <a href="#document">document</a> conforms
+<p>The <em>“<code class="language-plaintext highlighter-rouge">YAML</code>” directive</em> specifies the version of YAML the <a href="#documents">document</a> conforms
 to.
 This specification defines version “<code class="language-plaintext highlighter-rouge">1.2</code>”, including recommendations for <em>YAML
 1.1 processing</em>.</p>
@@ -4142,7 +4139,7 @@ semantics to the same <a href="#tags">local tag</a>.</p>
 prefix, and should contain at least the scheme.
 <a href="#tag-shorthands">Shorthands</a> using the associated <a href="#tag-handles">handle</a> are expanded to globally unique URI
 tags and their semantics is consistent across <a href="#processes-and-models">applications</a>.
-In particular, every <a href="#document">document</a> in every <a href="#streams">stream</a> must assign the same
+In particular, every <a href="#documents">document</a> in every <a href="#streams">stream</a> must assign the same
 semantics to the same <a href="#tags">global tag</a>.</p>
   </dd>
 </dl>
@@ -4573,7 +4570,7 @@ subsequent occurrences to be <a href="#presenting-the-serialization-tree">presen
 <p>An alias node is denoted by the <em>”<code class="language-plaintext highlighter-rouge">*</code>” indicator</em>.
 The alias refers to the most recent preceding <a href="#nodes">node</a> having the same <a href="#anchors-and-aliases">anchor</a>.
 It is an error for an alias node to use an <a href="#anchors-and-aliases">anchor</a> that does not previously
-occur in the <a href="#document">document</a>.
+occur in the <a href="#documents">document</a>.
 It is not an error to specify an <a href="#anchors-and-aliases">anchor</a> that is not used by any alias node.</p>
 
 <p>Note that an alias node must not specify any <a href="#node-properties">properties</a> or <a href="#nodes">content</a>, as
@@ -7482,10 +7479,10 @@ Each document is completely independent from the rest.</p>
 and optional <a href="#comments">comment</a> lines.
 Note that all <a href="#documents">documents</a> in a stream must use the same <a href="#character-encodings">character encoding</a>.
 However it is valid to re-specify the <a href="#character-encodings">encoding</a> using a <a href="#character-encodings">byte order mark</a> for
-each <a href="#document">document</a> in the stream.</p>
+each <a href="#documents">document</a> in the stream.</p>
 
 <p>The existence of the optional prefix does not necessarily indicate the
-existence of an actual <a href="#document">document</a>.</p>
+existence of an actual <a href="#documents">document</a>.</p>
 
 <div id="rule-l-document-prefix"></div>
 <pre class="rule">
@@ -7532,19 +7529,19 @@ How, then, to distinguish between an actual <a href="#directives">directive</a> 
 that happens to start with a “<code class="language-plaintext highlighter-rouge">%</code>” character?</p>
 
 <p>The solution is the use of two special <em>marker</em> lines to control the processing
-of <a href="#directives">directives</a>, one at the start of a <a href="#document">document</a> and one at the end.</p>
+of <a href="#directives">directives</a>, one at the start of a <a href="#documents">document</a> and one at the end.</p>
 
-<p>At the start of a <a href="#document">document</a>, lines beginning with a “<code class="language-plaintext highlighter-rouge">%</code>” character are
+<p>At the start of a <a href="#documents">document</a>, lines beginning with a “<code class="language-plaintext highlighter-rouge">%</code>” character are
 assumed to be <a href="#directives">directives</a>.
 The (possibly empty) list of <a href="#directives">directives</a> is terminated by a <em>directives end
 marker</em> line.
 Lines following this marker can safely use “<code class="language-plaintext highlighter-rouge">%</code>” as the first character.</p>
 
-<p>At the end of a <a href="#document">document</a>, a <em>document end marker</em> line is used to signal the
+<p>At the end of a <a href="#documents">document</a>, a <em>document end marker</em> line is used to signal the
 <a href="#parsing-the-presentation-stream">parser</a> to begin scanning for <a href="#directives">directives</a> again.</p>
 
 <p>The existence of this optional <em>document suffix</em> does not necessarily indicate
-the existence of an actual following <a href="#document">document</a>.</p>
+the existence of an actual following <a href="#documents">document</a>.</p>
 
 <p>Obviously, the actual <a href="#nodes">content</a> lines are therefore forbidden to begin with
 either of these markers.</p>
@@ -7673,8 +7670,8 @@ document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">inden
 
 <p>An <em>explicit document</em> begins with an explicit <a href="#document-markers">directives end marker</a> line but
 no <a href="#directives">directives</a>.
-Since the existence of the <a href="#document">document</a> is indicated by this <a href="#document-markers">marker</a>, the
-<a href="#document">document</a> itself may be <a href="#example-empty-content">completely empty</a>.</p>
+Since the existence of the <a href="#documents">document</a> is indicated by this <a href="#document-markers">marker</a>, the
+<a href="#documents">document</a> itself may be <a href="#example-empty-content">completely empty</a>.</p>
 
 <div id="rule-l-explicit-document"></div>
 <pre class="rule">
@@ -7776,8 +7773,8 @@ Since the existence of the <a href="#document">document</a> is indicated by this
 
 <p>A YAML <em>stream</em> consists of zero or more <a href="#documents">documents</a>.
 Subsequent <a href="#documents">documents</a> require some sort of separation <a href="#document-markers">marker</a> line.
-If a <a href="#document">document</a> is not terminated by a <a href="#document-markers">document end marker</a> line, then the
-following <a href="#document">document</a> must begin with a <a href="#document-markers">directives end marker</a> line.</p>
+If a <a href="#documents">document</a> is not terminated by a <a href="#document-markers">document end marker</a> line, then the
+following <a href="#documents">document</a> must begin with a <a href="#document-markers">directives end marker</a> line.</p>
 
 <div id="rule-l-any-document"></div>
 <pre class="rule">
@@ -7852,27 +7849,27 @@ with the above <code class="language-plaintext highlighter-rouge">l-yaml-stream<
   <dd>
     <p>Allowing multiple <a href="#documents">documents</a> in a single stream makes YAML suitable for log
 files and similar <a href="#processes-and-models">applications</a>.
-Note that each <a href="#document">document</a> is independent of the rest, allowing for
+Note that each <a href="#documents">document</a> is independent of the rest, allowing for
 heterogeneous log file entries.</p>
   </dd>
   <dt>Concatenating Streams</dt>
   <dd>
     <p>Concatenating two YAML streams requires both to use the same <a href="#character-encodings">character
 encoding</a>.
-In addition, it is necessary to separate the last <a href="#document">document</a> of the first
-stream and the first <a href="#document">document</a> of the second stream.
+In addition, it is necessary to separate the last <a href="#documents">document</a> of the first
+stream and the first <a href="#documents">document</a> of the second stream.
 This is easily ensured by inserting a <a href="#document-markers">document end marker</a> between the two
 streams.</p>
   </dd>
   <dt>Communication Streams</dt>
   <dd>
-    <p>The <a href="#document-markers">document end marker</a> allows signaling the end of a <a href="#document">document</a> without
-closing the stream or starting the next <a href="#document">document</a>.
-This allows the receiver to complete processing a <a href="#document">document</a> without having to
+    <p>The <a href="#document-markers">document end marker</a> allows signaling the end of a <a href="#documents">document</a> without
+closing the stream or starting the next <a href="#documents">document</a>.
+This allows the receiver to complete processing a <a href="#documents">document</a> without having to
 wait for the next one to arrive.
 The sender may also transmit “keep-alive” messages in the form of <a href="#comments">comment</a>
 lines or repeated <a href="#document-markers">document end markers</a> without signaling the start of the
-next <a href="#document">document</a>.</p>
+next <a href="#documents">document</a>.</p>
   </dd>
 </dl>
 
@@ -7885,7 +7882,7 @@ next <a href="#document">document</a>.</p>
 <div id="failsafe-schema"></div>
 <h2 id="101-failsafe-schema">10.1. Failsafe Schema</h2>
 
-<p>The <em>failsafe schema</em> is guaranteed to work with any YAML <a href="#document">document</a>.
+<p>The <em>failsafe schema</em> is guaranteed to work with any YAML <a href="#documents">document</a>.
 It is therefore the recommended <a href="#recommended-schemas">schema</a> for generic YAML tools.
 A YAML <a href="#processes-and-models">processor</a> should therefore support this <a href="#recommended-schemas">schema</a>, at least as an
 option.</p>
