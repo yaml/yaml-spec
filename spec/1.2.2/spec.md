@@ -673,6 +673,7 @@ structure] in this format.
 Therefore, this specification defines two concepts: a class of data objects
 called YAML [representations] and a syntax for [presenting] YAML
 [representations] as a series of characters, called a YAML [stream].
+
 A YAML _processor_ is a tool for converting information between these
 complementary views.
 It is assumed that a YAML processor does its work on behalf of another module,
