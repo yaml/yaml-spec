@@ -4106,7 +4106,7 @@ ambiguity.
 ```
 
 
-Plain scalars must never contain the "`:` " and " `#`" character combinations.
+Plain scalars must never contain the "`: `" and "` #`" character combinations.
 Such combinations would cause ambiguity with [mapping] [key/value pairs] and
 [comments].
 In addition, inside [flow collections], or when used as [implicit keys], plain
