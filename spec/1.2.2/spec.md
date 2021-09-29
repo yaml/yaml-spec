@@ -596,7 +596,7 @@ application specific tag: !something |
 ## #. Full Length Example
 
 Below are two full-length examples of YAML.
-On the left is a sample invoice; on the right is a sample log file.
+The first is a sample invoice; the second is a sample log file.
 
 
 **Example #. Invoice**
