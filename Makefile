@@ -10,7 +10,7 @@ BRANCHES := $(shell \
     git branch -a | \
     cut -c3- | \
     grep ^remotes/ | \
-    grep -Ev '/(RFC|HEAD|PR|_|gh-pages|work)' | \
+    grep -Ev '/(RFC|HEAD|PR|_|gh-pages|bundle-|uncanonicalizable-scalars|valid-formatted-content)' | \
     sed 's/remotes\/origin\///' \
 )
 
