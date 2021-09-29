@@ -597,7 +597,7 @@ application specific tag: !something |
 <code>## #. Full Length Example</code>
 
 Below are two full-length examples of YAML.
-On the left is a sample invoice; on the right is a sample log file.
+The first is a sample invoice; the second is a sample log file.
 
 
 <code>**Example #. Invoice**</code>
@@ -674,6 +674,7 @@ structure] in this format.
 Therefore, this specification defines two concepts: a class of data objects
 called YAML [representations] and a syntax for [presenting] YAML
 [representations] as a series of characters, called a YAML [stream].
+
 A YAML _processor_ is a tool for converting information between these
 complementary views.
 It is assumed that a YAML processor does its work on behalf of another module,
@@ -904,7 +905,7 @@ identifier, called a _tag_.
 _Global tags_ are URIs and hence globally unique across all [applications].
 The "`tag:`" URI scheme[^tag-uri] is recommended for all global YAML tags.
 In contrast, _local tags_ are specific to a single [application].
-Local tags start with _"`!`"_, are not URIs and are not expected to be globally
+Local tags start with "`!`", are not URIs and are not expected to be globally
 unique.
 YAML provides a "`TAG`" directive to make tag notation less verbose; it also
 offers easy migration from local to global tags.
@@ -1161,7 +1162,7 @@ parts of the input, but it must provide a mechanism for reporting such errors.
 
 Typically, most [tags] are not explicitly specified in the character [stream].
 During [parsing], [nodes] lacking an explicit [tag] are given a _non-specific
-tag_: _"`!`"_ for non-[plain scalars] and _"`?`"_ for all other [nodes].
+tag_: "`!`" for non-[plain scalars] and "`?`" for all other [nodes].
 [Composing] a [complete representation] requires each such non-specific tag to
 be _resolved_ to a _specific tag_, be it a [global tag] or a [local tag].
 
@@ -1263,36 +1264,48 @@ Otherwise it uses a YAML form that is as close to JSON as possible.
 Productions are defined using the syntax `production-name ::= term`, where a
 term is either:
 
-* An atomic term:
-  * A quoted string (`"abc"`), which matches that concatenation of characters. A
-    single character is usually written with single quotes (`'a'`).
-  * A hexadecimal number (`x0A`), which matches the character at that Unicode
-    code point.
-  * A range of hexadecimal numbers (`[x20-x7E]`), which matches any character
-    whose Unicode code point is within that range.
-  * The name of a production (`c-printable`), which matches that production.
-* A lookaround:
-  * `[ lookahead = term ]`, which matches the empty string if `term` would
-    match.
-  * `[ lookahead ≠ term ]`, which matches the empty string if `term` would not
-    match.
-  * `[ lookbehind = term ]`, which matches the empty string if `term` would
-    match beginning at any prior point on the line and ending at the current
-    position.
-* A special production:
-  * `&lt;start-of-line&gt;`, which matches the empty string at the beginning of a
-    line.
-  * `&lt;end-of-input&gt;`, matches the empty string at the end of the input.
-  * `&lt;empty&gt;`, which (always) matches the empty string.
-* A parenthesized term, which matches its contents.
-* A concatenation: `term-one term-two`, which matches `term-one` followed by
-  `term-two`.
-* A alternation: `term-one | term-two`, which matches the `term-one` if
-  possible, or `term-two` otherwise.
-* A quantified term:
-  * `term?`, which matches `(term | &lt;empty&gt;)`.
-  * `term*`, which matches `(term term* | &lt;empty&gt;)`.
-  * `term+`, which matches `(term term*)`.
+An atomic term
+:
+* A quoted string (`"abc"`), which matches that concatenation of characters. A
+  single character is usually written with single quotes (`'a'`).
+* A hexadecimal number (`x0A`), which matches the character at that Unicode
+  code point.
+* A range of hexadecimal numbers (`[x20-x7E]`), which matches any character
+  whose Unicode code point is within that range.
+* The name of a production (`c-printable`), which matches that production.
+
+A lookaround
+:
+* `[ lookahead = term ]`, which matches the empty string if `term` would match.
+* `[ lookahead ≠ term ]`, which matches the empty string if `term` would not
+  match.
+* `[ lookbehind = term ]`, which matches the empty string if `term` would match
+  beginning at any prior point on the line and ending at the current position.
+
+A special production
+:
+* `&lt;start-of-line&gt;`, which matches the empty string at the beginning of a line.
+* `&lt;end-of-input&gt;`, matches the empty string at the end of the input.
+* `&lt;empty&gt;`, which (always) matches the empty string.
+
+A parenthesized term
+:
+Matches its contents.
+
+A concatenation
+:
+Is `term-one term-two`, which matches `term-one` followed by `term-two`.
+
+A alternation
+:
+Is `term-one | term-two`, which matches the `term-one` if possible, or
+`term-two` otherwise.
+
+A quantified term:
+:
+* `term?`, which matches `(term | &lt;empty&gt;)`.
+* `term*`, which matches `(term term* | &lt;empty&gt;)`.
+* `term+`, which matches `(term term*)`.
 
 &gt; Note: Quantified terms are always greedy.
 
@@ -1727,8 +1740,7 @@ mapping: { sky: blue, sea: green }
 ```
 
 
-The "`!`" (`x21`, exclamation) is heavily overloaded for specifying [node
-tags].
+The "`!`" (`x21`, exclamation) is used for specifying [node tags].
 It is used to denote [tag handles] used in [tag directives] and [tag
 properties]; to denote [local tags]; and as the [non-specific tag] for
 non-[plain scalars].
@@ -1845,7 +1857,7 @@ double: "text"
 * [c-directive] &lt;!-- % --&gt;
 
 
-The _"`@`"_ (`x40`, at) and _"&lt;code&gt;&amp;grave;&lt;/code&gt;"_ (`x60`, grave accent) are
+The "`@`" (`x40`, at) and "&lt;code&gt;&amp;grave;&lt;/code&gt;" (`x60`, grave accent) are
 _reserved_ for future use.
 
 ```
@@ -1941,8 +1953,6 @@ separator (`x2028`) and paragraph separator (`x2029`).
 however, JSON does not.
 Hence, to ensure [JSON compatibility], YAML treats them as non-break characters
 as of version 1.2.
-In theory this would cause incompatibility with [version 1.1]; in practice
-these characters were rarely (if ever) used.
 YAML 1.2 [processors] [parsing] a [version 1.1] [document] should therefore
 treat these line breaks as non-break characters, with an appropriate warning.
 
@@ -2108,7 +2118,7 @@ URI characters for [tags], as defined in the URI specification[^uri].
 
 By convention, any URI characters other than the allowed printable ASCII
 characters are first _encoded_ in UTF-8 and then each byte is _escaped_ using
-the _"`%`"_ character.
+the "`%`" character.
 The YAML [processor] must not expand such escaped characters.
 [Tag] characters must be preserved and compared exactly as [presented] in the
 YAML [stream], without any processing.
@@ -2161,7 +2171,7 @@ These characters would cause ambiguity with [flow collection] structures.
 <code>## #. Escaped Characters</code>
 
 All non-[printable] characters must be _escaped_.
-YAML escape sequences use the _"`\`"_ notation common to most modern computer
+YAML escape sequences use the "`\`" notation common to most modern computer
 languages.
 Each escape sequence must be [parsed] into the appropriate Unicode character.
 The original escape sequence is a [presentation detail] and must not be used to
@@ -2782,13 +2792,14 @@ can be freely [more-indented] without affecting the [content] information.
 
 <code>## #. Comments</code>
 
-An explicit _comment_ is marked by a _"`#`" indicator_.
+An explicit _comment_ is marked by a "`#`" indicator.
 Comments are a [presentation detail] and must not be used to convey [content]
 information.
 
 Comments must be [separated] from other tokens by [white space] characters.
-To ensure [JSON compatibility], YAML [processors] must allow for the omission
-of the final comment [line break] of the input [stream].
+
+&gt; Note: To ensure [JSON compatibility], YAML [processors] must allow for the
+omission of the final comment [line break] of the input [stream].
 However, as this confuses many tools, YAML [processors] should terminate the
 [stream] with an explicit [line break] on output.
 
@@ -2973,7 +2984,7 @@ information.
 
 
 Each directive is specified on a separate non-[indented] line starting with the
-_"`%`" indicator_, followed by the directive name and a list of parameters.
+"`%`" indicator, followed by the directive name and a list of parameters.
 The semantics of these parameters depends on the specific directive.
 A YAML [processor] should ignore unknown directives with an appropriate
 warning.
@@ -3018,7 +3029,7 @@ warning.
 
 <code>### #. "`YAML`" Directives</code>
 
-The _"`YAML`" directive_ specifies the version of YAML the [document] conforms
+The "`YAML`" directive specifies the version of YAML the [document] conforms
 to.
 This specification defines version "`1.2`", including recommendations for _YAML
 1.1 processing_.
@@ -3095,7 +3106,7 @@ given at most once per document.
 
 <code>### #. "`TAG`" Directives</code>
 
-The _"`TAG`" directive_ establishes a [tag shorthand] notation for specifying
+The "`TAG`" directive establishes a [tag shorthand] notation for specifying
 [node tags].
 Each "`TAG`" directive associates a [handle] with a [prefix].
 This allows for compact and readable [tag] notation.
@@ -3165,7 +3176,7 @@ There are three tag handle variants:
 
 Primary Handle
 :
-The _primary tag handle_ is a single _"`!`"_ character.
+The _primary tag handle_ is a single "`!`" character.
 This allows using the most compact possible notation for a single "primary"
 name space.
 By default, the prefix associated with this handle is "`!`".
@@ -3206,7 +3217,7 @@ by the simple addition of a single "`TAG`" directive.
 
 Secondary Handle
 :
-The _secondary tag handle_ is written as _"`!!`"_.
+The _secondary tag handle_ is written as "`!!`".
 This allows using a compact notation for a single "secondary" name space.
 By default, the prefix associated with this handle is "`tag:yaml.org,2002:`".
 :
@@ -3236,7 +3247,7 @@ It is possible to override this default behavior by providing an explicit
 
 Named Handles
 :
-A _named tag handle_ surrounds a non-empty name with _"`!`"_ characters.
+A _named tag handle_ surrounds a non-empty name with "`!`" characters.
 A handle name must not be used in a [tag shorthand] unless an explicit "`TAG`"
 directive has associated some prefix with it.
 :
@@ -3398,7 +3409,7 @@ Either or both may be omitted.
 
 The _tag property_ identifies the type of the [native data structure]
 [presented] by the [node].
-A tag is denoted by the _"`!`" indicator_.
+A tag is denoted by the "`!`" indicator.
 
 ```
 [#] c-ns-tag-property ::=
@@ -3410,7 +3421,7 @@ A tag is denoted by the _"`!`" indicator_.
 
 Verbatim Tags
 :
-A tag may be written _verbatim_ by surrounding it with the _"`&lt;`" and "`&gt;`"_
+A tag may be written _verbatim_ by surrounding it with the "`&lt;`" and "`&gt;`"
 characters.
 In this case, the YAML [processor] must deliver the verbatim tag as-is to the
 [application].
@@ -3578,7 +3589,7 @@ This is intentional.
 
 <code>### #. Node Anchors</code>
 
-An anchor is denoted by the _"`&amp;`" indicator_.
+An anchor is denoted by the "`&amp;`" indicator.
 It marks a [node] for future reference.
 An [alias node] can then be used to indicate additional inclusions of the
 anchored [node].
@@ -3646,7 +3657,7 @@ _alias nodes_.
 The first occurrence of the [node] must be marked by an [anchor] to allow
 subsequent occurrences to be [presented] as alias nodes.
 
-An alias node is denoted by the _"`*`" indicator_.
+An alias node is denoted by the "`*`" indicator.
 The alias refers to the most recent preceding [node] having the same [anchor].
 It is an error for an alias node to use an [anchor] that does not previously
 occur in the [document].
@@ -3761,7 +3772,7 @@ distinguished for the purpose of [tag resolution].
 
 <code>### #. Double-Quoted Style</code>
 
-The _double-quoted style_ is specified by surrounding _"`"`" indicators_.
+The _double-quoted style_ is specified by surrounding "`"`" indicators.
 This is the only [style] capable of expressing arbitrary strings, by using
 "`\`" [escape sequences].
 This comes at the cost of having to escape the "`\`" and "`"`" characters.
@@ -3924,7 +3935,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 
 <code>### #. Single-Quoted Style</code>
 
-The _single-quoted style_ is specified by surrounding _"`'`" indicators_.
+The _single-quoted style_ is specified by surrounding "`'`" indicators.
 Therefore, within a single-quoted scalar, such characters need to be repeated.
 This is the only form of _escaping_ performed in single-quoted scalars.
 In particular, the "`\`" and "`"`" characters may be freely used.
@@ -4262,7 +4273,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 A _flow collection_ may be nested within a [block collection] ([`FLOW-OUT`
 context]), nested within another flow collection ([`FLOW-IN` context]) or be a
 part of an [implicit key] ([`FLOW-KEY` context] or [`BLOCK-KEY` context]).
-Flow collection entries are terminated by the _"`,`" indicator_.
+Flow collection entries are terminated by the "`,`" indicator.
 The final "`,`" may be omitted.
 This does not cause ambiguity because flow collection entries can never be
 [completely empty].
@@ -4278,8 +4289,7 @@ in-flow(n,FLOW-KEY)  ::= ns-s-flow-seq-entries(n,FLOW-KEY)
 
 <code>### #. Flow Sequences</code>
 
-_Flow sequence content_ is denoted by surrounding _"`[`"_ and _"`]`"_
-characters.
+_Flow sequence content_ is denoted by surrounding "`[`" and "`]`" characters.
 
 ```
 [#] c-flow-sequence(n,c) ::=
@@ -4361,7 +4371,7 @@ single: pair,
 
 <code>### #. Flow Mappings</code>
 
-_Flow mappings_ are denoted by surrounding _"`{`"_ and _"`}`"_ characters.
+_Flow mappings_ are denoted by surrounding "`{`" and "`}`" characters.
 
 ```
 [#] c-flow-mapping(n,c) ::=
@@ -4405,8 +4415,8 @@ Mapping entries are separated by a "`,`" character.
 * [ns-flow-map-entry(n,c)] &lt;!-- one_:_two three:_four five:_six seven_:_eight --&gt;
 
 
-If the optional _"`?`" mapping key indicator_ is specified, the rest of the
-entry may be [completely empty].
+If the optional "`?`" mapping key indicator is specified, the rest of the entry
+may be [completely empty].
 
 ```
 [#] ns-flow-map-entry(n,c) ::=
@@ -4450,7 +4460,7 @@ implicit: entry,
 * [e-node] &lt;!-- ° --&gt;
 
 
-Normally, YAML insists the _"`:`" mapping value indicator_ be [separated] from
+Normally, YAML insists the "`:`" mapping value indicator be [separated] from
 the [value] by [white space].
 A benefit of this restriction is that the "`:`" character can be used inside
 [plain scalars], as long as it is not followed by [white space].
@@ -4999,7 +5009,7 @@ YAML provides three chomping methods:
 
 Strip
 :
-_Stripping_ is specified by the _"`-`" chomping indicator_.
+_Stripping_ is specified by the "`-`" chomping indicator.
 In this case, the final [line break] and any trailing [empty lines] are
 excluded from the [scalar's content].
 
@@ -5015,7 +5025,7 @@ However, any trailing [empty lines] are excluded from the [scalar's content].
 
 Keep
 :
-_Keeping_ is specified by the _"`+`" chomping indicator_.
+_Keeping_ is specified by the "`+`" chomping indicator.
 In this case, the final [line break] and any trailing [empty lines] are
 considered to be part of the [scalar's content].
 These additional lines are not subject to [folding].
@@ -5170,7 +5180,7 @@ keep: |+
 
 <code>### #. Literal Style</code>
 
-The _literal style_ is denoted by the _"`|`" indicator_.
+The _literal style_ is denoted by the "`|`" indicator.
 It is the simplest, most restricted and most readable [scalar style].
 
 ```
@@ -5258,7 +5268,7 @@ In addition, there is no way to break a long literal line.
 
 <code>### #. Folded Style</code>
 
-The _folded style_ is denoted by the _"`&gt;`" indicator_.
+The _folded style_ is denoted by the "`&gt;`" indicator.
 It is similar to the [literal style]; however, folded scalars are subject to
 [line folding].
 
@@ -5510,7 +5520,7 @@ entry] is seen.
 <code>### #. Block Sequences</code>
 
 A _block sequence_ is simply a series of [nodes], each denoted by a leading
-_"`-`" indicator_.
+"`-`" indicator.
 The "`-`" indicator must be [separated] from the [node] by [white space].
 This allows "`-`" to be used as the first character in a [plain scalar] if
 followed by a non-space character (e.g. "`-42`").

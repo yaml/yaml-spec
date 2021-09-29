@@ -7,6 +7,8 @@ a:hover { color: blue; text-decoration: underline solid blue; }
 table { width: 100%; }
 table th, table tr { width: 100%; }
 
+code.language-plaintext { background-color: #ddd; }
+
 pre.rule { background-color: #E0F8F8; border: none; }
 
 div.example > * td.side-by-side { vertical-align: top; border: none; width: 10%; }
