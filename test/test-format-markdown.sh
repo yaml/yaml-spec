@@ -2,8 +2,17 @@
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/setup"
 
-find "$SPEC" -name '*.md' |
+find .. -type f -name '*.md' |
 while read -r file; do
+  echo "============================== $file"
+  [[ $file == */RFC* ]] && continue
+  [[ $file == */story/* ]] && continue
+  [[ $file == *ReadMe* ]] && continue
+  [[ $file == *www/main* ]] && continue
+  [[ $file == *contributing* ]] && continue
+  [[ $file == *pull_request_template* ]] && continue
+  [[ $file == *gloss* ]] && continue
+  [[ $file == *spec/1.2/spec.md* ]] && continue
 
   temp=/tmp/$(basename "$file")
 
@@ -11,5 +20,4 @@ while read -r file; do
 
   ( set -x; diff -u "$file" "$temp" ||
     die "spec.md not properly formatted" )
-
 done

@@ -100,9 +100,23 @@ sub parse_sections {
     s/\A\? (.*)\n+//
       and push @s, {dt => $1} and next;
 
+    # Definition definition:
+    s{\A
+      (
+        : (?:\n|$s+) $line
+        (?:
+          \S $line
+        )*?
+      )
+      (?:
+        (?= : ) |
+        \n+
+      )
+    }{}x and push @s, {dd => $1} and next;
+
     # Unordered list:
     s/\A
-      ([ ]*
+      (
         $ial*
         $li
         $line_not_blank*
@@ -125,14 +139,14 @@ sub parse_sections {
 
     # Regular paragraph:
     s/\A
-      ([ ]*
+      (
         (?:
-          (?:$b|-1$s|\`x|\[[\w\"\*\`]|`[\(]|<http|[\w\"\(])
+          (?:$b|-1$s|\`x|\[[\w\"\*\`]|`[\(]|<http|[\w\"\(]|\`\w)
           .*\n
         )+
       )
       (?:
-        (?= $code) |
+        (?= $code | : ) |
         \z |
         \n+
       )
@@ -149,17 +163,6 @@ sub parse_sections {
       )
       \n+
     }{}x and push @s, {indent => $1} and next;
-
-    # Definition definition:
-    s{\A
-      (
-        : $s+ $line
-        (?:
-          \S $line
-        )*
-      )
-      \n+
-    }{}x and push @s, {dd => $1} and next;
 
     s{
       \A(
@@ -180,9 +183,6 @@ sub parse_sections {
 
     s/\A(\* .*\n(?:  \S.*\n|\n(?=  \S))+)\n+//
       and push @s, {ul => $1} and next;
-
-    s/\A(\`\w.*\n)\n+//
-      and push @s, {p => $1} and next;
 
     s/\A((?:\| .*\n)+)\n+//
       and push @s, {table => $1} and next;
@@ -355,6 +355,7 @@ sub fmt_p {
 }
 
 sub fmt_dd {
+  s/^:\n(\S)/: $1/ or die $_;
   format_links();
 }
 

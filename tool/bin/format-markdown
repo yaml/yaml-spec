@@ -14,10 +14,14 @@ sub out {
   print encode('UTF-8', $_[0], Encode::FB_CROAK);
 }
 sub peek {
-  @l ? $l[0] : '';
+  $_ = @l ? $l[0] : '';
 }
 sub take {
-  shift(@l);
+  $_ = shift(@l);
+}
+sub poke {
+  unshift @l, @_ ? (shift) : $_;
+  $_ = @l ? $l[0] : '';
 }
 sub give {
   unshift(@l, "$_[0]\n");
@@ -164,6 +168,8 @@ sub comm {
   }
   space;
 }
+
+
 
 sub unknown {
   my $line = take;
