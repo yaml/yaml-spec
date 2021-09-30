@@ -162,9 +162,9 @@ It also removed many of the problematic implicit typing recommendations.
 
 Since the release of the 1.2 specification, YAML adoption has continued to
 grow, and many large-scale projects use it as their primary interface language.
-In 2020, the new [YAML language design team](team) began meeting regularly to
-discuss improvements to the YAML language and specification; to better meet the
-needs and expectations of its users and use cases.
+In 2020, the new [YAML language design team](ext/team) began meeting regularly
+to discuss improvements to the YAML language and specification; to better meet
+the needs and expectations of its users and use cases.
 
 This YAML 1.2.2 specification, published in October 2021, is the first step in
 YAML's rejuvenated development journey.
