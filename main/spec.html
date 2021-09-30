@@ -47,7 +47,7 @@ the content of this draft or cite it as an authority.
 
 <h1 id="yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</h1>
 
-<h2 class="subtitle" id="revision-122-2021-09-29">Revision 1.2.2 (2021-09-29)</h2>
+<h2 class="subtitle" id="revision-122-2021-09-30">Revision 1.2.2 (2021-09-30)</h2>
 
 <p>Copyright presently by YAML Language Development Team<sup id="fnref:team" role="doc-noteref"><a href="#fn:team" class="footnote" rel="footnote">1</a></sup><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -112,7 +112,7 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-12" id="markdown-toc-yaml-aint-markup-language-yaml-version-12">YAML Ain’t Markup Language (YAML™) version 1.2</a>    <ul>
-      <li><a href="#revision-122-2021-09-29" id="markdown-toc-revision-122-2021-09-29">Revision 1.2.2 (2021-09-29)</a></li>
+      <li><a href="#revision-122-2021-09-30" id="markdown-toc-revision-122-2021-09-30">Revision 1.2.2 (2021-09-30)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction-to-yaml" id="markdown-toc-chapter-1-introduction-to-yaml">Chapter 1. Introduction to YAML</a>    <ul>
@@ -376,9 +376,9 @@ It also removed many of the problematic implicit typing recommendations.</p>
 
 <p>Since the release of the 1.2 specification, YAML adoption has continued to
 grow, and many large-scale projects use it as their primary interface language.
-In 2020, the new <a href="team">YAML language design team</a> began meeting regularly to
-discuss improvements to the YAML language and specification; to better meet the
-needs and expectations of its users and use cases.</p>
+In 2020, the new <a href="ext/team">YAML language design team</a> began meeting regularly
+to discuss improvements to the YAML language and specification; to better meet
+the needs and expectations of its users and use cases.</p>
 
 <p>This YAML 1.2.2 specification, published in October 2021, is the first step in
 YAML’s rejuvenated development journey.
@@ -989,6 +989,8 @@ referenced during <a href="#constructing-native-data-structures">construction</a
 <p><em>Dumping</em> native data structures to a character <a href="#streams">stream</a> is done using the
 following three stages:</p>
 
+<div id="representing-native-data-structures"></div>
+
 <dl>
   <dt>Representing Native Data Structures</dt>
   <dd>
@@ -1016,21 +1018,31 @@ represented as a <a href="#mapping">mapping</a> together with the <a href="#tags
 This simple model can represent any data structure independent of programming
 language.</p>
   </dd>
+</dl>
+
+<div id="serializing-the-representation-graph"></div>
+
+<dl>
   <dt>Serializing the Representation Graph</dt>
   <dd>
     <p>For sequential access mediums, such as an event callback API, a YAML
 <a href="#representation-graph">representation</a> must be <em>serialized</em> to an ordered tree.
 Since in a YAML <a href="#representation-graph">representation</a>, <a href="#nodes">mapping keys</a> are unordered and <a href="#nodes">nodes</a> may
 be referenced more than once (have more than one incoming “arrow”), the
-serialization process is required to impose an <a href="#keys-order">ordering</a> on the <a href="#nodes">mapping keys</a>
+serialization process is required to impose an <a href="#mapping-key-order">ordering</a> on the <a href="#nodes">mapping keys</a>
 and to replace the second and subsequent references to a given <a href="#nodes">node</a> with
 place holders called <a href="#anchors-and-aliases">aliases</a>.
 YAML does not specify how these <em>serialization details</em> are chosen.
-It is up to the YAML <a href="#processes-and-models">processor</a> to come up with human-friendly <a href="#keys-order">key order</a> and
+It is up to the YAML <a href="#processes-and-models">processor</a> to come up with human-friendly <a href="#mapping-key-order">key order</a> and
 <a href="#anchors-and-aliases">anchor</a> names, possibly with the help of the <a href="#processes-and-models">application</a>.
 The result of this process, a YAML <a href="#serialization-tree">serialization tree</a>, can then be traversed
 to produce a series of event calls for one-pass processing of YAML data.</p>
   </dd>
+</dl>
+
+<div id="presenting-the-serialization-tree"></div>
+
+<dl>
   <dt>Presenting the Serialization Tree</dt>
   <dd>
     <p>The final output process is <em>presenting</em> the YAML <a href="#serialization-tree">serializations</a> as a
@@ -1053,6 +1065,8 @@ this process should be guided by the preferences of the user.</p>
 <p><em>Loading</em> <a href="#representing-native-data-structures">native data structures</a> from a character <a href="#streams">stream</a> is done using the
 following three stages:</p>
 
+<div id="parsing-the-presentation-stream"></div>
+
 <dl>
   <dt>Parsing the Presentation Stream</dt>
   <dd>
@@ -1062,13 +1076,23 @@ Parsing discards all the <a href="#presenting-the-serialization-tree">details</a
 reporting only the <a href="#serialization-tree">serialization tree</a>.
 Parsing can fail due to <a href="#well-formed-streams-and-identified-aliases">ill-formed</a> input.</p>
   </dd>
+</dl>
+
+<div id="composing-the-representation-graph"></div>
+
+<dl>
   <dt>Composing the Representation Graph</dt>
   <dd>
     <p><em>Composing</em> takes a <a href="#serialization-tree">serialization tree</a> and produces a <a href="#representation-graph">representation graph</a>.
 Composing discards all the <a href="#presenting-the-serialization-tree">details</a> introduced in the <a href="#serialization-tree">serialization</a> process,
 producing only the <a href="#representation-graph">representation graph</a>.
-Composing can fail due to any of several reasons, detailed <a href="#loading-point-failures">below</a>.</p>
+Composing can fail due to any of several reasons, detailed <a href="#loading-failure-points">below</a>.</p>
   </dd>
+</dl>
+
+<div id="constructing-native-data-structures"></div>
+
+<dl>
   <dt>Constructing Native Data Structures</dt>
   <dd>
     <p>The final input process is <em>constructing</em> <a href="#representing-native-data-structures">native data structures</a> from the
@@ -1091,7 +1115,7 @@ To maximize data portability between programming languages and implementations,
 users of YAML should be mindful of the distinction between <a href="#serialization-tree">serialization</a> or
 <a href="#presentation-stream">presentation</a> properties and those which are part of the YAML
 <a href="#representation-graph">representation</a>.
-Thus, while imposing a <a href="#keys-order">order</a> on <a href="#nodes">mapping keys</a> is necessary for flattening
+Thus, while imposing a <a href="#mapping-key-order">order</a> on <a href="#nodes">mapping keys</a> is necessary for flattening
 YAML <a href="#representation-graph">representations</a> to a sequential access medium, this <a href="#serializing-the-representation-graph">serialization
 detail</a> must not be used to convey <a href="#processes-and-models">application</a> level information.
 In a similar manner, while <a href="#indentation-spaces">indentation</a> technique and a choice of a <a href="#node-styles">node
@@ -1141,18 +1165,30 @@ Such nodes have <em>content</em> of one of three <em>kinds</em>: scalar, sequenc
 In addition, each node has a <a href="#tags">tag</a> which serves to restrict the set of possible
 values the content can have.</p>
 
+<div id="scalar"></div>
+
 <dl>
   <dt>Scalar</dt>
   <dd>
     <p>The content of a <em>scalar</em> node is an opaque datum that can be <a href="#presenting-the-serialization-tree">presented</a> as a
 series of zero or more Unicode characters.</p>
   </dd>
+</dl>
+
+<div id="sequence"></div>
+
+<dl>
   <dt>Sequence</dt>
   <dd>
     <p>The content of a <em>sequence</em> node is an ordered series of zero or more nodes.
 In particular, a sequence may contain the same node more than once.
 It could even contain itself.</p>
   </dd>
+</dl>
+
+<div id="mapping"></div>
+
+<dl>
   <dt>Mapping</dt>
   <dd>
     <p>The content of a <em>mapping</em> node is an unordered set of <em>key/value</em> node
@@ -1211,6 +1247,8 @@ If both notations are used as <a href="#nodes">keys</a> in the same <a href="#ma
 <a href="#processes-and-models">processor</a> which recognizes integer <a href="#scalar-formats">formats</a> would correctly flag the
 duplicate <a href="#nodes">key</a> as an error.</p>
 
+<div id="canonical-form"></div>
+
 <dl>
   <dt>Canonical Form</dt>
   <dd>
@@ -1220,6 +1258,11 @@ duplicate <a href="#nodes">key</a> as an error.</p>
 This form is a Unicode character string which also <a href="#presenting-the-serialization-tree">presents</a> the same
 <a href="#nodes">content</a> and can be used for equality testing.</p>
   </dd>
+</dl>
+
+<div id="equality"></div>
+
+<dl>
   <dt>Equality</dt>
   <dd>
     <p>Two <a href="#nodes">nodes</a> must have the same <a href="#tags">tag</a> and <a href="#nodes">content</a> to be <em>equal</em>.
@@ -1259,6 +1302,11 @@ equality of that node is implementation-defined.</p>
   <dd>
     <p>A YAML <a href="#processes-and-models">processor</a> may treat equal <a href="#scalars">scalars</a> as if they were identical.</p>
   </dd>
+</dl>
+
+<div id="uniqueness"></div>
+
+<dl>
   <dt>Uniqueness</dt>
   <dd>
     <p>A <a href="#mapping">mapping’s</a> <a href="#nodes">keys</a> are <em>unique</em> if no two keys are equal to each other.
@@ -1270,13 +1318,13 @@ Obviously, identical nodes are always considered equal.</p>
 <h3 id="322-serialization-tree">3.2.2. Serialization Tree</h3>
 
 <p>To express a YAML <a href="#representation-graph">representation</a> using a serial API, it is necessary to
-impose an <a href="#keys-order">order</a> on <a href="#nodes">mapping keys</a> and employ <a href="#alias-nodes">alias nodes</a> to indicate a
+impose an <a href="#mapping-key-order">order</a> on <a href="#nodes">mapping keys</a> and employ <a href="#alias-nodes">alias nodes</a> to indicate a
 subsequent occurrence of a previously encountered <a href="#nodes">node</a>.
 The result of this process is a <em>serialization tree</em>, where each <a href="#nodes">node</a> has an
 ordered set of children.
 This tree can be traversed for a serial event-based API.
 <a href="#constructing-native-data-structures">Construction</a> of <a href="#representing-native-data-structures">native data structures</a> from the serial interface should not
-use <a href="#keys-order">key order</a> or <a href="#anchors-and-aliases">anchor names</a> for the preservation of <a href="#processes-and-models">application</a> data.</p>
+use <a href="#mapping-key-order">key order</a> or <a href="#anchors-and-aliases">anchor names</a> for the preservation of <a href="#processes-and-models">application</a> data.</p>
 
 <p><strong>Figure 3.4. Serialization Model</strong></p>
 
@@ -1432,7 +1480,7 @@ parts of the input, but it must provide a mechanism for reporting such errors.</
 <p>Typically, most <a href="#tags">tags</a> are not explicitly specified in the character <a href="#streams">stream</a>.
 During <a href="#parsing-the-presentation-stream">parsing</a>, <a href="#nodes">nodes</a> lacking an explicit <a href="#tags">tag</a> are given a <em>non-specific
 tag</em>: “<code class="language-plaintext highlighter-rouge">!</code>” for non-<a href="#plain-style">plain scalars</a> and “<code class="language-plaintext highlighter-rouge">?</code>” for all other <a href="#nodes">nodes</a>.
-<a href="#composing-the-representation-graph">Composing</a> a <a href="#loading-point-failures">complete representation</a> requires each such non-specific tag to
+<a href="#composing-the-representation-graph">Composing</a> a <a href="#loading-failure-points">complete representation</a> requires each such non-specific tag to
 be <em>resolved</em> to a <em>specific tag</em>, be it a <a href="#tags">global tag</a> or a <a href="#tags">local tag</a>.</p>
 
 <p>Resolving the <a href="#tags">tag</a> of a <a href="#nodes">node</a> must only depend on the following three
@@ -1482,8 +1530,8 @@ YAML <a href="#processes-and-models">processors</a> should therefore provide a m
 <a href="#processes-and-models">application</a> to override and expand these default tag resolution rules.</p>
 
 <p>If a <a href="#documents">document</a> contains <em>unresolved tags</em>, the YAML <a href="#processes-and-models">processor</a> is unable to
-<a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete representation</a> graph.
-In such a case, the YAML <a href="#processes-and-models">processor</a> may <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">partial representation</a>,
+<a href="#composing-the-representation-graph">compose</a> a <a href="#loading-failure-points">complete representation</a> graph.
+In such a case, the YAML <a href="#processes-and-models">processor</a> may <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-failure-points">partial representation</a>,
 based on each <a href="#nodes">node’s kind</a> and allowing for non-specific tags.</p>
 
 <div id="recognized-and-valid-tags"></div>
@@ -1493,12 +1541,12 @@ based on each <a href="#nodes">node’s kind</a> and allowing for non-specific t
 <a href="#processes-and-models">processor</a> and its <a href="#nodes">content</a> must satisfy the constraints imposed by this
 <a href="#tags">tag</a>.
 If a <a href="#documents">document</a> contains a <a href="#nodes">scalar node</a> with an <em>unrecognized tag</em> or <em>invalid
-content</em>, only a <a href="#loading-point-failures">partial representation</a> may be <a href="#composing-the-representation-graph">composed</a>.
-In contrast, a YAML <a href="#processes-and-models">processor</a> can always <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete
+content</em>, only a <a href="#loading-failure-points">partial representation</a> may be <a href="#composing-the-representation-graph">composed</a>.
+In contrast, a YAML <a href="#processes-and-models">processor</a> can always <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-failure-points">complete
 representation</a> for an unrecognized or an invalid <a href="#collections">collection</a>, since
 <a href="#collections">collection</a> <a href="#equality">equality</a> does not depend upon knowledge of the <a href="#mapping">collection’s</a>
 data type.
-However, such a <a href="#loading-point-failures">complete representation</a> cannot be used to <a href="#constructing-native-data-structures">construct</a> a
+However, such a <a href="#loading-failure-points">complete representation</a> cannot be used to <a href="#constructing-native-data-structures">construct</a> a
 <a href="#representing-native-data-structures">native data structure</a>.</p>
 
 <div id="available-tags"></div>
@@ -1508,7 +1556,7 @@ However, such a <a href="#loading-point-failures">complete representation</a> ca
 corresponding to a given <a href="#tags">tag</a>.
 If a <a href="#tags">node’s tag</a> is <em>unavailable</em>, a YAML <a href="#processes-and-models">processor</a> will not be able to
 <a href="#constructing-native-data-structures">construct</a> a <a href="#representing-native-data-structures">native data structure</a> for it.
-In this case, a <a href="#loading-point-failures">complete representation</a> may still be <a href="#composing-the-representation-graph">composed</a> and an
+In this case, a <a href="#loading-failure-points">complete representation</a> may still be <a href="#composing-the-representation-graph">composed</a> and an
 <a href="#processes-and-models">application</a> may wish to use this <a href="#representation-graph">representation</a> directly.</p>
 
 <div id="syntax-conventions"></div>
@@ -1533,6 +1581,8 @@ Otherwise it uses a YAML form that is as close to JSON as possible.</p>
 <p>Productions are defined using the syntax <code class="language-plaintext highlighter-rouge">production-name ::= term</code>, where a
 term is either:</p>
 
+<div id="an-atomic-term"></div>
+
 <dl>
   <dt>An atomic term</dt>
   <dd>
@@ -1546,6 +1596,11 @@ whose Unicode code point is within that range.</li>
       <li>The name of a production (<code class="language-plaintext highlighter-rouge">c-printable</code>), which matches that production.</li>
     </ul>
   </dd>
+</dl>
+
+<div id="a-lookaround"></div>
+
+<dl>
   <dt>A lookaround</dt>
   <dd>
     <ul>
@@ -1556,6 +1611,11 @@ match.</li>
 beginning at any prior point on the line and ending at the current position.</li>
     </ul>
   </dd>
+</dl>
+
+<div id="a-special-production"></div>
+
+<dl>
   <dt>A special production</dt>
   <dd>
     <ul>
@@ -1564,19 +1624,39 @@ beginning at any prior point on the line and ending at the current position.</li
       <li><code class="language-plaintext highlighter-rouge">&lt;empty&gt;</code>, which (always) matches the empty string.</li>
     </ul>
   </dd>
+</dl>
+
+<div id="a-parenthesized-term"></div>
+
+<dl>
   <dt>A parenthesized term</dt>
   <dd>
     <p>Matches its contents.</p>
   </dd>
+</dl>
+
+<div id="a-concatenation"></div>
+
+<dl>
   <dt>A concatenation</dt>
   <dd>
     <p>Is <code class="language-plaintext highlighter-rouge">term-one term-two</code>, which matches <code class="language-plaintext highlighter-rouge">term-one</code> followed by <code class="language-plaintext highlighter-rouge">term-two</code>.</p>
   </dd>
+</dl>
+
+<div id="a-alternation"></div>
+
+<dl>
   <dt>A alternation</dt>
   <dd>
     <p>Is <code class="language-plaintext highlighter-rouge">term-one | term-two</code>, which matches the <code class="language-plaintext highlighter-rouge">term-one</code> if possible, or
 <code class="language-plaintext highlighter-rouge">term-two</code> otherwise.</p>
   </dd>
+</dl>
+
+<div id="a-quantified-term"></div>
+
+<dl>
   <dt>A quantified term:</dt>
   <dd>
     <ul>
@@ -1652,11 +1732,18 @@ production-a(1) ::=
 
 <p>The parameters are as follows:</p>
 
+<div id="indentation-n-or-m"></div>
+
 <dl>
   <dt>Indentation: <code class="language-plaintext highlighter-rouge">n</code> or <code class="language-plaintext highlighter-rouge">m</code></dt>
   <dd>
     <p>May be any natural number, including zero. <code class="language-plaintext highlighter-rouge">n</code> may also be -1.</p>
   </dd>
+</dl>
+
+<div id="context-c"></div>
+
+<dl>
   <dt>Context: <code class="language-plaintext highlighter-rouge">c</code></dt>
   <dd>
     <p>This parameter allows productions to tweak their behavior according to their
@@ -2650,7 +2737,7 @@ YAML <a href="#streams">stream</a>, without any processing.</p>
 [39] ns-uri-char ::=
     (
       '%'
-      <a href="#rule-ns-hex-digit{2}">ns-hex-digit{2}</a>
+      <a href="#rule-ns-hex-digit">ns-hex-digit</a>{2}
     )
   | <a href="#rule-ns-word-char">ns-word-char</a>
   | '#'
@@ -2841,7 +2928,7 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <pre class="rule">
 [59] ns-esc-8-bit ::=
   'x'
-  <a href="#rule-ns-hex-digit{2}">ns-hex-digit{2}</a>
+  <a href="#rule-ns-hex-digit">ns-hex-digit</a>{2}
 </pre>
 
 <p>Escaped 16-bit Unicode character.</p>
@@ -2850,7 +2937,7 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <pre class="rule">
 [60] ns-esc-16-bit ::=
   'u'
-  <a href="#rule-ns-hex-digit{4}">ns-hex-digit{4}</a>
+  <a href="#rule-ns-hex-digit">ns-hex-digit</a>{4}
 </pre>
 
 <p>Escaped 32-bit Unicode character.</p>
@@ -2859,7 +2946,7 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <pre class="rule">
 [61] ns-esc-32-bit ::=
   'U'
-  <a href="#rule-ns-hex-digit{8}">ns-hex-digit{8}</a>
+  <a href="#rule-ns-hex-digit">ns-hex-digit</a>{8}
 </pre>
 
 <p>Any escaped character:</p>
@@ -3332,6 +3419,8 @@ a single <a href="#white-space-characters">space</a> (<code class="language-plai
 flow styles</a>.
 Folding does distinguish between these cases in the following way:</p>
 
+<div id="block-folding"></div>
+
 <dl>
   <dt>Block Folding</dt>
   <dd>
@@ -3381,6 +3470,8 @@ formatting of <a href="#example-more-indented-lines">more-indented</a> lines is 
     </ul>
   </div>
 </div>
+
+<div id="flow-folding"></div>
 
 <dl>
   <dt>Flow Folding</dt>
@@ -3937,6 +4028,8 @@ There are three tag handle variants:</p>
   | <a href="#rule-c-primary-tag-handle">c-primary-tag-handle</a>
 </pre>
 
+<div id="primary-handle"></div>
+
 <dl>
   <dt>Primary Handle</dt>
   <dd>
@@ -3994,6 +4087,8 @@ by the simple addition of a single “<code class="language-plaintext highlighte
   </div>
 </div>
 
+<div id="secondary-handle"></div>
+
 <dl>
   <dt>Secondary Handle</dt>
   <dd>
@@ -4039,6 +4134,8 @@ By default, the prefix associated with this handle is “<code class="language-p
     </ul>
   </div>
 </div>
+
+<div id="named-handles"></div>
 
 <dl>
   <dt>Named Handles</dt>
@@ -4102,6 +4199,8 @@ In particular, the YAML <a href="#processes-and-models">processor</a> need not p
   <a href="#rule-c-ns-local-tag-prefix">c-ns-local-tag-prefix</a> | <a href="#rule-ns-global-tag-prefix">ns-global-tag-prefix</a>
 </pre>
 
+<div id="local-tag-prefix"></div>
+
 <dl>
   <dt>Local Tag Prefix</dt>
   <dd>
@@ -4154,6 +4253,8 @@ semantics to the same <a href="#tags">local tag</a>.</p>
     </ul>
   </div>
 </div>
+
+<div id="global-tag-prefix"></div>
 
 <dl>
   <dt>Global Tag Prefix</dt>
@@ -4276,6 +4377,8 @@ A tag is denoted by the “<code class="language-plaintext highlighter-rouge">!<
   | <a href="#rule-c-non-specific-tag">c-non-specific-tag</a>
 </pre>
 
+<div id="verbatim-tags"></div>
+
 <dl>
   <dt>Verbatim Tags</dt>
   <dd>
@@ -4350,6 +4453,8 @@ ERROR:
 </tr>
 </table>
 </div>
+
+<div id="tag-shorthands"></div>
 
 <dl>
   <dt>Tag Shorthands</dt>
@@ -4445,6 +4550,8 @@ ERROR:
 </tr>
 </table>
 </div>
+
+<div id="non-specific-tags"></div>
 
 <dl>
   <dt>Non-Specific Tags</dt>
@@ -5163,7 +5270,7 @@ ambiguity.</p>
     )
 </pre>
 
-<p>Plain scalars must never contain the “<code class="language-plaintext highlighter-rouge">:</code> “ and “ <code class="language-plaintext highlighter-rouge">#</code>” character combinations.
+<p>Plain scalars must never contain the “<code class="language-plaintext highlighter-rouge">: </code>” and “<code class="language-plaintext highlighter-rouge"> #</code>” character combinations.
 Such combinations would cause ambiguity with <a href="#mapping">mapping</a> <a href="#mapping">key/value pairs</a> and
 <a href="#comments">comments</a>.
 In addition, inside <a href="#flow-collection-styles">flow collections</a>, or when used as <a href="#example-single-pair-explicit-entry">implicit keys</a>, plain
@@ -6291,6 +6398,8 @@ ERROR:
 interpreted.
 YAML provides three chomping methods:</p>
 
+<div id="strip"></div>
+
 <dl>
   <dt>Strip</dt>
   <dd>
@@ -6298,6 +6407,11 @@ YAML provides three chomping methods:</p>
 In this case, the final <a href="#line-break-characters">line break</a> and any trailing <a href="#empty-lines">empty lines</a> are
 excluded from the <a href="#scalar">scalar’s content</a>.</p>
   </dd>
+</dl>
+
+<div id="clip"></div>
+
+<dl>
   <dt>Clip</dt>
   <dd>
     <p><em>Clipping</em> is the default behavior used if no explicit chomping indicator is
@@ -6306,6 +6420,11 @@ In this case, the final <a href="#line-break-characters">line break</a> characte
 content</a>.
 However, any trailing <a href="#empty-lines">empty lines</a> are excluded from the <a href="#scalar">scalar’s content</a>.</p>
   </dd>
+</dl>
+
+<div id="keep"></div>
+
+<dl>
   <dt>Keep</dt>
   <dd>
     <p><em>Keeping</em> is specified by the “<code class="language-plaintext highlighter-rouge">+</code>” chomping indicator.
@@ -7864,37 +7983,6 @@ following <a href="#documents">document</a> must begin with a <a href="#document
 <p>A sequence of bytes is a <em>well-formed stream</em> if, taken as a whole, it complies
 with the above <code class="language-plaintext highlighter-rouge">l-yaml-stream</code> production.</p>
 
-<p>Some common use case that can take advantage of the YAML stream structure are:</p>
-
-<dl>
-  <dt>Appending to Streams</dt>
-  <dd>
-    <p>Allowing multiple <a href="#documents">documents</a> in a single stream makes YAML suitable for log
-files and similar <a href="#processes-and-models">applications</a>.
-Note that each <a href="#documents">document</a> is independent of the rest, allowing for
-heterogeneous log file entries.</p>
-  </dd>
-  <dt>Concatenating Streams</dt>
-  <dd>
-    <p>Concatenating two YAML streams requires both to use the same <a href="#character-encodings">character
-encoding</a>.
-In addition, it is necessary to separate the last <a href="#documents">document</a> of the first
-stream and the first <a href="#documents">document</a> of the second stream.
-This is easily ensured by inserting a <a href="#document-markers">document end marker</a> between the two
-streams.</p>
-  </dd>
-  <dt>Communication Streams</dt>
-  <dd>
-    <p>The <a href="#document-markers">document end marker</a> allows signaling the end of a <a href="#documents">document</a> without
-closing the stream or starting the next <a href="#documents">document</a>.
-This allows the receiver to complete processing a <a href="#documents">document</a> without having to
-wait for the next one to arrive.
-The sender may also transmit “keep-alive” messages in the form of <a href="#comments">comment</a>
-lines or repeated <a href="#document-markers">document end markers</a> without signaling the start of the
-next <a href="#documents">document</a>.</p>
-  </dd>
-</dl>
-
 <div id="recommended-schemas"></div>
 <h1 id="chapter-10-recommended-schemas">Chapter 10. Recommended Schemas</h1>
 
@@ -7915,15 +8003,27 @@ option.</p>
 <div id="generic-mapping"></div>
 <h4 id="10111-generic-mapping">10.1.1.1. Generic Mapping</h4>
 
+<div id="uri"></div>
+
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code></p>
   </dd>
+</dl>
+
+<div id="kind"></div>
+
+<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#mapping">Mapping</a>.</p>
   </dd>
+</dl>
+
+<div id="definition"></div>
+
+<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> an associative container, where each <a href="#nodes">key</a> is unique in the
@@ -7952,15 +8052,27 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 <div id="generic-sequence"></div>
 <h4 id="10112-generic-sequence">10.1.1.2. Generic Sequence</h4>
 
+<div id="uri"></div>
+
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code></p>
   </dd>
+</dl>
+
+<div id="kind"></div>
+
+<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#sequence">Sequence</a>.</p>
   </dd>
+</dl>
+
+<div id="definition"></div>
+
+<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> a collection indexed by sequential integers starting with zero.
@@ -7986,21 +8098,38 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 <div id="generic-string"></div>
 <h4 id="10113-generic-string">10.1.1.3. Generic String</h4>
 
+<div id="uri"></div>
+
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code></p>
   </dd>
+</dl>
+
+<div id="kind"></div>
+
+<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
+</dl>
+
+<div id="definition"></div>
+
+<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> a Unicode string, a sequence of zero or more Unicode characters.
 This type is usually <a href="#representing-native-data-structures">bound</a> to the <a href="#representing-native-data-structures">native</a> language’s string type or, for
 languages lacking one (such as C), to a character array.</p>
   </dd>
+</dl>
+
+<div id="canonical-form"></div>
+
+<dl>
   <dt>Canonical Form:</dt>
   <dd>
     <p>The obvious.</p>
@@ -8027,7 +8156,7 @@ Flow style: !!str "String: just a theory."
 “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>”, according to their <a href="#nodes">kind</a>.</p>
 
 <p>All <a href="#nodes">nodes</a> with the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag are left <a href="#resolved-tags">unresolved</a>.
-This constrains the <a href="#processes-and-models">application</a> to deal with a <a href="#loading-point-failures">partial representation</a>.</p>
+This constrains the <a href="#processes-and-models">application</a> to deal with a <a href="#loading-failure-points">partial representation</a>.</p>
 
 <div id="json-schema"></div>
 <h2 id="102-json-schema">10.2. JSON Schema</h2>
@@ -8047,15 +8176,27 @@ It is also strongly recommended that other <a href="#recommended-schemas">schema
 <div id="null"></div>
 <h4 id="10211-null">10.2.1.1. Null</h4>
 
+<div id="uri"></div>
+
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:null</code></p>
   </dd>
+</dl>
+
+<div id="kind"></div>
+
+<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
+</dl>
+
+<div id="definition"></div>
+
+<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> the lack of a value.
@@ -8065,6 +8206,11 @@ Note that a null is different from an empty string.
 Also, a <a href="#mapping">mapping</a> entry with some <a href="#nodes">key</a> and a null <a href="#nodes">value</a> is valid and
 different from not having that <a href="#nodes">key</a> in the <a href="#mapping">mapping</a>.</p>
   </dd>
+</dl>
+
+<div id="canonical-form"></div>
+
+<dl>
   <dt>Canonical Form</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">null</code>.</p>
@@ -8084,21 +8230,38 @@ key with null value: !!null null
 <div id="boolean"></div>
 <h4 id="10212-boolean">10.2.1.2. Boolean</h4>
 
+<div id="uri"></div>
+
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:bool</code></p>
   </dd>
+</dl>
+
+<div id="kind"></div>
+
+<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
+</dl>
+
+<div id="definition"></div>
+
+<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> a true/false value.
 In languages without a <a href="#representing-native-data-structures">native</a> Boolean type (such as C), they are usually
 <a href="#representing-native-data-structures">bound</a> to a native integer type, using one for true and zero for false.</p>
   </dd>
+</dl>
+
+<div id="canonical-form"></div>
+
+<dl>
   <dt>Canonical Form</dt>
   <dd>
     <p>Either <code class="language-plaintext highlighter-rouge">true</code> or <code class="language-plaintext highlighter-rouge">false</code>.</p>
@@ -8118,15 +8281,27 @@ Pluto is a planet: !!bool false
 <div id="integer"></div>
 <h4 id="10213-integer">10.2.1.3. Integer</h4>
 
+<div id="uri"></div>
+
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:int</code></p>
   </dd>
+</dl>
+
+<div id="kind"></div>
+
+<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
+</dl>
+
+<div id="definition"></div>
+
+<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> arbitrary sized finite mathematical integers.
@@ -8147,6 +8322,11 @@ warning or find some other manner to round-trip it.
 In general, integers representable using 32 binary digits should safely
 round-trip through most systems.</p>
   </dd>
+</dl>
+
+<div id="canonical-form"></div>
+
+<dl>
   <dt>Canonical Form</dt>
   <dd>
     <p>Decimal integer notation, with a leading “<code class="language-plaintext highlighter-rouge">-</code>” character for negative values,
@@ -8168,15 +8348,27 @@ positive: !!int 34
 <div id="floating-point"></div>
 <h4 id="10214-floating-point">10.2.1.4. Floating Point</h4>
 
+<div id="uri"></div>
+
 <dl>
   <dt>URI</dt>
   <dd>
     <p><code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:float</code></p>
   </dd>
+</dl>
+
+<div id="kind"></div>
+
+<dl>
   <dt>Kind</dt>
   <dd>
     <p><a href="#scalar">Scalar</a>.</p>
   </dd>
+</dl>
+
+<div id="definition"></div>
+
+<dl>
   <dt>Definition</dt>
   <dd>
     <p><a href="#representation-graph">Represents</a> an approximation to real numbers, including three special values
@@ -8196,6 +8388,11 @@ IEEE floats should be safe.
 Since YAML does not specify a particular accuracy, using floating-point
 <a href="#nodes">mapping keys</a> requires great care and is not recommended.</p>
   </dd>
+</dl>
+
+<div id="canonical-form"></div>
+
+<dl>
   <dt>Canonical Form</dt>
   <dd>
     <p>Either <code class="language-plaintext highlighter-rouge">0</code>, <code class="language-plaintext highlighter-rouge">.inf</code>, <code class="language-plaintext highlighter-rouge">-.inf</code>, <code class="language-plaintext highlighter-rouge">.nan</code> or scientific notation matching the regular
@@ -8461,10 +8658,10 @@ defined above.</p>
       <p><a href="https://github.com/yaml/yaml-spec">YAML Specification on GitHub</a> <a href="#fnref:spec-repo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:1-2-spec" role="doc-endnote">
-      <p><a href="https://yaml.org/spec/1.2">YAML Ain’t Markup Language (YAML™) version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1-2-spec:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+      <p><a href="https://yaml.org/spec/1.2/">YAML Ain’t Markup Language (YAML™) version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1-2-spec:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
     </li>
     <li id="fn:unicode" role="doc-endnote">
-      <p><a href="https://www.unicode.org">Unicode – The World Standard for Text and Emoji</a> <a href="#fnref:unicode" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://home.unicode.org">Unicode – The World Standard for Text and Emoji</a> <a href="#fnref:unicode" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:yaml-core" role="doc-endnote">
       <p><a href="https://sourceforge.net/projects/yaml/lists/yaml-core">YAML Core Mailing List</a> <a href="#fnref:yaml-core" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
@@ -8476,7 +8673,7 @@ defined above.</p>
       <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod">Data::Denter - An (deprecated) alternative to Data::Dumper and Storable</a> <a href="#fnref:denter" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:1-1-spec" role="doc-endnote">
-      <p><a href="https://yaml.org/spec/1.1">YAML Ain’t Markup Language (YAML™) version 1.1</a> <a href="#fnref:1-1-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://yaml.org/spec/1.1/">YAML Ain’t Markup Language (YAML™) version 1.1</a> <a href="#fnref:1-1-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:json" role="doc-endnote">
       <p><a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">The JSON data interchange syntax</a> <a href="#fnref:json" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
@@ -8488,7 +8685,7 @@ defined above.</p>
       <p><a href="https://github.com/yaml/libyaml">LibYAML - A C library for parsing and emitting YAML</a> <a href="#fnref:libyaml" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:rfc-2119" role="doc-endnote">
-      <p><a href="https://tools.ietf.org/html/rfc2119">Request for Comments Summary</a> <a href="#fnref:rfc-2119" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://datatracker.ietf.org/doc/html/rfc2119">Request for Comments Summary</a> <a href="#fnref:rfc-2119" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:digraph" role="doc-endnote">
       <p><a href="https://xlinux.nist.gov/dads/HTML/directedGraph.html">directed graph</a> <a href="#fnref:digraph" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
@@ -8506,7 +8703,7 @@ defined above.</p>
       <p><a href="https://www.unicode.org/faq/utf_bom.html">UTF-8, UTF-16, UTF-32 &amp; BOM</a> <a href="#fnref:uni-faq" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:uri" role="doc-endnote">
-      <p><a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifiers (URI)</a> <a href="#fnref:uri" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://datatracker.ietf.org/doc/html/rfc3986">Uniform Resource Identifiers (URI)</a> <a href="#fnref:uri" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
