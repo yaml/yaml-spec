@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta
+  http-equiv="Content-Type"
+  content="text/html; charset=UTF-8"
+/>
+
+<title>YAML Playground Playground</title>
+
+
+  <script
+  type="text/javascript"
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"
+></script>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js"
+  integrity="sha512-JZSo0h5TONFYmyLMqp8k4oPhuo6yNk9mHM+FY50aBjpypfofqtEWsAgRDQm94ImLCzSaHeqNvYuD9382CEn2zw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+  <link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+  integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"s
+  crossorigin="anonymous"
+/>
+
+<script
+  type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+  integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+  crossorigin="anonymous"
+></script>
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+/>
+
+  <link
+  rel="stylesheet"
+  href="https://unpkg.com/@primer/css@^16.0.0/dist/primer.css"
+/>
+
+
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"
+  integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+  <script
+  type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/coffee-script/1.7.1/coffee-script.min.js"
+  crossorigin="anonymous"></script>
+
+
+  <script
+  src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"
+></script>
+
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"
+></script>
+
+  <script
+  src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.3.5/split.min.js"
+></script>
+
+
+  <script
+  src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"
+></script>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.css"
+  integrity="sha512-xIf9AdJauwKIVtrVRZ0i4nHP61Ogx9fSRAkCLecmE2dL/U8ioWpDvFCAy4dcfecN72HHB9+7FfQj3aiO68aaaw=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+/>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/codemirror.min.js"
+  integrity="sha512-i9pd5Q6ntCp6LwSgAZDzsrsOlE8SN+H5E0T5oumSXWQz5l1Oc4Kb5ZrXASfyjjqtc6Mg6xWbu+ePbbmiEPJlDg=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.62.0/keymap/vim.min.js"
+  integrity="sha512-icZkIkXjOTeE0e01uWzfFuWvMGjYGKaQQ1Aeq5VaO7NSaC1tnAdCZAuf9KMGoNZ0ngODW26dWnTbb8N9dvfb9Q=="
+  crossorigin="anonymous"
+  referrerpolicy="no-referrer"
+></script>
+
+
+  <script type="text/javascript">
+  window.require = function(name) {
+    if (name === 'lodash') {
+      return window._;
+    }
+    if (name === 'yaml') {
+      return window.EYAML;
+    }
+    if (name === 'sprintf-js') {
+      return {};
+    }
+    return null;
+  };
+  window.global = window;
+  window.ENV = {};
+  window.process = {
+    'ENV': ENV,
+    'exit': function(rc) {
+      throw `Exit ${rc}`;
+    },
+  };
+</script>
+
+<script
+  type="text/javascript"
+  src="https://unpkg.com/sprint-js@0.1.0/sprint.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="https://unpkg.com/ingy-prelude@0.0.4/lib/ingy-prelude/index.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/ext/yaml-reference-parser/javascript/lib/prelude.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/ext/yaml-reference-parser/javascript/lib/grammar.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/ext/yaml-reference-parser/javascript/lib/receiver.js"
+></script>
+
+<script
+  type="text/javascript"
+  src="/ext/yaml-reference-parser/javascript/lib/test-receiver.js"
+></script>
+
+<script type="text/javascript">
+  window.ENV = {};
+</script>
+
+<script
+  type="text/javascript"
+  src="/ext/yaml-reference-parser/javascript/lib/parser.js"
+></script>
+
+  <script type="module">
+import { parse } from '/ext/npm-yaml/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/browser/dist/test-events.js';
+window.npmYAML = {
+  'parse': parse,
+  'events': testEvents,
+};
+</script>
+
+<script type="module">
+import { YAML } from '/ext/npm-yaml/v1/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/v1/browser/dist/test-events.js';
+YAML.events = testEvents;
+window.npmYAML1 = YAML;
+</script>
+
+<script type="module">
+import { parse } from '/ext/npm-yaml/v2/browser/dist/index.js';
+import { testEvents } from '/ext/npm-yaml/v2/browser/dist/test-events.js';
+window.npmYAML2 = {
+  'parse': parse,
+  'events': testEvents,
+};
+</script>
+
+
+  <link
+  rel="stylesheet"
+  href="/ext/eatme/src/eatme.css"
+/>
+
+<script
+  type="text/javascript"
+  src="/ext/eatme/src/eatme.js"
+></script>
+
+  <link
+  rel="stylesheet"
+  href="playground.css"
+/>
+
+<script
+  type="text/javascript"
+  src="playground.js"
+></script>
+
+
+  <link
+  rel="icon"
+  href="/favicon.svg"
+/>
+
+</head>
+
+<body>
+  <pre>
+# Edit Me!
+
+%YAML 1.2
+---
+foo: Hello, YAML!
+bar: [123, true]
+baz:
+- one
+- two
+- null
+</pre>
+
+
+  <script type="text/javascript">
+    $(document).ready(()=> {
+
+      var conf = {"slug":"playground-devel","cols":4,"html":"<div class=\"container-fluid row\">","pane":[{"name":"Playground Menu","slug":"menu","type":"menu","load":"/main-menu.html"},{"name":"YAML Text Input","slug":"text","type":"input","colx":1},{"name":"YAML Reference Parser Events","slug":"events","call":["refparser-events","text"],"colx":2},{"name":"YAML::PP Events","slug":"yamlpp","type":"text"},{"name":"NPM 'yaml' 1.10.2 Parse to Event","slug":"npmyaml","type":"text","call":["npmyaml1-event","text"],"colx":3},{"name":"NPM 'yaml' 2.0.0 Parse to Event","slug":"npmyaml2","type":"text","call":["npmyaml2-event","text"],"colx":4},{"name":"DOM State","type":"text","slug":"dom"},{"name":"Native Data Structure","slug":"native","type":"text"},{"name":"JavaScript","slug":"javascript","type":"text"},{"name":"Parser Grammar","slug":"grammar","type":"input","load":"/grammar.yaml"},{"name":"EatMe Settings","slug":"settings","type":"settings"}]};
+
+      var conf_name = EatMe.conf(conf);
+      EatMe.init({
+        elem: 'pre',
+        conf: conf_name,
+        code: Playground,
+      });
+    });
+  </script>
+</body>
+
+</html>
