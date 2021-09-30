@@ -390,7 +390,7 @@ sub fmt_pre {
           (?:b|c|e|l|s|in|nb|ns)[-+]
           .*?
         )
-        (?=[\(\+\*\?]|\s|\z)
+        (?=[\{\(\+\*\?]|\s|\z)
       }
       {' ' . rule_link($1)}gex;
     $pre =~ s/%%%/$rule$sep/;
