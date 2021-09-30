@@ -1016,11 +1016,11 @@ language.</p>
 <a href="#representation-graph">representation</a> must be <em>serialized</em> to an ordered tree.
 Since in a YAML <a href="#representation-graph">representation</a>, <a href="#nodes">mapping keys</a> are unordered and <a href="#nodes">nodes</a> may
 be referenced more than once (have more than one incoming “arrow”), the
-serialization process is required to impose an <a href="#keys-order">ordering</a> on the <a href="#nodes">mapping keys</a>
+serialization process is required to impose an <a href="#mapping-key-order">ordering</a> on the <a href="#nodes">mapping keys</a>
 and to replace the second and subsequent references to a given <a href="#nodes">node</a> with
 place holders called <a href="#anchors-and-aliases">aliases</a>.
 YAML does not specify how these <em>serialization details</em> are chosen.
-It is up to the YAML <a href="#processes-and-models">processor</a> to come up with human-friendly <a href="#keys-order">key order</a> and
+It is up to the YAML <a href="#processes-and-models">processor</a> to come up with human-friendly <a href="#mapping-key-order">key order</a> and
 <a href="#anchors-and-aliases">anchor</a> names, possibly with the help of the <a href="#processes-and-models">application</a>.
 The result of this process, a YAML <a href="#serialization-tree">serialization tree</a>, can then be traversed
 to produce a series of event calls for one-pass processing of YAML data.</p>
@@ -1102,7 +1102,7 @@ To maximize data portability between programming languages and implementations,
 users of YAML should be mindful of the distinction between <a href="#serialization-tree">serialization</a> or
 <a href="#presentation-stream">presentation</a> properties and those which are part of the YAML
 <a href="#representation-graph">representation</a>.
-Thus, while imposing a <a href="#keys-order">order</a> on <a href="#nodes">mapping keys</a> is necessary for flattening
+Thus, while imposing a <a href="#mapping-key-order">order</a> on <a href="#nodes">mapping keys</a> is necessary for flattening
 YAML <a href="#representation-graph">representations</a> to a sequential access medium, this <a href="#serializing-the-representation-graph">serialization
 detail</a> must not be used to convey <a href="#processes-and-models">application</a> level information.
 In a similar manner, while <a href="#indentation-spaces">indentation</a> technique and a choice of a <a href="#node-styles">node
@@ -1305,13 +1305,13 @@ Obviously, identical nodes are always considered equal.</p>
 <h3 id="322-serialization-tree">3.2.2. Serialization Tree</h3>
 
 <p>To express a YAML <a href="#representation-graph">representation</a> using a serial API, it is necessary to
-impose an <a href="#keys-order">order</a> on <a href="#nodes">mapping keys</a> and employ <a href="#alias-nodes">alias nodes</a> to indicate a
+impose an <a href="#mapping-key-order">order</a> on <a href="#nodes">mapping keys</a> and employ <a href="#alias-nodes">alias nodes</a> to indicate a
 subsequent occurrence of a previously encountered <a href="#nodes">node</a>.
 The result of this process is a <em>serialization tree</em>, where each <a href="#nodes">node</a> has an
 ordered set of children.
 This tree can be traversed for a serial event-based API.
 <a href="#constructing-native-data-structures">Construction</a> of <a href="#representing-native-data-structures">native data structures</a> from the serial interface should not
-use <a href="#keys-order">key order</a> or <a href="#anchors-and-aliases">anchor names</a> for the preservation of <a href="#processes-and-models">application</a> data.</p>
+use <a href="#mapping-key-order">key order</a> or <a href="#anchors-and-aliases">anchor names</a> for the preservation of <a href="#processes-and-models">application</a> data.</p>
 
 <p><strong>Figure 3.4. Serialization Model</strong></p>
 
@@ -8688,10 +8688,10 @@ defined above.</p>
       <p><a href="https://github.com/yaml/yaml-spec">YAML Specification on GitHub</a> <a href="#fnref:spec-repo" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:1-2-spec" role="doc-endnote">
-      <p><a href="https://yaml.org/spec/1.2">YAML Ain’t Markup Language (YAML™) version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1-2-spec:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
+      <p><a href="https://yaml.org/spec/1.2/">YAML Ain’t Markup Language (YAML™) version 1.2</a> <a href="#fnref:1-2-spec" class="reversefootnote" role="doc-backlink">&#8617;</a> <a href="#fnref:1-2-spec:1" class="reversefootnote" role="doc-backlink">&#8617;<sup>2</sup></a></p>
     </li>
     <li id="fn:unicode" role="doc-endnote">
-      <p><a href="https://www.unicode.org">Unicode – The World Standard for Text and Emoji</a> <a href="#fnref:unicode" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://home.unicode.org">Unicode – The World Standard for Text and Emoji</a> <a href="#fnref:unicode" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:yaml-core" role="doc-endnote">
       <p><a href="https://sourceforge.net/projects/yaml/lists/yaml-core">YAML Core Mailing List</a> <a href="#fnref:yaml-core" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
@@ -8703,7 +8703,7 @@ defined above.</p>
       <p><a href="https://metacpan.org/dist/Data-Denter/view/Denter.pod">Data::Denter - An (deprecated) alternative to Data::Dumper and Storable</a> <a href="#fnref:denter" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:1-1-spec" role="doc-endnote">
-      <p><a href="https://yaml.org/spec/1.1">YAML Ain’t Markup Language (YAML™) version 1.1</a> <a href="#fnref:1-1-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://yaml.org/spec/1.1/">YAML Ain’t Markup Language (YAML™) version 1.1</a> <a href="#fnref:1-1-spec" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:json" role="doc-endnote">
       <p><a href="https://www.ecma-international.org/publications-and-standards/standards/ecma-404/">The JSON data interchange syntax</a> <a href="#fnref:json" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
@@ -8715,7 +8715,7 @@ defined above.</p>
       <p><a href="https://github.com/yaml/libyaml">LibYAML - A C library for parsing and emitting YAML</a> <a href="#fnref:libyaml" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:rfc-2119" role="doc-endnote">
-      <p><a href="https://tools.ietf.org/html/rfc2119">Request for Comments Summary</a> <a href="#fnref:rfc-2119" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://datatracker.ietf.org/doc/html/rfc2119">Request for Comments Summary</a> <a href="#fnref:rfc-2119" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:digraph" role="doc-endnote">
       <p><a href="https://xlinux.nist.gov/dads/HTML/directedGraph.html">directed graph</a> <a href="#fnref:digraph" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
@@ -8733,7 +8733,7 @@ defined above.</p>
       <p><a href="https://www.unicode.org/faq/utf_bom.html">UTF-8, UTF-16, UTF-32 &amp; BOM</a> <a href="#fnref:uni-faq" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
     <li id="fn:uri" role="doc-endnote">
-      <p><a href="https://tools.ietf.org/html/rfc3986">Uniform Resource Identifiers (URI)</a> <a href="#fnref:uri" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
+      <p><a href="https://datatracker.ietf.org/doc/html/rfc3986">Uniform Resource Identifiers (URI)</a> <a href="#fnref:uri" class="reversefootnote" role="doc-backlink">&#8617;</a></p>
     </li>
   </ol>
 </div>
