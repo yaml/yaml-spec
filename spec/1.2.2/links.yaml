@@ -126,10 +126,6 @@ indentation-spaces:
 indicator-characters:
 - indicator
 - some
-keys-order:
-- key order
-- order
-- ordering
 language-overview:
 - 2
 line-break-characters:
@@ -146,7 +142,7 @@ literal-style:
 - literal block scalar
 load:
 - loading
-loading-point-failures:
+loading-failure-points:
 - below
 - complete representation
 - partial representation
@@ -161,6 +157,10 @@ mapping:
 - mapping's
 - mapping value
 - single key/value pair
+mapping-key-order:
+- key order
+- order
+- ordering
 node-comparison:
 - unique
 nodes:
