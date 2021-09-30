@@ -69,7 +69,7 @@ page.
   It has interactive playgrounds for testing and interacting with new YAML
   projects.
 
-* <https://yaml.info>
+* <https://www.yaml.info/>
 
   This web site offers various useful information for learning about YAML.
 
