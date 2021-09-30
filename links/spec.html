@@ -2737,7 +2737,7 @@ YAML <a href="#streams">stream</a>, without any processing.</p>
 [39] ns-uri-char ::=
     (
       '%'
-      <a href="#rule-ns-hex-digit{2}">ns-hex-digit{2}</a>
+      <a href="#rule-ns-hex-digit">ns-hex-digit</a>{2}
     )
   | <a href="#rule-ns-word-char">ns-word-char</a>
   | '#'
@@ -2928,7 +2928,7 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <pre class="rule">
 [59] ns-esc-8-bit ::=
   'x'
-  <a href="#rule-ns-hex-digit{2}">ns-hex-digit{2}</a>
+  <a href="#rule-ns-hex-digit">ns-hex-digit</a>{2}
 </pre>
 
 <p>Escaped 16-bit Unicode character.</p>
@@ -2937,7 +2937,7 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <pre class="rule">
 [60] ns-esc-16-bit ::=
   'u'
-  <a href="#rule-ns-hex-digit{4}">ns-hex-digit{4}</a>
+  <a href="#rule-ns-hex-digit">ns-hex-digit</a>{4}
 </pre>
 
 <p>Escaped 32-bit Unicode character.</p>
@@ -2946,7 +2946,7 @@ space to become part of the <a href="#nodes">content</a>.</p>
 <pre class="rule">
 [61] ns-esc-32-bit ::=
   'U'
-  <a href="#rule-ns-hex-digit{8}">ns-hex-digit{8}</a>
+  <a href="#rule-ns-hex-digit">ns-hex-digit</a>{8}
 </pre>
 
 <p>Any escaped character:</p>
