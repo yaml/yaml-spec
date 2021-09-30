@@ -97,7 +97,7 @@ sub parse_sections {
       and push @s, {heading => $1} and next;
 
     # Definition term:
-    s/\A\? (.*)\n+//
+    s/\A(\w.*)(?=\n:)\n+//
       and push @s, {dt => $1} and next;
 
     # Definition definition:
