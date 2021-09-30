@@ -1086,7 +1086,7 @@ Parsing can fail due to <a href="#well-formed-streams-and-identified-aliases">il
     <p><em>Composing</em> takes a <a href="#serialization-tree">serialization tree</a> and produces a <a href="#representation-graph">representation graph</a>.
 Composing discards all the <a href="#presenting-the-serialization-tree">details</a> introduced in the <a href="#serialization-tree">serialization</a> process,
 producing only the <a href="#representation-graph">representation graph</a>.
-Composing can fail due to any of several reasons, detailed <a href="#loading-point-failures">below</a>.</p>
+Composing can fail due to any of several reasons, detailed <a href="#loading-failure-points">below</a>.</p>
   </dd>
 </dl>
 
@@ -1480,7 +1480,7 @@ parts of the input, but it must provide a mechanism for reporting such errors.</
 <p>Typically, most <a href="#tags">tags</a> are not explicitly specified in the character <a href="#streams">stream</a>.
 During <a href="#parsing-the-presentation-stream">parsing</a>, <a href="#nodes">nodes</a> lacking an explicit <a href="#tags">tag</a> are given a <em>non-specific
 tag</em>: “<code class="language-plaintext highlighter-rouge">!</code>” for non-<a href="#plain-style">plain scalars</a> and “<code class="language-plaintext highlighter-rouge">?</code>” for all other <a href="#nodes">nodes</a>.
-<a href="#composing-the-representation-graph">Composing</a> a <a href="#loading-point-failures">complete representation</a> requires each such non-specific tag to
+<a href="#composing-the-representation-graph">Composing</a> a <a href="#loading-failure-points">complete representation</a> requires each such non-specific tag to
 be <em>resolved</em> to a <em>specific tag</em>, be it a <a href="#tags">global tag</a> or a <a href="#tags">local tag</a>.</p>
 
 <p>Resolving the <a href="#tags">tag</a> of a <a href="#nodes">node</a> must only depend on the following three
@@ -1530,8 +1530,8 @@ YAML <a href="#processes-and-models">processors</a> should therefore provide a m
 <a href="#processes-and-models">application</a> to override and expand these default tag resolution rules.</p>
 
 <p>If a <a href="#documents">document</a> contains <em>unresolved tags</em>, the YAML <a href="#processes-and-models">processor</a> is unable to
-<a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete representation</a> graph.
-In such a case, the YAML <a href="#processes-and-models">processor</a> may <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">partial representation</a>,
+<a href="#composing-the-representation-graph">compose</a> a <a href="#loading-failure-points">complete representation</a> graph.
+In such a case, the YAML <a href="#processes-and-models">processor</a> may <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-failure-points">partial representation</a>,
 based on each <a href="#nodes">node’s kind</a> and allowing for non-specific tags.</p>
 
 <div id="recognized-and-valid-tags"></div>
@@ -1541,12 +1541,12 @@ based on each <a href="#nodes">node’s kind</a> and allowing for non-specific t
 <a href="#processes-and-models">processor</a> and its <a href="#nodes">content</a> must satisfy the constraints imposed by this
 <a href="#tags">tag</a>.
 If a <a href="#documents">document</a> contains a <a href="#nodes">scalar node</a> with an <em>unrecognized tag</em> or <em>invalid
-content</em>, only a <a href="#loading-point-failures">partial representation</a> may be <a href="#composing-the-representation-graph">composed</a>.
-In contrast, a YAML <a href="#processes-and-models">processor</a> can always <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-point-failures">complete
+content</em>, only a <a href="#loading-failure-points">partial representation</a> may be <a href="#composing-the-representation-graph">composed</a>.
+In contrast, a YAML <a href="#processes-and-models">processor</a> can always <a href="#composing-the-representation-graph">compose</a> a <a href="#loading-failure-points">complete
 representation</a> for an unrecognized or an invalid <a href="#collections">collection</a>, since
 <a href="#collections">collection</a> <a href="#equality">equality</a> does not depend upon knowledge of the <a href="#mapping">collection’s</a>
 data type.
-However, such a <a href="#loading-point-failures">complete representation</a> cannot be used to <a href="#constructing-native-data-structures">construct</a> a
+However, such a <a href="#loading-failure-points">complete representation</a> cannot be used to <a href="#constructing-native-data-structures">construct</a> a
 <a href="#representing-native-data-structures">native data structure</a>.</p>
 
 <div id="available-tags"></div>
@@ -1556,7 +1556,7 @@ However, such a <a href="#loading-point-failures">complete representation</a> ca
 corresponding to a given <a href="#tags">tag</a>.
 If a <a href="#tags">node’s tag</a> is <em>unavailable</em>, a YAML <a href="#processes-and-models">processor</a> will not be able to
 <a href="#constructing-native-data-structures">construct</a> a <a href="#representing-native-data-structures">native data structure</a> for it.
-In this case, a <a href="#loading-point-failures">complete representation</a> may still be <a href="#composing-the-representation-graph">composed</a> and an
+In this case, a <a href="#loading-failure-points">complete representation</a> may still be <a href="#composing-the-representation-graph">composed</a> and an
 <a href="#processes-and-models">application</a> may wish to use this <a href="#representation-graph">representation</a> directly.</p>
 
 <div id="syntax-conventions"></div>
@@ -8199,7 +8199,7 @@ Flow style: !!str "String: just a theory."
 “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:str</code>”, according to their <a href="#nodes">kind</a>.</p>
 
 <p>All <a href="#nodes">nodes</a> with the “<code class="language-plaintext highlighter-rouge">?</code>” non-specific tag are left <a href="#resolved-tags">unresolved</a>.
-This constrains the <a href="#processes-and-models">application</a> to deal with a <a href="#loading-point-failures">partial representation</a>.</p>
+This constrains the <a href="#processes-and-models">application</a> to deal with a <a href="#loading-failure-points">partial representation</a>.</p>
 
 <div id="json-schema"></div>
 <h2 id="102-json-schema">10.2. JSON Schema</h2>
