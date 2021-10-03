@@ -110,7 +110,7 @@
     };
 
     Playground.libyaml_event = function(text) {
-      return this.sandbox_event(text, 'cmd=c-libfyaml-event');
+      return this.sandbox_event(text, 'cmd=c-libyaml-event');
     };
 
     Playground.yamlcpp_event = function(text) {
