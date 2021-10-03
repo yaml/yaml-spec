@@ -1,28 +1,11 @@
-spec
-====
+1.2.2 Source Files
+==================
 
-This directory contains the YAML spec sources currently under development.
-
-The top level `www/` directory uses the contents of directory to build the spec
-web pages for https://spec.yaml.io.
+This directory contains the Markdown, YAML and LaTeX source files that were
+used to generate the 1.2.2 spec files that are published at
+<https://yaml.org/spec/1.2.2/>.
 
 ## Directory Layout
-
-* `2009/`
-
-  The 1.2 spec sources for https://yaml.org/spec/1.2/ published in 2009.
-  The source files are written in DocBook.
-
-* `1.2/`
-
-  The published 2009 1.2 spec HTML converted to a Markdown format.
-  We sometimes call this format "Markydown"; see below.
-
-  The HTML resulting from this markdown is better in some ways than then
-  original, so we may eventually replace https://yaml.org/spec/1.2/ with it.
-
-  The wording of this spec.md will remain constant, but improvements can be
-  continually made to the markdown.
 
 * `spec.md`
 
@@ -34,42 +17,13 @@ web pages for https://spec.yaml.io.
   To make the spec source file cleaner, internal link references are maintained
   in this file.
 
-* `tex/`
+* `src/`
 
   The LaTeX source files used to create the spec diagram images.
 
-* Companion Pages
-
-  The spec points to external pages that can be kept up to date after a spec
-  version is finalized and published.
-
+* `ext/`
   * `changes.md` - YAML spec changes
-  * `community.md` - YAML community resource links
-  * `dev.md` - YAML developer docs index
-  * `use.md` - YAML user docs index
-  * `team.md`- YAML design team
-
-## Makefile targets
-
-* `build`
-
-  Build the bare HTML content from Markdown and build the svg image files from
-  LaTeX.
-
-* `build-html`
-
-  Build just the HTML.
-
-* `build-img`
-
-  Build just the images.
-
-## The Markydown Format
-
-The markdown files in this repo are run through a pre-processor script (called
-markydown-to-kramdown) to convert from a very clean input to a full-power but
-messier markdown.
-The kramdown is then used by a Jekyll system to produce the final output.
-
-The tool chain required to do all this has been dockerized so that it will just
-work as long as you have Docker installed.
+  * `errata.md` - YAML spec errata
+  * `glossary.md` - YAML spec glossary
+  * `resources.md` - YAML spec external community and web resources
+  * `team.md`- YAML language development team
