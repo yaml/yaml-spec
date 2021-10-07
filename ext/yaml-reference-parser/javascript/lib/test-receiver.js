@@ -57,7 +57,7 @@
         }
         if (e.value != null) {
           style = style_map[e.style];
-          value = e.value.replace(/\\/g, '\\\\').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\x20$/g, '<SPC>');
+          value = e.value.replace(/\\/g, '\\\\').replace(/\x08/g, '\\b').replace(/\t/g, '\\t').replace(/\n/g, '\\n').replace(/\r/g, '\\r');
           event.push(`${style}${value}`);
         }
         return event.join(' ') + "\n";
