@@ -1697,30 +1697,30 @@ non-[printable] characters are not available.
 
 YAML escape sequences are a superset of C's escape sequences:
 
-* Escaped ASCII null (`x00`) character.
-* Escaped ASCII bell (`x07`) character.
-* Escaped ASCII backspace (`x08`) character.
-* Escaped ASCII horizontal tab (`x09`) character. (This is useful at the start
-  or the end of a line to force a leading or trailing tab to become part of the
-  [content].)
-* Escaped ASCII line feed (`x0A`) character.
-* Escaped ASCII vertical tab (`x0B`) character.
-* Escaped ASCII form feed (`x0C`) character.
-* Escaped ASCII carriage return (`x0D`) character.
-* Escaped ASCII escape (`x1B`) character.
-* Escaped ASCII space (`x20`) character. (This is useful at the start or the
-  end of a line to force a leading or trailing space to become part of the
-  [content].)
-* Escaped ASCII double quote (`x22`).
-* Escaped ASCII slash (`x2F`), for [JSON compatibility].
-* Escaped ASCII back slash (`x5C`).
-* Escaped Unicode next line (`x85`) character.
-* Escaped Unicode non-breaking space (`xA0`) character.
-* Escaped Unicode line separator (`x2028`) character.
-* Escaped Unicode paragraph separator (`x2029`) character.
-* Escaped 8-bit Unicode character.
-* Escaped 16-bit Unicode character.
-* Escaped 32-bit Unicode character.
+| Escape | Character
+| -- | --
+| `\0` | Null (`x00`)
+| `\a` | Bell (`x07`)
+| `\b` | Backspace (`x08`)
+| `\t` | Horizontal Tabulation (`x09`)
+| `\n` | New Line (`x0A`)
+| `\v` | Vertical Tabulation (`x0B`)
+| `\f` | Form Feed (`x0C`)
+| `\r` | Carriage Return (`x0D`)
+| `\e` | Escape (`x1B`)
+| `\ ` | Space (`x20`)
+| `\"` | Quotation Mark (`x22`)
+| `\/` | Solidus (`x22`)
+| `\\` | Reverse Solidus (`x22`)
+| `\N` | Next Line (`x85`)
+| `\_` | No-Break Space (`x85`)
+| `\L` | Line Separator (`x2028`)
+| `\P` | Paragraph Separator (`x2029`)
+
+The `\x`, `\u`, and `\U` escape sequences are followed by two, four, and eight
+hexadecimal digits respectively.
+Those digits are interpreted as a Unicode code point.
+The value of the escape is the character at that code point.
 
 
 **Example #. Escaped Characters**
