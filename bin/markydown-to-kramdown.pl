@@ -7,7 +7,7 @@ use YAML::PP;
 use XXX;
 
 my ($YYYY, $MM, $DD);
-my (@lvl) = (0, 0, 0, 0);
+my (@heading_level) = (0, 0, 0, 0);
 my $links = {};
 
 sub main {
@@ -348,7 +348,7 @@ sub fmt_p {
   set_dates();
   format_links();
   if (/^\*\*Figure #\./m) {
-    my $chapter = $lvl[0];
+    my $chapter = $heading_level[0];
     $figure++;
     s/^\*\*Figure #\./**Figure $chapter.$figure./;
   }
@@ -561,28 +561,35 @@ sub set_dates {
 
 my $example_number;
 sub set_heading_level {
-  /^(#+)\ .*#\./ or return;
-  my $lvl = length $1;
-  my $txt = '';
-  for (my $i = 0; $i < 4; $i++) {
-    if ($i < $lvl) {
-      if ($i == $lvl - 1) {
-        $lvl[$i]++;
+  my $lvl = 1;
+  if (/^#+\ .*((?:[\dA-Z]+\.)+ )/) {
+    my @parts = split(/\./, $1);
+    @heading_level = (@parts, 0, 0, 0);
+  } else {
+    my $txt = '';
+    /^(#+)\ .*(#)\./ or return;
+    $lvl = length $1;
+
+    for (my $i = 0; $i < 4; $i++) {
+      if ($i < $lvl) {
+        if ($i == $lvl - 1) {
+          $heading_level[$i]++;
+        }
+        $txt .= $heading_level[$i] . '.';
       }
-      $txt .= $lvl[$i] . '.';
+      else {
+        $heading_level[$i] = 0;
+      }
     }
-    else {
-      $lvl[$i] = 0;
-    }
+    s/#\./$txt/;
   }
-  s/#\./$txt/;
 
   $example_number = 0 if $lvl == 1;
 }
 
 sub set_example_level {
   my ($title) = @_;
-  my $chapter = $lvl[0];
+  my $chapter = $heading_level[0];
   $example_number++;
   $title =~ s/\#\./$chapter.$example_number/;
   return $title;
