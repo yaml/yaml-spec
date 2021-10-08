@@ -1,0 +1,95 @@
+#!/usr/bin/env perl
+
+use v5.18;
+
+my @prods;
+my %prods = (
+    'sp-start-of-line' => '',
+    'sp-end-of-stream' => '',
+    'sp-assert-lt' => 'a,b',
+    'sp-assert-le' => 'a,b',
+    'sp-lookahead-limit-1024' => '',
+    'sp-excluding-c-forbidden' => '',
+);
+my %nums;
+
+my $spec = do {local $/; <STDIN>};
+my @sect = grep / ::=/, ($spec =~ /\n```\n(.*?)```\n/gs);
+
+sub count {
+    my ($args) = (@_);
+    return($args ? (split /,/, $args) : 0);
+}
+
+my $num = 0;
+for (@sect) {
+    $num++;
+
+    s/(\S+)\s+::=((?s:.*))// or die "??? '$_'";
+
+    my ($sig, $body) = ($1, $2);
+    $sig =~ /^(.*?)(?:\((.*)\))?$/ or die "sig='$sig'";
+
+    my ($name, $args) = ($1, $2);
+    $args //= '';
+
+    $prods{$name} = $args;
+    push @prods, [$name, $body];
+    $nums{$name} = $num;
+}
+# YYY \%prods;
+# YYY \%nums;
+
+$num = 0;
+for my $prod (@prods) {
+    $num++;
+
+    my ($sig, $body) = @$prod;
+    my $sig_args = $prods{$sig};
+    $sig .= "($sig_args)" if $sig_args;
+
+    my @calls =
+        map {s/([\+\*\?]|\{.*\})$//; $_}
+        grep /^[a-z]+[-+](?:[a-z]{2,}|[a-z][-+])/,
+        split /\s+/, $body;
+
+    if (grep /^-q$/, @ARGV) {
+        @calls = grep /\(/, @calls;
+    }
+
+    my $numbered = 0;
+    for my $call (@calls) {
+        $call =~ /^(.*?)(?:\((.*)\))?$/ or die $call;
+        my ($name, $args) = ($1, $2);
+        next if $name =~ /^(
+            lookahead |
+            lookbehind |
+            not |
+            char-to-int |
+            auto-detect-indent |
+            start-of-line |
+            end-of-stream |
+        )$/x;
+        $args //= '';
+
+        my $prod_args = $prods{$name};
+        die "No prod '$name' found"
+            unless defined $prod_args;
+
+        my $prod_num = $nums{$name} || '';
+        $prod_num = sprintf '[%03d] ', $prod_num
+            if $prod_num;
+
+        printf "\n[%03d] %s\n", $num, $sig
+            unless $numbered++;
+
+        printf "  %-38s -> %s%s%s\n",
+            $call,
+            $prod_num,
+            $name,
+            ($prod_args ? "($prod_args)" : '');
+
+#         printf ">>>>>>>> %s -> %s(%s)\n", $call, $name, $prod_args
+#             unless count($args) == count($prod_args);
+    }
+}

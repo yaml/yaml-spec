@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+version=0.0.4
+
+source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
+
+vers=v0.7.2
+name=shellcheck
+user=koalaman
+dist=$name-$vers
+arch=linux.x86_64
+from=https://github.com/$user/$name/releases/download/$vers/$dist.$arch.tar.xz
+
+check() (
+  need shellcheck 0.7.2
+)
+
+main() (
+  shellcheck "$@"
+)
+
+dockerfile() (
+  from alpine
+  run wget "$from" \
+    + tar xf "$dist.$arch.tar.xz" \
+    + mv "$dist/$name" /usr/local/bin/ \
+    + rm -fr "$name"*
+)
+
+run "$@"

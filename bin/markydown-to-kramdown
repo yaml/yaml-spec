@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+version=0.0.14
+
+source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
+
+check() (
+  need perl 5.28
+  need perl YAML::PP XXX
+)
+
+dockerfile() (
+  from ubuntu
+  cpan YAML::PP XXX
+)
+
+run "$@"

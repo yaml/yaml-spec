@@ -2,4 +2,4 @@ shell=bash
 
 enable=quote-safe-variables
 
-disable=1091,2030,2031
+disable=1091,2030,2031,2034

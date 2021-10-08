@@ -30,10 +30,10 @@ clean:
 $(COMMON):
 ifeq (,$(COMMON_REPO:/%=))
 	ln -s $(COMMON_REPO) $@
-else ifneq (,$(wildcard $(TMPEXT)/$(COMMON)))
-	ln -s $(TMPEXT)/$(COMMON) $@
 else ifneq (,$(wildcard $(ROOT)/../$(COMMON)))
 	ln -s $(shell echo $$(cd $(ROOT)/../$(COMMON) && pwd)) $@
+else ifneq (,$(wildcard $(TMPEXT)/$(COMMON)))
+	ln -s $(TMPEXT)/$(COMMON) $@
 else
 	git clone $(COMMON_REPO) $@
 	mkdir -p $(TMPEXT)
@@ -44,10 +44,10 @@ endif
 $(EATME):
 ifeq (,$(EATME_REPO:/%=))
 	ln -s $(EATME_REPO) $@
-else ifneq (,$(wildcard $(TMPEXT)/$(EATME)))
-	ln -s $(TMPEXT)/$(EATME) $@
 else ifneq (,$(wildcard $(ROOT)/../$(EATME)))
 	ln -s $(shell echo $$(cd $(ROOT)/../$(EATME) && pwd)) $@
+else ifneq (,$(wildcard $(TMPEXT)/$(EATME)))
+	ln -s $(TMPEXT)/$(EATME) $@
 else
 	git clone $(EATME_REPO) --branch=devel $@
 	mkdir -p $(TMPEXT)
@@ -58,10 +58,10 @@ endif
 $(REF_PARSER):
 ifeq (,$(REF_PARSER_REPO:/%=))
 	ln -s $(REF_PARSER_REPO) $@
-else ifneq (,$(wildcard $(TMPEXT)/$(REF_PARSER)))
-	ln -s $(TMPEXT)/$(REF_PARSER) $@
 else ifneq (,$(wildcard $(ROOT)/../$(REF_PARSER)))
 	ln -s $(shell echo $$(cd $(ROOT)/../$(REF_PARSER) && pwd)) $@
+else ifneq (,$(wildcard $(TMPEXT)/$(REF_PARSER)))
+	ln -s $(TMPEXT)/$(REF_PARSER) $@
 else
 	git clone $(REF_PARSER_REPO) $@
 	mkdir -p $(TMPEXT)

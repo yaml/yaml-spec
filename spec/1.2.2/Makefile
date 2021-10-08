@@ -1,5 +1,4 @@
-DOCKER_TOOL := html-to-markydown
-include ../../tool/make/init.mk
+include ../../.common.mk
 
 ALL_MD := $(wildcard *.md) $(wildcard ext/*.md)
 ALL_FORMAT := $(ALL_MD:%=format-%)
@@ -28,7 +27,7 @@ clean:
 build-img: $(ALL_IMG) build-img-all
 
 html/%.html: build/%.md
-	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
+	jekyll-runner $(JEKYLL_BUILD)
 
 build/%.md: %.md
 	markydown-to-kramdown $(ROOT) $^ > /tmp/$@

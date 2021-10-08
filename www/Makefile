@@ -1,7 +1,5 @@
 DOCKER_TOOL := github-pages
-include ../tool/make/init.mk
-
-export ROOT
+include ../.common.mk
 
 #------------------------------------------------------------------------------
 # Makefile variables defined here:
@@ -14,7 +12,7 @@ SPEC := ../spec
 SPEC_120 := $(SPEC)/1.2.0
 SPEC_121 := $(SPEC)/1.2.1
 SPEC_122 := $(SPEC)/1.2.2
-SPEC_2009 := ../spec/2009
+SPEC_2009 := ../spec/1.2/docbook
 EXT := external
 
 include $(EXT)/ext.mk
@@ -25,21 +23,11 @@ serve : BASEURL :=
 PUBLISH_CNAME := spec.yaml.io
 REMOTE_NAME ?= $(shell $(ROOT)/tool/bin/get-remote-name)
 
-DOCKER_BUILD_OPTS := \
-    --user $(UID):$(GID) \
-
-DOCKER_SERVE_OPTS := \
-    $(DOCKER_BUILD_OPTS) \
-    --publish 4000:4000 \
-
-DOCKER_SHELL_OPTS := \
-    $(DOCKER_SERVE_OPTS) \
-    --volume $(HISTORY_FILE):/home/jekyll/.bash_history \
-
 DOCKER_SHELL_CMD ?= bash
 
 JEKYLL_BUILD := jekyll build --trace
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
+HISTORY_FILE := /tmp/docker-bash_history
 
 #------------------------------------------------------------------------------
 # Files for `make html`:
@@ -146,7 +134,7 @@ list-files:
 files: $(EXT_DIRS) $(FILES) track-gh-pages
 
 build: files
-	$(call docker-run,run $(JEKYLL_BUILD),$(DOCKER_BUILD_OPTS))
+	jekyll-runner $(JEKYLL_BUILD)
 ifneq (,$(SITEDIR))
 ifneq (main,$(SITEDIR))
 	mv $(BUILD)/main $(BUILD)/$(SITEDIR)
@@ -161,10 +149,12 @@ site: build
 	touch $(SITE)/.nojekyll
 
 serve: files
-	$(call docker-run,run $(JEKYLL_SERVE),$(DOCKER_SERVE_OPTS))
+	RUN_OR_DOCKER_OPTIONS='--publish 4000:4000' \
+	jekyll-runner $(JEKYLL_SERVE)
 
 shell: files
-	$(call docker-run,run $(DOCKER_SHELL_CMD),$(DOCKER_SHELL_OPTS))
+	RUN_OR_DOCKER_OPTIONS='--volume $(HISTORY_FILE):/home/jekyll/.bash_history \
+	jekyll-runner $(DOCKER_SHELL_CMD)
 
 html:
 	make clean

@@ -1,20 +1,26 @@
-include tool/make/init.mk
+include .common.mk
 
-export ROOT SPEC
+export SPEC
 
 TESTS ?= $(wildcard test/test-*)
+
+BPAN := .bpan
+COMMON := ../yaml-common
 
 QUICK := \
     test/test-lint-shell.sh \
     test/test-format-markdown.sh \
     test/test-lint-spec.sh \
 
+export PATH := $(ROOT)/bin:$(PATH)
+
+ifneq (,$(DOCKER))
+  export RUN_OR_DOCKER := $(DOCKER)
+endif
+
 default:
 
-docker-build-all docker-push-all docker-pull-all:
-	$(MAKE) -C tool/docker $@
-
-files build html site serve publish publish-fork force diff:
+files build html site serve publish force diff:
 	$(MAKE) -C www $@
 
 format:
@@ -26,10 +32,11 @@ test: $(TESTS)
 
 test-noclean: $(TESTS)
 
-quick-test: $(QUICK)
+test-quick: $(QUICK)
 
-docker-test:
-	$(MAKE) test TESTS='$(TESTS)' YAML_SPEC_USE_DOCKER=1
+test-docker:
+	export RUN_OR_DOCKER=force && \
+	$(MAKE) test TESTS='$(TESTS)'
 
 edit-spec:
 	@$${EDITOR:-vim} $(SPEC)/spec.md
@@ -53,8 +60,10 @@ _:
 	git worktree add $@ $@
 	$(MAKE) -C $@ all
 
+common:
+	cp $(COMMON)/bpan/run-or-docker.bash $(BPAN)/
+
 clean:
 	@git worktree prune
-	$(MAKE) --no-print-directory -C spec $@ &>/dev/null
+	$(MAKE) --no-print-directory -C $(SPEC) $@ &>/dev/null
 	$(MAKE) --no-print-directory -C www $@ &>/dev/null
-	$(MAKE) --no-print-directory -C tool/docker clean-all

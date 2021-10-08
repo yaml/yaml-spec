@@ -1,1 +1,0 @@
-export YAML_SPEC_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]:-$0}")" && pwd)

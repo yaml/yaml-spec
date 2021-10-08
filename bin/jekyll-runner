@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+# shellcheck disable=2154
+
+version=0.0.4
+
+source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
+
+check() (
+  force
+)
+
+dockerfile() (
+  cat <<... > "$build/Gemfile"
+source 'https://rubygems.org'
+
+gem "jekyll", "~> 3.9.0"
+
+group :jekyll_plugins do
+  gem 'github-pages'
+end
+...
+
+echo "
+FROM jekyll/jekyll:latest
+
+COPY Gemfile /tmp/
+
+WORKDIR /tmp
+
+RUN bundle install
+
+ENV \
+    LANG=en_US.UTF-8 \
+    LANGUAGE=en_US.UTF-8 \
+    LC_ALL=en_US.UTF-8
+
+WORKDIR /
+"
+)
+
+main() (
+  set -x
+  pwd
+  "$@"
+)
+
+run "$@"

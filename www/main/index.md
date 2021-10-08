@@ -12,9 +12,10 @@ referenced permanently.
 
 * [YAML Spec Revision 1.2.2](spec)
   * [Compare to Revision 1.2.1](review)
-* [YAML Developers Documentation](doc)
-* [YAML Development Stories](story)
 * [YAML Interactive Playground](playground)
+
+<!-- * [YAML Developers Documentation](doc)
+* [YAML Development Stories](story) -->
 
 Since the repository has many active branches, we publish each branch as a
 subdirectory.

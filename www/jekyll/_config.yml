@@ -3,7 +3,7 @@
 title: YAML™ Ain’t Markup Language — Spec Development
 name: null
 
-destination: /host/www/build
+destination: /home/host/www/build
 
 kramdown:
   parse_block_html: true

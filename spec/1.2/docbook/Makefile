@@ -1,5 +1,4 @@
-DOCKER_TOOL := docbook-builder
-include ../../tool/make/init.mk
+include ../../.common.mk
 
 
 .SUFFIXES: .dbk .html .dia .eps .png .pdf

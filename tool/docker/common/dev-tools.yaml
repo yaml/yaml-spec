@@ -1,7 +1,0 @@
-run:
-  apt-get install -y
-    git
-    silversearcher-ag
-    tig
-    tmux
-    vim
