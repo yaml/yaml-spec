@@ -60,6 +60,9 @@ _:
 	git worktree add $@ $@
 	$(MAKE) -C $@ all
 
+docker-push-all:
+	RUN_OR_DOCKER_PUSH=true tex-to-img
+
 common:
 	cp $(COMMON)/bpan/run-or-docker.bash $(BPAN)/
 
