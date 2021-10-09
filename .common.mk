@@ -9,16 +9,14 @@ IN_DOCKER := true
 endif
 
 ifdef IN_DOCKER
-    export YAML_SPEC_ROOT := /host
+    export ROOT := /host
 else
-    export YAML_SPEC_ROOT := $(shell git rev-parse --show-toplevel)
+    export ROOT := $(shell git rev-parse --show-toplevel)
 endif
 
 ifdef TEX_LOG
     export TEX_LOG
 endif
-
-export ROOT := $(YAML_SPEC_ROOT)
 
 SPEC12 := $(ROOT)/1.2
 SPEC := $(ROOT)/spec/1.2.2

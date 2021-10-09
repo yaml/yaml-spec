@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version=0.0.2
+version=0.0.3
 
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 
@@ -10,7 +10,7 @@ check() (
 
 dockerfile() (
   from alpine
-  pkg aspell
+  pkg aspell aspell-en
 )
 
 main() (
@@ -26,7 +26,7 @@ spell-check() (
 
   out=$(
     aspell \
-      -p "$YAML_SPEC_ROOT/.aspell" \
+      -p "$ROOT/.aspell" \
       --encoding utf-8 \
       --mode markdown \
       list \

@@ -48,14 +48,14 @@ run() (
     return
   fi
 
-  out=$(check 2>&1) && rc=0 || rc=$?
+  out=$(check) && rc=0 || rc=$?
 
-  [[ $rc == 0 || $out == CHECK:* ]] || die "Error: $out"
+  [[ $rc == 0 || $out == FAIL:* ]] || die "Error: $out"
 
   if [[ $rc -eq 0 ]]; then
     run-local "$@"
   else
-    echo "Can't run '$self' locally: ${out#CHECK:\ }"
+    echo "Can't run '$self' locally: ${out#FAIL:\ }"
     echo "Running with docker..."
     run-docker "$@"
   fi
@@ -116,11 +116,14 @@ run-docker() (
 )
 
 force() {
-  die 'CHECK: docker is forced here'
+  fail 'docker is forced here'
 }
 
 need() {
-  [[ $(command -v "$1") ]] || return 1
+  cmd=$1
+
+  [[ $(command -v "$cmd") ]] ||
+    fail "requires command '$cmd'"
 
   [[ ${2-} ]] || return 0
 
@@ -142,15 +145,13 @@ need-version() {
     die "Could not get version from '$cmd --version'"
   fi
 
-  fail() { die "CHECK: requires '$cmd' version '$ver' or higher"; }
-
   vers=$ver
   while [[ $vers && $* ]]; do
     v=${vers%%.*}
     if [[ $1 -gt $v ]]; then
       return
     elif [[ $1 -lt $v ]]; then
-      fail
+      fail "requires '$cmd' version '$ver' or higher"
     fi
     if [[ $vers != *.* ]]; then
       return
@@ -158,31 +159,31 @@ need-version() {
     vers=${vers#*.}
     shift
   done
-  fail
+  fail "requires '$cmd' version '$ver' or higher"
 }
 
 need-modules() {
   cmd=$1; shift
 
-  fail() { die "CHECK: '$cmd' requires module '$module'"; }
-
   for module; do
     case $cmd in
       perl)
-        perl -M"$module" -e1 \
-          &>/dev/null || fail ;;
+        perl -M"$module" -e1 &>/dev/null ||
+          fail "'$cmd' requires Perl module '$module'"
+        ;;
       node)
-        node -e "require('$module');" \
-          &>/dev/null || fail ;;
+        node -e "require('$module');" &>/dev/null ||
+          fail "'$cmd' requires NodeJS module '$module'"
+        ;;
       *) die "Can't check module '$module' for '$cmd'" ;;
     esac
   done
 }
 
 build-docker-image() (
-  build=$(mktemp -d --tmpdir run-or-docker-XXXXXX)
+  build=$(mktemp -d)
 
-  fail() ( die "docker-build failed: $*" )
+  build-fail() { fail "docker-build failed: $*"; }
 
   cmd() (
     _args=${1//\ \+\ /\ &&\ }
@@ -207,7 +208,7 @@ build-docker-image() (
         cmd 'WORKDIR /home'
         cmd 'RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y build-essential'
         ;;
-      *) fail "from $*"
+      *) build-fail "from $*"
     esac
   }
 
@@ -219,7 +220,7 @@ build-docker-image() (
       ubuntu)
         cmd "RUN DEBIAN_FRONTEND=noninteractive apt-get install -y $*"
         ;;
-      *) fail "pkg $*"
+      *) build-fail "pkg $*"
     esac
   )
 
@@ -231,7 +232,7 @@ build-docker-image() (
       ubuntu)
         pkg cpanminus
         ;;
-      *) fail "cpan $*"
+      *) build-fail "cpan $*"
     esac
 
     cmd "RUN cpanm -n $*"
@@ -242,7 +243,7 @@ build-docker-image() (
       alpine)
         pkg nodejs npm
         ;;
-      *) fail "npm $*"
+      *) build-fail "npm $*"
     esac
 
     cmd "RUN mkdir node_modules && npm install $*"
@@ -271,4 +272,5 @@ build-docker-image() (
   fi
 )
 
+fail() { echo "FAIL: $*"; exit 1; }
 die() { echo "$*" >&2; exit 1; }
