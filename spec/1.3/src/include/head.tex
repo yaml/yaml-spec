@@ -1,0 +1,57 @@
+\usepackage{tikz, etoolbox}
+\usetikzlibrary{arrows.meta, positioning, shapes, shapes.geometric, calc}
+
+% Sanserif font:
+\renewcommand{\familydefault}{\sfdefault}
+
+\newcommand{\entity}[3][]{
+  \node(#2)[
+    entity,
+    #1
+  ] {
+    \nodepart[font=\bfseries]{one} #2
+    \nodepart{two} #3
+  };
+}
+
+\tikzset{
+  entity/.style = {
+    draw,
+    align=left,
+    rectangle split,
+    rectangle split parts=2,
+    rectangle split ignore empty parts,
+    rectangle split part align={center, left},
+    minimum width=3cm,
+  },
+  parallellogram/.style = {
+    draw,
+    trapezium,
+    trapezium left angle=75,
+    trapezium right angle=105,
+  },
+  onArrow/.style = {
+    fill=white,
+    align=center,
+  },
+  has/.style = {
+    -{Latex[length=3mm]},
+  },
+  inherits/.style = {
+    -{Latex[open, length=3mm]},
+  },
+  bigArrow/.style = {
+    -{Latex[length=5mm]},
+    line width=1mm,
+    font=\bfseries,
+  },
+  node distance=2cm and 1cm,
+}
+
+% Attempt to get a little border padding
+% \usepackage[
+%     left=0.20in,
+%     right=0.20in,
+%     top=0.20in,
+%     bottom=0.20in,
+% ]{geometry}

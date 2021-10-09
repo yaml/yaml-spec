@@ -1,0 +1,57 @@
+\documentclass[12pt]{standalone}
+
+\input{src/include/head}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+\entity{Node}{};
+
+\entity[above=of Node]{Tag}{Name};
+\draw[has] (Node) -- (Tag)
+  node[near start, left]{1}
+  node[near end, left]{*};
+
+\entity[right=of Tag]{Specific Tag}{};
+\draw[inherits] (Specific Tag) -- (Tag);
+
+\entity[below=of Node]{Scalar Node}{Canonical Form};
+\draw[inherits] (Scalar Node) -- (Node);
+
+\entity[left=of Scalar Node]{Sequence Node}{};
+\draw[inherits] (Sequence Node) -- ++(0,+10mm) -| (Node);
+
+\draw[has] (Sequence Node.west)
+  -- ++(-5mm, 0) node[near start, below] {*}
+  |- (Node) node[onArrow, pos=0.25] {Ordered\\Content}
+  node[at end, above left] {*};
+
+\entity[right=of Scalar Node]{Mapping Node}{};
+\draw[inherits] (Mapping Node) -- ++(0,+10mm) -| (Node);
+
+\entity[right=of Node]{Key/Value Pair}{};
+
+\draw[has]
+  (Mapping Node.east)
+  -- ++(5mm, 0) node[near start, below] {*}
+  |- (Key/Value Pair) node[onArrow, pos=0.25] {Unordered\\Content}
+  node[at end, above right] {*};
+
+\draw[has] (Key/Value Pair.north)
+  |- ($(Node.north)+(0.5,0.5)$)
+  node[at start, above right] {1}
+  node[pos=0.75, onArrow] {Key}
+  -- ($(Node.north)+(0.5,0)$)
+  node[at start, above right] {*};
+
+\draw[has] (Key/Value Pair.south)
+  |- ($(Node.south)+(0.5,-0.5)$)
+  node[at start, below right] {1}
+  node[pos=0.75, onArrow] {Value}
+  -- ($(Node.south)+(0.5,0)$)
+  node[at start, below right] {*};
+
+\end{tikzpicture}
+
+\end{document}
