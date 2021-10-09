@@ -1,13 +1,14 @@
 #!/usr/bin/env bash
 
-version=0.0.4
+version=0.0.5
 
 RUN_OR_DOCKER_PULL=true
 
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 
 check() (
-  need aspell
+  need pdflatex
+  need pdf2svg
 )
 
 dockerfile() (
