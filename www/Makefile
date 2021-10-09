@@ -26,6 +26,9 @@ REMOTE_NAME ?= $(shell $(ROOT)/tool/bin/get-remote-name)
 DOCKER_SHELL_CMD ?= bash
 
 JEKYLL_BUILD := jekyll build --trace
+ifdef GITHUB_ACTIONS
+    JEKYLL_BUILD += --verbose
+endif
 JEKYLL_SERVE := jekyll serve --host 0.0.0.0
 HISTORY_FILE := /tmp/docker-bash_history
 

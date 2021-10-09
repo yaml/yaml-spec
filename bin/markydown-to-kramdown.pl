@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
 use v5.18;
-use utf8;
+use Encode;
 
 use YAML::PP;
 use XXX;
@@ -27,8 +27,8 @@ sub main {
     push @sections, $_;
   }
 
-  print $front;
-  print join "\n", @sections;
+  print encode_utf8 $front;
+  print encode_utf8 join "\n", @sections;
 }
 
 #------------------------------------------------------------------------------

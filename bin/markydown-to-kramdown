@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 
-version=0.0.14
+version=0.0.16
+
+RUN_OR_DOCKER_PULL=true
 
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 

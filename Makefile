@@ -60,7 +60,15 @@ _:
 	git worktree add $@ $@
 	$(MAKE) -C $@ all
 
-docker-push-all:
+docker-push-all: docker-push-jekyll docker-push-marky docker-push-tex
+
+docker-push-jekyll:
+	RUN_OR_DOCKER_PUSH=true jekyll-runner
+
+docker-push-marky:
+	RUN_OR_DOCKER_PUSH=true markydown-to-kramdown
+
+docker-push-tex:
 	RUN_OR_DOCKER_PUSH=true tex-to-img
 
 common:
