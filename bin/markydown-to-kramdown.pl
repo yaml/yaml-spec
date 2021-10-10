@@ -141,7 +141,7 @@ sub parse_sections {
     s/\A
       (
         (?:
-          (?:$b|-1$s|\`x|\[[\w\"\*\`]|`[\(]|<http|[\w\"\(]|\`\w)
+          (?:$b|-1$s|\`x|\[[\w\#\"\*\`]|`[\(]|<http|[\w\"\(]|\`\w)
           .*\n
         )+
       )
@@ -462,6 +462,15 @@ sub set_vars {
 sub make_link_index {
   my ($parsed, $overrides) = @_;
   for my $section (@$parsed) {
+    my $pre = $section->{pre} or next;
+    next unless $pre =~ /(.*?)\ +::=/;
+    my $rule = $1;
+    next if $rule =~ /^production/;
+    $rule unless $rule =~ /^\w{1,3}[-+]\S+$/;
+    $rule =~ s/\(.*//;
+    $links->{$rule} = "rule-$rule";
+  }
+  for my $section (@$parsed) {
     my $from = $section->{heading};
     my $text = lc($from);
     chomp $text;
@@ -470,8 +479,7 @@ sub make_link_index {
     $text =~ s/^chapter\s+//;
     $text =~ s/^#\.\s+//;
     $text =~ s/[\"\*\`]//g;
-    my $slug = slugify($text);
-    $links->{$text} = $slug;
+    $links->{$text} = slugify($text);
   }
   for my $k (keys %$overrides) {
     my $v = $overrides->{$k} || [$k];
@@ -535,6 +543,13 @@ sub format_internal_link {
   }
   if ($anchor = $links->{"${text}s"}) {
     return "[$link](#$anchor)";
+  }
+  if ($text =~ /^#(.*)/) {
+    if ($anchor = $links->{$1}) {
+      return "<sup class=\"rule-link\">[?](#$anchor)</sup>";
+    }
+    warn "\e[0;31m*** WARNING - Rule link '[$text]' is orphaned ***\e[0m\n";
+    return "<sup class=\"orphan-rule-link\">[XXX](#$anchor)</sup>";
   }
   die "Undefined link '[$link]' ($text) found. Check links.yaml file.";
 }

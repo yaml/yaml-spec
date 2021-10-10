@@ -11,7 +11,7 @@ HTML := html
 SPEC := ../spec
 SPEC_120 := $(SPEC)/1.2.0
 SPEC_121 := $(SPEC)/1.2.1
-SPEC_122 := $(SPEC)/1.2.2
+SPEC_122 := $(SPEC)/1.3
 SPEC_2009 := ../spec/1.2/docbook
 EXT := external
 
@@ -21,7 +21,7 @@ BASEURL ?=
 serve : BASEURL :=
 
 PUBLISH_CNAME := spec.yaml.io
-REMOTE_NAME ?= $(shell $(ROOT)/tool/bin/get-remote-name)
+REMOTE_NAME ?= $(shell $(ROOT)/bin/get-remote-name)
 
 DOCKER_SHELL_CMD ?= bash
 

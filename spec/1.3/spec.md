@@ -1257,6 +1257,7 @@ subset.
 
 On output, a YAML [processor] must only produce only characters in this
 printable subset.
+[#c-printable]
 Characters outside this set must be [presented] using [escape] sequences.
 In addition, any allowed characters known to be non-printable should also be
 [escaped].
@@ -1366,6 +1367,7 @@ ERROR:
 ## #. Indicator Characters
 
 _Indicators_ are characters that have special semantics.
+[#c-indicator]
 
 "`-`" (`x2D`, hyphen) denotes a [block sequence] entry.
 
@@ -1565,7 +1567,6 @@ ERROR:
 ```
 <!-- Reserved_indicators -->
 
-
 The "`[`", "`]`", "`{`", "`}`" and "`,`" indicators denote structure in [flow
 collections].
 They are therefore forbidden in some cases, to avoid ambiguity in several
@@ -1627,6 +1628,7 @@ clarity.
 ## #. White Space Characters
 
 YAML recognizes two _white space_ characters: _space_ and _tab_.
+[#s-space]
 
 The rest of the ([printable]) non-[break] characters are considered to be
 non-space characters.
@@ -1770,6 +1772,7 @@ ERROR:
 In YAML [block styles], structure is determined by _indentation_.
 In general, indentation is defined as a zero or more [space] characters at the
 start of a line.
+[#s-indent]
 
 To maintain portability, [tab] characters must not be used in indentation,
 since different systems treat [tabs] differently.
