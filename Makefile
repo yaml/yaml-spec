@@ -51,7 +51,7 @@ ifndef NAME
 	$(error Set NAME=branch-name-to-create)
 endif
 	$(eval override NAME := $(NAME:%/=%))
-	git branch $(NAME) main
+	git branch $(NAME) main-1.3
 	git push origin -u $(NAME):$(NAME)
 	$(MAKE) $(NAME)
 
