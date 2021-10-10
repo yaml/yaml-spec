@@ -373,8 +373,7 @@ sub fmt_pre {
     my $rule = $1;
     my $sep = $2;
     $num++;
-    $pre =~ s/\[\#\]/[$num]/;
-    $pre =~ s/<pre>/<pre class="rule">/;
+    $pre =~ s/<pre>/<pre class="rule">[$num]/;
     $pre =~
       s{
         \ (
