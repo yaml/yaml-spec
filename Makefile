@@ -10,22 +10,17 @@ BRANCHES := $(shell \
     git branch -a | \
     cut -c3- | \
     grep ^remotes/ | \
-    grep -Ev '/(RFC|HEAD|PR|_|gh-pages|bundle-|uncanonicalizable-scalars|valid-formatted-content)' | \
+    grep -Ev '/(_|HEAD|PR|gh-pages)' | \
     sed 's/remotes\/origin\///' \
 )
 
-BRANCHES_NOT_121 := \
-    annotate-1.3 \
-    eatme-full-support \
-    grammar \
-    main-wip \
-    mermaid \
-    playground \
-    rfc-publish \
-    stack-playground \
-    story-ideas \
+BRANCHES_NOT_13 := \
+    bundle-jekyll-theme \
+    bundle-jekyll-theme-2 \
+    uncanonicalizable-scalars \
+    valid-formatted-content \
 
-BRANCHES_121 := $(filter-out $(BRANCHES_NOT_121),$(BRANCHES))
+BRANCHES_13 := $(filter-out $(BRANCHES_NOT_13),$(BRANCHES))
 
 default:
 
@@ -34,13 +29,13 @@ fetch:
 
 all: $(BRANCHES)
 
-121: $(BRANCHES_121)
+1.3: $(BRANCHES_13)
 
 list-all:
 	@printf "%s\n" $(BRANCHES)
 
-list-121:
-	@printf "%s\n" $(BRANCHES_121)
+list-1.3:
+	@printf "%s\n" $(BRANCHES_13)
 
 shell-dirs \
 rebase-main \
