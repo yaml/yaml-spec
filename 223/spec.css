@@ -54,5 +54,6 @@ ul.author-group, ul.release-info, #markdown-toc, #markdown-toc ul { list-style: 
 
 dt { font-weight: normal !important; color: #159957; }
 
-sup .rule-link { color: #990000; font-weight: bold; }
-sup .orphan-rule-link { color: red; font-weight: bold; }
+sup.rule-link { color: #990000; font-weight: bold; }
+
+sup.orphan-rule-link { color: red; font-weight: bold; }
