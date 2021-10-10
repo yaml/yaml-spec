@@ -7,7 +7,7 @@ RUN_OR_DOCKER_PULL=true
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 
 check() (
-  need perl 5.28
+  need perl 5.18
   need perl YAML::PP XXX
 )
 
