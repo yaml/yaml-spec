@@ -48,15 +48,17 @@ run() (
     return
   fi
 
-  out=$(check) && rc=0 || rc=$?
+  out=$(check 2>/tmp/out) && rc=0 || rc=$?
 
-  [[ $rc == 0 || $out == FAIL:* ]] || die "Error: $out"
+  err=$(< /tmp/out)
+
+  [[ $rc == 0 || $err == FAIL:* ]] || die "Error: $err"
 
   if [[ $rc -eq 0 ]]; then
     run-local "$@"
   else
-    echo "Can't run '$self' locally: ${out#FAIL:\ }"
-    echo "Running with docker..."
+    echo "Can't run '$self' locally: ${err#FAIL:\ }" >&2
+    echo "Running with docker..." >&2
     run-docker "$@"
   fi
 )
@@ -272,5 +274,5 @@ build-docker-image() (
   fi
 )
 
-fail() { echo "FAIL: $*"; exit 1; }
+fail() { echo "FAIL: $*" >&2; exit 1; }
 die() { echo "$*" >&2; exit 1; }
