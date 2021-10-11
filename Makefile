@@ -1,7 +1,5 @@
 include .common.mk
 
-export SPEC
-
 TESTS ?= $(wildcard test/test-*)
 
 BPAN := .bpan
@@ -24,7 +22,7 @@ files build html site serve publish force diff:
 	$(MAKE) -C www $@
 
 format:
-	$(MAKE) -C $(SPEC) $@
+	$(MAKE) -C $(SPEC_130) $@
 
 .PHONY: test
 test: $(TESTS)
@@ -39,16 +37,16 @@ test-docker:
 	$(MAKE) test TESTS='$(TESTS)'
 
 edit-spec:
-	@$${EDITOR:-vim} $(SPEC)/spec.md
+	@$${EDITOR:-vim} $(SPEC_130)/spec.md
 
 edit-spec-dir:
-	@$${EDITOR:-vim} $(SPEC)
+	@$${EDITOR:-vim} $(SPEC_130)
 
 grammar-report:
-	@grammar-report < $(SPEC)/spec.md | less -FReX
+	@grammar-report < $(SPEC_130)/spec.md | less -FReX
 
 grammar-report-quiet:
-	@grammar-report -q < $(SPEC)/spec.md | less -FReX
+	@grammar-report -q < $(SPEC_130)/spec.md | less -FReX
 
 $(TESTS): always
 	bash $@
@@ -76,5 +74,6 @@ common:
 
 clean:
 	@git worktree prune
-	$(MAKE) --no-print-directory -C $(SPEC) $@ &>/dev/null
+	$(MAKE) --no-print-directory -C $(SPEC_122) $@ &>/dev/null
+	$(MAKE) --no-print-directory -C $(SPEC_130) $@ &>/dev/null
 	$(MAKE) --no-print-directory -C www $@ &>/dev/null

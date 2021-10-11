@@ -10,5 +10,5 @@ DIR=../www
   make -C "$DIR" force build
 
   [[ -e $DIR/build/favicon.svg ]]
-  [[ -e $DIR/build/main/spec.html ]]
+  [[ -e $DIR/build/main/spec/1.3.0/index.html ]]
 )

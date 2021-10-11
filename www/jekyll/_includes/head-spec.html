@@ -1,5 +1,9 @@
 <link
   rel="stylesheet"
   type="text/css"
-  href="spec.css"
+{% if page.plain %}
+  href="../spec.css"
+{% else %}
+  href="../../spec.css"
+{% endif %}
 />

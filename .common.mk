@@ -19,7 +19,12 @@ ifdef TEX_LOG
 endif
 
 SPEC12 := $(ROOT)/1.2
-SPEC := $(ROOT)/spec/1.2.2
+SPEC := $(ROOT)/spec
+SPEC_2009 := $(SPEC)/1.2/docbook
+SPEC_120 := $(SPEC)/1.2.0
+SPEC_121 := $(SPEC)/1.2.1
+SPEC_122 := $(SPEC)/1.2.2
+SPEC_130 := $(SPEC)/1.3.0
 DOC := $(ROOT)/doc
 GRAMMAR := $(ROOT)/grammar
 RFC := $(ROOT)/rfc

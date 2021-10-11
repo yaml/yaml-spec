@@ -7,7 +7,7 @@ To see all the individual contributors for a specific YAML specification
 version, visit <https://github.com/yaml/yaml-spec/releases/>.
 
 
-## Team for spec revision 1.2.2
+## Team for spec revision 1.2.2 and spec version 1.3
 
 * Ingy döt Net — [@ingydotnet](https://github.com/ingydotnet)
 * Tina Müller — [@perlpunk](https://github.com/perlpunk)

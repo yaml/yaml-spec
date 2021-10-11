@@ -1,9 +1,9 @@
-1.2.2 Source Files
+1.3.0 Source Files
 ==================
 
 This directory contains the Markdown, YAML and LaTeX source files that were
-used to generate the 1.2.2 spec files that are published at
-<https://yaml.org/spec/1.2.2/>.
+used to generate the 1.3.0 spec files that are published at
+<https://yaml.org/spec/1.3.0/>.
 
 ## Directory Layout
 

@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+set -e -u -o pipefail
+
 echo '---'
 echo 'layout: spec'
 echo 'plain: true'
@@ -7,5 +9,5 @@ echo '---'
 
 perl -Mstrict -p0 \
   -e 's/\A---\n.*?\n---\n//s;' \
-  -e 's{\(img/}{(../img/}g;' \
+  -e 's{\(img/}{(../spec/1.2.2/img/}g;' \
   "$1"

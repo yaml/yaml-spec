@@ -1,8 +1,14 @@
 # YAML Specification Changes
 
-The current version of the YAML language is **1.2** and the current YAML
-specification revision is **1.2.2**.
+The current version of the YAML language is **1.3** and the current YAML
+specification revision is **1.3.0**.
 
+
+## Changes in revision 1.3.0 (YYYY-MM-DD)
+
+* https://github.com/yaml/yaml-spec/pull/223
+* https://github.com/yaml/yaml-spec/pull/222
+* https://github.com/yaml/yaml-spec/pull/219
 
 ## Changes in revision 1.2.2 (2021-10-01)
 

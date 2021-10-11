@@ -10,7 +10,7 @@ The YAML Community consists of its users (in day-to-day programming tasks and
 also as part of larger software projects), the implementers of YAML frameworks
 and YAML tools and the core [YAML development team](team).
 
-It should be noted that as of the time of the 1.2.2 spec revision, the YAML
+It should be noted that as of the time of the 1.3.0 spec revision, the YAML
 specification and reference projects are once again under active development.
 To find out how you can help, reach out to us via the resources listed below
 and also checkout our YAML Specification Contribution Guidelines[^contributing]

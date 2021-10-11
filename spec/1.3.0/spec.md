@@ -1,11 +1,11 @@
 ---
 layout: spec
-title: YAML Ain’t Markup Language (YAML™) revision 1.2.2
+title: YAML Ain’t Markup Language (YAML™) revision 1.3.0
 ---
 
-# YAML Ain't Markup Language (YAML™) version 1.2
+# YAML Ain't Markup Language (YAML™) version 1.3
 
-## Revision 1.2.2 (2021-10-01)
+## Revision 1.3.0 (YYYY-MM-DD)
 {:.subtitle}
 
 Copyright presently by YAML Language Development Team[^team]  
@@ -16,23 +16,8 @@ This document may be freely copied, provided it is not modified.
 
 **Status of this Document**
 
-This is the **YAML specification v1.2.2**.
-It defines the **YAML 1.2 data language**.
-There are no normative changes from the **YAML specification v1.2**.
-The primary objectives of this revision are to correct errors and add clarity.
-
-This revision also strives to make the YAML language development process more
-open, more transparent and easier for people to contribute to.
-The input format is now Markdown instead of DocBook, and the images are made
-from plain text LaTeX files rather than proprietary drawing software.
-All the source content for the specification is publicly hosted[^spec-repo].
-
-The previous YAML specification[^1-2-spec] was published 12 years ago.
-In that time span, YAML's popularity has grown significantly.
-Efforts are ongoing to improve the language and grow it to meet the needs and
-expectations of its users.
-While this revision of the specification makes no actual changes to YAML, it
-begins a process by which the language intends to evolve and stay modern.
+This is the **YAML specification v1.3.0**.
+It defines the **YAML 1.3 data language**.
 
 The YAML specification is often seen as overly complicated for something which
 appears to be so simple.
@@ -42,9 +27,8 @@ Future YAML plans are focused on making the language and ecosystem more
 powerful and reliable while simultaneously simplifying the development process
 for implementers.
 
-While this revision of the specification is limiting itself to informational
-changes only, there is companion documentation intended to guide YAML framework
-implementers and YAML language users.
+In addition to this specification, there is companion documentation intended to
+guide YAML framework implementers and YAML language users.
 This documentation can continue to evolve and expand continually between
 published revisions of this specification.
 
@@ -64,7 +48,7 @@ dynamic programming languages.
 It is broadly useful for programming needs ranging from configuration files to
 internet messaging to object persistence to data auditing and visualization.
 Together with the Unicode standard for characters[^unicode], this specification
-provides all the information necessary to understand YAML version 1.2 and to
+provides all the information necessary to understand YAML version 1.3 and to
 create programs that process YAML information.
 
 
@@ -165,7 +149,7 @@ In 2020, the new [YAML language design team](ext/team) began meeting regularly
 to discuss improvements to the YAML language and specification; to better meet
 the needs and expectations of its users and use cases.
 
-This YAML 1.2.2 specification, published in October 2021, is the first step in
+The YAML 1.2.2 specification, published in October 2021, was the first step in
 YAML's rejuvenated development journey.
 YAML is now more popular than it has ever been, but there is a long list of
 things that need to be addressed for it to reach its full potential.
@@ -1536,7 +1520,7 @@ double: "text"
 **Example #. Directive Indicator**
 
 ```
-%YAML 1.2
+%YAML 1.3
 --- text
 ```
 
@@ -1587,7 +1571,7 @@ separator (`x2028`) and paragraph separator (`x2029`).
 however, JSON does not.
 Hence, to ensure [JSON compatibility], YAML treats them as non-break characters
 as of version 1.2.
-YAML 1.2 [processors] [parsing] a [version 1.1] [document] should therefore
+YAML 1.3 [processors] [parsing] a [version 1.1] [document] should therefore
 treat these line breaks as non-break characters, with an appropriate warning.
 
 Line breaks are interpreted differently by different systems and have multiple
@@ -2206,23 +2190,23 @@ warning.
 
 The "`YAML`" directive specifies the version of YAML the [document] conforms
 to.
-This specification defines version "`1.2`", including recommendations for _YAML
+This specification defines version "`1.3`", including recommendations for _YAML
 1.1 processing_.
 
-A version 1.2 YAML [processor] must accept [documents] with an explicit "`%YAML
-1.2`" directive, as well as [documents] lacking a "`YAML`" directive.
-Such [documents] are assumed to conform to the 1.2 version specification.
+A version 1.3 YAML [processor] must accept [documents] with an explicit "`%YAML
+1.3`" directive, as well as [documents] lacking a "`YAML`" directive.
+Such [documents] are assumed to conform to the 1.3 version specification.
 [Documents] with a "`YAML`" directive specifying a higher minor version (e.g.
 "`%YAML 1.3`") should be processed with an appropriate warning.
 [Documents] with a "`YAML`" directive specifying a higher major version (e.g.
 "`%YAML 2.0`") should be rejected with an appropriate error message.
 
-A version 1.2 YAML [processor] must also accept [documents] with an explicit
+A version 1.3 YAML [processor] must also accept [documents] with an explicit
 "`%YAML 1.1`" directive.
-Note that version 1.2 is mostly a superset of version 1.1, defined for the
+Note that version 1.3 is mostly a superset of version 1.1, defined for the
 purpose of ensuring _JSON compatibility_.
-Hence a version 1.2 [processor] should process version 1.1 [documents] as if
-they were version 1.2, giving a warning on points of incompatibility (handling
+Hence a version 1.3 [processor] should process version 1.1 [documents] as if
+they were version 1.3, giving a warning on points of incompatibility (handling
 of [non-ASCII line breaks], as described [above]).
 
 
@@ -2251,8 +2235,8 @@ document, even if both occurrences give the same version number.
 **Example #. Invalid Repeated YAML directive**
 
 ```
+%YAML 1.3
 %YAML 1.2
-%YAML 1.1
 foo
 ```
 <!-- 2:2,4 -->
@@ -4250,7 +4234,7 @@ either of these markers.
 **Example #. Document Markers**
 
 ```
-%YAML 1.2
+%YAML 1.3
 ---
 Document
 ... # Suffix
@@ -4341,11 +4325,11 @@ A _directives document_ begins with some [directives] followed by an explicit
 **Example #. Directives Documents**
 
 ```
-%YAML 1.2
+%YAML 1.3
 --- |
 %!PS-Adobe-2.0
 ...
-%YAML 1.2
+%YAML 1.3
 ---
 # Empty
 ...
@@ -4376,7 +4360,7 @@ Document
 ---
 # Empty
 ...
-%YAML 1.2
+%YAML 1.3
 ---
 matches %: 20
 ```
@@ -4730,8 +4714,8 @@ Hence the YAML [processor] should consider them to be an error.
 
 > Note: The regular expression for `float` does not exactly match the one in
 the JSON specification, where at least one digit is required after the dot: `(
-\.  [0-9]+ )`.  The YAML 1.2 specification intended to match JSON behavior, but
-this cannot be addressed in the 1.2.2 specification.
+\.  [0-9]+ )`. The YAML 1.2 specification intended to match JSON behavior, but
+this could not be addressed in the 1.2.2 specification.
 
 **Example #. JSON Tag Resolution**
 

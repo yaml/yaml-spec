@@ -10,7 +10,8 @@ some related projects are actively being worked on.
 The contents of this site are constantly changing and should not ever be
 referenced permanently.
 
-* [YAML Spec Revision 1.2.2](spec)
+* [YAML Spec Revision 1.3.0](spec/1.3.0)
+* [YAML Spec Revision 1.2.2](spec/1.2.2)
   * [Compare to Revision 1.2.1](review)
 * [YAML Interactive Playground](playground)
 

@@ -80,7 +80,7 @@ serialization tree, and representation graph.
 Directive
 :
 An instruction to the parser beginning with `%`.
-YAML 1.2 defines 2 directives: `%YAML ...` and `%TAG ...`.
+YAML 1.3 defines 2 directives: `%YAML ...` and `%TAG ...`.
 Directives are not part of the serialization tree or the representation graph.
 
 Document

@@ -1,4 +1,3 @@
-DOCKER_TOOL := github-pages
 include ../.common.mk
 
 #------------------------------------------------------------------------------
@@ -8,11 +7,6 @@ include ../.common.mk
 BUILD := build
 SITE := site
 HTML := html
-SPEC := ../spec
-SPEC_120 := $(SPEC)/1.2.0
-SPEC_121 := $(SPEC)/1.2.1
-SPEC_122 := $(SPEC)/1.3
-SPEC_2009 := ../spec/1.2/docbook
 EXT := external
 
 include $(EXT)/ext.mk
@@ -50,10 +44,21 @@ files := \
     $(wildcard $(SPEC_122)/*.md) \
     $(wildcard $(SPEC_122)/ext/*.md) \
     title.html
+files := $(files:%/spec.md=%/index.md)
 files := $(files:$(SPEC_122)/%.md=%.html)
 files := $(files:ReadMe.html=)
 files += spec.css img/
 HTML_FILES += $(files:%=1.2.2/%)
+
+files := \
+    $(wildcard $(SPEC_130)/*.md) \
+    $(wildcard $(SPEC_130)/ext/*.md) \
+    title.html
+files := $(files:%/spec.md=%/index.md)
+files := $(files:$(SPEC_130)/%.md=%.html)
+files := $(files:ReadMe.html=)
+files += spec.css img/
+HTML_FILES += $(files:%=1.3.0/%)
 
 HTML_FILES := $(HTML_FILES:%/Makefile=)
 HTML_FILES := $(HTML_FILES:%=html/%)
@@ -69,23 +74,41 @@ STRIP_HTML := \
 # Gather all the build files:
 #------------------------------------------------------------------------------
 
-SPEC_MD := \
+SPEC_122_MD := \
     $(wildcard $(SPEC_122)/*.md) \
     $(wildcard $(SPEC_122)/ext/*.md) \
 
-SPEC_MD := $(SPEC_MD:%/ReadMe.md=)
-SPEC_MD := $(SPEC_MD:$(SPEC_122)/%=main/%)
+SPEC_122_MD := $(SPEC_122_MD:%/ReadMe.md=)
+SPEC_122_MD := $(SPEC_122_MD:$(SPEC_122)/%=main/spec/1.2.2/%)
 
-SPEC_LINKS := $(SPEC_122)/links.yaml
+SPEC_122_LINKS := $(SPEC_122)/links.yaml
 
-SPEC_IMAGE := $(wildcard $(SPEC_122)/src/*.tex)
-SPEC_IMAGE := $(SPEC_IMAGE:$(SPEC_122)/src/%.tex=img/%.svg)
-.PRECIOUS: $(SPEC_IMAGE:%=$(SPEC_122)/%)
-SPEC_IMAGE := $(SPEC_IMAGE:%=main/%)
+SPEC_122_IMAGE := $(wildcard $(SPEC_122)/src/*.tex)
+SPEC_122_IMAGE := $(SPEC_122_IMAGE:$(SPEC_122)/src/%.tex=img/%.svg)
+.PRECIOUS: $(SPEC_122_IMAGE:%=$(SPEC_122)/%)
+SPEC_122_IMAGE := $(SPEC_122_IMAGE:%=main/spec/1.2.2/%)
 
-SPEC_FILES := \
-    $(SPEC_MD) \
-    $(SPEC_IMAGE)
+SPEC_122_FILES := \
+    $(SPEC_122_MD:%/spec.md=%/index.md) \
+    $(SPEC_122_IMAGE)
+
+SPEC_130_MD := \
+    $(wildcard $(SPEC_130)/*.md) \
+    $(wildcard $(SPEC_130)/ext/*.md) \
+
+SPEC_130_MD := $(SPEC_130_MD:%/ReadMe.md=)
+SPEC_130_MD := $(SPEC_130_MD:$(SPEC_130)/%=main/spec/1.3.0/%)
+
+SPEC_130_LINKS := $(SPEC_130)/links.yaml
+
+SPEC_130_IMAGE := $(wildcard $(SPEC_130)/src/*.tex)
+SPEC_130_IMAGE := $(SPEC_130_IMAGE:$(SPEC_130)/src/%.tex=img/%.svg)
+.PRECIOUS: $(SPEC_130_IMAGE:%=$(SPEC_130)/%)
+SPEC_130_IMAGE := $(SPEC_130_IMAGE:%=main/spec/1.3.0/%)
+
+SPEC_130_FILES := \
+    $(SPEC_130_MD:%/spec.md=%/index.md) \
+    $(SPEC_130_IMAGE)
 
 REVIEW_FILES := \
     main/review/markdown.html \
@@ -93,31 +116,14 @@ REVIEW_FILES := \
     main/review/spec-12.html \
     main/review/single_html.css \
 
-DOC_FILES := $(shell \
-    cd $(DOC) && \
-    find . -name '*.md' | \
-    grep -v ReadMe.md | \
-    sed 's/^\./doc/' \
-)
-DOC_FILES := $(DOC_FILES:%=main/%)
-
-STORY_FILES := $(shell \
-    cd $(STORY) && \
-    find . -name '*.md' | \
-    grep -v ReadMe.md | \
-    sed 's/^\./story/' \
-)
-STORY_FILES := $(STORY_FILES:%=main/%)
-
 FILES := \
     _config.yml \
     favicon.svg \
     Gemfile \
     $(EXT_FILES) \
-    $(SPEC_FILES) \
+    $(SPEC_122_FILES) \
+    $(SPEC_130_FILES) \
     $(REVIEW_FILES) \
-    $(DOC_FILES) \
-    $(STORY_FILES) \
     jekyll/_includes/sitedir-pulldown.html \
 
 FILES := $(FILES:%.swp=)
@@ -156,7 +162,7 @@ serve: files
 	jekyll-runner $(JEKYLL_SERVE)
 
 shell: files
-	RUN_OR_DOCKER_OPTIONS='--volume $(HISTORY_FILE):/home/jekyll/.bash_history \
+	RUN_OR_DOCKER_OPTIONS='--volume $(HISTORY_FILE):/home/jekyll/.bash_history' \
 	jekyll-runner $(DOCKER_SHELL_CMD)
 
 html:
@@ -177,6 +183,7 @@ publish: check-publish site
 # Remove generated files to force rebuild:
 force:
 	rm -fr ext $(BUILD) $(SITE) $(HTML) $(FILES)
+	rm -fr main/spec main/review/*.png
 
 clean: force
 	$(MAKE) -C $(EXT) $@
@@ -187,6 +194,8 @@ clean-all:
 diff: build
 	(cd $(SITE) && git diff)
 
+#------------------------------------------------------------------------------
+# Support rules:
 #------------------------------------------------------------------------------
 html-files: $(HTML_FILES)
 
@@ -222,36 +231,57 @@ ext/%.scss: $(EXT)/%.scss
 Gemfile:
 	touch $@
 
-main/doc/%.md: $(DOC)/%.md
-	@mkdir -p $(dir $@)
-	markydown-to-kramdown $(ROOT) $^ > $@
-
-main/story/%.md: $(STORY)/%.md
-	@mkdir -p $(dir $@)
-	markydown-to-kramdown $(ROOT) $^ > $@
-
-main/%.md: $(SPEC_122)/%.md
+#------------------------------------------------------------------------------
+# 1.2.2 spec files:
+#------------------------------------------------------------------------------
+main/spec/1.2.2/%.md: $(SPEC_122)/%.md
 	@mkdir -p $(dir $@)
 	(echo '---'; echo '---'; cat $<) > $@
 
-main/ext/%.md: $(SPEC_122)/ext/%.md $(SPEC_LINKS)
+main/spec/1.2.2/ext/%.md: $(SPEC_122)/ext/%.md $(SPEC_122_LINKS)
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-main/spec.md: $(SPEC_122)/spec.md $(SPEC_LINKS)
+main/spec/1.2.2/index.md: $(SPEC_122)/spec.md $(SPEC_122_LINKS)
 	@mkdir -p $(dir $@)
 	markydown-to-kramdown $(ROOT) $^ > $@
 
-main/img/%: $(SPEC_122)/img/%
+main/spec/1.2.2/img/%: $(SPEC_122)/img/%
 	@mkdir -p $(dir $@)
 	cp -r $< $@
 
 $(SPEC_122)/img/%:
 	$(MAKE) -C $(SPEC_122) build-img YAML_SPEC_DIR=
 
+#------------------------------------------------------------------------------
+# 1.3.0 spec files:
+#------------------------------------------------------------------------------
+main/spec/1.3.0/%.md: $(SPEC_130)/%.md
+	@mkdir -p $(dir $@)
+	(echo '---'; echo '---'; cat $<) > $@
+
+main/spec/1.3.0/ext/%.md: $(SPEC_130)/ext/%.md $(SPEC_130_LINKS)
+	@mkdir -p $(dir $@)
+	markydown-to-kramdown $(ROOT) $^ > $@
+
+main/spec/1.3.0/index.md: $(SPEC_130)/spec.md $(SPEC_130_LINKS)
+	@mkdir -p $(dir $@)
+	markydown-to-kramdown $(ROOT) $^ > $@
+
+main/spec/1.3.0/img/%: $(SPEC_130)/img/%
+	@mkdir -p $(dir $@)
+	cp -r $< $@
+
+$(SPEC_130)/img/%:
+	$(MAKE) -C $(SPEC_130) build-img YAML_SPEC_DIR=
+
+
+#------------------------------------------------------------------------------
+# 1.2.2 review files:
+#------------------------------------------------------------------------------
 main/review/spec-12.html: $(EXT)/spec-2009/yaml-spec-12.html
 	cp $< $@
-	perl -pi -e 's{"(.*?\.png)"}{"../img/$$1"}' $@
+	cp $(SPEC_2009)/*.png $(dir $@)
 
 main/review/single_html.css: $(SPEC_2009)/single_html.css
 	cp $< $@
@@ -259,11 +289,49 @@ main/review/single_html.css: $(SPEC_2009)/single_html.css
 main/review/markdown.html: $(SPEC_122)/spec.md
 	make-review-spec-html $< > $@
 
-main/review/spec-plain.md: main/spec.md
-	make-review-spec-md $< > $@
+main/review/spec-plain.md: $(SPEC_122)/spec.md $(SPEC_122_LINKS)
+	markydown-to-kramdown $(ROOT) $^ > /tmp/kramdown
+	make-review-spec-md /tmp/kramdown > $@
 
 jekyll/_includes/sitedir-pulldown.html:
 	./bin/generate-sitedir-pulldown > $@
+
+#------------------------------------------------------------------------------
+# HTML rules:
+#------------------------------------------------------------------------------
+# 1.2.0 & 1.2.1:
+html/%: $(SPEC)/%
+	@mkdir -p $(dir $@)
+	cp $< $@
+
+html/%.html: $(SPEC)/%.html
+	@mkdir -p $(dir $@)
+	$(STRIP_HTML) $< > $@
+
+html/%/title.html: $(SPEC)/%/spec.html
+	@mkdir -p $(dir $@)
+	grep '<title>' $< | head -n1 > $@
+
+# 1.2.2 & 1.3.0:
+html/%: $(SITE)/main/%
+	@mkdir -p $(dir $@)
+	cp $< $@
+
+html/%/: $(SITE)/main/spec/%
+	mkdir -p $(shell dirname $@)
+	cp -r $< $(shell dirname $@)
+
+html/%.css: $(SITE)/main/spec.css
+	@mkdir -p $(dir $@)
+	cp $< $@
+
+html/%.html: $(SITE)/main/spec/%.html
+	@mkdir -p $(dir $@)
+	$(STRIP_HTML) $< > $@
+
+html/%/title.html: $(SITE)/main/spec/%/index.html
+	@mkdir -p $(dir $@)
+	grep '<title>' $< | head -n1 > $@
 
 #------------------------------------------------------------------------------
 check-publish:
@@ -278,38 +346,6 @@ ifneq ($(shell git rev-parse --abbrev-ref HEAD), main)
 	$(error Must be on branch main to use SITEDIR=main)
 endif
 endif
-
-html/%: $(SPEC)/%
-	@mkdir -p $(dir $@)
-	cp $< $@
-
-html/%.html: $(SPEC)/%.html
-	@mkdir -p $(dir $@)
-	$(STRIP_HTML) $< > $@
-
-html/%/title.html: $(SPEC)/%/spec.html
-	@mkdir -p $(dir $@)
-	grep '<title>' $< | head -n1 > $@
-
-html/1.2.2/%: $(SITE)/main/%
-	@mkdir -p $(dir $@)
-	cp $< $@
-
-html/1.2.2/%/: $(SITE)/main/%
-	mkdir -p $(shell dirname $@)
-	cp -r $< $(shell dirname $@)
-
-html/1.2.2/%.css: $(SITE)/main/%.css
-	@mkdir -p $(dir $@)
-	cp $< $@
-
-html/1.2.2/%.html: $(SITE)/main/%.html
-	@mkdir -p $(dir $@)
-	$(STRIP_HTML) $< > $@
-
-html/1.2.2/title.html: $(SITE)/main/spec.html
-	@mkdir -p $(dir $@)
-	grep '<title>' $< | head -n1 > $@
 
 track-gh-pages:
 	git show-ref -q origin/gh-pages || \

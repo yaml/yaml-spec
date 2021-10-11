@@ -13,8 +13,8 @@ This repository is where the YAML language is further developed and the next
 versions are defined.
 
 This repository contains the source code and build system for the [published
-YAML 1.2 specification](https://yaml.org/spec/1.2/spec.html).
-Those files are under the `1.2` top level directory.
+YAML specifications](https://yaml.org/spec/).
+Those files are under the `spec` top level directory.
 
 The various components of the next YAML specification version will be added
 here incrementally following a well defined methodology.
@@ -52,4 +52,4 @@ successfully make changes and submit them as pull requests.
 * `make edit`
 
   Start your editor with the current spec source file.
-  This is just a shortcut for `$EDITOR 1.2.2/spec.md`.
+  This is just a shortcut for `$EDITOR 1.3.0/spec.md`.

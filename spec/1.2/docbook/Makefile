@@ -1,4 +1,4 @@
-include ../../.common.mk
+include ../../../.common.mk
 
 
 .SUFFIXES: .dbk .html .dia .eps .png .pdf
