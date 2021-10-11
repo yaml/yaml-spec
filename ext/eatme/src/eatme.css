@@ -1,0 +1,42 @@
+.eatme-container { min-height: 200px; height: 100%; }
+
+div.eatme-col { min-height: 200px; border: 1px solid black; padding: 0px; display: flex; flex-direction: column; }
+
+div.eatme-pane { width: 100%; min-height: 150px; display: block; background-color: #fff; display: grid; grid-template-rows: 35px; flex: 1 1 200px; }
+
+div.eatme-nav { background-color: #ddd; height: 35px; padding: 0px; }
+
+pre.eatme-box, pre.eatme-box-error { width: 100%; height: 100%; min-height: 150px; display: block; background-color: #eee; font-size: inherit; }
+pre.eatme-box.eatme-error, pre.eatme-box.eatme-errors, pre.eatme-box-error.eatme-error, pre.eatme-box-error.eatme-errors { background-color: #fcc; }
+
+div.eatme-box pre { white-space: pre-wrap; margin-left: 10px; margin-bottom: 1em; }
+
+pre.eatme-box-error { background-color: #fcc; }
+
+.eatme-box { padding: 5px; }
+
+textarea.eatme-box { width: 100%; height: 100%; min-height: 150px; display: block; font-family: monospace; background-color: #edece4; border: none; }
+
+select.eatme-select { height: 35px; background-color: #FEF07A; width: calc(100% - 35px); float: right; border-top: none; }
+
+select.eatme-select option:checked { display: none; }
+
+div.eatme-btns { width: 35px; height: 35px; padding: 0px; float: left; }
+div.eatme-btns button.eatme-toolbar-btn { width: 35px; height: 35px; padding: 0px; background-color: lightblue; }
+div.eatme-btns button.eatme-toolbar-btn:focus { box-shadow: none; }
+div.eatme-btns button.eatme-toolbar-btn.error { background-color: #f00; }
+div.eatme-btns li { padding-left: 10px; }
+div.eatme-btns li a { color: rgba(0, 0, 0, 0.3); }
+div.eatme-btns li a:hover { text-decoration: none; }
+div.eatme-btns li a:link, div.eatme-btns li a:visited { color: rgba(0, 0, 0, 0.8); }
+div.eatme-btns li a.error { color: #f00; }
+
+.split { -webkit-box-sizing: border-box; -moz-box-sizing: border-box; box-sizing: border-box; overflow-y: auto; overflow-x: hidden; }
+
+.gutter { background-color: transparent; background-repeat: no-repeat; background-position: 50%; }
+
+.gutter.gutter-horizontal { cursor: col-resize; background-image: url("data:image/png; base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg=="); }
+
+.gutter.gutter-vertical { cursor: row-resize; background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAFAQMAAABo7865AAAABlBMVEVHcEzMzMzyAv2sAAAAAXRSTlMAQObYZgAAABBJREFUeF5jOAMEEAIEEFwAn3kMwcB6I2AAAAAASUVORK5CYII="); }
+
+.split.split-horizontal, .gutter.gutter-horizontal { height: 100%; float: left; }
