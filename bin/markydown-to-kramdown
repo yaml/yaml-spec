@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version=0.0.17
+version=0.0.18
 
 RUN_OR_DOCKER_PULL=true
 
