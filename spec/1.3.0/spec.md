@@ -5802,7 +5802,7 @@ nb-double-char ::=
     c-ns-esc-char
   | (
         nb-json
-      - c-escape                    # '\'
+      - '\'                         # escape
       - c-double-quote              # '"'
     )
 ```
@@ -5810,7 +5810,7 @@ nb-double-char ::=
 ```
 s-double-escaped(n) ::=
   s-white*
-  c-escape                          # '\'
+  '\'                               # escape
   b-non-content
   l-empty(n,FLOW-IN)*
   s-flow-line-prefix(n)
@@ -6514,47 +6514,29 @@ c-reserved ::=
 
 ```
 c-ns-esc-char ::=
-  c-escape                          # '\'
+  '\'
   (
-      ns-esc-null
-    | ns-esc-bell
-    | ns-esc-backspace
-    | ns-esc-horizontal-tab
-    | ns-esc-line-feed
-    | ns-esc-vertical-tab
-    | ns-esc-form-feed
-    | ns-esc-carriage-return
-    | ns-esc-escape
-    | ns-esc-space
-    | ns-esc-double-quote
-    | ns-esc-slash
-    | ns-esc-backslash
-    | ns-esc-next-line
-    | ns-esc-non-breaking-space
-    | ns-esc-line-separator
-    | ns-esc-paragraph-separator
-    | ns-esc-8-bit
-    | ns-esc-16-bit
-    | ns-esc-32-bit
+      '0'                           # null
+    | 'a'                           # bell
+    | 'b'                           # backspace
+    | 't' | x09                     # horizontal-tab
+    | 'n'                           # line-feed
+    | 'v'                           # vertical-tab
+    | 'f'                           # form-feed
+    | 'r'                           # carriage-return
+    | 'e'                           # escape
+    | x20                           # space
+    | '"'                           # double-quote
+    | '/'                           # slash
+    | '\'                           # backslash
+    | 'N'                           # next-line
+    | '_'                           # non-breaking-space
+    | 'L'                           # line-separator
+    | 'P'                           # paragraph-separator
+    | ( 'x' ns-hex-digit{2} )       # 8-bit
+    | ( 'u' ns-hex-digit{4} )       # 16-bit
+    | ( 'U' ns-hex-digit{8} )       # 32-bit
   )
-```
-
-```
-ns-esc-8-bit ::=
-  'x'
-  ns-hex-digit{2}
-```
-
-```
-ns-esc-16-bit ::=
-  'u'
-  ns-hex-digit{4}
-```
-
-```
-ns-esc-32-bit ::=
-  'U'
-  ns-hex-digit{8}
 ```
 
 ```
@@ -6617,84 +6599,6 @@ ns-hex-digit ::=
 ns-ascii-letter ::=
     [x41-x5A]                       # A-Z
   | [x61-x7A]                       # a-z
-```
-
-
-### #. Escaped Characters
-
-<!-- This entire section can go away -->
-
-```
-c-escape ::= '\'
-```
-
-```
-ns-esc-null ::= '0'
-```
-
-```
-ns-esc-bell ::= 'a'
-```
-
-```
-ns-esc-backspace ::= 'b'
-```
-
-```
-ns-esc-horizontal-tab ::=
-  't' | x09
-```
-
-```
-ns-esc-line-feed ::= 'n'
-```
-
-```
-ns-esc-vertical-tab ::= 'v'
-```
-
-```
-ns-esc-form-feed ::= 'f'
-```
-
-```
-ns-esc-carriage-return ::= 'r'
-```
-
-```
-ns-esc-escape ::= 'e'
-```
-
-```
-ns-esc-space ::= x20
-```
-
-```
-ns-esc-double-quote ::= '"'
-```
-
-```
-ns-esc-slash ::= '/'
-```
-
-```
-ns-esc-backslash ::= '\'
-```
-
-```
-ns-esc-next-line ::= 'N'
-```
-
-```
-ns-esc-non-breaking-space ::= '_'
-```
-
-```
-ns-esc-line-separator ::= 'L'
-```
-
-```
-ns-esc-paragraph-separator ::= 'P'
 ```
 
 
