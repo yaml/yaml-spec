@@ -4,9 +4,9 @@ use v5.18;
 
 use Encode qw(decode encode);
 
-my $L = 0;
-my @l = ();
-my $l = '';
+my $lines = 0;
+my @line = ();
+my $line = '';
 
 sub in {
   decode('UTF-8', <>, Encode::FB_CROAK);
@@ -16,21 +16,21 @@ sub out {
   print encode('UTF-8', $out, Encode::FB_CROAK);
 }
 sub peek {
-  $_ = @l ? $l[0] : '';
+  $_ = @line ? $line[0] : '';
 }
 sub take {
-  $_ = shift(@l);
+  $_ = shift(@line);
 }
 sub poke {
-  unshift @l, @_ ? (shift) : $_;
-  $_ = @l ? $l[0] : '';
+  unshift @line, @_ ? (shift) : $_;
+  $_ = @line ? $line[0] : '';
 }
 sub give {
-  unshift(@l, "$_[0]\n");
+  unshift(@line, "$_[0]\n");
 }
 sub space {
   out take while peek eq "\n";
-  out take if @l == 1;
+  out take if @line == 1;
   return 1;
 }
 
@@ -40,24 +40,24 @@ sub lines {
   $p //= '';
   $m //= 79;
   $f //= 1;
-  while (my $s = $l) {
+  while (my $s = $line) {
     my $m2 = $m - 2;
     my $m3 = $m - 4;
-    if (length $l <= $m) {
-      out "$p$l\n";
+    if (length $line <= $m) {
+      out "$p$line\n";
       last;
     }
-    elsif ($l =~ s{^(\ \ \*\ .{10,$m3}\S)(?:$|\ (?=\S))}{}) {
+    elsif ($line =~ s{^(\ \ \*\ .{10,$m3}\S)(?:$|\ (?=\S))}{}) {
       out "$p$1\n";
     }
-    elsif ($l =~ s{^(.{5,$m2}\ \ )$/}{}) {
+    elsif ($line =~ s{^(.{5,$m2}\ \ )$/}{}) {
       out "$p$1\n";
     }
-    elsif ($l =~ s{^(\S.{10,$m2}\S)(?:$|\ (?=\S))}{}) {
+    elsif ($line =~ s{^(\S.{10,$m2}\S)(?:$|\ (?=\S))}{}) {
       out "$p$1\n";
     }
     else {
-      die ">>$l<<";
+      die ">>$line<<";
     }
     if ($f) {
       $f = 0;
@@ -78,32 +78,32 @@ sub lines {
 
 sub wrap {
   my $end = shift;
-  my @l;
+  my @line;
   while (peek =~ /./ and peek !~ /^:/) {
     my $line = take;
     chomp $line;
     $line =~ s/^\ +(?=\S)(?!\*)//;
-    push @l, $line;
+    push @line, $line;
     last if $end->($line);
   }
-  $l = join ' ', @l;
-  $l =~ s{\]\(\ }{](};
+  $line = join ' ', @line;
+  $line =~ s{\]\(\ }{](};
   lines;
   space;
   return 1;
 }
 
 sub lis2 {
-  my @l;
+  my @line;
   while (peek =~ /^\ \ \S/) {
     my $line = take;
     chomp $line;
     $line =~ s/^\ \ //;
-    push @l, $line;
+    push @line, $line;
     last if $line =~ /(  |\.)$/;
   }
-  $l = join ' ', @l;
-  $l =~ s{\]\(\ }{](};
+  $line = join ' ', @line;
+  $line =~ s{\]\(\ }{](};
   lines('  ', 77, 0);
   space;
   return 1;
@@ -180,7 +180,7 @@ sub unknown {
   my $line = take;
   my $show = $line;
   chomp $show;
-  my $num = $L - @l + 1;
+  my $num = $lines - @line + 1;
   warn "Unrecognized line (#$num): >>$show<<\n";
   out $line;
   space;
@@ -188,8 +188,8 @@ sub unknown {
 
 #------------------------------------------------------------------------------
 sub main {
-  push @l, $_ while $_ = in;
-  $L = @l;
+  push @line, $_ while $_ = in;
+  $lines = @line;
 
   if (peek =~ /^---$/) {
     out take;
@@ -199,7 +199,7 @@ sub main {
   }
 
   while (my $peek = peek) {
-    titl and next if @l >= 2 and $l[1] =~ /^===+$/;
+    titl and next if @line >= 2 and $line[1] =~ /^===+$/;
     head and next if $peek =~ /^#+\ /;
     line and next if $peek =~ /^\[\^/;
     line and space and next if $peek =~ /^\[\#\S+\]$/;
