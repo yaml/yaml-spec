@@ -4,6 +4,7 @@ use v5.18;
 
 use Encode qw(decode encode);
 
+my $L = 0;
 my @l = ();
 my $l = '';
 
@@ -11,7 +12,8 @@ sub in {
   decode('UTF-8', <>, Encode::FB_CROAK);
 }
 sub out {
-  print encode('UTF-8', $_[0], Encode::FB_CROAK);
+  my ($out) = @_;
+  print encode('UTF-8', $out, Encode::FB_CROAK);
 }
 sub peek {
   $_ = @l ? $l[0] : '';
@@ -178,7 +180,8 @@ sub unknown {
   my $line = take;
   my $show = $line;
   chomp $show;
-  warn "Unrecognized line: >>$show<<\n";
+  my $num = $L - @l + 1;
+  warn "Unrecognized line (#$num): >>$show<<\n";
   out $line;
   space;
 }
@@ -186,6 +189,7 @@ sub unknown {
 #------------------------------------------------------------------------------
 sub main {
   push @l, $_ while $_ = in;
+  $L = @l;
 
   if (peek =~ /^---$/) {
     out take;
@@ -198,6 +202,7 @@ sub main {
     titl and next if @l >= 2 and $l[1] =~ /^===+$/;
     head and next if $peek =~ /^#+\ /;
     line and next if $peek =~ /^\[\^/;
+    line and space and next if $peek =~ /^\[\#\S+\]$/;
     leg  and next if $peek =~ /^\*\*Legend:\*\*$/;
     toc  and next if $peek =~ /^\{:toc\}$/;
     pre  and next if $peek =~ /^\`\`\`$/;

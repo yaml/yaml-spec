@@ -4013,9 +4013,8 @@ for [block sequence] entries.
 
 <!-- REVIEW value should be null above -->
 
-If the "`?`" indicator is omitted, [parsing] needs to see past the
-[implicit key], in the same way as in the [single key/value pair] [flow
-mapping].
+If the "`?`" indicator is omitted, [parsing] needs to see past the [implicit
+key], in the same way as in the [single key/value pair] [flow mapping].
 Hence, such [keys] are subject to the same restrictions; they are limited to a
 single line and must not span more than 1024 Unicode characters.
 

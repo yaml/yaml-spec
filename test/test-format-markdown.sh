@@ -4,7 +4,7 @@ source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/setup"
 
 find .. -type f -name '*.md' |
 while read -r file; do
-  [[ $file == */1.2/* ]] && continue
+  [[ $file == */1.2* ]] && continue
   [[ $file == *www/build* ]] && continue
   [[ $file == *www/main* ]] && continue
   [[ $file == *contributing* ]] && continue
