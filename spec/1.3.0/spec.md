@@ -1382,9 +1382,9 @@ mapping:
 ```
 
 **Legend:**
-* [c-sequence-entry] <!-- - -->
-* [c-mapping-key] <!-- ? -->
-* [c-mapping-value] <!-- : -->
+* sequence entry <!-- - -->
+* mapping key <!-- ? -->
+* mapping value <!-- : -->
 
 
 "`,`" (`x2C`, comma) ends a [flow collection] entry.
@@ -1414,7 +1414,7 @@ mapping: { sky: blue, sea: green }
 **Legend:**
 * [c-sequence-start] [c-sequence-end] <!-- [ ] -->
 * [c-mapping-start] [c-mapping-end] <!-- { } -->
-* [c-collect-entry] <!-- , -->
+* collection entry <!-- , -->
 
 
 "`#`" (`x23`, octothorpe, hash, sharp, pound, number sign) denotes a [comment].
@@ -1433,7 +1433,7 @@ mapping: { sky: blue, sea: green }
 ```
 
 **Legend:**
-* [c-comment] <!-- # -->
+* comment <!-- # -->
 
 
 "`&`" (`x26`, ampersand) denotes a [node's anchor property].
@@ -1460,9 +1460,9 @@ alias: *anchor
 ```
 
 **Legend:**
-* [c-tag] <!-- ! -->
-* [c-anchor] <!-- & -->
-* [c-alias] <!-- * -->
+* tag <!-- ! -->
+* anchor <!-- & -->
+* alias <!-- * -->
 
 
 "`|`" (`7C`, vertical bar) denotes a [literal block scalar].
@@ -1488,8 +1488,8 @@ folded: >
 ```
 
 **Legend:**
-* [c-literal] <!-- | -->
-* [c-folded] <!-- > -->
+* literal <!-- | -->
+* folded <!-- > -->
 
 "`'`" (`x27`, apostrophe, single quote) surrounds a [single-quoted flow
 scalar].
@@ -1510,8 +1510,8 @@ double: "text"
 ```
 
 **Legend:**
-* [c-single-quote] <!-- ' -->
-* [c-double-quote] <!-- 2:9 2:14 -->
+* single quote <!-- ' -->
+* double quote <!-- 2:9 2:14 -->
 
 
 "`%`" (`x25`, percent) denotes a [directive] line.
@@ -1529,7 +1529,7 @@ double: "text"
 ```
 
 **Legend:**
-* [c-directive] <!-- % -->
+* directive <!-- % -->
 
 
 The "`@`" (`x40`, at) and "<code>&grave;</code>" (`x60`, grave accent) are
@@ -5076,7 +5076,7 @@ l-document-suffix ::=
 
 ```
 l-directive ::=
-  c-directive                       # '%'
+  '%'
   (
       ns-yaml-directive
     | ns-tag-directive
@@ -5223,14 +5223,14 @@ c-l-block-map-explicit-entry(n) ::=
 
 ```
 c-l-block-map-explicit-key(n) ::=
-  c-mapping-key                     # '?' (not followed by non-ws char)
+  '?'                               # not followed by non-ws char
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
 ```
 l-block-map-explicit-value(n) ::=
   s-indent(n)
-  c-mapping-value                   # ':' (not followed by non-ws char)
+  ':'                               # not followed by non-ws char
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
@@ -5251,7 +5251,7 @@ ns-s-block-map-implicit-key ::=
 
 ```
 c-l-block-map-implicit-value(n) ::=
-  c-mapping-value                   # ':' (not followed by non-ws char)
+  ':'                               # not followed by non-ws char
   (
       s-l+block-node(n,BLOCK-OUT)
     | (
@@ -5283,7 +5283,7 @@ l+block-sequence(n) ::=
 
 ```
 c-l-block-seq-entry(n) ::=
-  c-sequence-entry                  # '-'
+  '-'
   [ lookahead ≠ ns-char ]
   s-l+block-indented(n,BLOCK-IN)
 ```
@@ -5323,7 +5323,7 @@ See [Production Parameters] for the definition of the `t` variable.
 
 ```
 c-l+literal(n) ::=
-  c-literal                         # '|'
+  '|'
   c-b-block-header(t)
   l-literal-content(n+m,t)
 ```
@@ -5355,7 +5355,7 @@ b-nb-literal-next(n) ::=
 
 ```
 c-l+folded(n) ::=
-  c-folded                          # '>'
+  '>'
   c-b-block-header(t)
   l-folded-content(n+m,t)
 ```
@@ -5557,7 +5557,7 @@ ns-s-flow-map-entries(n,c) ::=
   ns-flow-map-entry(n,c)
   s-separate(n,c)?
   (
-    c-collect-entry                 # ','
+    ','
     s-separate(n,c)?
     ns-s-flow-map-entries(n,c)?
   )?
@@ -5566,7 +5566,7 @@ ns-s-flow-map-entries(n,c) ::=
 ```
 ns-flow-map-entry(n,c) ::=
     (
-      c-mapping-key                 # '?' (not followed by non-ws char)
+      '?'                           # not followed by non-ws char
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -5609,7 +5609,7 @@ c-ns-flow-map-empty-key-entry(n,c) ::=
 
 ```
 c-ns-flow-map-separate-value(n,c) ::=
-  c-mapping-value                   # ':'
+  ':'
   [ lookahead ≠ ns-plain-safe(c) ]
   (
       (
@@ -5634,7 +5634,7 @@ c-ns-flow-map-json-key-entry(n,c) ::=
 
 ```
 c-ns-flow-map-adjacent-value(n,c) ::=
-  c-mapping-value                   # ':'
+  ':'
   (
       (
         s-separate(n,c)?
@@ -5647,7 +5647,7 @@ c-ns-flow-map-adjacent-value(n,c) ::=
 ```
 ns-flow-pair(n,c) ::=
     (
-      c-mapping-key                 # '?' (not followed by non-ws char)
+      '?'                           # not followed by non-ws char
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -5728,7 +5728,7 @@ ns-s-flow-seq-entries(n,c) ::=
   ns-flow-seq-entry(n,c)
   s-separate(n,c)?
   (
-    c-collect-entry                 # ','
+    ','
     s-separate(n,c)?
     ns-s-flow-seq-entries(n,c)?
   )?
@@ -5746,9 +5746,9 @@ ns-flow-seq-entry(n,c) ::=
 
 ```
 c-double-quoted(n,c) ::=
-  c-double-quote                    # '"'
+  '"'
   nb-double-text(n,c)
-  c-double-quote                    # '"'
+  '"'
 ```
 
 ```
@@ -5800,11 +5800,7 @@ ns-double-char ::=
 ```
 nb-double-char ::=
     c-ns-esc-char
-  | (
-        nb-json
-      - '\'                         # escape
-      - c-double-quote              # '"'
-    )
+  | ( nb-json - '\' - '"' )
 ```
 
 ```
@@ -5827,9 +5823,9 @@ s-double-break(n) ::=
 
 ```
 c-single-quoted(n,c) ::=
-  c-single-quote                    # "'"
+  "'"
   nb-single-text(n,c)
-  c-single-quote                    # "'"
+  "'"
 ```
 
 ```
@@ -5882,10 +5878,7 @@ ns-single-char ::=
 ```
 nb-single-char ::=
     c-quoted-quote
-  | (
-        nb-json
-      - c-single-quote              # "'"
-    )
+  | ( nb-json - "'" )
 ```
 
 ```
@@ -5936,11 +5929,7 @@ ns-plain-first(c) ::=
       - c-indicator
     )
   | (
-      (
-          c-mapping-key             # '?'
-        | c-mapping-value           # ':'
-        | c-sequence-entry          # '-'
-      )
+      ( '?' | ':' | '-' )
       [ lookahead = ns-plain-safe(c) ]
     )
 ```
@@ -5949,15 +5938,15 @@ ns-plain-first(c) ::=
 ns-plain-char(c) ::=
     (
         ns-plain-safe(c)
-      - c-mapping-value             # ':'
-      - c-comment                   # '#'
+      - ':'
+      - '#'
     )
   | (
       [ lookbehind = ns-char ]
-      c-comment                     # '#'
+      '#'
     )
   | (
-      c-mapping-value               # ':'
+      ':'
       [ lookahead = ns-plain-safe(c) ]
     )
 ```
@@ -5996,7 +5985,7 @@ e-node ::=
 
 ```
 c-ns-alias-node ::=
-  c-alias                           # '*'
+  '*'
   ns-anchor-name
 ```
 
@@ -6072,7 +6061,7 @@ b-l-folded(n,c) ::=
 
 ```
 c-nb-comment-text ::=
-  c-comment                         # '#'
+  '#'
   nb-char*
 ```
 
@@ -6210,9 +6199,9 @@ c-tag-handle ::=
 
 ```
 c-named-tag-handle ::=
-  c-tag                             # '!'
+  '!'
   ns-word-char+
-  c-tag                             # '!'
+  '!'
 ```
 
 ```
@@ -6230,7 +6219,7 @@ ns-tag-prefix ::=
 
 ```
 c-ns-local-tag-prefix ::=
-  c-tag                             # '!'
+  '!'
   ns-uri-char*
 ```
 
@@ -6262,7 +6251,7 @@ c-ns-properties(n,c) ::=
 
 ```
 c-ns-anchor-property ::=
-  c-anchor                          # '&'
+  '&'
   ns-anchor-name
 ```
 
@@ -6405,59 +6394,33 @@ b-carriage-return ::= x0D
 
 ```
 c-indicator ::=
-    c-sequence-entry                # '-'
-  | c-mapping-key                   # '?'
-  | c-mapping-value                 # ':'
-  | c-collect-entry                 # ','
-  | c-sequence-start                # '['
-  | c-sequence-end                  # ']'
-  | c-mapping-start                 # '{'
-  | c-mapping-end                   # '}'
-  | c-comment                       # '#'
-  | c-anchor                        # '&'
-  | c-alias                         # '*'
-  | c-tag                           # '!'
-  | c-literal                       # '|'
-  | c-folded                        # '>'
-  | c-single-quote                  # "'"
-  | c-double-quote                  # '"'
-  | c-directive                     # '%'
-  | c-reserved                      # '@' '`'
+    '{'                             # c-mapping-start
+  | '}'                             # c-mapping-end
+  | '['                             # c-sequence-start
+  | ']'                             # c-sequence-end
+  | '-'                             # sequence entry
+  | '?'                             # mapping key
+  | ':'                             # mapping value
+  | ','                             # entry separator
+  | '#'                             # comment
+  | '&'                             # anchor
+  | '*'                             # alias
+  | '!'                             # tag
+  | '|'                             # literal scalar
+  | '>'                             # folded scalar
+  | "'"                             # single quote
+  | '"'                             # double quote
+  | '%'                             # directive
+  | '@'                             # reserved
+  | '`'                             # reserved
 ```
 
 ```
 c-flow-indicator ::=
-    c-collect-entry                 # ','
-  | c-sequence-start                # '['
-  | c-sequence-end                  # ']'
-  | c-mapping-start                 # '{'
-  | c-mapping-end                   # '}'
-```
-
-<!-- The single character productions below should be removed -->
-
-```
-c-sequence-entry ::= '-'
-```
-
-```
-c-mapping-key ::= '?'
-```
-
-```
-c-mapping-value ::= ':'
-```
-
-```
-c-collect-entry ::= ','
-```
-
-```
-c-sequence-start ::= '['
-```
-
-```
-c-sequence-end ::= ']'
+  | '{'                             # c-mapping-start
+  | '}'                             # c-mapping-end
+  | '['                             # c-sequence-start
+  | ']'                             # c-sequence-end
 ```
 
 ```
@@ -6469,44 +6432,11 @@ c-mapping-end ::= '}'
 ```
 
 ```
-c-comment ::= '#'
+c-sequence-start ::= '['
 ```
 
 ```
-c-anchor ::= '&'
-```
-
-```
-c-alias ::= '*'
-```
-
-```
-c-tag ::= '!'
-```
-
-```
-c-literal ::= '|'
-```
-
-```
-c-folded ::= '>'
-```
-
-```
-c-single-quote ::= "'"
-```
-
-```
-c-double-quote ::= '"'
-```
-
-```
-c-directive ::= '%'
-```
-
-```
-c-reserved ::=
-    '@' | '`'
+c-sequence-end ::= ']'
 ```
 
 
@@ -6542,7 +6472,7 @@ c-ns-esc-char ::=
 ```
 ns-tag-char ::=
     ns-uri-char
-  - c-tag                           # '!'
+  - '!'
   - c-flow-indicator
 ```
 
