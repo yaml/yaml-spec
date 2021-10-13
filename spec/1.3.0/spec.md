@@ -1381,7 +1381,7 @@ mapping:
 ```
 
 **Legend:**
-* sequence entry <!-- - -->
+* sequence entry indicator <!-- - -->
 * mapping key <!-- ? -->
 * mapping value <!-- : -->
 
