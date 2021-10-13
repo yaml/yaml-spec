@@ -1411,8 +1411,8 @@ mapping: { sky: blue, sea: green }
 ```
 
 **Legend:**
-* [c-sequence-start] [c-sequence-end] <!-- [ ] -->
-* [c-mapping-start] [c-mapping-end] <!-- { } -->
+* sequence start, sequence end <!-- [ ] -->
+* mapping start, mapping end <!-- { } -->
 * collection entry <!-- , -->
 
 
@@ -3087,7 +3087,7 @@ Sequence entries are separated by a "`,`" character.
 ```
 
 **Legend:**
-* [c-sequence-start] [c-sequence-end] <!-- [ ] -->
+* sequence-start, sequence-end <!-- [ ] -->
 * [ns-flow-seq-entry(n,c)] <!-- one two three four -->
 
 
@@ -3143,7 +3143,7 @@ Mapping entries are separated by a "`,`" character.
 ```
 
 **Legend:**
-* [c-mapping-start] [c-mapping-end] <!-- { } -->
+* mapping start, mapping end <!-- { } -->
 * [ns-flow-map-entry(n,c)] <!-- one_:_two three:_four five:_six seven_:_eight -->
 
 
@@ -5543,10 +5543,10 @@ in-flow(n,FLOW-KEY)  ::= ns-s-flow-seq-entries(n,FLOW-KEY)
 
 ```
 c-flow-mapping(n,c) ::=
-  c-mapping-start                   # '{'
+  '{'
   s-separate(n,c)?
   ns-s-flow-map-entries(n,in-flow(c))?
-  c-mapping-end                     # '}'
+  '}'
 ```
 
 ```
@@ -5714,10 +5714,10 @@ c-flow-json-node(n,c) ::=
 
 ```
 c-flow-sequence(n,c) ::=
-  c-sequence-start                  # '['
+  '['
   s-separate(n,c)?
   in-flow(n,c)?
-  c-sequence-end                    # ']'
+  ']'
 ```
 
 ```
@@ -6382,18 +6382,10 @@ b-char ::=
 
 ```
 c-flow-indicator ::=
-  | '{'                             # c-mapping-start
-  | '}'                             # c-mapping-end
-  | '['                             # c-sequence-start
-  | ']'                             # c-sequence-end
-```
-
-```
-c-mapping-start ::= '{'
-```
-
-```
-c-mapping-end ::= '}'
+  | '{'                             # Flow mapping start
+  | '}'                             # Flow mapping end
+  | '['                             # Flow sequence start
+  | ']'                             # Flow sequence end
 ```
 
 ```
