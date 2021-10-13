@@ -5088,7 +5088,7 @@ c-directives-end ::= "---"
 
 ```
 c-document-end ::=
-  "..."                             # (not followed by non-ws char)
+  "..."                             # Not followed by non-ws char
 ```
 
 
@@ -5220,14 +5220,14 @@ c-l-block-map-explicit-entry(n) ::=
 
 ```
 c-l-block-map-explicit-key(n) ::=
-  '?'                               # not followed by non-ws char
+  '?'                               # Not followed by non-ws char
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
 ```
 l-block-map-explicit-value(n) ::=
   s-indent(n)
-  ':'                               # not followed by non-ws char
+  ':'                               # Not followed by non-ws char
   s-l+block-indented(n,BLOCK-OUT)
 ```
 
@@ -5248,7 +5248,7 @@ ns-s-block-map-implicit-key ::=
 
 ```
 c-l-block-map-implicit-value(n) ::=
-  ':'                               # not followed by non-ws char
+  ':'                               # Not followed by non-ws char
   (
       s-l+block-node(n,BLOCK-OUT)
     | (
@@ -5563,7 +5563,7 @@ ns-s-flow-map-entries(n,c) ::=
 ```
 ns-flow-map-entry(n,c) ::=
     (
-      '?'                           # not followed by non-ws char
+      '?'                           # Not followed by non-ws char
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -5644,7 +5644,7 @@ c-ns-flow-map-adjacent-value(n,c) ::=
 ```
 ns-flow-pair(n,c) ::=
     (
-      '?'                           # not followed by non-ws char
+      '?'                           # Not followed by non-ws char
       s-separate(n,c)
       ns-flow-map-explicit-entry(n,c)
     )
@@ -5803,7 +5803,7 @@ nb-double-char ::=
 ```
 s-double-escaped(n) ::=
   s-white*
-  '\'                               # escape
+  '\'
   b-non-content
   l-empty(n,FLOW-IN)*
   s-flow-line-prefix(n)
@@ -5923,25 +5923,25 @@ nb-ns-plain-in-line(c) ::=
 ns-plain-first(c) ::=
     (
         ns-char
-      - '{'                         # c-mapping-start
-      - '}'                         # c-mapping-end
-      - '['                         # c-sequence-start
-      - ']'                         # c-sequence-end
-      - '-'                         # sequence entry
-      - '?'                         # mapping key
-      - ':'                         # mapping value
-      - ','                         # entry separator
-      - '#'                         # comment
-      - '&'                         # anchor
-      - '*'                         # alias
-      - '!'                         # tag
-      - '|'                         # literal scalar
-      - '>'                         # folded scalar
-      - "'"                         # single quote
-      - '"'                         # double quote
-      - '%'                         # directive
-      - '@'                         # reserved
-      - '`'                         # reserved
+      - '?'                         # Mapping key
+      - ':'                         # Mapping value
+      - '-'                         # Sequence entry
+      - '{'                         # Mapping start
+      - '}'                         # Mapping end
+      - '['                         # Sequence start
+      - ']'                         # Sequence end
+      - ','                         # Entry separator
+      - '#'                         # Comment
+      - '&'                         # Anchor
+      - '*'                         # Alias
+      - '!'                         # Tag
+      - '|'                         # Literal scalar
+      - '>'                         # Folded scalar
+      - "'"                         # Single quote
+      - '"'                         # Double quote
+      - '%'                         # Directive
+      - '@'                         # Reserved
+      - '`'                         # Reserved
     )
   | (
       ( '?' | ':' | '-' )
@@ -6307,14 +6307,14 @@ c-byte-order-mark ::= xFEFF
 ```
 c-printable ::=
                                     # 8 bit
-    x09                             # Tab (\t)
-  | x0A                             # Line feed (LF \n)
-  | x0D                             # Carriage Return (CR \r)
+    x09                             # Tab
+  | x0A                             # Line feed
+  | x0D                             # Carriage return
   | [x20-x7E]                       # Printable ASCII
                                     # 16 bit
-  | x85                             # Next Line (NEL)
-  | [xA0-xD7FF]                     # Basic Multilingual Plane (BMP)
-  | [xE000-xFFFD]                   # Additional Unicode Areas
+  | x85                             # Next line (NEL)
+  | [xA0-xD7FF]                     # Basic multilingual plane (BMP)
+  | [xE000-xFFFD]                   # Additional unicode areas
   | [x010000-x10FFFF]               # 32 bit
 ```
 
@@ -6324,7 +6324,7 @@ The production name `nb-json` means "non-break JSON compatible" here.
 
 ```
 nb-json ::=
-    x09                             # Tab character
+    x09                             # Tab
   | [x20-x10FFFF]                   # Non-C0-control characters
 ```
 
@@ -6340,7 +6340,7 @@ nb-char ::=
 
 ```
 s-white ::=
-  x20 | x09                         @ Space or Tab
+  x20 | x09                         # Space or Tab
 ```
 
 
@@ -6399,30 +6399,32 @@ c-sequence-end ::= ']'
 
 ### #. Miscellaneous Character Sets
 
+See [Escaped Characters].
+
 ```
 c-ns-esc-char ::=
   '\'
   (
-      '0'                           # null
-    | 'a'                           # bell
-    | 'b'                           # backspace
-    | 't' | x09                     # horizontal-tab
-    | 'n'                           # line-feed
-    | 'v'                           # vertical-tab
-    | 'f'                           # form-feed
-    | 'r'                           # carriage-return
-    | 'e'                           # escape
-    | x20                           # space
-    | '"'                           # double-quote
-    | '/'                           # slash
-    | '\'                           # backslash
-    | 'N'                           # next-line
-    | '_'                           # non-breaking-space
-    | 'L'                           # line-separator
-    | 'P'                           # paragraph-separator
-    | ( 'x' ns-hex-digit{2} )       # 8-bit
-    | ( 'u' ns-hex-digit{4} )       # 16-bit
-    | ( 'U' ns-hex-digit{8} )       # 32-bit
+      '0'
+    | 'a'
+    | 'b'
+    | 't' | x09
+    | 'n'
+    | 'v'
+    | 'f'
+    | 'r'
+    | 'e'
+    | x20
+    | '"'
+    | '/'
+    | '\'
+    | 'N'
+    | '_'
+    | 'L'
+    | 'P'
+    | ( 'x' ns-hex-digit{2} )
+    | ( 'u' ns-hex-digit{4} )
+    | ( 'U' ns-hex-digit{8} )
   )
 ```
 
@@ -6465,21 +6467,21 @@ ns-uri-char ::=
 
 ```
 ns-word-char ::=
-    ns-dec-digit                    # 0-9
-  | ns-ascii-letter                 # A-Z a-z
-  | '-'                             # '-'
+    ns-dec-digit
+  | ns-ascii-letter
+  | '-'
+```
+
+```
+ns-hex-digit ::=
+    ns-dec-digit
+  | [x41-x46]                       # A-F
+  | [x61-x66]                       # a-f
 ```
 
 ```
 ns-dec-digit ::=
   [x30-x39]                         # 0-9
-```
-
-```
-ns-hex-digit ::=
-    ns-dec-digit                    # 0-9
-  | [x41-x46]                       # A-F
-  | [x61-x66]                       # a-f
 ```
 
 ```
