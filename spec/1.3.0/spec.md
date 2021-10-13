@@ -4876,7 +4876,6 @@ A special production
 :
 * `<start-of-line>`, which matches the empty string at the beginning of a line.
 * `<end-of-input>`, matches the empty string at the end of the input.
-* `<empty>`, which (always) matches the empty string.
 
 A parenthesized term
 :
@@ -4893,8 +4892,8 @@ Is `term-one | term-two`, which matches the `term-one` if possible, or
 
 A quantified term:
 :
-* `term?`, which matches `(term | <empty>)`.
-* `term*`, which matches `(term term* | <empty>)`.
+* `term?`, which matches `(term | "")`.
+* `term*`, which matches `(term term* | "")`.
 * `term+`, which matches `(term term*)`.
 
 > Note: Quantified terms are always greedy.
@@ -5989,8 +5988,7 @@ c-ns-alias-node ::=
 ### #. Indentation Spaces
 
 ```
-s-indent(0) ::=
-  <empty>
+s-indent(0) ::= ""
 
 # When n≥0
 s-indent(n+1) ::=
@@ -5998,23 +5996,21 @@ s-indent(n+1) ::=
 ```
 
 ```
-s-indent-less-than(1) ::=
-  <empty>
+s-indent-less-than(1) ::= ""
 
 # When n≥1
 s-indent-less-than(n+1) ::=
-  x20 s-indent-less-than(n)
-  | <empty>
+    x20 s-indent-less-than(n)
+  | ""
 ```
 
 ```
-s-indent-less-or-equal(0) ::=
-  <empty>
+s-indent-less-or-equal(0) ::= ""
 
 # When n≥0
 s-indent-less-or-equal(n+1) ::=
-  x20 s-indent-less-or-equal(n)
-  | <empty>
+    x20 s-indent-less-or-equal(n)
+  | ""
 ```
 
 ### #. Line Prefixes
