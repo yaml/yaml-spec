@@ -43,7 +43,7 @@
 
 <h1 id="yaml-aint-markup-language-yaml-version-13">YAML Ain’t Markup Language (YAML™) version 1.3</h1>
 
-<h2 class="subtitle" id="revision-130-2021-10-12">Revision 1.3.0 (2021-10-12)</h2>
+<h2 class="subtitle" id="revision-130-2021-10-13">Revision 1.3.0 (2021-10-13)</h2>
 
 <p>Copyright presently by YAML Language Development Team<sup id="fnref:team" role="doc-noteref"><a href="#fn:team" class="footnote" rel="footnote">1</a></sup><br />
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
@@ -92,7 +92,7 @@ create programs that process YAML information.</p>
 
 <ul id="markdown-toc">
   <li><a href="#yaml-aint-markup-language-yaml-version-13" id="markdown-toc-yaml-aint-markup-language-yaml-version-13">YAML Ain’t Markup Language (YAML™) version 1.3</a>    <ul>
-      <li><a href="#revision-130-2021-10-12" id="markdown-toc-revision-130-2021-10-12">Revision 1.3.0 (2021-10-12)</a></li>
+      <li><a href="#revision-130-2021-10-13" id="markdown-toc-revision-130-2021-10-13">Revision 1.3.0 (2021-10-13)</a></li>
     </ul>
   </li>
   <li><a href="#chapter-1-introduction-to-yaml" id="markdown-toc-chapter-1-introduction-to-yaml">Chapter 1. Introduction to YAML</a>    <ul>
@@ -310,10 +310,9 @@ create programs that process YAML information.</p>
       <li><a href="#a5-character-productions" id="markdown-toc-a5-character-productions">A.5. Character Productions</a>        <ul>
           <li><a href="#a51-character-encoding" id="markdown-toc-a51-character-encoding">A.5.1. Character Encoding</a></li>
           <li><a href="#a52-valid-character-sets" id="markdown-toc-a52-valid-character-sets">A.5.2. Valid Character Sets</a></li>
-          <li><a href="#a53-white-space-characters" id="markdown-toc-a53-white-space-characters">A.5.3. White Space Characters</a></li>
-          <li><a href="#a54-line-break-characters" id="markdown-toc-a54-line-break-characters">A.5.4. Line Break Characters</a></li>
-          <li><a href="#a55-indicator-characters" id="markdown-toc-a55-indicator-characters">A.5.5. Indicator Characters</a></li>
-          <li><a href="#a56-miscellaneous-character-sets" id="markdown-toc-a56-miscellaneous-character-sets">A.5.6. Miscellaneous Character Sets</a></li>
+          <li><a href="#a53-line-break-characters" id="markdown-toc-a53-line-break-characters">A.5.3. Line Break Characters</a></li>
+          <li><a href="#a54-indicator-characters" id="markdown-toc-a54-indicator-characters">A.5.4. Indicator Characters</a></li>
+          <li><a href="#a55-miscellaneous-character-sets" id="markdown-toc-a55-miscellaneous-character-sets">A.5.5. Miscellaneous Character Sets</a></li>
         </ul>
       </li>
     </ul>
@@ -1825,8 +1824,7 @@ ERROR:
 <div id="indicator-characters"></div>
 <h2 id="43-indicator-characters">4.3. Indicator Characters</h2>
 
-<p><em>Indicators</em> are characters that have special semantics.
-<sup class="rule-link"><a href="#rule-c-indicator">?</a></sup></p>
+<p><em>Indicators</em> are characters that have special semantics.</p>
 
 <p>”<code class="language-plaintext highlighter-rouge">-</code>” (<code class="language-plaintext highlighter-rouge">x2D</code>, hyphen) denotes a <a href="#block-sequences">block sequence</a> entry.</p>
 
@@ -1866,9 +1864,9 @@ mapping<mark class="legend-3">:</mark>
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-c-sequence-entry">c-sequence-entry</a></code></li>
-      <li><code class="legend-2"><a href="#rule-c-mapping-key">c-mapping-key</a></code></li>
-      <li><code class="legend-3"><a href="#rule-c-mapping-value">c-mapping-value</a></code></li>
+      <li><code class="legend-1">sequence entry</code></li>
+      <li><code class="legend-2">mapping key</code></li>
+      <li><code class="legend-3">mapping value</code></li>
     </ul>
   </div>
 </div>
@@ -1909,7 +1907,7 @@ mapping: <mark class="legend-2">{</mark> sky: blue<mark class="legend-3">,</mark
     <ul>
       <li><code class="legend-1"><a href="#rule-c-sequence-start">c-sequence-start</a> <a href="#rule-c-sequence-end">c-sequence-end</a></code></li>
       <li><code class="legend-2"><a href="#rule-c-mapping-start">c-mapping-start</a> <a href="#rule-c-mapping-end">c-mapping-end</a></code></li>
-      <li><code class="legend-3"><a href="#rule-c-collect-entry">c-collect-entry</a></code></li>
+      <li><code class="legend-3">collection entry sep</code></li>
     </ul>
   </div>
 </div>
@@ -1940,7 +1938,7 @@ mapping: <mark class="legend-2">{</mark> sky: blue<mark class="legend-3">,</mark
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-c-comment">c-comment</a></code></li>
+      <li><code class="legend-1">comment</code></li>
     </ul>
   </div>
 </div>
@@ -1977,9 +1975,9 @@ alias: <mark class="legend-3">*</mark>anchor
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-c-tag">c-tag</a></code></li>
-      <li><code class="legend-2"><a href="#rule-c-anchor">c-anchor</a></code></li>
-      <li><code class="legend-3"><a href="#rule-c-alias">c-alias</a></code></li>
+      <li><code class="legend-1">tag</code></li>
+      <li><code class="legend-2">anchor</code></li>
+      <li><code class="legend-3">alias</code></li>
     </ul>
   </div>
 </div>
@@ -2015,8 +2013,8 @@ folded: <mark class="legend-2">&gt;</mark>
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-c-literal">c-literal</a></code></li>
-      <li><code class="legend-2"><a href="#rule-c-folded">c-folded</a></code></li>
+      <li><code class="legend-1">literal</code></li>
+      <li><code class="legend-2">folded</code></li>
     </ul>
   </div>
 </div>
@@ -2049,8 +2047,8 @@ double: <mark class="legend-2">"</mark>text<mark class="legend-2">"</mark>
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-c-single-quote">c-single-quote</a></code></li>
-      <li><code class="legend-2"><a href="#rule-c-double-quote">c-double-quote</a></code></li>
+      <li><code class="legend-1">single quote</code></li>
+      <li><code class="legend-2">double quote</code></li>
     </ul>
   </div>
 </div>
@@ -2079,7 +2077,7 @@ double: <mark class="legend-2">"</mark>text<mark class="legend-2">"</mark>
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-c-directive">c-directive</a></code></li>
+      <li><code class="legend-1">directive</code></li>
     </ul>
   </div>
 </div>
@@ -2183,8 +2181,7 @@ clarity.</p>
 <div id="white-space-characters"></div>
 <h2 id="45-white-space-characters">4.5. White Space Characters</h2>
 
-<p>YAML recognizes two <em>white space</em> characters: <em>space</em> and <em>tab</em>.
-<sup class="rule-link"><a href="#rule-s-space">?</a></sup></p>
+<p>YAML recognizes two <em>white space</em> characters: <em>space</em> and <em>tab</em>.</p>
 
 <p>The rest of the (<a href="#character-set">printable</a>) non-<a href="#line-break-characters">break</a> characters are considered to be
 non-space characters.</p>
@@ -2220,8 +2217,8 @@ block:<mark class="legend-2">→</mark>|
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-s-space">s-space</a></code></li>
-      <li><code class="legend-2"><a href="#rule-s-tab">s-tab</a></code></li>
+      <li><code class="legend-1">space</code></li>
+      <li><code class="legend-2">tab</code></li>
     </ul>
   </div>
 </div>
@@ -3816,7 +3813,7 @@ rather than to an actual character.</p>
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-e-scalar">e-scalar</a></code></li>
+      <li><code class="legend-1"><a href="#rule-e-node">e-node</a></code></li>
     </ul>
   </div>
 </div>
@@ -6743,7 +6740,6 @@ beginning at any prior point on the line and ending at the current position.</li
     <ul>
       <li><code class="language-plaintext highlighter-rouge">&lt;start-of-line&gt;</code>, which matches the empty string at the beginning of a line.</li>
       <li><code class="language-plaintext highlighter-rouge">&lt;end-of-input&gt;</code>, matches the empty string at the end of the input.</li>
-      <li><code class="language-plaintext highlighter-rouge">&lt;empty&gt;</code>, which (always) matches the empty string.</li>
     </ul>
   </dd>
 </dl>
@@ -6782,8 +6778,8 @@ beginning at any prior point on the line and ending at the current position.</li
   <dt>A quantified term:</dt>
   <dd>
     <ul>
-      <li><code class="language-plaintext highlighter-rouge">term?</code>, which matches <code class="language-plaintext highlighter-rouge">(term | &lt;empty&gt;)</code>.</li>
-      <li><code class="language-plaintext highlighter-rouge">term*</code>, which matches <code class="language-plaintext highlighter-rouge">(term term* | &lt;empty&gt;)</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">term?</code>, which matches <code class="language-plaintext highlighter-rouge">(term | "")</code>.</li>
+      <li><code class="language-plaintext highlighter-rouge">term*</code>, which matches <code class="language-plaintext highlighter-rouge">(term term* | "")</code>.</li>
       <li><code class="language-plaintext highlighter-rouge">term+</code>, which matches <code class="language-plaintext highlighter-rouge">(term term*)</code>.</li>
     </ul>
   </dd>
@@ -6990,7 +6986,7 @@ l-document-suffix ::=
 <div id="rule-l-directive"></div>
 <pre class="rule">[4]
 l-directive ::=
-  <a href="#rule-c-directive">c-directive</a>                       # '%'
+  '%'
   (
       <a href="#rule-ns-yaml-directive">ns-yaml-directive</a>
     | <a href="#rule-ns-tag-directive">ns-tag-directive</a>
@@ -7154,7 +7150,7 @@ c-l-block-map-explicit-entry(n) ::=
 <div id="rule-c-l-block-map-explicit-key"></div>
 <pre class="rule">[21]
 c-l-block-map-explicit-key(n) ::=
-  <a href="#rule-c-mapping-key">c-mapping-key</a>                     # '?' (not followed by non-ws char)
+  '?'                               # not followed by non-ws char
   <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-OUT)
 </pre>
 
@@ -7162,7 +7158,7 @@ c-l-block-map-explicit-key(n) ::=
 <pre class="rule">[22]
 l-block-map-explicit-value(n) ::=
   <a href="#rule-s-indent">s-indent</a>(n)
-  <a href="#rule-c-mapping-value">c-mapping-value</a>                   # ':' (not followed by non-ws char)
+  ':'                               # not followed by non-ws char
   <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-OUT)
 </pre>
 
@@ -7186,7 +7182,7 @@ ns-s-block-map-implicit-key ::=
 <div id="rule-c-l-block-map-implicit-value"></div>
 <pre class="rule">[25]
 c-l-block-map-implicit-value(n) ::=
-  <a href="#rule-c-mapping-value">c-mapping-value</a>                   # ':' (not followed by non-ws char)
+  ':'                               # not followed by non-ws char
   (
       <a href="#rule-s-l+block-node">s-l+block-node</a>(n,BLOCK-OUT)
     | (
@@ -7221,7 +7217,7 @@ l+block-sequence(n) ::=
 <div id="rule-c-l-block-seq-entry"></div>
 <pre class="rule">[28]
 c-l-block-seq-entry(n) ::=
-  <a href="#rule-c-sequence-entry">c-sequence-entry</a>                  # '-'
+  '-'
   [ lookahead ≠ <a href="#rule-ns-char">ns-char</a> ]
   <a href="#rule-s-l+block-indented">s-l+block-indented</a>(n,BLOCK-IN)
 </pre>
@@ -7264,7 +7260,7 @@ ns-l-compact-sequence(n) ::=
 <div id="rule-c-l+literal"></div>
 <pre class="rule">[31]
 c-l+literal(n) ::=
-  <a href="#rule-c-literal">c-literal</a>                         # '|'
+  '|'
   <a href="#rule-c-b-block-header">c-b-block-header</a>(t)
   <a href="#rule-l-literal-content">l-literal-content</a>(n+m,t)
 </pre>
@@ -7300,7 +7296,7 @@ b-nb-literal-next(n) ::=
 <div id="rule-c-l+folded"></div>
 <pre class="rule">[35]
 c-l+folded(n) ::=
-  <a href="#rule-c-folded">c-folded</a>                          # '&gt;'
+  '&gt;'
   <a href="#rule-c-b-block-header">c-b-block-header</a>(t)
   <a href="#rule-l-folded-content">l-folded-content</a>(n+m,t)
 </pre>
@@ -7468,7 +7464,7 @@ ns-flow-node(n,c) ::=
           <a href="#rule-s-separate">s-separate</a>(n,c)
           <a href="#rule-ns-flow-content">ns-flow-content</a>(n,c)
         )
-        | <a href="#rule-e-scalar">e-scalar</a>
+        | <a href="#rule-e-node">e-node</a>
       )
     )
 </pre>
@@ -7526,7 +7522,7 @@ ns-s-flow-map-entries(n,c) ::=
   <a href="#rule-ns-flow-map-entry">ns-flow-map-entry</a>(n,c)
   <a href="#rule-s-separate">s-separate</a>(n,c)?
   (
-    <a href="#rule-c-collect-entry">c-collect-entry</a>                 # ','
+    ','
     <a href="#rule-s-separate">s-separate</a>(n,c)?
     <a href="#rule-ns-s-flow-map-entries">ns-s-flow-map-entries</a>(n,c)?
   )?
@@ -7536,7 +7532,7 @@ ns-s-flow-map-entries(n,c) ::=
 <pre class="rule">[59]
 ns-flow-map-entry(n,c) ::=
     (
-      <a href="#rule-c-mapping-key">c-mapping-key</a>                 # '?' (not followed by non-ws char)
+      '?'                           # not followed by non-ws char
       <a href="#rule-s-separate">s-separate</a>(n,c)
       <a href="#rule-ns-flow-map-explicit-entry">ns-flow-map-explicit-entry</a>(n,c)
     )
@@ -7584,7 +7580,7 @@ c-ns-flow-map-empty-key-entry(n,c) ::=
 <div id="rule-c-ns-flow-map-separate-value"></div>
 <pre class="rule">[64]
 c-ns-flow-map-separate-value(n,c) ::=
-  <a href="#rule-c-mapping-value">c-mapping-value</a>                   # ':'
+  ':'
   [ lookahead ≠ <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) ]
   (
       (
@@ -7611,7 +7607,7 @@ c-ns-flow-map-json-key-entry(n,c) ::=
 <div id="rule-c-ns-flow-map-adjacent-value"></div>
 <pre class="rule">[66]
 c-ns-flow-map-adjacent-value(n,c) ::=
-  <a href="#rule-c-mapping-value">c-mapping-value</a>                   # ':'
+  ':'
   (
       (
         <a href="#rule-s-separate">s-separate</a>(n,c)?
@@ -7625,7 +7621,7 @@ c-ns-flow-map-adjacent-value(n,c) ::=
 <pre class="rule">[67]
 ns-flow-pair(n,c) ::=
     (
-      <a href="#rule-c-mapping-key">c-mapping-key</a>                 # '?' (not followed by non-ws char)
+      '?'                           # not followed by non-ws char
       <a href="#rule-s-separate">s-separate</a>(n,c)
       <a href="#rule-ns-flow-map-explicit-entry">ns-flow-map-explicit-entry</a>(n,c)
     )
@@ -7682,7 +7678,7 @@ ns-flow-yaml-node(n,c) ::=
             <a href="#rule-s-separate">s-separate</a>(n,c)
             <a href="#rule-ns-flow-yaml-content">ns-flow-yaml-content</a>(n,c)
           )
-        | <a href="#rule-e-scalar">e-scalar</a>
+        | <a href="#rule-e-node">e-node</a>
       )
     )
 </pre>
@@ -7715,7 +7711,7 @@ ns-s-flow-seq-entries(n,c) ::=
   <a href="#rule-ns-flow-seq-entry">ns-flow-seq-entry</a>(n,c)
   <a href="#rule-s-separate">s-separate</a>(n,c)?
   (
-    <a href="#rule-c-collect-entry">c-collect-entry</a>                 # ','
+    ','
     <a href="#rule-s-separate">s-separate</a>(n,c)?
     <a href="#rule-ns-s-flow-seq-entries">ns-s-flow-seq-entries</a>(n,c)?
   )?
@@ -7736,9 +7732,9 @@ ns-flow-seq-entry(n,c) ::=
 <div id="rule-c-double-quoted"></div>
 <pre class="rule">[78]
 c-double-quoted(n,c) ::=
-  <a href="#rule-c-double-quote">c-double-quote</a>                    # '"'
+  '"'
   <a href="#rule-nb-double-text">nb-double-text</a>(n,c)
-  <a href="#rule-c-double-quote">c-double-quote</a>                    # '"'
+  '"'
 </pre>
 
 <div id="rule-nb-double-text"></div>
@@ -7797,11 +7793,7 @@ ns-double-char ::=
 <pre class="rule">[85]
 nb-double-char ::=
     <a href="#rule-c-ns-esc-char">c-ns-esc-char</a>
-  | (
-        <a href="#rule-nb-json">nb-json</a>
-      - '\'                         # escape
-      - <a href="#rule-c-double-quote">c-double-quote</a>              # '"'
-    )
+  | ( <a href="#rule-nb-json">nb-json</a> - '\' - '"' )
 </pre>
 
 <div id="rule-s-double-escaped"></div>
@@ -7827,9 +7819,9 @@ s-double-break(n) ::=
 <div id="rule-c-single-quoted"></div>
 <pre class="rule">[88]
 c-single-quoted(n,c) ::=
-  <a href="#rule-c-single-quote">c-single-quote</a>                    # "'"
+  "'"
   <a href="#rule-nb-single-text">nb-single-text</a>(n,c)
-  <a href="#rule-c-single-quote">c-single-quote</a>                    # "'"
+  "'"
 </pre>
 
 <div id="rule-nb-single-text"></div>
@@ -7889,10 +7881,7 @@ ns-single-char ::=
 <pre class="rule">[95]
 nb-single-char ::=
     <a href="#rule-c-quoted-quote">c-quoted-quote</a>
-  | (
-        <a href="#rule-nb-json">nb-json</a>
-      - <a href="#rule-c-single-quote">c-single-quote</a>              # "'"
-    )
+  | ( <a href="#rule-nb-json">nb-json</a> - "'" )
 </pre>
 
 <div id="rule-c-quoted-quote"></div>
@@ -7947,14 +7936,28 @@ nb-ns-plain-in-line(c) ::=
 ns-plain-first(c) ::=
     (
         <a href="#rule-ns-char">ns-char</a>
-      - <a href="#rule-c-indicator">c-indicator</a>
+      - '{'                         # <a href="#rule-c-mapping-start">c-mapping-start</a>
+      - '}'                         # <a href="#rule-c-mapping-end">c-mapping-end</a>
+      - '['                         # <a href="#rule-c-sequence-start">c-sequence-start</a>
+      - ']'                         # <a href="#rule-c-sequence-end">c-sequence-end</a>
+      - '-'                         # sequence entry
+      - '?'                         # mapping key
+      - ':'                         # mapping value
+      - ','                         # entry separator
+      - '#'                         # comment
+      - '&amp;'                         # anchor
+      - '*'                         # alias
+      - '!'                         # tag
+      - '|'                         # literal scalar
+      - '&gt;'                         # folded scalar
+      - "'"                         # single quote
+      - '"'                         # double quote
+      - '%'                         # directive
+      - '@'                         # reserved
+      - '`'                         # reserved
     )
   | (
-      (
-          <a href="#rule-c-mapping-key">c-mapping-key</a>             # '?'
-        | <a href="#rule-c-mapping-value">c-mapping-value</a>           # ':'
-        | <a href="#rule-c-sequence-entry">c-sequence-entry</a>          # '-'
-      )
+      ( '?' | ':' | '-' )
       [ lookahead = <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) ]
     )
 </pre>
@@ -7964,15 +7967,15 @@ ns-plain-first(c) ::=
 ns-plain-char(c) ::=
     (
         <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c)
-      - <a href="#rule-c-mapping-value">c-mapping-value</a>             # ':'
-      - <a href="#rule-c-comment">c-comment</a>                   # '#'
+      - ':'
+      - '#'
     )
   | (
       [ lookbehind = <a href="#rule-ns-char">ns-char</a> ]
-      <a href="#rule-c-comment">c-comment</a>                     # '#'
+      '#'
     )
   | (
-      <a href="#rule-c-mapping-value">c-mapping-value</a>               # ':'
+      ':'
       [ lookahead = <a href="#rule-ns-plain-safe">ns-plain-safe</a>(c) ]
     )
 </pre>
@@ -8000,24 +8003,18 @@ ns-plain-safe-in ::=
 <div id="a-3-3-empty-nodes"></div>
 <h3 id="a33-empty-nodes">A.3.3. Empty Nodes</h3>
 
-<div id="rule-e-scalar"></div>
-<pre class="rule">[107]
-e-scalar ::= ""
-</pre>
-
 <div id="rule-e-node"></div>
-<pre class="rule">[108]
-e-node ::=
-  <a href="#rule-e-scalar">e-scalar</a>                          # ""
+<pre class="rule">[107]
+e-node ::= ""
 </pre>
 
 <div id="a-3-4-alias-nodes"></div>
 <h3 id="a34-alias-nodes">A.3.4. Alias Nodes</h3>
 
 <div id="rule-c-ns-alias-node"></div>
-<pre class="rule">[109]
+<pre class="rule">[108]
 c-ns-alias-node ::=
-  <a href="#rule-c-alias">c-alias</a>                           # '*'
+  '*'
   <a href="#rule-ns-anchor-name">ns-anchor-name</a>
 </pre>
 
@@ -8028,42 +8025,39 @@ c-ns-alias-node ::=
 <h3 id="a41-indentation-spaces">A.4.1. Indentation Spaces</h3>
 
 <div id="rule-s-indent"></div>
-<pre class="rule">[110]
-s-indent(0) ::=
-  &lt;empty&gt;
+<pre class="rule">[109]
+s-indent(0) ::= ""
 
 # When n≥0
 s-indent(n+1) ::=
-  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent">s-indent</a>(n)
+  x20 <a href="#rule-s-indent">s-indent</a>(n)
 </pre>
 
 <div id="rule-s-indent-less-than"></div>
-<pre class="rule">[111]
-s-indent-less-than(1) ::=
-  &lt;empty&gt;
+<pre class="rule">[110]
+s-indent-less-than(1) ::= ""
 
 # When n≥1
 s-indent-less-than(n+1) ::=
-  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent-less-than">s-indent-less-than</a>(n)
-  | &lt;empty&gt;
+    x20 <a href="#rule-s-indent-less-than">s-indent-less-than</a>(n)
+  | ""
 </pre>
 
 <div id="rule-s-indent-less-or-equal"></div>
-<pre class="rule">[112]
-s-indent-less-or-equal(0) ::=
-  &lt;empty&gt;
+<pre class="rule">[111]
+s-indent-less-or-equal(0) ::= ""
 
 # When n≥0
 s-indent-less-or-equal(n+1) ::=
-  <a href="#rule-s-space">s-space</a> <a href="#rule-s-indent-less-or-equal">s-indent-less-or-equal</a>(n)
-  | &lt;empty&gt;
+    x20 <a href="#rule-s-indent-less-or-equal">s-indent-less-or-equal</a>(n)
+  | ""
 </pre>
 
 <div id="a-4-2-line-prefixes"></div>
 <h3 id="a42-line-prefixes">A.4.2. Line Prefixes</h3>
 
 <div id="rule-s-line-prefix"></div>
-<pre class="rule">[113]
+<pre class="rule">[112]
 s-line-prefix(n,BLOCK-OUT) ::= <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
 s-line-prefix(n,BLOCK-IN)  ::= <a href="#rule-s-block-line-prefix">s-block-line-prefix</a>(n)
 s-line-prefix(n,FLOW-OUT)  ::= <a href="#rule-s-flow-line-prefix">s-flow-line-prefix</a>(n)
@@ -8071,13 +8065,13 @@ s-line-prefix(n,FLOW-IN)   ::= <a href="#rule-s-flow-line-prefix">s-flow-line-pr
 </pre>
 
 <div id="rule-s-block-line-prefix"></div>
-<pre class="rule">[114]
+<pre class="rule">[113]
 s-block-line-prefix(n) ::=
   <a href="#rule-s-indent">s-indent</a>(n)
 </pre>
 
 <div id="rule-s-flow-line-prefix"></div>
-<pre class="rule">[115]
+<pre class="rule">[114]
 s-flow-line-prefix(n) ::=
   <a href="#rule-s-indent">s-indent</a>(n)
   <a href="#rule-s-separate-in-line">s-separate-in-line</a>?
@@ -8087,7 +8081,7 @@ s-flow-line-prefix(n) ::=
 <h3 id="a43-line-folding">A.4.3. Line Folding</h3>
 
 <div id="rule-s-flow-folded"></div>
-<pre class="rule">[116]
+<pre class="rule">[115]
 s-flow-folded(n) ::=
   <a href="#rule-s-separate-in-line">s-separate-in-line</a>?
   <a href="#rule-b-l-folded">b-l-folded</a>(n,FLOW-IN)
@@ -8095,7 +8089,7 @@ s-flow-folded(n) ::=
 </pre>
 
 <div id="rule-b-l-folded"></div>
-<pre class="rule">[117]
+<pre class="rule">[116]
 b-l-folded(n,c) ::=
   <a href="#rule-b-l-trimmed">b-l-trimmed</a>(n,c) | <a href="#rule-b-as-space">b-as-space</a>
 </pre>
@@ -8104,21 +8098,21 @@ b-l-folded(n,c) ::=
 <h3 id="a44-comments">A.4.4. Comments</h3>
 
 <div id="rule-c-nb-comment-text"></div>
-<pre class="rule">[118]
+<pre class="rule">[117]
 c-nb-comment-text ::=
-  <a href="#rule-c-comment">c-comment</a>                         # '#'
+  '#'
   <a href="#rule-nb-char">nb-char</a>*
 </pre>
 
 <div id="rule-b-comment"></div>
-<pre class="rule">[119]
+<pre class="rule">[118]
 b-comment ::=
     <a href="#rule-b-non-content">b-non-content</a>
   | &lt;end-of-input&gt;
 </pre>
 
 <div id="rule-s-b-comment"></div>
-<pre class="rule">[120]
+<pre class="rule">[119]
 s-b-comment ::=
   (
     <a href="#rule-s-separate-in-line">s-separate-in-line</a>
@@ -8128,7 +8122,7 @@ s-b-comment ::=
 </pre>
 
 <div id="rule-l-comment"></div>
-<pre class="rule">[121]
+<pre class="rule">[120]
 l-comment ::=
   <a href="#rule-s-separate-in-line">s-separate-in-line</a>
   <a href="#rule-c-nb-comment-text">c-nb-comment-text</a>?
@@ -8136,7 +8130,7 @@ l-comment ::=
 </pre>
 
 <div id="rule-s-l-comments"></div>
-<pre class="rule">[122]
+<pre class="rule">[121]
 s-l-comments ::=
   (
       <a href="#rule-s-b-comment">s-b-comment</a>
@@ -8149,7 +8143,7 @@ s-l-comments ::=
 <h3 id="a45-empty-lines">A.4.5. Empty Lines</h3>
 
 <div id="rule-l-empty"></div>
-<pre class="rule">[123]
+<pre class="rule">[122]
 l-empty(n,c) ::=
   (
       <a href="#rule-s-line-prefix">s-line-prefix</a>(n,c)
@@ -8159,23 +8153,17 @@ l-empty(n,c) ::=
 </pre>
 
 <div id="rule-b-l-trimmed"></div>
-<pre class="rule">[124]
+<pre class="rule">[123]
 b-l-trimmed(n,c) ::=
   <a href="#rule-b-non-content">b-non-content</a>
   <a href="#rule-l-empty">l-empty</a>(n,c)+
-</pre>
-
-<div id="rule-b-as-space"></div>
-<pre class="rule">[125]
-b-as-space ::=
-  <a href="#rule-b-break">b-break</a>
 </pre>
 
 <div id="a-4-6-separation-lines"></div>
 <h3 id="a46-separation-lines">A.4.6. Separation Lines</h3>
 
 <div id="rule-s-separate"></div>
-<pre class="rule">[126]
+<pre class="rule">[124]
 s-separate(n,BLOCK-OUT) ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
 s-separate(n,BLOCK-IN)  ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
 s-separate(n,FLOW-OUT)  ::= <a href="#rule-s-separate-lines">s-separate-lines</a>(n)
@@ -8185,7 +8173,7 @@ s-separate(n,FLOW-KEY)  ::= <a href="#rule-s-separate-in-line">s-separate-in-lin
 </pre>
 
 <div id="rule-s-separate-lines"></div>
-<pre class="rule">[127]
+<pre class="rule">[125]
 s-separate-lines(n) ::=
     (
       <a href="#rule-s-l-comments">s-l-comments</a>
@@ -8198,7 +8186,7 @@ s-separate-lines(n) ::=
 <h3 id="a47-separation-spaces">A.4.7. Separation Spaces</h3>
 
 <div id="rule-s-separate-in-line"></div>
-<pre class="rule">[128]
+<pre class="rule">[126]
 s-separate-in-line ::=
     <a href="#rule-s-white">s-white</a>+
   | &lt;start-of-line&gt;
@@ -8208,7 +8196,7 @@ s-separate-in-line ::=
 <h3 id="a48-directives">A.4.8. Directives</h3>
 
 <div id="rule-ns-yaml-directive"></div>
-<pre class="rule">[129]
+<pre class="rule">[127]
 ns-yaml-directive ::=
   "YAML"
   <a href="#rule-s-separate-in-line">s-separate-in-line</a>
@@ -8216,7 +8204,7 @@ ns-yaml-directive ::=
 </pre>
 
 <div id="rule-ns-yaml-version"></div>
-<pre class="rule">[130]
+<pre class="rule">[128]
 ns-yaml-version ::=
   <a href="#rule-ns-dec-digit">ns-dec-digit</a>+
   '.'
@@ -8224,7 +8212,7 @@ ns-yaml-version ::=
 </pre>
 
 <div id="rule-ns-reserved-directive"></div>
-<pre class="rule">[131]
+<pre class="rule">[129]
 ns-reserved-directive ::=
   <a href="#rule-ns-directive-name">ns-directive-name</a>
   (
@@ -8234,19 +8222,19 @@ ns-reserved-directive ::=
 </pre>
 
 <div id="rule-ns-directive-name"></div>
-<pre class="rule">[132]
+<pre class="rule">[130]
 ns-directive-name ::=
   <a href="#rule-ns-char">ns-char</a>+
 </pre>
 
 <div id="rule-ns-directive-parameter"></div>
-<pre class="rule">[133]
+<pre class="rule">[131]
 ns-directive-parameter ::=
   <a href="#rule-ns-char">ns-char</a>+
 </pre>
 
 <div id="rule-ns-tag-directive"></div>
-<pre class="rule">[134]
+<pre class="rule">[132]
 ns-tag-directive ::=
   "TAG"
   <a href="#rule-s-separate-in-line">s-separate-in-line</a>
@@ -8256,7 +8244,7 @@ ns-tag-directive ::=
 </pre>
 
 <div id="rule-c-tag-handle"></div>
-<pre class="rule">[135]
+<pre class="rule">[133]
 c-tag-handle ::=
     <a href="#rule-c-named-tag-handle">c-named-tag-handle</a>
   | <a href="#rule-c-secondary-tag-handle">c-secondary-tag-handle</a>
@@ -8264,38 +8252,38 @@ c-tag-handle ::=
 </pre>
 
 <div id="rule-c-named-tag-handle"></div>
-<pre class="rule">[136]
+<pre class="rule">[134]
 c-named-tag-handle ::=
-  <a href="#rule-c-tag">c-tag</a>                             # '!'
+  '!'
   <a href="#rule-ns-word-char">ns-word-char</a>+
-  <a href="#rule-c-tag">c-tag</a>                             # '!'
+  '!'
 </pre>
 
 <div id="rule-c-secondary-tag-handle"></div>
-<pre class="rule">[137]
+<pre class="rule">[135]
 c-secondary-tag-handle ::= "!!"
 </pre>
 
 <div id="rule-c-primary-tag-handle"></div>
-<pre class="rule">[138]
+<pre class="rule">[136]
 c-primary-tag-handle ::= '!'
 </pre>
 
 <div id="rule-ns-tag-prefix"></div>
-<pre class="rule">[139]
+<pre class="rule">[137]
 ns-tag-prefix ::=
   <a href="#rule-c-ns-local-tag-prefix">c-ns-local-tag-prefix</a> | <a href="#rule-ns-global-tag-prefix">ns-global-tag-prefix</a>
 </pre>
 
 <div id="rule-c-ns-local-tag-prefix"></div>
-<pre class="rule">[140]
+<pre class="rule">[138]
 c-ns-local-tag-prefix ::=
-  <a href="#rule-c-tag">c-tag</a>                             # '!'
+  '!'
   <a href="#rule-ns-uri-char">ns-uri-char</a>*
 </pre>
 
 <div id="rule-ns-global-tag-prefix"></div>
-<pre class="rule">[141]
+<pre class="rule">[139]
 ns-global-tag-prefix ::=
   <a href="#rule-ns-tag-char">ns-tag-char</a>
   <a href="#rule-ns-uri-char">ns-uri-char</a>*
@@ -8305,7 +8293,7 @@ ns-global-tag-prefix ::=
 <h3 id="a49-node-properties">A.4.9. Node Properties</h3>
 
 <div id="rule-c-ns-properties"></div>
-<pre class="rule">[142]
+<pre class="rule">[140]
 c-ns-properties(n,c) ::=
     (
       <a href="#rule-c-ns-anchor-property">c-ns-anchor-property</a>
@@ -8324,26 +8312,26 @@ c-ns-properties(n,c) ::=
 </pre>
 
 <div id="rule-c-ns-anchor-property"></div>
-<pre class="rule">[143]
+<pre class="rule">[141]
 c-ns-anchor-property ::=
-  <a href="#rule-c-anchor">c-anchor</a>                          # '&amp;'
+  '&amp;'
   <a href="#rule-ns-anchor-name">ns-anchor-name</a>
 </pre>
 
 <div id="rule-ns-anchor-name"></div>
-<pre class="rule">[144]
+<pre class="rule">[142]
 ns-anchor-name ::=
   <a href="#rule-ns-anchor-char">ns-anchor-char</a>+
 </pre>
 
 <div id="rule-ns-anchor-char"></div>
-<pre class="rule">[145]
+<pre class="rule">[143]
 ns-anchor-char ::=
     <a href="#rule-ns-char">ns-char</a> - <a href="#rule-c-flow-indicator">c-flow-indicator</a>
 </pre>
 
 <div id="rule-c-ns-tag-property"></div>
-<pre class="rule">[146]
+<pre class="rule">[144]
 c-ns-tag-property ::=
     <a href="#rule-c-verbatim-tag">c-verbatim-tag</a>
   | <a href="#rule-c-ns-shorthand-tag">c-ns-shorthand-tag</a>
@@ -8351,7 +8339,7 @@ c-ns-tag-property ::=
 </pre>
 
 <div id="rule-c-verbatim-tag"></div>
-<pre class="rule">[147]
+<pre class="rule">[145]
 c-verbatim-tag ::=
   "!&lt;"
   <a href="#rule-ns-uri-char">ns-uri-char</a>+
@@ -8359,14 +8347,14 @@ c-verbatim-tag ::=
 </pre>
 
 <div id="rule-c-ns-shorthand-tag"></div>
-<pre class="rule">[148]
+<pre class="rule">[146]
 c-ns-shorthand-tag ::=
   <a href="#rule-c-tag-handle">c-tag-handle</a>
   <a href="#rule-ns-tag-char">ns-tag-char</a>+
 </pre>
 
 <div id="rule-c-non-specific-tag"></div>
-<pre class="rule">[149]
+<pre class="rule">[147]
 c-non-specific-tag ::= '!'
 </pre>
 
@@ -8377,7 +8365,7 @@ c-non-specific-tag ::= '!'
 <h3 id="a51-character-encoding">A.5.1. Character Encoding</h3>
 
 <div id="rule-c-byte-order-mark"></div>
-<pre class="rule">[150]
+<pre class="rule">[148]
 c-byte-order-mark ::= xFEFF
 </pre>
 
@@ -8385,7 +8373,7 @@ c-byte-order-mark ::= xFEFF
 <h3 id="a52-valid-character-sets">A.5.2. Valid Character Sets</h3>
 
 <div id="rule-c-printable"></div>
-<pre class="rule">[151]
+<pre class="rule">[149]
 c-printable ::=
                                     # 8 bit
     x09                             # Tab (\t)
@@ -8404,220 +8392,106 @@ c-printable ::=
 <p>The production name <code class="language-plaintext highlighter-rouge">nb-json</code> means “non-break JSON compatible” here.</p>
 
 <div id="rule-nb-json"></div>
-<pre class="rule">[152]
+<pre class="rule">[150]
 nb-json ::=
     x09                             # Tab character
   | [x20-x10FFFF]                   # Non-C0-control characters
 </pre>
 
 <div id="rule-ns-char"></div>
-<pre class="rule">[153]
+<pre class="rule">[151]
 ns-char ::=
   <a href="#rule-nb-char">nb-char</a> - <a href="#rule-s-white">s-white</a>
 </pre>
 
 <div id="rule-nb-char"></div>
-<pre class="rule">[154]
+<pre class="rule">[152]
 nb-char ::=
   <a href="#rule-c-printable">c-printable</a> - <a href="#rule-b-char">b-char</a> - <a href="#rule-c-byte-order-mark">c-byte-order-mark</a>
 </pre>
 
-<div id="a-5-3-white-space-characters"></div>
-<h3 id="a53-white-space-characters">A.5.3. White Space Characters</h3>
-
-<div id="rule-s-space"></div>
-<pre class="rule">[155]
-s-space ::= x20
-</pre>
-
-<div id="rule-s-tab"></div>
-<pre class="rule">[156]
-s-tab ::= x09
-</pre>
-
 <div id="rule-s-white"></div>
-<pre class="rule">[157]
+<pre class="rule">[153]
 s-white ::=
-  <a href="#rule-s-space">s-space</a> | <a href="#rule-s-tab">s-tab</a>
+  x20 | x09                         @ Space or Tab
 </pre>
 
-<div id="a-5-4-line-break-characters"></div>
-<h3 id="a54-line-break-characters">A.5.4. Line Break Characters</h3>
+<div id="a-5-3-line-break-characters"></div>
+<h3 id="a53-line-break-characters">A.5.3. Line Break Characters</h3>
+
+<div id="rule-b-as-space"></div>
+<pre class="rule">[154]
+b-as-space ::=
+  <a href="#rule-b-break">b-break</a>
+</pre>
 
 <div id="rule-b-as-line-feed"></div>
-<pre class="rule">[158]
+<pre class="rule">[155]
 b-as-line-feed ::=
   <a href="#rule-b-break">b-break</a>
 </pre>
 
 <div id="rule-b-non-content"></div>
-<pre class="rule">[159]
+<pre class="rule">[156]
 b-non-content ::=
   <a href="#rule-b-break">b-break</a>
 </pre>
 
 <div id="rule-b-break"></div>
-<pre class="rule">[160]
+<pre class="rule">[157]
 b-break ::=
     (
-      <a href="#rule-b-carriage-return">b-carriage-return</a>             # x0A
-      <a href="#rule-b-line-feed">b-line-feed</a>
-    )                               # x0D
-  | <a href="#rule-b-carriage-return">b-carriage-return</a>
-  | <a href="#rule-b-line-feed">b-line-feed</a>
+      x0D                           # Carriage return
+      x0A                           # Line feed
+    )
+  | x0D
+  | x0A
 </pre>
 
 <div id="rule-b-char"></div>
-<pre class="rule">[161]
+<pre class="rule">[158]
 b-char ::=
-    <a href="#rule-b-line-feed">b-line-feed</a>                     # x0A
-  | <a href="#rule-b-carriage-return">b-carriage-return</a>               # X0D
+    x0A
+  | x0D
 </pre>
 
-<div id="rule-b-line-feed"></div>
-<pre class="rule">[162]
-b-line-feed ::= x0A
-</pre>
-
-<div id="rule-b-carriage-return"></div>
-<pre class="rule">[163]
-b-carriage-return ::= x0D
-</pre>
-
-<div id="a-5-5-indicator-characters"></div>
-<h3 id="a55-indicator-characters">A.5.5. Indicator Characters</h3>
-
-<div id="rule-c-indicator"></div>
-<pre class="rule">[164]
-c-indicator ::=
-    <a href="#rule-c-sequence-entry">c-sequence-entry</a>                # '-'
-  | <a href="#rule-c-mapping-key">c-mapping-key</a>                   # '?'
-  | <a href="#rule-c-mapping-value">c-mapping-value</a>                 # ':'
-  | <a href="#rule-c-collect-entry">c-collect-entry</a>                 # ','
-  | <a href="#rule-c-sequence-start">c-sequence-start</a>                # '['
-  | <a href="#rule-c-sequence-end">c-sequence-end</a>                  # ']'
-  | <a href="#rule-c-mapping-start">c-mapping-start</a>                 # '{'
-  | <a href="#rule-c-mapping-end">c-mapping-end</a>                   # '}'
-  | <a href="#rule-c-comment">c-comment</a>                       # '#'
-  | <a href="#rule-c-anchor">c-anchor</a>                        # '&amp;'
-  | <a href="#rule-c-alias">c-alias</a>                         # '*'
-  | <a href="#rule-c-tag">c-tag</a>                           # '!'
-  | <a href="#rule-c-literal">c-literal</a>                       # '|'
-  | <a href="#rule-c-folded">c-folded</a>                        # '&gt;'
-  | <a href="#rule-c-single-quote">c-single-quote</a>                  # "'"
-  | <a href="#rule-c-double-quote">c-double-quote</a>                  # '"'
-  | <a href="#rule-c-directive">c-directive</a>                     # '%'
-  | <a href="#rule-c-reserved">c-reserved</a>                      # '@' '`'
-</pre>
+<div id="a-5-4-indicator-characters"></div>
+<h3 id="a54-indicator-characters">A.5.4. Indicator Characters</h3>
 
 <div id="rule-c-flow-indicator"></div>
-<pre class="rule">[165]
+<pre class="rule">[159]
 c-flow-indicator ::=
-    <a href="#rule-c-collect-entry">c-collect-entry</a>                 # ','
-  | <a href="#rule-c-sequence-start">c-sequence-start</a>                # '['
-  | <a href="#rule-c-sequence-end">c-sequence-end</a>                  # ']'
-  | <a href="#rule-c-mapping-start">c-mapping-start</a>                 # '{'
-  | <a href="#rule-c-mapping-end">c-mapping-end</a>                   # '}'
-</pre>
-
-<!-- The single character productions below should be removed -->
-
-<div id="rule-c-sequence-entry"></div>
-<pre class="rule">[166]
-c-sequence-entry ::= '-'
-</pre>
-
-<div id="rule-c-mapping-key"></div>
-<pre class="rule">[167]
-c-mapping-key ::= '?'
-</pre>
-
-<div id="rule-c-mapping-value"></div>
-<pre class="rule">[168]
-c-mapping-value ::= ':'
-</pre>
-
-<div id="rule-c-collect-entry"></div>
-<pre class="rule">[169]
-c-collect-entry ::= ','
-</pre>
-
-<div id="rule-c-sequence-start"></div>
-<pre class="rule">[170]
-c-sequence-start ::= '['
-</pre>
-
-<div id="rule-c-sequence-end"></div>
-<pre class="rule">[171]
-c-sequence-end ::= ']'
+  | '{'                             # <a href="#rule-c-mapping-start">c-mapping-start</a>
+  | '}'                             # <a href="#rule-c-mapping-end">c-mapping-end</a>
+  | '['                             # <a href="#rule-c-sequence-start">c-sequence-start</a>
+  | ']'                             # <a href="#rule-c-sequence-end">c-sequence-end</a>
 </pre>
 
 <div id="rule-c-mapping-start"></div>
-<pre class="rule">[172]
+<pre class="rule">[160]
 c-mapping-start ::= '{'
 </pre>
 
 <div id="rule-c-mapping-end"></div>
-<pre class="rule">[173]
+<pre class="rule">[161]
 c-mapping-end ::= '}'
 </pre>
 
-<div id="rule-c-comment"></div>
-<pre class="rule">[174]
-c-comment ::= '#'
+<div id="rule-c-sequence-start"></div>
+<pre class="rule">[162]
+c-sequence-start ::= '['
 </pre>
 
-<div id="rule-c-anchor"></div>
-<pre class="rule">[175]
-c-anchor ::= '&amp;'
+<div id="rule-c-sequence-end"></div>
+<pre class="rule">[163]
+c-sequence-end ::= ']'
 </pre>
 
-<div id="rule-c-alias"></div>
-<pre class="rule">[176]
-c-alias ::= '*'
-</pre>
-
-<div id="rule-c-tag"></div>
-<pre class="rule">[177]
-c-tag ::= '!'
-</pre>
-
-<div id="rule-c-literal"></div>
-<pre class="rule">[178]
-c-literal ::= '|'
-</pre>
-
-<div id="rule-c-folded"></div>
-<pre class="rule">[179]
-c-folded ::= '&gt;'
-</pre>
-
-<div id="rule-c-single-quote"></div>
-<pre class="rule">[180]
-c-single-quote ::= "'"
-</pre>
-
-<div id="rule-c-double-quote"></div>
-<pre class="rule">[181]
-c-double-quote ::= '"'
-</pre>
-
-<div id="rule-c-directive"></div>
-<pre class="rule">[182]
-c-directive ::= '%'
-</pre>
-
-<div id="rule-c-reserved"></div>
-<pre class="rule">[183]
-c-reserved ::=
-    '@' | '`'
-</pre>
-
-<div id="a-5-6-miscellaneous-character-sets"></div>
-<h3 id="a56-miscellaneous-character-sets">A.5.6. Miscellaneous Character Sets</h3>
+<div id="a-5-5-miscellaneous-character-sets"></div>
+<h3 id="a55-miscellaneous-character-sets">A.5.5. Miscellaneous Character Sets</h3>
 
 <div id="rule-c-ns-esc-char"></div>
-<pre class="rule">[184]
+<pre class="rule">[164]
 c-ns-esc-char ::=
   '\'
   (
@@ -8645,15 +8519,15 @@ c-ns-esc-char ::=
 </pre>
 
 <div id="rule-ns-tag-char"></div>
-<pre class="rule">[185]
+<pre class="rule">[165]
 ns-tag-char ::=
     <a href="#rule-ns-uri-char">ns-uri-char</a>
-  - <a href="#rule-c-tag">c-tag</a>                           # '!'
+  - '!'
   - <a href="#rule-c-flow-indicator">c-flow-indicator</a>
 </pre>
 
 <div id="rule-ns-uri-char"></div>
-<pre class="rule">[186]
+<pre class="rule">[166]
 ns-uri-char ::=
     (
       '%'
@@ -8684,7 +8558,7 @@ ns-uri-char ::=
 </pre>
 
 <div id="rule-ns-word-char"></div>
-<pre class="rule">[187]
+<pre class="rule">[167]
 ns-word-char ::=
     <a href="#rule-ns-dec-digit">ns-dec-digit</a>                    # 0-9
   | <a href="#rule-ns-ascii-letter">ns-ascii-letter</a>                 # A-Z a-z
@@ -8692,13 +8566,13 @@ ns-word-char ::=
 </pre>
 
 <div id="rule-ns-dec-digit"></div>
-<pre class="rule">[188]
+<pre class="rule">[168]
 ns-dec-digit ::=
   [x30-x39]                         # 0-9
 </pre>
 
 <div id="rule-ns-hex-digit"></div>
-<pre class="rule">[189]
+<pre class="rule">[169]
 ns-hex-digit ::=
     <a href="#rule-ns-dec-digit">ns-dec-digit</a>                    # 0-9
   | [x41-x46]                       # A-F
@@ -8706,7 +8580,7 @@ ns-hex-digit ::=
 </pre>
 
 <div id="rule-ns-ascii-letter"></div>
-<pre class="rule">[190]
+<pre class="rule">[170]
 ns-ascii-letter ::=
     [x41-x5A]                       # A-Z
   | [x61-x7A]                       # a-z
