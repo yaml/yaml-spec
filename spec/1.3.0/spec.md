@@ -1701,6 +1701,8 @@ YAML escape sequences are a superset of C's escape sequences:
 | `\L` | Line Separator (`x2028`)
 | `\P` | Paragraph Separator (`x2029`)
 
+An escaped tab character (`x09`) evaluates to a tab character.
+
 The `\x`, `\u`, and `\U` escape sequences are followed by two, four, and eight
 hexadecimal digits respectively.
 Those digits are interpreted as a Unicode code point.
