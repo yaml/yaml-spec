@@ -2753,7 +2753,7 @@ rather than to an actual character.
 ```
 
 **Legend:**
-* [e-scalar] <!-- ° -->
+* [e-node] <!-- ° -->
 
 
 Both the [node's properties] and [node content] are optional.
@@ -5504,7 +5504,7 @@ ns-flow-node(n,c) ::=
           s-separate(n,c)
           ns-flow-content(n,c)
         )
-        | e-scalar
+        | e-node
       )
     )
 ```
@@ -5697,7 +5697,7 @@ ns-flow-yaml-node(n,c) ::=
             s-separate(n,c)
             ns-flow-yaml-content(n,c)
           )
-        | e-scalar
+        | e-node
       )
     )
 ```
@@ -5971,12 +5971,7 @@ ns-plain-safe-in ::=
 ### #. Empty Nodes
 
 ```
-e-scalar ::= ""
-```
-
-```
-e-node ::=
-  e-scalar                          # ""
+e-node ::= ""
 ```
 
 
