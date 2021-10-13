@@ -77,3 +77,7 @@ clean:
 	$(MAKE) --no-print-directory -C $(SPEC_122) $@ &>/dev/null
 	$(MAKE) --no-print-directory -C $(SPEC_130) $@ &>/dev/null
 	$(MAKE) --no-print-directory -C www $@ &>/dev/null
+
+c: clean
+	@echo
+	git status --ignored
