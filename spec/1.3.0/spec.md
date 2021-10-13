@@ -1612,7 +1612,6 @@ clarity.
 ## #. White Space Characters
 
 YAML recognizes two _white space_ characters: _space_ and _tab_.
-[#s-space]
 
 The rest of the ([printable]) non-[break] characters are considered to be
 non-space characters.
@@ -1639,8 +1638,8 @@ block:→|
 ```
 
 **Legend:**
-* [s-space] <!-- ·· · -->
-* [s-tab] <!-- → -->
+* space <!-- ·· · -->
+* tab <!-- → -->
 
 
 ## #. Miscellaneous Characters
@@ -6000,7 +5999,7 @@ s-indent(0) ::=
 
 # When n≥0
 s-indent(n+1) ::=
-  s-space s-indent(n)
+  x20 s-indent(n)
 ```
 
 ```
@@ -6009,7 +6008,7 @@ s-indent-less-than(1) ::=
 
 # When n≥1
 s-indent-less-than(n+1) ::=
-  s-space s-indent-less-than(n)
+  x20 s-indent-less-than(n)
   | <empty>
 ```
 
@@ -6019,7 +6018,7 @@ s-indent-less-or-equal(0) ::=
 
 # When n≥0
 s-indent-less-or-equal(n+1) ::=
-  s-space s-indent-less-or-equal(n)
+  x20 s-indent-less-or-equal(n)
   | <empty>
 ```
 
@@ -6111,11 +6110,6 @@ l-empty(n,c) ::=
 b-l-trimmed(n,c) ::=
   b-non-content
   l-empty(n,c)+
-```
-
-```
-b-as-space ::=
-  b-break
 ```
 
 ### #. Separation Lines
@@ -6336,24 +6330,18 @@ nb-char ::=
   c-printable - b-char - c-byte-order-mark
 ```
 
-
-### #. White Space Characters
-
-```
-s-space ::= x20
-```
-
-```
-s-tab ::= x09
-```
-
 ```
 s-white ::=
-  s-space | s-tab
+  x20 | x09                         @ Space or Tab
 ```
 
 
 ### #. Line Break Characters
+
+```
+b-as-space ::=
+  b-break
+```
 
 ```
 b-as-line-feed ::=
@@ -6368,25 +6356,17 @@ b-non-content ::=
 ```
 b-break ::=
     (
-      b-carriage-return             # x0A
-      b-line-feed
-    )                               # x0D
-  | b-carriage-return
-  | b-line-feed
+      x0D                           # Carriage return
+      x0A                           # Line feed
+    )
+  | x0D
+  | x0A
 ```
 
 ```
 b-char ::=
-    b-line-feed                     # x0A
-  | b-carriage-return               # X0D
-```
-
-```
-b-line-feed ::= x0A
-```
-
-```
-b-carriage-return ::= x0D
+    x0A
+  | x0D
 ```
 
 
