@@ -1351,7 +1351,6 @@ ERROR:
 ## #. Indicator Characters
 
 _Indicators_ are characters that have special semantics.
-[#c-indicator]
 
 "`-`" (`x2D`, hyphen) denotes a [block sequence] entry.
 
@@ -5924,7 +5923,25 @@ nb-ns-plain-in-line(c) ::=
 ns-plain-first(c) ::=
     (
         ns-char
-      - c-indicator
+      - '{'                         # c-mapping-start
+      - '}'                         # c-mapping-end
+      - '['                         # c-sequence-start
+      - ']'                         # c-sequence-end
+      - '-'                         # sequence entry
+      - '?'                         # mapping key
+      - ':'                         # mapping value
+      - ','                         # entry separator
+      - '#'                         # comment
+      - '&'                         # anchor
+      - '*'                         # alias
+      - '!'                         # tag
+      - '|'                         # literal scalar
+      - '>'                         # folded scalar
+      - "'"                         # single quote
+      - '"'                         # double quote
+      - '%'                         # directive
+      - '@'                         # reserved
+      - '`'                         # reserved
     )
   | (
       ( '?' | ':' | '-' )
@@ -6362,29 +6379,6 @@ b-char ::=
 
 
 ### #. Indicator Characters
-
-```
-c-indicator ::=
-    '{'                             # c-mapping-start
-  | '}'                             # c-mapping-end
-  | '['                             # c-sequence-start
-  | ']'                             # c-sequence-end
-  | '-'                             # sequence entry
-  | '?'                             # mapping key
-  | ':'                             # mapping value
-  | ','                             # entry separator
-  | '#'                             # comment
-  | '&'                             # anchor
-  | '*'                             # alias
-  | '!'                             # tag
-  | '|'                             # literal scalar
-  | '>'                             # folded scalar
-  | "'"                             # single quote
-  | '"'                             # double quote
-  | '%'                             # directive
-  | '@'                             # reserved
-  | '`'                             # reserved
-```
 
 ```
 c-flow-indicator ::=
