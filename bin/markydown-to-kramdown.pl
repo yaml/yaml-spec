@@ -369,7 +369,7 @@ my $num = 0;
 sub fmt_pre {
   my $pre = format_pre($_);
   my $x = $pre;
-  if ($pre =~ s/\b([a-z]{1,3}[-+]\S+)(\s+::=)/%%%/) {
+  if ($pre =~ s/\b((?!production)[a-z]+-\S+)(\s+::=)/%%%/) {
     my $rule = $1;
     my $sep = $2;
     $num++;
@@ -386,7 +386,7 @@ sub fmt_pre {
     $pre =~
       s{
         \ (
-          (?:b|c|e|l|s|in|nb|ns)[-+]
+          (?:[a-z]+)-
           .*?
         )
         (?=[\{\(\+\*\?]|\s|\z)
@@ -466,7 +466,7 @@ sub make_link_index {
     next unless $pre =~ /(.*?)\ +::=/;
     my $rule = $1;
     next if $rule =~ /^production/;
-    $rule unless $rule =~ /^\w{1,3}[-+]\S+$/;
+    $rule unless $rule =~ /^\w+[-+]\S+$/;
     $rule =~ s/\(.*//;
     $links->{$rule} = "rule-$rule";
   }
