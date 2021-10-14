@@ -5155,7 +5155,7 @@ block-node(n,c) ::=
   | flow-node-in-a-block-node(n)
 ```
 
-XXX The following two should be inlined above
+XXX The following two should be moved into above
 
 ```
 block-node-in-a-block-node(n,c) ::=
