@@ -5061,7 +5061,7 @@ yaml-stream ::=
       )
     | byte-order-mark
     | blanks-and-maybe-comment-and-end-of-line
-    | explicit-document
+    | start-indicator-and-document
   )*
 ```
 
