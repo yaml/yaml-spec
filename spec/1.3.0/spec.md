@@ -5446,7 +5446,10 @@ block-scalar-indicators(t) ::=
         block-scalar-indentation-indicator
       )
   )
-  comment-line
+  (
+      comment-line
+    | line-ending
+  )
 ```
 
 ```
