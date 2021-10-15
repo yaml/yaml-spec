@@ -2066,7 +2066,7 @@ key:····# Comment↓
 **Legend:**
 * [comment-to-end-of-line] <!-- 1:9,9 -->
 * [break-or-end-of-input] <!-- ↓ 2:8,5 -->
-* [maybe-comment-and-end-of-line] <!-- 1:5, 2:8,5 -->
+* [comment-line] <!-- 1:5, 2:8,5 -->
 
 
 Outside [scalar content], comments may appear on a line of their own,
@@ -2089,8 +2089,8 @@ characters is taken to be a comment line.
 ```
 
 **Legend:**
-* [maybe-comment-and-end-of-line] <!-- 1:3, 2:4 3 -->
-* [blanks-and-maybe-comment-and-end-of-line] <!-- 1 2 3 -->
+* [comment-line] <!-- 1:3, 2:4 3 -->
+* [comment-line] <!-- 1 2 3 -->
 
 
 In most cases, when a line may end with a comment, YAML allows it to be
@@ -2112,8 +2112,8 @@ key:····# Comment↓
 ```
 
 **Legend:**
-* [maybe-comment-and-end-of-line] <!-- 1:5, 3:8 -->
-* [blanks-and-maybe-comment-and-end-of-line] <!-- 2 4 -->
+* [comment-line] <!-- 1:5, 3:8 -->
+* [comment-line] <!-- 2 4 -->
 * [comment-lines] <!-- 1:5, 2 3:8 4 -->
 
 
@@ -5060,7 +5060,7 @@ yaml-stream ::=
         any-document?
       )
     | byte-order-mark
-    | blanks-and-maybe-comment-and-end-of-line
+    | comment-line
     | start-indicator-and-document
   )*
 ```
@@ -5068,7 +5068,7 @@ yaml-stream ::=
 ```
 document-prefix ::=
   byte-order-mark?
-  blanks-and-maybe-comment-and-end-of-line*
+  comment-line*
 ```
 
 ```
@@ -5447,7 +5447,7 @@ block-scalar-indicators(t) ::=
         block-scalar-indentation-indicator
       )
   )
-  maybe-comment-and-end-of-line
+  comment-line
 ```
 
 ```
@@ -5493,7 +5493,7 @@ line-trail-comments(n) ::=
   indentation-spaces-less-than(n)
   comment-to-end-of-line
   break-or-end-of-input
-  blanks-and-maybe-comment-and-end-of-line*
+  comment-line*
 ```
 
 
@@ -6108,25 +6108,16 @@ folded-whitespace(n,c) ::=
 ```
 comment-lines ::=
   (
-      maybe-comment-and-end-of-line
+      comment-line
     | <start-of-line>
   )
-  blanks-and-maybe-comment-and-end-of-line*
+  comment-line*
 ```
 
 ```
-blanks-and-maybe-comment-and-end-of-line ::=
+comment-line ::=
   separation-blanks
   comment-to-end-of-line?
-  break-or-end-of-input
-```
-
-```
-maybe-comment-and-end-of-line ::=
-  (
-    separation-blanks
-    comment-to-end-of-line?
-  )?
   break-or-end-of-input
 ```
 
