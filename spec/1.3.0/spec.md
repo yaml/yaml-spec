@@ -3585,7 +3585,7 @@ keep: |+
 ```
 
 **Legend:**
-* [break-non-content] <!-- 2:7 -->
+* [line-break] <!-- 2:7 -->
 * [break-as-line-feed] <!-- 4:7 6:7 -->
 
 
@@ -5462,7 +5462,7 @@ block-scalar-chomping-indicator(CLIP)  ::= ""
 ```
 
 ```
-block-scalar-chomp-last(STRIP) ::= break-non-content  | <end-of-input>
+block-scalar-chomp-last(STRIP) ::= line-break | <end-of-input>
 block-scalar-chomp-last(CLIP)  ::= break-as-line-feed | <end-of-input>
 block-scalar-chomp-last(KEEP)  ::= break-as-line-feed | <end-of-input>
 ```
@@ -5477,7 +5477,7 @@ block-scalar-chomp-empty(n,KEEP)  ::= line-keep-empty(n)
 line-strip-empty(n) ::=
   (
     indentation-spaces-less-or-equal(n)
-    break-non-content
+    line-break
   )*
   line-trail-comments(n)?
 ```
@@ -5812,7 +5812,7 @@ non-break-double-quoted-character ::=
 double-quoted-line-continuation(n) ::=
   blank-character*
   '\'
-  break-non-content
+  line-break
   empty-line(n,FLOW-IN)*
   indentation-spaces-plus-maybe-more(n)
 ```
@@ -6096,7 +6096,7 @@ flow-folded-whitespace(n) ::=
 ```
 folded-whitespace(n,c) ::=
     (
-      break-non-content
+      line-break
       empty-line(n,c)+
     )
   | break-as-space
@@ -6126,7 +6126,7 @@ comment-content ::=
 
 ```
 line-ending ::=
-    break-non-content
+    line-break
   | <end-of-input>
 ```
 
@@ -6394,11 +6394,6 @@ break-as-space ::=
 
 ```
 break-as-line-feed ::=
-  line-break
-```
-
-```
-break-non-content ::=
   line-break
 ```
 
