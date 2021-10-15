@@ -107,154 +107,152 @@ create programs that process YAML information.</p>
       <li><a href="#23-scalars" id="markdown-toc-23-scalars">2.3. Scalars</a></li>
       <li><a href="#24-tags" id="markdown-toc-24-tags">2.4. Tags</a></li>
       <li><a href="#25-full-length-example" id="markdown-toc-25-full-length-example">2.5. Full Length Example</a></li>
+      <li><a href="#26-processes-and-models" id="markdown-toc-26-processes-and-models">2.6. Processes and Models</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-3-processes-and-models" id="markdown-toc-chapter-3-processes-and-models">Chapter 3. Processes and Models</a>    <ul>
-      <li><a href="#31-processes" id="markdown-toc-31-processes">3.1. Processes</a>        <ul>
-          <li><a href="#311-dump" id="markdown-toc-311-dump">3.1.1. Dump</a></li>
-          <li><a href="#312-load" id="markdown-toc-312-load">3.1.2. Load</a></li>
+  <li><a href="#chapter-3-processes" id="markdown-toc-chapter-3-processes">Chapter 3. Processes</a>    <ul>
+      <li><a href="#31-dump" id="markdown-toc-31-dump">3.1. Dump</a></li>
+      <li><a href="#32-load" id="markdown-toc-32-load">3.2. Load</a></li>
+    </ul>
+  </li>
+  <li><a href="#chapter-4-information-models" id="markdown-toc-chapter-4-information-models">Chapter 4. Information Models</a>    <ul>
+      <li><a href="#41-representation-graph" id="markdown-toc-41-representation-graph">4.1. Representation Graph</a>        <ul>
+          <li><a href="#411-nodes" id="markdown-toc-411-nodes">4.1.1. Nodes</a></li>
+          <li><a href="#412-tags" id="markdown-toc-412-tags">4.1.2. Tags</a></li>
+          <li><a href="#413-node-comparison" id="markdown-toc-413-node-comparison">4.1.3. Node Comparison</a></li>
         </ul>
       </li>
-      <li><a href="#32-information-models" id="markdown-toc-32-information-models">3.2. Information Models</a>        <ul>
-          <li><a href="#321-representation-graph" id="markdown-toc-321-representation-graph">3.2.1. Representation Graph</a>            <ul>
-              <li><a href="#3211-nodes" id="markdown-toc-3211-nodes">3.2.1.1. Nodes</a></li>
-              <li><a href="#3212-tags" id="markdown-toc-3212-tags">3.2.1.2. Tags</a></li>
-              <li><a href="#3213-node-comparison" id="markdown-toc-3213-node-comparison">3.2.1.3. Node Comparison</a></li>
-            </ul>
-          </li>
-          <li><a href="#322-serialization-tree" id="markdown-toc-322-serialization-tree">3.2.2. Serialization Tree</a>            <ul>
-              <li><a href="#3221-mapping-key-order" id="markdown-toc-3221-mapping-key-order">3.2.2.1. Mapping Key Order</a></li>
-              <li><a href="#3222-anchors-and-aliases" id="markdown-toc-3222-anchors-and-aliases">3.2.2.2. Anchors and Aliases</a></li>
-            </ul>
-          </li>
-          <li><a href="#323-presentation-stream" id="markdown-toc-323-presentation-stream">3.2.3. Presentation Stream</a>            <ul>
-              <li><a href="#3231-node-styles" id="markdown-toc-3231-node-styles">3.2.3.1. Node Styles</a></li>
-              <li><a href="#3232-scalar-formats" id="markdown-toc-3232-scalar-formats">3.2.3.2. Scalar Formats</a></li>
-              <li><a href="#3233-comments" id="markdown-toc-3233-comments">3.2.3.3. Comments</a></li>
-              <li><a href="#3234-directives" id="markdown-toc-3234-directives">3.2.3.4. Directives</a></li>
-            </ul>
-          </li>
+      <li><a href="#42-serialization-tree" id="markdown-toc-42-serialization-tree">4.2. Serialization Tree</a>        <ul>
+          <li><a href="#421-mapping-key-order" id="markdown-toc-421-mapping-key-order">4.2.1. Mapping Key Order</a></li>
+          <li><a href="#422-anchors-and-aliases" id="markdown-toc-422-anchors-and-aliases">4.2.2. Anchors and Aliases</a></li>
         </ul>
       </li>
-      <li><a href="#33-loading-failure-points" id="markdown-toc-33-loading-failure-points">3.3. Loading Failure Points</a>        <ul>
-          <li><a href="#331-well-formed-streams-and-identified-aliases" id="markdown-toc-331-well-formed-streams-and-identified-aliases">3.3.1. Well-Formed Streams and Identified Aliases</a></li>
-          <li><a href="#332-resolved-tags" id="markdown-toc-332-resolved-tags">3.3.2. Resolved Tags</a></li>
-          <li><a href="#333-recognized-and-valid-tags" id="markdown-toc-333-recognized-and-valid-tags">3.3.3. Recognized and Valid Tags</a></li>
-          <li><a href="#334-available-tags" id="markdown-toc-334-available-tags">3.3.4. Available Tags</a></li>
+      <li><a href="#43-presentation-stream" id="markdown-toc-43-presentation-stream">4.3. Presentation Stream</a>        <ul>
+          <li><a href="#431-node-styles" id="markdown-toc-431-node-styles">4.3.1. Node Styles</a></li>
+          <li><a href="#432-scalar-formats" id="markdown-toc-432-scalar-formats">4.3.2. Scalar Formats</a></li>
+          <li><a href="#433-comments" id="markdown-toc-433-comments">4.3.3. Comments</a></li>
+          <li><a href="#434-directives" id="markdown-toc-434-directives">4.3.4. Directives</a></li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#chapter-4-character-productions" id="markdown-toc-chapter-4-character-productions">Chapter 4. Character Productions</a>    <ul>
-      <li><a href="#41-character-set" id="markdown-toc-41-character-set">4.1. Character Set</a></li>
-      <li><a href="#42-character-encodings" id="markdown-toc-42-character-encodings">4.2. Character Encodings</a></li>
-      <li><a href="#43-indicator-characters" id="markdown-toc-43-indicator-characters">4.3. Indicator Characters</a></li>
-      <li><a href="#44-line-break-characters" id="markdown-toc-44-line-break-characters">4.4. Line Break Characters</a></li>
-      <li><a href="#45-white-space-characters" id="markdown-toc-45-white-space-characters">4.5. White Space Characters</a></li>
-      <li><a href="#46-miscellaneous-characters" id="markdown-toc-46-miscellaneous-characters">4.6. Miscellaneous Characters</a></li>
-      <li><a href="#47-escaped-characters" id="markdown-toc-47-escaped-characters">4.7. Escaped Characters</a></li>
+  <li><a href="#chapter-5-loading-failure-points" id="markdown-toc-chapter-5-loading-failure-points">Chapter 5. Loading Failure Points</a>    <ul>
+      <li><a href="#51-well-formed-streams-and-identified-aliases" id="markdown-toc-51-well-formed-streams-and-identified-aliases">5.1. Well-Formed Streams and Identified Aliases</a></li>
+      <li><a href="#52-resolved-tags" id="markdown-toc-52-resolved-tags">5.2. Resolved Tags</a></li>
+      <li><a href="#53-recognized-and-valid-tags" id="markdown-toc-53-recognized-and-valid-tags">5.3. Recognized and Valid Tags</a></li>
+      <li><a href="#54-available-tags" id="markdown-toc-54-available-tags">5.4. Available Tags</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-5-structural-productions" id="markdown-toc-chapter-5-structural-productions">Chapter 5. Structural Productions</a>    <ul>
-      <li><a href="#51-indentation-spaces" id="markdown-toc-51-indentation-spaces">5.1. Indentation Spaces</a></li>
-      <li><a href="#52-separation-spaces" id="markdown-toc-52-separation-spaces">5.2. Separation Spaces</a></li>
-      <li><a href="#53-line-prefixes" id="markdown-toc-53-line-prefixes">5.3. Line Prefixes</a></li>
-      <li><a href="#54-empty-lines" id="markdown-toc-54-empty-lines">5.4. Empty Lines</a></li>
-      <li><a href="#55-line-folding" id="markdown-toc-55-line-folding">5.5. Line Folding</a></li>
-      <li><a href="#56-comments" id="markdown-toc-56-comments">5.6. Comments</a></li>
-      <li><a href="#57-separation-lines" id="markdown-toc-57-separation-lines">5.7. Separation Lines</a></li>
-      <li><a href="#58-directives" id="markdown-toc-58-directives">5.8. Directives</a>        <ul>
-          <li><a href="#581-yaml-directives" id="markdown-toc-581-yaml-directives">5.8.1. “<code class="language-plaintext highlighter-rouge">YAML</code>” Directives</a></li>
-          <li><a href="#582-tag-directives" id="markdown-toc-582-tag-directives">5.8.2. “<code class="language-plaintext highlighter-rouge">TAG</code>” Directives</a>            <ul>
-              <li><a href="#5821-tag-handles" id="markdown-toc-5821-tag-handles">5.8.2.1. Tag Handles</a></li>
-              <li><a href="#5822-tag-prefixes" id="markdown-toc-5822-tag-prefixes">5.8.2.2. Tag Prefixes</a></li>
+  <li><a href="#chapter-6-character-productions" id="markdown-toc-chapter-6-character-productions">Chapter 6. Character Productions</a>    <ul>
+      <li><a href="#61-character-set" id="markdown-toc-61-character-set">6.1. Character Set</a></li>
+      <li><a href="#62-character-encodings" id="markdown-toc-62-character-encodings">6.2. Character Encodings</a></li>
+      <li><a href="#63-indicator-characters" id="markdown-toc-63-indicator-characters">6.3. Indicator Characters</a></li>
+      <li><a href="#64-line-break-characters" id="markdown-toc-64-line-break-characters">6.4. Line Break Characters</a></li>
+      <li><a href="#65-white-space-characters" id="markdown-toc-65-white-space-characters">6.5. White Space Characters</a></li>
+      <li><a href="#66-miscellaneous-characters" id="markdown-toc-66-miscellaneous-characters">6.6. Miscellaneous Characters</a></li>
+      <li><a href="#67-escaped-characters" id="markdown-toc-67-escaped-characters">6.7. Escaped Characters</a></li>
+    </ul>
+  </li>
+  <li><a href="#chapter-7-structural-productions" id="markdown-toc-chapter-7-structural-productions">Chapter 7. Structural Productions</a>    <ul>
+      <li><a href="#71-indentation-spaces" id="markdown-toc-71-indentation-spaces">7.1. Indentation Spaces</a></li>
+      <li><a href="#72-separation-spaces" id="markdown-toc-72-separation-spaces">7.2. Separation Spaces</a></li>
+      <li><a href="#73-line-prefixes" id="markdown-toc-73-line-prefixes">7.3. Line Prefixes</a></li>
+      <li><a href="#74-empty-lines" id="markdown-toc-74-empty-lines">7.4. Empty Lines</a></li>
+      <li><a href="#75-line-folding" id="markdown-toc-75-line-folding">7.5. Line Folding</a></li>
+      <li><a href="#76-comments" id="markdown-toc-76-comments">7.6. Comments</a></li>
+      <li><a href="#77-separation-lines" id="markdown-toc-77-separation-lines">7.7. Separation Lines</a></li>
+      <li><a href="#78-directives" id="markdown-toc-78-directives">7.8. Directives</a>        <ul>
+          <li><a href="#781-yaml-directives" id="markdown-toc-781-yaml-directives">7.8.1. “<code class="language-plaintext highlighter-rouge">YAML</code>” Directives</a></li>
+          <li><a href="#782-tag-directives" id="markdown-toc-782-tag-directives">7.8.2. “<code class="language-plaintext highlighter-rouge">TAG</code>” Directives</a>            <ul>
+              <li><a href="#7821-tag-handles" id="markdown-toc-7821-tag-handles">7.8.2.1. Tag Handles</a></li>
+              <li><a href="#7822-tag-prefixes" id="markdown-toc-7822-tag-prefixes">7.8.2.2. Tag Prefixes</a></li>
             </ul>
           </li>
         </ul>
       </li>
-      <li><a href="#59-node-properties" id="markdown-toc-59-node-properties">5.9. Node Properties</a>        <ul>
-          <li><a href="#591-node-tags" id="markdown-toc-591-node-tags">5.9.1. Node Tags</a></li>
-          <li><a href="#592-node-anchors" id="markdown-toc-592-node-anchors">5.9.2. Node Anchors</a></li>
+      <li><a href="#79-node-properties" id="markdown-toc-79-node-properties">7.9. Node Properties</a>        <ul>
+          <li><a href="#791-node-tags" id="markdown-toc-791-node-tags">7.9.1. Node Tags</a></li>
+          <li><a href="#792-node-anchors" id="markdown-toc-792-node-anchors">7.9.2. Node Anchors</a></li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#chapter-6-flow-style-productions" id="markdown-toc-chapter-6-flow-style-productions">Chapter 6. Flow Style Productions</a>    <ul>
-      <li><a href="#61-alias-nodes" id="markdown-toc-61-alias-nodes">6.1. Alias Nodes</a></li>
-      <li><a href="#62-empty-nodes" id="markdown-toc-62-empty-nodes">6.2. Empty Nodes</a></li>
-      <li><a href="#63-flow-scalar-styles" id="markdown-toc-63-flow-scalar-styles">6.3. Flow Scalar Styles</a>        <ul>
-          <li><a href="#631-double-quoted-style" id="markdown-toc-631-double-quoted-style">6.3.1. Double-Quoted Style</a></li>
-          <li><a href="#632-single-quoted-style" id="markdown-toc-632-single-quoted-style">6.3.2. Single-Quoted Style</a></li>
-          <li><a href="#633-plain-style" id="markdown-toc-633-plain-style">6.3.3. Plain Style</a></li>
+  <li><a href="#chapter-8-flow-style-productions" id="markdown-toc-chapter-8-flow-style-productions">Chapter 8. Flow Style Productions</a>    <ul>
+      <li><a href="#81-alias-nodes" id="markdown-toc-81-alias-nodes">8.1. Alias Nodes</a></li>
+      <li><a href="#82-empty-nodes" id="markdown-toc-82-empty-nodes">8.2. Empty Nodes</a></li>
+      <li><a href="#83-flow-scalar-styles" id="markdown-toc-83-flow-scalar-styles">8.3. Flow Scalar Styles</a>        <ul>
+          <li><a href="#831-double-quoted-style" id="markdown-toc-831-double-quoted-style">8.3.1. Double-Quoted Style</a></li>
+          <li><a href="#832-single-quoted-style" id="markdown-toc-832-single-quoted-style">8.3.2. Single-Quoted Style</a></li>
+          <li><a href="#833-plain-style" id="markdown-toc-833-plain-style">8.3.3. Plain Style</a></li>
         </ul>
       </li>
-      <li><a href="#64-flow-collection-styles" id="markdown-toc-64-flow-collection-styles">6.4. Flow Collection Styles</a>        <ul>
-          <li><a href="#641-flow-sequences" id="markdown-toc-641-flow-sequences">6.4.1. Flow Sequences</a></li>
-          <li><a href="#642-flow-mappings" id="markdown-toc-642-flow-mappings">6.4.2. Flow Mappings</a></li>
+      <li><a href="#84-flow-collection-styles" id="markdown-toc-84-flow-collection-styles">8.4. Flow Collection Styles</a>        <ul>
+          <li><a href="#841-flow-sequences" id="markdown-toc-841-flow-sequences">8.4.1. Flow Sequences</a></li>
+          <li><a href="#842-flow-mappings" id="markdown-toc-842-flow-mappings">8.4.2. Flow Mappings</a></li>
         </ul>
       </li>
-      <li><a href="#65-flow-nodes" id="markdown-toc-65-flow-nodes">6.5. Flow Nodes</a></li>
+      <li><a href="#85-flow-nodes" id="markdown-toc-85-flow-nodes">8.5. Flow Nodes</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-7-block-style-productions" id="markdown-toc-chapter-7-block-style-productions">Chapter 7. Block Style Productions</a>    <ul>
-      <li><a href="#71-block-scalar-styles" id="markdown-toc-71-block-scalar-styles">7.1. Block Scalar Styles</a>        <ul>
-          <li><a href="#711-block-scalar-headers" id="markdown-toc-711-block-scalar-headers">7.1.1. Block Scalar Headers</a>            <ul>
-              <li><a href="#7111-block-indentation-indicator" id="markdown-toc-7111-block-indentation-indicator">7.1.1.1. Block Indentation Indicator</a></li>
-              <li><a href="#7112-block-chomping-indicator" id="markdown-toc-7112-block-chomping-indicator">7.1.1.2. Block Chomping Indicator</a></li>
+  <li><a href="#chapter-9-block-style-productions" id="markdown-toc-chapter-9-block-style-productions">Chapter 9. Block Style Productions</a>    <ul>
+      <li><a href="#91-block-scalar-styles" id="markdown-toc-91-block-scalar-styles">9.1. Block Scalar Styles</a>        <ul>
+          <li><a href="#911-block-scalar-headers" id="markdown-toc-911-block-scalar-headers">9.1.1. Block Scalar Headers</a>            <ul>
+              <li><a href="#9111-block-indentation-indicator" id="markdown-toc-9111-block-indentation-indicator">9.1.1.1. Block Indentation Indicator</a></li>
+              <li><a href="#9112-block-chomping-indicator" id="markdown-toc-9112-block-chomping-indicator">9.1.1.2. Block Chomping Indicator</a></li>
             </ul>
           </li>
-          <li><a href="#712-literal-style" id="markdown-toc-712-literal-style">7.1.2. Literal Style</a></li>
-          <li><a href="#713-folded-style" id="markdown-toc-713-folded-style">7.1.3. Folded Style</a></li>
+          <li><a href="#912-literal-style" id="markdown-toc-912-literal-style">9.1.2. Literal Style</a></li>
+          <li><a href="#913-folded-style" id="markdown-toc-913-folded-style">9.1.3. Folded Style</a></li>
         </ul>
       </li>
-      <li><a href="#72-block-collection-styles" id="markdown-toc-72-block-collection-styles">7.2. Block Collection Styles</a>        <ul>
-          <li><a href="#721-block-sequences" id="markdown-toc-721-block-sequences">7.2.1. Block Sequences</a></li>
-          <li><a href="#722-block-mappings" id="markdown-toc-722-block-mappings">7.2.2. Block Mappings</a></li>
-          <li><a href="#723-block-nodes" id="markdown-toc-723-block-nodes">7.2.3. Block Nodes</a></li>
+      <li><a href="#92-block-collection-styles" id="markdown-toc-92-block-collection-styles">9.2. Block Collection Styles</a>        <ul>
+          <li><a href="#921-block-sequences" id="markdown-toc-921-block-sequences">9.2.1. Block Sequences</a></li>
+          <li><a href="#922-block-mappings" id="markdown-toc-922-block-mappings">9.2.2. Block Mappings</a></li>
+          <li><a href="#923-block-nodes" id="markdown-toc-923-block-nodes">9.2.3. Block Nodes</a></li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#chapter-8-document-stream-productions" id="markdown-toc-chapter-8-document-stream-productions">Chapter 8. Document Stream Productions</a>    <ul>
-      <li><a href="#81-documents" id="markdown-toc-81-documents">8.1. Documents</a>        <ul>
-          <li><a href="#811-document-prefix" id="markdown-toc-811-document-prefix">8.1.1. Document Prefix</a></li>
-          <li><a href="#812-document-markers" id="markdown-toc-812-document-markers">8.1.2. Document Markers</a></li>
-          <li><a href="#813-bare-documents" id="markdown-toc-813-bare-documents">8.1.3. Bare Documents</a></li>
-          <li><a href="#814-explicit-documents" id="markdown-toc-814-explicit-documents">8.1.4. Explicit Documents</a></li>
-          <li><a href="#815-directives-documents" id="markdown-toc-815-directives-documents">8.1.5. Directives Documents</a></li>
+  <li><a href="#chapter-10-document-stream-productions" id="markdown-toc-chapter-10-document-stream-productions">Chapter 10. Document Stream Productions</a>    <ul>
+      <li><a href="#101-documents" id="markdown-toc-101-documents">10.1. Documents</a>        <ul>
+          <li><a href="#1011-document-prefix" id="markdown-toc-1011-document-prefix">10.1.1. Document Prefix</a></li>
+          <li><a href="#1012-document-markers" id="markdown-toc-1012-document-markers">10.1.2. Document Markers</a></li>
+          <li><a href="#1013-bare-documents" id="markdown-toc-1013-bare-documents">10.1.3. Bare Documents</a></li>
+          <li><a href="#1014-explicit-documents" id="markdown-toc-1014-explicit-documents">10.1.4. Explicit Documents</a></li>
+          <li><a href="#1015-directives-documents" id="markdown-toc-1015-directives-documents">10.1.5. Directives Documents</a></li>
         </ul>
       </li>
-      <li><a href="#82-streams" id="markdown-toc-82-streams">8.2. Streams</a></li>
+      <li><a href="#102-streams" id="markdown-toc-102-streams">10.2. Streams</a></li>
     </ul>
   </li>
-  <li><a href="#chapter-9-recommended-schemas" id="markdown-toc-chapter-9-recommended-schemas">Chapter 9. Recommended Schemas</a>    <ul>
-      <li><a href="#91-failsafe-schema" id="markdown-toc-91-failsafe-schema">9.1. Failsafe Schema</a>        <ul>
-          <li><a href="#911-tags" id="markdown-toc-911-tags">9.1.1. Tags</a>            <ul>
-              <li><a href="#9111-generic-mapping" id="markdown-toc-9111-generic-mapping">9.1.1.1. Generic Mapping</a></li>
-              <li><a href="#9112-generic-sequence" id="markdown-toc-9112-generic-sequence">9.1.1.2. Generic Sequence</a></li>
-              <li><a href="#9113-generic-string" id="markdown-toc-9113-generic-string">9.1.1.3. Generic String</a></li>
+  <li><a href="#chapter-11-recommended-schemas" id="markdown-toc-chapter-11-recommended-schemas">Chapter 11. Recommended Schemas</a>    <ul>
+      <li><a href="#111-failsafe-schema" id="markdown-toc-111-failsafe-schema">11.1. Failsafe Schema</a>        <ul>
+          <li><a href="#1111-tags" id="markdown-toc-1111-tags">11.1.1. Tags</a>            <ul>
+              <li><a href="#11111-generic-mapping" id="markdown-toc-11111-generic-mapping">11.1.1.1. Generic Mapping</a></li>
+              <li><a href="#11112-generic-sequence" id="markdown-toc-11112-generic-sequence">11.1.1.2. Generic Sequence</a></li>
+              <li><a href="#11113-generic-string" id="markdown-toc-11113-generic-string">11.1.1.3. Generic String</a></li>
             </ul>
           </li>
-          <li><a href="#912-tag-resolution" id="markdown-toc-912-tag-resolution">9.1.2. Tag Resolution</a></li>
+          <li><a href="#1112-tag-resolution" id="markdown-toc-1112-tag-resolution">11.1.2. Tag Resolution</a></li>
         </ul>
       </li>
-      <li><a href="#92-json-schema" id="markdown-toc-92-json-schema">9.2. JSON Schema</a>        <ul>
-          <li><a href="#921-tags" id="markdown-toc-921-tags">9.2.1. Tags</a>            <ul>
-              <li><a href="#9211-null" id="markdown-toc-9211-null">9.2.1.1. Null</a></li>
-              <li><a href="#9212-boolean" id="markdown-toc-9212-boolean">9.2.1.2. Boolean</a></li>
-              <li><a href="#9213-integer" id="markdown-toc-9213-integer">9.2.1.3. Integer</a></li>
-              <li><a href="#9214-floating-point" id="markdown-toc-9214-floating-point">9.2.1.4. Floating Point</a></li>
+      <li><a href="#112-json-schema" id="markdown-toc-112-json-schema">11.2. JSON Schema</a>        <ul>
+          <li><a href="#1121-tags" id="markdown-toc-1121-tags">11.2.1. Tags</a>            <ul>
+              <li><a href="#11211-null" id="markdown-toc-11211-null">11.2.1.1. Null</a></li>
+              <li><a href="#11212-boolean" id="markdown-toc-11212-boolean">11.2.1.2. Boolean</a></li>
+              <li><a href="#11213-integer" id="markdown-toc-11213-integer">11.2.1.3. Integer</a></li>
+              <li><a href="#11214-floating-point" id="markdown-toc-11214-floating-point">11.2.1.4. Floating Point</a></li>
             </ul>
           </li>
-          <li><a href="#922-tag-resolution" id="markdown-toc-922-tag-resolution">9.2.2. Tag Resolution</a></li>
+          <li><a href="#1122-tag-resolution" id="markdown-toc-1122-tag-resolution">11.2.2. Tag Resolution</a></li>
         </ul>
       </li>
-      <li><a href="#93-core-schema" id="markdown-toc-93-core-schema">9.3. Core Schema</a>        <ul>
-          <li><a href="#931-tags" id="markdown-toc-931-tags">9.3.1. Tags</a></li>
-          <li><a href="#932-tag-resolution" id="markdown-toc-932-tag-resolution">9.3.2. Tag Resolution</a></li>
+      <li><a href="#113-core-schema" id="markdown-toc-113-core-schema">11.3. Core Schema</a>        <ul>
+          <li><a href="#1131-tags" id="markdown-toc-1131-tags">11.3.1. Tags</a></li>
+          <li><a href="#1132-tag-resolution" id="markdown-toc-1132-tag-resolution">11.3.2. Tag Resolution</a></li>
         </ul>
       </li>
-      <li><a href="#94-other-schemas" id="markdown-toc-94-other-schemas">9.4. Other Schemas</a></li>
+      <li><a href="#114-other-schemas" id="markdown-toc-114-other-schemas">11.4. Other Schemas</a></li>
     </ul>
   </li>
   <li><a href="#appendix-a-grammar" id="markdown-toc-appendix-a-grammar">Appendix A. Grammar</a>    <ul>
@@ -309,7 +307,7 @@ create programs that process YAML information.</p>
       <li><a href="#a5-character-productions" id="markdown-toc-a5-character-productions">A.5. Character Productions</a>        <ul>
           <li><a href="#a51-character-encoding" id="markdown-toc-a51-character-encoding">A.5.1. Character Encoding</a></li>
           <li><a href="#a52-valid-character-sets" id="markdown-toc-a52-valid-character-sets">A.5.2. Valid Character Sets</a></li>
-          <li><a href="#a53-line-break-characters" id="markdown-toc-a53-line-break-characters">A.5.3. Line Break Characters</a></li>
+          <li><a href="#a53-line-ending-productions" id="markdown-toc-a53-line-ending-productions">A.5.3. Line Ending Productions</a></li>
           <li><a href="#a54-indicator-characters" id="markdown-toc-a54-indicator-characters">A.5.4. Indicator Characters</a></li>
           <li><a href="#a55-miscellaneous-character-sets" id="markdown-toc-a55-miscellaneous-character-sets">A.5.5. Miscellaneous Character Sets</a></li>
         </ul>
@@ -968,7 +966,7 @@ Stack:
 </div>
 
 <div id="processes-and-models"></div>
-<h1 id="chapter-3-processes-and-models">Chapter 3. Processes and Models</h1>
+<h2 id="26-processes-and-models">2.6. Processes and Models</h2>
 
 <p>YAML is both a text format and a method for <a href="#presenting-the-serialization-tree">presenting</a> any <a href="#representing-native-data-structures">native data
 structure</a> in this format.
@@ -996,7 +994,7 @@ serial form, that is, a form with sequential access constraints.
 of characters in a human-friendly manner.</p>
 
 <div id="processes"></div>
-<h2 id="31-processes">3.1. Processes</h2>
+<h1 id="chapter-3-processes">Chapter 3. Processes</h1>
 
 <p>Translating between <a href="#representing-native-data-structures">native data structures</a> and a character <a href="#streams">stream</a> is done
 in several logically distinct stages, each with a well defined input and output
@@ -1017,7 +1015,7 @@ In particular, <a href="#mapping">mapping key order</a>, <a href="#comments">com
 referenced during <a href="#constructing-native-data-structures">construction</a>.</p>
 
 <div id="dump"></div>
-<h3 id="311-dump">3.1.1. Dump</h3>
+<h2 id="31-dump">3.1. Dump</h2>
 
 <p><em>Dumping</em> native data structures to a character <a href="#streams">stream</a> is done using the
 following three stages:</p>
@@ -1093,7 +1091,7 @@ this process should be guided by the preferences of the user.</p>
 </dl>
 
 <div id="load"></div>
-<h3 id="312-load">3.1.2. Load</h3>
+<h2 id="32-load">3.2. Load</h2>
 
 <p><em>Loading</em> <a href="#representing-native-data-structures">native data structures</a> from a character <a href="#streams">stream</a> is done using the
 following three stages:</p>
@@ -1140,7 +1138,7 @@ types</a>.</p>
 </dl>
 
 <div id="information-models"></div>
-<h2 id="32-information-models">3.2. Information Models</h2>
+<h1 id="chapter-4-information-models">Chapter 4. Information Models</h1>
 
 <p>This section specifies the formal details of the results of the above
 processes.
@@ -1164,12 +1162,12 @@ Full arrows denote composition, hollow arrows denote inheritance, “<code class
 A single “<code class="language-plaintext highlighter-rouge">+</code>” denotes <a href="#serialization-tree">serialization</a> details, a double “<code class="language-plaintext highlighter-rouge">++</code>” denotes
 <a href="#presentation-stream">presentation</a> details.</p>
 
-<p><strong>Figure 3.2. Information Models</strong></p>
+<p><strong>Figure 4.2. Information Models</strong></p>
 
 <p><img src="/main/spec/1.3.0/img/model2.svg" alt="Information Models" /></p>
 
 <div id="representation-graph"></div>
-<h3 id="321-representation-graph">3.2.1. Representation Graph</h3>
+<h2 id="41-representation-graph">4.1. Representation Graph</h2>
 
 <p>YAML’s <em>representation</em> of <a href="#representing-native-data-structures">native data structure</a> is a rooted, connected,
 directed graph of <a href="#tags">tagged</a> <a href="#nodes">nodes</a>.
@@ -1186,12 +1184,12 @@ YAML supports two <a href="#nodes">kinds</a> of <a href="#mapping">collection no
 <a href="#mapping">Mapping nodes</a> are somewhat tricky because their <a href="#nodes">keys</a> are unordered and must
 be <a href="#node-comparison">unique</a>.</p>
 
-<p><strong>Figure 3.3. Representation Model</strong></p>
+<p><strong>Figure 4.3. Representation Model</strong></p>
 
 <p><img src="/main/spec/1.3.0/img/represent2.svg" alt="Representation Model" /></p>
 
 <div id="nodes"></div>
-<h4 id="3211-nodes">3.2.1.1. Nodes</h4>
+<h3 id="411-nodes">4.1.1. Nodes</h3>
 
 <p>A YAML <em>node</em> <a href="#representation-graph">represents</a> a single <a href="#representing-native-data-structures">native data structure</a>.
 Such nodes have <em>content</em> of one of three <em>kinds</em>: scalar, sequence or mapping.
@@ -1234,7 +1232,7 @@ key or a value.</p>
 </dl>
 
 <div id="tags"></div>
-<h4 id="3212-tags">3.2.1.2. Tags</h4>
+<h3 id="412-tags">4.1.2. Tags</h3>
 
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
 identifier, called a <em>tag</em>.
@@ -1269,7 +1267,7 @@ allowed <a href="#nodes">content</a> values for validation, a mechanism for <a h
 any other data that is applicable to all of the tag’s <a href="#nodes">nodes</a>.</p>
 
 <div id="node-comparison"></div>
-<h4 id="3213-node-comparison">3.2.1.3. Node Comparison</h4>
+<h3 id="413-node-comparison">4.1.3. Node Comparison</h3>
 
 <p>Since YAML <a href="#mapping">mappings</a> require <a href="#nodes">key</a> uniqueness, <a href="#representation-graph">representations</a> must include
 a mechanism for testing the equality of <a href="#nodes">nodes</a>.
@@ -1348,7 +1346,7 @@ Obviously, identical nodes are always considered equal.</p>
 </dl>
 
 <div id="serialization-tree"></div>
-<h3 id="322-serialization-tree">3.2.2. Serialization Tree</h3>
+<h2 id="42-serialization-tree">4.2. Serialization Tree</h2>
 
 <p>To express a YAML <a href="#representation-graph">representation</a> using a serial API, it is necessary to
 impose an <a href="#mapping-key-order">order</a> on <a href="#nodes">mapping keys</a> and employ <a href="#alias-nodes">alias nodes</a> to indicate a
@@ -1359,12 +1357,12 @@ This tree can be traversed for a serial event-based API.
 <a href="#constructing-native-data-structures">Construction</a> of <a href="#representing-native-data-structures">native data structures</a> from the serial interface should not
 use <a href="#mapping-key-order">key order</a> or <a href="#anchors-and-aliases">anchor names</a> for the preservation of <a href="#processes-and-models">application</a> data.</p>
 
-<p><strong>Figure 3.4. Serialization Model</strong></p>
+<p><strong>Figure 4.4. Serialization Model</strong></p>
 
 <p><img src="/main/spec/1.3.0/img/serialize2.svg" alt="Serialization Model" /></p>
 
 <div id="mapping-key-order"></div>
-<h4 id="3221-mapping-key-order">3.2.2.1. Mapping Key Order</h4>
+<h3 id="421-mapping-key-order">4.2.1. Mapping Key Order</h3>
 
 <p>In the <a href="#representation-graph">representation</a> model, <a href="#nodes">mapping keys</a> do not have an order.
 To <a href="#serializing-the-representation-graph">serialize</a> a <a href="#mapping">mapping</a>, it is necessary to impose an <em>ordering</em> on its
@@ -1378,7 +1376,7 @@ For example, an ordered <a href="#mapping">mapping</a> can be <a href="#represen
 YAML provides convenient <a href="#example-flow-mapping-adjacent-values">compact notation</a> for this case.</p>
 
 <div id="anchors-and-aliases"></div>
-<h4 id="3222-anchors-and-aliases">3.2.2.2. Anchors and Aliases</h4>
+<h3 id="422-anchors-and-aliases">4.2.2. Anchors and Aliases</h3>
 
 <p>In the <a href="#representation-graph">representation graph</a>, a <a href="#nodes">node</a> may appear in more than one
 <a href="#collections">collection</a>.
@@ -1395,7 +1393,7 @@ Therefore, anchors need not be unique within a <a href="#serialization-tree">ser
 In addition, an anchor need not have an alias node referring to it.</p>
 
 <div id="presentation-stream"></div>
-<h3 id="323-presentation-stream">3.2.3. Presentation Stream</h3>
+<h2 id="43-presentation-stream">4.3. Presentation Stream</h2>
 
 <p>A YAML <em>presentation</em> is a <a href="#streams">stream</a> of Unicode characters making use of
 <a href="#node-styles">styles</a>, <a href="#scalar-formats">scalar content formats</a>, <a href="#comments">comments</a>, <a href="#directives">directives</a> and other
@@ -1404,12 +1402,12 @@ way.
 YAML allows several <a href="#serialization-tree">serialization trees</a> to be contained in the same YAML
 presentation stream, as a series of <a href="#documents">documents</a> separated by <a href="#document-markers">markers</a>.</p>
 
-<p><strong>Figure 3.5. Presentation Model</strong></p>
+<p><strong>Figure 4.5. Presentation Model</strong></p>
 
 <p><img src="/main/spec/1.3.0/img/present2.svg" alt="Presentation Model" /></p>
 
 <div id="node-styles"></div>
-<h4 id="3231-node-styles">3.2.3.1. Node Styles</h4>
+<h3 id="431-node-styles">4.3.1. Node Styles</h3>
 
 <p>Each <a href="#nodes">node</a> is presented in some <em>style</em>, depending on its <a href="#nodes">kind</a>.
 The node style is a <a href="#presenting-the-serialization-tree">presentation detail</a> and is not reflected in the
@@ -1432,12 +1430,12 @@ In addition, YAML provides a <a href="#example-flow-mapping-adjacent-values">com
 single <a href="#mapping">key/value pair</a>, nested inside a <a href="#flow-sequences">flow sequence</a>.
 These allow for a natural “ordered mapping” notation.</p>
 
-<p><strong>Figure 3.6. Kind/Style Combinations</strong></p>
+<p><strong>Figure 4.6. Kind/Style Combinations</strong></p>
 
 <p><img src="/main/spec/1.3.0/img/styles2.svg" alt="Kind/Style Combinations" /></p>
 
 <div id="scalar-formats"></div>
-<h4 id="3232-scalar-formats">3.2.3.2. Scalar Formats</h4>
+<h3 id="432-scalar-formats">4.3.2. Scalar Formats</h3>
 
 <p>YAML allows <a href="#scalars">scalars</a> to be <a href="#presenting-the-serialization-tree">presented</a> in several <em>formats</em>.
 For example, the integer “<code class="language-plaintext highlighter-rouge">11</code>” might also be written as “<code class="language-plaintext highlighter-rouge">0xB</code>”.
@@ -1447,7 +1445,7 @@ Like <a href="#node-styles">node style</a>, the format is a <a href="#presenting
 in the <a href="#serialization-tree">serialization tree</a> and <a href="#representation-graph">representation graph</a>.</p>
 
 <div id="comments"></div>
-<h4 id="3233-comments">3.2.3.3. Comments</h4>
+<h3 id="433-comments">4.3.3. Comments</h3>
 
 <p><a href="#comments">Comments</a> are a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not have any effect on the
 <a href="#serialization-tree">serialization tree</a> or <a href="#representation-graph">representation graph</a>.
@@ -1459,7 +1457,7 @@ Comments must not appear inside <a href="#scalars">scalars</a>, but may be inter
 <a href="#scalars">scalars</a> inside <a href="#collections">collections</a>.</p>
 
 <div id="directives"></div>
-<h4 id="3234-directives">3.2.3.4. Directives</h4>
+<h3 id="434-directives">4.3.4. Directives</h3>
 
 <p>Each <a href="#documents">document</a> may be associated with a set of <a href="#directives">directives</a>.
 A directive has a name and an optional sequence of parameters.
@@ -1470,7 +1468,7 @@ This version of YAML defines two directives, “<code class="language-plaintext 
 All other directives are <a href="#directives">reserved</a> for future versions of YAML.</p>
 
 <div id="loading-failure-points"></div>
-<h2 id="33-loading-failure-points">3.3. Loading Failure Points</h2>
+<h1 id="chapter-5-loading-failure-points">Chapter 5. Loading Failure Points</h1>
 
 <p>The process of <a href="#load">loading</a> <a href="#representing-native-data-structures">native data structures</a> from a YAML <a href="#streams">stream</a> has
 several potential <em>failure points</em>.
@@ -1491,12 +1489,12 @@ provides the <a href="#canonical-form">canonical form</a> of <a href="#scalar-fo
 A complete representation is required in order to <a href="#constructing-native-data-structures">construct</a> <a href="#representing-native-data-structures">native data
 structures</a>.</p>
 
-<p><strong>Figure 3.7. Loading Failure Points</strong></p>
+<p><strong>Figure 5.7. Loading Failure Points</strong></p>
 
 <p><img src="/main/spec/1.3.0/img/validity2.svg" alt="Loading Failure Points" /></p>
 
 <div id="well-formed-streams-and-identified-aliases"></div>
-<h3 id="331-well-formed-streams-and-identified-aliases">3.3.1. Well-Formed Streams and Identified Aliases</h3>
+<h2 id="51-well-formed-streams-and-identified-aliases">5.1. Well-Formed Streams and Identified Aliases</h2>
 
 <p>A <a href="#example-stream">well-formed</a> character <a href="#streams">stream</a> must match the BNF productions specified in
 the following chapters.
@@ -1508,7 +1506,7 @@ A YAML <a href="#processes-and-models">processor</a> may recover from syntax err
 parts of the input, but it must provide a mechanism for reporting such errors.</p>
 
 <div id="resolved-tags"></div>
-<h3 id="332-resolved-tags">3.3.2. Resolved Tags</h3>
+<h2 id="52-resolved-tags">5.2. Resolved Tags</h2>
 
 <p>Typically, most <a href="#tags">tags</a> are not explicitly specified in the character <a href="#streams">stream</a>.
 During <a href="#parsing-the-presentation-stream">parsing</a>, <a href="#nodes">nodes</a> lacking an explicit <a href="#tags">tag</a> are given a <em>non-specific
@@ -1568,7 +1566,7 @@ In such a case, the YAML <a href="#processes-and-models">processor</a> may <a hr
 based on each <a href="#nodes">node’s kind</a> and allowing for non-specific tags.</p>
 
 <div id="recognized-and-valid-tags"></div>
-<h3 id="333-recognized-and-valid-tags">3.3.3. Recognized and Valid Tags</h3>
+<h2 id="53-recognized-and-valid-tags">5.3. Recognized and Valid Tags</h2>
 
 <p>To be <em>valid</em>, a <a href="#nodes">node</a> must have a <a href="#tags">tag</a> which is <em>recognized</em> by the YAML
 <a href="#processes-and-models">processor</a> and its <a href="#nodes">content</a> must satisfy the constraints imposed by this
@@ -1583,7 +1581,7 @@ However, such a <a href="#loading-failure-points">complete representation</a> ca
 <a href="#representing-native-data-structures">native data structure</a>.</p>
 
 <div id="available-tags"></div>
-<h3 id="334-available-tags">3.3.4. Available Tags</h3>
+<h2 id="54-available-tags">5.4. Available Tags</h2>
 
 <p>In a given processing environment, there need not be an <em>available</em> native type
 corresponding to a given <a href="#tags">tag</a>.
@@ -1593,10 +1591,10 @@ In this case, a <a href="#loading-failure-points">complete representation</a> ma
 <a href="#processes-and-models">application</a> may wish to use this <a href="#representation-graph">representation</a> directly.</p>
 
 <div id="character-productions"></div>
-<h1 id="chapter-4-character-productions">Chapter 4. Character Productions</h1>
+<h1 id="chapter-6-character-productions">Chapter 6. Character Productions</h1>
 
 <div id="character-set"></div>
-<h2 id="41-character-set">4.1. Character Set</h2>
+<h2 id="61-character-set">6.1. Character Set</h2>
 
 <p>To ensure readability, YAML <a href="#streams">streams</a> use only the <em>printable</em> subset of the
 Unicode character set.
@@ -1632,7 +1630,7 @@ YAML <a href="#double-quoted-style">quoted scalars</a> can.</p>
 </blockquote>
 
 <div id="character-encodings"></div>
-<h2 id="42-character-encodings">4.2. Character Encodings</h2>
+<h2 id="62-character-encodings">6.2. Character Encodings</h2>
 
 <p>All characters mentioned in this specification are Unicode code points.
 Each such code point is written as one or more bytes depending on the
@@ -1768,7 +1766,7 @@ encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><
 <p>In the examples, byte order mark characters are displayed as “<code class="language-plaintext highlighter-rouge">⇔</code>”.</p>
 
 <div id="example-byte-order-mark" class="example">
-  <p><strong>Example 4.1 Byte Order Mark</strong></p>
+  <p><strong>Example 6.1 Byte Order Mark</strong></p>
 
   <table width="100%">
 <tr>
@@ -1797,7 +1795,7 @@ encoding schemes see the Unicode FAQ<sup id="fnref:uni-faq" role="doc-noteref"><
 </div>
 
 <div id="example-invalid-byte-order-mark" class="example">
-  <p><strong>Example 4.2 Invalid Byte Order Mark</strong></p>
+  <p><strong>Example 6.2 Invalid Byte Order Mark</strong></p>
 
   <table width="100%">
 <tr>
@@ -1822,7 +1820,7 @@ ERROR:
 </div>
 
 <div id="indicator-characters"></div>
-<h2 id="43-indicator-characters">4.3. Indicator Characters</h2>
+<h2 id="63-indicator-characters">6.3. Indicator Characters</h2>
 
 <p><em>Indicators</em> are characters that have special semantics.</p>
 
@@ -1833,7 +1831,7 @@ ERROR:
 <p>”<code class="language-plaintext highlighter-rouge">:</code>” (<code class="language-plaintext highlighter-rouge">x3A</code>, colon) denotes a <a href="#mapping">mapping value</a>.</p>
 
 <div id="example-block-structure-indicators" class="example">
-  <p><strong>Example 4.3 Block Structure Indicators</strong></p>
+  <p><strong>Example 6.3 Block Structure Indicators</strong></p>
 
   <table width="100%">
 <tr>
@@ -1882,7 +1880,7 @@ mapping<mark class="legend-3">:</mark>
 <p>”<code class="language-plaintext highlighter-rouge">}</code>” (<code class="language-plaintext highlighter-rouge">x7D</code>, right brace) ends a <a href="#flow-mappings">flow mapping</a>.</p>
 
 <div id="example-flow-collection-indicators" class="example">
-  <p><strong>Example 4.4 Flow Collection Indicators</strong></p>
+  <p><strong>Example 6.4 Flow Collection Indicators</strong></p>
 
   <table width="100%">
 <tr>
@@ -1915,7 +1913,7 @@ mapping: <mark class="legend-2">{</mark> sky: blue<mark class="legend-3">,</mark
 <p>”<code class="language-plaintext highlighter-rouge">#</code>” (<code class="language-plaintext highlighter-rouge">x23</code>, octothorpe, hash, sharp, pound, number sign) denotes a <a href="#comments">comment</a>.</p>
 
 <div id="example-comment-indicator" class="example">
-  <p><strong>Example 4.5 Comment Indicator</strong></p>
+  <p><strong>Example 6.5 Comment Indicator</strong></p>
 
   <table width="100%">
 <tr>
@@ -1953,7 +1951,7 @@ properties</a>; to denote <a href="#tags">local tags</a>; and as the <a href="#r
 non-<a href="#plain-style">plain scalars</a>.</p>
 
 <div id="example-node-property-indicators" class="example">
-  <p><strong>Example 4.6 Node Property Indicators</strong></p>
+  <p><strong>Example 6.6 Node Property Indicators</strong></p>
 
   <table width="100%">
 <tr>
@@ -1987,7 +1985,7 @@ alias: <mark class="legend-3">*</mark>anchor
 <p>”<code class="language-plaintext highlighter-rouge">&gt;</code>” (<code class="language-plaintext highlighter-rouge">x3E</code>, greater than) denotes a <a href="#block-folding">folded block scalar</a>.</p>
 
 <div id="example-block-scalar-indicators" class="example">
-  <p><strong>Example 4.7 Block Scalar Indicators</strong></p>
+  <p><strong>Example 6.7 Block Scalar Indicators</strong></p>
 
   <table width="100%">
 <tr>
@@ -2025,7 +2023,7 @@ scalar</a>.</p>
 <p>”<code class="language-plaintext highlighter-rouge">"</code>” (<code class="language-plaintext highlighter-rouge">x22</code>, double quote) surrounds a <a href="#double-quoted-style">double-quoted flow scalar</a>.</p>
 
 <div id="example-quoted-scalar-indicators" class="example">
-  <p><strong>Example 4.8 Quoted Scalar Indicators</strong></p>
+  <p><strong>Example 6.8 Quoted Scalar Indicators</strong></p>
 
   <table width="100%">
 <tr>
@@ -2056,7 +2054,7 @@ double: <mark class="legend-2">"</mark>text<mark class="legend-2">"</mark>
 <p>”<code class="language-plaintext highlighter-rouge">%</code>” (<code class="language-plaintext highlighter-rouge">x25</code>, percent) denotes a <a href="#directives">directive</a> line.</p>
 
 <div id="example-directive-indicator" class="example">
-  <p><strong>Example 4.9 Directive Indicator</strong></p>
+  <p><strong>Example 6.9 Directive Indicator</strong></p>
 
   <table width="100%">
 <tr>
@@ -2086,7 +2084,7 @@ double: <mark class="legend-2">"</mark>text<mark class="legend-2">"</mark>
 <em>reserved</em> for future use.</p>
 
 <div id="example-invalid-use-of-reserved-indicators" class="example">
-  <p><strong>Example 4.10 Invalid use of Reserved Indicators</strong></p>
+  <p><strong>Example 6.10 Invalid use of Reserved Indicators</strong></p>
 
   <table width="100%">
 <tr>
@@ -2116,7 +2114,7 @@ constructs.
 This is handled on a case-by-case basis by the relevant productions.</p>
 
 <div id="line-break-characters"></div>
-<h2 id="44-line-break-characters">4.4. Line Break Characters</h2>
+<h2 id="64-line-break-characters">6.4. Line Break Characters</h2>
 
 <p>The line feed (<code class="language-plaintext highlighter-rouge">x0A</code>) and carriage return (<code class="language-plaintext highlighter-rouge">0x0D</code>) are line break characters.</p>
 
@@ -2151,7 +2149,7 @@ convention is most appropriate.</p>
 clarity.</p>
 
 <div id="example-line-break-characters" class="example">
-  <p><strong>Example 4.11 Line Break Characters</strong></p>
+  <p><strong>Example 6.11 Line Break Characters</strong></p>
 
   <table width="100%">
 <tr>
@@ -2179,7 +2177,7 @@ clarity.</p>
 </div>
 
 <div id="white-space-characters"></div>
-<h2 id="45-white-space-characters">4.5. White Space Characters</h2>
+<h2 id="65-white-space-characters">6.5. White Space Characters</h2>
 
 <p>YAML recognizes two <em>white space</em> characters: <em>space</em> and <em>tab</em>.</p>
 
@@ -2190,7 +2188,7 @@ non-space characters.</p>
 Space characters are sometimes displayed as the glyph “<code class="language-plaintext highlighter-rouge">·</code>” for clarity.</p>
 
 <div id="example-tabs-and-spaces" class="example">
-  <p><strong>Example 4.12 Tabs and Spaces</strong></p>
+  <p><strong>Example 6.12 Tabs and Spaces</strong></p>
 
   <table width="100%">
 <tr>
@@ -2224,7 +2222,7 @@ block:<mark class="legend-2">→</mark>|
 </div>
 
 <div id="miscellaneous-characters"></div>
-<h2 id="46-miscellaneous-characters">4.6. Miscellaneous Characters</h2>
+<h2 id="66-miscellaneous-characters">6.6. Miscellaneous Characters</h2>
 
 <p>The YAML syntax productions make use of the following additional character
 classes:</p>
@@ -2251,7 +2249,7 @@ and “<code class="language-plaintext highlighter-rouge">,</code>” characters
 These characters would cause ambiguity with <a href="#flow-collection-styles">flow collection</a> structures.</p>
 
 <div id="escaped-characters"></div>
-<h2 id="47-escaped-characters">4.7. Escaped Characters</h2>
+<h2 id="67-escaped-characters">6.7. Escaped Characters</h2>
 
 <p>All non-<a href="#character-set">printable</a> characters must be <em>escaped</em>.
 YAML escape sequences use the “<code class="language-plaintext highlighter-rouge">\</code>” notation common to most modern computer
@@ -2353,7 +2351,7 @@ Those digits are interpreted as a Unicode code point.
 The value of the escape is the character at that code point.</p>
 
 <div id="example-escaped-characters" class="example">
-  <p><strong>Example 4.13 Escaped Characters</strong></p>
+  <p><strong>Example 6.13 Escaped Characters</strong></p>
 
   <table width="100%">
 <tr>
@@ -2386,7 +2384,7 @@ The value of the escape is the character at that code point.</p>
 </div>
 
 <div id="example-invalid-escaped-characters" class="example">
-  <p><strong>Example 4.14 Invalid Escaped Characters</strong></p>
+  <p><strong>Example 6.14 Invalid Escaped Characters</strong></p>
 
   <table width="100%">
 <tr>
@@ -2411,10 +2409,10 @@ ERROR:
 </div>
 
 <div id="structural-productions"></div>
-<h1 id="chapter-5-structural-productions">Chapter 5. Structural Productions</h1>
+<h1 id="chapter-7-structural-productions">Chapter 7. Structural Productions</h1>
 
 <div id="indentation-spaces"></div>
-<h2 id="51-indentation-spaces">5.1. Indentation Spaces</h2>
+<h2 id="71-indentation-spaces">7.1. Indentation Spaces</h2>
 
 <p>In YAML <a href="#block-style-productions">block styles</a>, structure is determined by <em>indentation</em>.
 In general, indentation is defined as a zero or more <a href="#white-space-characters">space</a> characters at the
@@ -2440,7 +2438,7 @@ However the <a href="#nodes">content</a> of each sibling <a href="#nodes">node</
 independently.</p>
 
 <div id="example-indentation-spaces" class="example">
-  <p><strong>Example 5.1 Indentation Spaces</strong></p>
+  <p><strong>Example 7.1 Indentation Spaces</strong></p>
 
   <table width="100%">
 <tr>
@@ -2488,7 +2486,7 @@ are perceived by people to be part of the indentation.
 This is handled on a case-by-case basis by the relevant productions.</p>
 
 <div id="example-indentation-indicators" class="example">
-  <p><strong>Example 5.2 Indentation Indicators</strong></p>
+  <p><strong>Example 7.2 Indentation Indicators</strong></p>
 
   <table width="100%">
 <tr>
@@ -2522,7 +2520,7 @@ This is handled on a case-by-case basis by the relevant productions.</p>
 </div>
 
 <div id="separation-spaces"></div>
-<h2 id="52-separation-spaces">5.2. Separation Spaces</h2>
+<h2 id="72-separation-spaces">7.2. Separation Spaces</h2>
 
 <p>Outside <a href="#indentation-spaces">indentation</a> and <a href="#scalar">scalar content</a>, YAML uses <a href="#white-space-characters">white space</a> characters
 for <em>separation</em> between tokens within a line.
@@ -2532,7 +2530,7 @@ Note that such <a href="#white-space-characters">white space</a> may safely incl
 <a href="#nodes">content</a> information.</p>
 
 <div id="example-separation-spaces" class="example">
-  <p><strong>Example 5.3 Separation Spaces</strong></p>
+  <p><strong>Example 7.3 Separation Spaces</strong></p>
 
   <table width="100%">
 <tr>
@@ -2562,7 +2560,7 @@ Note that such <a href="#white-space-characters">white space</a> may safely incl
 </div>
 
 <div id="line-prefixes"></div>
-<h2 id="53-line-prefixes">5.3. Line Prefixes</h2>
+<h2 id="73-line-prefixes">7.3. Line Prefixes</h2>
 
 <p>Inside <a href="#scalar">scalar content</a>, each line begins with a non-<a href="#nodes">content</a> <em>line prefix</em>.
 This prefix always includes the <a href="#indentation-spaces">indentation</a>.
@@ -2573,7 +2571,7 @@ which may contain <a href="#white-space-characters">tab</a> characters.</p>
 <a href="#nodes">content</a> information.</p>
 
 <div id="example-line-prefixes" class="example">
-  <p><strong>Example 5.4 Line Prefixes</strong></p>
+  <p><strong>Example 7.4 Line Prefixes</strong></p>
 
   <table width="100%">
 <tr>
@@ -2609,7 +2607,7 @@ block: |
 </div>
 
 <div id="empty-lines"></div>
-<h2 id="54-empty-lines">5.4. Empty Lines</h2>
+<h2 id="74-empty-lines">7.4. Empty Lines</h2>
 
 <p>An <em>empty line</em> line consists of the non-<a href="#nodes">content</a> <a href="#tag-prefixes">prefix</a> followed by a <a href="#line-break-characters">line
 break</a>.</p>
@@ -2618,7 +2616,7 @@ break</a>.</p>
 This is handled on a case-by-case basis by the relevant productions.</p>
 
 <div id="example-empty-lines" class="example">
-  <p><strong>Example 5.5 Empty Lines</strong></p>
+  <p><strong>Example 7.5 Empty Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -2651,7 +2649,7 @@ Chomping: |
 </div>
 
 <div id="line-folding"></div>
-<h2 id="55-line-folding">5.5. Line Folding</h2>
+<h2 id="75-line-folding">7.5. Line Folding</h2>
 
 <p><em>Line folding</em> allows long lines to be broken for readability, while retaining
 the semantics of the original long line.
@@ -2664,7 +2662,7 @@ a single <a href="#white-space-characters">space</a> (<code class="language-plai
 <p>A folded non-<a href="#empty-lines">empty line</a> may end with either of the above <a href="#line-break-characters">line breaks</a>.</p>
 
 <div id="example-line-folding" class="example">
-  <p><strong>Example 5.6 Line Folding</strong></p>
+  <p><strong>Example 7.6 Line Folding</strong></p>
 
   <table width="100%">
 <tr>
@@ -2690,7 +2688,7 @@ a single <a href="#white-space-characters">space</a> (<code class="language-plai
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-b-l-trimmed">b-l-trimmed(n,c)</a></code></li>
+      <li><code class="legend-1"><a href="#rule-trimmed">trimmed</a></code></li>
       <li><code class="legend-2"><a href="#rule-break-as-space">break-as-space</a></code></li>
     </ul>
   </div>
@@ -2720,7 +2718,7 @@ formatting of <a href="#example-more-indented-lines">more-indented</a> lines is 
 </dl>
 
 <div id="example-block-folding" class="example">
-  <p><strong>Example 5.7 Block Folding</strong></p>
+  <p><strong>Example 7.7 Block Folding</strong></p>
 
   <table width="100%">
 <tr>
@@ -2773,7 +2771,7 @@ can be freely <a href="#example-more-indented-lines">more-indented</a> without a
 </dl>
 
 <div id="example-flow-folding" class="example">
-  <p><strong>Example 5.8 Flow Folding</strong></p>
+  <p><strong>Example 7.8 Flow Folding</strong></p>
 
   <table width="100%">
 <tr>
@@ -2805,7 +2803,7 @@ can be freely <a href="#example-more-indented-lines">more-indented</a> without a
 </div>
 
 <div id="comments"></div>
-<h2 id="56-comments">5.6. Comments</h2>
+<h2 id="76-comments">7.6. Comments</h2>
 
 <p>An explicit <em>comment</em> is marked by a “<code class="language-plaintext highlighter-rouge">#</code>” indicator.
 Comments are a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to convey <a href="#nodes">content</a>
@@ -2821,7 +2819,7 @@ However, as this confuses many tools, YAML <a href="#processes-and-models">proce
 </blockquote>
 
 <div id="example-separated-comment" class="example">
-  <p><strong>Example 5.9 Separated Comment</strong></p>
+  <p><strong>Example 7.9 Separated Comment</strong></p>
 
   <table width="100%">
 <tr>
@@ -2842,9 +2840,9 @@ key:<mark class="legend-3">····<mark class="legend-1"># Comment</mark><mark 
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-comment-to-end-of-line">comment-to-end-of-line</a></code></li>
-      <li><code class="legend-2"><a href="#rule-break-or-end-of-input">break-or-end-of-input</a></code></li>
-      <li><code class="legend-3"><a href="#rule-maybe-comment-and-end-of-line">maybe-comment-and-end-of-line</a></code></li>
+      <li><code class="legend-1"><a href="#rule-comment-content">comment-content</a></code></li>
+      <li><code class="legend-2"><a href="#rule-line-ending">line-ending</a></code></li>
+      <li><code class="legend-3"><a href="#rule-comment-line">comment-line</a></code></li>
     </ul>
   </div>
 </div>
@@ -2855,7 +2853,7 @@ Note that outside <a href="#scalar">scalar content</a>, a line containing only <
 characters is taken to be a comment line.</p>
 
 <div id="example-comment-lines" class="example">
-  <p><strong>Example 5.10 Comment Lines</strong></p>
+  <p><strong>Example 7.10 Comment Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -2879,8 +2877,8 @@ characters is taken to be a comment line.</p>
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-maybe-comment-and-end-of-line">maybe-comment-and-end-of-line</a></code></li>
-      <li><code class="legend-2"><a href="#rule-blanks-and-maybe-comment-and-end-of-line">blanks-and-maybe-comment-and-end-of-line</a></code></li>
+      <li><code class="legend-1"><a href="#rule-comment-line">comment-line</a></code></li>
+      <li><code class="legend-2"><a href="#rule-comment-line">comment-line</a></code></li>
     </ul>
   </div>
 </div>
@@ -2890,7 +2888,7 @@ followed by additional comment lines.
 The only exception is a comment ending a <a href="#block-scalar-headers">block scalar header</a>.</p>
 
 <div id="example-multi-line-comments" class="example">
-  <p><strong>Example 5.11 Multi-Line Comments</strong></p>
+  <p><strong>Example 7.11 Multi-Line Comments</strong></p>
 
   <table width="100%">
 <tr>
@@ -2913,15 +2911,15 @@ key:<mark class="legend-1"><mark class="legend-3">····# Comment↓</mark></m
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-maybe-comment-and-end-of-line">maybe-comment-and-end-of-line</a></code></li>
-      <li><code class="legend-2"><a href="#rule-blanks-and-maybe-comment-and-end-of-line">blanks-and-maybe-comment-and-end-of-line</a></code></li>
+      <li><code class="legend-1"><a href="#rule-comment-line">comment-line</a></code></li>
+      <li><code class="legend-2"><a href="#rule-comment-line">comment-line</a></code></li>
       <li><code class="legend-3"><a href="#rule-comment-lines">comment-lines</a></code></li>
     </ul>
   </div>
 </div>
 
 <div id="separation-lines"></div>
-<h2 id="57-separation-lines">5.7. Separation Lines</h2>
+<h2 id="77-separation-lines">7.7. Separation Lines</h2>
 
 <p><a href="#example-single-pair-explicit-entry">Implicit keys</a> are restricted to a single line.
 In all other cases, YAML allows tokens to be separated by multi-line (possibly
@@ -2932,7 +2930,7 @@ empty) <a href="#comments">comments</a>.</p>
 <a href="#comments">comment</a> lines themselves.</p>
 
 <div id="example-separation-spaces" class="example">
-  <p><strong>Example 5.12 Separation Spaces</strong></p>
+  <p><strong>Example 7.12 Separation Spaces</strong></p>
 
   <table width="100%">
 <tr>
@@ -2968,7 +2966,7 @@ empty) <a href="#comments">comments</a>.</p>
 </div>
 
 <div id="directives"></div>
-<h2 id="58-directives">5.8. Directives</h2>
+<h2 id="78-directives">7.8. Directives</h2>
 
 <p><em>Directives</em> are instructions to the YAML <a href="#processes-and-models">processor</a>.
 This specification defines two directives, “<code class="language-plaintext highlighter-rouge">YAML</code>” and “<code class="language-plaintext highlighter-rouge">TAG</code>”, and <em>reserves</em>
@@ -2986,7 +2984,7 @@ A YAML <a href="#processes-and-models">processor</a> should ignore unknown direc
 warning.</p>
 
 <div id="example-reserved-directives" class="example">
-  <p><strong>Example 5.13 Reserved Directives</strong></p>
+  <p><strong>Example 7.13 Reserved Directives</strong></p>
 
   <table width="100%">
 <tr>
@@ -3016,7 +3014,7 @@ warning.</p>
 </div>
 
 <div id="yaml-directives"></div>
-<h3 id="581-yaml-directives">5.8.1. “<code class="language-plaintext highlighter-rouge">YAML</code>” Directives</h3>
+<h3 id="781-yaml-directives">7.8.1. “<code class="language-plaintext highlighter-rouge">YAML</code>” Directives</h3>
 
 <p>The “<code class="language-plaintext highlighter-rouge">YAML</code>” directive specifies the version of YAML the <a href="#documents">document</a> conforms
 to.
@@ -3040,7 +3038,7 @@ they were version 1.3, giving a warning on points of incompatibility (handling
 of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a href="#line-break-characters">above</a>).</p>
 
 <div id="example-yaml-directive" class="example">
-  <p><strong>Example 5.14 “<code class="language-plaintext highlighter-rouge">YAML</code>” directive</strong></p>
+  <p><strong>Example 7.14 “<code class="language-plaintext highlighter-rouge">YAML</code>” directive</strong></p>
 
   <table width="100%">
 <tr>
@@ -3073,7 +3071,7 @@ of <a href="#line-break-characters">non-ASCII line breaks</a>, as described <a h
 document, even if both occurrences give the same version number.</p>
 
 <div id="example-invalid-repeated-yaml-directive" class="example">
-  <p><strong>Example 5.15 Invalid Repeated YAML directive</strong></p>
+  <p><strong>Example 7.15 Invalid Repeated YAML directive</strong></p>
 
   <table width="100%">
 <tr>
@@ -3098,7 +3096,7 @@ given at most once per document.
 </div>
 
 <div id="tag-directives"></div>
-<h3 id="582-tag-directives">5.8.2. “<code class="language-plaintext highlighter-rouge">TAG</code>” Directives</h3>
+<h3 id="782-tag-directives">7.8.2. “<code class="language-plaintext highlighter-rouge">TAG</code>” Directives</h3>
 
 <p>The “<code class="language-plaintext highlighter-rouge">TAG</code>” directive establishes a <a href="#tag-shorthands">tag shorthand</a> notation for specifying
 <a href="#node-tags">node tags</a>.
@@ -3106,7 +3104,7 @@ Each “<code class="language-plaintext highlighter-rouge">TAG</code>” directi
 This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 
 <div id="example-tag-directive" class="example">
-  <p><strong>Example 5.16 “<code class="language-plaintext highlighter-rouge">TAG</code>” directive</strong></p>
+  <p><strong>Example 7.16 “<code class="language-plaintext highlighter-rouge">TAG</code>” directive</strong></p>
 
   <table width="100%">
 <tr>
@@ -3139,7 +3137,7 @@ This allows for compact and readable <a href="#tags">tag</a> notation.</p>
 in the same document, even if both occurrences give the same <a href="#tag-prefixes">prefix</a>.</p>
 
 <div id="example-invalid-repeated-tag-directive" class="example">
-  <p><strong>Example 5.17 Invalid Repeated TAG directive</strong></p>
+  <p><strong>Example 7.17 Invalid Repeated TAG directive</strong></p>
 
   <table width="100%">
 <tr>
@@ -3165,7 +3163,7 @@ be given at most once per
 </div>
 
 <div id="tag-handles"></div>
-<h4 id="5821-tag-handles">5.8.2.1. Tag Handles</h4>
+<h4 id="7821-tag-handles">7.8.2.1. Tag Handles</h4>
 
 <p>The <em>tag handle</em> exactly matches the prefix of the affected <a href="#tag-shorthands">tag shorthand</a>.
 There are three tag handle variants:</p>
@@ -3191,7 +3189,7 @@ by the simple addition of a single “<code class="language-plaintext highlighte
 </dl>
 
 <div id="example-primary-tag-handle" class="example">
-  <p><strong>Example 5.18 Primary Tag Handle</strong></p>
+  <p><strong>Example 7.18 Primary Tag Handle</strong></p>
 
   <table width="100%">
 <tr>
@@ -3240,7 +3238,7 @@ By default, the prefix associated with this handle is “<code class="language-p
 </dl>
 
 <div id="example-secondary-tag-handle" class="example">
-  <p><strong>Example 5.19 Secondary Tag Handle</strong></p>
+  <p><strong>Example 7.19 Secondary Tag Handle</strong></p>
 
   <table width="100%">
 <tr>
@@ -3285,7 +3283,7 @@ In particular, the YAML <a href="#processes-and-models">processor</a> need not p
 </dl>
 
 <div id="example-tag-handles" class="example">
-  <p><strong>Example 5.20 Tag Handles</strong></p>
+  <p><strong>Example 7.20 Tag Handles</strong></p>
 
   <table width="100%">
 <tr>
@@ -3313,7 +3311,7 @@ In particular, the YAML <a href="#processes-and-models">processor</a> need not p
 </div>
 
 <div id="tag-prefixes"></div>
-<h4 id="5822-tag-prefixes">5.8.2.2. Tag Prefixes</h4>
+<h4 id="7822-tag-prefixes">7.8.2.2. Tag Prefixes</h4>
 
 <p>There are two <em>tag prefix</em> variants:</p>
 
@@ -3332,7 +3330,7 @@ semantics to the same <a href="#tags">local tag</a>.</p>
 </dl>
 
 <div id="example-local-tag-prefix" class="example">
-  <p><strong>Example 5.21 Local Tag Prefix</strong></p>
+  <p><strong>Example 7.21 Local Tag Prefix</strong></p>
 
   <table width="100%">
 <tr>
@@ -3380,7 +3378,7 @@ semantics to the same <a href="#tags">global tag</a>.</p>
 </dl>
 
 <div id="example-global-tag-prefix" class="example">
-  <p><strong>Example 5.22 Global Tag Prefix</strong></p>
+  <p><strong>Example 7.22 Global Tag Prefix</strong></p>
 
   <table width="100%">
 <tr>
@@ -3409,7 +3407,7 @@ semantics to the same <a href="#tags">global tag</a>.</p>
 </div>
 
 <div id="node-properties"></div>
-<h2 id="59-node-properties">5.9. Node Properties</h2>
+<h2 id="79-node-properties">7.9. Node Properties</h2>
 
 <p>Each <a href="#nodes">node</a> may have two optional <em>properties</em>, <a href="#anchors-and-aliases">anchor</a> and <a href="#tags">tag</a>, in addition
 to its <a href="#nodes">content</a>.
@@ -3417,7 +3415,7 @@ Node properties may be specified in any order before the <a href="#nodes">node�
 Either or both may be omitted.</p>
 
 <div id="example-node-properties" class="example">
-  <p><strong>Example 5.23 Node Properties</strong></p>
+  <p><strong>Example 7.23 Node Properties</strong></p>
 
   <table width="100%">
 <tr>
@@ -3448,7 +3446,7 @@ Either or both may be omitted.</p>
 </div>
 
 <div id="node-tags"></div>
-<h3 id="591-node-tags">5.9.1. Node Tags</h3>
+<h3 id="791-node-tags">7.9.1. Node Tags</h3>
 
 <p>The <em>tag property</em> identifies the type of the <a href="#representing-native-data-structures">native data structure</a>
 <a href="#presenting-the-serialization-tree">presented</a> by the <a href="#nodes">node</a>.
@@ -3470,7 +3468,7 @@ A verbatim tag must either begin with a “<code class="language-plaintext highl
 </dl>
 
 <div id="example-verbatim-tags" class="example">
-  <p><strong>Example 5.24 Verbatim Tags</strong></p>
+  <p><strong>Example 7.24 Verbatim Tags</strong></p>
 
   <table width="100%">
 <tr>
@@ -3497,7 +3495,7 @@ A verbatim tag must either begin with a “<code class="language-plaintext highl
 </div>
 
 <div id="example-invalid-verbatim-tags" class="example">
-  <p><strong>Example 5.25 Invalid Verbatim Tags</strong></p>
+  <p><strong>Example 7.25 Invalid Verbatim Tags</strong></p>
 
   <table width="100%">
 <tr>
@@ -3556,7 +3554,7 @@ This behavior is consistent with the URI character escaping rules
 </dl>
 
 <div id="example-tag-shorthands" class="example">
-  <p><strong>Example 5.26 Tag Shorthands</strong></p>
+  <p><strong>Example 7.26 Tag Shorthands</strong></p>
 
   <table width="100%">
 <tr>
@@ -3588,7 +3586,7 @@ This behavior is consistent with the URI character escaping rules
 </div>
 
 <div id="example-invalid-tag-shorthands" class="example">
-  <p><strong>Example 5.27 Invalid Tag Shorthands</strong></p>
+  <p><strong>Example 7.27 Invalid Tag Shorthands</strong></p>
 
   <table width="100%">
 <tr>
@@ -3639,7 +3637,7 @@ This is intentional.</p>
 </dl>
 
 <div id="example-non-specific-tags" class="example">
-  <p><strong>Example 5.28 Non-Specific Tags</strong></p>
+  <p><strong>Example 7.28 Non-Specific Tags</strong></p>
 
   <table width="100%">
 <tr>
@@ -3670,7 +3668,7 @@ This is intentional.</p>
 </div>
 
 <div id="node-anchors"></div>
-<h3 id="592-node-anchors">5.9.2. Node Anchors</h3>
+<h3 id="792-node-anchors">7.9.2. Node Anchors</h3>
 
 <p>An anchor is denoted by the “<code class="language-plaintext highlighter-rouge">&amp;</code>” indicator.
 It marks a <a href="#nodes">node</a> for future reference.
@@ -3691,7 +3689,7 @@ characters.
 These characters would cause ambiguity with <a href="#flow-collection-styles">flow collection</a> structures.</p>
 
 <div id="example-node-anchors" class="example">
-  <p><strong>Example 5.29 Node Anchors</strong></p>
+  <p><strong>Example 7.29 Node Anchors</strong></p>
 
   <table width="100%">
 <tr>
@@ -3720,7 +3718,7 @@ Second occurrence: *<mark class="legend-2">anchor</mark>
 </div>
 
 <div id="flow-style-productions"></div>
-<h1 id="chapter-6-flow-style-productions">Chapter 6. Flow Style Productions</h1>
+<h1 id="chapter-8-flow-style-productions">Chapter 8. Flow Style Productions</h1>
 
 <p>YAML’s <em>flow styles</em> can be thought of as the natural extension of JSON to
 cover <a href="#line-folding">folding</a> long content lines for readability, <a href="#tags">tagging</a> nodes to control
@@ -3728,7 +3726,7 @@ cover <a href="#line-folding">folding</a> long content lines for readability, <a
 reuse <a href="#constructing-native-data-structures">constructed</a> object instances.</p>
 
 <div id="alias-nodes"></div>
-<h2 id="61-alias-nodes">6.1. Alias Nodes</h2>
+<h2 id="81-alias-nodes">8.1. Alias Nodes</h2>
 
 <p>Subsequent occurrences of a previously <a href="#serializing-the-representation-graph">serialized</a> node are <a href="#presenting-the-serialization-tree">presented</a> as
 <em>alias nodes</em>.
@@ -3745,7 +3743,7 @@ It is not an error to specify an <a href="#anchors-and-aliases">anchor</a> that 
 these were already specified at the first occurrence of the <a href="#nodes">node</a>.</p>
 
 <div id="example-alias-nodes" class="example">
-  <p><strong>Example 6.1 Alias Nodes</strong></p>
+  <p><strong>Example 8.1 Alias Nodes</strong></p>
 
   <table width="100%">
 <tr>
@@ -3778,7 +3776,7 @@ Reuse anchor: <mark class="legend-1">*<mark class="legend-2">anchor</mark></mark
 </div>
 
 <div id="empty-nodes"></div>
-<h2 id="62-empty-nodes">6.2. Empty Nodes</h2>
+<h2 id="82-empty-nodes">8.2. Empty Nodes</h2>
 
 <p>YAML allows the <a href="#nodes">node content</a> to be omitted in many cases.
 <a href="#nodes">Nodes</a> with empty <a href="#nodes">content</a> are interpreted as if they were <a href="#plain-style">plain scalars</a>
@@ -3791,7 +3789,7 @@ Note that this glyph corresponds to a position in the characters <a href="#strea
 rather than to an actual character.</p>
 
 <div id="example-empty-content" class="example">
-  <p><strong>Example 6.2 Empty Content</strong></p>
+  <p><strong>Example 8.2 Empty Content</strong></p>
 
   <table width="100%">
 <tr>
@@ -3826,7 +3824,7 @@ Completely empty nodes are only valid when following some explicit indication
 for their existence.</p>
 
 <div id="example-completely-empty-flow-nodes" class="example">
-  <p><strong>Example 6.3 Completely Empty Flow Nodes</strong></p>
+  <p><strong>Example 8.3 Completely Empty Flow Nodes</strong></p>
 
   <table width="100%">
 <tr>
@@ -3856,7 +3854,7 @@ for their existence.</p>
 </div>
 
 <div id="flow-scalar-styles"></div>
-<h2 id="63-flow-scalar-styles">6.3. Flow Scalar Styles</h2>
+<h2 id="83-flow-scalar-styles">8.3. Flow Scalar Styles</h2>
 
 <p>YAML provides three <em>flow scalar styles</em>: <a href="#double-quoted-style">double-quoted</a>, <a href="#single-quoted-style">single-quoted</a> and
 <a href="#plain-style">plain</a> (unquoted).
@@ -3867,7 +3865,7 @@ Each provides a different trade-off between readability and expressive power.</p
 distinguished for the purpose of <a href="#tag-resolution">tag resolution</a>.</p>
 
 <div id="double-quoted-style"></div>
-<h3 id="631-double-quoted-style">6.3.1. Double-Quoted Style</h3>
+<h3 id="831-double-quoted-style">8.3.1. Double-Quoted Style</h3>
 
 <p>The <em>double-quoted style</em> is specified by surrounding “<code class="language-plaintext highlighter-rouge">"</code>” indicators.
 This is the only <a href="#node-styles">style</a> capable of expressing arbitrary strings, by using
@@ -3878,7 +3876,7 @@ This comes at the cost of having to escape the “<code class="language-plaintex
 <a href="#example-single-pair-explicit-entry">implicit key</a>.</p>
 
 <div id="example-double-quoted-implicit-keys" class="example">
-  <p><strong>Example 6.4 Double Quoted Implicit Keys</strong></p>
+  <p><strong>Example 8.4 Double Quoted Implicit Keys</strong></p>
 
   <table width="100%">
 <tr>
@@ -3917,7 +3915,7 @@ Combined with the ability to <a href="#escaped-characters">escape</a> <a href="#
 double-quoted lines to be broken at arbitrary positions.</p>
 
 <div id="example-double-quoted-line-breaks" class="example">
-  <p><strong>Example 6.5 Double Quoted Line Breaks</strong></p>
+  <p><strong>Example 8.5 Double Quoted Line Breaks</strong></p>
 
   <table width="100%">
 <tr>
@@ -3954,7 +3952,7 @@ character.
 Empty lines, if any, are consumed as part of the <a href="#line-folding">line folding</a>.</p>
 
 <div id="example-double-quoted-lines" class="example">
-  <p><strong>Example 6.6 Double Quoted Lines</strong></p>
+  <p><strong>Example 8.6 Double Quoted Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -3984,7 +3982,7 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 </div>
 
 <div id="single-quoted-style"></div>
-<h3 id="632-single-quoted-style">6.3.2. Single-Quoted Style</h3>
+<h3 id="832-single-quoted-style">8.3.2. Single-Quoted Style</h3>
 
 <p>The <em>single-quoted style</em> is specified by surrounding “<code class="language-plaintext highlighter-rouge">'</code>” indicators.
 Therefore, within a single-quoted scalar, such characters need to be repeated.
@@ -3995,7 +3993,7 @@ In addition, it is only possible to break a long single-quoted line where a
 <a href="#white-space-characters">space</a> character is surrounded by non-<a href="#white-space-characters">spaces</a>.</p>
 
 <div id="example-single-quoted-characters" class="example">
-  <p><strong>Example 6.7 Single Quoted Characters</strong></p>
+  <p><strong>Example 8.7 Single Quoted Characters</strong></p>
 
   <table width="100%">
 <tr>
@@ -4024,7 +4022,7 @@ In addition, it is only possible to break a long single-quoted line where a
 <a href="#example-single-pair-explicit-entry">implicit key</a>.</p>
 
 <div id="example-single-quoted-implicit-keys" class="example">
-  <p><strong>Example 6.8 Single Quoted Implicit Keys</strong></p>
+  <p><strong>Example 8.8 Single Quoted Implicit Keys</strong></p>
 
   <table width="100%">
 <tr>
@@ -4060,7 +4058,7 @@ character.
 Empty lines, if any, are consumed as part of the <a href="#line-folding">line folding</a>.</p>
 
 <div id="example-single-quoted-lines" class="example">
-  <p><strong>Example 6.9 Single Quoted Lines</strong></p>
+  <p><strong>Example 8.9 Single Quoted Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -4090,7 +4088,7 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 </div>
 
 <div id="plain-style"></div>
-<h3 id="633-plain-style">6.3.3. Plain Style</h3>
+<h3 id="833-plain-style">8.3.3. Plain Style</h3>
 
 <p>The <em>plain</em> (unquoted) style has no identifying <a href="#indicator-characters">indicators</a> and provides no
 form of escaping.
@@ -4115,7 +4113,7 @@ scalars must not contain the “<code class="language-plaintext highlighter-roug
 These characters would cause ambiguity with <a href="#flow-collection-styles">flow collection</a> structures.</p>
 
 <div id="example-plain-characters" class="example">
-  <p><strong>Example 6.10 Plain Characters</strong></p>
+  <p><strong>Example 8.10 Plain Characters</strong></p>
 
   <table width="100%">
 <tr>
@@ -4167,7 +4165,7 @@ These characters would cause ambiguity with <a href="#flow-collection-styles">fl
 <a href="#example-single-pair-explicit-entry">implicit key</a>.</p>
 
 <div id="example-plain-implicit-keys" class="example">
-  <p><strong>Example 6.11 Plain Implicit Keys</strong></p>
+  <p><strong>Example 8.11 Plain Implicit Keys</strong></p>
 
   <table width="100%">
 <tr>
@@ -4202,7 +4200,7 @@ character.
 Empty lines, if any, are consumed as part of the <a href="#line-folding">line folding</a>.</p>
 
 <div id="example-plain-lines" class="example">
-  <p><strong>Example 6.12 Plain Lines</strong></p>
+  <p><strong>Example 8.12 Plain Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -4232,7 +4230,7 @@ Empty lines, if any, are consumed as part of the <a href="#line-folding">line fo
 </div>
 
 <div id="flow-collection-styles"></div>
-<h2 id="64-flow-collection-styles">6.4. Flow Collection Styles</h2>
+<h2 id="84-flow-collection-styles">8.4. Flow Collection Styles</h2>
 
 <p>A <em>flow collection</em> may be nested within a <a href="#block-collection-styles">block collection</a> ([<code class="language-plaintext highlighter-rouge">FLOW-OUT</code>
 context]), nested within another flow collection ([<code class="language-plaintext highlighter-rouge">FLOW-IN</code> context]) or be a
@@ -4243,14 +4241,14 @@ This does not cause ambiguity because flow collection entries can never be
 <a href="#example-empty-content">completely empty</a>.</p>
 
 <div id="flow-sequences"></div>
-<h3 id="641-flow-sequences">6.4.1. Flow Sequences</h3>
+<h3 id="841-flow-sequences">8.4.1. Flow Sequences</h3>
 
 <p><em>Flow sequence content</em> is denoted by surrounding “<code class="language-plaintext highlighter-rouge">[</code>” and “<code class="language-plaintext highlighter-rouge">]</code>” characters.</p>
 
 <p>Sequence entries are separated by a “<code class="language-plaintext highlighter-rouge">,</code>” character.</p>
 
 <div id="example-flow-sequence" class="example">
-  <p><strong>Example 6.13 Flow Sequence</strong></p>
+  <p><strong>Example 8.13 Flow Sequence</strong></p>
 
   <table width="100%">
 <tr>
@@ -4285,7 +4283,7 @@ In addition, YAML provides a <a href="#example-flow-mapping-adjacent-values">com
 sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">single key/value pair</a>.</p>
 
 <div id="example-flow-sequence-entries" class="example">
-  <p><strong>Example 6.14 Flow Sequence Entries</strong></p>
+  <p><strong>Example 8.14 Flow Sequence Entries</strong></p>
 
   <table width="100%">
 <tr>
@@ -4323,14 +4321,14 @@ sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">sin
 </div>
 
 <div id="flow-mappings"></div>
-<h3 id="642-flow-mappings">6.4.2. Flow Mappings</h3>
+<h3 id="842-flow-mappings">8.4.2. Flow Mappings</h3>
 
 <p><em>Flow mappings</em> are denoted by surrounding “<code class="language-plaintext highlighter-rouge">{</code>” and “<code class="language-plaintext highlighter-rouge">}</code>” characters.</p>
 
 <p>Mapping entries are separated by a “<code class="language-plaintext highlighter-rouge">,</code>” character.</p>
 
 <div id="example-flow-mappings" class="example">
-  <p><strong>Example 6.15 Flow Mappings</strong></p>
+  <p><strong>Example 8.15 Flow Mappings</strong></p>
 
   <table width="100%">
 <tr>
@@ -4364,7 +4362,7 @@ sequence entry is a <a href="#mapping">mapping</a> with a <a href="#mapping">sin
 may be <a href="#example-empty-content">completely empty</a>.</p>
 
 <div id="example-flow-mapping-entries" class="example">
-  <p><strong>Example 6.16 Flow Mapping Entries</strong></p>
+  <p><strong>Example 8.16 Flow Mapping Entries</strong></p>
 
   <table width="100%">
 <tr>
@@ -4409,7 +4407,7 @@ not a <a href="#mapping">key/value pair</a>.</p>
 indicated by the “<code class="language-plaintext highlighter-rouge">:</code>”.</p>
 
 <div id="example-flow-mapping-separate-values" class="example">
-  <p><strong>Example 6.17 Flow Mapping Separate Values</strong></p>
+  <p><strong>Example 8.17 Flow Mapping Separate Values</strong></p>
 
   <table width="100%">
 <tr>
@@ -4453,7 +4451,7 @@ However, as this greatly reduces readability, YAML <a href="#processes-and-model
 <a href="#separation-spaces">separate</a> the <a href="#nodes">value</a> from the “<code class="language-plaintext highlighter-rouge">:</code>” on output, even in this case.</p>
 
 <div id="example-flow-mapping-adjacent-values" class="example">
-  <p><strong>Example 6.18 Flow Mapping Adjacent Values</strong></p>
+  <p><strong>Example 8.18 Flow Mapping Adjacent Values</strong></p>
 
   <table width="100%">
 <tr>
@@ -4493,7 +4491,7 @@ Note that it is not possible to specify any <a href="#node-properties">node prop
 in this case.</p>
 
 <div id="example-single-pair-flow-mappings" class="example">
-  <p><strong>Example 6.19 Single Pair Flow Mappings</strong></p>
+  <p><strong>Example 8.19 Single Pair Flow Mappings</strong></p>
 
   <table width="100%">
 <tr>
@@ -4524,7 +4522,7 @@ in this case.</p>
 the syntax is identical to the general case.</p>
 
 <div id="example-single-pair-explicit-entry" class="example">
-  <p><strong>Example 6.20 Single Pair Explicit Entry</strong></p>
+  <p><strong>Example 8.20 Single Pair Explicit Entry</strong></p>
 
   <table width="100%">
 <tr>
@@ -4564,7 +4562,7 @@ Thus, without the above restrictions, practical one-pass <a href="#parsing-the-p
 been impossible to implement.</p>
 
 <div id="example-single-pair-implicit-entries" class="example">
-  <p><strong>Example 6.21 Single Pair Implicit Entries</strong></p>
+  <p><strong>Example 8.21 Single Pair Implicit Entries</strong></p>
 
   <table width="100%">
 <tr>
@@ -4597,7 +4595,7 @@ been impossible to implement.</p>
 </div>
 
 <div id="example-invalid-implicit-keys" class="example">
-  <p><strong>Example 6.22 Invalid Implicit Keys</strong></p>
+  <p><strong>Example 8.22 Invalid Implicit Keys</strong></p>
 
   <table width="100%">
 <tr>
@@ -4622,7 +4620,7 @@ ERROR:
 </div>
 
 <div id="flow-nodes"></div>
-<h2 id="65-flow-nodes">6.5. Flow Nodes</h2>
+<h2 id="85-flow-nodes">8.5. Flow Nodes</h2>
 
 <p><em>JSON-like</em> <a href="#flow-style-productions">flow styles</a> all have explicit start and end <a href="#indicator-characters">indicators</a>.
 The only <a href="#flow-style-productions">flow style</a> that does not have this property is the <a href="#plain-style">plain scalar</a>.
@@ -4630,7 +4628,7 @@ Note that none of the “JSON-like” styles is actually acceptable by JSON.
 Even the <a href="#double-quoted-style">double-quoted style</a> is a superset of the JSON string format.</p>
 
 <div id="example-flow-content" class="example">
-  <p><strong>Example 6.23 Flow Content</strong></p>
+  <p><strong>Example 8.23 Flow Content</strong></p>
 
   <table width="100%">
 <tr>
@@ -4668,7 +4666,7 @@ Even the <a href="#double-quoted-style">double-quoted style</a> is a superset of
 nodes</a> which refer to the <a href="#anchors-and-aliases">anchored</a> <a href="#node-properties">node properties</a>.</p>
 
 <div id="example-flow-nodes" class="example">
-  <p><strong>Example 6.24 Flow Nodes</strong></p>
+  <p><strong>Example 8.24 Flow Nodes</strong></p>
 
   <table width="100%">
 <tr>
@@ -4703,20 +4701,20 @@ nodes</a> which refer to the <a href="#anchors-and-aliases">anchored</a> <a href
 </div>
 
 <div id="block-style-productions"></div>
-<h1 id="chapter-7-block-style-productions">Chapter 7. Block Style Productions</h1>
+<h1 id="chapter-9-block-style-productions">Chapter 9. Block Style Productions</h1>
 
 <p>YAML’s <em>block styles</em> employ <a href="#indentation-spaces">indentation</a> rather than <a href="#indicator-characters">indicators</a> to denote
 structure.
 This results in a more human readable (though less compact) notation.</p>
 
 <div id="block-scalar-styles"></div>
-<h2 id="71-block-scalar-styles">7.1. Block Scalar Styles</h2>
+<h2 id="91-block-scalar-styles">9.1. Block Scalar Styles</h2>
 
 <p>YAML provides two <em>block scalar styles</em>, <a href="#literal-style">literal</a> and <a href="#line-folding">folded</a>.
 Each provides a different trade-off between readability and expressive power.</p>
 
 <div id="block-scalar-headers"></div>
-<h3 id="711-block-scalar-headers">7.1.1. Block Scalar Headers</h3>
+<h3 id="911-block-scalar-headers">9.1.1. Block Scalar Headers</h3>
 
 <p><a href="#block-scalar-styles">Block scalars</a> are controlled by a few <a href="#indicator-characters">indicators</a> given in a <em>header</em>
 preceding the <a href="#nodes">content</a> itself.
@@ -4726,7 +4724,7 @@ This is the only case where a <a href="#comments">comment</a> must not be follow
 <a href="#comments">comment</a> lines.</p>
 
 <div id="example-block-scalar-header" class="example">
-  <p><strong>Example 7.1 Block Scalar Header</strong></p>
+  <p><strong>Example 9.1 Block Scalar Header</strong></p>
 
   <table width="100%">
 <tr>
@@ -4763,7 +4761,7 @@ This is the only case where a <a href="#comments">comment</a> must not be follow
 </div>
 
 <div id="block-indentation-indicator"></div>
-<h4 id="7111-block-indentation-indicator">7.1.1.1. Block Indentation Indicator</h4>
+<h4 id="9111-block-indentation-indicator">9.1.1.1. Block Indentation Indicator</h4>
 
 <p>Every block scalar has a <em>content indentation level</em>.
 The content of the block scalar excludes a number of leading <a href="#white-space-characters">spaces</a> on each
@@ -4789,7 +4787,7 @@ than the first non-<a href="#empty-lines">empty line</a>.</p>
 where detection will fail.</p>
 
 <div id="example-block-indentation-indicator" class="example">
-  <p><strong>Example 7.2 Block Indentation Indicator</strong></p>
+  <p><strong>Example 9.2 Block Indentation Indicator</strong></p>
 
   <table width="100%">
 <tr>
@@ -4829,7 +4827,7 @@ where detection will fail.</p>
 </div>
 
 <div id="example-invalid-block-scalar-indentation-indicators" class="example">
-  <p><strong>Example 7.3 Invalid Block Scalar Indentation Indicators</strong></p>
+  <p><strong>Example 9.3 Invalid Block Scalar Indentation Indicators</strong></p>
 
   <table width="100%">
 <tr>
@@ -4863,7 +4861,7 @@ ERROR:
 </div>
 
 <div id="block-chomping-indicator"></div>
-<h4 id="7112-block-chomping-indicator">7.1.1.2. Block Chomping Indicator</h4>
+<h4 id="9112-block-chomping-indicator">9.1.1.2. Block Chomping Indicator</h4>
 
 <p><em>Chomping</em> controls how final <a href="#line-break-characters">line breaks</a> and trailing <a href="#empty-lines">empty lines</a> are
 interpreted.
@@ -4912,7 +4910,7 @@ convey <a href="#nodes">content</a> information.</p>
 by the chomping indicator specified in the <a href="#block-scalar-headers">block scalar header</a>.</p>
 
 <div id="example-chomping-final-line-break" class="example">
-  <p><strong>Example 7.4 Chomping Final Line Break</strong></p>
+  <p><strong>Example 9.4 Chomping Final Line Break</strong></p>
 
   <table width="100%">
 <tr>
@@ -4939,7 +4937,7 @@ keep: |+
   <div class="legend">
     <p><strong>Legend:</strong></p>
     <ul>
-      <li><code class="legend-1"><a href="#rule-break-non-content">break-non-content</a></code></li>
+      <li><code class="legend-1"><a href="#rule-line-break">line-break</a></code></li>
       <li><code class="legend-2"><a href="#rule-break-as-line-feed">break-as-line-feed</a></code></li>
     </ul>
   </div>
@@ -4957,7 +4955,7 @@ This is the only case where the <a href="#indentation-spaces">indentation</a> of
 constrained.</p>
 
 <div id="example-chomping-trailing-lines" class="example">
-  <p><strong>Example 7.5 Chomping Trailing Lines</strong></p>
+  <p><strong>Example 9.5 Chomping Trailing Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -5008,7 +5006,7 @@ keep: |+
 considered as trailing lines and hence are affected by chomping.</p>
 
 <div id="example-empty-scalar-chomping" class="example">
-  <p><strong>Example 7.6 Empty Scalar Chomping</strong></p>
+  <p><strong>Example 9.6 Empty Scalar Chomping</strong></p>
 
   <table width="100%">
 <tr>
@@ -5042,13 +5040,13 @@ keep: |+
 </div>
 
 <div id="literal-style"></div>
-<h3 id="712-literal-style">7.1.2. Literal Style</h3>
+<h3 id="912-literal-style">9.1.2. Literal Style</h3>
 
 <p>The <em>literal style</em> is denoted by the “<code class="language-plaintext highlighter-rouge">|</code>” indicator.
 It is the simplest, most restricted and most readable <a href="#node-styles">scalar style</a>.</p>
 
 <div id="example-literal-scalar" class="example">
-  <p><strong>Example 7.7 Literal Scalar</strong></p>
+  <p><strong>Example 9.7 Literal Scalar</strong></p>
 
   <table width="100%">
 <tr>
@@ -5087,7 +5085,7 @@ This restricts them to <a href="#character-set">printable</a> characters.
 In addition, there is no way to break a long literal line.</p>
 
 <div id="example-literal-content" class="example">
-  <p><strong>Example 7.8 Literal Content</strong></p>
+  <p><strong>Example 9.8 Literal Content</strong></p>
 
   <table width="100%">
 <tr>
@@ -5124,14 +5122,14 @@ In addition, there is no way to break a long literal line.</p>
 </div>
 
 <div id="folded-style"></div>
-<h3 id="713-folded-style">7.1.3. Folded Style</h3>
+<h3 id="913-folded-style">9.1.3. Folded Style</h3>
 
 <p>The <em>folded style</em> is denoted by the “<code class="language-plaintext highlighter-rouge">&gt;</code>” indicator.
 It is similar to the <a href="#literal-style">literal style</a>; however, folded scalars are subject to
 <a href="#line-folding">line folding</a>.</p>
 
 <div id="example-folded-scalar" class="example">
-  <p><strong>Example 7.9 Folded Scalar</strong></p>
+  <p><strong>Example 9.9 Folded Scalar</strong></p>
 
   <table width="100%">
 <tr>
@@ -5163,7 +5161,7 @@ It is similar to the <a href="#literal-style">literal style</a>; however, folded
 separates two non-<a href="#white-space-characters">space</a> characters.</p>
 
 <div id="example-folded-lines" class="example">
-  <p><strong>Example 7.10 Folded Lines</strong></p>
+  <p><strong>Example 9.10 Folded Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -5213,7 +5211,7 @@ different productions.)</p>
 <a href="#line-folding">folded</a>.</p>
 
 <div id="example-more-indented-lines" class="example">
-  <p><strong>Example 7.11 More Indented Lines</strong></p>
+  <p><strong>Example 9.11 More Indented Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -5260,7 +5258,7 @@ different productions.)</p>
 also not <a href="#line-folding">folded</a>.</p>
 
 <div id="example-empty-separation-lines" class="example">
-  <p><strong>Example 7.12 Empty Separation Lines</strong></p>
+  <p><strong>Example 9.12 Empty Separation Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -5307,7 +5305,7 @@ also not <a href="#line-folding">folded</a>.</p>
 <a href="#block-chomping-indicator">chomping</a> and are never <a href="#line-folding">folded</a>.</p>
 
 <div id="example-final-empty-lines" class="example">
-  <p><strong>Example 7.13 Final Empty Lines</strong></p>
+  <p><strong>Example 9.13 Final Empty Lines</strong></p>
 
   <table width="100%">
 <tr>
@@ -5351,7 +5349,7 @@ also not <a href="#line-folding">folded</a>.</p>
 </div>
 
 <div id="block-collection-styles"></div>
-<h2 id="72-block-collection-styles">7.2. Block Collection Styles</h2>
+<h2 id="92-block-collection-styles">9.2. Block Collection Styles</h2>
 
 <p>For readability, <em>block collections styles</em> are not denoted by any <a href="#indicator-characters">indicator</a>.
 Instead, YAML uses a lookahead method, where a block collection is
@@ -5359,7 +5357,7 @@ distinguished from a <a href="#plain-style">plain scalar</a> only when a <a href
 entry</a> is seen.</p>
 
 <div id="block-sequences"></div>
-<h3 id="721-block-sequences">7.2.1. Block Sequences</h3>
+<h3 id="921-block-sequences">9.2.1. Block Sequences</h3>
 
 <p>A <em>block sequence</em> is simply a series of <a href="#nodes">nodes</a>, each denoted by a leading
 “<code class="language-plaintext highlighter-rouge">-</code>” indicator.
@@ -5368,7 +5366,7 @@ This allows “<code class="language-plaintext highlighter-rouge">-</code>” to
 followed by a non-space character (e.g. “<code class="language-plaintext highlighter-rouge">-42</code>”).</p>
 
 <div id="example-block-sequence" class="example">
-  <p><strong>Example 7.14 Block Sequence</strong></p>
+  <p><strong>Example 9.14 Block Sequence</strong></p>
 
   <table width="100%">
 <tr>
@@ -5408,7 +5406,7 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 <a href="#collections">collection</a>.</p>
 
 <div id="example-block-sequence-entry-types" class="example">
-  <p><strong>Example 7.15 Block Sequence Entry Types</strong></p>
+  <p><strong>Example 9.15 Block Sequence Entry Types</strong></p>
 
   <table width="100%">
 <tr>
@@ -5445,12 +5443,12 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 </div>
 
 <div id="block-mappings"></div>
-<h3 id="722-block-mappings">7.2.2. Block Mappings</h3>
+<h3 id="922-block-mappings">9.2.2. Block Mappings</h3>
 
 <p>A <em>Block mapping</em> is a series of entries, each <a href="#presenting-the-serialization-tree">presenting</a> a <a href="#mapping">key/value pair</a>.</p>
 
 <div id="example-block-mappings" class="example">
-  <p><strong>Example 7.16 Block Mappings</strong></p>
+  <p><strong>Example 9.16 Block Mappings</strong></p>
 
   <table width="100%">
 <tr>
@@ -5484,7 +5482,7 @@ Note that YAML allows here the same <a href="#example-block-sequence">compact in
 for <a href="#block-sequences">block sequence</a> entries.</p>
 
 <div id="example-explicit-block-mapping-entries" class="example">
-  <p><strong>Example 7.17 Explicit Block Mapping Entries</strong></p>
+  <p><strong>Example 9.17 Explicit Block Mapping Entries</strong></p>
 
   <table width="100%">
 <tr>
@@ -5537,7 +5535,7 @@ the “<code class="language-plaintext highlighter-rouge">:</code>” indicator 
 This prevents a potential ambiguity with multi-line <a href="#plain-style">plain scalars</a>.</p>
 
 <div id="example-implicit-block-mapping-entries" class="example">
-  <p><strong>Example 7.18 Implicit Block Mapping Entries</strong></p>
+  <p><strong>Example 9.18 Implicit Block Mapping Entries</strong></p>
 
   <table width="100%">
 <tr>
@@ -5575,7 +5573,7 @@ Note that it is not possible to specify <a href="#node-properties">node properti
 mapping.</p>
 
 <div id="example-compact-block-mappings" class="example">
-  <p><strong>Example 7.19 Compact Block Mappings</strong></p>
+  <p><strong>Example 9.19 Compact Block Mappings</strong></p>
 
   <table width="100%">
 <tr>
@@ -5605,7 +5603,7 @@ mapping.</p>
 </div>
 
 <div id="block-nodes"></div>
-<h3 id="723-block-nodes">7.2.3. Block Nodes</h3>
+<h3 id="923-block-nodes">9.2.3. Block Nodes</h3>
 
 <p>YAML allows <a href="#flow-nodes">flow nodes</a> to be embedded inside <a href="#block-collection-styles">block collections</a> (but not
 vice-versa).
@@ -5617,7 +5615,7 @@ Note that <a href="#flow-nodes">flow nodes</a> may begin on a following line.</p
 scalar</a> and an <a href="#example-single-pair-explicit-entry">implicit key</a> starting a nested <a href="#block-mappings">block mapping</a>.</p>
 
 <div id="example-block-node-types" class="example">
-  <p><strong>Example 7.20 Block Node Types</strong></p>
+  <p><strong>Example 9.20 Block Node Types</strong></p>
 
   <table width="100%">
 <tr>
@@ -5656,7 +5654,7 @@ In this case, they must be <a href="#indentation-spaces">indented</a> by at leas
 entries.</p>
 
 <div id="example-block-scalar-nodes" class="example">
-  <p><strong>Example 7.21 Block Scalar Nodes</strong></p>
+  <p><strong>Example 9.21 Block Scalar Nodes</strong></p>
 
   <table width="100%">
 <tr>
@@ -5694,7 +5692,7 @@ course, if nested inside another <a href="#block-sequences">block sequence</a> (
 [<code class="language-plaintext highlighter-rouge">BLOCK-IN</code> context]).</p>
 
 <div id="example-block-collection-nodes" class="example">
-  <p><strong>Example 7.22 Block Collection Nodes</strong></p>
+  <p><strong>Example 9.22 Block Collection Nodes</strong></p>
 
   <table width="100%">
 <tr>
@@ -5730,16 +5728,16 @@ mapping:<mark class="legend-1"> !!map</mark>
 </div>
 
 <div id="document-stream-productions"></div>
-<h1 id="chapter-8-document-stream-productions">Chapter 8. Document Stream Productions</h1>
+<h1 id="chapter-10-document-stream-productions">Chapter 10. Document Stream Productions</h1>
 
 <div id="documents"></div>
-<h2 id="81-documents">8.1. Documents</h2>
+<h2 id="101-documents">10.1. Documents</h2>
 
 <p>A YAML character <a href="#streams">stream</a> may contain several <em>documents</em>.
 Each document is completely independent from the rest.</p>
 
 <div id="document-prefix"></div>
-<h3 id="811-document-prefix">8.1.1. Document Prefix</h3>
+<h3 id="1011-document-prefix">10.1.1. Document Prefix</h3>
 
 <p>A document may be preceded by a <em>prefix</em> specifying the <a href="#character-encoding">character encoding</a>
 and optional <a href="#comments">comment</a> lines.
@@ -5751,7 +5749,7 @@ each <a href="#documents">document</a> in the stream.</p>
 existence of an actual <a href="#documents">document</a>.</p>
 
 <div id="example-document-prefix" class="example">
-  <p><strong>Example 8.1 Document Prefix</strong></p>
+  <p><strong>Example 10.1 Document Prefix</strong></p>
 
   <table width="100%">
 <tr>
@@ -5779,7 +5777,7 @@ Document
 </div>
 
 <div id="document-markers"></div>
-<h3 id="812-document-markers">8.1.2. Document Markers</h3>
+<h3 id="1012-document-markers">10.1.2. Document Markers</h3>
 
 <p>Using <a href="#directives">directives</a> creates a potential ambiguity.
 It is valid to have a “<code class="language-plaintext highlighter-rouge">%</code>” character at the start of a line (e.g. as the first
@@ -5806,7 +5804,7 @@ the existence of an actual following <a href="#documents">document</a>.</p>
 either of these markers.</p>
 
 <div id="example-document-markers" class="example">
-  <p><strong>Example 8.2 Document Markers</strong></p>
+  <p><strong>Example 10.2 Document Markers</strong></p>
 
   <table width="100%">
 <tr>
@@ -5837,7 +5835,7 @@ Document
 </div>
 
 <div id="bare-documents"></div>
-<h3 id="813-bare-documents">8.1.3. Bare Documents</h3>
+<h3 id="1013-bare-documents">10.1.3. Bare Documents</h3>
 
 <p>A <em>bare document</em> does not begin with any <a href="#directives">directives</a> or <a href="#document-markers">marker</a> lines.
 Such documents are very “clean” as they contain nothing other than the
@@ -5851,7 +5849,7 @@ Since a <a href="#nodes">node</a> must be more <a href="#indentation-spaces">ind
 document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">indented</a> at zero or more <a href="#white-space-characters">spaces</a>.</p>
 
 <div id="example-bare-documents" class="example">
-  <p><strong>Example 8.3 Bare Documents</strong></p>
+  <p><strong>Example 10.3 Bare Documents</strong></p>
 
   <table width="100%">
 <tr>
@@ -5885,7 +5883,7 @@ document’s <a href="#nodes">node</a> to be <a href="#indentation-spaces">inden
 </div>
 
 <div id="explicit-documents"></div>
-<h3 id="814-explicit-documents">8.1.4. Explicit Documents</h3>
+<h3 id="1014-explicit-documents">10.1.4. Explicit Documents</h3>
 
 <p>An <em>explicit document</em> begins with an explicit <a href="#document-markers">directives end marker</a> line but
 no <a href="#directives">directives</a>.
@@ -5893,7 +5891,7 @@ Since the existence of the <a href="#documents">document</a> is indicated by thi
 <a href="#documents">document</a> itself may be <a href="#example-empty-content">completely empty</a>.</p>
 
 <div id="example-explicit-documents" class="example">
-  <p><strong>Example 8.4 Explicit Documents</strong></p>
+  <p><strong>Example 10.4 Explicit Documents</strong></p>
 
   <table width="100%">
 <tr>
@@ -5927,13 +5925,13 @@ Since the existence of the <a href="#documents">document</a> is indicated by thi
 </div>
 
 <div id="directives-documents"></div>
-<h3 id="815-directives-documents">8.1.5. Directives Documents</h3>
+<h3 id="1015-directives-documents">10.1.5. Directives Documents</h3>
 
 <p>A <em>directives document</em> begins with some <a href="#directives">directives</a> followed by an explicit
 <a href="#document-markers">directives end marker</a> line.</p>
 
 <div id="example-directives-documents" class="example">
-  <p><strong>Example 8.5 Directives Documents</strong></p>
+  <p><strong>Example 10.5 Directives Documents</strong></p>
 
   <table width="100%">
 <tr>
@@ -5968,7 +5966,7 @@ Since the existence of the <a href="#documents">document</a> is indicated by thi
 </div>
 
 <div id="streams"></div>
-<h2 id="82-streams">8.2. Streams</h2>
+<h2 id="102-streams">10.2. Streams</h2>
 
 <p>A YAML <em>stream</em> consists of zero or more <a href="#documents">documents</a>.
 Subsequent <a href="#documents">documents</a> require some sort of separation <a href="#document-markers">marker</a> line.
@@ -5976,7 +5974,7 @@ If a <a href="#documents">document</a> is not terminated by a <a href="#document
 following <a href="#documents">document</a> must begin with a <a href="#document-markers">directives end marker</a> line.</p>
 
 <div id="example-stream" class="example">
-  <p><strong>Example 8.6 Stream</strong></p>
+  <p><strong>Example 10.6 Stream</strong></p>
 
   <table width="100%">
 <tr>
@@ -6017,13 +6015,13 @@ following <a href="#documents">document</a> must begin with a <a href="#document
 with the above <code class="language-plaintext highlighter-rouge">yaml-stream</code> production.</p>
 
 <div id="recommended-schemas"></div>
-<h1 id="chapter-9-recommended-schemas">Chapter 9. Recommended Schemas</h1>
+<h1 id="chapter-11-recommended-schemas">Chapter 11. Recommended Schemas</h1>
 
 <p>A YAML <em>schema</em> is a combination of a set of <a href="#tags">tags</a> and a mechanism for
 <a href="#resolved-tags">resolving</a> <a href="#resolved-tags">non-specific tags</a>.</p>
 
 <div id="failsafe-schema"></div>
-<h2 id="91-failsafe-schema">9.1. Failsafe Schema</h2>
+<h2 id="111-failsafe-schema">11.1. Failsafe Schema</h2>
 
 <p>The <em>failsafe schema</em> is guaranteed to work with any YAML <a href="#documents">document</a>.
 It is therefore the recommended <a href="#recommended-schemas">schema</a> for generic YAML tools.
@@ -6031,10 +6029,10 @@ A YAML <a href="#processes-and-models">processor</a> should therefore support th
 option.</p>
 
 <div id="tags"></div>
-<h3 id="911-tags">9.1.1. Tags</h3>
+<h3 id="1111-tags">11.1.1. Tags</h3>
 
 <div id="generic-mapping"></div>
-<h4 id="9111-generic-mapping">9.1.1.1. Generic Mapping</h4>
+<h4 id="11111-generic-mapping">11.1.1.1. Generic Mapping</h4>
 
 <div id="uri"></div>
 
@@ -6069,7 +6067,7 @@ and Java’s Hashtable.</p>
 </dl>
 
 <div id="example-map-examples" class="example">
-  <p><strong>Example 9.1 <code class="language-plaintext highlighter-rouge">!!map</code> Examples</strong></p>
+  <p><strong>Example 11.1 <code class="language-plaintext highlighter-rouge">!!map</code> Examples</strong></p>
 
   <pre class="example">
 Block style: !!map
@@ -6083,7 +6081,7 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 </div>
 
 <div id="generic-sequence"></div>
-<h4 id="9112-generic-sequence">9.1.1.2. Generic Sequence</h4>
+<h4 id="11112-generic-sequence">11.1.1.2. Generic Sequence</h4>
 
 <div id="uri"></div>
 
@@ -6115,7 +6113,7 @@ tuple and Java’s array or Vector.</p>
 </dl>
 
 <div id="example-seq-examples" class="example">
-  <p><strong>Example 9.2 <code class="language-plaintext highlighter-rouge">!!seq</code> Examples</strong></p>
+  <p><strong>Example 11.2 <code class="language-plaintext highlighter-rouge">!!seq</code> Examples</strong></p>
 
   <pre class="example">
 Block style: !!seq
@@ -6129,7 +6127,7 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 </div>
 
 <div id="generic-string"></div>
-<h4 id="9113-generic-string">9.1.1.3. Generic String</h4>
+<h4 id="11113-generic-string">11.1.1.3. Generic String</h4>
 
 <div id="uri"></div>
 
@@ -6170,7 +6168,7 @@ languages lacking one (such as C), to a character array.</p>
 </dl>
 
 <div id="example-str-examples" class="example">
-  <p><strong>Example 9.3 <code class="language-plaintext highlighter-rouge">!!str</code> Examples</strong></p>
+  <p><strong>Example 11.3 <code class="language-plaintext highlighter-rouge">!!str</code> Examples</strong></p>
 
   <pre class="example">
 Block style: !!str |-
@@ -6182,7 +6180,7 @@ Flow style: !!str "String: just a theory."
 </div>
 
 <div id="tag-resolution"></div>
-<h3 id="912-tag-resolution">9.1.2. Tag Resolution</h3>
+<h3 id="1112-tag-resolution">11.1.2. Tag Resolution</h3>
 
 <p>All <a href="#nodes">nodes</a> with the “<code class="language-plaintext highlighter-rouge">!</code>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the standard
 <a href="#resolved-tags">convention</a>, to “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:seq</code>”, “<code class="language-plaintext highlighter-rouge">tag:yaml.org,2002:map</code>” or
@@ -6192,7 +6190,7 @@ Flow style: !!str "String: just a theory."
 This constrains the <a href="#processes-and-models">application</a> to deal with a <a href="#loading-failure-points">partial representation</a>.</p>
 
 <div id="json-schema"></div>
-<h2 id="92-json-schema">9.2. JSON Schema</h2>
+<h2 id="112-json-schema">11.2. JSON Schema</h2>
 
 <p>The <em>JSON schema</em> is the lowest common denominator of most modern computer
 languages and allows <a href="#parsing-the-presentation-stream">parsing</a> JSON files.
@@ -6201,13 +6199,13 @@ option.
 It is also strongly recommended that other <a href="#recommended-schemas">schemas</a> should be based on it.</p>
 
 <div id="tags"></div>
-<h3 id="921-tags">9.2.1. Tags</h3>
+<h3 id="1121-tags">11.2.1. Tags</h3>
 
 <p>The JSON <a href="#recommended-schemas">schema</a> uses the following <a href="#tags">tags</a> in addition to those defined by the
 <a href="#failsafe-schema">failsafe</a> schema:</p>
 
 <div id="null"></div>
-<h4 id="9211-null">9.2.1.1. Null</h4>
+<h4 id="11211-null">11.2.1.1. Null</h4>
 
 <div id="uri"></div>
 
@@ -6251,7 +6249,7 @@ different from not having that <a href="#nodes">key</a> in the <a href="#mapping
 </dl>
 
 <div id="example-null-examples" class="example">
-  <p><strong>Example 9.4 <code class="language-plaintext highlighter-rouge">!!null</code> Examples</strong></p>
+  <p><strong>Example 11.4 <code class="language-plaintext highlighter-rouge">!!null</code> Examples</strong></p>
 
   <pre class="example">
 !!null null: value for null key
@@ -6261,7 +6259,7 @@ key with null value: !!null null
 </div>
 
 <div id="boolean"></div>
-<h4 id="9212-boolean">9.2.1.2. Boolean</h4>
+<h4 id="11212-boolean">11.2.1.2. Boolean</h4>
 
 <div id="uri"></div>
 
@@ -6302,7 +6300,7 @@ In languages without a <a href="#representing-native-data-structures">native</a>
 </dl>
 
 <div id="example-bool-examples" class="example">
-  <p><strong>Example 9.5 <code class="language-plaintext highlighter-rouge">!!bool</code> Examples</strong></p>
+  <p><strong>Example 11.5 <code class="language-plaintext highlighter-rouge">!!bool</code> Examples</strong></p>
 
   <pre class="example">
 YAML is a superset of JSON: !!bool true
@@ -6312,7 +6310,7 @@ Pluto is a planet: !!bool false
 </div>
 
 <div id="integer"></div>
-<h4 id="9213-integer">9.2.1.3. Integer</h4>
+<h4 id="11213-integer">11.2.1.3. Integer</h4>
 
 <div id="uri"></div>
 
@@ -6368,7 +6366,7 @@ matching the regular expression <code class="language-plaintext highlighter-roug
 </dl>
 
 <div id="example-int-examples" class="example">
-  <p><strong>Example 9.6 <code class="language-plaintext highlighter-rouge">!!int</code> Examples</strong></p>
+  <p><strong>Example 11.6 <code class="language-plaintext highlighter-rouge">!!int</code> Examples</strong></p>
 
   <pre class="example">
 negative: !!int -12
@@ -6379,7 +6377,7 @@ positive: !!int 34
 </div>
 
 <div id="floating-point"></div>
-<h4 id="9214-floating-point">9.2.1.4. Floating Point</h4>
+<h4 id="11214-floating-point">11.2.1.4. Floating Point</h4>
 
 <div id="uri"></div>
 
@@ -6435,7 +6433,7 @@ expression<br />
 </dl>
 
 <div id="example-float-examples" class="example">
-  <p><strong>Example 9.7 <code class="language-plaintext highlighter-rouge">!!float</code> Examples</strong></p>
+  <p><strong>Example 11.7 <code class="language-plaintext highlighter-rouge">!!float</code> Examples</strong></p>
 
   <pre class="example">
 negative: !!float -1
@@ -6448,7 +6446,7 @@ not a number: !!float .nan
 </div>
 
 <div id="tag-resolution"></div>
-<h3 id="922-tag-resolution">9.2.2. Tag Resolution</h3>
+<h3 id="1122-tag-resolution">11.2.2. Tag Resolution</h3>
 
 <p>The <a href="#json-schema">JSON schema</a> <a href="#tag-resolution">tag resolution</a> is an extension of the <a href="#failsafe-schema">failsafe schema</a>
 <a href="#tag-resolution">tag resolution</a>.</p>
@@ -6507,7 +6505,7 @@ this could not be addressed in the 1.2.2 specification.</p>
 </blockquote>
 
 <div id="example-json-tag-resolution" class="example">
-  <p><strong>Example 9.8 JSON Tag Resolution</strong></p>
+  <p><strong>Example 11.8 JSON Tag Resolution</strong></p>
 
   <table width="100%">
 <tr>
@@ -6537,7 +6535,7 @@ Invalid: [ True, Null,
 </div>
 
 <div id="core-schema"></div>
-<h2 id="93-core-schema">9.3. Core Schema</h2>
+<h2 id="113-core-schema">11.3. Core Schema</h2>
 
 <p>The <em>Core schema</em> is an extension of the <a href="#json-schema">JSON schema</a>, allowing for more
 human-readable <a href="#presentation-stream">presentation</a> of the same types.
@@ -6546,12 +6544,12 @@ unless instructed otherwise.
 It is also strongly recommended that other <a href="#recommended-schemas">schemas</a> should be based on it.</p>
 
 <div id="tags"></div>
-<h3 id="931-tags">9.3.1. Tags</h3>
+<h3 id="1131-tags">11.3.1. Tags</h3>
 
 <p>The core <a href="#recommended-schemas">schema</a> uses the same <a href="#tags">tags</a> as the <a href="#json-schema">JSON schema</a>.</p>
 
 <div id="tag-resolution"></div>
-<h3 id="932-tag-resolution">9.3.2. Tag Resolution</h3>
+<h3 id="1132-tag-resolution">11.3.2. Tag Resolution</h3>
 
 <p>The <a href="#core-schema">core schema</a> <a href="#tag-resolution">tag resolution</a> is an extension of the <a href="#json-schema">JSON schema</a> <a href="#tag-resolution">tag
 resolution</a>.</p>
@@ -6621,7 +6619,7 @@ is <a href="#resolved-tags">resolved</a> to <code class="language-plaintext high
 </table>
 
 <div id="example-core-tag-resolution" class="example">
-  <p><strong>Example 9.9 Core Tag Resolution</strong></p>
+  <p><strong>Example 11.9 Core Tag Resolution</strong></p>
 
   <table width="100%">
 <tr>
@@ -6657,7 +6655,7 @@ Also floats: [
 </div>
 
 <div id="other-schemas"></div>
-<h2 id="94-other-schemas">9.4. Other Schemas</h2>
+<h2 id="114-other-schemas">11.4. Other Schemas</h2>
 
 <p>None of the above recommended <a href="#recommended-schemas">schemas</a> preclude the use of arbitrary explicit
 <a href="#tags">tags</a>.
@@ -6969,8 +6967,8 @@ yaml-stream ::=
         <a href="#rule-any-document">any-document</a>?
       )
     | <a href="#rule-byte-order-mark">byte-order-mark</a>
-    | <a href="#rule-blanks-and-maybe-comment-and-end-of-line">blanks-and-maybe-comment-and-end-of-line</a>
-    | <a href="#rule-explicit-document">explicit-document</a>
+    | <a href="#rule-comment-line">comment-line</a>
+    | <a href="#rule-start-indicator-and-document">start-indicator-and-document</a>
   )*
 </pre>
 
@@ -6978,7 +6976,7 @@ yaml-stream ::=
 <pre class="rule">[2]
 document-prefix ::=
   <a href="#rule-byte-order-mark">byte-order-mark</a>?
-  <a href="#rule-blanks-and-maybe-comment-and-end-of-line">blanks-and-maybe-comment-and-end-of-line</a>*
+  <a href="#rule-comment-line">comment-line</a>*
 </pre>
 
 <div id="rule-document-suffix"></div>
@@ -7059,9 +7057,8 @@ forbidden-content ::=
     | <a href="#rule-document-end-indicator">document-end-indicator</a>
   )
   (
-      <a href="#rule-line-break-character">line-break-character</a>
+      <a href="#rule-line-ending">line-ending</a>
     | <a href="#rule-blank-character">blank-character</a>
-    | &lt;end-of-input&gt;
   )
 </pre>
 
@@ -7399,7 +7396,10 @@ block-scalar-indicators(t) ::=
         <a href="#rule-block-scalar-indentation-indicator">block-scalar-indentation-indicator</a>
       )
   )
-  <a href="#rule-maybe-comment-and-end-of-line">maybe-comment-and-end-of-line</a>
+  (
+      <a href="#rule-comment-line">comment-line</a>
+    | <a href="#rule-line-ending">line-ending</a>
+  )
 </pre>
 
 <div id="rule-block-scalar-indentation-indicator"></div>
@@ -7417,7 +7417,7 @@ block-scalar-chomping-indicator(CLIP)  ::= ""
 
 <div id="rule-block-scalar-chomp-last"></div>
 <pre class="rule">[47]
-block-scalar-chomp-last(STRIP) ::= <a href="#rule-break-non-content">break-non-content</a>  | &lt;end-of-input&gt;
+block-scalar-chomp-last(STRIP) ::= <a href="#rule-line-break">line-break</a> | &lt;end-of-input&gt;
 block-scalar-chomp-last(CLIP)  ::= <a href="#rule-break-as-line-feed">break-as-line-feed</a> | &lt;end-of-input&gt;
 block-scalar-chomp-last(KEEP)  ::= <a href="#rule-break-as-line-feed">break-as-line-feed</a> | &lt;end-of-input&gt;
 </pre>
@@ -7434,7 +7434,7 @@ block-scalar-chomp-empty(n,KEEP)  ::= <a href="#rule-line-keep-empty">line-keep-
 line-strip-empty(n) ::=
   (
     <a href="#rule-indentation-spaces-less-or-equal">indentation-spaces-less-or-equal</a>(n)
-    <a href="#rule-break-non-content">break-non-content</a>
+    <a href="#rule-line-break">line-break</a>
   )*
   <a href="#rule-line-trail-comments">line-trail-comments</a>(n)?
 </pre>
@@ -7450,9 +7450,9 @@ line-keep-empty(n) ::=
 <pre class="rule">[51]
 line-trail-comments(n) ::=
   <a href="#rule-indentation-spaces-less-than">indentation-spaces-less-than</a>(n)
-  <a href="#rule-comment-to-end-of-line">comment-to-end-of-line</a>
-  <a href="#rule-break-or-end-of-input">break-or-end-of-input</a>
-  <a href="#rule-blanks-and-maybe-comment-and-end-of-line">blanks-and-maybe-comment-and-end-of-line</a>*
+  <a href="#rule-comment-content">comment-content</a>
+  <a href="#rule-line-ending">line-ending</a>
+  <a href="#rule-comment-line">comment-line</a>*
 </pre>
 
 <div id="a-3-flow-style-productions"></div>
@@ -7807,7 +7807,7 @@ non-break-double-quoted-character ::=
 double-quoted-line-continuation(n) ::=
   <a href="#rule-blank-character">blank-character</a>*
   '\'
-  <a href="#rule-break-non-content">break-non-content</a>
+  <a href="#rule-line-break">line-break</a>
   <a href="#rule-empty-line">empty-line</a>(n,FLOW-IN)*
   <a href="#rule-indentation-spaces-plus-maybe-more">indentation-spaces-plus-maybe-more</a>(n)
 </pre>
@@ -8124,7 +8124,7 @@ flow-folded-whitespace(n) ::=
 <pre class="rule">[116]
 folded-whitespace(n,c) ::=
     (
-      <a href="#rule-break-non-content">break-non-content</a>
+      <a href="#rule-line-break">line-break</a>
       <a href="#rule-empty-line">empty-line</a>(n,c)+
     )
   | <a href="#rule-break-as-space">break-as-space</a>
@@ -8136,50 +8136,30 @@ folded-whitespace(n,c) ::=
 <div id="rule-comment-lines"></div>
 <pre class="rule">[117]
 comment-lines ::=
-  (
-      <a href="#rule-maybe-comment-and-end-of-line">maybe-comment-and-end-of-line</a>
-    | &lt;start-of-line&gt;
-  )
-  <a href="#rule-blanks-and-maybe-comment-and-end-of-line">blanks-and-maybe-comment-and-end-of-line</a>*
+    <a href="#rule-comment-line">comment-line</a>+
+  | &lt;start-of-line&gt;
 </pre>
 
-<div id="rule-blanks-and-maybe-comment-and-end-of-line"></div>
+<div id="rule-comment-line"></div>
 <pre class="rule">[118]
-blanks-and-maybe-comment-and-end-of-line ::=
+comment-line ::=
   <a href="#rule-separation-blanks">separation-blanks</a>
-  <a href="#rule-comment-to-end-of-line">comment-to-end-of-line</a>?
-  <a href="#rule-break-or-end-of-input">break-or-end-of-input</a>
+  <a href="#rule-comment-content">comment-content</a>?
+  <a href="#rule-line-ending">line-ending</a>
 </pre>
 
-<div id="rule-maybe-comment-and-end-of-line"></div>
+<div id="rule-comment-content"></div>
 <pre class="rule">[119]
-maybe-comment-and-end-of-line ::=
-  (
-    <a href="#rule-separation-blanks">separation-blanks</a>
-    <a href="#rule-comment-to-end-of-line">comment-to-end-of-line</a>?
-  )?
-  <a href="#rule-break-or-end-of-input">break-or-end-of-input</a>
-</pre>
-
-<div id="rule-comment-to-end-of-line"></div>
-<pre class="rule">[120]
-comment-to-end-of-line ::=
+comment-content ::=
   '#'
   <a href="#rule-non-break-character">non-break-character</a>*
-</pre>
-
-<div id="rule-break-or-end-of-input"></div>
-<pre class="rule">[121]
-break-or-end-of-input ::=
-    <a href="#rule-break-non-content">break-non-content</a>
-  | &lt;end-of-input&gt;
 </pre>
 
 <div id="a-4-5-empty-lines"></div>
 <h3 id="a45-empty-lines">A.4.5. Empty Lines</h3>
 
 <div id="rule-empty-line"></div>
-<pre class="rule">[122]
+<pre class="rule">[120]
 empty-line(n,c) ::=
   (
       <a href="#rule-line-prefix-spaces">line-prefix-spaces</a>(n,c)
@@ -8192,7 +8172,7 @@ empty-line(n,c) ::=
 <h3 id="a46-separation-lines-and-blanks">A.4.6. Separation Lines and Blanks</h3>
 
 <div id="rule-separation-characters"></div>
-<pre class="rule">[123]
+<pre class="rule">[121]
 separation-characters(n,BLOCK-OUT) ::= <a href="#rule-separation-lines">separation-lines</a>(n)
 separation-characters(n,BLOCK-IN)  ::= <a href="#rule-separation-lines">separation-lines</a>(n)
 separation-characters(n,FLOW-OUT)  ::= <a href="#rule-separation-lines">separation-lines</a>(n)
@@ -8202,7 +8182,7 @@ separation-characters(n,FLOW-KEY)  ::= <a href="#rule-separation-blanks">separat
 </pre>
 
 <div id="rule-separation-lines"></div>
-<pre class="rule">[124]
+<pre class="rule">[122]
 separation-lines(n) ::=
     (
       <a href="#rule-comment-lines">comment-lines</a>
@@ -8212,7 +8192,7 @@ separation-lines(n) ::=
 </pre>
 
 <div id="rule-separation-blanks"></div>
-<pre class="rule">[125]
+<pre class="rule">[123]
 separation-blanks ::=
     <a href="#rule-blank-character">blank-character</a>+
   | &lt;start-of-line&gt;
@@ -8224,7 +8204,7 @@ separation-blanks ::=
 <p>A %YAML directive line.</p>
 
 <div id="rule-yaml-directive-line"></div>
-<pre class="rule">[126]
+<pre class="rule">[124]
 yaml-directive-line ::=
   "YAML"
   <a href="#rule-separation-blanks">separation-blanks</a>
@@ -8232,7 +8212,7 @@ yaml-directive-line ::=
 </pre>
 
 <div id="rule-yaml-version-number"></div>
-<pre class="rule">[127]
+<pre class="rule">[125]
 yaml-version-number ::=
   <a href="#rule-decimal-digit">decimal-digit</a>+
   '.'
@@ -8240,7 +8220,7 @@ yaml-version-number ::=
 </pre>
 
 <div id="rule-reserved-directive-line"></div>
-<pre class="rule">[128]
+<pre class="rule">[126]
 reserved-directive-line ::=
   <a href="#rule-directive-name">directive-name</a>
   (
@@ -8250,19 +8230,19 @@ reserved-directive-line ::=
 </pre>
 
 <div id="rule-directive-name"></div>
-<pre class="rule">[129]
+<pre class="rule">[127]
 directive-name ::=
   <a href="#rule-non-space-character">non-space-character</a>+
 </pre>
 
 <div id="rule-directive-parameter"></div>
-<pre class="rule">[130]
+<pre class="rule">[128]
 directive-parameter ::=
   <a href="#rule-non-space-character">non-space-character</a>+
 </pre>
 
 <div id="rule-tag-directive-line"></div>
-<pre class="rule">[131]
+<pre class="rule">[129]
 tag-directive-line ::=
   "TAG"
   <a href="#rule-separation-blanks">separation-blanks</a>
@@ -8272,7 +8252,7 @@ tag-directive-line ::=
 </pre>
 
 <div id="rule-tag-handle"></div>
-<pre class="rule">[132]
+<pre class="rule">[130]
 tag-handle ::=
     <a href="#rule-named-tag-handle">named-tag-handle</a>
   | <a href="#rule-secondary-tag-handle">secondary-tag-handle</a>
@@ -8280,7 +8260,7 @@ tag-handle ::=
 </pre>
 
 <div id="rule-named-tag-handle"></div>
-<pre class="rule">[133]
+<pre class="rule">[131]
 named-tag-handle ::=
   '!'
   <a href="#rule-word-character">word-character</a>+
@@ -8288,33 +8268,33 @@ named-tag-handle ::=
 </pre>
 
 <div id="rule-secondary-tag-handle"></div>
-<pre class="rule">[134]
+<pre class="rule">[132]
 secondary-tag-handle ::=
   "!!"
 </pre>
 
 <div id="rule-primary-tag-handle"></div>
-<pre class="rule">[135]
+<pre class="rule">[133]
 primary-tag-handle ::=
   '!'
 </pre>
 
 <div id="rule-tag-prefix"></div>
-<pre class="rule">[136]
+<pre class="rule">[134]
 tag-prefix ::=
     <a href="#rule-local-tag-prefix">local-tag-prefix</a>
   | <a href="#rule-global-tag-prefix">global-tag-prefix</a>
 </pre>
 
 <div id="rule-local-tag-prefix"></div>
-<pre class="rule">[137]
+<pre class="rule">[135]
 local-tag-prefix ::=
   '!'
   <a href="#rule-uri-character">uri-character</a>*
 </pre>
 
 <div id="rule-global-tag-prefix"></div>
-<pre class="rule">[138]
+<pre class="rule">[136]
 global-tag-prefix ::=
   <a href="#rule-tag-character">tag-character</a>
   <a href="#rule-uri-character">uri-character</a>*
@@ -8324,7 +8304,7 @@ global-tag-prefix ::=
 <h3 id="a48-node-properties">A.4.8. Node Properties</h3>
 
 <div id="rule-node-properties"></div>
-<pre class="rule">[139]
+<pre class="rule">[137]
 node-properties(n,c) ::=
     (
       <a href="#rule-anchor-property">anchor-property</a>
@@ -8343,14 +8323,14 @@ node-properties(n,c) ::=
 </pre>
 
 <div id="rule-anchor-property"></div>
-<pre class="rule">[140]
+<pre class="rule">[138]
 anchor-property ::=
   '&amp;'
   <a href="#rule-anchor-name">anchor-name</a>
 </pre>
 
 <div id="rule-anchor-name"></div>
-<pre class="rule">[141]
+<pre class="rule">[139]
 anchor-name ::=
   <a href="#rule-anchor-character">anchor-character</a>+
 </pre>
@@ -8358,14 +8338,14 @@ anchor-name ::=
 <p>XXX Change to <code class="language-plaintext highlighter-rouge">anchor-character ::= flow-plain-scalar-character</code> ?</p>
 
 <div id="rule-anchor-character"></div>
-<pre class="rule">[142]
+<pre class="rule">[140]
 anchor-character ::=
     <a href="#rule-non-space-character">non-space-character</a>
   - <a href="#rule-flow-collection-indicators">flow-collection-indicators</a>
 </pre>
 
 <div id="rule-tag-property"></div>
-<pre class="rule">[143]
+<pre class="rule">[141]
 tag-property ::=
     <a href="#rule-verbatim-tag">verbatim-tag</a>
   | <a href="#rule-shorthand-tag">shorthand-tag</a>
@@ -8373,7 +8353,7 @@ tag-property ::=
 </pre>
 
 <div id="rule-verbatim-tag"></div>
-<pre class="rule">[144]
+<pre class="rule">[142]
 verbatim-tag ::=
   "!&lt;"
   <a href="#rule-uri-character">uri-character</a>+
@@ -8381,14 +8361,14 @@ verbatim-tag ::=
 </pre>
 
 <div id="rule-shorthand-tag"></div>
-<pre class="rule">[145]
+<pre class="rule">[143]
 shorthand-tag ::=
   <a href="#rule-tag-handle">tag-handle</a>
   <a href="#rule-tag-character">tag-character</a>+
 </pre>
 
 <div id="rule-non-specific-tag"></div>
-<pre class="rule">[146]
+<pre class="rule">[144]
 non-specific-tag ::=
   '!'
 </pre>
@@ -8400,7 +8380,7 @@ non-specific-tag ::=
 <h3 id="a51-character-encoding">A.5.1. Character Encoding</h3>
 
 <div id="rule-byte-order-mark"></div>
-<pre class="rule">[147]
+<pre class="rule">[145]
 byte-order-mark ::=
   xFEFF
 </pre>
@@ -8411,7 +8391,7 @@ byte-order-mark ::=
 <p>All characters allowed in YAML.</p>
 
 <div id="rule-yaml-character"></div>
-<pre class="rule">[148]
+<pre class="rule">[146]
 yaml-character ::=
                                     # 8 bit
     x09                             # Tab
@@ -8428,63 +8408,65 @@ yaml-character ::=
 <p>All characters allowed in JSON.</p>
 
 <div id="rule-json-character"></div>
-<pre class="rule">[149]
+<pre class="rule">[147]
 json-character ::=
     x09                             # Tab
   | [x20-x10FFFF]                   # Non-C0-control characters
 </pre>
 
 <div id="rule-non-space-character"></div>
-<pre class="rule">[150]
+<pre class="rule">[148]
 non-space-character ::=
     <a href="#rule-non-break-character">non-break-character</a>
   - <a href="#rule-blank-character">blank-character</a>
 </pre>
 
 <div id="rule-non-break-character"></div>
-<pre class="rule">[151]
+<pre class="rule">[149]
 non-break-character ::=
     <a href="#rule-yaml-character">yaml-character</a>
-  - <a href="#rule-line-break-character">line-break-character</a>
+  - x0A
+  - x0D
   - <a href="#rule-byte-order-mark">byte-order-mark</a>
 </pre>
 
 <div id="rule-blank-character"></div>
-<pre class="rule">[152]
+<pre class="rule">[150]
 blank-character ::=
     x20                             # Space
   | x09                             # Tab
 </pre>
 
 <div id="rule-space-character"></div>
-<pre class="rule">[153]
+<pre class="rule">[151]
 space-character ::=
   x20
 </pre>
 
-<div id="a-5-3-line-break-characters"></div>
-<h3 id="a53-line-break-characters">A.5.3. Line Break Characters</h3>
+<div id="a-5-3-line-ending-productions"></div>
+<h3 id="a53-line-ending-productions">A.5.3. Line Ending Productions</h3>
+
+<div id="rule-line-ending"></div>
+<pre class="rule">[152]
+line-ending ::=
+    <a href="#rule-line-break">line-break</a>
+  | &lt;end-of-input&gt;
+</pre>
 
 <div id="rule-break-as-space"></div>
-<pre class="rule">[154]
+<pre class="rule">[153]
 break-as-space ::=
   <a href="#rule-line-break">line-break</a>
 </pre>
 
 <div id="rule-break-as-line-feed"></div>
-<pre class="rule">[155]
+<pre class="rule">[154]
 break-as-line-feed ::=
   <a href="#rule-line-break">line-break</a>
 </pre>
 
-<div id="rule-break-non-content"></div>
-<pre class="rule">[156]
-break-non-content ::=
-  <a href="#rule-line-break">line-break</a>
-</pre>
-
 <div id="rule-line-break"></div>
-<pre class="rule">[157]
+<pre class="rule">[155]
 line-break ::=
     (
       x0D                           # Carriage return
@@ -8494,18 +8476,11 @@ line-break ::=
   | x0A
 </pre>
 
-<div id="rule-line-break-character"></div>
-<pre class="rule">[158]
-line-break-character ::=
-    x0A
-  | x0D
-</pre>
-
 <div id="a-5-4-indicator-characters"></div>
 <h3 id="a54-indicator-characters">A.5.4. Indicator Characters</h3>
 
 <div id="rule-flow-collection-indicators"></div>
-<pre class="rule">[159]
+<pre class="rule">[156]
 flow-collection-indicators ::=
     '{'                             # Flow mapping start
   | '}'                             # Flow mapping end
@@ -8519,7 +8494,7 @@ flow-collection-indicators ::=
 <p>See <a href="#escaped-characters">Escaped Characters</a>.</p>
 
 <div id="rule-double-quoted-scalar-escape-character"></div>
-<pre class="rule">[160]
+<pre class="rule">[157]
 double-quoted-scalar-escape-character ::=
   '\'
   (
@@ -8547,7 +8522,7 @@ double-quoted-scalar-escape-character ::=
 </pre>
 
 <div id="rule-tag-character"></div>
-<pre class="rule">[161]
+<pre class="rule">[158]
 tag-character ::=
     <a href="#rule-uri-character">uri-character</a>
   - '!'
@@ -8555,7 +8530,7 @@ tag-character ::=
 </pre>
 
 <div id="rule-uri-character"></div>
-<pre class="rule">[162]
+<pre class="rule">[159]
 uri-character ::=
     (
       '%'
@@ -8586,7 +8561,7 @@ uri-character ::=
 </pre>
 
 <div id="rule-word-character"></div>
-<pre class="rule">[163]
+<pre class="rule">[160]
 word-character ::=
     <a href="#rule-decimal-digit">decimal-digit</a>
   | <a href="#rule-ascii-alpha-character">ascii-alpha-character</a>
@@ -8594,7 +8569,7 @@ word-character ::=
 </pre>
 
 <div id="rule-hexadecimal-digit"></div>
-<pre class="rule">[164]
+<pre class="rule">[161]
 hexadecimal-digit ::=
     <a href="#rule-decimal-digit">decimal-digit</a>
   | [x41-x46]                       # A-F
@@ -8602,19 +8577,19 @@ hexadecimal-digit ::=
 </pre>
 
 <div id="rule-decimal-digit"></div>
-<pre class="rule">[165]
+<pre class="rule">[162]
 decimal-digit ::=
   [x30-x39]                         # 0-9
 </pre>
 
 <div id="rule-decimal-digit-1-9"></div>
-<pre class="rule">[166]
+<pre class="rule">[163]
 decimal-digit-1-9 ::=
   [x31-x39]                         # 1-9
 </pre>
 
 <div id="rule-ascii-alpha-character"></div>
-<pre class="rule">[167]
+<pre class="rule">[164]
 ascii-alpha-character ::=
     [x41-x5A]                       # A-Z
   | [x61-x7A]                       # <a href="#rule-a-z">a-z</a>
