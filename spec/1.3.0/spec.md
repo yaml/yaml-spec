@@ -5140,9 +5140,8 @@ forbidden-content ::=
     | document-end-indicator
   )
   (
-      line-break-character
+      line-ending
     | blank-character
-    | <end-of-input>
   )
 ```
 
@@ -6369,7 +6368,8 @@ non-space-character ::=
 ```
 non-break-character ::=
     yaml-character
-  - line-break-character
+  - x0A
+  - x0D
   - byte-order-mark
 ```
 
@@ -6405,12 +6405,6 @@ line-break ::=
     )
   | x0D
   | x0A
-```
-
-```
-line-break-character ::=
-    x0A
-  | x0D
 ```
 
 
