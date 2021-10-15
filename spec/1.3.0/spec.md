@@ -6107,11 +6107,8 @@ folded-whitespace(n,c) ::=
 
 ```
 comment-lines ::=
-  (
-      comment-line
-    | <start-of-line>
-  )
-  comment-line*
+    comment-line+
+  | <start-of-line>
 ```
 
 ```
