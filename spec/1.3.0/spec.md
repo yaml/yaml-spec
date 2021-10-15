@@ -6126,12 +6126,6 @@ comment-content ::=
   non-break-character*
 ```
 
-```
-line-ending ::=
-    line-break
-  | <end-of-input>
-```
-
 
 ### #. Empty Lines
 
@@ -6388,7 +6382,13 @@ space-character ::=
 ```
 
 
-### #. Line Break Characters
+### #. Line Ending Productions
+
+```
+line-ending ::=
+    line-break
+  | <end-of-input>
+```
 
 ```
 break-as-space ::=
