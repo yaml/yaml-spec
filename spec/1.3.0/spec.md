@@ -676,9 +676,7 @@ serial form, that is, a form with sequential access constraints.
 of characters in a human-friendly manner.
 
 
-# Chapter #. Processes and Models
-
-## #. Processes
+# Chapter #. Processes
 
 Translating between [native data structures] and a character [stream] is done
 in several logically distinct stages, each with a well defined input and output
@@ -700,7 +698,7 @@ In particular, [mapping key order], [comments] and [tag handles] should not be
 referenced during [construction].
 
 
-### #. Dump
+## #. Dump
 
 _Dumping_ native data structures to a character [stream] is done using the
 following three stages:
@@ -762,7 +760,7 @@ While some of this can be done with the help of the [application], in general
 this process should be guided by the preferences of the user.
 
 
-### #. Load
+## #. Load
 
 _Loading_ [native data structures] from a character [stream] is done using the
 following three stages:
@@ -797,7 +795,7 @@ Construction can fail due to the [unavailability] of the required [native data
 types].
 
 
-## #. Information Models
+# Chapter #. Information Models
 
 This section specifies the formal details of the results of the above
 processes.
@@ -827,7 +825,7 @@ A single "`+`" denotes [serialization] details, a double "`++`" denotes
 ![Information Models](img/model2.svg)
 
 
-### #. Representation Graph
+## #. Representation Graph
 
 YAML's _representation_ of [native data structure] is a rooted, connected,
 directed graph of [tagged] [nodes].
@@ -850,7 +848,7 @@ be [unique].
 ![Representation Model](img/represent2.svg)
 
 
-#### #. Nodes
+### #. Nodes
 
 A YAML _node_ [represents] a single [native data structure].
 Such nodes have _content_ of one of three _kinds_: scalar, sequence or mapping.
@@ -881,7 +879,7 @@ value of several key/value pairs and a mapping could even contain itself as a
 key or a value.
 
 
-#### #. Tags
+### #. Tags
 
 YAML [represents] type information of [native data structures] with a simple
 identifier, called a _tag_.
@@ -916,7 +914,7 @@ allowed [content] values for validation, a mechanism for [tag resolution] or
 any other data that is applicable to all of the tag's [nodes].
 
 
-#### #. Node Comparison
+### #. Node Comparison
 
 Since YAML [mappings] require [key] uniqueness, [representations] must include
 a mechanism for testing the equality of [nodes].
@@ -977,7 +975,7 @@ A [mapping's] [keys] are _unique_ if no two keys are equal to each other.
 Obviously, identical nodes are always considered equal.
 
 
-### #. Serialization Tree
+## #. Serialization Tree
 
 To express a YAML [representation] using a serial API, it is necessary to
 impose an [order] on [mapping keys] and employ [alias nodes] to indicate a
@@ -994,7 +992,7 @@ use [key order] or [anchor names] for the preservation of [application] data.
 ![Serialization Model](img/serialize2.svg)
 
 
-#### #. Mapping Key Order
+### #. Mapping Key Order
 
 In the [representation] model, [mapping keys] do not have an order.
 To [serialize] a [mapping], it is necessary to impose an _ordering_ on its
@@ -1008,7 +1006,7 @@ For example, an ordered [mapping] can be [represented] as a [sequence] of
 YAML provides convenient [compact notation] for this case.
 
 
-#### #. Anchors and Aliases
+### #. Anchors and Aliases
 
 In the [representation graph], a [node] may appear in more than one
 [collection].
@@ -1025,7 +1023,7 @@ Therefore, anchors need not be unique within a [serialization].
 In addition, an anchor need not have an alias node referring to it.
 
 
-### #. Presentation Stream
+## #. Presentation Stream
 
 A YAML _presentation_ is a [stream] of Unicode characters making use of
 [styles], [scalar content formats], [comments], [directives] and other
@@ -1040,7 +1038,7 @@ presentation stream, as a series of [documents] separated by [markers].
 ![Presentation Model](img/present2.svg)
 
 
-#### #. Node Styles
+### #. Node Styles
 
 Each [node] is presented in some _style_, depending on its [kind].
 The node style is a [presentation detail] and is not reflected in the
@@ -1069,7 +1067,7 @@ These allow for a natural "ordered mapping" notation.
 ![Kind/Style Combinations](img/styles2.svg)
 
 
-#### #. Scalar Formats
+### #. Scalar Formats
 
 YAML allows [scalars] to be [presented] in several _formats_.
 For example, the integer "`11`" might also be written as "`0xB`".
@@ -1079,7 +1077,7 @@ Like [node style], the format is a [presentation detail] and is not reflected
 in the [serialization tree] and [representation graph].
 
 
-#### #. Comments
+### #. Comments
 
 [Comments] are a [presentation detail] and must not have any effect on the
 [serialization tree] or [representation graph].
@@ -1091,7 +1089,7 @@ Comments must not appear inside [scalars], but may be interleaved with such
 [scalars] inside [collections].
 
 
-#### #. Directives
+### #. Directives
 
 Each [document] may be associated with a set of [directives].
 A directive has a name and an optional sequence of parameters.
@@ -1102,7 +1100,7 @@ This version of YAML defines two directives, "`YAML`" and "`TAG`".
 All other directives are [reserved] for future versions of YAML.
 
 
-## #. Loading Failure Points
+# Chapter #. Loading Failure Points
 
 The process of [loading] [native data structures] from a YAML [stream] has
 several potential _failure points_.
@@ -1129,7 +1127,7 @@ structures].
 ![Loading Failure Points](img/validity2.svg)
 
 
-### #. Well-Formed Streams and Identified Aliases
+## #. Well-Formed Streams and Identified Aliases
 
 A [well-formed] character [stream] must match the BNF productions specified in
 the following chapters.
@@ -1141,7 +1139,7 @@ A YAML [processor] may recover from syntax errors, possibly by ignoring certain
 parts of the input, but it must provide a mechanism for reporting such errors.
 
 
-### #. Resolved Tags
+## #. Resolved Tags
 
 Typically, most [tags] are not explicitly specified in the character [stream].
 During [parsing], [nodes] lacking an explicit [tag] are given a _non-specific
@@ -1201,7 +1199,7 @@ In such a case, the YAML [processor] may [compose] a [partial representation],
 based on each [node's kind] and allowing for non-specific tags.
 
 
-### #. Recognized and Valid Tags
+## #. Recognized and Valid Tags
 
 To be _valid_, a [node] must have a [tag] which is _recognized_ by the YAML
 [processor] and its [content] must satisfy the constraints imposed by this
@@ -1216,7 +1214,7 @@ However, such a [complete representation] cannot be used to [construct] a
 [native data structure].
 
 
-### #. Available Tags
+## #. Available Tags
 
 In a given processing environment, there need not be an _available_ native type
 corresponding to a given [tag].
