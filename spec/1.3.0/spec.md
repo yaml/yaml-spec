@@ -648,8 +648,7 @@ Stack:
     foo = bar
 ```
 
-
-# Chapter #. Processes and Models
+## #. Processes and Models
 
 YAML is both a text format and a method for [presenting] any [native data
 structure] in this format.
@@ -676,6 +675,8 @@ serial form, that is, a form with sequential access constraints.
 [Presentation] deals with the formatting of a YAML [serialization] as a series
 of characters in a human-friendly manner.
 
+
+# Chapter #. Processes and Models
 
 ## #. Processes
 
