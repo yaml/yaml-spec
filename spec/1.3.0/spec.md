@@ -1959,7 +1959,7 @@ A folded non-[empty line] may end with either of the above [line breaks].
 ```
 
 **Legend:**
-* [b-l-trimmed(n,c)] <!-- 2:10 3 4 5 -->
+* [trimmed] <!-- 2:10 3 4 5 -->
 * [break-as-space] <!-- 6:5 -->
 
 
