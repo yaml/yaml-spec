@@ -2065,7 +2065,7 @@ key:····# Comment↓
 
 **Legend:**
 * [comment-content] <!-- 1:9,9 -->
-* [break-or-end-of-input] <!-- ↓ 2:8,5 -->
+* [line-ending] <!-- ↓ 2:8,5 -->
 * [comment-line] <!-- 1:5, 2:8,5 -->
 
 
@@ -5492,7 +5492,7 @@ line-keep-empty(n) ::=
 line-trail-comments(n) ::=
   indentation-spaces-less-than(n)
   comment-content
-  break-or-end-of-input
+  line-ending
   comment-line*
 ```
 
@@ -6115,7 +6115,7 @@ comment-lines ::=
 comment-line ::=
   separation-blanks
   comment-content?
-  break-or-end-of-input
+  line-ending
 ```
 
 ```
@@ -6125,7 +6125,7 @@ comment-content ::=
 ```
 
 ```
-break-or-end-of-input ::=
+line-ending ::=
     break-non-content
   | <end-of-input>
 ```
