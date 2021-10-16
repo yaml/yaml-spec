@@ -166,9 +166,9 @@ shell: files
 	jekyll-runner $(DOCKER_SHELL_CMD)
 
 html:
-	make clean
-	make site
-	make html-files
+	$(MAKE) clean
+	$(MAKE) site
+	$(MAKE) html-files
 
 publish: check-publish site
 	@(set -x ; \
@@ -189,7 +189,7 @@ clean: force
 	$(MAKE) -C $(EXT) $@
 
 clean-all:
-	make -C .. clean
+	$(MAKE) -C .. clean
 
 diff: build
 	(cd $(SITE) && git diff)
