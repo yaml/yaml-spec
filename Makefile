@@ -23,7 +23,7 @@ default:
 quick:
 	@$(eval override MAKE_QUICK := 1)
 
-files build html site serve publish force diff:
+files build html site serve publish force diff list-files list-html:
 	$(MAKE) -C www $@ QUICK=$(MAKE_QUICK)
 
 format:

@@ -106,7 +106,7 @@ FILES := \
     _config.yml \
     favicon.svg \
     Gemfile
-ifdef QUICK
+ifndef QUICK
 FILES += \
     $(SPEC_122_FILES) \
     $(REVIEW_FILES)
