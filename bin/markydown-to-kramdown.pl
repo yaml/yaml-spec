@@ -255,7 +255,7 @@ sub fmt_heading {
   my $text = $_;
   my $slug = slugify($text);
 
-  $_ = qq{<div id="$slug" />\n$text\n};
+  $_ = qq{<div id="$slug"></div>\n$text\n};
 }
 
 sub fmt_dt {
@@ -264,7 +264,7 @@ sub fmt_dt {
   my $text = $_;
   my $slug = slugify($text);
 
-  $_ = qq{<div id="$slug" />\n\n$text\n};
+  $_ = qq{<div id="$slug"></div>\n\n$text\n};
 }
 
 sub fmt_example {
@@ -396,7 +396,7 @@ sub fmt_pre {
     chomp $pre;
     $rule =~ s/\(.*//;
     $pre = <<"...";
-<div id="rule-$rule" />
+<div id="rule-$rule"></div>
 $pre
 ...
   }
