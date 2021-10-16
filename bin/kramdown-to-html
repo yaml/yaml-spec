@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+
+version=0.0.1
+
+source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
+
+check() (
+  need ruby 2.7.0
+  need ruby \
+    kramdown=2.3.1 \
+    kramdown-parser-gfm=1.1.0
+)
+
+dockerfile() (
+  from alpine
+  pkg ruby
+  gem kramdown=2.3.1 \
+      kramdown-parser-gfm
+)
+
+main() (
+  kramdown --extension=parser-gfm
+)
+
+run "$@"

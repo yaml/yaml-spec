@@ -97,7 +97,8 @@ run-docker() (
     args+=("$arg")
   done
 
-  [[ -t 0 ]] && flags=('-it') || flags=()
+  flags=()
+  [[ -t 0 ]] && flags+=('--tty')
 
   workdir=/home/host
   [[ ${RUN_OR_DOCKER_WORKDIR-} ]] &&
@@ -107,7 +108,7 @@ run-docker() (
   gid=$(id -g)
 
   set -x
-  docker run "${flags[@]}" --rm \
+  docker run "${flags[@]}" --interactive --rm \
     --volume "$root":/home/host \
     --workdir "$workdir" \
     --user "$uid:$gid" \
@@ -176,6 +177,18 @@ need-modules() {
       node)
         node -e "require('$module');" &>/dev/null ||
           fail "'$cmd' requires NodeJS module '$module'"
+        ;;
+      ruby)
+        list=$(gem list)
+        if [[ $module == *=* ]]; then
+          pattern="${module//./\\.}"
+          pattern="${pattern/=/ (.*})"
+        else
+          pattern="$module.*"
+        fi
+        pattern="^$pattern$"
+        grep "$pattern" <<<"$list" ||
+          fail "'$cmd' requires Ruby module '$module'"
         ;;
       *) die "Can't check module '$module' for '$cmd'" ;;
     esac
@@ -249,6 +262,23 @@ build-docker-image() (
     esac
 
     cmd "RUN mkdir node_modules && npm install $*"
+  )
+
+  gem() (
+    case $_from in
+      alpine)
+        pkg ruby
+        ;;
+      *) build-fail "npm $*"
+    esac
+
+    for module; do
+      if [[ $module == *=* ]]; then
+        module="${module%=*} -v ${module#*=}"
+      fi
+
+      cmd "RUN gem install $module"
+    done
   )
 
   (
