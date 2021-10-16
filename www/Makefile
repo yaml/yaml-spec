@@ -30,35 +30,30 @@ HISTORY_FILE := /tmp/docker-bash_history
 # Files for `make html`:
 #------------------------------------------------------------------------------
 
+define older-html-files
+files := $$(wildcard $$(SPEC_$1)/*) $$(SPEC_$1)/title.html
+files := $$(files:$$(SPEC_$1)/%=$2/%)
+HTML_FILES += $$(files)
+endef
+
+define get-html-files
+files := \
+    $$(wildcard $$(SPEC_$1)/*.md) \
+    $$(wildcard $$(SPEC_$1)/ext/*.md) \
+    title.html
+files := $$(files:%/spec.md=%/index.md)
+files := $$(files:$$(SPEC_$1)/%.md=%.html)
+files := $$(files:ReadMe.html=)
+files += spec.css img/
+HTML_FILES += $$(files:%=$2/%)
+endef
+
 HTML_FILES :=
 
-files := $(wildcard $(SPEC_120)/*) $(SPEC_120)/title.html
-files := $(files:$(SPEC_120)/%=1.2.0/%)
-HTML_FILES += $(files)
-
-files := $(wildcard $(SPEC_121)/*) $(SPEC_121)/title.html
-files := $(files:$(SPEC_121)/%=1.2.1/%)
-HTML_FILES += $(files)
-
-files := \
-    $(wildcard $(SPEC_122)/*.md) \
-    $(wildcard $(SPEC_122)/ext/*.md) \
-    title.html
-files := $(files:%/spec.md=%/index.md)
-files := $(files:$(SPEC_122)/%.md=%.html)
-files := $(files:ReadMe.html=)
-files += spec.css img/
-HTML_FILES += $(files:%=1.2.2/%)
-
-files := \
-    $(wildcard $(SPEC_130)/*.md) \
-    $(wildcard $(SPEC_130)/ext/*.md) \
-    title.html
-files := $(files:%/spec.md=%/index.md)
-files := $(files:$(SPEC_130)/%.md=%.html)
-files := $(files:ReadMe.html=)
-files += spec.css img/
-HTML_FILES += $(files:%=1.3.0/%)
+$(eval $(call older-html-files,120,1.2.0))
+$(eval $(call older-html-files,121,1.2.1))
+$(eval $(call get-html-files,122,1.2.2))
+$(eval $(call get-html-files,130,1.3.0))
 
 HTML_FILES := $(HTML_FILES:%/Makefile=)
 HTML_FILES := $(HTML_FILES:%=html/%)
@@ -74,42 +69,32 @@ STRIP_HTML := \
 # Gather all the build files:
 #------------------------------------------------------------------------------
 
-SPEC_122_MD := \
-    $(wildcard $(SPEC_122)/*.md) \
-    $(wildcard $(SPEC_122)/ext/*.md) \
+# Get spec markdown and image files:
+define get-spec-files
+SPEC_$1_MD := \
+    $$(wildcard $$(SPEC_$1)/*.md) \
+    $$(wildcard $$(SPEC_$1)/ext/*.md) \
 
-SPEC_122_MD := $(SPEC_122_MD:%/ReadMe.md=)
-SPEC_122_MD := $(SPEC_122_MD:$(SPEC_122)/%=main/spec/1.2.2/%)
+SPEC_$1_MD := $$(SPEC_$1_MD:%/ReadMe.md=)
+SPEC_$1_MD := $$(SPEC_$1_MD:$$(SPEC_$1)/%=main/spec/$2/%)
 
-SPEC_122_LINKS := $(SPEC_122)/links.yaml
+SPEC_$1_LINKS := $$(SPEC_$1)/links.yaml
 
-SPEC_122_IMAGE := $(wildcard $(SPEC_122)/src/*.tex)
-SPEC_122_IMAGE := $(SPEC_122_IMAGE:$(SPEC_122)/src/%.tex=img/%.svg)
-.PRECIOUS: $(SPEC_122_IMAGE:%=$(SPEC_122)/%)
-SPEC_122_IMAGE := $(SPEC_122_IMAGE:%=main/spec/1.2.2/%)
+SPEC_$1_IMAGE := $$(wildcard $$(SPEC_$1)/src/*.tex)
+SPEC_$1_IMAGE := $$(SPEC_$1_IMAGE:$$(SPEC_$1)/src/%.tex=img/%.svg)
+.PRECIOUS: $$(SPEC_$1_IMAGE:%=$$(SPEC_$1)/%)
+SPEC_$1_IMAGE := $$(SPEC_$1_IMAGE:%=main/spec/$2/%)
 
-SPEC_122_FILES := \
-    $(SPEC_122_MD:%/spec.md=%/index.md) \
-    $(SPEC_122_IMAGE)
+SPEC_$1_FILES := \
+    $$(SPEC_$1_MD:%/spec.md=%/index.md) \
+    $$(SPEC_$1_IMAGE) \
 
-SPEC_130_MD := \
-    $(wildcard $(SPEC_130)/*.md) \
-    $(wildcard $(SPEC_130)/ext/*.md) \
+endef
 
-SPEC_130_MD := $(SPEC_130_MD:%/ReadMe.md=)
-SPEC_130_MD := $(SPEC_130_MD:$(SPEC_130)/%=main/spec/1.3.0/%)
+$(eval $(call get-spec-files,122,1.2.2))
+$(eval $(call get-spec-files,130,1.3.0))
 
-SPEC_130_LINKS := $(SPEC_130)/links.yaml
-
-SPEC_130_IMAGE := $(wildcard $(SPEC_130)/src/*.tex)
-SPEC_130_IMAGE := $(SPEC_130_IMAGE:$(SPEC_130)/src/%.tex=img/%.svg)
-.PRECIOUS: $(SPEC_130_IMAGE:%=$(SPEC_130)/%)
-SPEC_130_IMAGE := $(SPEC_130_IMAGE:%=main/spec/1.3.0/%)
-
-SPEC_130_FILES := \
-    $(SPEC_130_MD:%/spec.md=%/index.md) \
-    $(SPEC_130_IMAGE)
-
+# Review files:
 REVIEW_FILES := \
     main/review/markdown.html \
     main/review/spec-plain.md \
@@ -232,49 +217,32 @@ Gemfile:
 	touch $@
 
 #------------------------------------------------------------------------------
-# 1.2.2 spec files:
+# Spec version specific files:
 #------------------------------------------------------------------------------
-main/spec/1.2.2/%.md: $(SPEC_122)/%.md
-	@mkdir -p $(dir $@)
-	(echo '---'; echo '---'; cat $<) > $@
 
-main/spec/1.2.2/ext/%.md: $(SPEC_122)/ext/%.md $(SPEC_122_LINKS)
-	@mkdir -p $(dir $@)
-	markydown-to-kramdown $(ROOT) $^ > $@
+define make-spec-files
+main/spec/$2/%.md: $$(SPEC_$1)/%.md
+	@mkdir -p $$(dir $$@)
+	(echo '---'; echo '---'; cat $$<) > $$@
 
-main/spec/1.2.2/index.md: $(SPEC_122)/spec.md $(SPEC_122_LINKS)
-	@mkdir -p $(dir $@)
-	markydown-to-kramdown $(ROOT) $^ > $@
+main/spec/$2/ext/%.md: $$(SPEC_$1)/ext/%.md $$(SPEC_$1_LINKS)
+	@mkdir -p $$(dir $$@)
+	markydown-to-kramdown $$(ROOT) $$^ > $$@
 
-main/spec/1.2.2/img/%: $(SPEC_122)/img/%
-	@mkdir -p $(dir $@)
-	cp -r $< $@
+main/spec/$2/index.md: $$(SPEC_$1)/spec.md $$(SPEC_$1_LINKS)
+	@mkdir -p $$(dir $$@)
+	markydown-to-kramdown $$(ROOT) $$^ > $$@
 
-$(SPEC_122)/img/%:
-	$(MAKE) -C $(SPEC_122) build-img YAML_SPEC_DIR=
+main/spec/$2/img/%: $$(SPEC_$1)/img/%
+	@mkdir -p $$(dir $$@)
+	cp -r $$< $$@
 
-#------------------------------------------------------------------------------
-# 1.3.0 spec files:
-#------------------------------------------------------------------------------
-main/spec/1.3.0/%.md: $(SPEC_130)/%.md
-	@mkdir -p $(dir $@)
-	(echo '---'; echo '---'; cat $<) > $@
+$$(SPEC_$1)/img/%:
+	$$(MAKE) -C $$(SPEC_$1) build-img YAML_SPEC_DIR=
+endef
 
-main/spec/1.3.0/ext/%.md: $(SPEC_130)/ext/%.md $(SPEC_130_LINKS)
-	@mkdir -p $(dir $@)
-	markydown-to-kramdown $(ROOT) $^ > $@
-
-main/spec/1.3.0/index.md: $(SPEC_130)/spec.md $(SPEC_130_LINKS)
-	@mkdir -p $(dir $@)
-	markydown-to-kramdown $(ROOT) $^ > $@
-
-main/spec/1.3.0/img/%: $(SPEC_130)/img/%
-	@mkdir -p $(dir $@)
-	cp -r $< $@
-
-$(SPEC_130)/img/%:
-	$(MAKE) -C $(SPEC_130) build-img YAML_SPEC_DIR=
-
+$(eval $(call make-spec-files,122,1.2.2))
+$(eval $(call make-spec-files,130,1.3.0))
 
 #------------------------------------------------------------------------------
 # 1.2.2 review files:
