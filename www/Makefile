@@ -71,25 +71,25 @@ STRIP_HTML := \
 
 # Get spec markdown and image files:
 define get-spec-files
-SPEC_$1_MD := \
-    $$(wildcard $$(SPEC_$1)/*.md) \
-    $$(wildcard $$(SPEC_$1)/ext/*.md) \
-
+SPEC_$1_MD := $$(wildcard $$(SPEC_$1)/*.md)
 SPEC_$1_MD := $$(SPEC_$1_MD:%/ReadMe.md=)
+ifndef QUICK
+SPEC_$1_MD += $$(wildcard $$(SPEC_$1)/ext/*.md)
+endif
 SPEC_$1_MD := $$(SPEC_$1_MD:$$(SPEC_$1)/%=main/spec/$2/%)
+
+SPEC_$1_FILES := $$(SPEC_$1_MD:%/spec.md=%/index.md)
+SPEC_$1_FILES := $$(SPEC_$1_FILES:%.md=%.html)
 
 SPEC_$1_LINKS := $$(SPEC_$1)/links.yaml
 
+ifndef QUICK
 SPEC_$1_IMAGE := $$(wildcard $$(SPEC_$1)/src/*.tex)
 SPEC_$1_IMAGE := $$(SPEC_$1_IMAGE:$$(SPEC_$1)/src/%.tex=img/%.svg)
 .PRECIOUS: $$(SPEC_$1_IMAGE:%=$$(SPEC_$1)/%)
 SPEC_$1_IMAGE := $$(SPEC_$1_IMAGE:%=main/spec/$2/%)
-
-SPEC_$1_FILES := \
-    $$(SPEC_$1_MD:%/spec.md=%/index.md) \
-    $$(SPEC_$1_IMAGE) \
-
-SPEC_$1_FILES := $$(SPEC_$1_FILES:%.md=%.html)
+SPEC_$1_FILES += $$(SPEC_$1_IMAGE)
+endif
 endef
 
 $(eval $(call get-spec-files,122,1.2.2))
@@ -105,10 +105,14 @@ REVIEW_FILES := \
 FILES := \
     _config.yml \
     favicon.svg \
-    Gemfile \
+    Gemfile
+ifdef QUICK
+FILES += \
     $(SPEC_122_FILES) \
+    $(REVIEW_FILES)
+endif
+FILES += \
     $(SPEC_130_FILES) \
-    $(REVIEW_FILES) \
     jekyll/_includes/sitedir-pulldown.html \
 
 FILES := $(FILES:%.swp=)

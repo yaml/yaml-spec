@@ -5,10 +5,12 @@ TESTS ?= $(wildcard test/test-*)
 BPAN := .bpan
 COMMON := ../yaml-common
 
-QUICK := \
+TEST_QUICK := \
     test/test-lint-shell.sh \
     test/test-format-markdown.sh \
     test/test-lint-spec.sh \
+
+MAKE_QUICK :=
 
 export PATH := $(ROOT)/bin:$(PATH)
 
@@ -18,8 +20,11 @@ endif
 
 default:
 
+quick:
+	@$(eval override MAKE_QUICK := 1)
+
 files build html site serve publish force diff:
-	$(MAKE) -C www $@
+	$(MAKE) -C www $@ QUICK=$(MAKE_QUICK)
 
 format:
 	$(MAKE) -C $(SPEC_130) $@
@@ -30,7 +35,7 @@ test: $(TESTS)
 
 test-noclean: $(TESTS)
 
-test-quick: $(QUICK)
+test-quick: $(TEST_QUICK)
 
 test-docker:
 	export RUN_OR_DOCKER=force && \
