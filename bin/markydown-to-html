@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+set -e -u -o pipefail
+
+root=$1 md=$2 links=$3
+
+perl -n0e '
+  /(\A---\n.*?\n---\n)/s
+    ? print $1
+    : do {
+      print "---\n";
+      print "layout: default\n";
+      print "---\n";
+    }
+' < "$md"
+
+markydown-to-kramdown "$@" |
+
+perl -p0e 's/\A---\n.*?\n---\n//s' |
+
+kramdown-to-html "$root" |
+
+html-to-html "$root"

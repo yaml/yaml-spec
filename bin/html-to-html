@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+version=0.0.1
+
+source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
+
+check() (
+  need python3 3.9.5
+  need python3 beautifulsoup4 lxml
+)
+
+dockerfile() (
+  from alpine
+  pip beautifulsoup4
+  pkg py3-lxml
+)
+
+run "$@"

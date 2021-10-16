@@ -10,6 +10,7 @@ RUN_OR_DOCKER_PULL=${RUN_OR_DOCKER_PULL:-false}
 RUN_OR_DOCKER_PUSH=${RUN_OR_DOCKER_PUSH:-false}
 
 run() (
+  verbose=${RUN_OR_DOCKER_VERBOSE:-false}
   bin=$(dirname "${BASH_SOURCE[1]}")
   self=$(basename "${BASH_SOURCE[1]}")
   root=${ROOT:-$PWD}
@@ -57,8 +58,9 @@ run() (
   if [[ $rc -eq 0 ]]; then
     run-local "$@"
   else
-    echo "Can't run '$self' locally: ${err#FAIL:\ }" >&2
-    echo "Running with docker..." >&2
+    $verbose &&
+      echo "Can't run '$self' locally: ${err#FAIL:\ }" >&2
+    echo "Running '$self' with docker..." >&2
     run-docker "$@"
   fi
 )
@@ -77,7 +79,7 @@ run-docker() (
     if ! $ok; then
       if $RUN_OR_DOCKER_PULL; then
         (
-          set -x
+          $verbose && set -x
           docker pull "$image"
         )
       else
@@ -107,7 +109,7 @@ run-docker() (
   uid=$(id -u)
   gid=$(id -g)
 
-  set -x
+  $verbose && set -x
   docker run "${flags[@]}" --interactive --rm \
     --volume "$root":/home/host \
     --workdir "$workdir" \
@@ -279,6 +281,17 @@ build-docker-image() (
 
       cmd "RUN gem install $module"
     done
+  )
+
+  pip() (
+    case $_from in
+      alpine)
+        pkg python3 py3-pip
+        ;;
+      *) build-fail "npm $*"
+    esac
+
+    cmd "RUN pip3 install $*"
   )
 
   (
