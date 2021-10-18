@@ -1,25 +1,17 @@
 #!/usr/bin/env bash
 
-version=0.0.1
+# XXX Using this hack until we can figure out how to get the same results
+# directly from kramdown.
 
-source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
-
-check() (
-  need ruby 2.7.0
-  need ruby \
-    kramdown=2.3.1 \
-    kramdown-parser-gfm=1.1.0
-)
-
-dockerfile() (
-  from alpine
-  pkg ruby
-  gem kramdown=2.3.1 \
-      kramdown-parser-gfm
-)
-
-main() (
-  kramdown --extension=parser-gfm
-)
-
-run "$@"
+docker run -i --rm jekyll/jekyll \
+  bash -c '(
+    (
+      echo "kramdown:"
+      echo "  parse_block_html: true"
+    ) > _config.yml
+    echo ---
+    echo ---
+    cat
+  ) > foo.md &&
+  jekyll build >/dev/null &&
+  cat ./_site/foo.html'
