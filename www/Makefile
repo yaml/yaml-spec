@@ -73,7 +73,7 @@ STRIP_HTML := \
 define get-spec-files
 SPEC_$1_MD := $$(wildcard $$(SPEC_$1)/*.md)
 SPEC_$1_MD := $$(SPEC_$1_MD:%/ReadMe.md=)
-ifndef QUICK
+ifndef MAKE_QUICK
 SPEC_$1_MD += $$(wildcard $$(SPEC_$1)/ext/*.md)
 endif
 SPEC_$1_MD := $$(SPEC_$1_MD:$$(SPEC_$1)/%=main/spec/$2/%)
@@ -83,7 +83,7 @@ SPEC_$1_FILES := $$(SPEC_$1_FILES:%.md=%.html)
 
 SPEC_$1_LINKS := $$(SPEC_$1)/links.yaml
 
-ifndef QUICK
+ifndef MAKE_QUICK
 SPEC_$1_IMAGE := $$(wildcard $$(SPEC_$1)/src/*.tex)
 SPEC_$1_IMAGE := $$(SPEC_$1_IMAGE:$$(SPEC_$1)/src/%.tex=img/%.svg)
 .PRECIOUS: $$(SPEC_$1_IMAGE:%=$$(SPEC_$1)/%)
@@ -106,7 +106,7 @@ FILES := \
     _config.yml \
     favicon.svg \
     Gemfile
-ifndef QUICK
+ifndef MAKE_QUICK
 FILES += \
     $(SPEC_122_FILES) \
     $(REVIEW_FILES)

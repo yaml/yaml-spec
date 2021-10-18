@@ -10,7 +10,7 @@ TEST_QUICK := \
     test/test-format-markdown.sh \
     test/test-lint-spec.sh \
 
-MAKE_QUICK :=
+export MAKE_QUICK :=
 
 export PATH := $(ROOT)/bin:$(PATH)
 
@@ -19,9 +19,24 @@ ifneq (,$(DOCKER))
 endif
 
 default:
+	@true
 
 quick:
-	@$(eval override MAKE_QUICK := 1)
+	$(eval override export MAKE_QUICK := true)
+	$(eval override export TESTS := $(TEST_QUICK))
+	@true
+
+docker-run:
+	$(eval override export RUN_OR_DOCKER := force)
+	@true
+
+docker-build:
+	$(eval override export RUN_OR_DOCKER := force-build)
+	@true
+
+verbose:
+	$(eval override export RUN_OR_DOCKER_VERBOSE := true)
+	@true
 
 files build html site serve publish force diff list-files list-html:
 	$(MAKE) -C www $@ QUICK=$(MAKE_QUICK)
@@ -30,16 +45,11 @@ format:
 	$(MAKE) -C $(SPEC_130) $@
 
 .PHONY: test
-test: $(TESTS)
+test:
+	$(MAKE) $(TESTS)
 	$(MAKE) clean &>/dev/null
 
 test-noclean: $(TESTS)
-
-test-quick: $(TEST_QUICK)
-
-test-docker:
-	export RUN_OR_DOCKER=force && \
-	$(MAKE) test TESTS='$(TESTS)'
 
 edit-spec:
 	@$${EDITOR:-vim} $(SPEC_130)/spec.md
