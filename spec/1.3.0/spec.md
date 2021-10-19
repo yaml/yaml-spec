@@ -52,11 +52,7 @@ provides all the information necessary to understand YAML version 1.3 and to
 create programs that process YAML information.
 
 
-**Contents**
-
-{:toc}
-* TOC
-
+**Contents**{: #toc-header}
 
 # Chapter #. Introduction to YAML
 
