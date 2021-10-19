@@ -50,10 +50,12 @@ endef
 
 HTML_FILES :=
 
+ifdef MAKE_FULL
 $(eval $(call older-html-files,120,1.2.0))
 $(eval $(call older-html-files,121,1.2.1))
 $(eval $(call get-html-files,122,1.2.2))
 $(eval $(call get-html-files,123,1.2.3))
+endif
 $(eval $(call get-html-files,130,1.3.0))
 
 HTML_FILES := $(HTML_FILES:%/Makefile=)
@@ -74,7 +76,7 @@ STRIP_HTML := \
 define get-spec-files
 SPEC_$1_MD := $$(wildcard $$(SPEC_$1)/*.md)
 SPEC_$1_MD := $$(SPEC_$1_MD:%/ReadMe.md=)
-ifndef MAKE_QUICK
+ifdef MAKE_FULL
 SPEC_$1_MD += $$(wildcard $$(SPEC_$1)/ext/*.md)
 endif
 SPEC_$1_MD := $$(SPEC_$1_MD:$$(SPEC_$1)/%=main/spec/$2/%)
@@ -84,7 +86,7 @@ SPEC_$1_FILES := $$(SPEC_$1_FILES:%.md=%.html)
 
 SPEC_$1_LINKS := $$(SPEC_$1)/links.yaml
 
-ifndef MAKE_QUICK
+ifdef MAKE_FULL
 SPEC_$1_IMAGE := $$(wildcard $$(SPEC_$1)/src/*.tex)
 SPEC_$1_IMAGE := $$(SPEC_$1_IMAGE:$$(SPEC_$1)/src/%.tex=img/%.svg)
 .PRECIOUS: $$(SPEC_$1_IMAGE:%=$$(SPEC_$1)/%)
@@ -108,7 +110,7 @@ FILES := \
     _config.yml \
     favicon.svg \
     Gemfile
-ifndef MAKE_QUICK
+ifdef MAKE_FULL
 FILES += \
     $(SPEC_122_FILES) \
     $(SPEC_123_FILES) \

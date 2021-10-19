@@ -2,31 +2,28 @@ include .common.mk
 
 TESTS ?= $(wildcard test/test-*)
 
-BPAN := .bpan
 COMMON := ../yaml-common
+BPAN := .bpan
 
 TEST_QUICK := \
     test/test-lint-shell.sh \
     test/test-format-markdown.sh \
     test/test-lint-spec.sh \
 
-export MAKE_QUICK :=
-
 export PATH := $(ROOT)/bin:$(PATH)
-
-ifneq (,$(DOCKER))
-  export RUN_OR_DOCKER := $(DOCKER)
-endif
 
 default:
 	@true
 
+full:
+	$(eval override export MAKE_FULL := true)
+	@true
+
 quick:
-	$(eval override export MAKE_QUICK := true)
 	$(eval override export TESTS := $(TEST_QUICK))
 	@true
 
-docker-run:
+docker:
 	$(eval override export RUN_OR_DOCKER := force)
 	@true
 
@@ -39,13 +36,14 @@ verbose:
 	@true
 
 files build html site serve publish force diff list-files list-html:
-	$(MAKE) -C www $@ QUICK=$(MAKE_QUICK)
+	$(MAKE) -C www $@
 
 format:
 	$(MAKE) -C $(SPEC_130) $@
 
 .PHONY: test
 test:
+	$(MAKE) clean
 	$(MAKE) $(TESTS)
 	$(MAKE) clean &>/dev/null
 

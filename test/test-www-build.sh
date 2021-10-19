@@ -2,13 +2,14 @@
 
 source "$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/setup"
 
-DIR=../www
-
 (
   set -x
 
-  make -C "$DIR" force build
+  cd "$ROOT" || exit
 
-  [[ -e $DIR/build/favicon.svg ]]
-  [[ -e $DIR/build/main/spec/1.3.0/index.html ]]
+  make clean
+  make build
+
+  [[ -e www/build/favicon.svg ]]
+  [[ -e www/build/main/spec/1.3.0/index.html ]]
 )
