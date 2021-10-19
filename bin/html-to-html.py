@@ -42,41 +42,42 @@ def make_toc():
     if toc_header is None:
         return
 
-    headings = [
+    structure = make_heading_structure(
         element
-        for element in soup.contents
+        for element in reversed(soup.contents)
         if isinstance(element.name, str) and HEADING_EXPR.match(element.name)
-    ]
+    )
 
-    toc = make_toc_recursive(1, headings)
+    toc = make_toc_recursive(structure)
     toc['id'] = 'markdown-toc'
 
     toc_header.parent.insert_after(toc)
 
 
-def split_heading_reversed(elements, name):
-    acc = []
-    for element in reversed(elements):
-        if element.name == name:
-            acc.reverse()
-            yield (element, acc)
-            acc = []
+def make_heading_structure(reversed_elements, level = 1):
+    ret = []
+    accumulated = []
+    for element in reversed_elements:
+        if element.name == 'h' + str(level):
+            ret.append((element, make_heading_structure(accumulated, level + 1)))
+            accumulated = []
         else:
-            acc.append(element)
+            accumulated.append(element)
+
+    ret.reverse()
+    return ret
 
 
-def make_toc_recursive(level, elements):
-    structure = list(split_heading_reversed(elements, 'h'+str(level)))
-
+def make_toc_recursive(structure):
     if len(structure) == 0:
         return None
 
     return tag('ul', [
         tag('li',
-            tag('a', heading.contents, href='#'+heading['id']),
-            make_toc_recursive(level + 1, children),
+            tag('a', heading.contents, href='#' + heading['id']),
+            make_toc_recursive(children),
         )
-        for heading, children in reversed(structure)
+        for heading, children in structure
     ])
 
 
