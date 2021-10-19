@@ -53,6 +53,7 @@ HTML_FILES :=
 $(eval $(call older-html-files,120,1.2.0))
 $(eval $(call older-html-files,121,1.2.1))
 $(eval $(call get-html-files,122,1.2.2))
+$(eval $(call get-html-files,123,1.2.3))
 $(eval $(call get-html-files,130,1.3.0))
 
 HTML_FILES := $(HTML_FILES:%/Makefile=)
@@ -93,6 +94,7 @@ endif
 endef
 
 $(eval $(call get-spec-files,122,1.2.2))
+$(eval $(call get-spec-files,123,1.2.3))
 $(eval $(call get-spec-files,130,1.3.0))
 
 # Review files:
@@ -109,6 +111,7 @@ FILES := \
 ifndef MAKE_QUICK
 FILES += \
     $(SPEC_122_FILES) \
+    $(SPEC_123_FILES) \
     $(REVIEW_FILES)
 endif
 FILES += \
@@ -242,6 +245,7 @@ $$(SPEC_$1)/img/%:
 endef
 
 $(eval $(call make-spec-files,122,1.2.2))
+$(eval $(call make-spec-files,123,1.2.3))
 $(eval $(call make-spec-files,130,1.3.0))
 
 #------------------------------------------------------------------------------

@@ -90,6 +90,7 @@ common:
 clean:
 	@git worktree prune
 	$(MAKE) --no-print-directory -C $(SPEC_122) $@ &>/dev/null
+	$(MAKE) --no-print-directory -C $(SPEC_123) $@ &>/dev/null
 	$(MAKE) --no-print-directory -C $(SPEC_130) $@ &>/dev/null
 	$(MAKE) --no-print-directory -C www $@ &>/dev/null
 

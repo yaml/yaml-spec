@@ -11,9 +11,17 @@ The contents of this site are constantly changing and should not ever be
 referenced permanently.
 
 * [YAML Spec Revision 1.3.0](spec/1.3.0)
+  * [1.3.0 Changes](spec/1.3.0/ext/changes)
+* [YAML Spec Revision 1.2.3](spec/1.2.3)
+  * [1.2.3 Glossary](spec/1.2.3/ext/glossary)
+  * [1.2.3 Changes](spec/1.2.3/ext/changes)
 * [YAML Spec Revision 1.2.2](spec/1.2.2)
+  * [1.2.2 Glossary](spec/1.2.2/ext/glossary)
+  * [1.2.2 Changes](spec/1.2.2/ext/changes)
   * [Compare to Revision 1.2.1](review)
-* [YAML Interactive Playground](playground)
+* [YAML Interactive Playground](play)
+* [YAML Resources Index](spec/1.3.0/ext/resources)
+* [YAML Development Team](spec/1.3.0/ext/team)
 
 <!-- * [YAML Developers Documentation](doc)
 * [YAML Development Stories](story) -->
