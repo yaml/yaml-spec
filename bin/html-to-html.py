@@ -43,9 +43,9 @@ def make_toc():
         return
 
     structure = make_heading_structure(
-        element
-        for element in reversed(soup.contents)
-        if isinstance(element.name, str) and HEADING_EXPR.match(element.name)
+        reversed(
+            toc_header.find_all_next(lambda element: HEADING_EXPR.match(element.name))
+        )
     )
 
     toc = make_toc_recursive(structure)
