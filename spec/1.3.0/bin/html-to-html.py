@@ -5,7 +5,14 @@ from copy import copy
 from bs4 import BeautifulSoup, PageElement, NavigableString
 
 
-HEADING_EXPR = re.compile(r'\Ah\d\Z')
+HEADING_EXPR = re.compile(r'\Ah(\d)\Z')
+
+def heading_level(element):
+    if element.name:
+        match = HEADING_EXPR.match(element.name)
+        if match is not None:
+            return int(match.group(1))
+    return None
 
 
 def tag(name, *contents, **attrs):
@@ -59,98 +66,93 @@ def do_heading_stuff():
     if toc_header is None:
         return
 
-    structure = make_heading_structure(
-        reversed(
-            toc_header.find_all_next(lambda element: HEADING_EXPR.match(element.name))
-        )
-    )
+    make_outline(list(toc_header.parent.next_siblings))
 
-    number_chapters(structure)
+    number_chapters(soup)
     number_examples()
     number_figures()
 
-    toc = make_toc(structure)
+    toc = make_toc(soup)
     toc['id'] = 'markdown-toc'
 
     toc_header.parent.insert_after(toc)
 
 
-def make_heading_structure(reversed_elements, level = 1):
-    ret = []
-    accumulated = []
-    for element in reversed_elements:
-        if element.name == 'h' + str(level):
-            # section = element.wrap(tag('section'))
-            # section
-            ret.append((element, make_heading_structure(accumulated, level + 1)))
-            accumulated = []
+def make_outline(elements):
+    stack = []
+    path = []
+
+    for element in elements:
+        level = heading_level(element)
+        if level is None:
+            if stack:
+                stack[-1].append(element.extract())
         else:
-            accumulated.append(element)
+            previous_index = 0
 
-    ret.reverse()
-    return ret
+            while len(stack) >= level:
+                stack.pop()
+                previous_index = path.pop()
+
+            if isinstance(previous_index, int) and element.string and element.string.startswith('Appendix'):
+                # Special case for appendices
+                index = 'A'
+            elif isinstance(previous_index, str):
+                index = chr(ord(previous_index) + 1)
+            else:
+                index = previous_index + 1
+
+            section = element.wrap(tag('section', **{'data-section-number': index}))
+
+            if stack:
+                stack[-1].append(section.extract())
+
+            stack.append(section)
+            path.append(index)
 
 
-HEADING_NUMBER_EXPR = re.compile(r'[#\dA-Z](\.[#\dA-Z])*(?=\. )')
+HEADING_NUMBER_EXPR = re.compile(r'#(\.#)*(?=\. )')
 
-def number_chapters(structure, numbers = []):
-    heading_index = 1
-    for heading, subheadings in structure:
-        if heading.string and heading.string.startswith('Appendix') and isinstance(heading_index, int):
-            heading_index = 'A'
 
-        heading_path = numbers + [str(heading_index)]
+def number_chapters(parent, numbers = []):
+    for section in parent.find_all('section', recursive=False):
+        heading = section.contents[0]
+        heading_path = numbers + [str(section['data-section-number'])]
+
         replace(heading, HEADING_NUMBER_EXPR, '.'.join(heading_path))
-        heading.attrs['data-index'] = str(heading_index)
-        number_chapters(subheadings, heading_path)
 
-        if isinstance(heading_index, str):
-            heading_index = chr(ord(heading_index) + 1)
-        else:
-            heading_index += 1
+        number_chapters(section, heading_path)
 
 
 def number_examples():
-    last_heading = None
-    example_index = None
-    for example in soup.find_all(class_='example'):
-        example_heading = example.find('strong')
-        if example_heading is None:
-            continue
-        heading = example_heading.find_previous('h1')
-        if heading != last_heading:
-            last_heading = heading
-            example_index = 1
-        chapter = '.'.join([heading['data-index'], str(example_index)])
-        replace(example_heading, HEADING_NUMBER_EXPR, chapter)
-        example_index += 1
+    for section in soup.find_all('section', recursive=False):
+        chapter = str(section['data-section-number'])
+        for i, example in enumerate(section.find_all('div', class_='example'), 1):
+            example_heading = example.find('strong')
+            replace(example_heading, HEADING_NUMBER_EXPR, '.'.join([chapter, str(i)]))
 
 
 def number_figures():
-    last_heading = None
-    figure_index = None
-    for figure_heading in soup.find_all(lambda element:
-        element.name == 'strong' and element.string and element.string.startswith('Figure #.')
-    ):
-        heading = figure_heading.find_previous('h1')
-        if heading != last_heading:
-            last_heading = heading
-            figure_index = 1
-        chapter = '.'.join([heading['data-index'], str(figure_index)])
-        replace(figure_heading, HEADING_NUMBER_EXPR, chapter)
-        figure_index += 1
+    for section in soup.find_all('section', recursive=False):
+        chapter = str(section['data-section-number'])
+        figure_headings = section.find_all(lambda element:
+            element.name == 'strong' and element.string and element.string.startswith('Figure #.')
+        )
+        for i, figure_heading in enumerate(figure_headings, 1):
+            replace(figure_heading, HEADING_NUMBER_EXPR, '.'.join([chapter, str(i)]))
 
 
-def make_toc(structure):
-    if len(structure) == 0:
+def make_toc(parent):
+    sections = parent.find_all('section', recursive=False)
+    if len(sections) == 0:
         return None
 
     return tag('ul', [
         tag('li',
-            tag('a', heading.contents, href='#' + heading['id']),
-            make_toc(children),
+            tag('a', section.contents[0].contents, href='#' + section.contents[0]['id']),
+            make_toc(section),
         )
-        for heading, children in structure
+        for section in sections
     ])
 
 
