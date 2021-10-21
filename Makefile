@@ -49,6 +49,22 @@ test:
 
 test-noclean: $(TESTS)
 
+DIFF_FILES := prev/www/html/1.3.0/index.html www/html/1.3.0/index.html
+
+diff-html:
+	[[ -d prev ]] || git worktree add -f prev main-1.3
+	[[ -d prev/www/html ]] || $(MAKE) -C prev html
+	rm -fr www/html
+	$(MAKE) html
+	@-if command -v xmldiff >/dev/null; then \
+	    echo; \
+	    echo '*** This may take a couple of minutes! ***'; \
+	    echo; \
+	    (set -x; xmldiff $(DIFF_FILES) | less -FRX); \
+	else \
+	    (set -x; diff -u $(DIFF_FILES) | less -FRX); \
+	fi
+
 edit-spec:
 	@$${EDITOR:-vim} $(SPEC_130)/spec.md
 
@@ -91,6 +107,7 @@ clean:
 	$(MAKE) --no-print-directory -C $(SPEC_123) $@ &>/dev/null
 	$(MAKE) --no-print-directory -C $(SPEC_130) $@ &>/dev/null
 	$(MAKE) --no-print-directory -C www $@ &>/dev/null
+	@rm -fr prev
 
 c: clean
 	@echo
