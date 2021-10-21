@@ -68,7 +68,7 @@ def do_heading_stuff():
 
     make_outline(list(toc_header.parent.next_siblings))
 
-    number_chapters(soup)
+    number_chapters()
     number_examples()
     number_figures()
 
@@ -114,14 +114,13 @@ def make_outline(elements):
 HEADING_NUMBER_EXPR = re.compile(r'#(\.#)*(?=\. )')
 
 
-def number_chapters(parent, numbers = []):
-    for section in parent.find_all('section', recursive=False):
-        heading = section.contents[0]
-        heading_path = numbers + [str(section['data-section-number'])]
-
+def number_chapters():
+    for heading in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
+        heading_path = [
+            str(section['data-section-number'])
+            for section in reversed(heading.find_parents('section'))
+        ]
         replace(heading, HEADING_NUMBER_EXPR, '.'.join(heading_path))
-
-        number_chapters(section, heading_path)
 
 
 def number_examples():
