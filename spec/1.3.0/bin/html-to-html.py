@@ -102,7 +102,7 @@ def make_outline(elements):
             else:
                 index = previous_index + 1
 
-            section = element.wrap(tag('section', **{'data-section-number': index}))
+            section = element.wrap(tag('section', **{'data-section-number': str(index)}))
 
             if stack:
                 stack[-1].append(section.extract())
@@ -117,7 +117,7 @@ HEADING_NUMBER_EXPR = re.compile(r'#(\.#)*(?=\. )')
 def number_chapters():
     for heading in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
         heading_path = [
-            str(section['data-section-number'])
+            section['data-section-number']
             for section in reversed(heading.find_parents('section'))
         ]
         replace(heading, HEADING_NUMBER_EXPR, '.'.join(heading_path))
@@ -125,7 +125,7 @@ def number_chapters():
 
 def number_examples():
     for section in soup.find_all('section', recursive=False):
-        chapter = str(section['data-section-number'])
+        chapter = section['data-section-number']
         for i, example in enumerate(section.find_all('div', class_='example'), 1):
             example_heading = example.find('strong')
             replace(example_heading, HEADING_NUMBER_EXPR, '.'.join([chapter, str(i)]))
@@ -133,7 +133,7 @@ def number_examples():
 
 def number_figures():
     for section in soup.find_all('section', recursive=False):
-        chapter = str(section['data-section-number'])
+        chapter = section['data-section-number']
         figure_headings = section.find_all(lambda element:
             element.name == 'strong' and element.string and element.string.startswith('Figure #.')
         )
