@@ -173,23 +173,36 @@ need-modules() {
   for module; do
     case $cmd in
       perl)
-        perl -M"$module" -e1 &>/dev/null ||
-          fail "'$cmd' requires Perl module '$module'"
+        if [[ $module == *=* ]]; then
+          want=$module
+          version=${module#*=}
+          module=${module%=*}
+          perl -M"$module"\ "$version" -e1 &>/dev/null ||
+            fail "'$cmd' requires Perl module '$want'"
+        else
+          want=$module
+          perl -M"$module" -e1 &>/dev/null ||
+            fail "'$cmd' requires Perl module '$module'"
+        fi
         ;;
       node)
         node -e "require('$module');" &>/dev/null ||
           fail "'$cmd' requires NodeJS module '$module'"
         ;;
+      python)
+        python3 -c "import $module" &>/dev/null ||
+          fail "'$cmd' requires Python(3) module '$module'"
+        ;;
       ruby)
         list=$(gem list)
         if [[ $module == *=* ]]; then
-          pattern="${module//./\\.}"
-          pattern="${pattern/=/ (.*})"
+          want="${module//./\\.}"
+          want="${want/=/ (.*})"
         else
-          pattern="$module.*"
+          want="$module.*"
         fi
-        pattern="^$pattern$"
-        grep "$pattern" <<<"$list" ||
+        want="^$want$"
+        grep "$want" <<<"$list" ||
           fail "'$cmd' requires Ruby module '$module'"
         ;;
       *) die "Can't check module '$module' for '$cmd'" ;;
