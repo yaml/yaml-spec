@@ -149,6 +149,7 @@ loading-failure-points:
 mapping:
 - collection node
 - collection's
+- collections
 - key node
 - key/value pair
 - mapping
