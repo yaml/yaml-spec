@@ -671,8 +671,41 @@ serial form, that is, a form with sequential access constraints.
 [Presentation] deals with the formatting of a YAML [serialization] as a series
 of characters in a human-friendly manner.
 
+## #. Information Models
 
-# Chapter #. Processes
+The following diagram summarizes the three _information models_.
+Full arrows denote composition, hollow arrows denote inheritance, "`1`" and
+"`*`" denote "one" and "many" relationships.
+A single "`+`" denotes [serialization] details, a double "`++`" denotes
+[presentation] details.
+
+
+**Figure #. Information Models**
+
+![Information Models](img/model2.svg)
+
+Presentation stream
+:
+A sequence of Unicode characters conforming to the YAML syntax.
+
+Serialization tree
+:
+A tree of serialization nodes.
+Aliases and anchors are used to refer to a node more than once.
+Nodes may lack specific tags, and node content may not be in canonical form.
+
+Representation graph
+:
+A graph of representation nodes.
+All nodes have specific tags and content in canonical form. Aliases and anchors
+are not present.
+
+Native data structures
+:
+Implementation-defined values in some programming language or framework
+compatible with user code.
+
+## #. Processes
 
 Translating between [native data structures] and a character [stream] is done
 in several logically distinct stages, each with a well defined input and output
@@ -692,6 +725,50 @@ structures] are [constructed] only from information available in the
 [representation].
 In particular, [mapping key order], [comments] and [tag handles] should not be
 referenced during [construction].
+
+### #. Loading
+
+Loading is the entire process of turning a YAML document into usable native
+values.
+It consists of the following processes:
+
+Parsing
+:
+Turn the presentation stream into a serialization tree.
+Read the input, parse it according to the grammar, and build a tree of nodes
+and their content.
+
+Composition
+:
+Using a schema, turn the serialization tree into a representation graph.
+Identify anchors and aliases, resolve tags according to the schema, and
+determine the canonical form of node content.
+
+Construction
+:
+Turn the representation graph into implementation-defined native data types.
+
+### #. Dumping
+
+Dumping is the entire process of native values into a YAML document.
+It consists of the following processes:
+
+Representation
+:
+Turn implementation-defined native values into a representation graph,
+specifying node tags and content.
+
+Serialization
+:
+Using a schema, turn the representation graph into a serialization tree.
+Use anchors and aliases to ensure that each node only appears once in the tree.
+
+Presentation
+:
+Turn the serialization tree into a presentation stream.
+
+
+# Chapter #. Processes
 
 
 ## #. Dump
@@ -808,17 +885,6 @@ neither part of the YAML [serialization] nor the YAML [representation].
 By carefully separating properties needed for [serialization] and
 [presentation], YAML [representations] of [application] information will be
 consistent and portable between various programming environments.
-
-The following diagram summarizes the three _information models_.
-Full arrows denote composition, hollow arrows denote inheritance, "`1`" and
-"`*`" denote "one" and "many" relationships.
-A single "`+`" denotes [serialization] details, a double "`++`" denotes
-[presentation] details.
-
-
-**Figure #. Information Models**
-
-![Information Models](img/model2.svg)
 
 
 ## #. Representation Graph
