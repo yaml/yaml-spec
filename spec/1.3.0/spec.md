@@ -673,7 +673,8 @@ of characters in a human-friendly manner.
 
 ## #. Information Models
 
-The following diagram summarizes the three _information models_.
+The following diagram summarizes the YAML _information models_, excluding
+native data types.
 Full arrows denote composition, hollow arrows denote inheritance, "`1`" and
 "`*`" denote "one" and "many" relationships.
 A single "`+`" denotes [serialization] details, a double "`++`" denotes
