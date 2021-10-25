@@ -7,6 +7,7 @@ use YAML::PP;
 use XXX;
 
 my ($YYYY, $MM, $DD);
+my (@heading_level) = (0, 0, 0, 0);
 my $links = {};
 
 sub main {
@@ -247,6 +248,7 @@ sub fmt_html_block {
 
 sub fmt_heading {
   set_dates();
+  set_heading_level();
 
   return unless /\d\.\s/;
 
@@ -272,7 +274,7 @@ sub fmt_example {
   $id =~ s/\s*\(.*//s;
   $id = slugify($id);
 
-  my $out = ($title . "\n\n");
+  my $out = set_example_level($title) . "\n\n";
 
   if ($legend) {
     $yaml1 = apply_highlights($yaml1, $legend);
@@ -341,9 +343,15 @@ sub fmt_ul {
   format_links();
 }
 
+my $figure = 0;
 sub fmt_p {
   set_dates();
   format_links();
+  if (/^\*\*Figure #\./m) {
+    my $chapter = $heading_level[0];
+    $figure++;
+    s/^\*\*Figure #\./**Figure $chapter.$figure./;
+  }
 }
 
 sub fmt_dd {
@@ -549,6 +557,42 @@ sub format_internal_link {
 sub set_dates {
   s/YYYY(.)MM(.)DD/$YYYY$1$MM$2$DD/g;
   s/YYYY/$YYYY/g;
+}
+
+my $example_number;
+sub set_heading_level {
+  my $lvl = 1;
+  if (/^#+\ .*((?:[\dA-Z]+\.)+ )/) {
+    my @parts = split(/\./, $1);
+    @heading_level = (@parts, 0, 0, 0);
+  } else {
+    my $txt = '';
+    /^(#+)\ .*(#)\./ or return;
+    $lvl = length $1;
+
+    for (my $i = 0; $i < 4; $i++) {
+      if ($i < $lvl) {
+        if ($i == $lvl - 1) {
+          $heading_level[$i]++;
+        }
+        $txt .= $heading_level[$i] . '.';
+      }
+      else {
+        $heading_level[$i] = 0;
+      }
+    }
+    s/#\./$txt/;
+  }
+
+  $example_number = 0 if $lvl == 1;
+}
+
+sub set_example_level {
+  my ($title) = @_;
+  my $chapter = $heading_level[0];
+  $example_number++;
+  $title =~ s/\#\./$chapter.$example_number/;
+  return $title;
 }
 
 sub apply_highlights {
