@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
-version=1.3.0.3
+version=1.3.0.4
 
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 
 check() (
   need python3 3.8
-  need python bs4
+  need python bs4 roman
 )
 
 dockerfile() (
   from alpine
-  pip beautifulsoup4
+  pip beautifulsoup4 roman
 )
 
 run "$@"

@@ -3,9 +3,9 @@ layout: spec
 title: YAML Ain’t Markup Language (YAML™) revision 1.3.0
 ---
 
-# YAML Ain't Markup Language (YAML™) version 1.3
+## YAML Ain't Markup Language (YAML™) version 1.3
 
-## Revision 1.3.0 (YYYY-MM-DD)
+### Revision 1.3.0 (YYYY-MM-DD)
 {:.subtitle}
 
 Copyright presently by YAML Language Development Team[^team]  
@@ -54,7 +54,9 @@ create programs that process YAML information.
 
 **Contents**{: #toc-header}
 
-# Chapter #. Introduction to YAML
+# Part #. Introduction
+
+## Chapter #. Introduction to YAML
 
 YAML (a recursive acronym for "YAML Ain't Markup Language") is a data
 serialization language designed to be human-friendly and work well with modern
@@ -97,7 +99,7 @@ debugging of complex data structures.
 When data is easy to view and understand, programming becomes a simpler task.
 
 
-## #. Goals
+### #. Goals
 
 The design goals for YAML are, in decreasing priority:
 
@@ -110,7 +112,7 @@ The design goals for YAML are, in decreasing priority:
 1. YAML should be easy to implement and use.
 
 
-## #. YAML History
+### #. YAML History
 
 The YAML 1.0 specification was published in early 2004 by by Clark Evans, Oren
 Ben-Kiki, and Ingy döt Net after 3 years of collaborative design work through
@@ -152,7 +154,7 @@ things that need to be addressed for it to reach its full potential.
 The YAML design team is focused on making YAML as good as possible.
 
 
-## #. Terminology
+### #. Terminology
 
 The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD",
 "SHOULD NOT", "RECOMMENDED",  "MAY", and "OPTIONAL" in this document are to be
@@ -168,7 +170,7 @@ define this text format.
 Finally, chapter [10] recommends basic YAML schemas.
 
 
-# Chapter #. Language Overview
+## Chapter #. Language Overview
 
 This section provides a quick glimpse into the expressive power of YAML.
 It is not expected that the first-time reader grok all of the examples.
@@ -176,7 +178,7 @@ Rather, these selections are used as motivation for the remainder of the
 specification.
 
 
-## #. Collections
+### #. Collections
 
 YAML's [block collections] use [indentation] for scope and begin each entry on
 its own line.
@@ -258,7 +260,7 @@ Sammy Sosa: {
 ```
 
 
-## #. Structures
+### #. Structures
 
 YAML uses three dashes ("`---`") to separate [directives] from [document]
 [content].
@@ -364,7 +366,7 @@ the [dash], [colon] or [question mark].
 ```
 
 
-## #. Scalars
+### #. Scalars
 
 [Scalar content] can be written in [block] notation, using a [literal style]
 (indicated by "`|`") where all [line breaks] are significant.
@@ -452,7 +454,7 @@ quoted: "So does this
 ```
 
 
-## #. Tags
+### #. Tags
 
 In YAML, [untagged nodes] are given a type depending on the [application].
 The examples in this specification generally use the `seq`, `map` and `str`
@@ -572,7 +574,7 @@ application specific tag: !something |
 ```
 
 
-## #. Full Length Example
+### #. Full Length Example
 
 Below are two full-length examples of YAML.
 The first is a sample invoice; the second is a sample log file.
@@ -644,7 +646,7 @@ Stack:
     foo = bar
 ```
 
-## #. Processes and Models
+### #. Processes and Models
 
 YAML is both a text format and a method for [presenting] any [native data
 structure] in this format.
@@ -671,8 +673,10 @@ serial form, that is, a form with sequential access constraints.
 [Presentation] deals with the formatting of a YAML [serialization] as a series
 of characters in a human-friendly manner.
 
+# Part #. Processes
+{: data-section-continue="true"}
 
-# Chapter #. Processes
+## Chapter #. Processes
 
 Translating between [native data structures] and a character [stream] is done
 in several logically distinct stages, each with a well defined input and output
@@ -694,7 +698,7 @@ In particular, [mapping key order], [comments] and [tag handles] should not be
 referenced during [construction].
 
 
-## #. Dump
+### #. Dump
 
 _Dumping_ native data structures to a character [stream] is done using the
 following three stages:
@@ -756,7 +760,7 @@ While some of this can be done with the help of the [application], in general
 this process should be guided by the preferences of the user.
 
 
-## #. Load
+### #. Load
 
 _Loading_ [native data structures] from a character [stream] is done using the
 following three stages:
@@ -790,8 +794,10 @@ details] such as [comments], [directives], [mapping key order], [node styles],
 Construction can fail due to the [unavailability] of the required [native data
 types].
 
+# Part #. Information Models
+{: data-section-continue="true"}
 
-# Chapter #. Information Models
+## Chapter #. Information Models
 
 This section specifies the formal details of the results of the above
 processes.
@@ -821,7 +827,7 @@ A single "`+`" denotes [serialization] details, a double "`++`" denotes
 ![Information Models](img/model2.svg)
 
 
-## #. Representation Graph
+### #. Representation Graph
 
 YAML's _representation_ of [native data structure] is a rooted, connected,
 directed graph of [tagged] [nodes].
@@ -844,7 +850,7 @@ be [unique].
 ![Representation Model](img/represent2.svg)
 
 
-### #. Nodes
+#### #. Nodes
 
 A YAML _node_ [represents] a single [native data structure].
 Such nodes have _content_ of one of three _kinds_: scalar, sequence or mapping.
@@ -875,7 +881,7 @@ value of several key/value pairs and a mapping could even contain itself as a
 key or a value.
 
 
-### #. Tags
+#### #. Tags
 
 YAML [represents] type information of [native data structures] with a simple
 identifier, called a _tag_.
@@ -910,7 +916,7 @@ allowed [content] values for validation, a mechanism for [tag resolution] or
 any other data that is applicable to all of the tag's [nodes].
 
 
-### #. Node Comparison
+#### #. Node Comparison
 
 Since YAML [mappings] require [key] uniqueness, [representations] must include
 a mechanism for testing the equality of [nodes].
@@ -971,7 +977,7 @@ A [mapping's] [keys] are _unique_ if no two keys are equal to each other.
 Obviously, identical nodes are always considered equal.
 
 
-## #. Serialization Tree
+### #. Serialization Tree
 
 To express a YAML [representation] using a serial API, it is necessary to
 impose an [order] on [mapping keys] and employ [alias nodes] to indicate a
@@ -988,7 +994,7 @@ use [key order] or [anchor names] for the preservation of [application] data.
 ![Serialization Model](img/serialize2.svg)
 
 
-### #. Mapping Key Order
+#### #. Mapping Key Order
 
 In the [representation] model, [mapping keys] do not have an order.
 To [serialize] a [mapping], it is necessary to impose an _ordering_ on its
@@ -1002,7 +1008,7 @@ For example, an ordered [mapping] can be [represented] as a [sequence] of
 YAML provides convenient [compact notation] for this case.
 
 
-### #. Anchors and Aliases
+#### #. Anchors and Aliases
 
 In the [representation graph], a [node] may appear in more than one
 [collection].
@@ -1019,7 +1025,7 @@ Therefore, anchors need not be unique within a [serialization].
 In addition, an anchor need not have an alias node referring to it.
 
 
-## #. Presentation Stream
+### #. Presentation Stream
 
 A YAML _presentation_ is a [stream] of Unicode characters making use of
 [styles], [scalar content formats], [comments], [directives] and other
@@ -1034,7 +1040,7 @@ presentation stream, as a series of [documents] separated by [markers].
 ![Presentation Model](img/present2.svg)
 
 
-### #. Node Styles
+#### #. Node Styles
 
 Each [node] is presented in some _style_, depending on its [kind].
 The node style is a [presentation detail] and is not reflected in the
@@ -1063,7 +1069,7 @@ These allow for a natural "ordered mapping" notation.
 ![Kind/Style Combinations](img/styles2.svg)
 
 
-### #. Scalar Formats
+#### #. Scalar Formats
 
 YAML allows [scalars] to be [presented] in several _formats_.
 For example, the integer "`11`" might also be written as "`0xB`".
@@ -1073,7 +1079,7 @@ Like [node style], the format is a [presentation detail] and is not reflected
 in the [serialization tree] and [representation graph].
 
 
-### #. Comments
+#### #. Comments
 
 [Comments] are a [presentation detail] and must not have any effect on the
 [serialization tree] or [representation graph].
@@ -1085,7 +1091,7 @@ Comments must not appear inside [scalars], but may be interleaved with such
 [scalars] inside [collections].
 
 
-### #. Directives
+#### #. Directives
 
 Each [document] may be associated with a set of [directives].
 A directive has a name and an optional sequence of parameters.
@@ -1096,7 +1102,7 @@ This version of YAML defines two directives, "`YAML`" and "`TAG`".
 All other directives are [reserved] for future versions of YAML.
 
 
-# Chapter #. Loading Failure Points
+## Chapter #. Loading Failure Points
 
 The process of [loading] [native data structures] from a YAML [stream] has
 several potential _failure points_.
@@ -1123,7 +1129,7 @@ structures].
 ![Loading Failure Points](img/validity2.svg)
 
 
-## #. Well-Formed Streams and Identified Aliases
+### #. Well-Formed Streams and Identified Aliases
 
 A [well-formed] character [stream] must match the BNF productions specified in
 the following chapters.
@@ -1135,7 +1141,7 @@ A YAML [processor] may recover from syntax errors, possibly by ignoring certain
 parts of the input, but it must provide a mechanism for reporting such errors.
 
 
-## #. Resolved Tags
+### #. Resolved Tags
 
 Typically, most [tags] are not explicitly specified in the character [stream].
 During [parsing], [nodes] lacking an explicit [tag] are given a _non-specific
@@ -1195,7 +1201,7 @@ In such a case, the YAML [processor] may [compose] a [partial representation],
 based on each [node's kind] and allowing for non-specific tags.
 
 
-## #. Recognized and Valid Tags
+### #. Recognized and Valid Tags
 
 To be _valid_, a [node] must have a [tag] which is _recognized_ by the YAML
 [processor] and its [content] must satisfy the constraints imposed by this
@@ -1210,7 +1216,7 @@ However, such a [complete representation] cannot be used to [construct] a
 [native data structure].
 
 
-## #. Available Tags
+### #. Available Tags
 
 In a given processing environment, there need not be an _available_ native type
 corresponding to a given [tag].
@@ -1220,9 +1226,12 @@ In this case, a [complete representation] may still be [composed] and an
 [application] may wish to use this [representation] directly.
 
 
-# Chapter #. Character Productions
+# Part #. Syntax
+{: data-section-continue="true"}
 
-## #. Character Set
+## Chapter #. Character Productions
+
+### #. Character Set
 
 To ensure readability, YAML [streams] use only the _printable_ subset of the
 Unicode character set.
@@ -1255,7 +1264,7 @@ even inside such [scalars].
 YAML [quoted scalars] can.
 
 
-## #. Character Encodings
+### #. Character Encodings
 
 All characters mentioned in this specification are Unicode code points.
 Each such code point is written as one or more bytes depending on the
@@ -1344,7 +1353,7 @@ ERROR:
 <!-- BOM -->
 
 
-## #. Indicator Characters
+### #. Indicator Characters
 
 _Indicators_ are characters that have special semantics.
 
@@ -1553,7 +1562,7 @@ constructs.
 This is handled on a case-by-case basis by the relevant productions.
 
 
-## #. Line Break Characters
+### #. Line Break Characters
 
 The line feed (`x0A`) and carriage return (`0x0D`) are line break characters.
 
@@ -1604,7 +1613,7 @@ clarity.
 * [line-break] <!-- ↓ -->
 
 
-## #. White Space Characters
+### #. White Space Characters
 
 YAML recognizes two _white space_ characters: _space_ and _tab_.
 
@@ -1637,7 +1646,7 @@ block:→|
 * tab <!-- → -->
 
 
-## #. Miscellaneous Characters
+### #. Miscellaneous Characters
 
 The YAML syntax productions make use of the following additional character
 classes:
@@ -1662,7 +1671,7 @@ and "`,`" characters.
 These characters would cause ambiguity with [flow collection] structures.
 
 
-## #. Escaped Characters
+### #. Escaped Characters
 
 All non-[printable] characters must be _escaped_.
 YAML escape sequences use the "`\`" notation common to most modern computer
@@ -1745,9 +1754,9 @@ ERROR:
 <!-- 3:3 3:9 -->
 
 
-# Chapter #. Structural Productions
+## Chapter #. Structural Productions
 
-## #. Indentation Spaces
+### #. Indentation Spaces
 
 In YAML [block styles], structure is determined by _indentation_.
 In general, indentation is defined as a zero or more [space] characters at the
@@ -1832,7 +1841,7 @@ This is handled on a case-by-case basis by the relevant productions.
 * Indicator as indentation <!-- 1:1 2:1 2:3 3:3 3:6 4:6 -->
 
 
-## #. Separation Spaces
+### #. Separation Spaces
 
 Outside [indentation] and [scalar content], YAML uses [white space] characters
 for _separation_ between tokens within a line.
@@ -1860,7 +1869,7 @@ Separation spaces are a [presentation detail] and must not be used to convey
 * [separation-blanks] <!-- →· · → -->
 
 
-## #. Line Prefixes
+### #. Line Prefixes
 
 Inside [scalar content], each line begins with a non-[content] _line prefix_.
 This prefix always includes the [indentation].
@@ -1894,7 +1903,7 @@ block: |
 * [indentation-spaces(n)] <!-- 2:1 4:1 6:1,2 7:1,2 -->
 
 
-## #. Empty Lines
+### #. Empty Lines
 
 An _empty line_ line consists of the non-[content] [prefix] followed by a [line
 break].
@@ -1924,7 +1933,7 @@ Chomping: |
 * [empty-line(n,c)] <!-- 3 7 -->
 
 
-## #. Line Folding
+### #. Line Folding
 
 _Line folding_ allows long lines to be broken for readability, while retaining
 the semantics of the original long line.
@@ -2033,7 +2042,7 @@ can be freely [more-indented] without affecting the [content] information.
 * Non-content spaces <!-- 2:1,2 2:6 3:1 4:1,4 6:1,2 -->
 
 
-## #. Comments
+### #. Comments
 
 An explicit _comment_ is marked by a "`#`" indicator.
 Comments are a [presentation detail] and must not be used to convey [content]
@@ -2112,7 +2121,7 @@ key:····# Comment↓
 * [comment-lines] <!-- 1:5, 2 3:8 4 -->
 
 
-## #. Separation Lines
+### #. Separation Lines
 
 [Implicit keys] are restricted to a single line.
 In all other cases, YAML allows tokens to be separated by multi-line (possibly
@@ -2147,7 +2156,7 @@ Note that structures following multi-line comment separation must be properly
 * [indentation-spaces(n)] <!-- 3:1,2 4:1,3 5:1,2 6:1,3 -->
 
 
-## #. Directives
+### #. Directives
 
 _Directives_ are instructions to the YAML [processor].
 This specification defines two directives, "`YAML`" and "`TAG`", and _reserves_
@@ -2182,7 +2191,7 @@ warning.
 * [directive-parameter] <!-- 1:7,3 1:11,3 -->
 
 
-### #. "`YAML`" Directives
+#### #. "`YAML`" Directives
 
 The "`YAML`" directive specifies the version of YAML the [document] conforms
 to.
@@ -2245,7 +2254,7 @@ given at most once per document.
 <!-- 2:5,4 -->
 
 
-### #. "`TAG`" Directives
+#### #. "`TAG`" Directives
 
 The "`TAG`" directive establishes a [tag shorthand] notation for specifying
 [node tags].
@@ -2293,7 +2302,7 @@ handle in the same document.
 <!-- 4:1,6 -->
 
 
-#### #. Tag Handles
+##### #. Tag Handles
 
 The _tag handle_ exactly matches the prefix of the affected [tag shorthand].
 There are three tag handle variants:
@@ -2389,7 +2398,7 @@ In particular, the YAML [processor] need not preserve the handle name once
 * [named-tag-handle] <!-- !e! -->
 
 
-#### #. Tag Prefixes
+##### #. Tag Prefixes
 
 There are two _tag prefix_ variants:
 
@@ -2451,7 +2460,7 @@ semantics to the same [global tag].
 * [global-tag-prefix] <!-- tag:example.com,2000:app/ -->
 
 
-## #. Node Properties
+### #. Node Properties
 
 Each [node] may have two optional _properties_, [anchor] and [tag], in addition
 to its [content].
@@ -2478,7 +2487,7 @@ Either or both may be omitted.
 * [tag-property] <!-- 1:1,5 2:3,5 -->
 
 
-### #. Node Tags
+#### #. Node Tags
 
 The _tag property_ identifies the type of the [native data structure]
 [presented] by the [node].
@@ -2636,7 +2645,7 @@ This is intentional.
 * [non-specific-tag] <!-- ! -->
 
 
-### #. Node Anchors
+#### #. Node Anchors
 
 An anchor is denoted by the "`&`" indicator.
 It marks a [node] for future reference.
@@ -2675,7 +2684,7 @@ Second occurrence: *anchor
 * [anchor-name] <!-- 1:20,6 2:21,6 -->
 
 
-# Chapter #. Flow Style Productions
+## Chapter #. Flow Style Productions
 
 YAML's _flow styles_ can be thought of as the natural extension of JSON to
 cover [folding] long content lines for readability, [tagging] nodes to control
@@ -2683,7 +2692,7 @@ cover [folding] long content lines for readability, [tagging] nodes to control
 reuse [constructed] object instances.
 
 
-## #. Alias Nodes
+### #. Alias Nodes
 
 Subsequent occurrences of a previously [serialized] node are [presented] as
 _alias nodes_.
@@ -2721,7 +2730,7 @@ Reuse anchor: *anchor
 * [anchor-name] <!-- 1:20,6 2:21,6 3:19,6 4:16,6 -->
 
 
-## #. Empty Nodes
+### #. Empty Nodes
 
 YAML allows the [node content] to be omitted in many cases.
 [Nodes] with empty [content] are interpreted as if they were [plain scalars]
@@ -2777,7 +2786,7 @@ for their existence.
 * [empty-node] <!-- ° -->
 
 
-## #. Flow Scalar Styles
+### #. Flow Scalar Styles
 
 YAML provides three _flow scalar styles_: [double-quoted], [single-quoted] and
 [plain] (unquoted).
@@ -2788,7 +2797,7 @@ The [scalar style] is a [presentation detail] and must not be used to convey
 distinguished for the purpose of [tag resolution].
 
 
-### #. Double-Quoted Style
+#### #. Double-Quoted Style
 
 The _double-quoted style_ is specified by surrounding "`"`" indicators.
 This is the only [style] capable of expressing arbitrary strings, by using
@@ -2871,7 +2880,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 * [double-quoted-next-line(n)] <!-- ↓ 3 4:1,14 -->
 
 
-### #. Single-Quoted Style
+#### #. Single-Quoted Style
 
 The _single-quoted style_ is specified by surrounding "`'`" indicators.
 Therefore, within a single-quoted scalar, such characters need to be repeated.
@@ -2943,7 +2952,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 * [single-quoted-next-line(n)] <!-- 1:16 2 3 4:1,14 -->
 
 
-### #. Plain Style
+#### #. Plain Style
 
 The _plain_ (unquoted) style has no identifying [indicators] and provides no
 form of escaping.
@@ -3052,7 +3061,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 * [plain-scalar-next-line(n,c)] <!-- 1:14 2 3 4 -->
 
 
-## #. Flow Collection Styles
+### #. Flow Collection Styles
 
 A _flow collection_ may be nested within a [block collection] ([`FLOW-OUT`
 context]), nested within another flow collection ([`FLOW-IN` context]) or be a
@@ -3063,7 +3072,7 @@ This does not cause ambiguity because flow collection entries can never be
 [completely empty].
 
 
-### #. Flow Sequences
+#### #. Flow Sequences
 
 _Flow sequence content_ is denoted by surrounding "`[`" and "`]`" characters.
 
@@ -3120,7 +3129,7 @@ single: pair,
 * [flow-pair(n,c)] <!-- 7:1,12 -->
 
 
-### #. Flow Mappings
+#### #. Flow Mappings
 
 _Flow mappings_ are denoted by surrounding "`{`" and "`}`" characters.
 
@@ -3334,7 +3343,7 @@ ERROR:
 <!-- 3:7,9 -->
 
 
-## #. Flow Nodes
+### #. Flow Nodes
 
 _JSON-like_ [flow styles] all have explicit start and end [indicators].
 The only [flow style] that does not have this property is the [plain scalar].
@@ -3392,20 +3401,20 @@ nodes] which refer to the [anchored] [node properties].
 * [flow-yaml-node(n,c)] <!-- *anchor !!str° -->
 
 
-# Chapter #. Block Style Productions
+## Chapter #. Block Style Productions
 
 YAML's _block styles_ employ [indentation] rather than [indicators] to denote
 structure.
 This results in a more human readable (though less compact) notation.
 
 
-## #. Block Scalar Styles
+### #. Block Scalar Styles
 
 YAML provides two _block scalar styles_, [literal] and [folded].
 Each provides a different trade-off between readability and expressive power.
 
 
-### #. Block Scalar Headers
+#### #. Block Scalar Headers
 
 [Block scalars] are controlled by a few [indicators] given in a _header_
 preceding the [content] itself.
@@ -3440,7 +3449,7 @@ This is the only case where a [comment] must not be followed by additional
 * [block-scalar-indicators(t)] <!-- _#_Empty_header↓ 01_#_Indentation_indicator↓ +_#_Chomping_indicator↓ 01-_#_Both_indicators↓ -->
 
 
-#### #. Block Indentation Indicator
+##### #. Block Indentation Indicator
 
 Every block scalar has a _content indentation level_.
 The content of the block scalar excludes a number of leading [spaces] on each
@@ -3524,7 +3533,7 @@ ERROR:
 <!-- 6:15,13 -->
 
 
-#### #. Block Chomping Indicator
+##### #. Block Chomping Indicator
 
 _Chomping_ controls how final [line breaks] and trailing [empty lines] are
 interpreted.
@@ -3657,7 +3666,7 @@ keep: |+
 * [line-keep-empty(n)] <!-- 6 -->
 
 
-### #. Literal Style
+#### #. Literal Style
 
 The _literal style_ is denoted by the "`|`" indicator.
 It is the simplest, most restricted and most readable [scalar style].
@@ -3716,7 +3725,7 @@ In addition, there is no way to break a long literal line.
 * [block-scalar-chomp-empty(n,t)] <!-- 9 -->
 
 
-### #. Folded Style
+#### #. Folded Style
 
 The _folded style_ is denoted by the "`>`" indicator.
 It is similar to the [literal style]; however, folded scalars are subject to
@@ -3887,7 +3896,7 @@ The final [line break] and trailing [empty lines] if any, are subject to
 * [block-scalar-chomp-empty(n,t)] <!-- 15 16 -->
 
 
-## #. Block Collection Styles
+### #. Block Collection Styles
 
 For readability, _block collections styles_ are not denoted by any [indicator].
 Instead, YAML uses a lookahead method, where a block collection is
@@ -3895,7 +3904,7 @@ distinguished from a [plain scalar] only when a [key/value pair] or a [sequence
 entry] is seen.
 
 
-### #. Block Sequences
+#### #. Block Sequences
 
 A _block sequence_ is simply a series of [nodes], each denoted by a leading
 "`-`" indicator.
@@ -3958,7 +3967,7 @@ Note that it is not possible to specify [node properties] for such a
 * [compact-mapping(n)] <!-- _one:_two_#_Compact_mapping -->
 
 
-### #. Block Mappings
+#### #. Block Mappings
 
 A _Block mapping_ is a series of entries, each [presenting] a [key/value pair].
 
@@ -4072,7 +4081,7 @@ mapping.
 * [compact-mapping(n)] <!-- 1:3, 2:3, 3 -->
 
 
-### #. Block Nodes
+#### #. Block Nodes
 
 YAML allows [flow nodes] to be embedded inside [block collections] (but not
 vice-versa).
@@ -4163,15 +4172,15 @@ mapping: !!map
 * [block-mapping(n)] <!-- 6 -->
 
 
-# Chapter #. Document Stream Productions
+## Chapter #. Document Stream Productions
 
-## #. Documents
+### #. Documents
 
 A YAML character [stream] may contain several _documents_.
 Each document is completely independent from the rest.
 
 
-### #. Document Prefix
+#### #. Document Prefix
 
 A document may be preceded by a _prefix_ specifying the [character encoding]
 and optional [comment] lines.
@@ -4199,7 +4208,7 @@ Document
 * [document-prefix] <!-- 1 2 -->
 
 
-### #. Document Markers
+#### #. Document Markers
 
 Using [directives] creates a potential ambiguity.
 It is valid to have a "`%`" character at the start of a line (e.g. as the first
@@ -4245,7 +4254,7 @@ Document
 * [document-end-indicator] <!-- 4:1,3 -->
 
 
-### #. Bare Documents
+#### #. Bare Documents
 
 A _bare document_ does not begin with any [directives] or [marker] lines.
 Such documents are very "clean" as they contain nothing other than the
@@ -4281,7 +4290,7 @@ document
 * [bare-document] <!-- 1 2 6 7 -->
 
 
-### #. Explicit Documents
+#### #. Explicit Documents
 
 An _explicit document_ begins with an explicit [directives end marker] line but
 no [directives].
@@ -4311,7 +4320,7 @@ null
 * [explicit-document] <!-- 1 2 3 5 6 -->
 
 
-### #. Directives Documents
+#### #. Directives Documents
 
 A _directives document_ begins with some [directives] followed by an explicit
 [directives end marker] line.
@@ -4340,7 +4349,7 @@ null
 * [explicit-document] <!-- 1 2 3 5 6 7 -->
 
 
-## #. Streams
+### #. Streams
 
 A YAML _stream_ consists of zero or more [documents].
 Subsequent [documents] require some sort of separation [marker] line.
@@ -4378,7 +4387,11 @@ A sequence of bytes is a _well-formed stream_ if, taken as a whole, it complies
 with the above `yaml-stream` production.
 
 
-# Appendix A. Grammar
+# Part #. Appendices
+{: data-section-format="letter"}
+
+
+## Appendix #. Grammar
 
 The following chapters formally define the syntax of YAML character [streams],
 using parameterized BNF productions.
@@ -4394,7 +4407,7 @@ YAML view of the example.
 The right-hand view uses JSON when possible.
 Otherwise it uses a YAML form that is as close to JSON as possible.
 
-## #. Production Syntax
+### #. Production Syntax
 
 Productions are defined using the syntax `production-name ::= term`, where a
 term is either:
@@ -4460,7 +4473,7 @@ even though it might not be obvious from the content of that particular
 production alone.
 
 
-### #. Production Parameters
+#### #. Production Parameters
 
 Some productions have parameters in parentheses after the name, such as
 [`line-prefix-spaces(n,c)`](#rule-line-prefix-spaces).
@@ -4536,7 +4549,7 @@ May be any of the following values:
 * `KEEP` -- retain all trailing newlines
 
 
-### #. Production Naming Conventions
+#### #. Production Naming Conventions
 
 To make it easier to follow production combinations, production names use a
 prefix-style naming convention.
@@ -4582,12 +4595,12 @@ A production as above, with the additional property that the matched content
 [indentation] level is greater than the specified `n` parameter.
 
 
-## #. Document Stream Productions
+### #. Document Stream Productions
 
 The YAML 1.3 syntax productions are presented here in a top down fashion.
 
 
-### #. Streams
+#### #. Streams
 
 The starting production (`yaml-stream`) matches an entire YAML character
 stream.
@@ -4631,7 +4644,7 @@ document-end-indicator ::=
 ```
 
 
-### #. Documents
+#### #. Documents
 
 ```
 any-document ::=
@@ -4689,7 +4702,7 @@ forbidden-content ::=
 ```
 
 
-#### #. Block Nodes
+##### #. Block Nodes
 
 ```
 block-node(n,c) ::=
@@ -4744,7 +4757,7 @@ block-scalar(n,c) ::=
 ```
 
 
-#### #. Block Mappings
+##### #. Block Mappings
 
 ```
 block-mapping(n) ::=
@@ -4819,7 +4832,7 @@ compact-mapping(n) ::=
 ```
 
 
-#### #. Block Sequences
+##### #. Block Sequences
 
 ```
 block-sequence(n) ::=
@@ -4862,12 +4875,12 @@ compact-sequence(n) ::=
 ```
 
 
-### #. Block Scalar Styles
+#### #. Block Scalar Styles
 
 See [Production Parameters] for the definition of the `t` variable.
 
 
-#### #. Literal Style
+##### #. Literal Style
 
 ```
 block-literal-scalar(n) ::=
@@ -4900,7 +4913,7 @@ literal-scalar-next-line(n) ::=
 ```
 
 
-#### #. Folded Style
+##### #. Folded Style
 
 ```
 block-folded-scalar(n) ::=
@@ -4975,7 +4988,7 @@ folded-scalar-spaced-text(n) ::=
 ```
 
 
-#### #. Block Scalar Headers
+##### #. Block Scalar Headers
 
 ```
 block-scalar-indicators(t) ::=
@@ -5042,9 +5055,9 @@ line-trail-comments(n) ::=
 ```
 
 
-## #. Flow Style Productions
+### #. Flow Style Productions
 
-### #. Flow Nodes
+#### #. Flow Nodes
 
 ```
 flow-node(n,c) ::=
@@ -5082,7 +5095,7 @@ flow-json-content(n,c) ::=
 ```
 
 
-#### #. Flow Mappings
+##### #. Flow Mappings
 
 ```
 flow-mapping(n,c) ::=
@@ -5253,7 +5266,7 @@ flow-json-node(n,c) ::=
 ```
 
 
-#### #. Flow Sequences
+##### #. Flow Sequences
 
 ```
 flow-sequence(n,c) ::=
@@ -5281,9 +5294,9 @@ flow-sequence-entry(n,c) ::=
 ```
 
 
-### #. Flow Scalar Styles
+#### #. Flow Scalar Styles
 
-#### #. Double-Quoted Style
+##### #. Double-Quoted Style
 
 ```
 double-quoted-scalar(n,c) ::=
@@ -5362,7 +5375,7 @@ double-quoted-line-continuation(n) ::=
   indentation-spaces-plus-maybe-more(n)
 ```
 
-#### #. Flow Collection Context
+##### #. Flow Collection Context
 
 ```
 flow-mapping-context(n,FLOW-OUT)  ::= flow-sequence-entries(n,FLOW-IN)
@@ -5379,7 +5392,7 @@ flow-sequence-context(n,FLOW-KEY)  ::= flow-sequence-entries(n,FLOW-KEY)
 ```
 
 
-#### #. Single-Quoted Style
+##### #. Single-Quoted Style
 
 ```
 single-quoted-scalar(n,c) ::=
@@ -5451,7 +5464,7 @@ single-quoted-escaped-single-quote ::=
 ```
 
 
-#### #. Plain Style
+##### #. Plain Style
 
 ```
 flow-plain-scalar(n,FLOW-OUT)  ::= plain-scalar-multi-line(n,FLOW-OUT)
@@ -5553,7 +5566,7 @@ flow-plain-scalar-character ::=
 ```
 
 
-### #. Other Nodes
+#### #. Other Nodes
 
 ```
 alias-node ::=
@@ -5567,9 +5580,9 @@ empty-node ::=
 ```
 
 
-## #. Structural Productions
+### #. Structural Productions
 
-### #. Indentation Spaces
+#### #. Indentation Spaces
 
 ```
 indentation-spaces(0) ::=
@@ -5608,7 +5621,7 @@ indentation-spaces-less-or-equal(n+1) ::=
 ```
 
 
-### #. Line Prefixes
+#### #. Line Prefixes
 
 ```
 line-prefix-spaces(n,BLOCK-OUT) ::= indentation-spaces-exact(n)
@@ -5629,7 +5642,7 @@ indentation-spaces-plus-maybe-more(n) ::=
 ```
 
 
-### #. Line Folding
+#### #. Line Folding
 
 ```
 flow-folded-whitespace(n) ::=
@@ -5648,7 +5661,7 @@ folded-whitespace(n,c) ::=
 ```
 
 
-### #. Comments
+#### #. Comments
 
 ```
 comment-lines ::=
@@ -5670,7 +5683,7 @@ comment-content ::=
 ```
 
 
-### #. Empty Lines
+#### #. Empty Lines
 
 ```
 empty-line(n,c) ::=
@@ -5682,7 +5695,7 @@ empty-line(n,c) ::=
 ```
 
 
-### #. Separation Lines and Blanks
+#### #. Separation Lines and Blanks
 
 ```
 separation-characters(n,BLOCK-OUT) ::= separation-lines(n)
@@ -5709,7 +5722,7 @@ separation-blanks ::=
 ```
 
 
-### #. Directives
+#### #. Directives
 
 A %YAML directive line.
 
@@ -5798,7 +5811,7 @@ global-tag-prefix ::=
 ```
 
 
-### #. Node Properties
+#### #. Node Properties
 
 ```
 node-properties(n,c) ::=
@@ -5863,9 +5876,9 @@ non-specific-tag ::=
 ```
 
 
-## #. Character Productions
+### #. Character Productions
 
-### #. Character Encoding
+#### #. Character Encoding
 
 ```
 byte-order-mark ::=
@@ -5873,7 +5886,7 @@ byte-order-mark ::=
 ```
 
 
-### #. Valid Character Sets
+#### #. Valid Character Sets
 
 All characters allowed in YAML.
 
@@ -5925,7 +5938,7 @@ space-character ::=
 ```
 
 
-### #. Line Ending Productions
+#### #. Line Ending Productions
 
 ```
 line-ending ::=
@@ -5954,7 +5967,7 @@ line-break ::=
 ```
 
 
-### #. Indicator Characters
+#### #. Indicator Characters
 
 ```
 flow-collection-indicators ::=
@@ -5965,7 +5978,7 @@ flow-collection-indicators ::=
 ```
 
 
-### #. Miscellaneous Character Sets
+#### #. Miscellaneous Character Sets
 
 See [Escaped Characters].
 
@@ -6064,13 +6077,13 @@ ascii-alpha-character ::=
 ```
 
 
-# Appendix #. Recommended Schemas
+## Appendix #. Recommended Schemas
 
 A YAML _schema_ is a combination of a set of [tags] and a mechanism for
 [resolving] [non-specific tags].
 
 
-## #. Failsafe Schema
+### #. Failsafe Schema
 
 The _failsafe schema_ is guaranteed to work with any YAML [document].
 It is therefore the recommended [schema] for generic YAML tools.
@@ -6078,9 +6091,9 @@ A YAML [processor] should therefore support this [schema], at least as an
 option.
 
 
-### #. Tags
+#### #. Tags
 
-#### #. Generic Mapping
+##### #. Generic Mapping
 
 URI
 :
@@ -6114,7 +6127,7 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 ```
 
 
-#### #. Generic Sequence
+##### #. Generic Sequence
 
 URI
 :
@@ -6145,7 +6158,7 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 ```
 
 
-#### #. Generic String
+##### #. Generic String
 
 URI
 :
@@ -6179,7 +6192,7 @@ Flow style: !!str "String: just a theory."
 ```
 
 
-### #. Tag Resolution
+#### #. Tag Resolution
 
 All [nodes] with the "`!`" non-specific tag are [resolved], by the standard
 [convention], to "`tag:yaml.org,2002:seq`", "`tag:yaml.org,2002:map`" or
@@ -6189,7 +6202,7 @@ All [nodes] with the "`?`" non-specific tag are left [unresolved].
 This constrains the [application] to deal with a [partial representation].
 
 
-## #. JSON Schema
+### #. JSON Schema
 
 The _JSON schema_ is the lowest common denominator of most modern computer
 languages and allows [parsing] JSON files.
@@ -6198,13 +6211,13 @@ option.
 It is also strongly recommended that other [schemas] should be based on it.
 
 
-### #. Tags
+#### #. Tags
 
 The JSON [schema] uses the following [tags] in addition to those defined by the
 [failsafe] schema:
 
 
-#### #. Null
+##### #. Null
 
 URI
 :
@@ -6238,7 +6251,7 @@ key with null value: !!null null
 ```
 
 
-#### #. Boolean
+##### #. Boolean
 
 URI
 :
@@ -6270,7 +6283,7 @@ Pluto is a planet: !!bool false
 ```
 
 
-#### #. Integer
+##### #. Integer
 
 URI
 :
@@ -6316,7 +6329,7 @@ positive: !!int 34
 ```
 
 
-#### #. Floating Point
+##### #. Floating Point
 
 URI
 :
@@ -6364,7 +6377,7 @@ not a number: !!float .nan
 ```
 
 
-### #. Tag Resolution
+#### #. Tag Resolution
 
 The [JSON schema] [tag resolution] is an extension of the [failsafe schema]
 [tag resolution].
@@ -6419,7 +6432,7 @@ Invalid: [ True, Null,
 ```
 
 
-## #. Core Schema
+### #. Core Schema
 
 The _Core schema_ is an extension of the [JSON schema], allowing for more
 human-readable [presentation] of the same types.
@@ -6428,12 +6441,12 @@ unless instructed otherwise.
 It is also strongly recommended that other [schemas] should be based on it.
 
 
-### #. Tags
+#### #. Tags
 
 The core [schema] uses the same [tags] as the [JSON schema].
 
 
-### #. Tag Resolution
+#### #. Tag Resolution
 
 The [core schema] [tag resolution] is an extension of the [JSON schema] [tag
 resolution].
@@ -6492,7 +6505,7 @@ Also floats: [
 ```
 
 
-## #. Other Schemas
+### #. Other Schemas
 
 None of the above recommended [schemas] preclude the use of arbitrary explicit
 [tags].
@@ -6516,7 +6529,7 @@ It is strongly recommended that such [schemas] be based on the [core schema]
 defined above.
 
 
-# Reference Links
+## Reference Links
 
 [^team]: [YAML Language Development Team](ext/team)
 [^spec-repo]: [YAML Specification on GitHub](https://github.com/yaml/yaml-spec)
