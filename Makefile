@@ -87,16 +87,15 @@ _:
 	git worktree add $@ $@
 	$(MAKE) -C $@ all
 
-docker-push-all: docker-push-jekyll docker-push-marky docker-push-tex
-
-docker-push-jekyll:
-	RUN_OR_DOCKER_PUSH=true jekyll-runner
-
-docker-push-marky:
-	RUN_OR_DOCKER_PUSH=true markydown-to-kramdown
-
-docker-push-tex:
-	RUN_OR_DOCKER_PUSH=true tex-to-img
+docker-push:
+	$(eval override export RUN_OR_DOCKER_PUSH := true)
+	$(ROOT)/bin/check-spec-file
+	$(ROOT)/bin/jekyll-runner
+	$(ROOT)/bin/lint-shell
+	$(ROOT)/bin/markydown-to-kramdown
+	$(ROOT)/bin/tex-to-img
+	$(ROOT)/spec/1.3.0/bin/html-to-html
+	$(ROOT)/spec/1.3.0/bin/markydown-to-kramdown
 
 common:
 	cp $(COMMON)/bpan/run-or-docker.bash $(BPAN)/

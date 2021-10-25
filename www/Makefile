@@ -4,6 +4,8 @@ include ../.common.mk
 # Makefile variables defined here:
 #------------------------------------------------------------------------------
 
+export OPATH := $(PATH)
+
 BUILD := build
 SITE := site
 HTML := html
@@ -232,10 +234,12 @@ Gemfile:
 define make-spec-files
 main/spec/$2/ext/%.html: $$(SPEC_$1)/ext/%.md $$(SPEC_$1_LINKS)
 	@mkdir -p $$(dir $$@)
+	$$(eval override PATH := $$(ROOT)/spec/$2/bin:$$(PATH))
 	markydown-to-html $$(ROOT) $$^ > $$@
 
 main/spec/$2/index.html: $$(SPEC_$1)/spec.md $$(SPEC_$1_LINKS)
 	@mkdir -p $$(dir $$@)
+	$$(eval override PATH := $$(ROOT)/spec/$2/bin:$$(PATH))
 	markydown-to-html $$(ROOT) $$^ > $$@
 
 main/spec/$2/img/%: $$(SPEC_$1)/img/%
@@ -264,6 +268,7 @@ main/review/markdown.html: $(SPEC_122)/spec.md
 	make-review-spec-html $< > $@
 
 main/review/spec-plain.md: $(SPEC_122)/spec.md $(SPEC_122_LINKS)
+	$(eval override PATH := $(ROOT)/spec/1.2.2/bin:$(PATH))
 	markydown-to-kramdown $(ROOT) $^ > /tmp/kramdown
 	make-review-spec-md /tmp/kramdown > $@
 
