@@ -309,8 +309,13 @@ build-docker-image() (
 
   (
     dockerfile
-
-    cmd "ENV PATH=/home/host/bin:\$PATH"
+    bin=$(dirname "$0")
+    bin=${bin#$root/}
+    if [[ $bin == bin ]]; then
+      cmd "ENV PATH=/home/host/bin:\$PATH"
+    else
+      cmd "ENV PATH=/home/host/$bin:/home/host/bin:\$PATH"
+    fi
   ) > "$build/Dockerfile"
 
 

@@ -4,8 +4,6 @@ set -e -u -o pipefail
 
 root=$1 md=$2 links=$3
 
-echo 1.2.2 >&2
-
 perl -n0e '
   /(\A---\n.*?\n---\n)/s
     ? print $1
