@@ -26,6 +26,7 @@ run() (
       *.bash) lang=bash ;;
       *.pl) lang=perl ;;
       *.py) lang=python3 ;;
+      *.rb) lang=ruby ;;
       *) die "Don't recognize language of '$prog'" ;;
     esac
   fi
