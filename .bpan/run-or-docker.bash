@@ -197,14 +197,13 @@ need-modules() {
       ruby)
         list=$(gem list)
         if [[ $module == *=* ]]; then
-          want="${module//./\\.}"
-          want="${want/=/ (.*})"
+          version=${module#*=}
+          module=${module%=*}
         else
-          want="$module.*"
+          version=0
         fi
-        want="^$want$"
-        grep "$want" <<<"$list" ||
-          fail "'$cmd' requires Ruby module '$module'"
+        (set -x; ruby -e "gem '$module', '>=$version'") &>/dev/null ||
+          fail "'$cmd' requires Ruby module '$module' >= v$version"
         ;;
       *) die "Can't check module '$module' for '$cmd'" ;;
     esac

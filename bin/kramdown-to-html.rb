@@ -1,4 +1,5 @@
 require 'kramdown'
+require 'kramdown-parser-gfm'
 
 options = {
   input: 'GFM',
