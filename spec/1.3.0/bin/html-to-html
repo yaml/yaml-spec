@@ -6,12 +6,12 @@ source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 
 check() (
   need python3 3.8
-  need python bs4 roman
+  need python bs4 roman yaml
 )
 
 dockerfile() (
   from alpine
-  pip beautifulsoup4 roman
+  pip beautifulsoup4 roman pyyaml
 )
 
 run "$@"

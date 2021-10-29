@@ -7,7 +7,6 @@ use YAML::PP;
 use XXX;
 
 my ($YYYY, $MM, $DD);
-my $links = {};
 
 sub main {
   my ($front, $markdown, $link_map) = read_files(@_);
@@ -15,7 +14,6 @@ sub main {
   my $parsed = parse_sections($markdown);
 
   set_vars();
-  make_link_index($parsed, $link_map);
 
   my @sections;
   for my $section (@$parsed) {
@@ -337,25 +335,19 @@ $out
 ...
 }
 
-sub fmt_ul {
-  format_links();
-}
+sub fmt_ul {}
 
 sub fmt_p {
   set_dates();
-  format_links();
 }
 
 sub fmt_dd {
   s/^:\n(\S)/: $1/ or die $_;
-  format_links();
 }
 
 sub fmt_hr {}
 
-sub fmt_indent {
-  format_links();
-}
+sub fmt_indent {}
 
 my $num = 0;
 sub fmt_pre {
@@ -424,13 +416,6 @@ layout: default
 ...
   }
 
-  if ($links_file) {
-    $links = YAML::PP::LoadFile($links_file);
-  }
-  else {
-    $links = {};
-  }
-
   $markdown .= "\n";
   $front = "---\n$front---\n";
   return ($front, $markdown, $links)
@@ -449,42 +434,6 @@ sub set_vars {
   $YYYY = 1900 + $y;
   $MM = sprintf "%02d", $m + 1;
   $DD = sprintf "%02d", $d;
-}
-
-sub make_link_index {
-  my ($parsed, $overrides) = @_;
-  for my $section (@$parsed) {
-    my $pre = $section->{pre} or next;
-    next unless $pre =~ /(.*?)\ +::=/;
-    my $rule = $1;
-    next if $rule =~ /^production/;
-    $rule unless $rule =~ /^\w+[-+]\S+$/;
-    $rule =~ s/\(.*//;
-    $links->{$rule} = "rule-$rule";
-  }
-  for my $section (@$parsed) {
-    my $from = $section->{heading};
-    my $text = lc($from);
-    chomp $text;
-    $text =~ /^#+\s+.*#\.\s/ or next;
-    $text =~ s/^#+\s+//;
-    $text =~ s/^chapter\s+//;
-    $text =~ s/^#\.\s+//;
-    $text =~ s/[\"\*\`]//g;
-    $links->{$text} = slugify($text);
-  }
-  for my $k (keys %$overrides) {
-    my $v = $overrides->{$k} || [$k];
-    for my $t (@$v) {
-      $links->{$t} = $k;
-    }
-  }
-  for my $k (keys %$overrides) {
-    my $v = $overrides->{$k} || [$k];
-    for my $t (@$v) {
-      $links->{"${t}s"} ||= $k;
-    }
-  }
 }
 
 sub slugify {
@@ -506,44 +455,6 @@ sub rule_link {
   my $rule = $text;
   $rule =~ s/\(.*//;
   return qq{<a href="#rule-$rule">$text<\/a>};
-}
-
-sub format_links {
-  s{
-    \[ (?!\^)
-      (
-        (?![01]- | \d{3} )
-        [^-\`\]]
-        [^\]]*?
-      )
-    \]
-    (?= [^\(\`] )
-  }{format_internal_link($1)}gex;
-}
-
-sub format_internal_link {
-  my ($link) = @_;
-  my $text = lc($link);
-  $text =~ s/\s+/ /g;
-  $text =~ s/’/'/g;
-  my $anchor;
-  if ($text =~ /\*\*/) {
-    return "$link";
-  }
-  if ($anchor = $links->{$text}) {
-    return "[$link](#$anchor)";
-  }
-  if ($anchor = $links->{"${text}s"}) {
-    return "[$link](#$anchor)";
-  }
-  if ($text =~ /^#(.*)/) {
-    if ($anchor = $links->{$1}) {
-      return "<sup class=\"rule-link\">[?](#$anchor)</sup>";
-    }
-    warn "\e[0;31m*** WARNING - Rule link '[$text]' is orphaned ***\e[0m\n";
-    return "<sup class=\"orphan-rule-link\">[XXX](#$anchor)</sup>";
-  }
-  die "Undefined link '[$link]' ($text) found. Check links.yaml file.";
 }
 
 sub set_dates {

@@ -1,10 +1,16 @@
 import sys
+import os.path
 import re
 from copy import copy
 import string
 
 from bs4 import BeautifulSoup, PageElement, NavigableString
 from roman import toRoman
+import yaml
+
+
+def warn(*args):
+    print(*args, file=sys.stderr)
 
 
 HEADING_EXPR = re.compile(r'\Ah(\d)\Z')
@@ -53,14 +59,41 @@ def replace(element, expr, replacement):
 
     for child in contents:
         if isinstance(child, NavigableString):
-            element.append(expr.sub(replacement, str(child)))
+            matches = list(expr.finditer(child))
+            if matches:
+                text = child
+                last_end = 0
+
+                for match in expr.finditer(text):
+                    start, end = match.span(0)
+
+                    element.append(text[last_end:start])
+                    if isinstance(replacement, str):
+                        element.append(match.expand(replacement))
+                    else:
+                        element.append(replacement(match))
+
+                    last_end = end
+
+                element.append(text[last_end:])
+            else:
+                element.append(child)
+
         elif isinstance(child, PageElement):
-            replace(child, expr, replacement)
+            if child.name not in ('code', 'pre'):
+                replace(child, expr, replacement)
             element.append(child)
-        elif isinstance(child, str):
-            element.append(re.sub(expr, replacement, child))
         else:
             raise TypeError(type(child))
+
+
+def slugify(string):
+    ret = string.lower()
+    ret = re.sub(r'\s+chapter\s\d+\.\s+', '', ret)
+    ret = re.sub(r'^#+\s+(\d+\.)+', '', ret)
+    ret = re.sub(r'[^a-z0-9]+', '-', ret)
+    ret = ret.strip('-')
+    return ret
 
 
 def do_heading_stuff():
@@ -79,6 +112,8 @@ def do_heading_stuff():
     toc['id'] = 'markdown-toc'
 
     toc_header.parent.insert_after(toc)
+
+    create_internal_links()
 
 
 def make_outline(elements):
@@ -176,9 +211,67 @@ def make_toc(parent):
     ])
 
 
-html = sys.stdin.read()
+def create_internal_links():
+    all_ids = {
+        element['id']
+        for element in soup.find_all(lambda tag: tag.has_attr('id'))
+    }
+    link_expr = re.compile(r'''
+        \[ (?!\^)
+          (
+            (?![01]- | \d{3} )
+            [^-\`\]]
+            [^\]]*?
+          )
+        \]
+        (?= [^\(\`]|$ )
+    ''', re.X)
 
+    def replace_link(match):
+        target = match.group(1)
+        if target.startswith('#'):
+            href = '#rule-' + target[1:]
+            return tag('sup', tag('a', '?', href=href), **{'class': 'rule-link'})
+        else:
+            id = link_index.get(slugify(target), link_index.get(slugify(target)+'s', '<nowhere>'))
+            if id not in all_ids:
+                warn("Warning: can't find id", repr(id), match.group(0))
+            return tag('a', target, href='#'+id)
+
+    replace(soup, link_expr, replace_link)
+
+
+def make_link_index():
+    root_path = sys.argv[1]
+    links_path = os.path.join(root_path, 'spec', '1.3.0', 'links.yaml')
+
+    with open(links_path, 'r') as file:
+        links_text = file.read()
+        links = yaml.load(links_text, Loader=yaml.SafeLoader)
+
+    ids = [
+        slugify(element['id'])
+        for element in soup.find_all(lambda tag: tag.has_attr('id'))
+    ]
+
+    overrides = [
+        (slug, target)
+        for target, sources in links.items()
+        if sources is not None
+        for source in sources
+        if (slug := slugify(str(source)))
+    ]
+
+    return {
+        **{ slug+'s': target for slug, target in overrides },
+        **{ id: id for id in ids },
+        **{ slug: target for slug, target in overrides },
+    }
+
+html = sys.stdin.read()
 soup = BeautifulSoup(html, "html.parser")
+
+link_index = make_link_index()
 
 do_heading_stuff()
 
