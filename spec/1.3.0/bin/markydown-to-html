@@ -20,4 +20,4 @@ perl -p0e 's/\A---\n.*?\n---\n//s' |
 
 kramdown-to-html "$root" |
 
-html-to-html "$root"
+html-to-html "$root" "$links"

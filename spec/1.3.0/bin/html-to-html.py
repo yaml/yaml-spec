@@ -1,5 +1,4 @@
 import sys
-import os.path
 import re
 from copy import copy
 import string
@@ -242,8 +241,7 @@ def create_internal_links():
 
 
 def make_link_index():
-    root_path = sys.argv[1]
-    links_path = os.path.join(root_path, 'spec', '1.3.0', 'links.yaml')
+    links_path = sys.argv[2]
 
     with open(links_path, 'r') as file:
         links_text = file.read()
