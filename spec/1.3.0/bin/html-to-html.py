@@ -9,7 +9,8 @@ import yaml
 
 
 def warn(*args):
-    print(*args, file=sys.stderr)
+    sys.stderr.write('\033[0;31m')
+    print(*args, file=sys.stderr, end='\033[0m\n')
 
 
 HEADING_EXPR = re.compile(r'\Ah(\d)\Z')
