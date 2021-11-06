@@ -22,7 +22,7 @@ $(ALL_FORMAT):
 	mv /tmp/file.md $(@:format-%=%)
 
 clean:
-	rm -fr img html build
+	rm -fr img html build bin/lib/__pycache__
 
 build-img: $(ALL_IMG) build-img-all
 
