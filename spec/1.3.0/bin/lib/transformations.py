@@ -100,7 +100,11 @@ def number_sections(parent, section_format, start_index):
         section['data-section-number'] = formatter(index)
         if not section.attrs.get('data-section-continue'):
             child_index = 1
-        child_index = number_sections(section, section.attrs.get('data-section-format', 'decimal'), child_index)
+        child_index = number_sections(
+            section,
+            section.attrs.get('data-section-format', 'decimal'),
+            child_index
+        )
         index += 1
 
     return index
@@ -134,7 +138,9 @@ def number_figures(soup):
         for section in part.find_all('section', recursive=False):
             chapter = section['data-section-number']
             figure_headings = section.find_all(lambda element:
-                element.name == 'strong' and element.string and element.string.startswith('Figure #.')
+                element.name == 'strong' and
+                element.string and
+                element.string.startswith('Figure #.')
             )
             for i, figure_heading in enumerate(figure_headings, 1):
                 replace(figure_heading, HEADING_NUMBER_EXPR, '.'.join([chapter, str(i)]))
@@ -176,7 +182,11 @@ def create_internal_links(soup, link_index):
             href = '#rule-' + target[1:]
             return tag('sup', tag('a', '?', href=href), **{'class': 'rule-link'})
         else:
-            id = link_index.get(slugify(target), link_index.get(slugify(target)+'s', '<nowhere>'))
+            id = link_index.get(
+                slugify(target),
+                link_index.get(slugify(target)+'s',
+                '<nowhere>')
+            )
             if id not in all_ids:
                 warn("Warning: can't find id", repr(id), match.group(0))
             return tag('a', target, href='#'+id)
