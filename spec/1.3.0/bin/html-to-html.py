@@ -4,7 +4,7 @@ import os.path
 from bs4 import BeautifulSoup
 import yaml
 
-library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'html-to-html-util')
+library_path = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
 
 sys.path.append(library_path)
 
