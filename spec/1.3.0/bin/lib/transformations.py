@@ -69,6 +69,8 @@ def transform(soup, links):
 
     make_outline(list(toc_header.parent.next_siblings))
 
+    auto_id_dts(soup)
+
     number_sections(soup, 'roman', 1)
     number_headings(soup)
     number_examples(soup)
@@ -108,6 +110,11 @@ def make_outline(elements):
                 stack[-1].append(section.extract())
 
             stack.append(section)
+
+
+def auto_id_dts(soup):
+    for dt in soup.find_all('dt'):
+        dt['id'] = slugify(''.join(dt.strings))
 
 
 def number_sections(parent, section_format, start_index):

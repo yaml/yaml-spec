@@ -249,11 +249,6 @@ sub fmt_heading {
 
 sub fmt_dt {
   set_dates();
-
-  my $text = $_;
-  my $slug = slugify($text);
-
-  $_ = qq{<div id="$slug"></div>\n\n$text\n};
 }
 
 sub fmt_example {
