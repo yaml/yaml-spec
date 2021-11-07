@@ -210,7 +210,6 @@ def format_productions(soup):
         production_name = PRODUCTION_EXPR.search(production.string).group('name')
         all_names.add(production_name)
 
-        # production.insert_before(tag('div', id='rule-' + production_name))
         production['id'] = 'rule-' + production_name
         production['class'] = 'rule'
 
@@ -222,10 +221,7 @@ def format_productions(soup):
             if name not in all_names:
                 warn(f"Warning: Can't find rule {name}")
 
-            return [
-                tag('a', name, href=f'#rule-{name}'),
-                m.group('args') or '',
-            ]
+            return tag('a', m[0], href=f'#rule-{name}')
         else:
             return m[0]
 
