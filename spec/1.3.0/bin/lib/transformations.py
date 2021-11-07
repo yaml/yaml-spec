@@ -203,16 +203,16 @@ def format_productions(soup):
         and 'production-' not in pre.string
     ]
     for i, production in enumerate(productions, 1):
-        m = PRODUCTION_EXPR.search(production.string)
+        production_name = PRODUCTION_EXPR.search(production.string).group('name')
 
-        production.insert_before(tag('div', id='rule-' + m.group('name')))
+        production['id'] = 'rule-' + production_name
         production['class'] = 'rule'
 
         replace(production, PRODUCTION_EXPR,
             lambda m: [
                 tag('a', m.group('name'), href='#rule-' + m.group('name')),
                 m.group('args') or '',
-            ] if not m.group('definition') else m[0]
+            ] if m.group('definition') is None else m[0]
         )
 
         production.insert(0, f'[{i}]')
