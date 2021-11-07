@@ -76,6 +76,8 @@ def transform(soup, links):
     number_examples(soup)
     number_figures(soup)
 
+    format_productions(soup)
+
     link_index = make_link_index(soup, links)
 
     toc = make_toc(soup)
@@ -177,6 +179,43 @@ def number_figures(soup):
             )
             for i, figure_heading in enumerate(figure_headings, 1):
                 replace(figure_heading, HEADING_NUMBER_EXPR, '.'.join([chapter, str(i)]))
+
+
+PRODUCTION_EXPR = re.compile(r'''
+    \b(?P<name>
+        [a-z]+(?:-[a-z0-9]+)+
+    )\b
+    (?![->])
+    (?P<args>
+        \( [^)]* \)
+    )?
+    (?=
+        \s+ (?P<definition>::=)
+    )?
+''', re.X)
+
+
+def format_productions(soup):
+    productions = [
+        pre for pre in soup.find_all('pre')
+        if pre.string is not None
+        and '::=' in pre.string
+        and 'production-' not in pre.string
+    ]
+    for i, production in enumerate(productions, 1):
+        m = PRODUCTION_EXPR.search(production.string)
+
+        production.insert_before(tag('div', id='rule-' + m.group('name')))
+        production['class'] = 'rule'
+
+        replace(production, PRODUCTION_EXPR,
+            lambda m: [
+                tag('a', m.group('name'), href='#rule-' + m.group('name')),
+                m.group('args') or '',
+            ] if not m.group('definition') else m[0]
+        )
+
+        production.insert(0, f'[{i}]')
 
 
 def make_toc(parent):

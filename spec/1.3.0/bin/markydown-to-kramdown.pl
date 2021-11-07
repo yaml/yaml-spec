@@ -340,38 +340,6 @@ sub fmt_indent {}
 my $num = 0;
 sub fmt_pre {
   my $pre = format_pre($_);
-  my $x = $pre;
-  if ($pre =~ s/\b((?!production)[a-z]+-\S+)(\s+::=)/%%%/) {
-    my $rule = $1;
-    my $sep = $2;
-    $num++;
-    $pre =~ s/<pre>/<pre class="rule">[$num]/;
-    $pre =~
-      s{
-        \ (
-          [cs]-l\+
-          .*?
-        )
-        (?=[\(\+\*\?]|\s|\z)
-      }
-      {' ' . rule_link($1)}gex;
-    $pre =~
-      s{
-        \ (
-          (?:[a-z]+)-
-          .*?
-        )
-        (?=[\{\(\+\*\?]|\s|\z)
-      }
-      {' ' . rule_link($1)}gex;
-    $pre =~ s/%%%/$rule$sep/;
-    chomp $pre;
-    $rule =~ s/\(.*//;
-    $pre = <<"...";
-<div id="rule-$rule"></div>
-$pre
-...
-  }
   $_ = $pre;
 }
 

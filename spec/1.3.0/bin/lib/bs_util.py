@@ -53,7 +53,12 @@ def replace(element, expr, replacement):
                     if isinstance(replacement, str):
                         element.append(match.expand(replacement))
                     else:
-                        element.append(replacement(match))
+                        r = replacement(match)
+                        if isinstance(r, PageElement):
+                            element.append(r)
+                        else:
+                            for item in r:
+                                element.append(item)
 
                     last_end = end
 
