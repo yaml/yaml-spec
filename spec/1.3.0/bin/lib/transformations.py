@@ -6,6 +6,10 @@ from roman import toRoman
 
 from bs_util import new_tag, replace
 
+
+__all__ = ['transform']
+
+
 def warn(*args):
     sys.stderr.write('\033[0;31m')
     print(*args, file=sys.stderr, end='\033[0m\n')
@@ -28,14 +32,33 @@ def heading_level(element):
 
 def slugify(string):
     ret = string.lower()
-    ret = re.sub(r'\s+chapter\s\d+\.\s+', '', ret)
-    ret = re.sub(r'^#+\s+(\d+\.)+', '', ret)
+    ret = re.sub(r'^(chapter|appendix)\b', '', ret)
     ret = re.sub(r'[^a-z0-9]+', '-', ret)
     ret = ret.strip('-')
     return ret
 
 
-def transform(soup, link_index):
+def make_link_index(soup, links):
+    ids = [
+        slugify(element['id'])
+        for element in soup.find_all(lambda tag: tag.has_attr('id'))
+    ]
+
+    overrides = [
+        (slugify(str(source)), target)
+        for target, sources in links.items()
+        if sources is not None
+        for source in sources
+    ]
+
+    return {
+        **{ slug+'s': target for slug, target in overrides },
+        **{ id: id for id in ids },
+        **{ slug: target for slug, target in overrides },
+    }
+
+
+def transform(soup, links):
     # Hack so we don't have to explicitly pass the document into tag()
     global DOCUMENT
     DOCUMENT = soup
@@ -50,6 +73,8 @@ def transform(soup, link_index):
     number_headings(soup)
     number_examples(soup)
     number_figures(soup)
+
+    link_index = make_link_index(soup, links)
 
     toc = make_toc(soup)
     toc['id'] = 'markdown-toc'
@@ -71,12 +96,13 @@ def make_outline(elements):
             while len(stack) >= level:
                 stack.pop()
 
+            section_id = slugify(''.join(element.strings))
             section_attributes = {
                 name: value
                 for name, value in element.attrs.items()
                 if name.startswith('data-section-')
             }
-            section = element.wrap(tag('section', **section_attributes))
+            section = element.wrap(tag('section', id=section_id, **section_attributes))
 
             if stack:
                 stack[-1].append(section.extract())
@@ -153,7 +179,7 @@ def make_toc(parent):
 
     return tag('ul', [
         tag('li',
-            tag('a', section.contents[0].contents, href='#' + section.contents[0]['id']),
+            tag('a', section.contents[0].contents, href='#' + section['id']),
             make_toc(section),
         )
         for section in sections

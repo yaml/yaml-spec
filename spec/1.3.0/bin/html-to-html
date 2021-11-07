@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-version=1.3.0.5
+version=1.3.0.6
 
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 

@@ -209,6 +209,8 @@ processes-and-models:
 - processor
 production-parameters:
 - production parameters
+production-syntax:
+- 4
 recognized-and-valid-tags:
 - invalid
 - unrecognized
@@ -274,8 +276,6 @@ special-productions:
 - special-production
 structural-productions:
 - 6
-syntax-conventions:
-- 4
 tags:
 - global
 - global tag

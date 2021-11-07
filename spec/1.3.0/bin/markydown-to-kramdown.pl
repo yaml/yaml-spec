@@ -245,13 +245,6 @@ sub fmt_html_block {
 
 sub fmt_heading {
   set_dates();
-
-  return unless /\d\.\s/;
-
-  my $text = $_;
-  my $slug = slugify($text);
-
-  $_ = qq{<div id="$slug"></div>\n$text\n};
 }
 
 sub fmt_dt {
