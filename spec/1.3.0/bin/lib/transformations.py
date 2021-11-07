@@ -182,6 +182,7 @@ def number_figures(soup):
 
 
 PRODUCTION_EXPR = re.compile(r'''
+    (?P<comment>\#.*) |
     \b(?P<name>
         [a-z]+(?:-[a-z0-9]+)+
     )\b
@@ -214,11 +215,10 @@ def format_productions(soup):
         production['class'] = 'rule'
 
         production.insert(0, f'[{i}]')
-        production.prettify()
 
     def link_production(m):
         name = m.group('name')
-        if m.group('definition') is None:
+        if m.group('comment') is None and m.group('definition') is None:
             if name not in all_names:
                 warn(f"Warning: Can't find rule {name}")
 
