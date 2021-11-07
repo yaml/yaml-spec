@@ -202,20 +202,35 @@ def format_productions(soup):
         and '::=' in pre.string
         and 'production-' not in pre.string
     ]
+
+    all_names = set()
+
     for i, production in enumerate(productions, 1):
         production_name = PRODUCTION_EXPR.search(production.string).group('name')
+        all_names.add(production_name)
 
+        # production.insert_before(tag('div', id='rule-' + production_name))
         production['id'] = 'rule-' + production_name
         production['class'] = 'rule'
 
-        replace(production, PRODUCTION_EXPR,
-            lambda m: [
-                tag('a', m.group('name'), href='#rule-' + m.group('name')),
-                m.group('args') or '',
-            ] if m.group('definition') is None else m[0]
-        )
-
         production.insert(0, f'[{i}]')
+        production.prettify()
+
+    def link_production(m):
+        name = m.group('name')
+        if m.group('definition') is None:
+            if name not in all_names:
+                warn(f"Warning: Can't find rule {name}")
+
+            return [
+                tag('a', name, href=f'#rule-{name}'),
+                m.group('args') or '',
+            ]
+        else:
+            return m[0]
+
+    for production in productions:
+        replace(production, PRODUCTION_EXPR, link_production)
 
 
 def make_toc(parent):
