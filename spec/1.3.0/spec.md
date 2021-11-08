@@ -5561,7 +5561,7 @@ block-plain-scalar-character ::=
 
 ```
 flow-plain-scalar-character ::=
-    non-space-characters
+    non-space-character
   - flow-collection-indicators
 ```
 
