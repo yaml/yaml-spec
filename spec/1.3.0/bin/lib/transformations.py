@@ -126,7 +126,7 @@ SHORT_DATE_EXPR = re.compile(r'YYYY')
 
 
 def auto_dates(soup):
-    today = datetime.today().date()
+    today = datetime.utcnow().date()
     replace(soup, DATE_EXPR, fr'{today.year:04}\g<1>{today.month:02}\g<2>{today.day:02}')
     replace(soup, SHORT_DATE_EXPR, fr'{today.year:04}')
 
