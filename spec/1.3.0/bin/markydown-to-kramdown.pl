@@ -6,14 +6,10 @@ use Encode;
 use YAML::PP;
 use XXX;
 
-my ($YYYY, $MM, $DD);
-
 sub main {
   my ($front, $markdown, $link_map) = read_files(@_);
 
   my $parsed = parse_sections($markdown);
-
-  set_vars();
 
   my @sections;
   for my $section (@$parsed) {
@@ -243,13 +239,9 @@ sub fmt_html_block {
   $_ = "$line$out";
 }
 
-sub fmt_heading {
-  set_dates();
-}
+sub fmt_heading {}
 
-sub fmt_dt {
-  set_dates();
-}
+sub fmt_dt {}
 
 sub fmt_example {
   my ($title, $yaml1, $yaml2, $legend) = @$_;
@@ -325,9 +317,7 @@ $out
 
 sub fmt_ul {}
 
-sub fmt_p {
-  set_dates();
-}
+sub fmt_p {}
 
 sub fmt_dd {
   s/^:\n(\S)/: $1/ or die $_;
@@ -384,14 +374,6 @@ sub read_file {
   <$fh>;
 }
 
-sub set_vars {
-  my ($d,$m,$y);
-  ($_,$_,$_,$d,$m,$y) = localtime;
-  $YYYY = 1900 + $y;
-  $MM = sprintf "%02d", $m + 1;
-  $DD = sprintf "%02d", $d;
-}
-
 sub slugify {
   my ($slug) = @_;
 
@@ -411,11 +393,6 @@ sub rule_link {
   my $rule = $text;
   $rule =~ s/\(.*//;
   return qq{<a href="#rule-$rule">$text<\/a>};
-}
-
-sub set_dates {
-  s/YYYY(.)MM(.)DD/$YYYY$1$MM$2$DD/g;
-  s/YYYY/$YYYY/g;
 }
 
 sub apply_highlights {

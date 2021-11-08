@@ -1,6 +1,7 @@
 import sys
 import re
 import string
+from datetime import datetime
 
 from roman import toRoman
 
@@ -70,6 +71,7 @@ def transform(soup, links):
     make_outline(list(toc_header.parent.next_siblings))
 
     auto_id_dts(soup)
+    auto_dates(soup)
 
     number_sections(soup, 'roman', 1)
     number_headings(soup)
@@ -117,6 +119,16 @@ def make_outline(elements):
 def auto_id_dts(soup):
     for dt in soup.find_all('dt'):
         dt['id'] = slugify(''.join(dt.strings))
+
+
+DATE_EXPR = re.compile(r'YYYY(.)MM(.)DD')
+SHORT_DATE_EXPR = re.compile(r'YYYY')
+
+
+def auto_dates(soup):
+    today = datetime.today().date()
+    replace(soup, DATE_EXPR, fr'{today.year:04}\g<1>{today.month:02}\g<2>{today.day:02}')
+    replace(soup, SHORT_DATE_EXPR, fr'{today.year:04}')
 
 
 def number_sections(parent, section_format, start_index):
