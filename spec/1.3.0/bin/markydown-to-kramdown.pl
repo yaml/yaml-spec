@@ -298,7 +298,7 @@ $yaml2
   }
 
   if ($legend) {
-    $_ = format_legend($legend);
+    $_ = $legend;
     $out .= <<"...";
 <div class="legend" markdown=1>
 $_
@@ -486,23 +486,6 @@ sub format_pre_json {
   $_ = $_[0];
   s/\n+\z/\n/;
   s/\A```\n/```json\n/;
-  return $_;
-}
-
-sub format_legend {
-  $_ = $_[0];
-  chomp;
-  s/\s*<!--.*-->//g;
-  my @lines = split /\n/, $_;
-  my $i = 1;
-  for (@lines) {
-    if (/^\*\ /) {
-      s{^\*\ (.*)}{* <code class="legend-$i">$1</code>}g;
-      $i++;
-    }
-  }
-  $_ = join "\n", @lines;
-  s{\[([^\]]+)\]}{rule_link($1)}ge;
   return $_;
 }
 

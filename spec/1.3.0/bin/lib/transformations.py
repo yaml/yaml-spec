@@ -78,7 +78,8 @@ def transform(soup, links):
     number_examples(soup)
     number_figures(soup)
 
-    format_productions(soup)
+    production_names = format_productions(soup)
+    format_examples(soup, production_names)
 
     link_index = make_link_index(soup, links)
 
@@ -208,6 +209,7 @@ PRODUCTION_EXPR = re.compile(r'''
 ''', re.X)
 
 
+
 def format_productions(soup):
     productions = [
         pre for pre in soup.find_all('pre')
@@ -240,6 +242,39 @@ def format_productions(soup):
     for production in productions:
         replace(production, PRODUCTION_EXPR, link_production)
 
+    return all_names
+
+
+def format_examples(soup, production_names):
+    def replace_legend_link(match):
+        production_match = PRODUCTION_EXPR.match(match[1])
+        if production_match:
+            name = production_match.group('name')
+        else:
+            name = match[1]
+            warn(f"Warning: Invalid rule name {name}")
+
+        if name not in production_names:
+            warn(f"Warning: Can't find rule {name}")
+
+        return tag('a', match[1], href=f'#rule-{name}')
+
+    for legend in soup.find_all('div', **{'class': 'legend'}):
+        from bs4 import Comment
+
+        for i, li in enumerate(legend.find_all('li'), 1):
+            for comment in li.find_all(string=lambda node: isinstance(node, Comment)):
+                comment.extract()
+
+            code = tag('code', **{'class': f'legend-{i}'})
+            for child in li.contents:
+                code.append(child.extract())
+
+                if code.string is not None:
+                    code.append(code.string.extract().strip(' '))
+            replace(code, LINK_EXPR, replace_legend_link)
+            li.append(code)
+
 
 def make_toc(parent):
     sections = parent.find_all('section', recursive=False)
@@ -255,21 +290,22 @@ def make_toc(parent):
     ])
 
 
+LINK_EXPR = re.compile(r'''
+    \[ (?!\^)
+      (
+        (?![01]- | \d{3} )
+        [^-\`\]]
+        [^\]]*?
+      )
+    \]
+    (?= [^\(\`]|$ )
+''', re.X)
+
 def create_internal_links(soup, link_index):
     all_ids = {
         element['id']
         for element in soup.find_all(lambda tag: tag.has_attr('id'))
     }
-    link_expr = re.compile(r'''
-        \[ (?!\^)
-          (
-            (?![01]- | \d{3} )
-            [^-\`\]]
-            [^\]]*?
-          )
-        \]
-        (?= [^\(\`]|$ )
-    ''', re.X)
 
     def replace_link(match):
         target = match.group(1)
@@ -286,4 +322,4 @@ def create_internal_links(soup, link_index):
                 warn("Warning: can't find id", repr(id), match.group(0))
             return tag('a', target, href='#'+id)
 
-    replace(soup, link_expr, replace_link)
+    replace(soup, LINK_EXPR, replace_link)
