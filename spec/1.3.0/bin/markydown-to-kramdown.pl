@@ -57,14 +57,15 @@ sub parse_sections {
   my @s;
   while ($_) {
     # Example section:
-    s<\A
+    s<\A(
       (${b}Example$s\# $x*?$b)\n+
       ($re_pre)
       ($re_pre)?
       ($re_legend)?
       \n+
-    ><>x
-      and push @s, {example => [$1, $2, $3, $4]} and next;
+    )><>x
+      # and push @s, {example => [$1, $2, $3, $4]} and next;
+      and push @s, {example => $1} and next;
 
     # HTML block:
     if (/\A$html/) {
@@ -243,77 +244,7 @@ sub fmt_heading {}
 
 sub fmt_dt {}
 
-sub fmt_example {
-  my ($title, $yaml1, $yaml2, $legend) = @$_;
-
-  my $id = $title;
-  $id =~ s/\s*\(.*//s;
-  $id = slugify($id);
-
-  my $out = ($title . "\n\n");
-
-  if ($legend) {
-    $yaml1 = apply_highlights($yaml1, $legend);
-  }
-  else {
-    if ($yaml1 =~ s/($comment+)\n*\z//) {
-      $yaml1 = apply_highlights($yaml1, $1);
-    }
-  }
-  $yaml1 = format_pre($yaml1);
-  $yaml1 =~ s{_eof_}{<i>eof</i>}g;
-
-  my $inner_markdown = 0;
-  if ($yaml2) {
-    if ($yaml2 =~ s/($comment+)\n*\z//) {
-      $yaml2 = apply_highlights($yaml2, $1);
-    }
-    if ($yaml2 =~ /\A```\n(?:[\{\[]\ |"|!)/) {
-      $yaml2 = format_pre_json($yaml2);
-      $inner_markdown = 1;
-    }
-    else {
-      $yaml2 = format_pre($yaml2);
-    }
-    if ($yaml2 =~ /ERROR:/) {
-      $yaml1 =~ s/<pre(\ ?)/<pre class="error"$1/;
-      $yaml2 =~ s/<pre(\ ?)/<pre class="error"$1/;
-    }
-    $out .= <<"...";
-<table width="100%">
-<tr>
-<td class="side-by-side">
-$yaml1
-</td>
-<td class="side-by-side" markdown="$inner_markdown">
-$yaml2
-</td>
-</tr>
-</table>
-...
-  }
-  else {
-    $yaml1 =~ s/<pre>/<pre class="example">/;
-    $out .= "$yaml1\n";
-  }
-
-  if ($legend) {
-    $_ = $legend;
-    $out .= <<"...";
-<div class="legend" markdown=1>
-$_
-</div>
-...
-  }
-
-  chomp $out;
-
-  $_ = <<"...";
-<div id="$id" class="example">
-$out
-</div>
-...
-}
+sub fmt_example {}
 
 sub fmt_ul {}
 
@@ -327,7 +258,6 @@ sub fmt_hr {}
 
 sub fmt_indent {}
 
-my $num = 0;
 sub fmt_pre {
   my $pre = format_pre($_);
   $_ = $pre;
@@ -374,94 +304,6 @@ sub read_file {
   <$fh>;
 }
 
-sub slugify {
-  my ($slug) = @_;
-
-  $slug =~ s/#+\s+Chapter\s\d+\.\s+//;
-  $slug =~ s/^#+\s+(\d+\.)+//;
-  $slug = lc $slug;
-  $slug =~ s/[^a-z0-9]/-/g;
-  $slug =~ s/-+/-/g;
-  $slug =~ s/^-//;
-  $slug =~ s/-$//;
-
-  return $slug;
-}
-
-sub rule_link {
-  my ($text) = @_;
-  my $rule = $text;
-  $rule =~ s/\(.*//;
-  return qq{<a href="#rule-$rule">$text<\/a>};
-}
-
-sub apply_highlights {
-  my ($yaml, $highlights) = @_;
-  my @lines = split /\n/, $highlights;
-  my @rules;
-  for my $line (@lines) {
-    if ($line =~ /<!--/) {
-      $line =~ s/.*<!--\s+(.*?)\s+-->/$1/;
-      push @rules, [split /\s+/, $line];
-    }
-  }
-
-  $yaml =~ s/\A```\n//;
-  $yaml =~ s/\n```\n\z//;
-  XXX $yaml if /(?:\[%|%\])/;
-
-  @lines = split /\n/, $yaml;
-  my @chars = map
-    [ split //, $_ ],
-    @lines;
-
-  my $i = @rules + 1;
-  for my $rule (reverse @rules) {
-    $i--;
-    for my $r (@$rule) {
-      next unless $r =~ /^[1-9]/;
-      $r =~ /^([1-9]\d*)(?::(\d+)(,\d*)?)?$/
-        or XXX $r;
-      my ($row, $col, $end) = ($1, $2, $3);
-      my $len = @{$chars[--$row]} - 1;
-      if ($col) {
-        $col--;
-        if ($end) {
-          $end =~ s/^,// or die;
-          if ($end eq '') { $end = $len }
-          else { $end = $col + $end - 1 }
-        }
-        else { $end = $col }
-      }
-      else { $col = 0; $end = $len }
-      $chars[$row]->[$col] =~ s{^}{[%mark class="legend-$i"%]};
-      $chars[$row]->[$end] =~ s{$}{[%/mark%]};
-    }
-  }
-
-  $yaml = join "\n",
-    map { $_ = join '', @$_ }
-    @chars;
-
-  my $i = 0;
-  for my $rule (@rules) {
-    $i++;
-    my @re;
-    for my $r (@$rule) {
-      next if $r =~ /^[1-9]/;
-      $r =~ s/^0//;
-      $r =~ s/([\"\'\!\*\+\?\|\{\}\[\]\(\)\.\\])/\\$1/g;
-      $r =~ s/_/\\ /g;
-      push @re, $r;
-    }
-    next unless @re;
-    my $re = '(' . join('|', @re) . ')';
-    $yaml =~ s{$re}{[%mark class="legend-$i"%]${1}[%/mark%]}g;
-  }
-
-  return $yaml;
-}
-
 sub format_pre {
   $_ = $_[0];
   s/\n+\z/\n/;
@@ -480,13 +322,6 @@ sub format_pre {
 $_
 </pre>
 ...
-}
-
-sub format_pre_json {
-  $_ = $_[0];
-  s/\n+\z/\n/;
-  s/\A```\n/```json\n/;
-  return $_;
 }
 
 main @ARGV;

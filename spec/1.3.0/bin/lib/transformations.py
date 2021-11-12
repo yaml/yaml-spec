@@ -5,7 +5,9 @@ from datetime import datetime
 
 from roman import toRoman
 
-from bs_util import new_tag, replace
+from bs_util import new_tag, replace, next_tag, next_comments
+
+from bs4 import Comment
 
 
 __all__ = ['transform']
@@ -75,11 +77,11 @@ def transform(soup, links):
 
     number_sections(soup, 'roman', 1)
     number_headings(soup)
-    number_examples(soup)
     number_figures(soup)
 
     production_names = format_productions(soup)
     format_examples(soup, production_names)
+    number_examples(soup)
 
     link_index = make_link_index(soup, links)
 
@@ -245,6 +247,23 @@ def format_productions(soup):
     return all_names
 
 
+HIGHLIGHT_EXPR = re.compile(r"""
+    (?P<row>\d+)
+    (?:
+        :
+        (?P<col_start>\d+)
+        (?:
+            (?P<comma>,)
+            (?P<length>\d+)?
+        )?
+    )?
+""", re.X)
+
+
+def regexp_escape(s):
+    return re.sub(r'([\[\]\(|)\{\}\?\*\+\#\|\\])', r'\\\1', s)
+
+
 def format_examples(soup, production_names):
     def replace_legend_link(match):
         production_match = PRODUCTION_EXPR.match(match[1])
@@ -259,21 +278,157 @@ def format_examples(soup, production_names):
 
         return tag('a', match[1], href=f'#rule-{name}')
 
-    for legend in soup.find_all('div', **{'class': 'legend'}):
-        from bs4 import Comment
+    def get_highlights(lines, comments):
+        for comment, mark_index in comments:
+            parts = str(comment).strip().split(' ')
+            literal_parts = []
+            for part in parts:
+                m = HIGHLIGHT_EXPR.fullmatch(part)
+                if m is None:
+                    literal_parts.append(part)
+                else:
+                    row = int(m.group('row'))
+                    if m.group('col_start') is not None:
+                        col_start = int(m.group('col_start')) - 1
+                        if m.group('length') is not None:
+                            length = int(m.group('length'))
+                        elif m.group('comma') is not None:
+                            length = len(lines[row - 1]) - col_start
+                        else:
+                            length = 1
+                    else:
+                        col_start = 0
+                        length = len(lines[row - 1])
 
-        for i, li in enumerate(legend.find_all('li'), 1):
-            for comment in li.find_all(string=lambda node: isinstance(node, Comment)):
-                comment.extract()
+                    yield (row, col_start, col_start + length, mark_index)
 
-            code = tag('code', **{'class': f'legend-{i}'})
-            for child in li.contents:
-                code.append(child.extract())
+            if literal_parts:
+                pattern = r'|'.join(
+                    regexp_escape(part).removeprefix('0').replace('_', ' ')
+                    for part in literal_parts
+                )
+                for row, line in enumerate(lines, 1):
+                    for m in re.finditer(pattern, line):
+                        yield (row, m.start(0), m.end(0), mark_index)
 
-                if code.string is not None:
-                    code.append(code.string.extract().strip(' '))
-            replace(code, LINK_EXPR, replace_legend_link)
-            li.append(code)
+    def format_pre(pre, comments):
+        lines = pre.get_text().removeprefix('\n').removesuffix('\n').split('\n')
+
+        highlights = list(get_highlights(lines, comments))
+        highlights.sort(key=lambda h: (h[0], h[1], -h[2], h[3]))
+
+        pre.clear()
+        pre.append('\n')
+
+        for parent_row, line in enumerate(lines, 1):
+            def highlight_part(parent_start, parent_end):
+                i = parent_start
+                while highlights:
+                    row, col_start, col_end, mark_index = highlights[0]
+                    if row != parent_row or col_start >= parent_end:
+                        break
+                    highlights.pop(0)
+                    yield line[i:col_start]
+                    yield tag('mark', highlight_part(col_start, col_end), class_=f'legend-{mark_index}')
+                    i = col_end
+                yield line[i:parent_end]
+
+            for x in highlight_part(0, len(line)):
+                pre.append(x)
+
+            pre.append('\n')
+
+        pre.prettify()
+        replace(pre, re.compile(r'_eof_'), lambda _: tag('i', 'eof'))
+
+    example_headings = [
+        element.parent
+        for element in soup.find_all('strong')
+        if element is not None
+        and element.get_text().startswith('Example')
+    ]
+
+    for example_heading in example_headings:
+        example_id = slugify(re.sub(r'\s*\(.*', '', example_heading.get_text()))
+        example = example_heading.wrap(
+            tag('div', class_='example', id=example_id)
+        )
+
+        # Find parts of example
+
+        first_block = None
+        first_comments = []
+        second_block = None
+        second_comments = []
+        legend_heading = None
+        legend_list = None
+
+        t = next_tag(example)
+        if t is not None and t.name == 'pre':
+            first_block = t.extract()
+
+            for i, comment in enumerate(next_comments(example), 1):
+                first_comments.append((comment.extract(), i))
+
+            t = next_tag(example)
+
+            if t is not None and t.name == 'pre':
+                second_block = t.extract()
+
+                for i, comment in enumerate(next_comments(example), 1):
+                    second_comments.append((comment.extract(), i))
+
+                t = next_tag(example)
+
+        if t is not None and t.get_text().strip() == 'Legend:':
+            legend_heading = t.extract()
+            t = next_tag(example)
+
+            if t is not None and t.name == 'ul':
+                legend_list = t.extract()
+
+        # Format
+
+        if legend_list is not None:
+            for i, li in enumerate(legend_list.find_all('li'), 1):
+                comment = li.find(string=lambda node: isinstance(node, Comment))
+                if comment is not None:
+                    first_comments.append((comment.extract(), i))
+
+                code = tag('code', class_=f'legend-{i}')
+                for child in li.contents:
+                    code.append(child.extract())
+
+                    if code.string is not None:
+                        code.append(code.string.extract().strip(' '))
+
+                replace(code, LINK_EXPR, replace_legend_link)
+                li.append(code)
+
+        format_pre(first_block, first_comments)
+        if second_block is not None:
+            if re.match(r'\A\n?(?:[\{\[]\ |"|!)', second_block.get_text()):
+                second_block.code['class'] = 'language-json'
+            else:
+                format_pre(second_block, second_comments)
+
+        # Output
+
+        if second_block is not None:
+            if second_block.get_text().startswith('\nERROR:'):
+                first_block['class'] = 'error'
+                second_block['class'] = 'error'
+
+            example.append(tag('table', tag('tr',
+                tag('td', first_block, class_='side-by-side'),
+                tag('td', second_block, class_='side-by-side'),
+            ), width='100%'))
+        else:
+            first_block['class'] = 'example'
+            example.append(first_block)
+
+        if legend_list is not None:
+            example.append(tag('div', legend_heading, legend_list, class_='legend'))
 
 
 def make_toc(parent):

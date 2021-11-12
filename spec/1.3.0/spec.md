@@ -1492,7 +1492,7 @@ folded: >
 ```
 
 **Legend:**
-* literal <!-- | -->
+* literal <!-- 1:10 -->
 * folded <!-- > -->
 
 "`'`" (`x27`, apostrophe, single quote) surrounds a [single-quoted flow

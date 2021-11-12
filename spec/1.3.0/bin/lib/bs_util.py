@@ -1,12 +1,15 @@
 from copy import copy
-from bs4 import BeautifulSoup, PageElement, NavigableString
+from bs4 import BeautifulSoup, PageElement, Tag, Comment, NavigableString
 
 
-__all__ = ['new_tag', 'replace']
+__all__ = ['new_tag', 'replace', 'next_tag', 'next_comments']
 
 
 def new_tag(soup, name, *contents, **attrs):
-    ret = soup.new_tag(name, **attrs)
+    ret = soup.new_tag(name, **{
+        key.rstrip('_'): value
+        for key, value in attrs.items()
+    })
     for child in flatten(contents):
         ret.append(child)
     return ret
@@ -72,3 +75,22 @@ def replace(element, expr, replacement):
             element.append(child)
         else:
             raise TypeError(type(child))
+
+
+def next_tag(start):
+    node = start
+    while node is not None:
+        node = node.next_sibling
+        if isinstance(node, Tag):
+            return node
+
+
+def next_comments(start):
+    node = start.next_sibling
+    while node is not None:
+        next_node = node.next_sibling
+        if isinstance(node, Comment):
+            yield node
+        elif isinstance(node, Tag):
+            return
+        node = next_node
