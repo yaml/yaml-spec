@@ -270,8 +270,7 @@ def format_examples(soup, production_names):
         if production_match:
             name = production_match.group('name')
         else:
-            name = match[1]
-            warn(f"Warning: Invalid rule name {name}")
+            raise ValueError(f'Invalid rule name {match[1]}')
 
         if name not in production_names:
             warn(f"Warning: Can't find rule {name}")

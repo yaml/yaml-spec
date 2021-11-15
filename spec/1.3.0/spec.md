@@ -1963,7 +1963,7 @@ A folded non-[empty line] may end with either of the above [line breaks].
 ```
 
 **Legend:**
-* [trimmed] <!-- 2:10 3 4 5 -->
+* Trimmed spaces <!-- 2:10 3 4 5 -->
 * [break-as-space] <!-- 6:5 -->
 
 
@@ -4317,7 +4317,7 @@ null
 ```
 
 **Legend:**
-* [explicit-document] <!-- 1 2 3 5 6 -->
+* [start-indicator-and-document] <!-- 1 2 3 5 6 -->
 
 
 #### #. Directives Documents
@@ -4346,7 +4346,7 @@ null
 ```
 
 **Legend:**
-* [explicit-document] <!-- 1 2 3 5 6 7 -->
+* [start-indicator-and-document] <!-- 1 2 3 5 6 7 -->
 
 
 ### #. Streams
@@ -4380,7 +4380,7 @@ null
 **Legend:**
 * [any-document] <!-- 1 2 3 -->
 * [document-suffix] <!-- 4 -->
-* [explicit-document] <!-- 5 6 7 -->
+* [start-indicator-and-document] <!-- 5 6 7 -->
 
 
 A sequence of bytes is a _well-formed stream_ if, taken as a whole, it complies
