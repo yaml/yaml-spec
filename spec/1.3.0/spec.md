@@ -3781,8 +3781,8 @@ separates two non-[space] characters.
 ```
 
 **Legend:**
-* [folded-scalar-lines(n)] <!-- 3:1,7 4:1,5 6 7:1,5 13:1,5 14:1,5 -->
-* [folded-scalar-text(n)] <!-- 3 4 6 7:1,5 13 14:1,5 -->
+* [folded-scalar-text(n)] <!-- 3:1,7 4:1,5 6 7:1,5 13:1,5 14:1,5 -->
+* [folded-scalar-lines(n)] <!-- 3 4 6 7:1,5 13 14:1,5 -->
 
 
 (The following three examples duplicate this example, each highlighting
