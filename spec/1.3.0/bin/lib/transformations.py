@@ -329,7 +329,11 @@ def format_examples(soup, production_names):
                         break
                     highlights.pop(0)
                     yield line[i:col_start]
-                    yield tag('mark', highlight_part(col_start, col_end), class_=f'legend-{mark_index}')
+                    yield tag(
+                        'mark',
+                        highlight_part(col_start, col_end),
+                        class_=f'legend-{mark_index}',
+                    )
                     i = col_end
                 yield line[i:parent_end]
 
