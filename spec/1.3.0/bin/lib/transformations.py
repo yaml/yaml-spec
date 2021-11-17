@@ -342,7 +342,6 @@ def format_examples(soup, production_names):
             pre.append('\n')
 
         pre.prettify()
-        replace(pre, re.compile(r'_eof_'), lambda _: tag('i', 'eof'))
 
     example_headings = [
         element.parent
