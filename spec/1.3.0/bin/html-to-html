@@ -1,14 +1,16 @@
 #!/usr/bin/env bash
 
-version=$(
-  cd "$(dirname "$0")" || exit
-  tar -cf - html-to-html html-to-html.py lib/* | md5sum | cut -d " " -f 1
+uses=(
+  html-to-html
+  html-to-html.py
+  lib/bs_util.py
+  lib/transformations.py
 )
 
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 
 check() (
-  need python3 3.8
+  need python3 3.9
   need python bs4 roman yaml
 )
 

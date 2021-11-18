@@ -15,6 +15,7 @@ run() (
   self=$(basename "${BASH_SOURCE[1]}")
   root=${ROOT:-$PWD}
   prog=$(cd "$bin" && echo "$self".*)
+  version=${version:-$(calculate-version)}
   image=yamlio/$self:$version
 
   if [[ $prog == *'.*' ]]; then
@@ -333,6 +334,17 @@ build-docker-image() (
       docker push "$image"
     )
   fi
+)
+
+calculate-version() (
+  [[ ${uses-} ]] ||
+    die "'$0' requires either '\$version' variable or '\$uses' array"
+
+  cd "$(dirname "$0")" || exit
+
+  cat "${uses[@]}" |
+    md5sum |
+    cut -d' ' -f1
 )
 
 fail() { echo "FAIL: $*" >&2; exit 1; }

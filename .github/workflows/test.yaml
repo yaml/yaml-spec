@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
-    - run: make test
+    - run: make verbose test
 
 # TODO: Make this on demand.
 #     - uses: mxschmitt/action-tmate@v3
