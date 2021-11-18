@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 version=$(
-  cd $(dirname $0)
+  cd "$(dirname "$0")" || exit
   tar -cf - html-to-html html-to-html.py lib/* | md5sum | cut -d " " -f 1
-) >&2
+)
 
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 
