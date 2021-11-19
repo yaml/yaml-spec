@@ -3446,7 +3446,7 @@ This is the only case where a [comment] must not be followed by additional
 ```
 
 **Legend:**
-* [block-scalar-indicators(t)] <!-- _#_Empty_header↓ 01_#_Indentation_indicator↓ +_#_Chomping_indicator↓ 01-_#_Both_indicators↓ -->
+* [block-scalar-indicators(t)] <!-- _#_Empty_header↓ 1_#_Indentation_indicator↓ +_#_Chomping_indicator↓ 1-_#_Both_indicators↓ -->
 
 
 ##### #. Block Indentation Indicator
