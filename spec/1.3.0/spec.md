@@ -4627,7 +4627,7 @@ yaml-stream ::=
 ```
 document-prefix ::=
   byte-order-mark?
-  comment-line*
+  blanks-and-comment-line*
 ```
 
 ```
@@ -5005,10 +5005,7 @@ block-scalar-indicators(t) ::=
         block-scalar-indentation-indicator
       )
   )
-  (
-      comment-line
-    | line-ending
-  )
+  comment-line
 ```
 
 ```
@@ -5668,12 +5665,24 @@ folded-whitespace(n,c) ::=
 
 ```
 comment-lines ::=
-    comment-line+
+  (
+    comment-line
   | <start-of-line>
+  )
+  blanks-and-comment-line*
 ```
 
 ```
 comment-line ::=
+  (
+    separation-blanks
+    comment-content?
+  )?
+  line-ending
+```
+
+```
+blanks-and-comment-line ::=
   separation-blanks
   comment-content?
   line-ending
