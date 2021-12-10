@@ -5565,7 +5565,7 @@ block-plain-scalar-character ::=
 ```
 flow-plain-scalar-character ::=
     non-space-character
-  - flow-collection-indicators
+  - flow-collection-indicator
 ```
 
 
@@ -5850,7 +5850,7 @@ XXX Change to `anchor-character ::= flow-plain-scalar-character` ?
 ```
 anchor-character ::=
     non-space-character
-  - flow-collection-indicators
+  - flow-collection-indicator
 ```
 
 ```
@@ -5973,7 +5973,7 @@ line-break ::=
 #### #. Indicator Characters
 
 ```
-flow-collection-indicators ::=
+flow-collection-indicator ::=
     '{'                             # Flow mapping start
   | '}'                             # Flow mapping end
   | '['                             # Flow sequence start
@@ -6016,7 +6016,7 @@ double-quoted-scalar-escape-character ::=
 tag-character ::=
     uri-character
   - '!'
-  - flow-collection-indicators
+  - flow-collection-indicator
 ```
 
 ```
