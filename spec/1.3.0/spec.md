@@ -5974,7 +5974,8 @@ line-break ::=
 
 ```
 flow-collection-indicators ::=
-    '{'                             # Flow mapping start
+    ','                             # Flow collection separator
+  | '{'                             # Flow mapping start
   | '}'                             # Flow mapping end
   | '['                             # Flow sequence start
   | ']'                             # Flow sequence end
