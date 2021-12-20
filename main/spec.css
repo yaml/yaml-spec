@@ -39,10 +39,6 @@ div.legend code { box-shadow: 0 0 0 1px #666 inset; }
 
 ul.author-group, ul.release-info, #markdown-toc, #markdown-toc ul { list-style: none; }
 
-#markdown-toc ul ul ul ul { display: none; }
-
-#markdown-toc > :first-child { display: none; }
-
 .footnotes { margin-bottom: 1000px; }
 .footnotes p { margin-bottom: 0px; margin-block: 0px; }
 
