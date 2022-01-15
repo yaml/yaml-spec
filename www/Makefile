@@ -321,8 +321,8 @@ ifneq ($(wildcard $(SITE)),)
 	$(error Please make clean before make publish)
 endif
 ifeq ($(SITEDIR),main)
-ifneq ($(shell git rev-parse --abbrev-ref HEAD), main)
-	$(error Must be on branch main to use SITEDIR=main)
+ifeq (,$(findstring main,$(SITEDIR)))
+	$(error Must be on branch main (or main-1.3) to use SITEDIR=main)
 endif
 endif
 
