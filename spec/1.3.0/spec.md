@@ -2135,7 +2135,7 @@ Note that structures following multi-line comment separation must be properly
 [comment] lines themselves.
 
 
-**Example #. Separation Spaces**
+**Example #. Separation Lines**
 
 ```
 {·first:·Sammy,·last:·Sosa·}:↵

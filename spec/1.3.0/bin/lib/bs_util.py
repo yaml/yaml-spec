@@ -2,7 +2,7 @@ from copy import copy
 from bs4 import BeautifulSoup, PageElement, Tag, Comment, NavigableString
 
 
-__all__ = ['new_tag', 'replace', 'next_tag', 'next_comments']
+__all__ = ['new_tag', 'replace', 'next_tag', 'next_comments', 'pretty_path']
 
 
 def new_tag(soup, name, *contents, **attrs):
@@ -94,3 +94,15 @@ def next_comments(start):
         elif isinstance(node, Tag):
             return
         node = next_node
+
+def pretty_element(element):
+    parts = [element.name]
+    if element.has_attr('id'):
+        parts.append('#' + element['id'])
+    return ''.join(parts)
+
+def pretty_path(element):
+    return ' → '.join(
+        pretty_element(p) for p in reversed([element, *element.parents])
+        if p.name != '[document]'
+    )
