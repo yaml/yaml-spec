@@ -1,11 +1,12 @@
 import sys
 import re
 import string
+import itertools
 from datetime import datetime
 
 from roman import toRoman
 
-from bs_util import new_tag, replace, next_tag, next_comments
+from bs_util import new_tag, replace, next_tag, next_comments, pretty_path
 
 from bs4 import Comment
 
@@ -21,6 +22,14 @@ def warn(*args):
 DOCUMENT = None
 def tag(name, *contents, **attrs):
     return new_tag(DOCUMENT, name, *contents, **attrs)
+
+
+def next_available_id(slug):
+    return next(
+        id
+        for id in itertools.chain([slug], (f'{slug}-{i}' for i in itertools.count(1)))
+        if DOCUMENT.find(id=id) is None
+    )
 
 
 HEADING_EXPR = re.compile(r'h(\d)')
@@ -92,6 +101,8 @@ def transform(soup, links):
 
     create_internal_links(soup, link_index)
 
+    check_for_duplicate_ids(soup)
+
 
 def make_outline(elements):
     stack = []
@@ -105,7 +116,7 @@ def make_outline(elements):
             while len(stack) >= level:
                 stack.pop()
 
-            section_id = slugify(''.join(element.strings))
+            section_id = next_available_id(slugify(''.join(element.strings)))
             section_attributes = {
                 name: value
                 for name, value in element.attrs.items()
@@ -121,7 +132,7 @@ def make_outline(elements):
 
 def auto_id_dts(soup):
     for dt in soup.find_all('dt'):
-        dt['id'] = slugify(''.join(dt.strings))
+        dt['id'] = next_available_id(slugify(''.join(dt.strings)))
 
 
 DATE_EXPR = re.compile(r'YYYY(.)MM(.)DD')
@@ -342,7 +353,6 @@ def format_examples(soup, production_names):
             pre.append('\n')
 
         pre.prettify()
-        replace(pre, re.compile(r'_eof_'), lambda _: tag('i', 'eof'))
 
     example_headings = [
         element.parent
@@ -481,3 +491,15 @@ def create_internal_links(soup, link_index):
             return tag('a', target, href='#'+id)
 
     replace(soup, LINK_EXPR, replace_link)
+
+
+def check_for_duplicate_ids(soup):
+    grouped = {}
+    for element in soup.find_all(lambda tag: tag.has_attr('id')):
+        grouped.setdefault(element['id'], []).append(element)
+
+    for id, elements in grouped.items():
+        if len(elements) > 1:
+            warn(f"Warning: multiple elements with ID {id!r}")
+            for element in elements:
+                warn('    ' + pretty_path(element))

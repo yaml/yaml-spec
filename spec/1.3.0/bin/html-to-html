@@ -1,11 +1,16 @@
 #!/usr/bin/env bash
 
-version=1.3.0.10
+uses=(
+  html-to-html
+  html-to-html.py
+  lib/bs_util.py
+  lib/transformations.py
+)
 
 source "${ROOT:-$PWD}/.bpan/run-or-docker.bash"
 
 check() (
-  need python3 3.8
+  need python3 3.9
   need python bs4 roman yaml
 )
 

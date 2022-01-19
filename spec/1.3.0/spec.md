@@ -1593,7 +1593,7 @@ lines.
 On output, a YAML [processor] is free to emit line breaks using whatever
 convention is most appropriate.
 
-In the examples, line breaks are sometimes displayed using the "`↓`" glyph for
+In the examples, line breaks are sometimes displayed using the "`↵`" glyph for
 clarity.
 
 
@@ -1602,7 +1602,8 @@ clarity.
 ```
 |
   Line break (no glyph)
-  Line break (glyphed)↓
+  Line break (glyphed)↵
+
 ```
 
 ```
@@ -1610,7 +1611,7 @@ clarity.
 ```
 
 **Legend:**
-* [line-break] <!-- ↓ -->
+* [line-break] <!-- ↵ -->
 
 
 ### #. White Space Characters
@@ -1732,7 +1733,7 @@ The value of the escape is the character at that code point.
 ```
 
 **Legend:**
-* [double-quoted-scalar-escape-character] <!-- \\ \" \a \b \e \f \↓ \n \r \t \v \0 4:4,2 4:7,2 \N \L \P \x41 \u0041 \U00000041 -->
+* [double-quoted-scalar-escape-character] <!-- \\ \" \a \b \e \f \↵ \n \r \t \v \0 4:4,2 4:7,2 \N \L \P \x41 \u0041 \U00000041 -->
 
 
 **Example #. Invalid Escaped Characters**
@@ -1950,11 +1951,11 @@ A folded non-[empty line] may end with either of the above [line breaks].
 
 ```
 >-
-  trimmed↓
-··↓
-·↓
-↓
-  as↓
+  trimmed↵
+··↵
+·↵
+↵
+  as↵
   space
 ```
 
@@ -1990,11 +1991,11 @@ formatting of [more-indented] lines is preserved.
 
 ```
 >
-··foo·↓
-·↓
-··→·bar↓
-↓
-··baz↓
+··foo·↵
+·↵
+··→·bar↵
+↵
+··baz↵
 ```
 
 ```
@@ -2025,12 +2026,12 @@ can be freely [more-indented] without affecting the [content] information.
 **Example #. Flow Folding**
 
 ```
-"↓
-··foo·↓
-·↓
-··→·bar↓
-↓
-··baz↓ "
+"↵
+··foo·↵
+·↵
+··→·bar↵
+↵
+··baz↵ "
 ```
 
 ```
@@ -2055,12 +2056,14 @@ omission of the final comment [line break] of the input [stream].
 However, as this confuses many tools, YAML [processors] should terminate the
 [stream] with an explicit [line break] on output.
 
+In this example, the end of the stream is displayed using the "`∎`" glyph for
+clarity.
 
 **Example #. Separated Comment**
 
 ```
-key:····# Comment↓
-  value_eof_
+key:····# Comment↵
+  value∎
 ```
 
 ```
@@ -2069,7 +2072,7 @@ key:····# Comment↓
 
 **Legend:**
 * [comment-content] <!-- 1:9,9 -->
-* [line-ending] <!-- ↓ 2:8,5 -->
+* [line-ending] <!-- ↵ 2:8,5 -->
 * [comment-line] <!-- 1:5, 2:8,5 -->
 
 
@@ -2082,9 +2085,9 @@ characters is taken to be a comment line.
 **Example #. Comment Lines**
 
 ```
-··# Comment↓
-···↓
-↓
+··# Comment↵
+···↵
+↵
 ```
 
 ```
@@ -2105,10 +2108,10 @@ The only exception is a comment ending a [block scalar header].
 **Example #. Multi-Line Comments**
 
 ```
-key:····# Comment↓
-········# lines↓
-  value↓
-↓
+key:····# Comment↵
+········# lines↵
+  value↵
+↵
 ```
 
 ```
@@ -2132,10 +2135,10 @@ Note that structures following multi-line comment separation must be properly
 [comment] lines themselves.
 
 
-**Example #. Separation Spaces**
+**Example #. Separation Lines**
 
 ```
-{·first:·Sammy,·last:·Sosa·}:↓
+{·first:·Sammy,·last:·Sosa·}:↵
 # Statistics:
 ··hr:··# Home runs
 ·····65
@@ -2839,10 +2842,10 @@ double-quoted lines to be broken at arbitrary positions.
 **Example #. Double Quoted Line Breaks**
 
 ```
-"folded·↓
-to a space,→↓
-·↓
-to a line feed, or·→\↓
+"folded·↵
+to a space,→↵
+·↵
+to a line feed, or·→\↵
 ·\·→non-content"
 ```
 
@@ -2851,8 +2854,8 @@ to a line feed, or·→\↓
 ```
 
 **Legend:**
-* [flow-folded-whitespace(n)] <!-- ·↓ →↓ -->
-* [double-quoted-line-continuation(n)] <!-- ·→\↓ 5:1 -->
+* [flow-folded-whitespace(n)] <!-- ·↵ →↵ -->
+* [double-quoted-line-continuation(n)] <!-- ·→\↵ 5:1 -->
 
 
 All leading and trailing [white space] characters on each line are excluded
@@ -2865,8 +2868,8 @@ Empty lines, if any, are consumed as part of the [line folding].
 **Example #. Double Quoted Lines**
 
 ```
-"·1st non-empty↓
-↓
+"·1st non-empty↵
+↵
 ·2nd non-empty·
 →3rd non-empty·"
 ```
@@ -2877,7 +2880,7 @@ Empty lines, if any, are consumed as part of the [line folding].
 
 **Legend:**
 * [double-quoted-first-line] <!-- 1:2,14 3:2,13 4:2,13 -->
-* [double-quoted-next-line(n)] <!-- ↓ 3 4:1,14 -->
+* [double-quoted-next-line(n)] <!-- ↵ 3 4:1,14 -->
 
 
 #### #. Single-Quoted Style
@@ -2937,8 +2940,8 @@ Empty lines, if any, are consumed as part of the [line folding].
 **Example #. Single Quoted Lines**
 
 ```
-'·1st non-empty↓
-↓
+'·1st non-empty↵
+↵
 ·2nd non-empty·
 →3rd non-empty·'
 ```
@@ -3046,8 +3049,8 @@ Empty lines, if any, are consumed as part of the [line folding].
 **Example #. Plain Lines**
 
 ```
-1st non-empty↓
-↓
+1st non-empty↵
+↵
 ·2nd non-empty·
 →3rd non-empty
 ```
@@ -3427,14 +3430,14 @@ This is the only case where a [comment] must not be followed by additional
 **Example #. Block Scalar Header**
 
 ```
-- | # Empty header↓
+- | # Empty header↵
  literal
-- >1 # Indentation indicator↓
+- >1 # Indentation indicator↵
  ·folded
-- |+ # Chomping indicator↓
+- |+ # Chomping indicator↵
  keep
 
-- >1- # Both indicators↓
+- >1- # Both indicators↵
  ·strip
 ```
 
@@ -3446,7 +3449,7 @@ This is the only case where a [comment] must not be followed by additional
 ```
 
 **Legend:**
-* [block-scalar-indicators(t)] <!-- _#_Empty_header↓ 1_#_Indentation_indicator↓ +_#_Chomping_indicator↓ 1-_#_Both_indicators↓ -->
+* [block-scalar-indicators(t)] <!-- _#_Empty_header↵ 1_#_Indentation_indicator↵ +_#_Chomping_indicator↵ 1-_#_Both_indicators↵ -->
 
 
 ##### #. Block Indentation Indicator
@@ -3575,11 +3578,11 @@ by the chomping indicator specified in the [block scalar header].
 
 ```
 strip: |-
-  text↓
+  text↵
 clip: |
-  text↓
+  text↵
 keep: |+
-  text↓
+  text↵
 ```
 
 ```
@@ -3611,20 +3614,20 @@ constrained.
 # Strip
   # Comments:
 strip: |-
-  # text↓
+  # text↵
 ··⇓
 ·# Clip
 ··# comments:
-↓
+↵
 clip: |
-  # text↓
-·↓
+  # text↵
+·↵
 ·# Keep
 ··# comments:
-↓
+↵
 keep: |+
-  # text↓
-↓
+  # text↵
+↵
 ·# Trail
 ··# comments.
 ```
@@ -3648,11 +3651,11 @@ considered as trailing lines and hence are affected by chomping.
 
 ```
 strip: >-
-↓
+↵
 clip: >
-↓
+↵
 keep: |+
-↓
+↵
 ```
 
 ```
@@ -3675,10 +3678,10 @@ It is the simplest, most restricted and most readable [scalar style].
 **Example #. Literal Scalar**
 
 ```
-|↓
-·literal↓
-·→text↓
-↓
+|↵
+·literal↵
+·→text↵
+↵
 ```
 
 ```
@@ -3706,11 +3709,11 @@ In addition, there is no way to break a long literal line.
 |
 ·
 ··
-··literal↓
-···↓
+··literal↵
+···↵
 ··
-··text↓
-↓
+··text↵
+↵
 ·# Comment
 ```
 
@@ -3735,10 +3738,10 @@ It is similar to the [literal style]; however, folded scalars are subject to
 **Example #. Folded Scalar**
 
 ```
->↓
-·folded↓
-·text↓
-↓
+>↵
+·folded↵
+·text↵
+↵
 ```
 
 ```
@@ -3758,18 +3761,18 @@ separates two non-[space] characters.
 ```
 >
 
-·folded↓
-·line↓
-↓
+·folded↵
+·line↵
+↵
 ·next
-·line↓
+·line↵
    * bullet
 
    * list
    * lines
 
-·last↓
-·line↓
+·last↵
+·line↵
 
 # Comment
 ```
@@ -3802,10 +3805,10 @@ Lines starting with [white space] characters (_more-indented_ lines) are not
 
  next
  line
-···* bullet↓
-↓
-···* list↓
-···* lines↓
+···* bullet↵
+↵
+···* list↵
+···* lines↵
 
  last
  line
@@ -3832,17 +3835,17 @@ also not [folded].
 
 ```
 >
-↓
+↵
  folded
- line↓
-↓
+ line↵
+↵
  next
- line↓
+ line↵
    * bullet
 
    * list
-   * lines↓
-↓
+   * lines↵
+↵
  last
  line
 
@@ -3880,8 +3883,8 @@ The final [line break] and trailing [empty lines] if any, are subject to
    * lines
 
  last
- line↓
-↓
+ line↵
+↵
 # Comment
 ```
 
@@ -3917,8 +3920,8 @@ followed by a non-space character (e.g. "`-42`").
 
 ```
 block sequence:
-··- one↓
-  - two : three↓
+··- one↵
+  - two : three↵
 ```
 
 ```
@@ -3976,7 +3979,7 @@ A _Block mapping_ is a series of entries, each [presenting] a [key/value pair].
 
 ```
 block mapping:
-·key: value↓
+·key: value↵
 ```
 
 ```
@@ -3997,11 +4000,11 @@ for [block sequence] entries.
 **Example #. Explicit Block Mapping Entries**
 
 ```
-? explicit key # Empty value↓°
+? explicit key # Empty value↵°
 ? |
-  block key↓
+  block key↵
 :·- one # Explicit compact
-··- two # block value↓
+··- two # block value↵
 ```
 
 ```
@@ -4066,9 +4069,9 @@ mapping.
 **Example #. Compact Block Mappings**
 
 ```
-- sun: yellow↓
-- ? earth: blue↓
-  : moon: white↓
+- sun: yellow↵
+- ? earth: blue↵
+  : moon: white↵
 ```
 
 ```
@@ -4096,12 +4099,12 @@ scalar] and an [implicit key] starting a nested [block mapping].
 **Example #. Block Node Types**
 
 ```
--↓
-··"flow in block"↓
+-↵
+··"flow in block"↵
 -·>
- Block scalar↓
+ Block scalar↵
 -·!!map # Block collection
-  foo : bar↓
+  foo : bar↵
 ```
 
 ```
@@ -4126,7 +4129,7 @@ entries.
 ```
 literal: |2
 ··value
-folded:↓
+folded:↵
 ···!foo
 ··>1
 ·value
@@ -4624,7 +4627,7 @@ yaml-stream ::=
 ```
 document-prefix ::=
   byte-order-mark?
-  comment-line*
+  blanks-and-comment-line*
 ```
 
 ```
@@ -5002,10 +5005,7 @@ block-scalar-indicators(t) ::=
         block-scalar-indentation-indicator
       )
   )
-  (
-      comment-line
-    | line-ending
-  )
+  comment-line
 ```
 
 ```
@@ -5665,12 +5665,24 @@ folded-whitespace(n,c) ::=
 
 ```
 comment-lines ::=
-    comment-line+
+  (
+    comment-line
   | <start-of-line>
+  )
+  blanks-and-comment-line*
 ```
 
 ```
 comment-line ::=
+  (
+    separation-blanks
+    comment-content?
+  )?
+  line-ending
+```
+
+```
+blanks-and-comment-line ::=
   separation-blanks
   comment-content?
   line-ending
@@ -5971,7 +5983,8 @@ line-break ::=
 
 ```
 flow-collection-indicators ::=
-    '{'                             # Flow mapping start
+    ','                             # Flow collection separator
+  | '{'                             # Flow mapping start
   | '}'                             # Flow mapping end
   | '['                             # Flow sequence start
   | ']'                             # Flow sequence end
