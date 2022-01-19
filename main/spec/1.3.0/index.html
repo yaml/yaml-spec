@@ -41,8 +41,28 @@
 
 
 
+Sending build context to Docker daemon  2.048kB
+Step 1/6 : FROM alpine
+ ---> 0a97eee8041e
+Step 2/6 : WORKDIR /home
+ ---> Using cache
+ ---> 1244026bc829
+Step 3/6 : RUN apk update && apk add bash build-base coreutils
+ ---> Using cache
+ ---> 612abac553fb
+Step 4/6 : RUN apk add python3 py3-pip
+ ---> Using cache
+ ---> 2796b4eb47b5
+Step 5/6 : RUN pip3 install beautifulsoup4 roman pyyaml
+ ---> Using cache
+ ---> a471ab2a7845
+Step 6/6 : ENV PATH=/home/host/spec/1.3.0/bin:/home/host/bin:$PATH
+ ---> Using cache
+ ---> 4214c9ae8b92
+Successfully built 4214c9ae8b92
+Successfully tagged yamlio/html-to-html:d964055126c21d26ab12bbb6b3510ae4
 <h2>YAML Ain’t Markup Language (YAML™) version 1.3</h2>
-<h3 class="subtitle">Revision 1.3.0 (2022-01-16)</h3>
+<h3 class="subtitle">Revision 1.3.0 (2022-01-19)</h3>
 <p>Copyright presently by YAML Language Development Team<sup id="fnref:team" role="doc-noteref"><a class="footnote" href="#fn:team" rel="footnote">1</a></sup><br/>
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 <p>This document may be freely copied, provided it is not modified.</p>
@@ -76,7 +96,7 @@ internet messaging to object persistence to data auditing and visualization.
 Together with the Unicode standard for characters<sup id="fnref:unicode" role="doc-noteref"><a class="footnote" href="#fn:unicode" rel="footnote">2</a></sup>, this specification
 provides all the information necessary to understand YAML version 1.3 and to
 create programs that process YAML information.</p>
-<p><strong id="toc-header">Contents</strong></p><ul id="markdown-toc"><li><a href="#part-introduction">Part I. Introduction</a><ul><li><a href="#introduction-to-yaml">Chapter 1. Introduction to YAML</a><ul><li><a href="#goals">1.1. Goals</a></li><li><a href="#yaml-history">1.2. YAML History</a></li><li><a href="#terminology">1.3. Terminology</a></li></ul></li><li><a href="#language-overview">Chapter 2. Language Overview</a><ul><li><a href="#collections">2.1. Collections</a></li><li><a href="#structures">2.2. Structures</a></li><li><a href="#scalars">2.3. Scalars</a></li><li><a href="#tags">2.4. Tags</a></li><li><a href="#full-length-example">2.5. Full Length Example</a></li><li><a href="#processes-and-models">2.6. Processes and Models</a></li></ul></li></ul></li><li><a href="#part-processes">Part II. Processes</a><ul><li><a href="#processes">Chapter 3. Processes</a><ul><li><a href="#dump">3.1. Dump</a></li><li><a href="#load">3.2. Load</a></li></ul></li></ul></li><li><a href="#part-information-models">Part III. Information Models</a><ul><li><a href="#information-models">Chapter 4. Information Models</a><ul><li><a href="#representation-graph">4.1. Representation Graph</a><ul><li><a href="#nodes">4.1.1. Nodes</a></li><li><a href="#tags">4.1.2. Tags</a></li><li><a href="#node-comparison">4.1.3. Node Comparison</a></li></ul></li><li><a href="#serialization-tree">4.2. Serialization Tree</a><ul><li><a href="#mapping-key-order">4.2.1. Mapping Key Order</a></li><li><a href="#anchors-and-aliases">4.2.2. Anchors and Aliases</a></li></ul></li><li><a href="#presentation-stream">4.3. Presentation Stream</a><ul><li><a href="#node-styles">4.3.1. Node Styles</a></li><li><a href="#scalar-formats">4.3.2. Scalar Formats</a></li><li><a href="#comments">4.3.3. Comments</a></li><li><a href="#directives">4.3.4. Directives</a></li></ul></li></ul></li><li><a href="#loading-failure-points">Chapter 5. Loading Failure Points</a><ul><li><a href="#well-formed-streams-and-identified-aliases">5.1. Well-Formed Streams and Identified Aliases</a></li><li><a href="#resolved-tags">5.2. Resolved Tags</a></li><li><a href="#recognized-and-valid-tags">5.3. Recognized and Valid Tags</a></li><li><a href="#available-tags">5.4. Available Tags</a></li></ul></li></ul></li><li><a href="#part-syntax">Part IV. Syntax</a><ul><li><a href="#character-productions">Chapter 6. Character Productions</a><ul><li><a href="#character-set">6.1. Character Set</a></li><li><a href="#character-encodings">6.2. Character Encodings</a></li><li><a href="#indicator-characters">6.3. Indicator Characters</a></li><li><a href="#line-break-characters">6.4. Line Break Characters</a></li><li><a href="#white-space-characters">6.5. White Space Characters</a></li><li><a href="#miscellaneous-characters">6.6. Miscellaneous Characters</a></li><li><a href="#escaped-characters">6.7. Escaped Characters</a></li></ul></li><li><a href="#structural-productions">Chapter 7. Structural Productions</a><ul><li><a href="#indentation-spaces">7.1. Indentation Spaces</a></li><li><a href="#separation-spaces">7.2. Separation Spaces</a></li><li><a href="#line-prefixes">7.3. Line Prefixes</a></li><li><a href="#empty-lines">7.4. Empty Lines</a></li><li><a href="#line-folding">7.5. Line Folding</a></li><li><a href="#comments">7.6. Comments</a></li><li><a href="#separation-lines">7.7. Separation Lines</a></li><li><a href="#directives">7.8. Directives</a><ul><li><a href="#yaml-directives">7.8.1. “<code>YAML</code>” Directives</a></li><li><a href="#tag-directives">7.8.2. “<code>TAG</code>” Directives</a><ul><li><a href="#tag-handles">7.8.2.1. Tag Handles</a></li><li><a href="#tag-prefixes">7.8.2.2. Tag Prefixes</a></li></ul></li></ul></li><li><a href="#node-properties">7.9. Node Properties</a><ul><li><a href="#node-tags">7.9.1. Node Tags</a></li><li><a href="#node-anchors">7.9.2. Node Anchors</a></li></ul></li></ul></li><li><a href="#flow-style-productions">Chapter 8. Flow Style Productions</a><ul><li><a href="#alias-nodes">8.1. Alias Nodes</a></li><li><a href="#empty-nodes">8.2. Empty Nodes</a></li><li><a href="#flow-scalar-styles">8.3. Flow Scalar Styles</a><ul><li><a href="#double-quoted-style">8.3.1. Double-Quoted Style</a></li><li><a href="#single-quoted-style">8.3.2. Single-Quoted Style</a></li><li><a href="#plain-style">8.3.3. Plain Style</a></li></ul></li><li><a href="#flow-collection-styles">8.4. Flow Collection Styles</a><ul><li><a href="#flow-sequences">8.4.1. Flow Sequences</a></li><li><a href="#flow-mappings">8.4.2. Flow Mappings</a></li></ul></li><li><a href="#flow-nodes">8.5. Flow Nodes</a></li></ul></li><li><a href="#block-style-productions">Chapter 9. Block Style Productions</a><ul><li><a href="#block-scalar-styles">9.1. Block Scalar Styles</a><ul><li><a href="#block-scalar-headers">9.1.1. Block Scalar Headers</a><ul><li><a href="#block-indentation-indicator">9.1.1.1. Block Indentation Indicator</a></li><li><a href="#block-chomping-indicator">9.1.1.2. Block Chomping Indicator</a></li></ul></li><li><a href="#literal-style">9.1.2. Literal Style</a></li><li><a href="#folded-style">9.1.3. Folded Style</a></li></ul></li><li><a href="#block-collection-styles">9.2. Block Collection Styles</a><ul><li><a href="#block-sequences">9.2.1. Block Sequences</a></li><li><a href="#block-mappings">9.2.2. Block Mappings</a></li><li><a href="#block-nodes">9.2.3. Block Nodes</a></li></ul></li></ul></li><li><a href="#document-stream-productions">Chapter 10. Document Stream Productions</a><ul><li><a href="#documents">10.1. Documents</a><ul><li><a href="#document-prefix">10.1.1. Document Prefix</a></li><li><a href="#document-markers">10.1.2. Document Markers</a></li><li><a href="#bare-documents">10.1.3. Bare Documents</a></li><li><a href="#explicit-documents">10.1.4. Explicit Documents</a></li><li><a href="#directives-documents">10.1.5. Directives Documents</a></li></ul></li><li><a href="#streams">10.2. Streams</a></li></ul></li></ul></li><li><a href="#part-appendices">Part V. Appendices</a><ul><li><a href="#grammar">Appendix A. Grammar</a><ul><li><a href="#production-syntax">A.1. Production Syntax</a><ul><li><a href="#production-parameters">A.1.1. Production Parameters</a></li><li><a href="#production-naming-conventions">A.1.2. Production Naming Conventions</a></li></ul></li><li><a href="#document-stream-productions">A.2. Document Stream Productions</a><ul><li><a href="#streams">A.2.1. Streams</a></li><li><a href="#documents">A.2.2. Documents</a><ul><li><a href="#block-nodes">A.2.2.1. Block Nodes</a></li><li><a href="#block-mappings">A.2.2.2. Block Mappings</a></li><li><a href="#block-sequences">A.2.2.3. Block Sequences</a></li></ul></li><li><a href="#block-scalar-styles">A.2.3. Block Scalar Styles</a><ul><li><a href="#literal-style">A.2.3.1. Literal Style</a></li><li><a href="#folded-style">A.2.3.2. Folded Style</a></li><li><a href="#block-scalar-headers">A.2.3.3. Block Scalar Headers</a></li></ul></li></ul></li><li><a href="#flow-style-productions">A.3. Flow Style Productions</a><ul><li><a href="#flow-nodes">A.3.1. Flow Nodes</a><ul><li><a href="#flow-mappings">A.3.1.1. Flow Mappings</a></li><li><a href="#flow-sequences">A.3.1.2. Flow Sequences</a></li></ul></li><li><a href="#flow-scalar-styles">A.3.2. Flow Scalar Styles</a><ul><li><a href="#double-quoted-style">A.3.2.1. Double-Quoted Style</a></li><li><a href="#flow-collection-context">A.3.2.2. Flow Collection Context</a></li><li><a href="#single-quoted-style">A.3.2.3. Single-Quoted Style</a></li><li><a href="#plain-style">A.3.2.4. Plain Style</a></li></ul></li><li><a href="#other-nodes">A.3.3. Other Nodes</a></li></ul></li><li><a href="#structural-productions">A.4. Structural Productions</a><ul><li><a href="#indentation-spaces">A.4.1. Indentation Spaces</a></li><li><a href="#line-prefixes">A.4.2. Line Prefixes</a></li><li><a href="#line-folding">A.4.3. Line Folding</a></li><li><a href="#comments">A.4.4. Comments</a></li><li><a href="#empty-lines">A.4.5. Empty Lines</a></li><li><a href="#separation-lines-and-blanks">A.4.6. Separation Lines and Blanks</a></li><li><a href="#directives">A.4.7. Directives</a></li><li><a href="#node-properties">A.4.8. Node Properties</a></li></ul></li><li><a href="#character-productions">A.5. Character Productions</a><ul><li><a href="#character-encoding">A.5.1. Character Encoding</a></li><li><a href="#valid-character-sets">A.5.2. Valid Character Sets</a></li><li><a href="#line-ending-productions">A.5.3. Line Ending Productions</a></li><li><a href="#indicator-characters">A.5.4. Indicator Characters</a></li><li><a href="#miscellaneous-character-sets">A.5.5. Miscellaneous Character Sets</a></li></ul></li></ul></li><li><a href="#recommended-schemas">Appendix B. Recommended Schemas</a><ul><li><a href="#failsafe-schema">B.1. Failsafe Schema</a><ul><li><a href="#tags">B.1.1. Tags</a><ul><li><a href="#generic-mapping">B.1.1.1. Generic Mapping</a></li><li><a href="#generic-sequence">B.1.1.2. Generic Sequence</a></li><li><a href="#generic-string">B.1.1.3. Generic String</a></li></ul></li><li><a href="#tag-resolution">B.1.2. Tag Resolution</a></li></ul></li><li><a href="#json-schema">B.2. JSON Schema</a><ul><li><a href="#tags">B.2.1. Tags</a><ul><li><a href="#null">B.2.1.1. Null</a></li><li><a href="#boolean">B.2.1.2. Boolean</a></li><li><a href="#integer">B.2.1.3. Integer</a></li><li><a href="#floating-point">B.2.1.4. Floating Point</a></li></ul></li><li><a href="#tag-resolution">B.2.2. Tag Resolution</a></li></ul></li><li><a href="#core-schema">B.3. Core Schema</a><ul><li><a href="#tags">B.3.1. Tags</a></li><li><a href="#tag-resolution">B.3.2. Tag Resolution</a></li></ul></li><li><a href="#other-schemas">B.4. Other Schemas</a></li></ul></li><li><a href="#reference-links">Reference Links</a></li></ul></li></ul>
+<p><strong id="toc-header">Contents</strong></p><ul id="markdown-toc"><li><a href="#part-introduction">Part I. Introduction</a><ul><li><a href="#introduction-to-yaml">Chapter 1. Introduction to YAML</a><ul><li><a href="#goals">1.1. Goals</a></li><li><a href="#yaml-history">1.2. YAML History</a></li><li><a href="#terminology">1.3. Terminology</a></li></ul></li><li><a href="#language-overview">Chapter 2. Language Overview</a><ul><li><a href="#collections">2.1. Collections</a></li><li><a href="#structures">2.2. Structures</a></li><li><a href="#scalars">2.3. Scalars</a></li><li><a href="#tags">2.4. Tags</a></li><li><a href="#full-length-example">2.5. Full Length Example</a></li><li><a href="#processes-and-models">2.6. Processes and Models</a></li></ul></li></ul></li><li><a href="#part-processes">Part II. Processes</a><ul><li><a href="#processes">Chapter 3. Processes</a><ul><li><a href="#dump">3.1. Dump</a></li><li><a href="#load">3.2. Load</a></li></ul></li></ul></li><li><a href="#part-information-models">Part III. Information Models</a><ul><li><a href="#information-models">Chapter 4. Information Models</a><ul><li><a href="#representation-graph">4.1. Representation Graph</a><ul><li><a href="#nodes">4.1.1. Nodes</a></li><li><a href="#tags-1">4.1.2. Tags</a></li><li><a href="#node-comparison">4.1.3. Node Comparison</a></li></ul></li><li><a href="#serialization-tree">4.2. Serialization Tree</a><ul><li><a href="#mapping-key-order">4.2.1. Mapping Key Order</a></li><li><a href="#anchors-and-aliases">4.2.2. Anchors and Aliases</a></li></ul></li><li><a href="#presentation-stream">4.3. Presentation Stream</a><ul><li><a href="#node-styles">4.3.1. Node Styles</a></li><li><a href="#scalar-formats">4.3.2. Scalar Formats</a></li><li><a href="#comments">4.3.3. Comments</a></li><li><a href="#directives">4.3.4. Directives</a></li></ul></li></ul></li><li><a href="#loading-failure-points">Chapter 5. Loading Failure Points</a><ul><li><a href="#well-formed-streams-and-identified-aliases">5.1. Well-Formed Streams and Identified Aliases</a></li><li><a href="#resolved-tags">5.2. Resolved Tags</a></li><li><a href="#recognized-and-valid-tags">5.3. Recognized and Valid Tags</a></li><li><a href="#available-tags">5.4. Available Tags</a></li></ul></li></ul></li><li><a href="#part-syntax">Part IV. Syntax</a><ul><li><a href="#character-productions">Chapter 6. Character Productions</a><ul><li><a href="#character-set">6.1. Character Set</a></li><li><a href="#character-encodings">6.2. Character Encodings</a></li><li><a href="#indicator-characters">6.3. Indicator Characters</a></li><li><a href="#line-break-characters">6.4. Line Break Characters</a></li><li><a href="#white-space-characters">6.5. White Space Characters</a></li><li><a href="#miscellaneous-characters">6.6. Miscellaneous Characters</a></li><li><a href="#escaped-characters">6.7. Escaped Characters</a></li></ul></li><li><a href="#structural-productions">Chapter 7. Structural Productions</a><ul><li><a href="#indentation-spaces">7.1. Indentation Spaces</a></li><li><a href="#separation-spaces">7.2. Separation Spaces</a></li><li><a href="#line-prefixes">7.3. Line Prefixes</a></li><li><a href="#empty-lines">7.4. Empty Lines</a></li><li><a href="#line-folding">7.5. Line Folding</a></li><li><a href="#comments-1">7.6. Comments</a></li><li><a href="#separation-lines">7.7. Separation Lines</a></li><li><a href="#directives-1">7.8. Directives</a><ul><li><a href="#yaml-directives">7.8.1. “<code>YAML</code>” Directives</a></li><li><a href="#tag-directives">7.8.2. “<code>TAG</code>” Directives</a><ul><li><a href="#tag-handles">7.8.2.1. Tag Handles</a></li><li><a href="#tag-prefixes">7.8.2.2. Tag Prefixes</a></li></ul></li></ul></li><li><a href="#node-properties">7.9. Node Properties</a><ul><li><a href="#node-tags">7.9.1. Node Tags</a></li><li><a href="#node-anchors">7.9.2. Node Anchors</a></li></ul></li></ul></li><li><a href="#flow-style-productions">Chapter 8. Flow Style Productions</a><ul><li><a href="#alias-nodes">8.1. Alias Nodes</a></li><li><a href="#empty-nodes">8.2. Empty Nodes</a></li><li><a href="#flow-scalar-styles">8.3. Flow Scalar Styles</a><ul><li><a href="#double-quoted-style">8.3.1. Double-Quoted Style</a></li><li><a href="#single-quoted-style">8.3.2. Single-Quoted Style</a></li><li><a href="#plain-style">8.3.3. Plain Style</a></li></ul></li><li><a href="#flow-collection-styles">8.4. Flow Collection Styles</a><ul><li><a href="#flow-sequences">8.4.1. Flow Sequences</a></li><li><a href="#flow-mappings">8.4.2. Flow Mappings</a></li></ul></li><li><a href="#flow-nodes">8.5. Flow Nodes</a></li></ul></li><li><a href="#block-style-productions">Chapter 9. Block Style Productions</a><ul><li><a href="#block-scalar-styles">9.1. Block Scalar Styles</a><ul><li><a href="#block-scalar-headers">9.1.1. Block Scalar Headers</a><ul><li><a href="#block-indentation-indicator">9.1.1.1. Block Indentation Indicator</a></li><li><a href="#block-chomping-indicator">9.1.1.2. Block Chomping Indicator</a></li></ul></li><li><a href="#literal-style">9.1.2. Literal Style</a></li><li><a href="#folded-style">9.1.3. Folded Style</a></li></ul></li><li><a href="#block-collection-styles">9.2. Block Collection Styles</a><ul><li><a href="#block-sequences">9.2.1. Block Sequences</a></li><li><a href="#block-mappings">9.2.2. Block Mappings</a></li><li><a href="#block-nodes">9.2.3. Block Nodes</a></li></ul></li></ul></li><li><a href="#document-stream-productions">Chapter 10. Document Stream Productions</a><ul><li><a href="#documents">10.1. Documents</a><ul><li><a href="#document-prefix">10.1.1. Document Prefix</a></li><li><a href="#document-markers">10.1.2. Document Markers</a></li><li><a href="#bare-documents">10.1.3. Bare Documents</a></li><li><a href="#explicit-documents">10.1.4. Explicit Documents</a></li><li><a href="#directives-documents">10.1.5. Directives Documents</a></li></ul></li><li><a href="#streams">10.2. Streams</a></li></ul></li></ul></li><li><a href="#part-appendices">Part V. Appendices</a><ul><li><a href="#grammar">Appendix A. Grammar</a><ul><li><a href="#production-syntax">A.1. Production Syntax</a><ul><li><a href="#production-parameters">A.1.1. Production Parameters</a></li><li><a href="#production-naming-conventions">A.1.2. Production Naming Conventions</a></li></ul></li><li><a href="#document-stream-productions-1">A.2. Document Stream Productions</a><ul><li><a href="#streams-1">A.2.1. Streams</a></li><li><a href="#documents-1">A.2.2. Documents</a><ul><li><a href="#block-nodes-1">A.2.2.1. Block Nodes</a></li><li><a href="#block-mappings-1">A.2.2.2. Block Mappings</a></li><li><a href="#block-sequences-1">A.2.2.3. Block Sequences</a></li></ul></li><li><a href="#block-scalar-styles-1">A.2.3. Block Scalar Styles</a><ul><li><a href="#literal-style-1">A.2.3.1. Literal Style</a></li><li><a href="#folded-style-1">A.2.3.2. Folded Style</a></li><li><a href="#block-scalar-headers-1">A.2.3.3. Block Scalar Headers</a></li></ul></li></ul></li><li><a href="#flow-style-productions-1">A.3. Flow Style Productions</a><ul><li><a href="#flow-nodes-1">A.3.1. Flow Nodes</a><ul><li><a href="#flow-mappings-1">A.3.1.1. Flow Mappings</a></li><li><a href="#flow-sequences-1">A.3.1.2. Flow Sequences</a></li></ul></li><li><a href="#flow-scalar-styles-1">A.3.2. Flow Scalar Styles</a><ul><li><a href="#double-quoted-style-1">A.3.2.1. Double-Quoted Style</a></li><li><a href="#flow-collection-context">A.3.2.2. Flow Collection Context</a></li><li><a href="#single-quoted-style-1">A.3.2.3. Single-Quoted Style</a></li><li><a href="#plain-style-1">A.3.2.4. Plain Style</a></li></ul></li><li><a href="#other-nodes">A.3.3. Other Nodes</a></li></ul></li><li><a href="#structural-productions-1">A.4. Structural Productions</a><ul><li><a href="#indentation-spaces-1">A.4.1. Indentation Spaces</a></li><li><a href="#line-prefixes-1">A.4.2. Line Prefixes</a></li><li><a href="#line-folding-1">A.4.3. Line Folding</a></li><li><a href="#comments-2">A.4.4. Comments</a></li><li><a href="#empty-lines-1">A.4.5. Empty Lines</a></li><li><a href="#separation-lines-and-blanks">A.4.6. Separation Lines and Blanks</a></li><li><a href="#directives-2">A.4.7. Directives</a></li><li><a href="#node-properties-1">A.4.8. Node Properties</a></li></ul></li><li><a href="#character-productions-1">A.5. Character Productions</a><ul><li><a href="#character-encoding">A.5.1. Character Encoding</a></li><li><a href="#valid-character-sets">A.5.2. Valid Character Sets</a></li><li><a href="#line-ending-productions">A.5.3. Line Ending Productions</a></li><li><a href="#indicator-characters-1">A.5.4. Indicator Characters</a></li><li><a href="#miscellaneous-character-sets">A.5.5. Miscellaneous Character Sets</a></li></ul></li></ul></li><li><a href="#recommended-schemas">Appendix B. Recommended Schemas</a><ul><li><a href="#failsafe-schema">B.1. Failsafe Schema</a><ul><li><a href="#tags-2">B.1.1. Tags</a><ul><li><a href="#generic-mapping">B.1.1.1. Generic Mapping</a></li><li><a href="#generic-sequence">B.1.1.2. Generic Sequence</a></li><li><a href="#generic-string">B.1.1.3. Generic String</a></li></ul></li><li><a href="#tag-resolution">B.1.2. Tag Resolution</a></li></ul></li><li><a href="#json-schema">B.2. JSON Schema</a><ul><li><a href="#tags-3">B.2.1. Tags</a><ul><li><a href="#null">B.2.1.1. Null</a></li><li><a href="#boolean">B.2.1.2. Boolean</a></li><li><a href="#integer">B.2.1.3. Integer</a></li><li><a href="#floating-point">B.2.1.4. Floating Point</a></li></ul></li><li><a href="#tag-resolution-1">B.2.2. Tag Resolution</a></li></ul></li><li><a href="#core-schema">B.3. Core Schema</a><ul><li><a href="#tags-4">B.3.1. Tags</a></li><li><a href="#tag-resolution-2">B.3.2. Tag Resolution</a></li></ul></li><li><a href="#other-schemas">B.4. Other Schemas</a></li></ul></li><li><a href="#reference-links">Reference Links</a></li></ul></li></ul>
 <section data-section-number="I" id="part-introduction"><h1>Part I. Introduction</h1>
 <section data-section-number="1" id="introduction-to-yaml"><h2>Chapter 1. Introduction to YAML</h2>
 <p>YAML (a recursive acronym for “YAML Ain’t Markup Language”) is a data
@@ -719,7 +739,7 @@ In particular, keys may be arbitrary nodes, the same node may be used as the
 value of several key/value pairs and a mapping could even contain itself as a
 key or a value.</dd>
 </dl>
-</section><section data-section-number="2" id="tags"><h4>4.1.2. Tags</h4>
+</section><section data-section-number="2" id="tags-1"><h4>4.1.2. Tags</h4>
 <p>YAML <a href="#representation-graph">represents</a> type information of <a href="#representing-native-data-structures">native data structures</a> with a simple
 identifier, called a <em>tag</em>.
 <em>Global tags</em> are URIs and hence globally unique across all <a href="#processes-and-models">applications</a>.
@@ -1757,7 +1777,7 @@ can be freely <a href="#example-more-indented-lines">more-indented</a> without a
 
 
 
-</section><section data-section-number="6" id="comments"><h3>7.6. Comments</h3>
+</section><section data-section-number="6" id="comments-1"><h3>7.6. Comments</h3>
 <p>An explicit <em>comment</em> is marked by a “<code>#</code>” indicator.
 Comments are a <a href="#presenting-the-serialization-tree">presentation detail</a> and must not be used to convey <a href="#nodes">content</a>
 information.</p>
@@ -1827,7 +1847,7 @@ empty) <a href="#comments">comments</a>.</p>
 <p>Note that structures following multi-line comment separation must be properly
 <a href="#indentation-spaces">indented</a>, even though there is no such restriction on the separation
 <a href="#comments">comment</a> lines themselves.</p>
-<div class="example" id="example-separation-spaces"><p><strong>Example 7.12. Separation Spaces</strong></p><table width="100%"><tr><td class="side-by-side"><pre>
+<div class="example" id="example-separation-lines"><p><strong>Example 7.12. Separation Lines</strong></p><table width="100%"><tr><td class="side-by-side"><pre>
 {<mark class="legend-1">·</mark>first:<mark class="legend-1">·</mark>Sammy,<mark class="legend-1">·</mark>last:<mark class="legend-1">·</mark>Sosa<mark class="legend-1">·</mark>}:<mark class="legend-2">↵</mark>
 <mark class="legend-2"># Statistics:</mark>
 <mark class="legend-2"><mark class="legend-3">··</mark></mark>hr:<mark class="legend-2">··# Home runs</mark>
@@ -1847,7 +1867,7 @@ empty) <a href="#comments">comments</a>.</p>
 
 
 
-</section><section data-section-number="8" id="directives"><h3>7.8. Directives</h3>
+</section><section data-section-number="8" id="directives-1"><h3>7.8. Directives</h3>
 <p><em>Directives</em> are instructions to the YAML <a href="#processes-and-models">processor</a>.
 This specification defines two directives, “<code>YAML</code>” and “<code>TAG</code>”, and <em>reserves</em>
 all other directives for future use.
@@ -3772,9 +3792,9 @@ where <code>X-</code> and <code>Y-</code> are any of the above prefixes.</p>
 <a href="#indentation-spaces">indentation</a> level is greater than the specified <code>n</code> parameter.</p>
 </dd>
 </dl>
-</section></section><section data-section-number="2" id="document-stream-productions"><h3>A.2. Document Stream Productions</h3>
+</section></section><section data-section-number="2" id="document-stream-productions-1"><h3>A.2. Document Stream Productions</h3>
 <p>The YAML 1.3 syntax productions are presented here in a top down fashion.</p>
-<section data-section-number="1" id="streams"><h4>A.2.1. Streams</h4>
+<section data-section-number="1" id="streams-1"><h4>A.2.1. Streams</h4>
 <p>The starting production (<code>yaml-stream</code>) matches an entire YAML character
 stream.</p>
 <pre class="rule" id="rule-yaml-stream">[1]
@@ -3810,7 +3830,7 @@ document-start-indicator ::=
 document-end-indicator ::=
   "..."                             # Not followed by non-ws char
 </pre>
-</section><section data-section-number="2" id="documents"><h4>A.2.2. Documents</h4>
+</section><section data-section-number="2" id="documents-1"><h4>A.2.2. Documents</h4>
 <pre class="rule" id="rule-any-document">[6]
 any-document ::=
     <a href="#rule-directives-and-document">directives-and-document</a>
@@ -3860,7 +3880,7 @@ forbidden-content ::=
     | <a href="#rule-blank-character">blank-character</a>
   )
 </pre>
-<section data-section-number="1" id="block-nodes"><h5>A.2.2.1. Block Nodes</h5>
+<section data-section-number="1" id="block-nodes-1"><h5>A.2.2.1. Block Nodes</h5>
 <pre class="rule" id="rule-block-node">[12]
 block-node(n,c) ::=
     <a href="#rule-block-node-in-a-block-node">block-node-in-a-block-node(n,c)</a>
@@ -3906,7 +3926,7 @@ block-scalar(n,c) ::=
     | <a href="#rule-block-folded-scalar">block-folded-scalar(n)</a>
   )
 </pre>
-</section><section data-section-number="2" id="block-mappings"><h5>A.2.2.2. Block Mappings</h5>
+</section><section data-section-number="2" id="block-mappings-1"><h5>A.2.2.2. Block Mappings</h5>
 <pre class="rule" id="rule-block-mapping">[18]
 block-mapping(n) ::=
   (
@@ -3970,7 +3990,7 @@ compact-mapping(n) ::=
     <a href="#rule-block-mapping-entry">block-mapping-entry(n)</a>
   )*
 </pre>
-</section><section data-section-number="3" id="block-sequences"><h5>A.2.2.3. Block Sequences</h5>
+</section><section data-section-number="3" id="block-sequences-1"><h5>A.2.2.3. Block Sequences</h5>
 <pre class="rule" id="rule-block-sequence">[27]
 block-sequence(n) ::=
   (
@@ -4007,9 +4027,9 @@ compact-sequence(n) ::=
     <a href="#rule-block-sequence-entry">block-sequence-entry(n)</a>
   )*
 </pre>
-</section></section><section data-section-number="3" id="block-scalar-styles"><h4>A.2.3. Block Scalar Styles</h4>
+</section></section><section data-section-number="3" id="block-scalar-styles-1"><h4>A.2.3. Block Scalar Styles</h4>
 <p>See <a href="#production-parameters">Production Parameters</a> for the definition of the <code>t</code> variable.</p>
-<section data-section-number="1" id="literal-style"><h5>A.2.3.1. Literal Style</h5>
+<section data-section-number="1" id="literal-style-1"><h5>A.2.3.1. Literal Style</h5>
 <pre class="rule" id="rule-block-literal-scalar">[31]
 block-literal-scalar(n) ::=
   '|'
@@ -4036,7 +4056,7 @@ literal-scalar-next-line(n) ::=
   <a href="#rule-break-as-line-feed">break-as-line-feed</a>
   <a href="#rule-literal-scalar-line-content">literal-scalar-line-content(n)</a>
 </pre>
-</section><section data-section-number="2" id="folded-style"><h5>A.2.3.2. Folded Style</h5>
+</section><section data-section-number="2" id="folded-style-1"><h5>A.2.3.2. Folded Style</h5>
 <pre class="rule" id="rule-block-folded-scalar">[35]
 block-folded-scalar(n) ::=
   '&gt;'
@@ -4100,7 +4120,7 @@ folded-scalar-spaced-text(n) ::=
   <a href="#rule-blank-character">blank-character</a>
   <a href="#rule-non-break-character">non-break-character</a>*
 </pre>
-</section><section data-section-number="3" id="block-scalar-headers"><h5>A.2.3.3. Block Scalar Headers</h5>
+</section><section data-section-number="3" id="block-scalar-headers-1"><h5>A.2.3.3. Block Scalar Headers</h5>
 <pre class="rule" id="rule-block-scalar-indicators">[44]
 block-scalar-indicators(t) ::=
   (
@@ -4154,8 +4174,8 @@ line-trail-comments(n) ::=
   <a href="#rule-line-ending">line-ending</a>
   <a href="#rule-comment-line">comment-line</a>*
 </pre>
-</section></section></section><section data-section-number="3" id="flow-style-productions"><h3>A.3. Flow Style Productions</h3>
-<section data-section-number="1" id="flow-nodes"><h4>A.3.1. Flow Nodes</h4>
+</section></section></section><section data-section-number="3" id="flow-style-productions-1"><h3>A.3. Flow Style Productions</h3>
+<section data-section-number="1" id="flow-nodes-1"><h4>A.3.1. Flow Nodes</h4>
 <pre class="rule" id="rule-flow-node">[52]
 flow-node(n,c) ::=
     <a href="#rule-alias-node">alias-node</a>
@@ -4187,7 +4207,7 @@ flow-json-content(n,c) ::=
   | <a href="#rule-single-quoted-scalar">single-quoted-scalar(n,c)</a>
   | <a href="#rule-double-quoted-scalar">double-quoted-scalar(n,c)</a>
 </pre>
-<section data-section-number="1" id="flow-mappings"><h5>A.3.1.1. Flow Mappings</h5>
+<section data-section-number="1" id="flow-mappings-1"><h5>A.3.1.1. Flow Mappings</h5>
 <pre class="rule" id="rule-flow-mapping">[56]
 flow-mapping(n,c) ::=
   '{'
@@ -4338,7 +4358,7 @@ flow-json-node(n,c) ::=
   )?
   <a href="#rule-flow-json-content">flow-json-content(n,c)</a>
 </pre>
-</section><section data-section-number="2" id="flow-sequences"><h5>A.3.1.2. Flow Sequences</h5>
+</section><section data-section-number="2" id="flow-sequences-1"><h5>A.3.1.2. Flow Sequences</h5>
 <pre class="rule" id="rule-flow-sequence">[74]
 flow-sequence(n,c) ::=
   '['
@@ -4361,8 +4381,8 @@ flow-sequence-entry(n,c) ::=
     <a href="#rule-flow-pair">flow-pair(n,c)</a>
   | <a href="#rule-flow-node">flow-node(n,c)</a>
 </pre>
-</section></section><section data-section-number="2" id="flow-scalar-styles"><h4>A.3.2. Flow Scalar Styles</h4>
-<section data-section-number="1" id="double-quoted-style"><h5>A.3.2.1. Double-Quoted Style</h5>
+</section></section><section data-section-number="2" id="flow-scalar-styles-1"><h4>A.3.2. Flow Scalar Styles</h4>
+<section data-section-number="1" id="double-quoted-style-1"><h5>A.3.2.1. Double-Quoted Style</h5>
 <pre class="rule" id="rule-double-quoted-scalar">[77]
 double-quoted-scalar(n,c) ::=
   '"'
@@ -4444,7 +4464,7 @@ flow-sequence-context(n,FLOW-IN)   ::= <a href="#rule-flow-sequence-entries">flo
 flow-sequence-context(n,BLOCK-KEY) ::= <a href="#rule-flow-sequence-entries">flow-sequence-entries(n,FLOW-KEY)</a>
 flow-sequence-context(n,FLOW-KEY)  ::= <a href="#rule-flow-sequence-entries">flow-sequence-entries(n,FLOW-KEY)</a>
 </pre>
-</section><section data-section-number="3" id="single-quoted-style"><h5>A.3.2.3. Single-Quoted Style</h5>
+</section><section data-section-number="3" id="single-quoted-style-1"><h5>A.3.2.3. Single-Quoted Style</h5>
 <pre class="rule" id="rule-single-quoted-scalar">[88]
 single-quoted-scalar(n,c) ::=
   "'"
@@ -4505,7 +4525,7 @@ non-break-single-quoted-character ::=
 single-quoted-escaped-single-quote ::=
   "''"
 </pre>
-</section><section data-section-number="4" id="plain-style"><h5>A.3.2.4. Plain Style</h5>
+</section><section data-section-number="4" id="plain-style-1"><h5>A.3.2.4. Plain Style</h5>
 <pre class="rule" id="rule-flow-plain-scalar">[97]
 flow-plain-scalar(n,FLOW-OUT)  ::= <a href="#rule-plain-scalar-multi-line">plain-scalar-multi-line(n,FLOW-OUT)</a>
 flow-plain-scalar(n,FLOW-IN)   ::= <a href="#rule-plain-scalar-multi-line">plain-scalar-multi-line(n,FLOW-IN)</a>
@@ -4605,8 +4625,8 @@ alias-node ::=
 empty-node ::=
   ""
 </pre>
-</section></section><section data-section-number="4" id="structural-productions"><h3>A.4. Structural Productions</h3>
-<section data-section-number="1" id="indentation-spaces"><h4>A.4.1. Indentation Spaces</h4>
+</section></section><section data-section-number="4" id="structural-productions-1"><h3>A.4. Structural Productions</h3>
+<section data-section-number="1" id="indentation-spaces-1"><h4>A.4.1. Indentation Spaces</h4>
 <pre class="rule" id="rule-indentation-spaces">[109]
 indentation-spaces(0) ::=
   ""
@@ -4640,7 +4660,7 @@ indentation-spaces-less-or-equal(n+1) ::=
     )
   | ""
 </pre>
-</section><section data-section-number="2" id="line-prefixes"><h4>A.4.2. Line Prefixes</h4>
+</section><section data-section-number="2" id="line-prefixes-1"><h4>A.4.2. Line Prefixes</h4>
 <pre class="rule" id="rule-line-prefix-spaces">[112]
 line-prefix-spaces(n,BLOCK-OUT) ::= <a href="#rule-indentation-spaces-exact">indentation-spaces-exact(n)</a>
 line-prefix-spaces(n,BLOCK-IN)  ::= <a href="#rule-indentation-spaces-exact">indentation-spaces-exact(n)</a>
@@ -4656,7 +4676,7 @@ indentation-spaces-plus-maybe-more(n) ::=
   <a href="#rule-indentation-spaces">indentation-spaces(n)</a>
   <a href="#rule-separation-blanks">separation-blanks</a>?
 </pre>
-</section><section data-section-number="3" id="line-folding"><h4>A.4.3. Line Folding</h4>
+</section><section data-section-number="3" id="line-folding-1"><h4>A.4.3. Line Folding</h4>
 <pre class="rule" id="rule-flow-folded-whitespace">[115]
 flow-folded-whitespace(n) ::=
   <a href="#rule-separation-blanks">separation-blanks</a>?
@@ -4671,7 +4691,7 @@ folded-whitespace(n,c) ::=
     )
   | <a href="#rule-break-as-space">break-as-space</a>
 </pre>
-</section><section data-section-number="4" id="comments"><h4>A.4.4. Comments</h4>
+</section><section data-section-number="4" id="comments-2"><h4>A.4.4. Comments</h4>
 <pre class="rule" id="rule-comment-lines">[117]
 comment-lines ::=
   (
@@ -4699,7 +4719,7 @@ comment-content ::=
   '#'
   <a href="#rule-non-break-character">non-break-character</a>*
 </pre>
-</section><section data-section-number="5" id="empty-lines"><h4>A.4.5. Empty Lines</h4>
+</section><section data-section-number="5" id="empty-lines-1"><h4>A.4.5. Empty Lines</h4>
 <pre class="rule" id="rule-empty-line">[121]
 empty-line(n,c) ::=
   (
@@ -4730,7 +4750,7 @@ separation-blanks ::=
     <a href="#rule-blank-character">blank-character</a>+
   | &lt;start-of-line&gt;
 </pre>
-</section><section data-section-number="7" id="directives"><h4>A.4.7. Directives</h4>
+</section><section data-section-number="7" id="directives-2"><h4>A.4.7. Directives</h4>
 <p>A %YAML directive line.</p>
 <pre class="rule" id="rule-yaml-directive-line">[125]
 yaml-directive-line ::=
@@ -4803,7 +4823,7 @@ global-tag-prefix ::=
   <a href="#rule-tag-character">tag-character</a>
   <a href="#rule-uri-character">uri-character</a>*
 </pre>
-</section><section data-section-number="8" id="node-properties"><h4>A.4.8. Node Properties</h4>
+</section><section data-section-number="8" id="node-properties-1"><h4>A.4.8. Node Properties</h4>
 <pre class="rule" id="rule-node-properties">[138]
 node-properties(n,c) ::=
     (
@@ -4857,7 +4877,7 @@ shorthand-tag ::=
 non-specific-tag ::=
   '!'
 </pre>
-</section></section><section data-section-number="5" id="character-productions"><h3>A.5. Character Productions</h3>
+</section></section><section data-section-number="5" id="character-productions-1"><h3>A.5. Character Productions</h3>
 <section data-section-number="1" id="character-encoding"><h4>A.5.1. Character Encoding</h4>
 <pre class="rule" id="rule-byte-order-mark">[146]
 byte-order-mark ::=
@@ -4928,7 +4948,7 @@ line-break ::=
   | x0D
   | x0A
 </pre>
-</section><section data-section-number="4" id="indicator-characters"><h4>A.5.4. Indicator Characters</h4>
+</section><section data-section-number="4" id="indicator-characters-1"><h4>A.5.4. Indicator Characters</h4>
 <pre class="rule" id="rule-flow-collection-indicators">[157]
 flow-collection-indicators ::=
     ','                             # Flow collection separator
@@ -5033,7 +5053,7 @@ ascii-alpha-character ::=
 It is therefore the recommended <a href="#recommended-schemas">schema</a> for generic YAML tools.
 A YAML <a href="#processes-and-models">processor</a> should therefore support this <a href="#recommended-schemas">schema</a>, at least as an
 option.</p>
-<section data-section-number="1" id="tags"><h4>B.1.1. Tags</h4>
+<section data-section-number="1" id="tags-2"><h4>B.1.1. Tags</h4>
 <section data-section-number="1" id="generic-mapping"><h5>B.1.1.1. Generic Mapping</h5>
 <dl>
 <dt id="uri">URI</dt>
@@ -5059,11 +5079,11 @@ Flow style: !!map { Clark: Evans, Ingy: döt Net, Oren: Ben-Kiki }
 
 </section><section data-section-number="2" id="generic-sequence"><h5>B.1.1.2. Generic Sequence</h5>
 <dl>
-<dt id="uri">URI</dt>
+<dt id="uri-1">URI</dt>
 <dd><code>tag:yaml.org,2002:seq</code></dd>
-<dt id="kind">Kind</dt>
+<dt id="kind-1">Kind</dt>
 <dd><a href="#sequence">Sequence</a>.</dd>
-<dt id="definition">Definition</dt>
+<dt id="definition-1">Definition</dt>
 <dd><a href="#representation-graph">Represents</a> a collection indexed by sequential integers starting with zero.
 Example <a href="#constructing-native-data-structures">bindings</a> to <a href="#representing-native-data-structures">native</a> types include Perl’s array, Python’s list or
 tuple and Java’s array or Vector.</dd>
@@ -5079,15 +5099,15 @@ Flow style: !!seq [ Clark Evans, Ingy döt Net, Oren Ben-Kiki ]
 
 </section><section data-section-number="3" id="generic-string"><h5>B.1.1.3. Generic String</h5>
 <dl>
-<dt id="uri">URI</dt>
+<dt id="uri-2">URI</dt>
 <dd><code>tag:yaml.org,2002:str</code></dd>
-<dt id="kind">Kind</dt>
+<dt id="kind-2">Kind</dt>
 <dd><a href="#scalar">Scalar</a>.</dd>
-<dt id="definition">Definition</dt>
+<dt id="definition-2">Definition</dt>
 <dd><a href="#representation-graph">Represents</a> a Unicode string, a sequence of zero or more Unicode characters.
 This type is usually <a href="#representing-native-data-structures">bound</a> to the <a href="#representing-native-data-structures">native</a> language’s string type or, for
 languages lacking one (such as C), to a character array.</dd>
-<dt id="canonical-form">Canonical Form:</dt>
+<dt id="canonical-form-1">Canonical Form:</dt>
 <dd>The obvious.</dd>
 </dl>
 <div class="example" id="example-str-examples"><p><strong>Example B.3. <code>!!str</code> Examples</strong></p><pre class="example">
@@ -5109,23 +5129,23 @@ languages and allows <a href="#parsing-the-presentation-stream">parsing</a> JSON
 A YAML <a href="#processes-and-models">processor</a> should therefore support this <a href="#recommended-schemas">schema</a>, at least as an
 option.
 It is also strongly recommended that other <a href="#recommended-schemas">schemas</a> should be based on it.</p>
-<section data-section-number="1" id="tags"><h4>B.2.1. Tags</h4>
+<section data-section-number="1" id="tags-3"><h4>B.2.1. Tags</h4>
 <p>The JSON <a href="#recommended-schemas">schema</a> uses the following <a href="#tags">tags</a> in addition to those defined by the
 <a href="#failsafe-schema">failsafe</a> schema:</p>
 <section data-section-number="1" id="null"><h5>B.2.1.1. Null</h5>
 <dl>
-<dt id="uri">URI</dt>
+<dt id="uri-3">URI</dt>
 <dd><code>tag:yaml.org,2002:null</code></dd>
-<dt id="kind">Kind</dt>
+<dt id="kind-3">Kind</dt>
 <dd><a href="#scalar">Scalar</a>.</dd>
-<dt id="definition">Definition</dt>
+<dt id="definition-3">Definition</dt>
 <dd><a href="#representation-graph">Represents</a> the lack of a value.
 This is typically <a href="#representing-native-data-structures">bound</a> to a <a href="#representing-native-data-structures">native</a> null-like value (e.g., <code>undef</code> in Perl,
 <code>None</code> in Python).
 Note that a null is different from an empty string.
 Also, a <a href="#mapping">mapping</a> entry with some <a href="#nodes">key</a> and a null <a href="#nodes">value</a> is valid and
 different from not having that <a href="#nodes">key</a> in the <a href="#mapping">mapping</a>.</dd>
-<dt id="canonical-form">Canonical Form</dt>
+<dt id="canonical-form-2">Canonical Form</dt>
 <dd><code>null</code>.</dd>
 </dl>
 <div class="example" id="example-null-examples"><p><strong>Example B.4. <code>!!null</code> Examples</strong></p><pre class="example">
@@ -5135,15 +5155,15 @@ key with null value: !!null null
 
 </section><section data-section-number="2" id="boolean"><h5>B.2.1.2. Boolean</h5>
 <dl>
-<dt id="uri">URI</dt>
+<dt id="uri-4">URI</dt>
 <dd><code>tag:yaml.org,2002:bool</code></dd>
-<dt id="kind">Kind</dt>
+<dt id="kind-4">Kind</dt>
 <dd><a href="#scalar">Scalar</a>.</dd>
-<dt id="definition">Definition</dt>
+<dt id="definition-4">Definition</dt>
 <dd><a href="#representation-graph">Represents</a> a true/false value.
 In languages without a <a href="#representing-native-data-structures">native</a> Boolean type (such as C), they are usually
 <a href="#representing-native-data-structures">bound</a> to a native integer type, using one for true and zero for false.</dd>
-<dt id="canonical-form">Canonical Form</dt>
+<dt id="canonical-form-3">Canonical Form</dt>
 <dd>Either <code>true</code> or <code>false</code>.</dd>
 </dl>
 <div class="example" id="example-bool-examples"><p><strong>Example B.5. <code>!!bool</code> Examples</strong></p><pre class="example">
@@ -5153,11 +5173,11 @@ Pluto is a planet: !!bool false
 
 </section><section data-section-number="3" id="integer"><h5>B.2.1.3. Integer</h5>
 <dl>
-<dt id="uri">URI</dt>
+<dt id="uri-5">URI</dt>
 <dd><code>tag:yaml.org,2002:int</code></dd>
-<dt id="kind">Kind</dt>
+<dt id="kind-5">Kind</dt>
 <dd><a href="#scalar">Scalar</a>.</dd>
-<dt id="definition">Definition</dt>
+<dt id="definition-5">Definition</dt>
 <dd><a href="#representation-graph">Represents</a> arbitrary sized finite mathematical integers.
 Scalars of this type should be <a href="#representing-native-data-structures">bound</a> to a <a href="#representing-native-data-structures">native</a> integer data type, if
 possible.</dd>
@@ -5175,7 +5195,7 @@ warning or find some other manner to round-trip it.
 In general, integers representable using 32 binary digits should safely
 round-trip through most systems.</p>
 </dd>
-<dt id="canonical-form">Canonical Form</dt>
+<dt id="canonical-form-4">Canonical Form</dt>
 <dd>Decimal integer notation, with a leading “<code>-</code>” character for negative values,
 matching the regular expression <code>0 | -? [1-9] [0-9]*</code></dd>
 </dl>
@@ -5187,11 +5207,11 @@ positive: !!int 34
 
 </section><section data-section-number="4" id="floating-point"><h5>B.2.1.4. Floating Point</h5>
 <dl>
-<dt id="uri">URI</dt>
+<dt id="uri-6">URI</dt>
 <dd><code>tag:yaml.org,2002:float</code></dd>
-<dt id="kind">Kind</dt>
+<dt id="kind-6">Kind</dt>
 <dd><a href="#scalar">Scalar</a>.</dd>
-<dt id="definition">Definition</dt>
+<dt id="definition-6">Definition</dt>
 <dd><a href="#representation-graph">Represents</a> an approximation to real numbers, including three special values
 (positive and negative infinity and “not a number”).</dd>
 <dd>
@@ -5208,7 +5228,7 @@ IEEE floats should be safe.
 Since YAML does not specify a particular accuracy, using floating-point
 <a href="#nodes">mapping keys</a> requires great care and is not recommended.</p>
 </dd>
-<dt id="canonical-form">Canonical Form</dt>
+<dt id="canonical-form-5">Canonical Form</dt>
 <dd>Either <code>0</code>, <code>.inf</code>, <code>-.inf</code>, <code>.nan</code> or scientific notation matching the regular
 expression<br/>
 <code>-? [1-9] ( \. [0-9]* [1-9] )? ( e [-+] [1-9] [0-9]* )?</code>.</dd>
@@ -5221,7 +5241,7 @@ infinity: !!float .inf
 not a number: !!float .nan
 </pre></div>
 
-</section></section><section data-section-number="2" id="tag-resolution"><h4>B.2.2. Tag Resolution</h4>
+</section></section><section data-section-number="2" id="tag-resolution-1"><h4>B.2.2. Tag Resolution</h4>
 <p>The <a href="#json-schema">JSON schema</a> <a href="#tag-resolution">tag resolution</a> is an extension of the <a href="#failsafe-schema">failsafe schema</a>
 <a href="#tag-resolution">tag resolution</a>.</p>
 <p>All <a href="#nodes">nodes</a> with the “<code>!</code>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the standard
@@ -5294,9 +5314,9 @@ human-readable <a href="#presentation-stream">presentation</a> of the same types
 This is the recommended default <a href="#recommended-schemas">schema</a> that YAML <a href="#processes-and-models">processor</a> should use
 unless instructed otherwise.
 It is also strongly recommended that other <a href="#recommended-schemas">schemas</a> should be based on it.</p>
-<section data-section-number="1" id="tags"><h4>B.3.1. Tags</h4>
+<section data-section-number="1" id="tags-4"><h4>B.3.1. Tags</h4>
 <p>The core <a href="#recommended-schemas">schema</a> uses the same <a href="#tags">tags</a> as the <a href="#json-schema">JSON schema</a>.</p>
-</section><section data-section-number="2" id="tag-resolution"><h4>B.3.2. Tag Resolution</h4>
+</section><section data-section-number="2" id="tag-resolution-2"><h4>B.3.2. Tag Resolution</h4>
 <p>The <a href="#core-schema">core schema</a> <a href="#tag-resolution">tag resolution</a> is an extension of the <a href="#json-schema">JSON schema</a> <a href="#tag-resolution">tag
 resolution</a>.</p>
 <p>All <a href="#nodes">nodes</a> with the “<code>!</code>” non-specific tag are <a href="#resolved-tags">resolved</a>, by the standard
