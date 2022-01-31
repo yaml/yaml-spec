@@ -1,6 +1,7 @@
 ---
 layout: spec
 title: YAML Ain’t Markup Language (YAML™) revision 1.3.0
+status: draft
 ---
 
 ## YAML Ain't Markup Language (YAML™) version 1.3
