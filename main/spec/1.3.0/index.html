@@ -35,34 +35,20 @@
 
 </head>
 
-<body class="status-">
+<body class="status-draft">
 
 <main id="content" class="main-content" role="main">
 
 
+<p class="status-header">
+This is a working draft of an upcoming specification. It is a work
+in progress and may be modified before final release. You should not rely on
+the content of this draft or cite it as an authority.
+</p>
 
-Sending build context to Docker daemon  2.048kB
-Step 1/6 : FROM alpine
- ---> 0a97eee8041e
-Step 2/6 : WORKDIR /home
- ---> Using cache
- ---> 1244026bc829
-Step 3/6 : RUN apk update && apk add bash build-base coreutils
- ---> Using cache
- ---> 612abac553fb
-Step 4/6 : RUN apk add python3 py3-pip
- ---> Using cache
- ---> 2796b4eb47b5
-Step 5/6 : RUN pip3 install beautifulsoup4 roman pyyaml
- ---> Using cache
- ---> a471ab2a7845
-Step 6/6 : ENV PATH=/home/host/spec/1.3.0/bin:/home/host/bin:$PATH
- ---> Using cache
- ---> 4214c9ae8b92
-Successfully built 4214c9ae8b92
-Successfully tagged yamlio/html-to-html:d964055126c21d26ab12bbb6b3510ae4
+
 <h2>YAML Ain’t Markup Language (YAML™) version 1.3</h2>
-<h3 class="subtitle">Revision 1.3.0 (2022-01-19)</h3>
+<h3 class="subtitle">Revision 1.3.0 (2022-02-06)</h3>
 <p>Copyright presently by YAML Language Development Team<sup id="fnref:team" role="doc-noteref"><a class="footnote" href="#fn:team" rel="footnote">1</a></sup><br/>
 Copyright 2001-2009 by Oren Ben-Kiki, Clark Evans, Ingy döt Net</p>
 <p>This document may be freely copied, provided it is not modified.</p>
