@@ -1,12 +1,12 @@
 ---
 layout: spec
-title: YAML Ain’t Markup Language (YAML™) revision 1.2.2
+title: YAML Ain’t Markup Language (YAML™) revision 1.2.3
 status: draft
 ---
 
 # YAML Ain't Markup Language (YAML™) version 1.2
 
-## Revision 1.2.2 (2021-10-01)
+## Revision 1.2.3 (YYYY-MM-DD)
 {:.subtitle}
 
 Copyright presently by YAML Language Development Team[^team]  
@@ -17,7 +17,7 @@ This document may be freely copied, provided it is not modified.
 
 **Status of this Document**
 
-This is the **YAML specification v1.2.2**.
+This is the **YAML specification v1.2.3**.
 It defines the **YAML 1.2 data language**.
 There are no normative changes from the **YAML specification v1.2**.
 The primary objectives of this revision are to correct errors and add clarity.
