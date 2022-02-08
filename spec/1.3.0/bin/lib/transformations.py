@@ -99,6 +99,8 @@ def transform(soup, links):
 
     toc_header.parent.insert_after(toc)
 
+    link_headings(soup)
+
     create_internal_links(soup, link_index)
 
     check_for_duplicate_ids(soup)
@@ -205,6 +207,16 @@ def number_figures(soup):
             )
             for i, figure_heading in enumerate(figure_headings, 1):
                 replace(figure_heading, HEADING_NUMBER_EXPR, '.'.join([chapter, str(i)]))
+
+
+def link_headings(soup):
+    for heading in soup.find_all(['h1', 'h2', 'h3', 'h4', 'h5', 'h6']):
+        section = heading.find_parent('section')
+        if section is not None:
+            anchor = section.attrs.get('id', None)
+            if anchor is not None:
+                a = tag('a', [ch.extract() for ch in list(heading.children)], href='#'+anchor)
+                heading.append(a)
 
 
 PRODUCTION_EXPR = re.compile(r'''
