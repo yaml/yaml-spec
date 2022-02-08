@@ -12,11 +12,17 @@ body.status-draft {
 
 a {
   color: inherit;
-  text-decoration: underline solid $theme-color;
+  text-decoration: underline solid currentcolor;
 
   &:hover {
     color: blue;
-    text-decoration: underline solid blue;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  position: relative;
+  a {
+    text-decoration: none;
   }
 }
 
