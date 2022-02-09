@@ -549,32 +549,6 @@ application specific tag: !something |
 ```
 
 
-**Example #. Unordered Sets**
-
-```
-# Sets are represented as a
-# Mapping where each key is
-# associated with a null value
---- !!set
-? Mark McGwire
-? Sammy Sosa
-? Ken Griffey
-```
-
-
-**Example #. Ordered Mappings**
-
-```
-# Ordered maps are represented as
-# A sequence of mappings, with
-# each mapping having one key
---- !!omap
-- Mark McGwire: 65
-- Sammy Sosa: 63
-- Ken Griffey: 58
-```
-
-
 ### #. Full Length Example
 
 Below are two full-length examples of YAML.
