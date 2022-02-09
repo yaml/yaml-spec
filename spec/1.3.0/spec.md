@@ -494,15 +494,6 @@ string: '012345'
 ```
 
 
-**Example #. Timestamps**
-
-```
-canonical: 2001-12-15T02:59:43.1Z
-iso8601: 2001-12-14t21:59:43.10-05:00
-spaced: 2001-12-14 21:59:43.10 -5
-date: 2002-12-14
-```
-
 Explicit typing is denoted with a [tag] using the exclamation point ("`!`")
 symbol.
 [Global tags] are URIs and may be specified in a [tag shorthand] notation using
