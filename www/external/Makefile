@@ -17,7 +17,7 @@ ALL := \
     $(REF_PARSER) \
     $(NPM_YAML) \
 
-TMPEXT := /tmp/yaml-spec-ext
+TMPEXT ?= /tmp/yaml-spec-ext
 
 .DELETE_ON_ERROR:
 default:
