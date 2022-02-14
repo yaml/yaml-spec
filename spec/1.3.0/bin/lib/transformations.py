@@ -314,7 +314,7 @@ def format_examples(soup, production_names):
 
             if literal_parts:
                 pattern = r'|'.join(
-                    regexp_escape(part).removeprefix('0').replace('_', ' ')
+                    regexp_escape(part).replace('_', ' ')
                     for part in literal_parts
                 )
                 for row, line in enumerate(lines, 1):
