@@ -132,7 +132,7 @@ The design goals for YAML are, in decreasing priority:
 
 ## #. YAML History
 
-The YAML 1.0 specification was published in early 2004 by by Clark Evans, Oren
+The YAML 1.0 specification was published in early 2004 by Clark Evans, Oren
 Ben-Kiki, and Ingy döt Net after 3 years of collaborative design work through
 the yaml-core mailing list[^yaml-core].
 The project was initially rooted in Clark and Oren's work on the
