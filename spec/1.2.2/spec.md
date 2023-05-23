@@ -1533,18 +1533,18 @@ The encoding can therefore be deduced by matching the first few bytes of the
 [stream] with the following table rows (in order):
 
 
-|                       | Byte0 | Byte1 | Byte2 | Byte3 | Encoding
-| --                    | --    | --    | --    | --    | --
-| Explicit BOM          | x00   | x00   | xFE   | xFF   | UTF-32BE
-| ASCII first character | x00   | x00   | x00   | any   | UTF-32BE
-| Explicit BOM          | xFF   | xFE   | x00   | x00   | UTF-32LE
-| ASCII first character | any   | x00   | x00   | x00   | UTF-32LE
-| Explicit BOM          | xFE   | xFF   |       |       | UTF-16BE
-| ASCII first character | x00   | any   |       |       | UTF-16BE
-| Explicit BOM          | xFF   | xFE   |       |       | UTF-16LE
-| ASCII first character | any   | x00   |       |       | UTF-16LE
-| Explicit BOM          | xEF   | xBB   | xBF   |       | UTF-8
-| Default               |       |       |       |       | UTF-8
+|                       | Byte0 | Byte1 | Byte2 | Byte3 | Encoding |
+| --                    | --    | --    | --    | --    | --       |
+| Explicit BOM          | x00   | x00   | xFE   | xFF   | UTF-32BE |
+| ASCII first character | x00   | x00   | x00   | any   | UTF-32BE |
+| Explicit BOM          | xFF   | xFE   | x00   | x00   | UTF-32LE |
+| ASCII first character | any   | x00   | x00   | x00   | UTF-32LE |
+| Explicit BOM          | xFE   | xFF   |       |       | UTF-16BE |
+| ASCII first character | x00   | any   |       |       | UTF-16BE |
+| Explicit BOM          | xFF   | xFE   |       |       | UTF-16LE |
+| ASCII first character | any   | x00   |       |       | UTF-16LE |
+| Explicit BOM          | xEF   | xBB   | xBF   |       | UTF-8    |
+| Default               |       |       |       |       | UTF-8    |
 
 
 The recommended output encoding is UTF-8.
@@ -6565,13 +6565,13 @@ least one of these.
 Hence the YAML [processor] should consider them to be an error.
 
 
-| Regular expression        | Resolved to tag
-| --                        | --
-| `null`                    | tag:yaml.org,2002:null
-| `true | false`            | tag:yaml.org,2002:bool
-| `-? ( 0 | [1-9] [0-9]* )` | tag:yaml.org,2002:int
-| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float
-| `*`                       | Error
+| Regular expression                                              | Resolved to tag         |
+| --                                                              | --                      |
+| `null`                                                          | tag:yaml.org,2002:null  |
+| `true | false`                                                  | tag:yaml.org,2002:bool  |
+| `-? ( 0 | [1-9] [0-9]* )`                                       | tag:yaml.org,2002:int   |
+| `-? ( 0 | [1-9] [0-9]* ) ( \. [0-9]* )? ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float |
+| `*`                                                             | Error                   |
 
 > Note: The regular expression for `float` does not exactly match the one in
 the JSON specification, where at least one digit is required after the dot: `(
@@ -6632,18 +6632,18 @@ However, in this case, if none of the regular expressions matches, the [scalar]
 is [resolved] to `tag:yaml.org,2002:str` (that is, considered to be a string).
 
 
-| Regular expression                | Resolved to tag
-| --                                | --
-| `null | Null | NULL | ~`          | tag:yaml.org,2002:null
-| `/* Empty */`                     | tag:yaml.org,2002:null
-| `true | True | TRUE | false | False | FALSE` | tag:yaml.org,2002:bool
-| `[-+]? [0-9]+`                    | tag:yaml.org,2002:int (Base 10)
-| `0o [0-7]+`                       | tag:yaml.org,2002:int (Base 8)
-| `0x [0-9a-fA-F]+`                 | tag:yaml.org,2002:int (Base 16)
-| `[-+]? ( \. [0-9]+ | [0-9]+ ( \. [0-9]* )? ) ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float (Number)
-| `[-+]? ( \.inf | \.Inf | \.INF )` | tag:yaml.org,2002:float (Infinity)
-| `\.nan | \.NaN | \.NAN`           | tag:yaml.org,2002:float (Not a number)
-| `*`                               | tag:yaml.org,2002:str (Default)
+| Regular expression                                                   | Resolved to tag                        |
+| --                                                                   | --                                     |
+| `null | Null | NULL | ~`                                             | tag:yaml.org,2002:null                 |
+| `/* Empty */`                                                        | tag:yaml.org,2002:null                 |
+| `true | True | TRUE | false | False | FALSE`                         | tag:yaml.org,2002:bool                 |
+| `[-+]? [0-9]+`                                                       | tag:yaml.org,2002:int (Base 10)        |
+| `0o [0-7]+`                                                          | tag:yaml.org,2002:int (Base 8)         |
+| `0x [0-9a-fA-F]+`                                                    | tag:yaml.org,2002:int (Base 16)        |
+| `[-+]? ( \. [0-9]+ | [0-9]+ ( \. [0-9]* )? ) ( [eE] [-+]? [0-9]+ )?` | tag:yaml.org,2002:float (Number)       |
+| `[-+]? ( \.inf | \.Inf | \.INF )`                                    | tag:yaml.org,2002:float (Infinity)     |
+| `\.nan | \.NaN | \.NAN`                                              | tag:yaml.org,2002:float (Not a number) |
+| `*`                                                                  | tag:yaml.org,2002:str (Default)        |
 
 
 **Example #. Core Tag Resolution**
