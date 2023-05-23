@@ -6955,3 +6955,62 @@ The yaml-core mailing list at
 <http://lists.sourceforge.net/lists/listinfo/yaml-core>
 is the preferred method for such submissions, as well as raising any questions
 regarding this draft.
+
+## Security considerations
+
+### YAML and JSON
+
+Since YAML is a superset of JSON [JSON],
+the same security considerations apply when using that syntax.
+It is important to note though, that when serializing a YAML document
+in JSON, information can be discarded: this includes comments and references
+that do not have a JSON counterpart.
+
+Implementers interested in using YAML as a more efficient format
+to serialize information intented to be consumed in JSON,
+needs to ensure that relevant information will not be lost during
+the processing, and might want to use a restricted YAML profile.
+
+### Arbitrary code execution
+
+Yaml has some features like explicit typing (e.g. `!!str`) and local tags that,
+depending on the implementation, might trigger unexpected code execution.
+
+```python
+document = "!!python/object/apply:os.system ['echo boom!']"
+yaml.unsafe_load(document)
+# boom!
+```
+
+Code execution in deserializers should be disabled by default,
+and only be enabled explicitly. 
+In those cases, the implementation should ensure
+- for example, via specific functions - 
+that code execution would result to strictly bounded time/memory limits.
+
+Many implementations provide safe deserializers addressing these issues
+(e.g the `yaml.safe_load` function in pyyaml, ...).
+
+### Resource exhaustion
+
+YAML documents may contain reference cycles,
+so they can't be treated as tree structures.
+An implementation that attempts to treat a cyclic document as a tree structure
+may infinite-loop at some point (e.g. when trying to serialize a YAML document in JSON).
+
+Even if a document is not cyclic, treating it as a tree may lead to improper behavior
+(such as the "billion laughs" problem).
+
+```yaml
+x:  &a1 ["a", "a"] 
+x2: &a2 [*a1, *a1]
+x3: &a3 [*a2, *a2]
+```
+
+This can be addressed using processors limiting the anchor recursion depth
+and validating the input before processing it; 
+even in these cases it is important
+to carefully test the implementation you are going to use.
+The same considerations apply when serializing a YAML object
+in a format that do not support reference cycles (see Section X.1 of this document).
+
