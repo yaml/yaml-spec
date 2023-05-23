@@ -4170,12 +4170,12 @@ ns-plain-safe(FLOW-KEY)  ::= ns-plain-safe-in
   ": - ()",
   "Up, up, and away!",
   -123,
-  "http://example.com/foo#bar",
+  "https://example.com/foo#bar",
   [ "::vector",
     ": - ()",
     "Up, up, and away!",
     -123,
-    "http://example.com/foo#bar" ] ]
+    "https://example.com/foo#bar" ] ]
 ```
 
 **Legend:**
@@ -4521,7 +4521,7 @@ omitted value:°,
 
 ```
 { "unquoted": "separate",
-  "http://foo.com": null,
+  "https://foo.com": null,
   "omitted value": null,
   null: "omitted key" }
 ```
