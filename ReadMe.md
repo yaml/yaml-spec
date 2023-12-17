@@ -14,7 +14,7 @@ versions are defined.
 
 This repository contains the source code and build system for the [published
 YAML specification](https://yaml.org/).
-Versions 1.2 and newer are located under the `spec` directory.
+Versions 1.2 and older are located under the `spec` directory.
 
 The various components of the next YAML specification version will be added
 here incrementally following a well defined methodology.
