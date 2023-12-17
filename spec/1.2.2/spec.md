@@ -4924,6 +4924,7 @@ equal to the number of leading [spaces] on the first non-[empty line] of the
 contents.
 If there is no non-[empty line] then the content indentation level is equal to
 the number of spaces on the longest line.
+![ic_launcher_foreground](https://github.com/yaml/yaml-spec/assets/148902722/abeade30-90de-4f02-8b5d-a68833370239)
 
 It is an error if any non-[empty line] does not begin with a number of spaces
 greater than or equal to the content indentation level.
