@@ -13,8 +13,8 @@ This repository is where the YAML language is further developed and the next
 versions are defined.
 
 This repository contains the source code and build system for the [published
-YAML 1.2 specification](https://yaml.org/spec/1.2/spec.html).
-Those files are under the `1.2` top level directory.
+YAML specification](https://yaml.org/).
+Versions 1.2 and older are located under the `spec` directory.
 
 The various components of the next YAML specification version will be added
 here incrementally following a well defined methodology.
