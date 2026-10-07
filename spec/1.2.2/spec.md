@@ -5890,8 +5890,8 @@ folded:↓
 ```
 
 ```
-{ "literal": "value",
-  "folded": !<!foo> "value" }
+{ "literal": "value\n",
+  "folded": !<!foo> "value\n" }
 ```
 
 **Legend:**
